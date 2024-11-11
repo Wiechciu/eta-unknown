@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=3 uid="uid://bisun2rrujs6p"]
+
+[ext_resource type="Script" path="res://documents/document_dimension_set.gd" id="1_cckso"]
+
+[node name="DimensionSet" type="HBoxContainer" node_paths=PackedStringArray("quantity", "length", "width", "height", "total_weight", "total_volume")]
+script = ExtResource("1_cckso")
+quantity = NodePath("Quantity")
+length = NodePath("Length")
+width = NodePath("Width")
+height = NodePath("Height")
+total_weight = NodePath("TotalWeight")
+total_volume = NodePath("TotalVolume")
+
+[node name="Quantity" type="Label" parent="."]
+layout_mode = 2
+text = "X"
+
+[node name="x1" type="Label" parent="."]
+layout_mode = 2
+text = "x"
+
+[node name="Length" type="Label" parent="."]
+layout_mode = 2
+text = "X"
+
+[node name="x2" type="Label" parent="."]
+layout_mode = 2
+text = "x"
+
+[node name="Width" type="Label" parent="."]
+layout_mode = 2
+text = "X"
+
+[node name="x3" type="Label" parent="."]
+layout_mode = 2
+text = "x"
+
+[node name="Height" type="Label" parent="."]
+layout_mode = 2
+text = "X"
+
+[node name="x4" type="Label" parent="."]
+layout_mode = 2
+text = " "
+
+[node name="TotalWeight" type="Label" parent="."]
+layout_mode = 2
+text = "X"
+
+[node name="x5" type="Label" parent="."]
+layout_mode = 2
+text = " "
+
+[node name="TotalVolume" type="Label" parent="."]
+layout_mode = 2
+text = "X"

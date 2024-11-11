@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b18oy35p17ir7"]
+
+[ext_resource type="PackedScene" uid="uid://byup0xasld7sf" path="res://documents/shipping_order.tscn" id="1_w2twt"]
+
+[node name="MainScene" type="Node"]
+
+[node name="ShippingOrder" parent="." instance=ExtResource("1_w2twt")]

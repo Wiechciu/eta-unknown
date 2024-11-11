@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="Shipment" load_steps=9 format=3 uid="uid://d3ijp60vruc74"]
+
+[ext_resource type="Resource" uid="uid://cy45s8gheldxx" path="res://parties/example_party_2.tres" id="1_6xnjn"]
+[ext_resource type="Resource" uid="uid://cjtegb54egl4w" path="res://locations/CNSHA.tres" id="2_aug0v"]
+[ext_resource type="Script" path="res://shipments/dimension_set.gd" id="3_lkwm8"]
+[ext_resource type="Script" path="res://shipments/shipment.gd" id="4_weo8s"]
+[ext_resource type="Resource" uid="uid://3kt1mit60prx" path="res://locations/DEHAM.tres" id="5_j5pmg"]
+[ext_resource type="Resource" uid="uid://kp4yt701wblu" path="res://parties/example_party_1.tres" id="6_78ca3"]
+
+[sub_resource type="Resource" id="Resource_bu3jw"]
+script = ExtResource("3_lkwm8")
+quantity = 2
+length = 120.0
+width = 100.0
+height = 80.0
+total_weight = 550.0
+is_stackable = true
+is_dg = false
+metadata/_custom_type_script = ExtResource("3_lkwm8")
+
+[sub_resource type="Resource" id="Resource_b5p3w"]
+script = ExtResource("3_lkwm8")
+quantity = 15
+length = 120.0
+width = 80.0
+height = 30.0
+total_weight = 815.0
+is_stackable = false
+is_dg = false
+metadata/_custom_type_script = ExtResource("3_lkwm8")
+
+[resource]
+script = ExtResource("4_weo8s")
+shipper = ExtResource("6_78ca3")
+consignee = ExtResource("1_6xnjn")
+origin = ExtResource("5_j5pmg")
+destination = ExtResource("2_aug0v")
+dimension_sets = Array[ExtResource("3_lkwm8")]([SubResource("Resource_bu3jw"), SubResource("Resource_b5p3w")])
+metadata/_custom_type_script = ExtResource("4_weo8s")

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Location" load_steps=2 format=3 uid="uid://3kt1mit60prx"]
+
+[ext_resource type="Script" path="res://locations/location.gd" id="1_onic1"]
+
+[resource]
+script = ExtResource("1_onic1")
+code = "DEHAM"
+country_code = "DE"
+name = "Hamburg"
+metadata/_custom_type_script = ExtResource("1_onic1")
