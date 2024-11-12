@@ -36,3 +36,12 @@ func _ready() -> void:
 		document_dimension_set.total_weight.text = str(dimension_set.total_weight)
 		document_dimension_set.total_volume.text = str(dimension_set.total_volume)
 		dimension_sets_container.add_child(document_dimension_set)
+
+
+func _on_accept_button_pressed() -> void:
+	GameManager.player.employer.add_shipment(shipment)
+	queue_free()
+
+
+func _on_reject_button_pressed() -> void:
+	queue_free()

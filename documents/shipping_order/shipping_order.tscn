@@ -20,130 +20,151 @@ corner_radius_bottom_left = 2
 shadow_size = 2
 shadow_offset = Vector2(2, 2)
 
-[node name="ShippingOrder" type="PanelContainer" node_paths=PackedStringArray("shipper", "consignee", "origin", "destination", "total_quantity", "total_weight", "total_volume", "dimension_sets_container")]
-offset_right = 147.0
-offset_bottom = 254.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_mvygk")
+[node name="ShippingOrder" type="Container" node_paths=PackedStringArray("shipper", "consignee", "origin", "destination", "total_quantity", "total_weight", "total_volume", "dimension_sets_container")]
+offset_right = 171.0
+offset_bottom = 304.0
 script = ExtResource("1_i3w6w")
 shipment = ExtResource("2_a6u7x")
-shipper = NodePath("MarginContainer/VBoxContainer/Parties/Shipper")
-consignee = NodePath("MarginContainer/VBoxContainer/Parties/Consignee")
-origin = NodePath("MarginContainer/VBoxContainer/Locations/Origin")
-destination = NodePath("MarginContainer/VBoxContainer/Locations/Destination")
-total_quantity = NodePath("MarginContainer/VBoxContainer/CargoDetails/TotalQuantity")
-total_weight = NodePath("MarginContainer/VBoxContainer/CargoDetails/TotalWeight")
-total_volume = NodePath("MarginContainer/VBoxContainer/CargoDetails/TotalVolume")
-dimension_sets_container = NodePath("MarginContainer/VBoxContainer/DimensionSets")
+shipper = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Parties/Shipper")
+consignee = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Parties/Consignee")
+origin = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Locations/Origin")
+destination = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Locations/Destination")
+total_quantity = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/CargoDetails/TotalQuantity")
+total_weight = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/CargoDetails/TotalWeight")
+total_volume = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/CargoDetails/TotalVolume")
+dimension_sets_container = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/DimensionSets")
 document_dimension_set_scene = ExtResource("4_pg3yj")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mvygk")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Parties" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Parties" type="GridContainer" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="ShipperLabel" type="Label" parent="MarginContainer/VBoxContainer/Parties"]
+[node name="ShipperLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Parties"]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Shipper:"
 label_settings = ExtResource("3_uq1ad")
 
-[node name="Shipper" type="Label" parent="MarginContainer/VBoxContainer/Parties"]
+[node name="Shipper" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Parties"]
 layout_mode = 2
 text = "XXX
 XXX"
 label_settings = ExtResource("5_w3ty1")
 
-[node name="ConsigneeLabel" type="Label" parent="MarginContainer/VBoxContainer/Parties"]
+[node name="ConsigneeLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Parties"]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Consignee:"
 label_settings = ExtResource("3_uq1ad")
 
-[node name="Consignee" type="Label" parent="MarginContainer/VBoxContainer/Parties"]
+[node name="Consignee" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Parties"]
 layout_mode = 2
 text = "XXX
 XXX"
 label_settings = ExtResource("5_w3ty1")
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Locations" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Locations" type="GridContainer" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="OriginLabel" type="Label" parent="MarginContainer/VBoxContainer/Locations"]
+[node name="OriginLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Locations"]
 layout_mode = 2
 text = "Origin:"
 label_settings = ExtResource("3_uq1ad")
 
-[node name="Origin" type="Label" parent="MarginContainer/VBoxContainer/Locations"]
+[node name="Origin" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Locations"]
 layout_mode = 2
 text = "XXX"
 label_settings = ExtResource("5_w3ty1")
 
-[node name="DestinationLabel" type="Label" parent="MarginContainer/VBoxContainer/Locations"]
+[node name="DestinationLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Locations"]
 layout_mode = 2
 text = "Destination:
 "
 label_settings = ExtResource("3_uq1ad")
 
-[node name="Destination" type="Label" parent="MarginContainer/VBoxContainer/Locations"]
+[node name="Destination" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Locations"]
 layout_mode = 2
 text = "XXX"
 label_settings = ExtResource("5_w3ty1")
 
-[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="CargoDetails" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+[node name="CargoDetails" type="GridContainer" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="TotalQuantityLabel" type="Label" parent="MarginContainer/VBoxContainer/CargoDetails"]
+[node name="TotalQuantityLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/CargoDetails"]
 layout_mode = 2
 text = "Total quantity:"
 label_settings = ExtResource("3_uq1ad")
 
-[node name="TotalQuantity" type="Label" parent="MarginContainer/VBoxContainer/CargoDetails"]
+[node name="TotalQuantity" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/CargoDetails"]
 layout_mode = 2
 text = "XXX"
 label_settings = ExtResource("5_w3ty1")
 
-[node name="TotalWeightLabel" type="Label" parent="MarginContainer/VBoxContainer/CargoDetails"]
+[node name="TotalWeightLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/CargoDetails"]
 layout_mode = 2
 text = "Total weight:"
 label_settings = ExtResource("3_uq1ad")
 
-[node name="TotalWeight" type="Label" parent="MarginContainer/VBoxContainer/CargoDetails"]
+[node name="TotalWeight" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/CargoDetails"]
 layout_mode = 2
 text = "XXX"
 label_settings = ExtResource("5_w3ty1")
 
-[node name="TotalVolumeLabel" type="Label" parent="MarginContainer/VBoxContainer/CargoDetails"]
+[node name="TotalVolumeLabel" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/CargoDetails"]
 layout_mode = 2
 text = "Total volume:"
 label_settings = ExtResource("3_uq1ad")
 
-[node name="TotalVolume" type="Label" parent="MarginContainer/VBoxContainer/CargoDetails"]
+[node name="TotalVolume" type="Label" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/CargoDetails"]
 layout_mode = 2
 text = "XXX"
 label_settings = ExtResource("5_w3ty1")
 
-[node name="HSeparator3" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="DimensionSets" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="DimensionSets" type="VBoxContainer" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="DimensionSet" parent="MarginContainer/VBoxContainer/DimensionSets" instance=ExtResource("4_pg3yj")]
+[node name="DimensionSet" parent="VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/DimensionSets" instance=ExtResource("4_pg3yj")]
 layout_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="AcceptButton" type="Button" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Accept"
+
+[node name="RejectButton" type="Button" parent="VBoxContainer/Buttons"]
+layout_mode = 2
+text = "Reject"
+
+[connection signal="pressed" from="VBoxContainer/Buttons/AcceptButton" to="." method="_on_accept_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Buttons/RejectButton" to="." method="_on_reject_button_pressed"]
