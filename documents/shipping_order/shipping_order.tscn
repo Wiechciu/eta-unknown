@@ -1,137 +1,149 @@
-[gd_scene load_steps=5 format=3 uid="uid://byup0xasld7sf"]
+[gd_scene load_steps=7 format=3 uid="uid://byup0xasld7sf"]
 
 [ext_resource type="Script" path="res://documents/shipping_order/shipping_order.gd" id="1_i3w6w"]
 [ext_resource type="Resource" uid="uid://d3ijp60vruc74" path="res://shipments/example_shipment_1.tres" id="2_a6u7x"]
-[ext_resource type="LabelSettings" uid="uid://dbxrdxwwawld3" path="res://themes/document_label_settings.tres" id="3_uq1ad"]
+[ext_resource type="LabelSettings" uid="uid://dbxrdxwwawld3" path="res://themes/document_label_label_settings.tres" id="3_uq1ad"]
 [ext_resource type="PackedScene" uid="uid://bisun2rrujs6p" path="res://documents/document_dimension_set.tscn" id="4_pg3yj"]
+[ext_resource type="LabelSettings" uid="uid://tas3grgdcwul" path="res://themes/document_value_label_settings.tres" id="5_w3ty1"]
 
-[node name="ShippingOrder" type="Control" node_paths=PackedStringArray("shipper", "consignee", "origin", "destination", "total_quantity", "total_weight", "total_volume", "dimension_sets_container")]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mvygk"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.288518, 0.288518, 0.288518, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+
+[node name="ShippingOrder" type="PanelContainer" node_paths=PackedStringArray("shipper", "consignee", "origin", "destination", "total_quantity", "total_weight", "total_volume", "dimension_sets_container")]
+offset_right = 147.0
+offset_bottom = 254.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_mvygk")
 script = ExtResource("1_i3w6w")
 shipment = ExtResource("2_a6u7x")
-shipper = NodePath("VBoxContainer/Parties/Shipper/Shipper")
-consignee = NodePath("VBoxContainer/Parties/Consignee/Consignee")
-origin = NodePath("VBoxContainer/Locations/Origin/Origin")
-destination = NodePath("VBoxContainer/Locations/Destination/Destination")
-total_quantity = NodePath("VBoxContainer/CargoDetails/TotalQuantity/TotalQuantity")
-total_weight = NodePath("VBoxContainer/CargoDetails/TotalWeight/TotalWeight")
-total_volume = NodePath("VBoxContainer/CargoDetails/TotalVolume/TotalVolume")
-dimension_sets_container = NodePath("VBoxContainer/CargoDetails/DimensionSets")
+shipper = NodePath("MarginContainer/VBoxContainer/Parties/Shipper")
+consignee = NodePath("MarginContainer/VBoxContainer/Parties/Consignee")
+origin = NodePath("MarginContainer/VBoxContainer/Locations/Origin")
+destination = NodePath("MarginContainer/VBoxContainer/Locations/Destination")
+total_quantity = NodePath("MarginContainer/VBoxContainer/CargoDetails/TotalQuantity")
+total_weight = NodePath("MarginContainer/VBoxContainer/CargoDetails/TotalWeight")
+total_volume = NodePath("MarginContainer/VBoxContainer/CargoDetails/TotalVolume")
+dimension_sets_container = NodePath("MarginContainer/VBoxContainer/DimensionSets")
 document_dimension_set_scene = ExtResource("4_pg3yj")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
 
-[node name="Parties" type="VBoxContainer" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="Shipper" type="HBoxContainer" parent="VBoxContainer/Parties"]
+[node name="Parties" type="GridContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+columns = 2
 
-[node name="ShipperLabel" type="Label" parent="VBoxContainer/Parties/Shipper"]
+[node name="ShipperLabel" type="Label" parent="MarginContainer/VBoxContainer/Parties"]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Shipper:"
 label_settings = ExtResource("3_uq1ad")
 
-[node name="Shipper" type="Label" parent="VBoxContainer/Parties/Shipper"]
+[node name="Shipper" type="Label" parent="MarginContainer/VBoxContainer/Parties"]
 layout_mode = 2
 text = "XXX
 XXX"
+label_settings = ExtResource("5_w3ty1")
 
-[node name="Consignee" type="HBoxContainer" parent="VBoxContainer/Parties"]
-layout_mode = 2
-
-[node name="ConsigneeLabel" type="Label" parent="VBoxContainer/Parties/Consignee"]
+[node name="ConsigneeLabel" type="Label" parent="MarginContainer/VBoxContainer/Parties"]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Consignee:"
 label_settings = ExtResource("3_uq1ad")
 
-[node name="Consignee" type="Label" parent="VBoxContainer/Parties/Consignee"]
+[node name="Consignee" type="Label" parent="MarginContainer/VBoxContainer/Parties"]
 layout_mode = 2
-text = "XXX"
+text = "XXX
+XXX"
+label_settings = ExtResource("5_w3ty1")
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="Locations" type="VBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="Origin" type="HBoxContainer" parent="VBoxContainer/Locations"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="OriginLabel" type="Label" parent="VBoxContainer/Locations/Origin"]
+[node name="Locations" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="OriginLabel" type="Label" parent="MarginContainer/VBoxContainer/Locations"]
 layout_mode = 2
 text = "Origin:"
 label_settings = ExtResource("3_uq1ad")
 
-[node name="Origin" type="Label" parent="VBoxContainer/Locations/Origin"]
+[node name="Origin" type="Label" parent="MarginContainer/VBoxContainer/Locations"]
 layout_mode = 2
 text = "XXX"
+label_settings = ExtResource("5_w3ty1")
 
-[node name="Destination" type="HBoxContainer" parent="VBoxContainer/Locations"]
-layout_mode = 2
-
-[node name="DestinationLabel" type="Label" parent="VBoxContainer/Locations/Destination"]
+[node name="DestinationLabel" type="Label" parent="MarginContainer/VBoxContainer/Locations"]
 layout_mode = 2
 text = "Destination:
 "
 label_settings = ExtResource("3_uq1ad")
 
-[node name="Destination" type="Label" parent="VBoxContainer/Locations/Destination"]
+[node name="Destination" type="Label" parent="MarginContainer/VBoxContainer/Locations"]
 layout_mode = 2
 text = "XXX"
+label_settings = ExtResource("5_w3ty1")
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="CargoDetails" type="VBoxContainer" parent="VBoxContainer"]
+[node name="CargoDetails" type="GridContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+columns = 2
 
-[node name="TotalQuantity" type="HBoxContainer" parent="VBoxContainer/CargoDetails"]
-layout_mode = 2
-
-[node name="TotalQuantityLabel" type="Label" parent="VBoxContainer/CargoDetails/TotalQuantity"]
+[node name="TotalQuantityLabel" type="Label" parent="MarginContainer/VBoxContainer/CargoDetails"]
 layout_mode = 2
 text = "Total quantity:"
 label_settings = ExtResource("3_uq1ad")
 
-[node name="TotalQuantity" type="Label" parent="VBoxContainer/CargoDetails/TotalQuantity"]
+[node name="TotalQuantity" type="Label" parent="MarginContainer/VBoxContainer/CargoDetails"]
 layout_mode = 2
 text = "XXX"
+label_settings = ExtResource("5_w3ty1")
 
-[node name="TotalWeight" type="HBoxContainer" parent="VBoxContainer/CargoDetails"]
-layout_mode = 2
-
-[node name="TotalWeightLabel" type="Label" parent="VBoxContainer/CargoDetails/TotalWeight"]
+[node name="TotalWeightLabel" type="Label" parent="MarginContainer/VBoxContainer/CargoDetails"]
 layout_mode = 2
 text = "Total weight:"
 label_settings = ExtResource("3_uq1ad")
 
-[node name="TotalWeight" type="Label" parent="VBoxContainer/CargoDetails/TotalWeight"]
+[node name="TotalWeight" type="Label" parent="MarginContainer/VBoxContainer/CargoDetails"]
 layout_mode = 2
 text = "XXX"
+label_settings = ExtResource("5_w3ty1")
 
-[node name="TotalVolume" type="HBoxContainer" parent="VBoxContainer/CargoDetails"]
-layout_mode = 2
-
-[node name="TotalVolumeLabel" type="Label" parent="VBoxContainer/CargoDetails/TotalVolume"]
+[node name="TotalVolumeLabel" type="Label" parent="MarginContainer/VBoxContainer/CargoDetails"]
 layout_mode = 2
 text = "Total volume:"
 label_settings = ExtResource("3_uq1ad")
 
-[node name="TotalVolume" type="Label" parent="VBoxContainer/CargoDetails/TotalVolume"]
+[node name="TotalVolume" type="Label" parent="MarginContainer/VBoxContainer/CargoDetails"]
 layout_mode = 2
 text = "XXX"
+label_settings = ExtResource("5_w3ty1")
 
-[node name="DimensionSets" type="VBoxContainer" parent="VBoxContainer/CargoDetails"]
+[node name="HSeparator3" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="DimensionSet" parent="VBoxContainer/CargoDetails/DimensionSets" instance=ExtResource("4_pg3yj")]
+[node name="DimensionSets" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="DimensionSet" parent="MarginContainer/VBoxContainer/DimensionSets" instance=ExtResource("4_pg3yj")]
 layout_mode = 2

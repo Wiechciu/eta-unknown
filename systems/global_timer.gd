@@ -1,25 +1,19 @@
 extends Node
 
 
-@export var timer: int
-@export var minute: int:
+@export var time_scale: float = 60
+@export var timer: float
+@export var date_string: String:
 	get:
-		return (timer) % 60
-@export var hour: int:
+		return Time.get_date_string_from_unix_time(timer)
+@export var time_string: String:
 	get:
-		return (timer / 60) % 24
-@export var day: int:
-	get:
-		return (timer / (60 * 24)) % 30
-@export var week: int:
-	get:
-		return (timer / (60 * 24 * 7)) % 52
-@export var month: int:
-	get:
-		return (timer / (60 * 24  * 30)) % 12
-@export var year: int:
-	get:
-		return timer / (60 * 24  * 365)
+		return Time.get_time_string_from_unix_time(timer)
 
-func _on_timer_timeout() -> void:
-	timer += 1
+
+func _init() -> void:
+	timer = Time.get_unix_time_from_datetime_string("2025-01-01T08:00:00")
+
+
+func _process(delta: float) -> void:
+	timer += delta * time_scale

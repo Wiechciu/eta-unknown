@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bisun2rrujs6p"]
+[gd_scene load_steps=3 format=3 uid="uid://bisun2rrujs6p"]
 
 [ext_resource type="Script" path="res://documents/document_dimension_set.gd" id="1_cckso"]
+[ext_resource type="LabelSettings" uid="uid://tas3grgdcwul" path="res://themes/document_value_label_settings.tres" id="2_6bitq"]
 
 [node name="DimensionSet" type="HBoxContainer" node_paths=PackedStringArray("quantity", "length", "width", "height", "total_weight", "total_volume")]
 script = ExtResource("1_cckso")
@@ -14,43 +15,54 @@ total_volume = NodePath("TotalVolume")
 [node name="Quantity" type="Label" parent="."]
 layout_mode = 2
 text = "X"
+label_settings = ExtResource("2_6bitq")
 
 [node name="x1" type="Label" parent="."]
 layout_mode = 2
 text = "x"
+label_settings = ExtResource("2_6bitq")
 
 [node name="Length" type="Label" parent="."]
 layout_mode = 2
 text = "X"
+label_settings = ExtResource("2_6bitq")
 
 [node name="x2" type="Label" parent="."]
 layout_mode = 2
 text = "x"
+label_settings = ExtResource("2_6bitq")
 
 [node name="Width" type="Label" parent="."]
 layout_mode = 2
 text = "X"
+label_settings = ExtResource("2_6bitq")
 
 [node name="x3" type="Label" parent="."]
 layout_mode = 2
 text = "x"
+label_settings = ExtResource("2_6bitq")
 
 [node name="Height" type="Label" parent="."]
 layout_mode = 2
 text = "X"
+label_settings = ExtResource("2_6bitq")
 
 [node name="x4" type="Label" parent="."]
 layout_mode = 2
 text = " "
+label_settings = ExtResource("2_6bitq")
 
 [node name="TotalWeight" type="Label" parent="."]
 layout_mode = 2
 text = "X"
+label_settings = ExtResource("2_6bitq")
 
 [node name="x5" type="Label" parent="."]
 layout_mode = 2
 text = " "
+label_settings = ExtResource("2_6bitq")
 
 [node name="TotalVolume" type="Label" parent="."]
 layout_mode = 2
 text = "X"
+label_settings = ExtResource("2_6bitq")
