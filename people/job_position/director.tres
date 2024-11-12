@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="JobPosition" load_steps=2 format=3 uid="uid://mnq0jaym4y41"]
+
+[ext_resource type="Script" path="res://people/job_position/job_position.gd" id="1_1vnli"]
+
+[resource]
+script = ExtResource("1_1vnli")
+job_title = "Director"
+salary = 3000
+metadata/_custom_type_script = ExtResource("1_1vnli")

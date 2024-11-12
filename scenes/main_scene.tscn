@@ -1,7 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://b18oy35p17ir7"]
+[gd_scene load_steps=3 format=3 uid="uid://b18oy35p17ir7"]
 
-[ext_resource type="PackedScene" uid="uid://byup0xasld7sf" path="res://documents/shipping_order.tscn" id="1_w2twt"]
+[ext_resource type="PackedScene" uid="uid://b66husl1w3olw" path="res://systems/ui.tscn" id="1_pw63i"]
+[ext_resource type="PackedScene" uid="uid://byup0xasld7sf" path="res://documents/shipping_order/shipping_order.tscn" id="1_w2twt"]
 
 [node name="MainScene" type="Node"]
 
+[node name="Ui" parent="." instance=ExtResource("1_pw63i")]
+
 [node name="ShippingOrder" parent="." instance=ExtResource("1_w2twt")]
+visible = false

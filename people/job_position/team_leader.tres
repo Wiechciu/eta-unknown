@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="JobPosition" load_steps=2 format=3 uid="uid://dp2hi7q5vmy0e"]
+
+[ext_resource type="Script" path="res://people/job_position/job_position.gd" id="1_wxair"]
+
+[resource]
+script = ExtResource("1_wxair")
+job_title = "Team Leader"
+salary = 1500
+metadata/_custom_type_script = ExtResource("1_wxair")

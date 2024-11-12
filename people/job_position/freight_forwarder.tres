@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="JobPosition" load_steps=2 format=3 uid="uid://cor07h6lxcx7m"]
+
+[ext_resource type="Script" path="res://people/job_position/job_position.gd" id="1_qkhl1"]
+
+[resource]
+script = ExtResource("1_qkhl1")
+job_title = "Freight Forwarder"
+salary = 1300
+metadata/_custom_type_script = ExtResource("1_qkhl1")
