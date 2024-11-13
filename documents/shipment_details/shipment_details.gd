@@ -1,4 +1,4 @@
-class_name ShippingOrder
+class_name ShipmentDetails
 extends Document
 
 
@@ -38,10 +38,10 @@ func _ready() -> void:
 		dimension_sets_container.add_child(document_dimension_set)
 
 
-func _on_accept_button_pressed() -> void:
-	(shipment.duplicate() as Shipment).accept(GameManager.player.employer)
+func _on_complete_button_pressed() -> void:
+	shipment.change_status(Shipment.Status.COMPLETED)
 	queue_free()
 
 
-func _on_reject_button_pressed() -> void:
+func _on_close_button_pressed() -> void:
 	queue_free()

@@ -2,14 +2,23 @@ class_name Shipment
 extends Resource
 
 
+signal status_changed(Shipment, Status)
+signal completed(Shipment)
+
+
 enum Status{
 	REQUESTED,
 	ACCEPTED,
 	IN_TRANSIT,
 	COMPLETED,
+	CANCELLED,
 }
 
+static var shipments: Array[Shipment]
 
+
+var shipment_id: int
+@export var customer_reference: String
 @export var shipper: Party
 @export var consignee: Party
 @export var origin: Location
@@ -48,3 +57,33 @@ var total_volume:
 var is_completed: bool:
 	get:
 		return status == Status.COMPLETED 
+
+# Accepted shipment variables
+var shipment_number: int
+var owner: Company
+
+
+func _init() -> void:
+	shipments.append(self)
+	shipment_id = shipments.size()
+
+
+func accept(new_owner: Company) -> void:
+	owner = new_owner
+	new_owner.add_shipment(self)
+	change_status(Status.ACCEPTED)
+
+
+func change_status(new_status: Status) -> void:
+	status = new_status
+	status_changed.emit(self, status)
+	if status == Status.COMPLETED:
+		completed.emit(self)
+
+
+static func is_shipment_completed(shipment_to_check: Shipment) -> bool:
+	return shipment_to_check.is_completed
+
+
+static func is_shipment_not_completed(shipment_to_check: Shipment) -> bool:
+	return not shipment_to_check.is_completed

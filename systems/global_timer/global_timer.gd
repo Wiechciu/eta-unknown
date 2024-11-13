@@ -13,7 +13,6 @@ signal lunch_ended
 @export var lunch_start_hour: int = 12
 @export var lunch_end_hour: int = 13
 
-
 @export var timer: float
 @export var date_string: String:
 	get:
@@ -52,3 +51,11 @@ func check_timesplits() -> void:
 		lunch_ended.emit()
 	
 	current_hour = new_hour
+
+
+func start_next_day() -> void:
+	var one_day_in_seconds = 1 * 60 * 60 * 24
+	var next_day_time_dictionary = Time.get_datetime_dict_from_unix_time(timer + one_day_in_seconds)
+	next_day_time_dictionary["hour"] = shift_start_hour
+	next_day_time_dictionary["minute"] = 0
+	timer = Time.get_unix_time_from_datetime_dict(next_day_time_dictionary)

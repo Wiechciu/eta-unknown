@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b66husl1w3olw"]
+[gd_scene load_steps=7 format=3 uid="uid://b66husl1w3olw"]
 
 [ext_resource type="Script" path="res://systems/calendar/date_time.gd" id="1_ywo4k"]
 [ext_resource type="LabelSettings" uid="uid://dbpx3q8ueafhu" path="res://themes/calendar_label_settings.tres" id="2_gb54w"]
 [ext_resource type="Script" path="res://systems/calendar/calendar_event.gd" id="3_bspw3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vp42h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ywo4k"]
 bg_color = Color(0.609701, 0.613308, 0.45809, 1)
@@ -17,16 +19,13 @@ shadow_offset = Vector2(2, 2)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bspw3"]
 bg_color = Color(0.411765, 0.407843, 0.254902, 0.419608)
 
-[node name="Calendar" type="Control"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 90.0
+[node name="Calendar" type="PanelContainer"]
+offset_right = 162.0
 offset_bottom = 58.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_vp42h")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="DateTime" type="PanelContainer" parent="HBoxContainer" node_paths=PackedStringArray("date", "time")]
 layout_mode = 2

@@ -1,44 +1,49 @@
-[gd_scene load_steps=2 format=3 uid="uid://bt74quytm4ts"]
+[gd_scene load_steps=4 format=3 uid="uid://bt74quytm4ts"]
 
 [ext_resource type="Script" path="res://systems/shipment_list/shipment_list.gd" id="1_t5evc"]
+[ext_resource type="PackedScene" uid="uid://bni42s5wy2wb3" path="res://systems/shipment_list/shipment_list_item.tscn" id="2_bsirv"]
+[ext_resource type="LabelSettings" uid="uid://ctkwvbi52ojou" path="res://themes/menu_header_label_settings.tres" id="3_mk6g8"]
 
-[node name="ShipmentList" type="Control" node_paths=PackedStringArray("_shipment_container")]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 3.0
-offset_top = 79.0
-offset_right = 43.0
-offset_bottom = 119.0
+[node name="ShipmentList" type="PanelContainer" node_paths=PackedStringArray("_shipment_container", "_completed_shipments", "_toggle_shipments_button")]
+offset_right = 153.0
+offset_bottom = 74.0
 script = ExtResource("1_t5evc")
-_shipment_container = NodePath("PanelContainer/MarginContainer/ShipmentContainer")
+_shipment_container = NodePath("MarginContainer/VBoxContainer/ShipmentContainer")
+_completed_shipments = NodePath("MarginContainer/VBoxContainer/CompletedShipments")
+_shipment_list_item_scene = ExtResource("2_bsirv")
+_toggle_shipments_button = NodePath("MarginContainer/VBoxContainer/Header/ToggleShipmentListButton")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 4
 
-[node name="ShipmentContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="Shipment" type="Label" parent="PanelContainer/MarginContainer/ShipmentContainer"]
+[node name="Header" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Shipment_1"
 
-[node name="Shipment2" type="Label" parent="PanelContainer/MarginContainer/ShipmentContainer"]
+[node name="Header" type="Label" parent="MarginContainer/VBoxContainer/Header"]
 layout_mode = 2
-text = "Shipment_1"
+text = "Shipments"
+label_settings = ExtResource("3_mk6g8")
 
-[node name="Shipment3" type="Label" parent="PanelContainer/MarginContainer/ShipmentContainer"]
+[node name="ToggleShipmentListButton" type="Button" parent="MarginContainer/VBoxContainer/Header"]
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
-text = "Shipment_1"
+text = "+"
 
-[node name="Shipment4" type="Label" parent="PanelContainer/MarginContainer/ShipmentContainer"]
+[node name="ShipmentContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Shipment_1"
+
+[node name="ShipmentListItem" parent="MarginContainer/VBoxContainer/ShipmentContainer" instance=ExtResource("2_bsirv")]
+layout_mode = 2
+
+[node name="CompletedShipments" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Completed: "
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Header/ToggleShipmentListButton" to="." method="_on_toggle_shipment_list_button_pressed"]
