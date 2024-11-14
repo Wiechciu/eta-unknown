@@ -31,7 +31,6 @@ metadata/_custom_type_script = ExtResource("3_lkwm8")
 
 [resource]
 script = ExtResource("4_weo8s")
-shipment_id = 0
 customer_reference = "ABC123"
 shipper = ExtResource("6_78ca3")
 consignee = ExtResource("1_6xnjn")

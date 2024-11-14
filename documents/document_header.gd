@@ -1,8 +1,8 @@
 class_name DocumentHeader
-extends Label
+extends Control
 
 
-@export var document_to_move: Document
+@export var document_to_move: Control
 var is_moving: bool
 
 
