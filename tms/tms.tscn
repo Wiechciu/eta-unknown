@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cgytarte2suti"]
+[gd_scene load_steps=10 format=3 uid="uid://cgytarte2suti"]
 
 [ext_resource type="Script" path="res://tms/tms.gd" id="1_eiifu"]
 [ext_resource type="PackedScene" uid="uid://cxa2h82m4jg1l" path="res://tms/panel_header.tscn" id="2_ql6i1"]
@@ -9,6 +9,10 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mgofm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eiifu"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
 bg_color = Color(1, 1, 1, 1)
 border_width_left = 2
 border_width_top = 2
@@ -17,6 +21,22 @@ border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 shadow_size = 1
 shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ql6i1"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ek2n7"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(0.91664, 0.91664, 0.91664, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.61339, 0.61339, 0.61339, 1)
 
 [node name="Tms" type="PanelContainer"]
 offset_right = 661.0
@@ -31,192 +51,247 @@ layout_mode = 2
 layout_mode = 2
 document_to_move = NodePath("../..")
 
-[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+[node name="ShipmentList" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/ShipmentList"]
+visible = false
+layout_mode = 2
+flat = true
+
+[node name="Label" type="Label" parent="VBoxContainer/ShipmentList/Button"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ShipmentList/Button"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Tree" type="Tree" parent="VBoxContainer/ShipmentList"]
+layout_mode = 2
+
+[node name="ShipmentDetails" type="TabContainer" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 current_tab = 0
 clip_tabs = false
 
-[node name="General" type="PanelContainer" parent="VBoxContainer/TabContainer"]
+[node name="General" type="PanelContainer" parent="VBoxContainer/ShipmentDetails"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 metadata/_tab_index = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TabContainer/General"]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 4
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/General/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ShipmentDetails/General"]
 layout_mode = 2
 
-[node name="Parties" type="GridContainer" parent="VBoxContainer/TabContainer/General/MarginContainer/VBoxContainer"]
+[node name="Parties" type="GridContainer" parent="VBoxContainer/ShipmentDetails/General/VBoxContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="ShipperLabel" type="Label" parent="VBoxContainer/TabContainer/General/MarginContainer/VBoxContainer/Parties"]
+[node name="TmsFieldLabel" type="PanelContainer" parent="VBoxContainer/ShipmentDetails/General/VBoxContainer/Parties"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+
+[node name="Label" type="Label" parent="VBoxContainer/ShipmentDetails/General/VBoxContainer/Parties/TmsFieldLabel"]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Shipper:"
 label_settings = ExtResource("3_ql6i1")
+text_overrun_behavior = 3
 
-[node name="Shipper" type="Label" parent="VBoxContainer/TabContainer/General/MarginContainer/VBoxContainer/Parties"]
+[node name="TmsFieldValue" type="PanelContainer" parent="VBoxContainer/ShipmentDetails/General/VBoxContainer/Parties"]
+custom_minimum_size = Vector2(250, 130)
 layout_mode = 2
-text = "XXX
-XXX"
+theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
+
+[node name="Label" type="Label" parent="VBoxContainer/ShipmentDetails/General/VBoxContainer/Parties/TmsFieldValue"]
+layout_mode = 2
+text = "XXX asfdadf fds
+XXXfasdf
+ sdfadsf
+fasd
+f"
 label_settings = ExtResource("4_ek2n7")
+text_overrun_behavior = 3
+max_lines_visible = 5
 
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer/TabContainer/General/MarginContainer/VBoxContainer/Parties/Shipper"]
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.881937, 0.881937, 0.881937, 1)
+[node name="TmsFieldLabel2" type="PanelContainer" parent="VBoxContainer/ShipmentDetails/General/VBoxContainer/Parties"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
 
-[node name="ConsigneeLabel" type="Label" parent="VBoxContainer/TabContainer/General/MarginContainer/VBoxContainer/Parties"]
+[node name="Label" type="Label" parent="VBoxContainer/ShipmentDetails/General/VBoxContainer/Parties/TmsFieldLabel2"]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Consignee:"
 label_settings = ExtResource("3_ql6i1")
+text_overrun_behavior = 3
 
-[node name="Consignee" type="Label" parent="VBoxContainer/TabContainer/General/MarginContainer/VBoxContainer/Parties"]
+[node name="TmsFieldValue2" type="PanelContainer" parent="VBoxContainer/ShipmentDetails/General/VBoxContainer/Parties"]
+custom_minimum_size = Vector2(250, 130)
 layout_mode = 2
-text = "XXX
-XXX"
+theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
+
+[node name="Label" type="Label" parent="VBoxContainer/ShipmentDetails/General/VBoxContainer/Parties/TmsFieldValue2"]
+layout_mode = 2
+text = "XXX asfdadf fds
+XXXfasdf
+ sdfadsf
+fasd
+f"
 label_settings = ExtResource("4_ek2n7")
+text_overrun_behavior = 3
+max_lines_visible = 5
 
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer/TabContainer/General/MarginContainer/VBoxContainer/Parties/Consignee"]
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.881937, 0.881937, 0.881937, 1)
-
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/TabContainer/General/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/ShipmentDetails/General/VBoxContainer"]
 layout_mode = 2
 
-[node name="Locations" type="GridContainer" parent="VBoxContainer/TabContainer/General/MarginContainer/VBoxContainer"]
+[node name="Locations" type="GridContainer" parent="VBoxContainer/ShipmentDetails/General/VBoxContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="OriginLabel" type="Label" parent="VBoxContainer/TabContainer/General/MarginContainer/VBoxContainer/Locations"]
+[node name="TmsFieldLabel" type="PanelContainer" parent="VBoxContainer/ShipmentDetails/General/VBoxContainer/Locations"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+
+[node name="Label" type="Label" parent="VBoxContainer/ShipmentDetails/General/VBoxContainer/Locations/TmsFieldLabel"]
+layout_mode = 2
+size_flags_vertical = 1
 text = "Origin:"
 label_settings = ExtResource("3_ql6i1")
+text_overrun_behavior = 3
 
-[node name="Origin" type="Label" parent="VBoxContainer/TabContainer/General/MarginContainer/VBoxContainer/Locations"]
+[node name="TmsFieldValue" type="PanelContainer" parent="VBoxContainer/ShipmentDetails/General/VBoxContainer/Locations"]
+custom_minimum_size = Vector2(250, 27)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
+
+[node name="Label" type="Label" parent="VBoxContainer/ShipmentDetails/General/VBoxContainer/Locations/TmsFieldValue"]
 layout_mode = 2
 text = "XXX"
 label_settings = ExtResource("4_ek2n7")
+text_overrun_behavior = 3
+max_lines_visible = 1
 
-[node name="DestinationLabel" type="Label" parent="VBoxContainer/TabContainer/General/MarginContainer/VBoxContainer/Locations"]
+[node name="TmsFieldLabel2" type="PanelContainer" parent="VBoxContainer/ShipmentDetails/General/VBoxContainer/Locations"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-text = "Destination:
-"
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+
+[node name="Label" type="Label" parent="VBoxContainer/ShipmentDetails/General/VBoxContainer/Locations/TmsFieldLabel2"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Destination:"
 label_settings = ExtResource("3_ql6i1")
+text_overrun_behavior = 3
 
-[node name="Destination" type="Label" parent="VBoxContainer/TabContainer/General/MarginContainer/VBoxContainer/Locations"]
+[node name="TmsFieldValue2" type="PanelContainer" parent="VBoxContainer/ShipmentDetails/General/VBoxContainer/Locations"]
+custom_minimum_size = Vector2(250, 27)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
+
+[node name="Label" type="Label" parent="VBoxContainer/ShipmentDetails/General/VBoxContainer/Locations/TmsFieldValue2"]
 layout_mode = 2
 text = "XXX"
 label_settings = ExtResource("4_ek2n7")
+text_overrun_behavior = 3
+max_lines_visible = 1
 
-[node name="Cargo details" type="PanelContainer" parent="VBoxContainer/TabContainer"]
+[node name="Cargo details" type="PanelContainer" parent="VBoxContainer/ShipmentDetails"]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 metadata/_tab_index = 1
 
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/TabContainer/Cargo details"]
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/ShipmentDetails/Cargo details"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Cargo details/MarginContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ShipmentDetails/Cargo details/MarginContainer2"]
 layout_mode = 2
 
-[node name="CargoDetails" type="GridContainer" parent="VBoxContainer/TabContainer/Cargo details/MarginContainer2/VBoxContainer"]
+[node name="CargoDetails" type="GridContainer" parent="VBoxContainer/ShipmentDetails/Cargo details/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="TotalQuantityLabel" type="Label" parent="VBoxContainer/TabContainer/Cargo details/MarginContainer2/VBoxContainer/CargoDetails"]
+[node name="TotalQuantityLabel" type="Label" parent="VBoxContainer/ShipmentDetails/Cargo details/MarginContainer2/VBoxContainer/CargoDetails"]
 layout_mode = 2
 text = "Total quantity:"
 label_settings = ExtResource("3_ql6i1")
 
-[node name="TotalQuantity" type="Label" parent="VBoxContainer/TabContainer/Cargo details/MarginContainer2/VBoxContainer/CargoDetails"]
+[node name="TotalQuantity" type="Label" parent="VBoxContainer/ShipmentDetails/Cargo details/MarginContainer2/VBoxContainer/CargoDetails"]
 layout_mode = 2
 text = "XXX"
 label_settings = ExtResource("4_ek2n7")
 
-[node name="TotalWeightLabel" type="Label" parent="VBoxContainer/TabContainer/Cargo details/MarginContainer2/VBoxContainer/CargoDetails"]
+[node name="TotalWeightLabel" type="Label" parent="VBoxContainer/ShipmentDetails/Cargo details/MarginContainer2/VBoxContainer/CargoDetails"]
 layout_mode = 2
 text = "Total weight:"
 label_settings = ExtResource("3_ql6i1")
 
-[node name="TotalWeight" type="Label" parent="VBoxContainer/TabContainer/Cargo details/MarginContainer2/VBoxContainer/CargoDetails"]
+[node name="TotalWeight" type="Label" parent="VBoxContainer/ShipmentDetails/Cargo details/MarginContainer2/VBoxContainer/CargoDetails"]
 layout_mode = 2
 text = "XXX"
 label_settings = ExtResource("4_ek2n7")
 
-[node name="TotalVolumeLabel" type="Label" parent="VBoxContainer/TabContainer/Cargo details/MarginContainer2/VBoxContainer/CargoDetails"]
+[node name="TotalVolumeLabel" type="Label" parent="VBoxContainer/ShipmentDetails/Cargo details/MarginContainer2/VBoxContainer/CargoDetails"]
 layout_mode = 2
 text = "Total volume:"
 label_settings = ExtResource("3_ql6i1")
 
-[node name="TotalVolume" type="Label" parent="VBoxContainer/TabContainer/Cargo details/MarginContainer2/VBoxContainer/CargoDetails"]
+[node name="TotalVolume" type="Label" parent="VBoxContainer/ShipmentDetails/Cargo details/MarginContainer2/VBoxContainer/CargoDetails"]
 layout_mode = 2
 text = "XXX"
 label_settings = ExtResource("4_ek2n7")
 
-[node name="HSeparator3" type="HSeparator" parent="VBoxContainer/TabContainer/Cargo details/MarginContainer2/VBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer/ShipmentDetails/Cargo details/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 
-[node name="DimensionSets" type="VBoxContainer" parent="VBoxContainer/TabContainer/Cargo details/MarginContainer2/VBoxContainer"]
+[node name="DimensionSets" type="VBoxContainer" parent="VBoxContainer/ShipmentDetails/Cargo details/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 
-[node name="DimensionSet" parent="VBoxContainer/TabContainer/Cargo details/MarginContainer2/VBoxContainer/DimensionSets" instance=ExtResource("5_t5xli")]
+[node name="DimensionSet" parent="VBoxContainer/ShipmentDetails/Cargo details/MarginContainer2/VBoxContainer/DimensionSets" instance=ExtResource("5_t5xli")]
 layout_mode = 2
 
-[node name="Main freight" type="Label" parent="VBoxContainer/TabContainer"]
+[node name="Main freight" type="Label" parent="VBoxContainer/ShipmentDetails"]
 visible = false
 layout_mode = 2
 text = "NOT IMPLEMENTED"
 metadata/_tab_index = 2
 
-[node name="Pickup" type="Label" parent="VBoxContainer/TabContainer"]
+[node name="Pickup" type="Label" parent="VBoxContainer/ShipmentDetails"]
 visible = false
 layout_mode = 2
 text = "NOT IMPLEMENTED"
 metadata/_tab_index = 3
 
-[node name="Delivery" type="Label" parent="VBoxContainer/TabContainer"]
+[node name="Delivery" type="Label" parent="VBoxContainer/ShipmentDetails"]
 visible = false
 layout_mode = 2
 text = "NOT IMPLEMENTED"
 metadata/_tab_index = 4
 
-[node name="Customs" type="Label" parent="VBoxContainer/TabContainer"]
+[node name="Customs" type="Label" parent="VBoxContainer/ShipmentDetails"]
 visible = false
 layout_mode = 2
 text = "NOT IMPLEMENTED"
 metadata/_tab_index = 5
 
-[node name="Handling" type="Label" parent="VBoxContainer/TabContainer"]
+[node name="Handling" type="Label" parent="VBoxContainer/ShipmentDetails"]
 visible = false
 layout_mode = 2
 text = "NOT IMPLEMENTED"
 metadata/_tab_index = 6
 
-[node name="Accounting" type="Label" parent="VBoxContainer/TabContainer"]
+[node name="Accounting" type="Label" parent="VBoxContainer/ShipmentDetails"]
 visible = false
 layout_mode = 2
 text = "NOT IMPLEMENTED"
