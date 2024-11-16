@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bisun2rrujs6p"]
 
 [ext_resource type="Script" path="res://documents/document_dimension_set.gd" id="1_cckso"]
-[ext_resource type="LabelSettings" uid="uid://tas3grgdcwul" path="res://themes/document_value_label_settings.tres" id="2_6bitq"]
+[ext_resource type="LabelSettings" uid="uid://tas3grgdcwul" path="res://systems/themes/document_value_label_settings.tres" id="2_6bitq"]
 
 [node name="DimensionSet" type="HBoxContainer" node_paths=PackedStringArray("quantity", "length", "width", "height", "total_weight", "total_volume")]
 script = ExtResource("1_cckso")

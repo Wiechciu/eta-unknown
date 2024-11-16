@@ -1,0 +1,22 @@
+class_name Tms
+extends Control
+
+
+@export var shipment_list: ShipmentList
+@export var shipment_details: ShipmentDetails
+
+
+func _ready() -> void:
+	close_shipment_details()
+
+
+func open_shipment_details(shipment: Shipment) -> void:
+	shipment_details.load_shipment(shipment)
+	
+	shipment_list.visible = false
+	shipment_details.visible = true
+
+
+func close_shipment_details() -> void:
+	shipment_list.visible = true
+	shipment_details.visible = false

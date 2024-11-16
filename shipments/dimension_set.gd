@@ -11,4 +11,4 @@ extends Resource
 @export var is_dg: bool
 var total_volume:
 	get:
-		return quantity * length * width * height / 1000000
+		return snappedf(quantity * length * width * height / 1000000, 0.001)

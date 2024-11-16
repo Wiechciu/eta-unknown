@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://b18oy35p17ir7"]
+
+[ext_resource type="PackedScene" uid="uid://b66husl1w3olw" path="res://systems/calendar/calendar.tscn" id="1_82prh"]
+[ext_resource type="PackedScene" uid="uid://cieydjj1npshf" path="res://systems/debug_menu/debug_menu.tscn" id="2_8pfch"]
+[ext_resource type="PackedScene" uid="uid://cgytarte2suti" path="res://systems/tms/tms.tscn" id="3_kooe7"]
+
+[node name="MainScene" type="Node"]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Calendar" parent="VBoxContainer" instance=ExtResource("1_82prh")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="DebugMenu" parent="VBoxContainer" instance=ExtResource("2_8pfch")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="ScreenArea" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 203.0
+offset_top = 69.0
+offset_right = 1003.0
+offset_bottom = 619.0
+
+[node name="Tms" parent="ScreenArea" instance=ExtResource("3_kooe7")]
+layout_mode = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3

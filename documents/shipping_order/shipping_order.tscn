@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://byup0xasld7sf"]
+[gd_scene load_steps=7 format=3 uid="uid://byup0xasld7sf"]
 
 [ext_resource type="Script" path="res://documents/shipping_order/shipping_order.gd" id="1_i3w6w"]
-[ext_resource type="Resource" uid="uid://d3ijp60vruc74" path="res://shipments/example_shipment_1.tres" id="2_a6u7x"]
-[ext_resource type="LabelSettings" uid="uid://dbxrdxwwawld3" path="res://themes/document_label_label_settings.tres" id="3_uq1ad"]
+[ext_resource type="LabelSettings" uid="uid://dbxrdxwwawld3" path="res://systems/themes/document_label_label_settings.tres" id="3_uq1ad"]
 [ext_resource type="PackedScene" uid="uid://n3em2rf20umy" path="res://documents/document_header.tscn" id="4_mvygk"]
 [ext_resource type="PackedScene" uid="uid://bisun2rrujs6p" path="res://documents/document_dimension_set.tscn" id="4_pg3yj"]
-[ext_resource type="LabelSettings" uid="uid://tas3grgdcwul" path="res://themes/document_value_label_settings.tres" id="5_w3ty1"]
+[ext_resource type="LabelSettings" uid="uid://tas3grgdcwul" path="res://systems/themes/document_value_label_settings.tres" id="5_w3ty1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mvygk"]
 bg_color = Color(1, 1, 1, 1)
@@ -25,7 +24,6 @@ shadow_offset = Vector2(2, 2)
 offset_right = 171.0
 offset_bottom = 304.0
 script = ExtResource("1_i3w6w")
-shipment = ExtResource("2_a6u7x")
 shipper = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Parties/Shipper")
 consignee = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Parties/Consignee")
 origin = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Locations/Origin")

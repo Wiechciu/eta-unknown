@@ -1,8 +1,10 @@
-class_name ShippingOrder
-extends Document
+class_name ShipmentDetails
+extends Control
 
 
 var shipment: Shipment
+
+@export var tms: Tms
 
 @export_category("Assigned internally")
 @export var shipper: Label
@@ -14,6 +16,7 @@ var shipment: Shipment
 @export var total_volume: Label
 @export var dimension_sets_container: Control
 @export var document_dimension_set_scene: PackedScene
+@export var tab_container: TabContainer
 
 
 func load_shipment(shipment_to_load: Shipment) -> void:
@@ -38,12 +41,14 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 		document_dimension_set.total_weight.text = str(dimension_set.total_weight)
 		document_dimension_set.total_volume.text = str(dimension_set.total_volume)
 		dimension_sets_container.add_child(document_dimension_set)
+	
+	tab_container.current_tab = 0
 
 
-func _on_accept_button_pressed() -> void:
-	shipment.accept(GameManager.player.employer)
-	queue_free()
+func _on_complete_button_pressed() -> void:
+	shipment.change_status(Shipment.Status.COMPLETED)
+	tms.close_shipment_details()
 
 
-func _on_reject_button_pressed() -> void:
-	queue_free()
+func _on_close_button_pressed() -> void:
+	tms.close_shipment_details()

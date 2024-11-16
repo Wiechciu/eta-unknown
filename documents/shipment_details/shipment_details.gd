@@ -1,8 +1,8 @@
-class_name ShipmentDetails
+#class_name ShipmentDetails
 extends Document
 
 
-@export var shipment: Shipment
+var shipment: Shipment
 
 @export_category("Assigned internally")
 @export var shipper: Label
@@ -16,7 +16,9 @@ extends Document
 @export var document_dimension_set_scene: PackedScene
 
 
-func _ready() -> void:
+func load_shipment(shipment_to_load: Shipment) -> void:
+	shipment = shipment_to_load
+	
 	shipper.text = shipment.shipper.print_string
 	consignee.text = shipment.consignee.print_string
 	origin.text = shipment.origin.print_string

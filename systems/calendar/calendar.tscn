@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b66husl1w3olw"]
 
 [ext_resource type="Script" path="res://systems/calendar/date_time.gd" id="1_ywo4k"]
-[ext_resource type="LabelSettings" uid="uid://dbpx3q8ueafhu" path="res://themes/calendar_label_settings.tres" id="2_gb54w"]
+[ext_resource type="LabelSettings" uid="uid://dbpx3q8ueafhu" path="res://systems/themes/calendar_label_settings.tres" id="2_gb54w"]
 [ext_resource type="Script" path="res://systems/calendar/calendar_event.gd" id="3_bspw3"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vp42h"]

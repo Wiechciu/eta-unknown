@@ -13,14 +13,14 @@ signal lunch_ended
 @export var lunch_start_hour: int = 12
 @export var lunch_end_hour: int = 13
 
-@export var timer: float
-@export var date_string: String:
+var timer: float
+var date_string: String:
 	get:
 		return Time.get_date_string_from_unix_time(timer)
-@export var time_string: String:
+var time_string: String:
 	get:
 		return Time.get_time_string_from_unix_time(timer)
-@export var time_dictionary: Dictionary:
+var time_dictionary: Dictionary:
 	get:
 		return Time.get_datetime_dict_from_unix_time(timer)
 
