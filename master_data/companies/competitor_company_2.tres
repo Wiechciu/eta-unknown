@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="Company" load_steps=3 format=3 uid="uid://bbmj0abnayuv8"]
-
-[ext_resource type="Script" path="res://master_data/companies/company.gd" id="1_apymd"]
-[ext_resource type="Resource" uid="uid://xsdl1djl82em" path="res://master_data/parties/competitor_company_2.tres" id="2_vma71"]
-
-[resource]
-script = ExtResource("1_apymd")
-party_details = ExtResource("2_vma71")
-metadata/_custom_type_script = ExtResource("1_apymd")

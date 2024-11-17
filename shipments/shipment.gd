@@ -6,7 +6,14 @@ signal status_changed(Shipment, Status)
 signal completed(Shipment)
 
 
-enum Status{
+enum ModeOfTransport {
+	AIR,
+	SEA,
+	LAND,
+	RAIL,
+}
+
+enum Status {
 	REQUESTED,
 	QUOTED,
 	ACCEPTED,
@@ -18,98 +25,129 @@ enum Status{
 	REJECTED,
 }
 
-static var shipments: Array[Shipment]
 
+static var all: Array[Shipment]
+static var last_id: int = 0
 
 var shipment_id: int
 
-var customer_reference: String #TODO
-var customer_contact_person: Person #TODO
+# General
+var customer_reference: String
+var export_contact_person: Person
+var import_contact_person: Person
 var shipper: Party
 var consignee: Party
 var origin: Location
 var destination: Location
-var earliest_pickup_date_string: String = "YYYY-MM-DDTHH:MM:SS"
-var latest_delivery_date_string: String = "YYYY-MM-DDTHH:MM:SS"
-var incoterms_code: String #TODO
-var incoterms_place: String #TODO
-var service: String #TODO
-var commercial_documents: String #TODO
-var transport_documents: String #TODO
-var customs_documents: String #TODO
+var earliest_pickup_date: int
+var latest_delivery_date: int
+var service: Service
+var incoterms: Incoterms
+var incoterms_place: String
+var incoterms_full: String:
+	get:
+		return incoterms.code + " " + incoterms_place
 
+# Documentation
+var commercial_documents: Array[Document] #TODO
+var transport_documents: Array[Document] #TODO
+var customs_documents: Array[Document] #TODO
+var accounting_documents: Array[Document] #TODO
+
+# Cargo details
+var cargo: Cargo
+var slac: int
 var dimension_sets: Array[DimensionSet]
-var total_quantity:
+var total_quantity: int:
 	get:
-		if dimension_sets.size() > 0:
-			var quantity: float = 0
-			for dimension_set in dimension_sets:
-				quantity += dimension_set.quantity
-			return quantity
-		else:
-			return 0
-var total_weight:
+		var total: int = 0
+		for dimension_set in dimension_sets:
+			total += dimension_set.quantity
+		return total
+var total_weight: float:
 	get:
-		if dimension_sets.size() > 0:
-			var weight: float = 0
-			for dimension_set in dimension_sets:
-				weight += dimension_set.total_weight
-			return weight
-		else:
-			return 0
-var total_volume:
+		var total: float = 0
+		for dimension_set in dimension_sets:
+			total += dimension_set.total_weight
+		return total
+var total_volume: float:
 	get:
-		if dimension_sets.size() > 0:
-			var volume: float = 0
-			for dimension_set in dimension_sets:
-				volume += dimension_set.total_volume
-			return volume
-		else:
-			return 0
+		var total: float = 0
+		for dimension_set in dimension_sets:
+			total += dimension_set.total_volume
+		return total
+var total_value: float:
+	get:
+		return slac * cargo.unit_value
 var status: Status
 var is_completed: bool:
 	get:
 		return status == Status.COMPLETED 
 
 # Quoted
-var quotation: String #TODO
+var quotation: Quotation #TODO
 
 # Accepted shipment variables
 var shipment_number: int
-var owner: Company
+var owner: FreightForwarder
 
 # Planned shipment variables
-var planned_pickup_date_string: String = "YYYY-MM-DDTHH:MM:SS" #TODO
-var planned_delivery_date_string: String = "YYYY-MM-DDTHH:MM:SS" #TODO
-var trucker_pickup: String #TODO
-var trucker_delivery: String #TODO
-var carrier: String #TODO
-var customs_agency: String #TODO
+var mode_of_transport: ModeOfTransport #TODO
+var planned_pickup_date_string: int #TODO
+var planned_delivery_date_string: int #TODO
+var planned_departure_date_string: int #TODO
+var planned_arrival_date_string: int #TODO
+var trucker_pickup: Trucker #TODO
+var trucker_delivery: Trucker #TODO
+var carrier: Carrier #TODO
+var export_customs_agency: CustomsAgency #TODO
+var import_customs_agency: CustomsAgency #TODO
 var costs: String #TODO
 
 # In transit
-var events: String #TODO
+var events: Array[Event] #TODO
 
 
 static func new_random_shipment() -> Shipment:
 	var new_shipment = Shipment.new()
+	all.append(new_shipment)
+	last_id += 1
+	new_shipment.shipment_id = last_id
 	
-	new_shipment.shipper = Constants.parties.pick_random()
-	new_shipment.consignee = Constants.parties.pick_random()
+	new_shipment.customer_reference = generate_random_customer_reference(randi_range(3, 5), randi_range(3, 5))
 	
-	Location.country_code_to_check = new_shipment.shipper.country_code
-	new_shipment.origin = Constants.locations.filter(Location.is_in_country).pick_random()
+	new_shipment.shipper = Customer.all_with_employees.pick_random()
+	new_shipment.consignee = Customer.all_with_employees.pick_random()
+	new_shipment.export_contact_person = new_shipment.shipper.employees.pick_random()
+	new_shipment.import_contact_person = new_shipment.consignee.employees.pick_random()
 	
-	Location.country_code_to_check = new_shipment.consignee.country_code
-	new_shipment.destination = Constants.locations.filter(Location.is_in_country).pick_random()
+	Location.country_to_check = new_shipment.shipper.country
+	new_shipment.origin = Location.all.filter(Location.is_in_country).pick_random()
+	Location.country_to_check = new_shipment.consignee.country
+	new_shipment.destination = Location.all.filter(Location.is_in_country).pick_random()
 	
-	var random_pickup_day = randi_range(2, 5)
-	new_shipment.earliest_pickup_date_string = "2025-01-" + str(random_pickup_day) + "T10:00:00"
+	new_shipment.earliest_pickup_date = GlobalTimer.get_future_date(GlobalTimer.now, randi_range(1, 20), 10, 0)
+	new_shipment.latest_delivery_date = GlobalTimer.get_future_date(new_shipment.earliest_pickup_date, randi_range(2, 30), 17, 0)
 	
-	var random_delivery_day = randi_range(10, 20)
-	new_shipment.latest_delivery_date_string = "2025-01-" + str(random_delivery_day) + "T17:00:00"
+	new_shipment.service = Service.all.pick_random()
+	new_shipment.incoterms = Incoterms.all.pick_random()
+	var incoterms_place: String
+	match new_shipment.incoterms.group:
+		"C", "D":
+			incoterms_place = new_shipment.consignee.city_name
+		"E", "F":
+			incoterms_place = new_shipment.shipper.city_name
+	new_shipment.incoterms_place = incoterms_place
 	
-	var dimension_set_count = randi_range(1, 10)
+	new_shipment.cargo = Cargo.all.pick_random()
+	if new_shipment.cargo.unit_size < 0:
+		new_shipment.slac = randi_range(100, 10000)
+	elif new_shipment.cargo.unit_size < 5:
+		new_shipment.slac = randi_range(10, 1000)
+	else:
+		new_shipment.slac = randi_range(1, 50)
+	
+	var dimension_set_count = randi_range(1, 5)
 	for n in dimension_set_count:
 		var new_dimension_set = DimensionSet.new()
 		new_dimension_set.quantity = randi_range(1, 5)
@@ -132,12 +170,23 @@ static func is_shipment_not_completed(shipment_to_check: Shipment) -> bool:
 	return not shipment_to_check.is_completed
 
 
-func _init() -> void:
-	shipments.append(self)
-	shipment_id = shipments.size()
+static func generate_random_customer_reference(string_length: int, number_length: int) -> String:
+	var word: String
+	var allowed_characters_in_string := "abcdefghijklmnopqrstvwxyz"
+	var allowed_characters_in_number := "1234567890"
+	
+	var n_char := len(allowed_characters_in_string)
+	for i in range(string_length):
+		word += allowed_characters_in_string[randi()% n_char].to_upper()
+	
+	n_char = len(allowed_characters_in_number)
+	for i in range(number_length):
+		word += allowed_characters_in_number[randi()% n_char]
+	
+	return word
 
 
-func accept(new_owner: Company) -> void:
+func accept(new_owner: FreightForwarder) -> void:
 	change_status(Status.ACCEPTED)
 	owner = new_owner
 	shipment_number = owner.get_next_shipment_number()

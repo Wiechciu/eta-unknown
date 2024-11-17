@@ -1,0 +1,26 @@
+[
+ {
+   "title": "Intern",
+   "salary": "500"
+ },
+ {
+   "title": "Freight Forwarder",
+   "salary": "1000"
+ },
+ {
+   "title": "Senior Freight Forwarder",
+   "salary": "1400"
+ },
+ {
+   "title": "Team Leader",
+   "salary": "1700"
+ },
+ {
+   "title": "Manager",
+   "salary": "2200"
+ },
+ {
+   "title": "Director",
+   "salary": "3000"
+ }
+]

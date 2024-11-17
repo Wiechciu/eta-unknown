@@ -2,5 +2,9 @@ class_name JobPosition
 extends Resource
 
 
-@export var job_title: String
-@export var salary: int
+static var all: Array[JobPosition]
+static var all_dict: Dictionary[String, JobPosition]
+
+
+var title: String
+var salary: float

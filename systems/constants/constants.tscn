@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bf5utjh0bnpnw"]
-
-[ext_resource type="Script" path="res://systems/constants/constants.gd" id="1_elhwi"]
-
-[node name="Constants" type="Node"]
-script = ExtResource("1_elhwi")
-locations_json = "res://master_data/locations/locations_json.json"
-parties_json = "res://master_data/parties/parties_json.json"

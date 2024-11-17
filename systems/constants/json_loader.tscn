@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bf5utjh0bnpnw"]
+
+[ext_resource type="Script" path="res://systems/constants/json_loader.gd" id="1_elhwi"]
+
+[node name="JsonLoader" type="Node"]
+script = ExtResource("1_elhwi")
+events_json = "res://master_data/events/events_json.json"
+cargo_json = "res://master_data/cargo/cargo_json.json"
+currencies_json = "res://master_data/currencies/currencies_json.json"
+countries_json = "res://master_data/countries/countries_json.json"
+locations_json = "res://master_data/locations/locations_json.json"
+incoterms_json = "res://master_data/incoterms/incoterms_json.json"
+services_json = "res://master_data/services/services_json.json"
+parties_json = "res://master_data/parties/parties_json.json"
+job_positions_json = "res://master_data/people/job_position/job_positions_json.json"
+people_json = "res://master_data/people/people_json.json"

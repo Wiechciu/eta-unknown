@@ -1,0 +1,8 @@
+[
+  {"code": "DEP", "name": "Departure"},
+  {"code": "ARR", "name": "Arrival"},
+  {"code": "PUP", "name": "Picked up"},
+  {"code": "DEL", "name": "Delivered"},
+  {"code": "CSE", "name": "Export customs cleared"},
+  {"code": "CSI", "name": "Import customs cleared"}
+]

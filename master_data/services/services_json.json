@@ -1,0 +1,18 @@
+[
+ {
+   "code": "PTP",
+   "name": "Port to Port"
+ },
+ {
+   "code": "DTD",
+   "name": "Door to Door"
+ },
+ {
+   "code": "PTD",
+   "name": "Port to Door"
+ },
+ {
+   "code": "DTP",
+   "name": "Door to Port"
+ }
+]

@@ -2,32 +2,31 @@ class_name Party
 extends Resource
 
 
-enum PartyType {
-	Customer,
-	Company,
-	AirCarrier,
-	SeaCarrier,
-	Trucker,
-}
+static var all: Array[Party]
+static var all_dict: Dictionary[String, Party]
+static var all_with_employees: Array[Party]:
+	get:
+		return all.filter(has_employees)
 
-@export var name: String
-@export var street_name: String
-@export var street_number: String
-@export var house_number: String
-@export var postal_code: String
-@export var city_name: String
-@export var country_code: String
-@export var party_type: PartyType
+
+var name: String
+var street_name: String
+var street_number: String
+var house_number: String
+var postal_code: String
+var city_name: String
+var country: Country
 var print_string: String:
 	get:
+		var house_number_fixed = ("/" + house_number) if (house_number != null and house_number != "") else ""
+		var postal_code_fixed = (postal_code + " ") if (postal_code != null and postal_code != "") else ""
 		return name \
-		 + "\n" + street_name + " " + street_number + "/" + house_number \
-		 + "\n" + postal_code + " " + city_name + ", " + country_code
+		+ "\n" + street_name + " " + street_number + house_number_fixed \
+		+ "\n" + postal_code_fixed + city_name \
+		+ "\n" + country.code + " " + country.name
+
+var employees: Array[Person]
 
 
-static func is_in_country(party_to_check: Party, country_code_to_check: String) -> bool:
-	return party_to_check.country_code == country_code_to_check
-
-
-static func is_not_in_country(party_to_check: Party, country_code_to_check: String) -> bool:
-	return party_to_check.country_code != country_code_to_check
+static func has_employees(party_to_check: Party) -> bool:
+	return not party_to_check.employees.is_empty()

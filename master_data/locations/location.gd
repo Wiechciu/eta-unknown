@@ -2,19 +2,39 @@ class_name Location
 extends Resource
 
 
-@export var code: String
-@export var country_code: String
-@export var name: String
-@export var print_string: String:
+static var all: Array[Location]
+static var all_dict: Dictionary[String, Location]
+static var airports: Array[Location]:
 	get:
-		return code + ", " + name + ", " + country_code
+		return all.filter(is_location_airport)
+static var seaports: Array[Location]:
+	get:
+		return all.filter(is_location_seaport)
 
-static var country_code_to_check: String
+
+var code: String
+var country: Country
+var name: String
+var print_string: String:
+	get:
+		return code + ", " + name + ", " + country.code
+var is_airport: bool
+var is_seaport: bool
+
+static var country_to_check: Country
 
 
 static func is_in_country(location_to_check: Location) -> bool:
-	return location_to_check.country_code == country_code_to_check
+	return location_to_check.country.code == country_to_check.code
 
 
 static func is_not_in_country(location_to_check: Location) -> bool:
-	return location_to_check.country_code != country_code_to_check
+	return location_to_check.country.code != country_to_check.code
+
+
+static func is_location_airport(location_to_check: Location) -> bool:
+	return location_to_check.is_airport
+
+
+static func is_location_seaport(location_to_check: Location) -> bool:
+	return location_to_check.is_seaport

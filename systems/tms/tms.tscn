@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://systems/tms/tms.gd" id="1_eiifu"]
 [ext_resource type="PackedScene" uid="uid://cxa2h82m4jg1l" path="res://systems/tms/panel_header.tscn" id="2_ql6i1"]
-[ext_resource type="PackedScene" uid="uid://dkbqixm40xi7u" path="res://systems/tms/shipment_list.tscn" id="3_t5xli"]
-[ext_resource type="PackedScene" uid="uid://bmaoxf15lcni7" path="res://systems/tms/shipment_details.tscn" id="4_nhplg"]
+[ext_resource type="PackedScene" uid="uid://dkbqixm40xi7u" path="res://systems/tms/shipment_list/shipment_list.tscn" id="3_t5xli"]
+[ext_resource type="PackedScene" uid="uid://bmaoxf15lcni7" path="res://systems/tms/shipment_details/shipment_details.tscn" id="4_nhplg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mgofm"]
 
@@ -13,6 +13,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_mgofm")
 script = ExtResource("1_eiifu")
 shipment_list = NodePath("VBoxContainer/ShipmentList")
