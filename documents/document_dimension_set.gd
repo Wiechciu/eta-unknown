@@ -11,4 +11,4 @@ extends Node
 
 
 func _ready() -> void:
-	Debugger.assert_all_properties(self)
+	Debugger.assert_all_exported_properties(self)

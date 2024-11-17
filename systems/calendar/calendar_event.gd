@@ -8,7 +8,7 @@ extends Control
 
 
 func _ready() -> void:
-	Debugger.assert_all_properties(self)
+	Debugger.assert_all_exported_properties(self)
 
 	_hide(0)
 	GlobalTimer.shift_started.connect(_on_shift_started)

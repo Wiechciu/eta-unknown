@@ -5,7 +5,7 @@ var player: Person
 
 
 func _ready() -> void:
-	Debugger.assert_all_properties(self)
+	Debugger.assert_all_exported_properties(self)
 	
 	if not JsonLoader.is_node_ready():
 		await JsonLoader.ready

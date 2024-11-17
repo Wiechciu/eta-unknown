@@ -7,7 +7,7 @@ var is_moving: bool
 
 
 func _ready() -> void:
-	Debugger.assert_all_properties(self)
+	Debugger.assert_all_exported_properties(self)
 
 
 func _on_gui_input(event: InputEvent) -> void:

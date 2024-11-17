@@ -40,7 +40,7 @@ var shipment: Shipment
 
 
 func _ready() -> void:
-	Debugger.assert_all_properties(self)
+	Debugger.assert_all_exported_properties(self)
 
 
 func load_shipment(shipment_to_load: Shipment) -> void:

@@ -10,7 +10,7 @@ var show_completed: bool = true
 
 
 func _ready() -> void:
-	Debugger.assert_all_properties(self)
+	Debugger.assert_all_exported_properties(self)
 	
 	if not GameManager.is_node_ready():
 		await GameManager.ready
