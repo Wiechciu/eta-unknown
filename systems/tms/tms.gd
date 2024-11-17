@@ -7,6 +7,8 @@ extends Control
 
 
 func _ready() -> void:
+	Debugger.assert_all_properties(self)
+	
 	close_shipment_details()
 
 

@@ -14,6 +14,8 @@ extends Node
 
 
 func _ready() -> void:
+	Debugger.assert_all_properties(self)
+	
 	load_events_from_json(events_json, Event.all, Event.all_dict)
 	load_cargo_from_json(cargo_json, Cargo.all, Cargo.all_dict)
 	load_currencies_from_json(currencies_json, Currency.all, Currency.all_dict)

@@ -6,6 +6,10 @@ extends Control
 var is_moving: bool
 
 
+func _ready() -> void:
+	Debugger.assert_all_properties(self)
+
+
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed:

@@ -6,11 +6,21 @@
 [ext_resource type="LabelSettings" uid="uid://tas3grgdcwul" path="res://systems/themes/document_value_label_settings.tres" id="4_xd1jn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0f3ba"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eiifu"]
-content_margin_left = 8.0
+content_margin_left = 4.0
 content_margin_top = 4.0
-content_margin_right = 8.0
+content_margin_right = 4.0
 content_margin_bottom = 4.0
 bg_color = Color(1, 1, 1, 1)
 border_width_left = 2
@@ -18,8 +28,6 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
-shadow_size = 1
-shadow_offset = Vector2(2, 2)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ql6i1"]
 content_margin_left = 2.0
@@ -67,10 +75,11 @@ layout_mode = 2
 [node name="Tabs" type="TabContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 0
+current_tab = 1
 clip_tabs = false
 
 [node name="General" type="PanelContainer" parent="VBoxContainer/Tabs"]
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 metadata/_tab_index = 0
@@ -368,7 +377,6 @@ text_overrun_behavior = 3
 max_lines_visible = 1
 
 [node name="Cargo details" type="PanelContainer" parent="VBoxContainer/Tabs"]
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 metadata/_tab_index = 1
@@ -510,8 +518,12 @@ layout_mode = 2
 
 [node name="DimensionSets" type="VBoxContainer" parent="VBoxContainer/Tabs/Cargo details/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = -1
 
 [node name="DimensionSet" parent="VBoxContainer/Tabs/Cargo details/VBoxContainer/DimensionSets" instance=ExtResource("2_s8pr3")]
+layout_mode = 2
+
+[node name="DimensionSet2" parent="VBoxContainer/Tabs/Cargo details/VBoxContainer/DimensionSets" instance=ExtResource("2_s8pr3")]
 layout_mode = 2
 
 [node name="Main freight" type="Label" parent="VBoxContainer/Tabs"]

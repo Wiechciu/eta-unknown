@@ -40,6 +40,10 @@ func _init() -> void:
 	now = Time.get_unix_time_from_datetime_string(STARTING_DATE)
 
 
+func _ready() -> void:
+	Debugger.assert_all_properties(self)
+
+
 func _process(delta: float) -> void:
 	now += delta * time_scale
 	check_timesplits()

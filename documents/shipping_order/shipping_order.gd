@@ -36,7 +36,6 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 		document_dimension_set.width.text = str(dimension_set.width)
 		document_dimension_set.height.text = str(dimension_set.height)
 		document_dimension_set.total_weight.text = str(dimension_set.total_weight)
-		document_dimension_set.total_volume.text = str(dimension_set.total_volume)
 		dimension_sets_container.add_child(document_dimension_set)
 
 

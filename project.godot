@@ -19,7 +19,7 @@ config/icon="res://icon.svg"
 
 GlobalTimer="*res://systems/global_timer/global_timer.tscn"
 GameManager="*res://systems/game_manager/game_manager.tscn"
-JsonLoader="*res://systems/constants/json_loader.tscn"
+JsonLoader="*res://systems/json_loader/json_loader.tscn"
 
 [rendering]
 

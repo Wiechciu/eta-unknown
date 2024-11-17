@@ -15,6 +15,10 @@ var shipment: Shipment
 @export var status: Label
 
 
+func _ready() -> void:
+	Debugger.assert_all_properties(self)
+
+
 func with_data(new_shipment: Shipment) -> ShipmentListItem:
 	shipment = new_shipment
 	

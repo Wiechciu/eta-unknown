@@ -1,15 +1,32 @@
-[gd_scene load_steps=5 format=3 uid="uid://dkbqixm40xi7u"]
+[gd_scene load_steps=6 format=3 uid="uid://dkbqixm40xi7u"]
 
 [ext_resource type="Script" path="res://systems/tms/shipment_list/shipment_list.gd" id="1_f2rsm"]
 [ext_resource type="PackedScene" uid="uid://dag450t1ydq8u" path="res://systems/tms/shipment_list/shipment_list_item.tscn" id="2_jqska"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f2rsm"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
 bg_color = Color(0.91664, 0.91664, 0.91664, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_f2rsm"]
 font_size = 24
 font_color = Color(0, 0, 0, 1)
 shadow_color = Color(0, 0, 0, 0.341176)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w1aiy"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
 
 [node name="ShipmentList" type="PanelContainer" node_paths=PackedStringArray("_shipment_container", "_toggle_completed_button")]
 anchors_preset = 15
@@ -19,7 +36,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_f2rsm")
 script = ExtResource("1_f2rsm")
-_shipment_container = NodePath("VBoxContainer/ShipmentContainer")
+_shipment_container = NodePath("VBoxContainer/PanelContainer/ShipmentContainer")
 _shipment_list_item_scene = ExtResource("2_jqska")
 _toggle_completed_button = NodePath("VBoxContainer/HBoxContainer/ToggleCompletedButton")
 
@@ -39,10 +56,19 @@ label_settings = SubResource("LabelSettings_f2rsm")
 layout_mode = 2
 text = "hide completed"
 
-[node name="ShipmentContainer" type="VBoxContainer" parent="VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_w1aiy")
+
+[node name="ShipmentContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="ShipmentListItem" parent="VBoxContainer/PanelContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
 layout_mode = 2
 
-[node name="ShipmentListItem" parent="VBoxContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+[node name="ShipmentListItem2" parent="VBoxContainer/PanelContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
 layout_mode = 2
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ToggleCompletedButton" to="." method="_on_toggle_completed_button_pressed"]

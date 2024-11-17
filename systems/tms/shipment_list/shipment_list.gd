@@ -10,6 +10,8 @@ var show_completed: bool = true
 
 
 func _ready() -> void:
+	Debugger.assert_all_properties(self)
+	
 	if not GameManager.is_node_ready():
 		await GameManager.ready
 	refresh_shipment_list_items()
