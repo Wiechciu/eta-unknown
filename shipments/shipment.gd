@@ -7,6 +7,7 @@ signal completed(Shipment)
 
 
 enum ModeOfTransport {
+	NONE,
 	AIR,
 	SEA,
 	LAND,
@@ -46,7 +47,7 @@ var incoterms: Incoterms
 var incoterms_place: String
 var incoterms_full: String:
 	get:
-		return incoterms.code + " " + incoterms_place
+		return (incoterms.code + " " + incoterms_place) if incoterms else ""
 
 # Documentation
 var commercial_documents: Array[Document] #TODO
@@ -93,22 +94,30 @@ var owner: FreightForwarder
 
 # Planned shipment variables
 var mode_of_transport: ModeOfTransport #TODO
-var planned_pickup_date_string: int #TODO
-var planned_delivery_date_string: int #TODO
-var planned_departure_date_string: int #TODO
-var planned_arrival_date_string: int #TODO
+var planned_pickup_date: int #TODO
+var planned_delivery_date: int #TODO
+var planned_departure_date: int #TODO
+var planned_arrival_date: int #TODO
 var trucker_pickup: Trucker #TODO
 var trucker_delivery: Trucker #TODO
 var carrier: Carrier #TODO
-var export_customs_agency: CustomsAgency #TODO
-var import_customs_agency: CustomsAgency #TODO
+var handling_agent_export: HandlingAgent #TODO
+var handling_agent_import: HandlingAgent #TODO
+var customs_agency_export: CustomsAgency #TODO
+var customs_agency_import: CustomsAgency #TODO
 var costs: String #TODO
 
 # In transit
 var events: Array[Event] #TODO
+var earliest_pickup_date_time_event: TimeEvent
+var latest_delivery_date_time_event: TimeEvent
+var planned_pickup_date_time_event: TimeEvent
+var planned_delivery_date_time_event: TimeEvent
+var planned_departure_date_time_event: TimeEvent
+var planned_arrival_date_time_event: TimeEvent
 
 
-static func new_random_shipment() -> Shipment:
+static func create_new() -> Shipment:
 	var new_shipment = Shipment.new()
 	all.append(new_shipment)
 	last_id += 1
@@ -159,6 +168,9 @@ static func new_random_shipment() -> Shipment:
 		new_dimension_set.is_dg = randi_range(1, 100) > 90
 		new_shipment.dimension_sets.append(new_dimension_set)
 	
+	new_shipment.earliest_pickup_date_time_event = GlobalTimer.create_time_event(new_shipment.earliest_pickup_date, new_shipment)
+	new_shipment.latest_delivery_date_time_event = GlobalTimer.create_time_event(new_shipment.latest_delivery_date, new_shipment)
+	
 	return new_shipment
 
 
@@ -198,3 +210,20 @@ func change_status(new_status: Status) -> void:
 	status_changed.emit(self, status)
 	if status == Status.COMPLETED:
 		completed.emit(self)
+
+
+func notify(time_event: TimeEvent) -> void:
+	match time_event:
+		earliest_pickup_date_time_event:
+			print_debug("Shipment ID %s earliest_pickup_date_time_event (%s)" % [shipment_id, time_event.time])
+		latest_delivery_date_time_event:
+			print_debug("Shipment ID %s latest_delivery_date_time_event (%s)" % [shipment_id, time_event.time])
+		planned_pickup_date_time_event:
+			print_debug("Shipment ID %s planned_pickup_date_time_event (%s)" % [shipment_id, time_event.time])
+		planned_delivery_date_time_event:
+			print_debug("Shipment ID %s planned_delivery_date_time_event (%s)" % [shipment_id, time_event.time])
+		planned_departure_date_time_event:
+			print_debug("Shipment ID %s planned_departure_date_time_event (%s)" % [shipment_id, time_event.time])
+		planned_arrival_date_time_event:
+			print_debug("Shipment ID %s planned_arrival_date_time_event (%s)" % [shipment_id, time_event.time])
+	

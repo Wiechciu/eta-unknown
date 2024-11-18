@@ -16,6 +16,7 @@ static var all_specific_with_employees: Array[FreightForwarder]:
 
 var shipments: Array[Shipment]
 var last_shipment_number: int = 1000000
+var total_earnings: float
 
 
 func add_shipment(new_shipment: Shipment) -> void:

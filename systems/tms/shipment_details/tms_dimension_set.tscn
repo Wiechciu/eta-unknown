@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bisun2rrujs6p"]
+[gd_scene load_steps=4 format=3 uid="uid://baurmy6fwc0ye"]
 
-[ext_resource type="Script" path="res://documents/document_dimension_set.gd" id="1_cckso"]
-[ext_resource type="LabelSettings" uid="uid://tas3grgdcwul" path="res://systems/themes/document_value_label_settings.tres" id="2_6bitq"]
+[ext_resource type="Script" path="res://systems/tms/shipment_details/tms_dimension_set.gd" id="1_kcwf6"]
+[ext_resource type="LabelSettings" uid="uid://tas3grgdcwul" path="res://systems/themes/document_value_label_settings.tres" id="2_dyo2o"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6bitq"]
 content_margin_left = 4.0
@@ -17,7 +17,7 @@ border_color = Color(0.61339, 0.61339, 0.61339, 1)
 offset_right = 145.0
 offset_bottom = 25.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_6bitq")
-script = ExtResource("1_cckso")
+script = ExtResource("1_kcwf6")
 quantity = NodePath("DimensionSet/Quantity")
 length = NodePath("DimensionSet/Length")
 width = NodePath("DimensionSet/Width")
@@ -30,39 +30,39 @@ layout_mode = 2
 [node name="Quantity" type="Label" parent="DimensionSet"]
 layout_mode = 2
 text = "X"
-label_settings = ExtResource("2_6bitq")
+label_settings = ExtResource("2_dyo2o")
 
 [node name="x1" type="Label" parent="DimensionSet"]
 layout_mode = 2
 text = "x"
-label_settings = ExtResource("2_6bitq")
+label_settings = ExtResource("2_dyo2o")
 
 [node name="Length" type="Label" parent="DimensionSet"]
 layout_mode = 2
 text = "X"
-label_settings = ExtResource("2_6bitq")
+label_settings = ExtResource("2_dyo2o")
 
 [node name="x2" type="Label" parent="DimensionSet"]
 layout_mode = 2
 text = "x"
-label_settings = ExtResource("2_6bitq")
+label_settings = ExtResource("2_dyo2o")
 
 [node name="Width" type="Label" parent="DimensionSet"]
 layout_mode = 2
 text = "X"
-label_settings = ExtResource("2_6bitq")
+label_settings = ExtResource("2_dyo2o")
 
 [node name="x3" type="Label" parent="DimensionSet"]
 layout_mode = 2
 text = "x"
-label_settings = ExtResource("2_6bitq")
+label_settings = ExtResource("2_dyo2o")
 
 [node name="Height" type="Label" parent="DimensionSet"]
 layout_mode = 2
 text = "X"
-label_settings = ExtResource("2_6bitq")
+label_settings = ExtResource("2_dyo2o")
 
 [node name="TotalWeight" type="Label" parent="DimensionSet"]
 layout_mode = 2
 text = "X"
-label_settings = ExtResource("2_6bitq")
+label_settings = ExtResource("2_dyo2o")

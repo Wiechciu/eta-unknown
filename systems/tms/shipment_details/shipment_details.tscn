@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bmaoxf15lcni7"]
+[gd_scene load_steps=10 format=3 uid="uid://bmaoxf15lcni7"]
 
 [ext_resource type="Script" path="res://systems/tms/shipment_details/shipment_details.gd" id="1_0f3ba"]
 [ext_resource type="PackedScene" uid="uid://bisun2rrujs6p" path="res://documents/document_dimension_set.tscn" id="2_s8pr3"]
+[ext_resource type="PackedScene" uid="uid://baurmy6fwc0ye" path="res://systems/tms/shipment_details/tms_dimension_set.tscn" id="2_socwm"]
 [ext_resource type="LabelSettings" uid="uid://dbxrdxwwawld3" path="res://systems/themes/document_label_label_settings.tres" id="3_yrx8i"]
 [ext_resource type="LabelSettings" uid="uid://tas3grgdcwul" path="res://systems/themes/document_value_label_settings.tres" id="4_xd1jn"]
 
@@ -45,7 +46,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.61339, 0.61339, 0.61339, 1)
 
-[node name="ShipmentDetails" type="PanelContainer" node_paths=PackedStringArray("tab_container", "shipment_number", "customer_reference", "shipper", "consignee", "origin", "destination", "incoterms", "service", "earliest_pickup", "latest_delivery", "cargo_description", "slac", "total_quantity", "total_weight", "total_volume", "dimension_sets_container")]
+[node name="ShipmentDetails" type="PanelContainer" node_paths=PackedStringArray("tab_container", "shipment_number", "customer_reference", "shipper", "consignee", "origin", "destination", "incoterms", "service", "earliest_pickup", "latest_delivery", "cargo_description", "slac", "total_quantity", "total_weight", "total_volume", "dimension_sets_container", "mode_of_transport", "carrier", "planned_departure", "planned_arrival", "trucker_pickup", "trucker_delivery", "planned_pickup", "planned_delivery", "handling_agent_export", "handling_agent_import", "customs_agency_export", "customs_agency_import")]
 offset_right = 766.0
 offset_bottom = 198.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_0f3ba")
@@ -67,7 +68,19 @@ total_quantity = NodePath("VBoxContainer/Tabs/Cargo details/VBoxContainer/CargoD
 total_weight = NodePath("VBoxContainer/Tabs/Cargo details/VBoxContainer/CargoDetailsSummary/TmsFieldValue2/TotalWeight")
 total_volume = NodePath("VBoxContainer/Tabs/Cargo details/VBoxContainer/CargoDetailsSummary/TmsFieldValue3/TotalVolume")
 dimension_sets_container = NodePath("VBoxContainer/Tabs/Cargo details/VBoxContainer/DimensionSets")
-document_dimension_set_scene = ExtResource("2_s8pr3")
+tms_dimension_set_scene = ExtResource("2_socwm")
+mode_of_transport = NodePath("VBoxContainer/Tabs/Main freight/VBoxContainer/General/TmsFieldValue4/ModeOfTransport")
+carrier = NodePath("VBoxContainer/Tabs/Main freight/VBoxContainer/General/TmsFieldValue5/Carrier")
+planned_departure = NodePath("VBoxContainer/Tabs/Main freight/VBoxContainer/Dates/TmsFieldValue/PlannedDeparture")
+planned_arrival = NodePath("VBoxContainer/Tabs/Main freight/VBoxContainer/Dates/TmsFieldValue2/PlannedArrival")
+trucker_pickup = NodePath("VBoxContainer/Tabs/Haulage/VBoxContainer/General/TmsFieldValue4/TruckerPickup")
+trucker_delivery = NodePath("VBoxContainer/Tabs/Haulage/VBoxContainer/General/TmsFieldValue5/TruckerDelivery")
+planned_pickup = NodePath("VBoxContainer/Tabs/Haulage/VBoxContainer/Dates/TmsFieldValue/PlannedPickup")
+planned_delivery = NodePath("VBoxContainer/Tabs/Haulage/VBoxContainer/Dates/TmsFieldValue2/PlannedDelivery")
+handling_agent_export = NodePath("VBoxContainer/Tabs/Handling/VBoxContainer/General/TmsFieldValue4/HandlingAgentExport")
+handling_agent_import = NodePath("VBoxContainer/Tabs/Handling/VBoxContainer/General/TmsFieldValue5/HandlingAgentImport")
+customs_agency_export = NodePath("VBoxContainer/Tabs/Customs/VBoxContainer/General/TmsFieldValue4/CustomsAgencyExport")
+customs_agency_import = NodePath("VBoxContainer/Tabs/Customs/VBoxContainer/General/TmsFieldValue5/CustomsAgencyImport")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -75,7 +88,7 @@ layout_mode = 2
 [node name="Tabs" type="TabContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 1
+current_tab = 2
 clip_tabs = false
 
 [node name="General" type="PanelContainer" parent="VBoxContainer/Tabs"]
@@ -377,6 +390,7 @@ text_overrun_behavior = 3
 max_lines_visible = 1
 
 [node name="Cargo details" type="PanelContainer" parent="VBoxContainer/Tabs"]
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 metadata/_tab_index = 1
@@ -526,37 +540,384 @@ layout_mode = 2
 [node name="DimensionSet2" parent="VBoxContainer/Tabs/Cargo details/VBoxContainer/DimensionSets" instance=ExtResource("2_s8pr3")]
 layout_mode = 2
 
-[node name="Main freight" type="Label" parent="VBoxContainer/Tabs"]
-visible = false
+[node name="Main freight" type="PanelContainer" parent="VBoxContainer/Tabs"]
 layout_mode = 2
-text = "NOT IMPLEMENTED"
+theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 metadata/_tab_index = 2
 
-[node name="Pickup" type="Label" parent="VBoxContainer/Tabs"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Main freight"]
+layout_mode = 2
+
+[node name="General" type="GridContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="TmsFieldLabel4" type="PanelContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/General"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+
+[node name="Label" type="Label" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/General/TmsFieldLabel4"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Mode of Tr.:"
+label_settings = ExtResource("3_yrx8i")
+text_overrun_behavior = 3
+
+[node name="TmsFieldValue4" type="PanelContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/General"]
+custom_minimum_size = Vector2(250, 27)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
+
+[node name="ModeOfTransport" type="Label" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/General/TmsFieldValue4"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "XXX"
+label_settings = ExtResource("4_xd1jn")
+text_overrun_behavior = 3
+max_lines_visible = 1
+
+[node name="TmsFieldLabel5" type="PanelContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/General"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+
+[node name="Label" type="Label" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/General/TmsFieldLabel5"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Carrier:"
+label_settings = ExtResource("3_yrx8i")
+text_overrun_behavior = 3
+
+[node name="TmsFieldValue5" type="PanelContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/General"]
+custom_minimum_size = Vector2(250, 27)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
+
+[node name="Carrier" type="Label" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/General/TmsFieldValue5"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "XXX"
+label_settings = ExtResource("4_xd1jn")
+text_overrun_behavior = 3
+max_lines_visible = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/Tabs/Main freight/VBoxContainer"]
+layout_mode = 2
+
+[node name="Dates" type="GridContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer"]
+layout_mode = 2
+columns = 4
+
+[node name="TmsFieldLabel" type="PanelContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/Dates"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+
+[node name="Label" type="Label" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/Dates/TmsFieldLabel"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Plan. depart.:"
+label_settings = ExtResource("3_yrx8i")
+text_overrun_behavior = 3
+
+[node name="TmsFieldValue" type="PanelContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/Dates"]
+custom_minimum_size = Vector2(250, 27)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
+
+[node name="PlannedDeparture" type="Label" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/Dates/TmsFieldValue"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "XXX"
+label_settings = ExtResource("4_xd1jn")
+text_overrun_behavior = 3
+max_lines_visible = 1
+
+[node name="TmsFieldLabel2" type="PanelContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/Dates"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+
+[node name="Label" type="Label" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/Dates/TmsFieldLabel2"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Plan. arrival:"
+label_settings = ExtResource("3_yrx8i")
+text_overrun_behavior = 3
+
+[node name="TmsFieldValue2" type="PanelContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/Dates"]
+custom_minimum_size = Vector2(250, 27)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
+
+[node name="PlannedArrival" type="Label" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/Dates/TmsFieldValue2"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "XXX"
+label_settings = ExtResource("4_xd1jn")
+text_overrun_behavior = 3
+max_lines_visible = 1
+
+[node name="Haulage" type="PanelContainer" parent="VBoxContainer/Tabs"]
 visible = false
 layout_mode = 2
-text = "NOT IMPLEMENTED"
+theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 metadata/_tab_index = 3
 
-[node name="Delivery" type="Label" parent="VBoxContainer/Tabs"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Haulage"]
+layout_mode = 2
+
+[node name="General" type="GridContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer"]
+layout_mode = 2
+columns = 4
+
+[node name="TmsFieldLabel4" type="PanelContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/General"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+
+[node name="Label" type="Label" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/General/TmsFieldLabel4"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Trucker PUP:"
+label_settings = ExtResource("3_yrx8i")
+text_overrun_behavior = 3
+
+[node name="TmsFieldValue4" type="PanelContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/General"]
+custom_minimum_size = Vector2(250, 27)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
+
+[node name="TruckerPickup" type="Label" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/General/TmsFieldValue4"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "XXX"
+label_settings = ExtResource("4_xd1jn")
+text_overrun_behavior = 3
+max_lines_visible = 1
+
+[node name="TmsFieldLabel5" type="PanelContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/General"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+
+[node name="Label" type="Label" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/General/TmsFieldLabel5"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Trucker DEL:"
+label_settings = ExtResource("3_yrx8i")
+text_overrun_behavior = 3
+
+[node name="TmsFieldValue5" type="PanelContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/General"]
+custom_minimum_size = Vector2(250, 27)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
+
+[node name="TruckerDelivery" type="Label" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/General/TmsFieldValue5"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "XXX"
+label_settings = ExtResource("4_xd1jn")
+text_overrun_behavior = 3
+max_lines_visible = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/Tabs/Haulage/VBoxContainer"]
+layout_mode = 2
+
+[node name="Dates" type="GridContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer"]
+layout_mode = 2
+columns = 4
+
+[node name="TmsFieldLabel" type="PanelContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/Dates"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+
+[node name="Label" type="Label" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/Dates/TmsFieldLabel"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Plan. pickup:"
+label_settings = ExtResource("3_yrx8i")
+text_overrun_behavior = 3
+
+[node name="TmsFieldValue" type="PanelContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/Dates"]
+custom_minimum_size = Vector2(250, 27)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
+
+[node name="PlannedPickup" type="Label" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/Dates/TmsFieldValue"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "XXX"
+label_settings = ExtResource("4_xd1jn")
+text_overrun_behavior = 3
+max_lines_visible = 1
+
+[node name="TmsFieldLabel2" type="PanelContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/Dates"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+
+[node name="Label" type="Label" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/Dates/TmsFieldLabel2"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Plan. delivery:"
+label_settings = ExtResource("3_yrx8i")
+text_overrun_behavior = 3
+
+[node name="TmsFieldValue2" type="PanelContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/Dates"]
+custom_minimum_size = Vector2(250, 27)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
+
+[node name="PlannedDelivery" type="Label" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/Dates/TmsFieldValue2"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "XXX"
+label_settings = ExtResource("4_xd1jn")
+text_overrun_behavior = 3
+max_lines_visible = 1
+
+[node name="Handling" type="PanelContainer" parent="VBoxContainer/Tabs"]
 visible = false
 layout_mode = 2
-text = "NOT IMPLEMENTED"
+theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 metadata/_tab_index = 4
 
-[node name="Customs" type="Label" parent="VBoxContainer/Tabs"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Handling"]
+layout_mode = 2
+
+[node name="General" type="GridContainer" parent="VBoxContainer/Tabs/Handling/VBoxContainer"]
+layout_mode = 2
+columns = 4
+
+[node name="TmsFieldLabel4" type="PanelContainer" parent="VBoxContainer/Tabs/Handling/VBoxContainer/General"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+
+[node name="Label" type="Label" parent="VBoxContainer/Tabs/Handling/VBoxContainer/General/TmsFieldLabel4"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Hand. ag. exp:"
+label_settings = ExtResource("3_yrx8i")
+text_overrun_behavior = 3
+
+[node name="TmsFieldValue4" type="PanelContainer" parent="VBoxContainer/Tabs/Handling/VBoxContainer/General"]
+custom_minimum_size = Vector2(250, 27)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
+
+[node name="HandlingAgentExport" type="Label" parent="VBoxContainer/Tabs/Handling/VBoxContainer/General/TmsFieldValue4"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "XXX"
+label_settings = ExtResource("4_xd1jn")
+text_overrun_behavior = 3
+max_lines_visible = 1
+
+[node name="TmsFieldLabel5" type="PanelContainer" parent="VBoxContainer/Tabs/Handling/VBoxContainer/General"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+
+[node name="Label" type="Label" parent="VBoxContainer/Tabs/Handling/VBoxContainer/General/TmsFieldLabel5"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Hand. ag. imp:"
+label_settings = ExtResource("3_yrx8i")
+text_overrun_behavior = 3
+
+[node name="TmsFieldValue5" type="PanelContainer" parent="VBoxContainer/Tabs/Handling/VBoxContainer/General"]
+custom_minimum_size = Vector2(250, 27)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
+
+[node name="HandlingAgentImport" type="Label" parent="VBoxContainer/Tabs/Handling/VBoxContainer/General/TmsFieldValue5"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "XXX"
+label_settings = ExtResource("4_xd1jn")
+text_overrun_behavior = 3
+max_lines_visible = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/Tabs/Handling/VBoxContainer"]
+layout_mode = 2
+
+[node name="Customs" type="PanelContainer" parent="VBoxContainer/Tabs"]
 visible = false
 layout_mode = 2
-text = "NOT IMPLEMENTED"
+theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 metadata/_tab_index = 5
 
-[node name="Handling" type="Label" parent="VBoxContainer/Tabs"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Customs"]
+layout_mode = 2
+
+[node name="General" type="GridContainer" parent="VBoxContainer/Tabs/Customs/VBoxContainer"]
+layout_mode = 2
+columns = 4
+
+[node name="TmsFieldLabel4" type="PanelContainer" parent="VBoxContainer/Tabs/Customs/VBoxContainer/General"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+
+[node name="Label" type="Label" parent="VBoxContainer/Tabs/Customs/VBoxContainer/General/TmsFieldLabel4"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Cust. ag. exp:"
+label_settings = ExtResource("3_yrx8i")
+text_overrun_behavior = 3
+
+[node name="TmsFieldValue4" type="PanelContainer" parent="VBoxContainer/Tabs/Customs/VBoxContainer/General"]
+custom_minimum_size = Vector2(250, 27)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
+
+[node name="CustomsAgencyExport" type="Label" parent="VBoxContainer/Tabs/Customs/VBoxContainer/General/TmsFieldValue4"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "XXX"
+label_settings = ExtResource("4_xd1jn")
+text_overrun_behavior = 3
+max_lines_visible = 1
+
+[node name="TmsFieldLabel5" type="PanelContainer" parent="VBoxContainer/Tabs/Customs/VBoxContainer/General"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+
+[node name="Label" type="Label" parent="VBoxContainer/Tabs/Customs/VBoxContainer/General/TmsFieldLabel5"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Cust. ag. imp:"
+label_settings = ExtResource("3_yrx8i")
+text_overrun_behavior = 3
+
+[node name="TmsFieldValue5" type="PanelContainer" parent="VBoxContainer/Tabs/Customs/VBoxContainer/General"]
+custom_minimum_size = Vector2(250, 27)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
+
+[node name="CustomsAgencyImport" type="Label" parent="VBoxContainer/Tabs/Customs/VBoxContainer/General/TmsFieldValue5"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "XXX"
+label_settings = ExtResource("4_xd1jn")
+text_overrun_behavior = 3
+max_lines_visible = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/Tabs/Customs/VBoxContainer"]
+layout_mode = 2
+
+[node name="Events" type="Label" parent="VBoxContainer/Tabs"]
 visible = false
 layout_mode = 2
 text = "NOT IMPLEMENTED"
 metadata/_tab_index = 6
 
-[node name="Events" type="Label" parent="VBoxContainer/Tabs"]
+[node name="Documents" type="Label" parent="VBoxContainer/Tabs"]
 visible = false
 layout_mode = 2
 text = "NOT IMPLEMENTED"

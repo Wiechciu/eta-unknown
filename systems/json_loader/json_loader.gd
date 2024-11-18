@@ -16,6 +16,8 @@ extends Node
 func _ready() -> void:
 	Debugger.assert_all_exported_properties(self)
 	
+	print("--- starting loading from JSONs ---")
+	var start = Time.get_ticks_msec()
 	load_events_from_json(events_json, Event.all, Event.all_dict)
 	load_cargo_from_json(cargo_json, Cargo.all, Cargo.all_dict)
 	load_currencies_from_json(currencies_json, Currency.all, Currency.all_dict)
@@ -26,6 +28,10 @@ func _ready() -> void:
 	load_parties_from_json(parties_json, Party.all, Party.all_dict)
 	load_job_positions_from_json(job_positions_json, JobPosition.all, JobPosition.all_dict)
 	load_people_from_json(people_json, Person.all, Person.all_dict)
+	
+	var end = Time.get_ticks_msec()
+	var time = (end - start)
+	print("--- finished loading from JSONs | in " + str(time) + " ms ---\n")
 
 
 func load_events_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
@@ -174,10 +180,12 @@ func load_parties_from_json(file_to_load: String, array_to_fill: Array, dict_to_
 				HandlingAgent.all_specific_dict[new_resource.name] = new_resource
 			"trucker":
 				new_resource = Trucker.new()
-				new_resource.reliability_factor = randf_range(0.9, 1.0)
-				new_resource.cost_factor = randf_range(0.8, 1.0)
 				Trucker.all_specific.append(new_resource)
 				Trucker.all_specific_dict[new_resource.name] = new_resource
+		
+		if new_resource is Supplier:
+			new_resource.reliability_factor = randf_range(0.9, 1.0)
+			new_resource.cost_factor = randf_range(0.8, 1.0)
 		
 		new_resource.name = str(item.name) if item.name else ""
 		new_resource.street_name = str(item.street_name) if item.street_name else ""

@@ -29,7 +29,7 @@ static func is_in_country(location_to_check: Location) -> bool:
 
 
 static func is_not_in_country(location_to_check: Location) -> bool:
-	return location_to_check.country.code != country_to_check.code
+	return not is_in_country(location_to_check)
 
 
 static func is_location_airport(location_to_check: Location) -> bool:

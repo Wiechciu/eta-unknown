@@ -30,12 +30,7 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 	for child in dimension_sets_container.get_children():
 		child.queue_free()
 	for dimension_set in shipment.dimension_sets:
-		var document_dimension_set: DocumentDimensionSet = document_dimension_set_scene.instantiate()
-		document_dimension_set.quantity.text = str(dimension_set.quantity)
-		document_dimension_set.length.text = str(dimension_set.length)
-		document_dimension_set.width.text = str(dimension_set.width)
-		document_dimension_set.height.text = str(dimension_set.height)
-		document_dimension_set.total_weight.text = str(dimension_set.total_weight)
+		var document_dimension_set: DocumentDimensionSet = (document_dimension_set_scene.instantiate() as DocumentDimensionSet).with_data(dimension_set)
 		dimension_sets_container.add_child(document_dimension_set)
 
 

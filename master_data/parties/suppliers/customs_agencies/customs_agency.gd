@@ -1,5 +1,5 @@
 class_name CustomsAgency
-extends Party
+extends Supplier
 
 
 static var all_specific: Array[CustomsAgency]

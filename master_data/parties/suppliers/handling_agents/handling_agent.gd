@@ -1,5 +1,5 @@
 class_name HandlingAgent
-extends Party
+extends Supplier
 
 
 static var all_specific: Array[HandlingAgent]

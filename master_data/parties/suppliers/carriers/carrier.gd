@@ -1,5 +1,5 @@
 class_name Carrier
-extends Party
+extends Supplier
 
 
 static var all_specific: Array[Carrier]

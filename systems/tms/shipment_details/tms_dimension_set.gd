@@ -1,4 +1,4 @@
-class_name DocumentDimensionSet
+class_name TmsDimensionSet
 extends Node
 
 
@@ -14,7 +14,7 @@ func _ready() -> void:
 	Debugger.assert_all_exported_properties(self)
 
 
-func with_data(dimension_set: DimensionSet) -> DocumentDimensionSet:
+func with_data(dimension_set: DimensionSet) -> TmsDimensionSet:
 	quantity.text = "%d pcs" % [dimension_set.quantity]
 	length.text = "%d" % [dimension_set.length]
 	width.text = "%d" % [dimension_set.width]

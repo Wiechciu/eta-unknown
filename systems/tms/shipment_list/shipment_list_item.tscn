@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://systems/tms/shipment_list/shipment_list_item.gd" id="1_bi60y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bi60y"]
+content_margin_left = 4.0
+content_margin_right = 4.0
 bg_color = Color(0.868985, 0.868985, 0.868985, 1)
 border_width_left = 1
 border_width_top = 1
@@ -33,54 +35,72 @@ status = NodePath("HBoxContainer/Status")
 layout_mode = 2
 
 [node name="ShipmentNumber" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 text = "1000001"
 label_settings = SubResource("LabelSettings_bi60y")
+clip_text = true
+text_overrun_behavior = 3
 
 [node name="VSeparator5" type="VSeparator" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_bi60y")
 
 [node name="Shipper" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Shipper"
 label_settings = SubResource("LabelSettings_bi60y")
+clip_text = true
+text_overrun_behavior = 3
 
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_bi60y")
 
 [node name="Origin" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 text = "Origin"
 label_settings = SubResource("LabelSettings_bi60y")
+clip_text = true
+text_overrun_behavior = 3
 
 [node name="VSeparator2" type="VSeparator" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_bi60y")
 
 [node name="Destination" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 text = "Destination"
 label_settings = SubResource("LabelSettings_bi60y")
+clip_text = true
+text_overrun_behavior = 3
 
 [node name="VSeparator3" type="VSeparator" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_bi60y")
 
 [node name="TotalWeight" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Weight"
 label_settings = SubResource("LabelSettings_bi60y")
+clip_text = true
+text_overrun_behavior = 3
 
 [node name="VSeparator4" type="VSeparator" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_bi60y")
 
 [node name="Status" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Status"
 label_settings = SubResource("LabelSettings_bi60y")
+clip_text = true
+text_overrun_behavior = 3
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 2
