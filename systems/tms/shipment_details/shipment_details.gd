@@ -8,6 +8,7 @@ var shipment: Shipment
 
 @export_category("Assigned internally")
 @export var tab_container: TabContainer
+@export var shipment_status: OptionButton
 
 @export_group("References")
 @export var shipment_number: Label
@@ -112,8 +113,8 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 	tab_container.current_tab = 0
 
 
-func _on_complete_button_pressed() -> void:
-	shipment.change_status(Shipment.Status.COMPLETED)
+func _on_change_status_button_pressed() -> void:
+	shipment.change_status(shipment_status.selected)
 	tms.close_shipment_details()
 
 

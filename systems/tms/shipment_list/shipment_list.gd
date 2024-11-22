@@ -15,7 +15,7 @@ func _ready() -> void:
 	if not GameManager.is_node_ready():
 		await GameManager.ready
 	refresh_shipment_list_items()
-	GameManager.player.employer.shipment_list_updated.connect(_on_shipment_list_updated)
+	(GameManager.player.employer as FreightForwarder).shipment_list_updated.connect(_on_shipment_list_updated)
 
 
 func add_shipment(new_shipment: Shipment) -> void:

@@ -30,10 +30,22 @@ modulate = Color(0, 1, 0, 1)
 layout_mode = 2
 text = "New shipping order"
 
+[node name="AcceptNewShipmentButton" type="Button" parent="MarginContainer/VBoxContainer"]
+modulate = Color(0.714709, 0.671151, 3.85046e-07, 1)
+layout_mode = 2
+text = "Accept new shipment"
+
+[node name="Accept10NewShipmentsButton" type="Button" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 0.490166, 0.0794685, 1)
+layout_mode = 2
+text = "Accept 10 new shipments"
+
 [node name="NextDayButton" type="Button" parent="MarginContainer/VBoxContainer"]
 modulate = Color(1, 0.792449, 0.380258, 1)
 layout_mode = 2
 text = "Next day"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/NewShippingOrderButton" to="." method="_on_new_shipping_order_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/AcceptNewShipmentButton" to="." method="_on_accept_new_shipment_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Accept10NewShipmentsButton" to="." method="_on_accept_10_new_shipments_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/NextDayButton" to="." method="_on_next_day_button_pressed"]

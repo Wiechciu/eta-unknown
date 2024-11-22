@@ -2,7 +2,7 @@ class_name Shipment
 extends Resource
 
 
-signal status_changed(Shipment, Status)
+signal status_changed(Shipment)
 signal completed(Shipment)
 
 
@@ -207,7 +207,7 @@ func accept(new_owner: FreightForwarder) -> void:
 
 func change_status(new_status: Status) -> void:
 	status = new_status
-	status_changed.emit(self, status)
+	status_changed.emit(self)
 	if status == Status.COMPLETED:
 		completed.emit(self)
 

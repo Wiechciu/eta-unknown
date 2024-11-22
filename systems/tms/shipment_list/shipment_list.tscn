@@ -36,7 +36,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_f2rsm")
 script = ExtResource("1_f2rsm")
-_shipment_container = NodePath("VBoxContainer/PanelContainer/ShipmentContainer")
+_shipment_container = NodePath("VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer")
 _shipment_list_item_scene = ExtResource("2_jqska")
 _toggle_completed_button = NodePath("VBoxContainer/HBoxContainer/ToggleCompletedButton")
 
@@ -61,14 +61,70 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_w1aiy")
 
-[node name="ShipmentContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer"]
 layout_mode = 2
+
+[node name="ShipmentContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/separation = -1
 
-[node name="ShipmentListItem" parent="VBoxContainer/PanelContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+[node name="ShipmentListItem" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
 layout_mode = 2
 
-[node name="ShipmentListItem2" parent="VBoxContainer/PanelContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+[node name="ShipmentListItem2" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+layout_mode = 2
+
+[node name="ShipmentListItem3" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+layout_mode = 2
+
+[node name="ShipmentListItem4" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+layout_mode = 2
+
+[node name="ShipmentListItem5" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+layout_mode = 2
+
+[node name="ShipmentListItem6" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+layout_mode = 2
+
+[node name="ShipmentListItem7" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+layout_mode = 2
+
+[node name="ShipmentListItem8" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+layout_mode = 2
+
+[node name="ShipmentListItem9" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+layout_mode = 2
+
+[node name="ShipmentListItem10" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+layout_mode = 2
+
+[node name="ShipmentListItem11" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+layout_mode = 2
+
+[node name="ShipmentListItem12" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+layout_mode = 2
+
+[node name="ShipmentListItem13" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+layout_mode = 2
+
+[node name="ShipmentListItem14" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+layout_mode = 2
+
+[node name="ShipmentListItem15" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+layout_mode = 2
+
+[node name="ShipmentListItem16" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+layout_mode = 2
+
+[node name="ShipmentListItem17" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+layout_mode = 2
+
+[node name="ShipmentListItem18" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+layout_mode = 2
+
+[node name="ShipmentListItem19" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
 layout_mode = 2
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ToggleCompletedButton" to="." method="_on_toggle_completed_button_pressed"]
