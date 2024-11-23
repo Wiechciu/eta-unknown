@@ -67,6 +67,8 @@ func _ready() -> void:
 func load_shipment(shipment_to_load: Shipment) -> void:
 	shipment = shipment_to_load
 	
+	shipment_status.select(shipment.status)
+	
 	shipment_number.text = str(shipment.shipment_number)
 	customer_reference.text = shipment.customer_reference
 	
@@ -82,33 +84,33 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 	earliest_pickup.text = GlobalTimer.get_nice_format_datetime_string(shipment.earliest_pickup_date)
 	latest_delivery.text = GlobalTimer.get_nice_format_datetime_string(shipment.latest_delivery_date)
 	
-	cargo_description.text = shipment.cargo.description if shipment.cargo else ""
-	slac.text = "%d pcs" % [shipment.slac]
-	total_quantity.text = "%d pcs" % [shipment.total_quantity]
-	total_weight.text = "%d kg" % [shipment.total_weight]
-	total_volume.text = "%.3f cbm" % [shipment.total_volume]
+	cargo_description.text = shipment.cargo_details.cargo.description if shipment.cargo_details.cargo else ""
+	slac.text = "%d pcs" % [shipment.cargo_details.slac]
+	total_quantity.text = "%d pcs" % [shipment.cargo_details.total_quantity]
+	total_weight.text = "%d kg" % [shipment.cargo_details.total_weight]
+	total_volume.text = "%.3f cbm" % [shipment.cargo_details.total_volume]
 
 	for child in dimension_sets_container.get_children():
 		child.queue_free()
-	for dimension_set in shipment.dimension_sets:
+	for dimension_set in shipment.cargo_details.dimension_sets:
 		var tms_dimension_set: TmsDimensionSet = (tms_dimension_set_scene.instantiate() as TmsDimensionSet).with_data(dimension_set)
 		dimension_sets_container.add_child(tms_dimension_set)
 	
-	mode_of_transport.text = Shipment.ModeOfTransport.keys()[shipment.mode_of_transport] if shipment.mode_of_transport != Shipment.ModeOfTransport.NONE else ""
-	carrier.text = shipment.carrier.name if shipment.carrier else ""
-	planned_departure.text = GlobalTimer.get_nice_format_datetime_string(shipment.planned_departure_date)
-	planned_arrival.text = GlobalTimer.get_nice_format_datetime_string(shipment.planned_arrival_date)
+	mode_of_transport.text = Shipment.ModeOfTransport.keys()[shipment.main_freight.mode_of_transport] if shipment.main_freight.mode_of_transport != Shipment.ModeOfTransport.NONE else ""
+	carrier.text = shipment.main_freight.carrier.name if shipment.main_freight.carrier else ""
+	planned_departure.text = GlobalTimer.get_nice_format_datetime_string(shipment.main_freight.planned_departure_date)
+	planned_arrival.text = GlobalTimer.get_nice_format_datetime_string(shipment.main_freight.planned_arrival_date)
 
-	trucker_pickup.text = shipment.trucker_pickup.name if shipment.trucker_pickup else ""
-	trucker_delivery.text = shipment.trucker_delivery.name if shipment.trucker_delivery else ""
-	planned_pickup.text = GlobalTimer.get_nice_format_datetime_string(shipment.planned_pickup_date)
-	planned_delivery.text = GlobalTimer.get_nice_format_datetime_string(shipment.planned_delivery_date)
+	trucker_pickup.text = shipment.haulage.trucker_pickup.name if shipment.haulage.trucker_pickup else ""
+	trucker_delivery.text = shipment.haulage.trucker_delivery.name if shipment.haulage.trucker_delivery else ""
+	planned_pickup.text = GlobalTimer.get_nice_format_datetime_string(shipment.haulage.planned_pickup_date)
+	planned_delivery.text = GlobalTimer.get_nice_format_datetime_string(shipment.haulage.planned_delivery_date)
 	
-	handling_agent_export.text = shipment.handling_agent_export.name if shipment.handling_agent_export else ""
-	handling_agent_import.text = shipment.handling_agent_import.name if shipment.handling_agent_import else ""
+	handling_agent_export.text = shipment.handling.handling_agent_export.name if shipment.handling.handling_agent_export else ""
+	handling_agent_import.text = shipment.handling.handling_agent_import.name if shipment.handling.handling_agent_import else ""
 	
-	customs_agency_export.text = shipment.customs_agency_export.name if shipment.customs_agency_export else ""
-	customs_agency_import.text = shipment.customs_agency_import.name if shipment.customs_agency_import else ""
+	customs_agency_export.text = shipment.customs.customs_agency_export.name if shipment.customs.customs_agency_export else ""
+	customs_agency_import.text = shipment.customs.customs_agency_import.name if shipment.customs.customs_agency_import else ""
 	
 	tab_container.current_tab = 0
 

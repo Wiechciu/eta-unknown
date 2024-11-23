@@ -18,13 +18,20 @@ func _on_next_day_button_pressed() -> void:
 
 
 func _on_accept_new_shipment_button_pressed() -> void:
-	create_new_shipment_and_accept()
+	accept_shipment()
 
 
 func _on_accept_10_new_shipments_button_pressed() -> void:
 	for n in 10:
-		create_new_shipment_and_accept()
+		if accept_shipment() == false:
+			return
+	print("There are %s not owned shipments left!" % Shipment.all_not_owned.size())
 
 
-func create_new_shipment_and_accept() -> void:
-	Shipment.create_new().accept(GameManager.player.employer)
+func accept_shipment() -> bool:
+	if not Shipment.all_not_owned.is_empty():
+		Shipment.all_not_owned.pick_random().accept(GameManager.player.employer)
+		return true
+	else:
+		print("There are no more shipments to accept!")
+		return false

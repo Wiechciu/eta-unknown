@@ -21,15 +21,14 @@ var print_string: String:
 var is_airport: bool
 var is_seaport: bool
 
-static var country_to_check: Country
 
 
-static func is_in_country(location_to_check: Location) -> bool:
+static func is_in_country(location_to_check: Location, country_to_check: Country) -> bool:
 	return location_to_check.country.code == country_to_check.code
 
 
-static func is_not_in_country(location_to_check: Location) -> bool:
-	return not is_in_country(location_to_check)
+static func is_not_in_country(location_to_check: Location, country_to_check: Country) -> bool:
+	return not is_in_country(location_to_check, country_to_check)
 
 
 static func is_location_airport(location_to_check: Location) -> bool:

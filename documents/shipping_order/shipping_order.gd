@@ -23,9 +23,9 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 	consignee.text = shipment.consignee.print_string
 	origin.text = shipment.origin.print_string
 	destination.text = shipment.destination.print_string
-	total_quantity.text = str(shipment.total_quantity)
-	total_weight.text = str(shipment.total_weight)
-	total_volume.text = str(shipment.total_volume)
+	total_quantity.text = str(shipment.cargo_details.total_quantity)
+	total_weight.text = str(shipment.cargo_details.total_weight)
+	total_volume.text = str(shipment.cargo_details.total_volume)
 	
 	for child in dimension_sets_container.get_children():
 		child.queue_free()

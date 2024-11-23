@@ -31,7 +31,8 @@ func refresh_shipment_list_items() -> void:
 	
 	var shipment_list: Array[Shipment] = (GameManager.player.employer as FreightForwarder).shipments
 	if not show_completed:
-		shipment_list = shipment_list.filter(Shipment.is_shipment_not_completed)
+		var shipments_not_completed = shipment_list.filter(func(shipment: Shipment): return not shipment.is_completed)
+		shipment_list = shipments_not_completed
 	
 	for shipment in shipment_list:
 		add_shipment(shipment)

@@ -28,9 +28,17 @@ enum Status {
 
 
 static var all: Array[Shipment]
+static var all_not_owned: Array[Shipment]:
+	get:
+		return all.filter(func(shipment: Shipment): return not shipment.is_owned) 
+
 static var last_id: int = 0
 
 var shipment_id: int
+var status: Status
+var is_completed: bool:
+	get:
+		return status == Status.COMPLETED 
 
 # General
 var customer_reference: String
@@ -49,94 +57,61 @@ var incoterms_full: String:
 	get:
 		return (incoterms.code + " " + incoterms_place) if incoterms else ""
 
-# Documentation
-var commercial_documents: Array[Document] #TODO
-var transport_documents: Array[Document] #TODO
-var customs_documents: Array[Document] #TODO
-var accounting_documents: Array[Document] #TODO
-
-# Cargo details
-var cargo: Cargo
-var slac: int
-var dimension_sets: Array[DimensionSet]
-var total_quantity: int:
-	get:
-		var total: int = 0
-		for dimension_set in dimension_sets:
-			total += dimension_set.quantity
-		return total
-var total_weight: float:
-	get:
-		var total: float = 0
-		for dimension_set in dimension_sets:
-			total += dimension_set.total_weight
-		return total
-var total_volume: float:
-	get:
-		var total: float = 0
-		for dimension_set in dimension_sets:
-			total += dimension_set.total_volume
-		return total
-var total_value: float:
-	get:
-		return slac * cargo.unit_value
-var status: Status
-var is_completed: bool:
-	get:
-		return status == Status.COMPLETED 
-
-# Quoted
-var quotation: Quotation #TODO
+# Shipment modules
+var cargo_details: ShipmentCargoDetails
+var main_freight: ShipmentMainFreight
+var haulage: ShipmentHaulage
+var handling: ShipmentHandling
+var customs: ShipmentCustoms
+var documentation: ShipmentDocumentation
+var events: ShipmentEvents
+var accounting: ShipmentAccounting
 
 # Accepted shipment variables
 var shipment_number: int
 var owner: FreightForwarder
-
-# Planned shipment variables
-var mode_of_transport: ModeOfTransport #TODO
-var planned_pickup_date: int #TODO
-var planned_delivery_date: int #TODO
-var planned_departure_date: int #TODO
-var planned_arrival_date: int #TODO
-var trucker_pickup: Trucker #TODO
-var trucker_delivery: Trucker #TODO
-var carrier: Carrier #TODO
-var handling_agent_export: HandlingAgent #TODO
-var handling_agent_import: HandlingAgent #TODO
-var customs_agency_export: CustomsAgency #TODO
-var customs_agency_import: CustomsAgency #TODO
-var costs: String #TODO
-
-# In transit
-var events: Array[Event] #TODO
-var earliest_pickup_date_time_event: TimeEvent
-var latest_delivery_date_time_event: TimeEvent
-var planned_pickup_date_time_event: TimeEvent
-var planned_delivery_date_time_event: TimeEvent
-var planned_departure_date_time_event: TimeEvent
-var planned_arrival_date_time_event: TimeEvent
+var is_owned: bool:
+	get:
+		return owner != null
 
 
-static func create_new() -> Shipment:
+
+static func create_new(shipper: Customer = null, consignee: Customer = null) -> Shipment:
 	var new_shipment = Shipment.new()
 	all.append(new_shipment)
 	last_id += 1
 	new_shipment.shipment_id = last_id
 	
+	new_shipment.cargo_details = ShipmentCargoDetails.create_new(new_shipment)
+	new_shipment.main_freight = ShipmentMainFreight.create_new(new_shipment)
+	new_shipment.haulage = ShipmentHaulage.create_new(new_shipment)
+	new_shipment.handling = ShipmentHandling.create_new(new_shipment)
+	new_shipment.customs = ShipmentCustoms.create_new(new_shipment)
+	new_shipment.documentation = ShipmentDocumentation.create_new(new_shipment)
+	new_shipment.events = ShipmentEvents.create_new(new_shipment)
+	new_shipment.accounting = ShipmentAccounting.create_new(new_shipment)
+	
 	new_shipment.customer_reference = generate_random_customer_reference(randi_range(3, 5), randi_range(3, 5))
 	
-	new_shipment.shipper = Customer.all_with_employees.pick_random()
-	new_shipment.consignee = Customer.all_with_employees.pick_random()
+	if shipper == null:
+		shipper = Customer.all_specific_with_employees.pick_random()
+	new_shipment.shipper = shipper
+	if consignee == null:
+		consignee = Customer.all_specific_with_employees.pick_random()
+	new_shipment.consignee = consignee
 	new_shipment.export_contact_person = new_shipment.shipper.employees.pick_random()
 	new_shipment.import_contact_person = new_shipment.consignee.employees.pick_random()
 	
-	Location.country_to_check = new_shipment.shipper.country
-	new_shipment.origin = Location.all.filter(Location.is_in_country).pick_random()
-	Location.country_to_check = new_shipment.consignee.country
-	new_shipment.destination = Location.all.filter(Location.is_in_country).pick_random()
+	new_shipment.origin = Location.all.filter(Location.is_in_country.bind(new_shipment.shipper.country)).pick_random()
+	new_shipment.destination = Location.all.filter(Location.is_in_country.bind(new_shipment.consignee.country)).pick_random()
+	
+	#FIXME sometimes can be empty, because there are no locations in the customer country
+	if new_shipment.origin == null or new_shipment.destination == null:
+		return null
 	
 	new_shipment.earliest_pickup_date = GlobalTimer.get_future_date(GlobalTimer.now, randi_range(1, 20), 10, 0)
 	new_shipment.latest_delivery_date = GlobalTimer.get_future_date(new_shipment.earliest_pickup_date, randi_range(2, 30), 17, 0)
+	new_shipment.events.create_time_events()
 	
 	new_shipment.service = Service.all.pick_random()
 	new_shipment.incoterms = Incoterms.all.pick_random()
@@ -148,38 +123,9 @@ static func create_new() -> Shipment:
 			incoterms_place = new_shipment.shipper.city_name
 	new_shipment.incoterms_place = incoterms_place
 	
-	new_shipment.cargo = Cargo.all.pick_random()
-	if new_shipment.cargo.unit_size < 0:
-		new_shipment.slac = randi_range(100, 10000)
-	elif new_shipment.cargo.unit_size < 5:
-		new_shipment.slac = randi_range(10, 1000)
-	else:
-		new_shipment.slac = randi_range(1, 50)
 	
-	var dimension_set_count = randi_range(1, 5)
-	for n in dimension_set_count:
-		var new_dimension_set = DimensionSet.new()
-		new_dimension_set.quantity = randi_range(1, 5)
-		new_dimension_set.length = randi_range(120, 150)
-		new_dimension_set.width = randi_range(80, 120)
-		new_dimension_set.height = randi_range(50, 150)
-		new_dimension_set.total_weight = randi_range(50, 250)
-		new_dimension_set.is_stackable = randi_range(1, 100) > 50
-		new_dimension_set.is_dg = randi_range(1, 100) > 90
-		new_shipment.dimension_sets.append(new_dimension_set)
-	
-	new_shipment.earliest_pickup_date_time_event = GlobalTimer.create_time_event(new_shipment.earliest_pickup_date, new_shipment)
-	new_shipment.latest_delivery_date_time_event = GlobalTimer.create_time_event(new_shipment.latest_delivery_date, new_shipment)
-	
+	print("New shipment created. Shipment ID: " + str(new_shipment.shipment_id))
 	return new_shipment
-
-
-static func is_shipment_completed(shipment_to_check: Shipment) -> bool:
-	return shipment_to_check.is_completed
-
-
-static func is_shipment_not_completed(shipment_to_check: Shipment) -> bool:
-	return not shipment_to_check.is_completed
 
 
 static func generate_random_customer_reference(string_length: int, number_length: int) -> String:
@@ -202,7 +148,7 @@ func accept(new_owner: FreightForwarder) -> void:
 	change_status(Status.ACCEPTED)
 	owner = new_owner
 	shipment_number = owner.get_next_shipment_number()
-	new_owner.add_shipment(self)
+	new_owner.accept_shipment(self)
 
 
 func change_status(new_status: Status) -> void:
@@ -210,20 +156,3 @@ func change_status(new_status: Status) -> void:
 	status_changed.emit(self)
 	if status == Status.COMPLETED:
 		completed.emit(self)
-
-
-func notify(time_event: TimeEvent) -> void:
-	match time_event:
-		earliest_pickup_date_time_event:
-			print_debug("Shipment ID %s earliest_pickup_date_time_event (%s)" % [shipment_id, time_event.time])
-		latest_delivery_date_time_event:
-			print_debug("Shipment ID %s latest_delivery_date_time_event (%s)" % [shipment_id, time_event.time])
-		planned_pickup_date_time_event:
-			print_debug("Shipment ID %s planned_pickup_date_time_event (%s)" % [shipment_id, time_event.time])
-		planned_delivery_date_time_event:
-			print_debug("Shipment ID %s planned_delivery_date_time_event (%s)" % [shipment_id, time_event.time])
-		planned_departure_date_time_event:
-			print_debug("Shipment ID %s planned_departure_date_time_event (%s)" % [shipment_id, time_event.time])
-		planned_arrival_date_time_event:
-			print_debug("Shipment ID %s planned_arrival_date_time_event (%s)" % [shipment_id, time_event.time])
-	

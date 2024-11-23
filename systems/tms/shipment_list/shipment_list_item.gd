@@ -26,7 +26,7 @@ func with_data(new_shipment: Shipment) -> ShipmentListItem:
 	shipper.text = shipment.shipper.name
 	origin.text = shipment.origin.code
 	destination.text = shipment.destination.code
-	total_weight.text = "%d kg" % [shipment.total_weight]
+	total_weight.text = "%d kg" % [shipment.cargo_details.total_weight]
 	status.text = Shipment.Status.keys()[shipment.status]
 	match shipment.status:
 		Shipment.Status.COMPLETED:

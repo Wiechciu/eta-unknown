@@ -1,6 +1,7 @@
 extends Node
 
 
+signal new_day_started
 signal shift_started
 signal shift_ended
 signal lunch_started
@@ -12,8 +13,8 @@ const ONE_MINUTE: int = 1 * 60
 const ONE_HOUR: int = 1 * 60 * 60
 const ONE_DAY: int = 1 * 60 * 60 * 24
 const ONE_WEEK: int = 1 * 60 * 60 * 24 * 7
-const ONE_MONTH: int = 1 * 60 * 60 * 24 * 30
-const ONE_YEAR: int = 1 * 60 * 60 * 24 * 365
+const ONE_MONTH: int = 1 * 60 * 60 * 24 * 30 #FIXME - it's inaccurate and may cause issues
+const ONE_YEAR: int = 1 * 60 * 60 * 24 * 365 #FIXME - it's inaccurate and may cause issues
 const STARTING_DATE: String = "2025-01-01T08:00:00"
 
 @export var time_scale: float = 600
@@ -34,6 +35,7 @@ var time_dictionary: Dictionary:
 		return Time.get_datetime_dict_from_unix_time(now)
 
 var current_hour: int
+var current_day: String
 var time_events: Array[TimeEvent]
 
 
@@ -47,10 +49,11 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	now += delta * time_scale
-	check_timesplits()
-	check_time_events()
+	_check_hour_change()
+	_check_day_change()
+	_check_time_events()
 
-func check_timesplits() -> void:
+func _check_hour_change() -> void:
 	var new_hour = time_dictionary["hour"]
 	if new_hour == current_hour:
 		return
@@ -67,11 +70,21 @@ func check_timesplits() -> void:
 	current_hour = new_hour
 
 
+func _check_day_change() -> void:
+	var new_day = date_string
+	if new_day == current_day:
+		return
+	
+	current_day = new_day
+	new_day_started.emit()
+	print("New day started: " + new_day)
+
+
 func start_next_day() -> void:
-	var next_day_time_dictionary = Time.get_datetime_dict_from_unix_time(now + ONE_DAY)
-	next_day_time_dictionary["hour"] = shift_start_hour
-	next_day_time_dictionary["minute"] = 0
-	now = Time.get_unix_time_from_datetime_dict(next_day_time_dictionary)
+	var next_day_datetime_dictionary = Time.get_datetime_dict_from_unix_time(now + ONE_DAY)
+	next_day_datetime_dictionary["hour"] = shift_start_hour
+	next_day_datetime_dictionary["minute"] = 0
+	now = Time.get_unix_time_from_datetime_dict(next_day_datetime_dictionary)
 
 
 func get_future_date(original_date: int, plus_days: int, hour: int, minute: int) -> int:
@@ -93,17 +106,17 @@ func create_time_event(time: int, observer: Object) -> TimeEvent:
 	new_time_event.time = time
 	new_time_event.observer = observer
 	time_events.append(new_time_event)
-	time_events.sort_custom(sort_time_events_ascending)
+	time_events.sort_custom(_sort_time_events_ascending)
 	return new_time_event
 
 
-func sort_time_events_ascending(a: TimeEvent, b: TimeEvent) -> bool:
+func _sort_time_events_ascending(a: TimeEvent, b: TimeEvent) -> bool:
 	if a.time < b.time:
 		return true
 	return false
 
 
-func check_time_events() -> void:
+func _check_time_events() -> void:
 	var counter: int = -1
 	var time_event_indexes_to_remove: Array[int]
 	for time_event in time_events:

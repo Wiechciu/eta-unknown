@@ -19,7 +19,7 @@ var last_shipment_number: int = 1000000
 var total_earnings: float
 
 
-func add_shipment(new_shipment: Shipment) -> void:
+func accept_shipment(new_shipment: Shipment) -> void:
 	shipments.append(new_shipment)
 	new_shipment.status_changed.connect(_on_shipment_status_changed)
 	new_shipment_accepted.emit(new_shipment)
