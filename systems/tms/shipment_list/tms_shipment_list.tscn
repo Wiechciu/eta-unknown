@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dkbqixm40xi7u"]
 
-[ext_resource type="Script" path="res://systems/tms/shipment_list/shipment_list.gd" id="1_f2rsm"]
-[ext_resource type="PackedScene" uid="uid://dag450t1ydq8u" path="res://systems/tms/shipment_list/shipment_list_item.tscn" id="2_jqska"]
+[ext_resource type="Script" path="res://systems/tms/shipment_list/tms_shipment_list.gd" id="1_f2rsm"]
+[ext_resource type="PackedScene" uid="uid://dag450t1ydq8u" path="res://systems/tms/shipment_list/tms_shipment_list_item.tscn" id="2_jqska"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f2rsm"]
 content_margin_left = 4.0
@@ -28,7 +28,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 
-[node name="ShipmentList" type="PanelContainer" node_paths=PackedStringArray("_shipment_container", "_toggle_completed_button")]
+[node name="ShipmentList" type="PanelContainer" node_paths=PackedStringArray("_shipment_container", "_toggle_completed_button", "_sort_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -37,8 +37,9 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_f2rsm")
 script = ExtResource("1_f2rsm")
 _shipment_container = NodePath("VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer")
-_shipment_list_item_scene = ExtResource("2_jqska")
 _toggle_completed_button = NodePath("VBoxContainer/HBoxContainer/ToggleCompletedButton")
+_sort_button = NodePath("VBoxContainer/HBoxContainer/SortButton")
+_shipment_list_item_scene = ExtResource("2_jqska")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -53,8 +54,16 @@ text = "Shipments:"
 label_settings = SubResource("LabelSettings_f2rsm")
 
 [node name="ToggleCompletedButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "hide completed"
+clip_text = true
+
+[node name="SortButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "sort by date"
+clip_text = true
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -128,3 +137,4 @@ layout_mode = 2
 layout_mode = 2
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ToggleCompletedButton" to="." method="_on_toggle_completed_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/SortButton" to="." method="_on_sort_button_pressed"]

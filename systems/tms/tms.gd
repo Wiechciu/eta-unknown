@@ -2,8 +2,8 @@ class_name Tms
 extends Control
 
 
-@export var shipment_list: ShipmentList
-@export var shipment_details: ShipmentDetails
+@export var shipment_list: TmsShipmentList
+@export var shipment_details: TmsShipmentDetails
 
 
 func _ready() -> void:

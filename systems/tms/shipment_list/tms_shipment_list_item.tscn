@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dag450t1ydq8u"]
 
-[ext_resource type="Script" path="res://systems/tms/shipment_list/shipment_list_item.gd" id="1_bi60y"]
+[ext_resource type="Script" path="res://systems/tms/shipment_list/tms_shipment_list_item.gd" id="1_bi60y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bi60y"]
 content_margin_left = 4.0
@@ -18,13 +18,14 @@ font_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_bi60y"]
 vertical = true
 
-[node name="ShipmentListItem" type="PanelContainer" node_paths=PackedStringArray("shipment_number", "shipper", "origin", "destination", "total_weight", "status")]
+[node name="ShipmentListItem" type="PanelContainer" node_paths=PackedStringArray("shipment_number", "earliest_pickup_date", "shipper", "origin", "destination", "total_weight", "status")]
 custom_minimum_size = Vector2(0, 40)
 offset_right = 367.0
 offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
 script = ExtResource("1_bi60y")
 shipment_number = NodePath("HBoxContainer/ShipmentNumber")
+earliest_pickup_date = NodePath("HBoxContainer/EarliestPickupDate")
 shipper = NodePath("HBoxContainer/Shipper")
 origin = NodePath("HBoxContainer/Origin")
 destination = NodePath("HBoxContainer/Destination")
@@ -43,6 +44,16 @@ clip_text = true
 text_overrun_behavior = 3
 
 [node name="VSeparator5" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_bi60y")
+
+[node name="EarliestPickupDate" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "2025-01-05"
+label_settings = SubResource("LabelSettings_bi60y")
+
+[node name="VSeparator6" type="VSeparator" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_bi60y")
 

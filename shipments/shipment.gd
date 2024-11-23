@@ -144,6 +144,16 @@ static func generate_random_customer_reference(string_length: int, number_length
 	return word
 
 
+static func sort_shipment_list_by_shipment_number(shipment_list: Array[Shipment]) -> Array[Shipment]:
+	shipment_list.sort_custom(_sort_ascending_by_shipment_number)
+	return shipment_list
+
+
+static func sort_shipment_list_by_earliest_pickup_date(shipment_list: Array[Shipment]) -> Array[Shipment]:
+	shipment_list.sort_custom(_sort_ascending_by_earliest_pickup_date)
+	return shipment_list
+
+
 func accept(new_owner: FreightForwarder) -> void:
 	change_status(Status.ACCEPTED)
 	owner = new_owner
@@ -156,3 +166,15 @@ func change_status(new_status: Status) -> void:
 	status_changed.emit(self)
 	if status == Status.COMPLETED:
 		completed.emit(self)
+
+
+static func _sort_ascending_by_shipment_number(a: Shipment, b: Shipment) -> bool:
+	if a.shipment_number < b.shipment_number:
+		return true
+	return false
+
+
+static func _sort_ascending_by_earliest_pickup_date(a: Shipment, b: Shipment) -> bool:
+	if a.earliest_pickup_date < b.earliest_pickup_date:
+		return true
+	return false

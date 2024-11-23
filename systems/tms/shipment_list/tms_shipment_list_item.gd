@@ -1,4 +1,4 @@
-class_name ShipmentListItem
+class_name TmsShipmentListItem
 extends Control
 
 
@@ -8,6 +8,7 @@ signal pressed_with_shipment_data(Shipment)
 var shipment: Shipment
 
 @export var shipment_number: Label
+@export var earliest_pickup_date: Label
 @export var shipper: Label
 @export var origin: Label
 @export var destination: Label
@@ -19,10 +20,11 @@ func _ready() -> void:
 	Debugger.assert_all_exported_properties(self)
 
 
-func with_data(new_shipment: Shipment) -> ShipmentListItem:
+func with_data(new_shipment: Shipment) -> TmsShipmentListItem:
 	shipment = new_shipment
 	
 	shipment_number.text = str(shipment.shipment_number)
+	earliest_pickup_date.text = GlobalTimer.get_nice_format_date_string(shipment.earliest_pickup_date)
 	shipper.text = shipment.shipper.name
 	origin.text = shipment.origin.code
 	destination.text = shipment.destination.code

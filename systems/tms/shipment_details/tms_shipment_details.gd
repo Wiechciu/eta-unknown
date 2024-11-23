@@ -1,4 +1,4 @@
-class_name ShipmentDetails
+class_name TmsShipmentDetails
 extends Control
 
 
@@ -40,16 +40,10 @@ var shipment: Shipment
 @export var tms_dimension_set_scene: PackedScene
 
 @export_group("Main freight")
-@export var mode_of_transport: Label
-@export var carrier: Label
-@export var planned_departure: Label
-@export var planned_arrival: Label
+@export var shipment_main_freight: TmsShipmentDetailsMainFreight
 
 @export_group("Haulage")
-@export var trucker_pickup: Label
-@export var trucker_delivery: Label
-@export var planned_pickup: Label
-@export var planned_delivery: Label
+@export var shipment_haulage: TmsShipmentDetailsHaulage
 
 @export_group("Handling")
 @export var handling_agent_export: Label
@@ -96,15 +90,8 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 		var tms_dimension_set: TmsDimensionSet = (tms_dimension_set_scene.instantiate() as TmsDimensionSet).with_data(dimension_set)
 		dimension_sets_container.add_child(tms_dimension_set)
 	
-	mode_of_transport.text = Shipment.ModeOfTransport.keys()[shipment.main_freight.mode_of_transport] if shipment.main_freight.mode_of_transport != Shipment.ModeOfTransport.NONE else ""
-	carrier.text = shipment.main_freight.carrier.name if shipment.main_freight.carrier else ""
-	planned_departure.text = GlobalTimer.get_nice_format_datetime_string(shipment.main_freight.planned_departure_date)
-	planned_arrival.text = GlobalTimer.get_nice_format_datetime_string(shipment.main_freight.planned_arrival_date)
-
-	trucker_pickup.text = shipment.haulage.trucker_pickup.name if shipment.haulage.trucker_pickup else ""
-	trucker_delivery.text = shipment.haulage.trucker_delivery.name if shipment.haulage.trucker_delivery else ""
-	planned_pickup.text = GlobalTimer.get_nice_format_datetime_string(shipment.haulage.planned_pickup_date)
-	planned_delivery.text = GlobalTimer.get_nice_format_datetime_string(shipment.haulage.planned_delivery_date)
+	shipment_main_freight.load_shipment(shipment.main_freight)
+	shipment_haulage.load_shipment(shipment.haulage)
 	
 	handling_agent_export.text = shipment.handling.handling_agent_export.name if shipment.handling.handling_agent_export else ""
 	handling_agent_import.text = shipment.handling.handling_agent_import.name if shipment.handling.handling_agent_import else ""
@@ -115,10 +102,9 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 	tab_container.current_tab = 0
 
 
-func _on_change_status_button_pressed() -> void:
-	shipment.change_status(shipment_status.selected)
-	tms.close_shipment_details()
-
-
 func _on_close_button_pressed() -> void:
 	tms.close_shipment_details()
+
+
+func _on_shipment_statuses_item_selected(index: int) -> void:
+	shipment.change_status(index)

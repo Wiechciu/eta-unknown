@@ -1,12 +1,19 @@
-class_name ShipmentList
+class_name TmsShipmentList
 extends Control
 
 
+enum SortType {
+	BY_NUMBER,
+	BY_DATE,
+}
+
 @export var tms: Tms
 @export var _shipment_container: Control
-@export var _shipment_list_item_scene: PackedScene
 @export var _toggle_completed_button: Button
+@export var _sort_button: Button
+@export var _shipment_list_item_scene: PackedScene
 var show_completed: bool = true
+var sort_type: SortType
 
 
 func _ready() -> void:
@@ -19,7 +26,7 @@ func _ready() -> void:
 
 
 func add_shipment(new_shipment: Shipment) -> void:
-	var new_shipment_list_item: ShipmentListItem = _shipment_list_item_scene.instantiate().with_data(new_shipment)
+	var new_shipment_list_item: TmsShipmentListItem = _shipment_list_item_scene.instantiate().with_data(new_shipment)
 	new_shipment_list_item.name = "Shipment_" + str(new_shipment_list_item.shipment.shipment_id)
 	new_shipment_list_item.pressed_with_shipment_data.connect(_on_shipment_list_item_pressed)
 	_shipment_container.add_child(new_shipment_list_item)
@@ -29,12 +36,20 @@ func refresh_shipment_list_items() -> void:
 	for child in _shipment_container.get_children():
 		child.queue_free()
 	
-	var shipment_list: Array[Shipment] = (GameManager.player.employer as FreightForwarder).shipments
+	var shipments := (GameManager.player.employer as FreightForwarder).shipments
 	if not show_completed:
-		var shipments_not_completed = shipment_list.filter(func(shipment: Shipment): return not shipment.is_completed)
-		shipment_list = shipments_not_completed
+		var shipments_not_completed := shipments.filter(func(shipment: Shipment): return not shipment.is_completed)
+		shipments = shipments_not_completed
 	
-	for shipment in shipment_list:
+	var shipments_sorted: Array[Shipment]
+	match sort_type:
+		SortType.BY_NUMBER:
+			shipments_sorted = Shipment.sort_shipment_list_by_shipment_number(shipments)
+		SortType.BY_DATE:
+			shipments_sorted = Shipment.sort_shipment_list_by_earliest_pickup_date(shipments)
+	
+	
+	for shipment in shipments_sorted:
 		add_shipment(shipment)
 
 
@@ -52,5 +67,16 @@ func _on_toggle_completed_button_pressed() -> void:
 		_toggle_completed_button.text = "hide completed"
 	else:
 		_toggle_completed_button.text = "show completed"
+	
+	refresh_shipment_list_items()
+
+
+func _on_sort_button_pressed() -> void:
+	sort_type = (sort_type + 1) % SortType.size()
+	match sort_type:
+		SortType.BY_NUMBER:
+			_sort_button.text = "sort by date"
+		SortType.BY_DATE:
+			_sort_button.text = "sort by number"
 	
 	refresh_shipment_list_items()

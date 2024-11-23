@@ -101,6 +101,12 @@ func get_nice_format_datetime_string(unix_time: int) -> String:
 	return Time.get_datetime_string_from_unix_time(unix_time).replace("T", ", ").left(-3)
 
 
+func get_nice_format_date_string(unix_time: int) -> String:
+	if unix_time == 0:
+		return ""
+	return Time.get_datetime_string_from_unix_time(unix_time).left(-9)
+
+
 func create_time_event(time: int, observer: Object) -> TimeEvent:
 	var new_time_event = TimeEvent.new()
 	new_time_event.time = time
