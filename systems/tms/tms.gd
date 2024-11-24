@@ -13,7 +13,7 @@ func _ready() -> void:
 
 
 func open_shipment_details(shipment: Shipment) -> void:
-	shipment_details.load_shipment(shipment)
+	shipment_details.open_shipment_details(shipment)
 	
 	shipment_list.visible = false
 	shipment_details.visible = true

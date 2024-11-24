@@ -4,6 +4,7 @@ extends Party
 
 signal new_shipment_accepted(Shipment)
 signal shipment_status_changed(Shipment)
+signal shipment_details_changed(Shipment)
 signal shipment_list_updated
 
 
@@ -22,12 +23,18 @@ var total_earnings: float
 func accept_shipment(new_shipment: Shipment) -> void:
 	shipments.append(new_shipment)
 	new_shipment.status_changed.connect(_on_shipment_status_changed)
+	new_shipment.details_changed.connect(_on_shipment_details_changed)
 	new_shipment_accepted.emit(new_shipment)
 	shipment_list_updated.emit()
 
 
 func _on_shipment_status_changed(shipment: Shipment):
 	shipment_status_changed.emit(shipment)
+	shipment_list_updated.emit()
+
+
+func _on_shipment_details_changed(shipment: Shipment):
+	shipment_details_changed.emit(shipment)
 	shipment_list_updated.emit()
 
 

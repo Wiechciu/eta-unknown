@@ -12,7 +12,7 @@ var quotations: Array[Quotation]
 
 
 static func create_new(customer: Customer) -> RequestForQuotation:
-	var new_request = RequestForQuotation.new()
+	var new_request := RequestForQuotation.new()
 	all.append(new_request)
 	
 	new_request.requestor = customer
@@ -27,9 +27,9 @@ static func create_new(customer: Customer) -> RequestForQuotation:
 	if new_request.shipment == null:
 		return null
 	
-	var expected_rate_per_kg = 1000 #TODO implement some market rates
+	var expected_rate_per_kg := 1000 #TODO implement some market rates
 	new_request.expected_total_cost = new_request.shipment.cargo_details.total_weight * expected_rate_per_kg
-	new_request.deadline_date = GlobalTimer.get_future_date(GlobalTimer.now, randi_range(1, 5), randi_range(10, 16), 00)
+	new_request.deadline_date = GlobalTimer.get_future_date_from_now(randi_range(1, 5), randi_range(10, 16))
 	
 	return new_request
 

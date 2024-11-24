@@ -3,10 +3,8 @@ extends Resource
 
 
 var shipment: Shipment
-var mode_of_transport: Shipment.ModeOfTransport #TODO
-var carrier: Carrier #TODO
-var planned_departure_date: int #TODO
-var planned_arrival_date: int #TODO
+var mode_of_transport: ModeOfTransport
+var carrier: Carrier
 var cost: String #TODO
 
 

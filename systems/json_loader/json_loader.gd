@@ -1,16 +1,13 @@
 extends Node
 
 
-@export_file var events_json
-@export_file var cargo_json
-@export_file var currencies_json
-@export_file var countries_json
-@export_file var locations_json
-@export_file var incoterms_json
-@export_file var services_json
-@export_file var parties_json
-@export_file var job_positions_json
-@export_file var people_json
+@export_file var cargo_json: String
+@export_file var currencies_json: String
+@export_file var countries_json: String
+@export_file var locations_json: String
+@export_file var parties_json: String
+@export_file var job_positions_json: String
+@export_file var people_json: String
 
 
 func _ready() -> void:
@@ -18,13 +15,10 @@ func _ready() -> void:
 	
 	print("--- starting loading from JSONs ---")
 	var start = Time.get_ticks_msec()
-	load_events_from_json(events_json, Event.all, Event.all_dict)
 	load_cargo_from_json(cargo_json, Cargo.all, Cargo.all_dict)
 	load_currencies_from_json(currencies_json, Currency.all, Currency.all_dict)
 	load_countries_from_json(countries_json, Country.all, Country.all_dict)
 	load_locations_from_json(locations_json, Location.all, Location.all_dict)
-	load_incoterms_from_json(incoterms_json, Incoterms.all, Incoterms.all_dict)
-	load_services_from_json(services_json, Service.all, Service.all_dict)
 	load_parties_from_json(parties_json, Party.all, Party.all_dict)
 	load_job_positions_from_json(job_positions_json, JobPosition.all, JobPosition.all_dict)
 	load_people_from_json(people_json, Person.all, Person.all_dict)
@@ -32,22 +26,6 @@ func _ready() -> void:
 	var end = Time.get_ticks_msec()
 	var time = (end - start)
 	print("--- finished loading from JSONs | in " + str(time) + " ms ---\n")
-
-
-func load_events_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
-	var start = Time.get_ticks_msec()
-	var loaded_array = load_json_file(file_to_load)
-	
-	for item in loaded_array:
-		var new_resource = Event.new()
-		new_resource.code = str(item.code) if item.code else ""
-		new_resource.name = str(item.name) if item.name else ""
-		array_to_fill.append(new_resource)
-		dict_to_fill[new_resource.code] = new_resource
-	
-	var end = Time.get_ticks_msec()
-	var time = (end - start)
-	print("loaded " + str(array_to_fill.size()) + " events | in " + str(time) + " ms")
 
 
 func load_cargo_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
@@ -117,38 +95,6 @@ func load_locations_from_json(file_to_load: String, array_to_fill: Array, dict_t
 	var end = Time.get_ticks_msec()
 	var time = (end - start)
 	print("loaded " + str(array_to_fill.size()) + " locations | in " + str(time) + " ms")
-
-
-func load_incoterms_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
-	var start = Time.get_ticks_msec()
-	var loaded_array = load_json_file(file_to_load)
-	
-	for item in loaded_array:
-		var new_resource = Incoterms.new()
-		new_resource.code = str(item.code) if item.code else ""
-		new_resource.name = str(item.name) if item.name else ""
-		array_to_fill.append(new_resource)
-		dict_to_fill[new_resource.code] = new_resource
-	
-	var end = Time.get_ticks_msec()
-	var time = (end - start)
-	print("loaded " + str(array_to_fill.size()) + " incoterms | in " + str(time) + " ms")
-
-
-func load_services_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
-	var start = Time.get_ticks_msec()
-	var loaded_array = load_json_file(file_to_load)
-	
-	for item in loaded_array:
-		var new_resource = Service.new()
-		new_resource.code = str(item.code) if item.code else ""
-		new_resource.name = str(item.name) if item.name else ""
-		array_to_fill.append(new_resource)
-		dict_to_fill[new_resource.code] = new_resource
-	
-	var end = Time.get_ticks_msec()
-	var time = (end - start)
-	print("loaded " + str(array_to_fill.size()) + " services | in " + str(time) + " ms")
 
 
 func load_parties_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:

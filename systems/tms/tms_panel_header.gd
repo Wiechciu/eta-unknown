@@ -1,8 +1,8 @@
-class_name DocumentHeader
+class_name TmsPanelHeader
 extends Control
 
 
-@export var document_to_move: Control
+@export var control_to_move: Control
 var is_moving: bool
 
 
@@ -13,9 +13,9 @@ func _ready() -> void:
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if (event as InputEventMouseButton).pressed:
-			document_to_move.move_to_front()
+			control_to_move.move_to_front()
 			is_moving = true
 		else:
 			is_moving = false
 	elif event is InputEventMouseMotion and is_moving:
-		document_to_move.global_position = document_to_move.global_position + (event as InputEventMouseMotion).relative
+		control_to_move.global_position = control_to_move.global_position + (event as InputEventMouseMotion).relative

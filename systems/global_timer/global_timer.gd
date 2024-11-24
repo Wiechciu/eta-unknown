@@ -17,13 +17,16 @@ const ONE_MONTH: int = 1 * 60 * 60 * 24 * 30 #FIXME - it's inaccurate and may ca
 const ONE_YEAR: int = 1 * 60 * 60 * 24 * 365 #FIXME - it's inaccurate and may cause issues
 const STARTING_DATE: String = "2025-01-01T08:00:00"
 
-@export var time_scale: float = 600
+@export var time_scale: int = 600
 @export var shift_start_hour: int = 8
 @export var shift_end_hour: int = 16
 @export var lunch_start_hour: int = 12
 @export var lunch_end_hour: int = 13
 
-var now: float
+var now_float: float
+var now: int:
+	get:
+		return int(now_float)
 var date_string: String:
 	get:
 		return Time.get_date_string_from_unix_time(now)
@@ -40,7 +43,7 @@ var time_events: Array[TimeEvent]
 
 
 func _init() -> void:
-	now = Time.get_unix_time_from_datetime_string(STARTING_DATE)
+	now_float = Time.get_unix_time_from_datetime_string(STARTING_DATE)
 
 
 func _ready() -> void:
@@ -48,7 +51,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	now += delta * time_scale
+	now_float += delta * time_scale
 	_check_hour_change()
 	_check_day_change()
 	_check_time_events()
@@ -81,39 +84,67 @@ func _check_day_change() -> void:
 
 
 func start_next_day() -> void:
-	var next_day_datetime_dictionary = Time.get_datetime_dict_from_unix_time(now + ONE_DAY)
+	var next_day_datetime_dictionary := Time.get_datetime_dict_from_unix_time(now + ONE_DAY)
 	next_day_datetime_dictionary["hour"] = shift_start_hour
 	next_day_datetime_dictionary["minute"] = 0
-	now = Time.get_unix_time_from_datetime_dict(next_day_datetime_dictionary)
+	now_float = Time.get_unix_time_from_datetime_dict(next_day_datetime_dictionary)
 
 
-func get_future_date(original_date: int, plus_days: int, hour: int, minute: int) -> int:
-	var datetime_dict = Time.get_date_dict_from_unix_time(original_date + ONE_DAY * plus_days)
+func get_future_date_from_unix_time(original_date: int, plus_days: int = 0, hour: int = 0, minute: int = 0) -> int:
+	var datetime_dict := Time.get_date_dict_from_unix_time(original_date + ONE_DAY * plus_days)
 	datetime_dict["hour"] = hour
 	datetime_dict["minute"] = minute
 	datetime_dict["second"] = 0
 	return Time.get_unix_time_from_datetime_dict(datetime_dict)
 
 
-func get_nice_format_datetime_string(unix_time: int) -> String:
+func get_future_date_from_event(original_event: Event, plus_days: int = 0, hour: int = 0, minute: int = 0) -> int:
+	if original_event == null:
+		return -1
+	var time: int = original_event.time if original_event else now
+	return get_future_date_from_unix_time(time, plus_days, hour, minute)
+
+
+func get_future_date_from_now(plus_days: int = 0, hour: int = 0, minute: int = 0) -> int:
+	return get_future_date_from_unix_time(now, plus_days, hour, minute)
+
+
+func get_nice_datetime_string_from_unix_time(unix_time: int) -> String:
 	if unix_time == 0:
 		return ""
 	return Time.get_datetime_string_from_unix_time(unix_time).replace("T", ", ").left(-3)
 
 
-func get_nice_format_date_string(unix_time: int) -> String:
+func get_nice_datetime_string_from_event(event: Event) -> String:
+	if event == null:
+		return ""
+	return get_nice_datetime_string_from_unix_time(event.time)
+
+
+func get_nice_date_string_from_unix_time(unix_time: int) -> String:
 	if unix_time == 0:
 		return ""
 	return Time.get_datetime_string_from_unix_time(unix_time).left(-9)
 
 
-func create_time_event(time: int, observer: Object) -> TimeEvent:
-	var new_time_event = TimeEvent.new()
-	new_time_event.time = time
-	new_time_event.observer = observer
+func get_nice_date_string_from_event(event: Event) -> String:
+	if event == null:
+		return ""
+	return get_nice_date_string_from_unix_time(event.time)
+
+
+func create_time_event_from_unix_time(time: int, observer: Object, event: Event = null) -> TimeEvent:
+	var new_time_event = TimeEvent.new().with_data(time, observer, event)
 	time_events.append(new_time_event)
 	time_events.sort_custom(_sort_time_events_ascending)
 	return new_time_event
+
+
+func create_time_event_from_event(event: Event, observer: Object) -> TimeEvent:
+	if event == null:
+		return null
+	return create_time_event_from_unix_time(event.time, observer, event)
+
 
 
 func _sort_time_events_ascending(a: TimeEvent, b: TimeEvent) -> bool:

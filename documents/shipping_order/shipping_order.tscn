@@ -20,19 +20,19 @@ corner_radius_bottom_left = 2
 shadow_size = 2
 shadow_offset = Vector2(2, 2)
 
-[node name="ShippingOrder" type="Container" node_paths=PackedStringArray("shipper", "consignee", "origin", "destination", "total_quantity", "total_weight", "total_volume", "dimension_sets_container")]
+[node name="ShippingOrder" type="Container" node_paths=PackedStringArray("_shipper", "_consignee", "_origin", "_destination", "_total_quantity", "_total_weight", "_total_volume", "_dimension_sets_container")]
 offset_right = 171.0
 offset_bottom = 304.0
 script = ExtResource("1_i3w6w")
-shipper = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Parties/Shipper")
-consignee = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Parties/Consignee")
-origin = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Locations/Origin")
-destination = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Locations/Destination")
-total_quantity = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/CargoDetails/TotalQuantity")
-total_weight = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/CargoDetails/TotalWeight")
-total_volume = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/CargoDetails/TotalVolume")
-dimension_sets_container = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/DimensionSets")
-document_dimension_set_scene = ExtResource("4_pg3yj")
+_shipper = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Parties/Shipper")
+_consignee = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Parties/Consignee")
+_origin = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Locations/Origin")
+_destination = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Locations/Destination")
+_total_quantity = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/CargoDetails/TotalQuantity")
+_total_weight = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/CargoDetails/TotalWeight")
+_total_volume = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/CargoDetails/TotalVolume")
+_dimension_sets_container = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/DimensionSets")
+_document_dimension_set_scene = ExtResource("4_pg3yj")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2

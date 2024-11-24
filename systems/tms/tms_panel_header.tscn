@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cxa2h82m4jg1l"]
 
-[ext_resource type="Script" path="res://documents/document_header.gd" id="1_1ibk0"]
+[ext_resource type="Script" path="res://systems/tms/tms_panel_header.gd" id="1_1rwd0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pg08m"]
 bg_color = Color(0.196078, 0.196078, 0.196078, 1)
@@ -9,9 +9,9 @@ bg_color = Color(0.196078, 0.196078, 0.196078, 1)
 font_size = 20
 shadow_color = Color(0, 0, 0, 0.439216)
 
-[node name="PanelHeader" type="PanelContainer"]
+[node name="TmsPanelHeader" type="PanelContainer"]
 theme_override_styles/panel = SubResource("StyleBoxFlat_pg08m")
-script = ExtResource("1_1ibk0")
+script = ExtResource("1_1rwd0")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2

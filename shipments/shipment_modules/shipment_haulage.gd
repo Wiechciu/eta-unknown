@@ -3,10 +3,8 @@ extends Resource
 
 
 var shipment: Shipment
-var trucker_pickup: Trucker #TODO
-var trucker_delivery: Trucker #TODO
-var planned_pickup_date: int #TODO
-var planned_delivery_date: int #TODO
+var trucker_pickup: Trucker
+var trucker_delivery: Trucker
 var cost: String #TODO
 
 

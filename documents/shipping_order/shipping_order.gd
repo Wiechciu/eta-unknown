@@ -5,37 +5,37 @@ extends Document
 var shipment: Shipment
 
 @export_category("Assigned internally")
-@export var shipper: Label
-@export var consignee: Label
-@export var origin: Label
-@export var destination: Label
-@export var total_quantity: Label
-@export var total_weight: Label
-@export var total_volume: Label
-@export var dimension_sets_container: Control
-@export var document_dimension_set_scene: PackedScene
+@export var _shipper: Label
+@export var _consignee: Label
+@export var _origin: Label
+@export var _destination: Label
+@export var _total_quantity: Label
+@export var _total_weight: Label
+@export var _total_volume: Label
+@export var _dimension_sets_container: Control
+@export var _document_dimension_set_scene: PackedScene
 
 
 func load_shipment(shipment_to_load: Shipment) -> void:
 	shipment = shipment_to_load
 	
-	shipper.text = shipment.shipper.print_string
-	consignee.text = shipment.consignee.print_string
-	origin.text = shipment.origin.print_string
-	destination.text = shipment.destination.print_string
-	total_quantity.text = str(shipment.cargo_details.total_quantity)
-	total_weight.text = str(shipment.cargo_details.total_weight)
-	total_volume.text = str(shipment.cargo_details.total_volume)
+	_shipper.text = shipment.shipper.print_string
+	_consignee.text = shipment.consignee.print_string
+	_origin.text = shipment.origin.print_string
+	_destination.text = shipment.destination.print_string
+	_total_quantity.text = str(shipment.cargo_details.total_quantity)
+	_total_weight.text = str(shipment.cargo_details.total_weight)
+	_total_volume.text = str(shipment.cargo_details.total_volume)
 	
-	for child in dimension_sets_container.get_children():
+	for child in _dimension_sets_container.get_children():
 		child.queue_free()
 	for dimension_set in shipment.cargo_details.dimension_sets:
-		var document_dimension_set: DocumentDimensionSet = (document_dimension_set_scene.instantiate() as DocumentDimensionSet).with_data(dimension_set)
-		dimension_sets_container.add_child(document_dimension_set)
+		var document_dimension_set: DocumentDimensionSet = (_document_dimension_set_scene.instantiate() as DocumentDimensionSet).with_data(dimension_set)
+		_dimension_sets_container.add_child(document_dimension_set)
 
 
 func _on_accept_button_pressed() -> void:
-	shipment.accept(GameManager.player.employer)
+	shipment.accept(GameManager.player.employer as FreightForwarder)
 	queue_free()
 
 

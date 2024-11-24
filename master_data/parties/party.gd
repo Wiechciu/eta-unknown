@@ -26,6 +26,7 @@ var print_string: String:
 		+ "\n" + country.code + " " + country.name
 
 var employees: Array[Person]
+var balance: float
 
 
 static func has_employees(party_to_check: Party) -> bool:

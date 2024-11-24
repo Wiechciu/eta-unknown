@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://baurmy6fwc0ye"]
 
-[ext_resource type="Script" path="res://systems/tms/shipment_details/tms_dimension_set.gd" id="1_kcwf6"]
+[ext_resource type="Script" path="res://systems/tms/shipment_details/dimensiont_sets/tms_dimension_set.gd" id="1_kcwf6"]
 [ext_resource type="LabelSettings" uid="uid://tas3grgdcwul" path="res://systems/themes/document_value_label_settings.tres" id="2_dyo2o"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6bitq"]
@@ -13,56 +13,56 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.61339, 0.61339, 0.61339, 1)
 
-[node name="DimensionSet" type="PanelContainer" node_paths=PackedStringArray("quantity", "length", "width", "height", "total_weight")]
+[node name="TmsDimensionSet" type="PanelContainer" node_paths=PackedStringArray("_quantity", "_length", "_width", "_height", "_total_weight")]
 offset_right = 145.0
 offset_bottom = 25.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_6bitq")
 script = ExtResource("1_kcwf6")
-quantity = NodePath("DimensionSet/Quantity")
-length = NodePath("DimensionSet/Length")
-width = NodePath("DimensionSet/Width")
-height = NodePath("DimensionSet/Height")
-total_weight = NodePath("DimensionSet/TotalWeight")
+_quantity = NodePath("HBoxContainer/Quantity")
+_length = NodePath("HBoxContainer/Length")
+_width = NodePath("HBoxContainer/Width")
+_height = NodePath("HBoxContainer/Height")
+_total_weight = NodePath("HBoxContainer/TotalWeight")
 
-[node name="DimensionSet" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="Quantity" type="Label" parent="DimensionSet"]
+[node name="Quantity" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 text = "X"
 label_settings = ExtResource("2_dyo2o")
 
-[node name="x1" type="Label" parent="DimensionSet"]
+[node name="x1" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 text = "x"
 label_settings = ExtResource("2_dyo2o")
 
-[node name="Length" type="Label" parent="DimensionSet"]
+[node name="Length" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 text = "X"
 label_settings = ExtResource("2_dyo2o")
 
-[node name="x2" type="Label" parent="DimensionSet"]
+[node name="x2" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 text = "x"
 label_settings = ExtResource("2_dyo2o")
 
-[node name="Width" type="Label" parent="DimensionSet"]
+[node name="Width" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 text = "X"
 label_settings = ExtResource("2_dyo2o")
 
-[node name="x3" type="Label" parent="DimensionSet"]
+[node name="x3" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 text = "x"
 label_settings = ExtResource("2_dyo2o")
 
-[node name="Height" type="Label" parent="DimensionSet"]
+[node name="Height" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 text = "X"
 label_settings = ExtResource("2_dyo2o")
 
-[node name="TotalWeight" type="Label" parent="DimensionSet"]
+[node name="TotalWeight" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 text = "X"
 label_settings = ExtResource("2_dyo2o")

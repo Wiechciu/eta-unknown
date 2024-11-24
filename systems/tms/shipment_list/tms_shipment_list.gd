@@ -26,7 +26,7 @@ func _ready() -> void:
 
 
 func add_shipment(new_shipment: Shipment) -> void:
-	var new_shipment_list_item: TmsShipmentListItem = _shipment_list_item_scene.instantiate().with_data(new_shipment)
+	var new_shipment_list_item: TmsShipmentListItem = (_shipment_list_item_scene.instantiate() as TmsShipmentListItem).with_data(new_shipment)
 	new_shipment_list_item.name = "Shipment_" + str(new_shipment_list_item.shipment.shipment_id)
 	new_shipment_list_item.pressed_with_shipment_data.connect(_on_shipment_list_item_pressed)
 	_shipment_container.add_child(new_shipment_list_item)
@@ -72,7 +72,7 @@ func _on_toggle_completed_button_pressed() -> void:
 
 
 func _on_sort_button_pressed() -> void:
-	sort_type = (sort_type + 1) % SortType.size()
+	sort_type = SortType.values()[(sort_type + 1) % SortType.size()]
 	match sort_type:
 		SortType.BY_NUMBER:
 			_sort_button.text = "sort by date"

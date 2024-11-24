@@ -24,9 +24,9 @@ shipment_details = NodePath("VBoxContainer/ShipmentDetails")
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="PanelHeader" parent="VBoxContainer" node_paths=PackedStringArray("document_to_move") instance=ExtResource("2_ql6i1")]
+[node name="PanelHeader" parent="VBoxContainer" node_paths=PackedStringArray("control_to_move") instance=ExtResource("2_ql6i1")]
 layout_mode = 2
-document_to_move = NodePath("../..")
+control_to_move = NodePath("../..")
 
 [node name="ShipmentList" parent="VBoxContainer" node_paths=PackedStringArray("tms") instance=ExtResource("3_t5xli")]
 custom_minimum_size = Vector2(0, 100)
