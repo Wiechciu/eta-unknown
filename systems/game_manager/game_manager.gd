@@ -25,18 +25,18 @@ func load_player() -> void:
 
 
 func create_new_shipments() -> void:
-	for customer in Customer.all_specific_with_employees:
+	for customer: Customer in Customer.all_specific_with_employees:
 		var chance_to_create: float = 0.01
 		if randf() > chance_to_create:
 			continue
 		
-		for i in randi_range(0, 5):
+		for i: int in randi_range(0, 5):
 			mutex.lock()
 			customer.create_new_shipment()
 			mutex.unlock()
 
 
-func _initiate_thread():
+func _initiate_thread() -> void:
 	if thread != null:
 		thread.wait_to_finish()
 	mutex = Mutex.new()
@@ -45,5 +45,5 @@ func _initiate_thread():
 
 
 # Thread must be disposed (or "joined"), for portability.
-func _exit_tree():
+func _exit_tree() -> void:
 	thread.wait_to_finish()

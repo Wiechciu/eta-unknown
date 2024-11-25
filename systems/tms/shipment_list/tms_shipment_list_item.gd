@@ -2,7 +2,7 @@ class_name TmsShipmentListItem
 extends Control
 
 
-signal pressed_with_shipment_data(Shipment)
+signal pressed_with_shipment_data(shipment: Shipment)
 
 
 var shipment: Shipment
@@ -23,7 +23,7 @@ func _ready() -> void:
 func with_data(new_shipment: Shipment) -> TmsShipmentListItem:
 	shipment = new_shipment
 	
-	_shipment_number.text = str(shipment.shipment_number)
+	_shipment_number.text = str(shipment.number)
 	_earliest_pickup_date.text = GlobalTimer.get_nice_date_string_from_event(shipment.events.get_first_event_of_type(Event.Code.ERL))
 	_shipper.text = shipment.shipper.name
 	_origin.text = shipment.origin.code

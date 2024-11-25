@@ -57,7 +57,7 @@ func _process(delta: float) -> void:
 	_check_time_events()
 
 func _check_hour_change() -> void:
-	var new_hour = time_dictionary["hour"]
+	var new_hour: int = time_dictionary["hour"]
 	if new_hour == current_hour:
 		return
 	
@@ -74,7 +74,7 @@ func _check_hour_change() -> void:
 
 
 func _check_day_change() -> void:
-	var new_day = date_string
+	var new_day: String = date_string
 	if new_day == current_day:
 		return
 	
@@ -84,14 +84,14 @@ func _check_day_change() -> void:
 
 
 func start_next_day() -> void:
-	var next_day_datetime_dictionary := Time.get_datetime_dict_from_unix_time(now + ONE_DAY)
+	var next_day_datetime_dictionary: Dictionary = Time.get_datetime_dict_from_unix_time(now + ONE_DAY)
 	next_day_datetime_dictionary["hour"] = shift_start_hour
 	next_day_datetime_dictionary["minute"] = 0
 	now_float = Time.get_unix_time_from_datetime_dict(next_day_datetime_dictionary)
 
 
 func get_future_date_from_unix_time(original_date: int, plus_days: int = 0, hour: int = 0, minute: int = 0) -> int:
-	var datetime_dict := Time.get_date_dict_from_unix_time(original_date + ONE_DAY * plus_days)
+	var datetime_dict: Dictionary = Time.get_date_dict_from_unix_time(original_date + ONE_DAY * plus_days)
 	datetime_dict["hour"] = hour
 	datetime_dict["minute"] = minute
 	datetime_dict["second"] = 0
@@ -134,7 +134,7 @@ func get_nice_date_string_from_event(event: Event) -> String:
 
 
 func create_time_event_from_unix_time(time: int, observer: Object, event: Event = null) -> TimeEvent:
-	var new_time_event = TimeEvent.new().with_data(time, observer, event)
+	var new_time_event: TimeEvent = TimeEvent.new().with_data(time, observer, event)
 	time_events.append(new_time_event)
 	time_events.sort_custom(_sort_time_events_ascending)
 	return new_time_event
@@ -156,12 +156,12 @@ func _sort_time_events_ascending(a: TimeEvent, b: TimeEvent) -> bool:
 func _check_time_events() -> void:
 	var counter: int = -1
 	var time_event_indexes_to_remove: Array[int]
-	for time_event in time_events:
+	for time_event: TimeEvent in time_events:
 		counter += 1
 		if time_event.time > now:
 			break
 		time_event.notify()
 		time_event_indexes_to_remove.push_front(counter)
 	
-	for time_event_index_to_remove in time_event_indexes_to_remove:
+	for time_event_index_to_remove: int in time_event_indexes_to_remove:
 		time_events.remove_at(time_event_index_to_remove)

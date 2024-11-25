@@ -21,40 +21,41 @@ var actual_events_as_events: Array[Event]:
 		return new_list
 
 
-static func create_new(parent_shipment: Shipment) -> ShipmentEvents:
-	var new_events := ShipmentEvents.new()
-	new_events.shipment = parent_shipment
-	return new_events
+func with_data(parent_shipment: Shipment) -> ShipmentEvents:
+	self.shipment = parent_shipment
+	return self
+
+
+func register_event(event: Event) -> void:
+	events.append(event)
+	events.sort_custom(_sort_ascending)
+	if event is EventPlanned:
+		planned_events.append(event)
+		planned_events.sort_custom(_sort_ascending)
+	elif event is EventActual:
+		actual_events.append(event)
+		actual_events.sort_custom(_sort_ascending)
+	
+	if event.code == Event.Code.PUP and event is EventPlanned:
+		shipment.change_status(Shipment.Status.PLANNED)
+	elif event.code == Event.Code.PUP and event is EventActual:
+		shipment.change_status(Shipment.Status.IN_TRANSIT)
+	elif event.code == Event.Code.DEL and event is EventActual:
+		shipment.change_status(Shipment.Status.DELIVERED)
+	
+	events_updated.emit()
 
 
 func create_new_planned_event(code: Event.Code, time: int, location: Location = null) -> EventPlanned:
-	var new_event := EventPlanned.new().with_data(code, time, location)
-	events.append(new_event)
-	events.sort_custom(_sort_events_ascending)
-	planned_events.append(new_event)
-	planned_events.sort_custom(_sort_events_ascending)
+	var new_event: EventPlanned = EventPlanned.new().with_data(code, time, location)
 	GlobalTimer.create_time_event_from_event(new_event, self)
-	
-	if new_event.code == Event.Code.PUP:
-		shipment.change_status(Shipment.Status.PLANNED)
-	
-	events_updated.emit()
+	register_event(new_event)
 	return new_event
 
 
 func create_new_actual_event(code: Event.Code, time: int, location: Location = null, event_planned: EventPlanned = null) -> EventActual:
-	var new_event := EventActual.new().with_data(code, time, location, event_planned)
-	events.append(new_event)
-	events.sort_custom(_sort_events_ascending)
-	actual_events.append(new_event)
-	actual_events.sort_custom(_sort_events_ascending)
-	
-	if new_event.code == Event.Code.PUP:
-		shipment.change_status(Shipment.Status.IN_TRANSIT)
-	if new_event.code == Event.Code.DEL:
-		shipment.change_status(Shipment.Status.DELIVERED)
-	
-	events_updated.emit()
+	var new_event: EventActual = EventActual.new().with_data(code, time, location, event_planned)
+	register_event(new_event)
 	return new_event
 
 
@@ -67,30 +68,55 @@ func create_new_actual_event_from_planned_event(event_planned: EventPlanned) -> 
 
 
 func get_all_events_of_type(code: Event.Code) -> Array[Event]:
-	return events.filter(func(event: Event): return event.code == code)
+	return events.filter(func(event: Event) -> bool: return event.code == code)
 
 
 func get_first_event_of_type(code: Event.Code) -> Event:
-	var index := events.find_custom(func(event: Event): return event.code == code)
+	var index: int = events.find_custom(func(event: Event) -> bool: return event.code == code)
 	if index == -1:
 		return null
 	return events[index]
 
 
 func get_last_event_of_type(code: Event.Code) -> Event:
-	var index := events.rfind_custom(func(event: Event): return event.code == code)
+	var index: int = events.rfind_custom(func(event: Event) -> bool: return event.code == code)
 	if index == -1:
 		return null
 	return events[index]
 
 
 func notify(time_event: TimeEvent) -> void:
-	print_debug("Shipment ID: %s, number: %s, event: %s at %s" % [shipment.shipment_id, shipment.shipment_number, time_event.event.code_string, GlobalTimer.get_nice_datetime_string_from_unix_time(time_event.time)])
+	print("Shipment ID: %s, number: %s, event: %s at %s" % [shipment.shipment_id, shipment.number, time_event.event.code_string, GlobalTimer.get_nice_datetime_string_from_unix_time(time_event.time)])
+	
+	if time_event.event.code == Event.Code.LTS and not shipment.is_owned:
+		shipment.remove()
+	
+	#TODO: this is to be removed once proper events are created
 	if time_event.event.code != Event.Code.ERL and time_event.event.code != Event.Code.LTS:
 		create_new_actual_event_from_planned_event(time_event.event as EventPlanned)
+	
+	match time_event.event.code:
+		Event.Code.BOK:
+			shipment.documentation.create_new_document(Document.Code.SPO, GlobalTimer.now, 1)
+		Event.Code.PUP:
+			shipment.documentation.create_new_document(Document.Code.PUO, GlobalTimer.now, 1)
+		Event.Code.CSE:
+			shipment.documentation.create_new_document(Document.Code.CDE, GlobalTimer.now, 1)
+		Event.Code.CSI:
+			shipment.documentation.create_new_document(Document.Code.CDI, GlobalTimer.now, 1)
+		Event.Code.DEP when shipment.main_freight.mode_of_transport != null and shipment.main_freight.mode_of_transport.code == ModeOfTransport.Code.AIR:
+			shipment.documentation.create_new_document(Document.Code.HWB, GlobalTimer.now, 1)
+			shipment.documentation.create_new_document(Document.Code.MWB, GlobalTimer.now, 1)
+		Event.Code.DEP when shipment.main_freight.mode_of_transport != null and shipment.main_freight.mode_of_transport.code == ModeOfTransport.Code.SEA:
+			shipment.documentation.create_new_document(Document.Code.HBL, GlobalTimer.now, 1)
+			shipment.documentation.create_new_document(Document.Code.MBL, GlobalTimer.now, 1)
+		Event.Code.REL:
+			shipment.documentation.create_new_document(Document.Code.DLO, GlobalTimer.now, 1)
+		Event.Code.DEL:
+			shipment.documentation.create_new_document(Document.Code.POD, GlobalTimer.now, 1)
 
 
-func _sort_events_ascending(a: Event, b: Event) -> bool:
+static func _sort_ascending(a: Event, b: Event) -> bool:
 	if a.time < b.time:
 		return true
 	return false

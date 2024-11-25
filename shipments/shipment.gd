@@ -2,9 +2,9 @@ class_name Shipment
 extends Resource
 
 
-signal details_changed(Shipment)
-signal status_changed(Shipment)
-signal completed(Shipment)
+signal details_changed(shipment: Shipment)
+signal status_changed(shipment: Shipment)
+signal completed(shipment: Shipment)
 
 
 enum Status {
@@ -24,7 +24,7 @@ enum Status {
 static var all: Array[Shipment]
 static var all_not_owned: Array[Shipment]:
 	get:
-		return all.filter(func(shipment: Shipment): return not shipment.is_owned)
+		return all.filter(func(shipment: Shipment) -> bool: return not shipment.is_owned)
 
 static var last_id: int = 0
 
@@ -46,7 +46,7 @@ var service: Service
 var incoterms: Incoterms
 
 # Accepted shipment variables
-var shipment_number: int
+var number: int
 var owner: FreightForwarder
 var is_owned: bool:
 	get:
@@ -63,69 +63,73 @@ var events: ShipmentEvents
 var accounting: ShipmentAccounting
 
 
-static func create_new(shipper: Customer = null, consignee: Customer = null) -> Shipment:
-	var new_shipment := Shipment.new()
-	all.append(new_shipment)
+func with_data(shipper_to_assign: Customer = null, consignee_to_assign: Customer = null) -> Shipment:
 	last_id += 1
-	new_shipment.shipment_id = last_id
+	self.shipment_id = last_id
 	
-	new_shipment.cargo_details = ShipmentCargoDetails.create_new(new_shipment)
-	new_shipment.main_freight = ShipmentMainFreight.create_new(new_shipment)
-	new_shipment.haulage = ShipmentHaulage.create_new(new_shipment)
-	new_shipment.handling = ShipmentHandling.create_new(new_shipment)
-	new_shipment.customs = ShipmentCustoms.create_new(new_shipment)
-	new_shipment.documentation = ShipmentDocumentation.create_new(new_shipment)
-	new_shipment.events = ShipmentEvents.create_new(new_shipment)
-	new_shipment.accounting = ShipmentAccounting.create_new(new_shipment)
+	self.cargo_details = ShipmentCargoDetails.new().with_data(self)
+	self.main_freight = ShipmentMainFreight.new().with_data(self)
+	self.haulage = ShipmentHaulage.new().with_data(self)
+	self.handling = ShipmentHandling.new().with_data(self)
+	self.customs = ShipmentCustoms.new().with_data(self)
+	self.documentation = ShipmentDocumentation.new().with_data(self)
+	self.events = ShipmentEvents.new().with_data(self)
+	self.accounting = ShipmentAccounting.new().with_data(self)
 	
-	new_shipment.customer_reference = generate_random_customer_reference(randi_range(3, 5), randi_range(3, 5))
+	self.customer_reference = generate_random_customer_reference(randi_range(3, 5), randi_range(3, 5))
 	
-	if shipper == null:
-		shipper = Customer.all_specific_with_employees.pick_random()
-	new_shipment.shipper = shipper
-	if consignee == null:
-		consignee = Customer.all_specific_with_employees.pick_random()
-	new_shipment.consignee = consignee
-	new_shipment.export_contact_person = new_shipment.shipper.employees.pick_random()
-	new_shipment.import_contact_person = new_shipment.consignee.employees.pick_random()
+	if shipper_to_assign == null:
+		shipper_to_assign = Customer.all_specific_with_employees.pick_random()
+	self.shipper = shipper_to_assign
+	if consignee_to_assign == null:
+		consignee_to_assign = Customer.all_specific_with_employees.pick_random()
+	self.consignee = consignee_to_assign
+	self.export_contact_person = self.shipper.employees.pick_random()
+	self.import_contact_person = self.consignee.employees.pick_random()
 	
 	#FIXME sometimes can be empty, because there are no locations in the customer country
-	var origin_list := Location.all.filter(Location.is_in_country.bind(new_shipment.shipper.country))
-	var destination_list := Location.all.filter(Location.is_in_country.bind(new_shipment.consignee.country))
+	var origin_list: Array[Location] = Location.all.filter(Location.is_in_country.bind(self.shipper.country))
+	var destination_list: Array[Location] = Location.all.filter(Location.is_in_country.bind(self.consignee.country))
 	if origin_list.is_empty() or destination_list.is_empty():
 		return null
-	new_shipment.origin = origin_list.pick_random()
-	new_shipment.destination = destination_list.pick_random()
+	self.origin = origin_list.pick_random()
+	self.destination = destination_list.pick_random()
 	
-	new_shipment.events.create_new_planned_event(Event.Code.ERL, GlobalTimer.get_future_date_from_now(randi_range(1, 20), 10, 0))
-	new_shipment.events.create_new_planned_event(Event.Code.LTS, GlobalTimer.get_future_date_from_event(new_shipment.events.get_first_event_of_type(Event.Code.ERL), randi_range(2, 30), 17, 0))
+	self.events.create_new_planned_event(Event.Code.ERL, GlobalTimer.get_future_date_from_now(randi_range(1, 20), 10, 0))
+	self.events.create_new_planned_event(Event.Code.LTS, GlobalTimer.get_future_date_from_event(self.events.get_first_event_of_type(Event.Code.ERL), randi_range(2, 30), 17, 0))
 	
-	new_shipment.service = Service.create_new_with_random_code()
-	new_shipment.incoterms = Incoterms.create_new_with_random_code()
+	self.service = Service.new().with_data_random()
+	self.incoterms = Incoterms.new().with_data_random()
 	var incoterms_location: String
-	match new_shipment.incoterms.group:
+	match self.incoterms.group:
 		"C", "D":
-			incoterms_location = new_shipment.consignee.city_name
+			incoterms_location = self.consignee.city_name
 		"E", "F":
-			incoterms_location = new_shipment.shipper.city_name
-	new_shipment.incoterms.place = incoterms_location
+			incoterms_location = self.shipper.city_name
+	self.incoterms.place = incoterms_location
 	
-	print("New shipment created. Shipment ID: " + str(new_shipment.shipment_id))
-	return new_shipment
+	all.append(self)
+	print("New shipment created. Shipment ID: %s. There are %s active shipments." % [self.shipment_id, all.size()])
+	return self
+
+
+func remove() -> void:
+	all.erase(self)
 
 
 static func generate_random_customer_reference(string_length: int, number_length: int) -> String:
 	var random_customer_reference: String = ""
-	var allowed_characters_in_string := "abcdefghijklmnopqrstvwxyz"
-	var allowed_characters_in_number := "1234567890"
+	var allowed_characters_in_string: String = "abcdefghijklmnopqrstvwxyz"
+	var allowed_characters_in_number: String = "1234567890"
+	var number_of_characters: int = 0
 	
-	var n_char := len(allowed_characters_in_string)
-	for i in range(string_length):
-		random_customer_reference += allowed_characters_in_string[randi()% n_char].to_upper()
+	number_of_characters = len(allowed_characters_in_string)
+	for i: int in range(string_length):
+		random_customer_reference += allowed_characters_in_string[randi()% number_of_characters].to_upper()
 	
-	n_char = len(allowed_characters_in_number)
-	for i in range(number_length):
-		random_customer_reference += allowed_characters_in_number[randi()% n_char]
+	number_of_characters = len(allowed_characters_in_number)
+	for i: int in range(number_length):
+		random_customer_reference += allowed_characters_in_number[randi()% number_of_characters]
 	
 	return random_customer_reference
 
@@ -144,7 +148,7 @@ func accept(new_owner: FreightForwarder) -> void:
 	events.create_new_actual_event_now(Event.Code.BOK)
 	change_status(Status.ACCEPTED)
 	owner = new_owner
-	shipment_number = owner.get_next_shipment_number()
+	number = owner.get_next_shipment_number()
 	new_owner.accept_shipment(self)
 
 
@@ -164,7 +168,7 @@ func notify_details_changed() -> void:
 
 
 static func _sort_ascending_by_shipment_number(a: Shipment, b: Shipment) -> bool:
-	if a.shipment_number < b.shipment_number:
+	if a.number < b.number:
 		return true
 	return false
 

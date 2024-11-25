@@ -5,12 +5,11 @@ extends Control
 
 
 func _on_new_shipping_order_button_pressed() -> void:
-	var new_shipping_order := (shipping_order_scene.instantiate() as ShippingOrder)
-	new_shipping_order.name = "ShippingOrder_" + str(Document.documents.size())
-	var new_shipment := Shipment.create_new()
+	var new_shipping_order: ShippingOrder = shipping_order_scene.instantiate()
+	var new_shipment: Shipment = Shipment.new().with_data()
 	if new_shipment == null:
 		return
-	new_shipping_order.load_shipment(Shipment.create_new())
+	new_shipping_order.load_shipment(Shipment.new().with_data())
 	
 	get_tree().root.add_child(new_shipping_order)
 	new_shipping_order.position.x = 300
@@ -25,7 +24,7 @@ func _on_accept_new_shipment_button_pressed() -> void:
 
 
 func _on_accept_10_new_shipments_button_pressed() -> void:
-	for n in 10:
+	for n: int in 10:
 		if accept_shipment() == false:
 			return
 	print("There are %s not owned shipments left!" % Shipment.all_not_owned.size())
@@ -33,7 +32,9 @@ func _on_accept_10_new_shipments_button_pressed() -> void:
 
 func accept_shipment() -> bool:
 	if not Shipment.all_not_owned.is_empty():
-		(Shipment.all_not_owned.pick_random() as Shipment).accept(GameManager.player.employer)
+		var random_shipment: Shipment = Shipment.all_not_owned.pick_random()
+		random_shipment.accept(GameManager.player.employer as FreightForwarder)
+		#random_shipment.documentation.create_new_document(Document.Code.SPO, GlobalTimer.now, 1)
 		return true
 	else:
 		print("There are no more shipments to accept!")

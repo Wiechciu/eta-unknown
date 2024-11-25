@@ -18,14 +18,14 @@ func _ready() -> void:
 
 
 func _show(duration: float) -> void:
-	var tween = create_tween()
+	var tween: Tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(self, "modulate", Color.WHITE, duration)
 
 
 func _hide(duration: float) -> void:
-	var tween = create_tween()
+	var tween: Tween = create_tween()
 	tween.set_ease(Tween.EASE_IN)
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(self, "modulate", Color.TRANSPARENT, duration)

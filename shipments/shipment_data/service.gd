@@ -25,14 +25,13 @@ var name: String:
 			_: return "%s - unknown service" % code_string
 
 
-static func create_new(code: Code) -> Service:
-	var new := Service.new()
-	new.code = code
-	return new
+func with_data(code_to_assign: Code) -> Service:
+	self.code = code_to_assign
+	return self
 
 
-static func create_new_with_random_code() -> Service:
-	return create_new(get_random_code())
+func with_data_random() -> Service:
+	return self.with_data(get_random_code())
 
 
 static func get_random_code() -> Code:

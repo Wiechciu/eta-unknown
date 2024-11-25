@@ -2,9 +2,9 @@ class_name FreightForwarder
 extends Party
 
 
-signal new_shipment_accepted(Shipment)
-signal shipment_status_changed(Shipment)
-signal shipment_details_changed(Shipment)
+signal new_shipment_accepted(shipment: Shipment)
+signal shipment_status_changed(shipment: Shipment)
+signal shipment_details_changed(shipment: Shipment)
 signal shipment_list_updated
 
 
@@ -28,12 +28,12 @@ func accept_shipment(new_shipment: Shipment) -> void:
 	shipment_list_updated.emit()
 
 
-func _on_shipment_status_changed(shipment: Shipment):
+func _on_shipment_status_changed(shipment: Shipment) -> void:
 	shipment_status_changed.emit(shipment)
 	shipment_list_updated.emit()
 
 
-func _on_shipment_details_changed(shipment: Shipment):
+func _on_shipment_details_changed(shipment: Shipment) -> void:
 	shipment_details_changed.emit(shipment)
 	shipment_list_updated.emit()
 

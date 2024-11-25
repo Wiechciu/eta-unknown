@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://n3em2rf20umy"]
 
 [ext_resource type="LabelSettings" uid="uid://du1enh7krtm8v" path="res://systems/themes/document_header_label_settings.tres" id="1_kgx1v"]
-[ext_resource type="Script" path="res://documents/document_header.gd" id="2_kowu0"]
+[ext_resource type="Script" path="res://documents/document_layouts/document_header.gd" id="2_kowu0"]
 
 [node name="DocumentHeader" type="Label"]
 mouse_filter = 1

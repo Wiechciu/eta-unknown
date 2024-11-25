@@ -30,8 +30,8 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 	_total_weight.text = "%d kg" % [shipment.cargo_details.total_weight]
 	_total_volume.text = "%.3f cbm" % [shipment.cargo_details.total_volume]
 
-	for child in _dimension_sets_container.get_children():
+	for child: Node in _dimension_sets_container.get_children():
 		child.queue_free()
-	for dimension_set in shipment.cargo_details.dimension_sets:
+	for dimension_set: DimensionSet in shipment.cargo_details.dimension_sets:
 		var tms_dimension_set: TmsDimensionSet = (_tms_dimension_set_scene.instantiate() as TmsDimensionSet).with_data(dimension_set)
 		_dimension_sets_container.add_child(tms_dimension_set)

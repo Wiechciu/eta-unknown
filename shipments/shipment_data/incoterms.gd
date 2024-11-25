@@ -46,15 +46,14 @@ var print_string: String:
 		return code_string + " " + place
 
 
-static func create_new(code: Code, place: String = "") -> Incoterms:
-	var new := Incoterms.new()
-	new.code = code
-	new.place = place
-	return new
+func with_data(code_to_assign: Code, place_to_assign: String = "") -> Incoterms:
+	self.code = code_to_assign
+	self.place = place_to_assign
+	return self
 
 
-static func create_new_with_random_code(place: String = "") -> Incoterms:
-	return create_new(get_random_code(), place)
+func with_data_random(place_to_assign: String = "") -> Incoterms:
+	return with_data(get_random_code(), place_to_assign)
 
 
 static func get_random_code() -> Code:

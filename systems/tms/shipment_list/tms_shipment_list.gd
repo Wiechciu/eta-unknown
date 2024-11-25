@@ -7,7 +7,7 @@ enum SortType {
 	BY_DATE,
 }
 
-@export var tms: Tms
+@export var _tms: Tms
 @export var _shipment_container: Control
 @export var _toggle_completed_button: Button
 @export var _sort_button: Button
@@ -33,12 +33,12 @@ func add_shipment(new_shipment: Shipment) -> void:
 
 
 func refresh_shipment_list_items() -> void:
-	for child in _shipment_container.get_children():
+	for child: Node in _shipment_container.get_children():
 		child.queue_free()
 	
-	var shipments := (GameManager.player.employer as FreightForwarder).shipments
+	var shipments: Array[Shipment] = (GameManager.player.employer as FreightForwarder).shipments
 	if not show_completed:
-		var shipments_not_completed := shipments.filter(func(shipment: Shipment): return not shipment.is_completed)
+		var shipments_not_completed: Array[Shipment] = shipments.filter(func(shipment: Shipment) -> bool: return not shipment.is_completed)
 		shipments = shipments_not_completed
 	
 	var shipments_sorted: Array[Shipment]
@@ -49,7 +49,7 @@ func refresh_shipment_list_items() -> void:
 			shipments_sorted = Shipment.sort_shipment_list_by_earliest_pickup_date(shipments)
 	
 	
-	for shipment in shipments_sorted:
+	for shipment: Shipment in shipments_sorted:
 		add_shipment(shipment)
 
 
@@ -58,7 +58,7 @@ func _on_shipment_list_updated() -> void:
 
 
 func _on_shipment_list_item_pressed(shipment_to_load: Shipment) -> void:
-	tms.open_shipment_details(shipment_to_load)
+	_tms.open_shipment_details(shipment_to_load)
 
 
 func _on_toggle_completed_button_pressed() -> void:

@@ -9,8 +9,6 @@ var cost: String #TODO
 var profit: String #TODO
 
 
-static func create_new(parent_shipment: Shipment) -> ShipmentAccounting:
-	var new_accounting := ShipmentAccounting.new()
-	new_accounting.shipment = parent_shipment
-	
-	return new_accounting
+func with_data(parent_shipment: Shipment) -> ShipmentAccounting:
+	self.shipment = parent_shipment
+	return self

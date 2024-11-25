@@ -1,8 +1,6 @@
 class_name ShippingOrder
-extends Document
+extends DocumentLayout
 
-
-var shipment: Shipment
 
 @export_category("Assigned internally")
 @export var _shipper: Label
@@ -27,9 +25,9 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 	_total_weight.text = str(shipment.cargo_details.total_weight)
 	_total_volume.text = str(shipment.cargo_details.total_volume)
 	
-	for child in _dimension_sets_container.get_children():
+	for child: Node in _dimension_sets_container.get_children():
 		child.queue_free()
-	for dimension_set in shipment.cargo_details.dimension_sets:
+	for dimension_set: DimensionSet in shipment.cargo_details.dimension_sets:
 		var document_dimension_set: DocumentDimensionSet = (_document_dimension_set_scene.instantiate() as DocumentDimensionSet).with_data(dimension_set)
 		_dimension_sets_container.add_child(document_dimension_set)
 

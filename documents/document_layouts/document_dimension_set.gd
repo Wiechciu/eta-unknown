@@ -20,5 +20,4 @@ func with_data(dimension_set: DimensionSet) -> DocumentDimensionSet:
 	width.text = "%d" % [dimension_set.width]
 	height.text = "%d cm, " % [dimension_set.height]
 	total_weight.text = "%d kg" % [dimension_set.total_weight]
-
 	return self

@@ -25,14 +25,13 @@ var name: String:
 			_: return "%s - unknown mode of transport" % code_string
 
 
-static func create_new(code: Code) -> ModeOfTransport:
-	var new := ModeOfTransport.new()
-	new.code = code
-	return new
+func with_data(code_to_assign: Code) -> ModeOfTransport:
+	self.code = code_to_assign
+	return self
 
 
-static func create_new_with_random_code() -> ModeOfTransport:
-	return create_new(get_random_code())
+func with_data_random() -> ModeOfTransport:
+	return self.with_data(get_random_code())
 
 
 static func get_random_code() -> Code:

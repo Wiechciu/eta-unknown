@@ -40,9 +40,9 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 
 
 func refresh_event_details(event_details_container: Control, events: Array[Event]) -> void:
-	for child in event_details_container.get_children():
+	for child: Node in event_details_container.get_children():
 		child.queue_free()
 	
-	for event in events:
+	for event: Event in events:
 		var event_details: TmsEventDetails = (_event_details_scene.instantiate() as TmsEventDetails).with_data(event)
 		event_details_container.add_child(event_details)

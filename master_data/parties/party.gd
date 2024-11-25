@@ -18,8 +18,8 @@ var city_name: String
 var country: Country
 var print_string: String:
 	get:
-		var house_number_fixed = ("/" + house_number) if (house_number != null and house_number != "") else ""
-		var postal_code_fixed = (postal_code + " ") if (postal_code != null and postal_code != "") else ""
+		var house_number_fixed: String = ("/" + house_number) if (house_number != null and house_number != "") else ""
+		var postal_code_fixed: String = (postal_code + " ") if (postal_code != null and postal_code != "") else ""
 		return name \
 		+ "\n" + street_name + " " + street_number + house_number_fixed \
 		+ "\n" + postal_code_fixed + city_name \

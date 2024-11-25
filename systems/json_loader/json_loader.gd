@@ -14,7 +14,7 @@ func _ready() -> void:
 	Debugger.assert_all_exported_properties(self)
 	
 	print("--- starting loading from JSONs ---")
-	var start = Time.get_ticks_msec()
+	var start: int = Time.get_ticks_msec()
 	load_cargo_from_json(cargo_json, Cargo.all, Cargo.all_dict)
 	load_currencies_from_json(currencies_json, Currency.all, Currency.all_dict)
 	load_countries_from_json(countries_json, Country.all, Country.all_dict)
@@ -23,85 +23,85 @@ func _ready() -> void:
 	load_job_positions_from_json(job_positions_json, JobPosition.all, JobPosition.all_dict)
 	load_people_from_json(people_json, Person.all, Person.all_dict)
 	
-	var end = Time.get_ticks_msec()
-	var time = (end - start)
+	var end: int = Time.get_ticks_msec()
+	var time: int = (end - start)
 	print("--- finished loading from JSONs | in " + str(time) + " ms ---\n")
 
 
 func load_cargo_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
-	var start = Time.get_ticks_msec()
-	var loaded_array = load_json_file(file_to_load)
+	var start: int = Time.get_ticks_msec()
+	var loaded_array: Array = load_json_file(file_to_load)
 	
-	for item in loaded_array:
-		var new_resource = Cargo.new()
+	for item: Dictionary in loaded_array:
+		var new_resource: Cargo = Cargo.new()
 		new_resource.description = str(item.description) if item.description else ""
 		new_resource.hs_code = str(item.hs_code) if item.hs_code else ""
-		new_resource.unit_value = float(item.unit_value) if item.unit_value else 0.0
-		new_resource.unit_size = float(item.unit_size) if item.unit_size else 0.0
-		new_resource.unit_weight = float(item.unit_weight) if item.unit_weight else 0.0
+		new_resource.unit_value = item.unit_value if item.unit_value else 0.0
+		new_resource.unit_size = item.unit_size if item.unit_size else 0.0
+		new_resource.unit_weight = item.unit_weight if item.unit_weight else 0.0
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.description] = new_resource
 	
-	var end = Time.get_ticks_msec()
-	var time = (end - start)
+	var end: int = Time.get_ticks_msec()
+	var time: int = (end - start)
 	print("loaded " + str(array_to_fill.size()) + " cargo | in " + str(time) + " ms")
 
 
 func load_currencies_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
-	var start = Time.get_ticks_msec()
-	var loaded_array = load_json_file(file_to_load)
+	var start: int = Time.get_ticks_msec()
+	var loaded_array: Array = load_json_file(file_to_load)
 	
-	for item in loaded_array:
-		var new_resource = Currency.new()
+	for item: Dictionary in loaded_array:
+		var new_resource: Currency = Currency.new()
 		new_resource.code = str(item.code) if item.code else ""
 		new_resource.name = str(item.name) if item.name else ""
-		new_resource.exchange_rate_to_usd = float(item.exchange_rate_to_usd) if item.exchange_rate_to_usd else 0.0
+		new_resource.exchange_rate_to_usd = item.exchange_rate_to_usd if item.exchange_rate_to_usd else 0.0
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.code] = new_resource
 	
-	var end = Time.get_ticks_msec()
-	var time = (end - start)
+	var end: int = Time.get_ticks_msec()
+	var time: int = (end - start)
 	print("loaded " + str(array_to_fill.size()) + " currencies | in " + str(time) + " ms")
 
 
 func load_countries_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
-	var start = Time.get_ticks_msec()
-	var loaded_array = load_json_file(file_to_load)
+	var start: int = Time.get_ticks_msec()
+	var loaded_array: Array = load_json_file(file_to_load)
 	
-	for item in loaded_array:
-		var new_resource = Country.new()
+	for item: Dictionary in loaded_array:
+		var new_resource: Country = Country.new()
 		new_resource.code = str(item.code) if item.code else ""
 		new_resource.name = str(item.name) if item.name else ""
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.code] = new_resource
 	
-	var end = Time.get_ticks_msec()
-	var time = (end - start)
+	var end: int = Time.get_ticks_msec()
+	var time: int = (end - start)
 	print("loaded " + str(array_to_fill.size()) + " countries | in " + str(time) + " ms")
 
 
 func load_locations_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
-	var start = Time.get_ticks_msec()
-	var loaded_array = load_json_file(file_to_load)
+	var start: int = Time.get_ticks_msec()
+	var loaded_array: Array = load_json_file(file_to_load)
 	
-	for item in loaded_array:
-		var new_resource = Location.new()
+	for item: Dictionary in loaded_array:
+		var new_resource: Location = Location.new()
 		new_resource.code = (str(item.country) + str(item.location)) if item.country else ""
 		new_resource.country = Country.all_dict[item.country] if item.country else null
 		new_resource.name = str(item.name_wo_diacritics) if item.name_wo_diacritics else ""
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.code] = new_resource
 	
-	var end = Time.get_ticks_msec()
-	var time = (end - start)
+	var end: int = Time.get_ticks_msec()
+	var time: int = (end - start)
 	print("loaded " + str(array_to_fill.size()) + " locations | in " + str(time) + " ms")
 
 
 func load_parties_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
-	var start = Time.get_ticks_msec()
-	var loaded_array = load_json_file(file_to_load)
+	var start: int = Time.get_ticks_msec()
+	var loaded_array: Array = load_json_file(file_to_load)
 	
-	for item in loaded_array:
+	for item: Dictionary in loaded_array:
 		var new_resource: Party
 		match str(item.type):
 			"carrier":
@@ -130,8 +130,8 @@ func load_parties_from_json(file_to_load: String, array_to_fill: Array, dict_to_
 				Trucker.all_specific_dict[new_resource.name] = new_resource
 		
 		if new_resource is Supplier:
-			new_resource.reliability_factor = randf_range(0.9, 1.0)
-			new_resource.cost_factor = randf_range(0.8, 1.0)
+			(new_resource as Supplier).reliability_factor = randf_range(0.9, 1.0)
+			(new_resource as Supplier).cost_factor = randf_range(0.8, 1.0)
 		
 		new_resource.name = str(item.name) if item.name else ""
 		new_resource.street_name = str(item.street_name) if item.street_name else ""
@@ -143,8 +143,8 @@ func load_parties_from_json(file_to_load: String, array_to_fill: Array, dict_to_
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.name] = new_resource
 	
-	var end = Time.get_ticks_msec()
-	var time = (end - start)
+	var end: int = Time.get_ticks_msec()
+	var time: int = (end - start)
 	print("loaded " + str(array_to_fill.size()) + " parties | in " + str(time) + " ms")
 	print("   loaded " + str(Carrier.all_specific.size()) + " carriers")
 	print("   loaded " + str(Customer.all_specific.size()) + " customers")
@@ -155,27 +155,27 @@ func load_parties_from_json(file_to_load: String, array_to_fill: Array, dict_to_
 
 
 func load_job_positions_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
-	var start = Time.get_ticks_msec()
-	var loaded_array = load_json_file(file_to_load)
+	var start: int = Time.get_ticks_msec()
+	var loaded_array: Array = load_json_file(file_to_load)
 	
-	for item in loaded_array:
-		var new_resource = JobPosition.new()
+	for item: Dictionary in loaded_array:
+		var new_resource: JobPosition = JobPosition.new()
 		new_resource.title = str(item.title) if item.title else ""
-		new_resource.salary = float(item.salary) if item.salary else 0.0
+		new_resource.salary = item.salary if item.salary else 0.0
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.title] = new_resource
 	
-	var end = Time.get_ticks_msec()
-	var time = (end - start)
+	var end: int = Time.get_ticks_msec()
+	var time: int = (end - start)
 	print("loaded " + str(array_to_fill.size()) + " job positions | in " + str(time) + " ms")
 
 
 func load_people_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
-	var start = Time.get_ticks_msec()
-	var loaded_array = load_json_file(file_to_load)
+	var start: int = Time.get_ticks_msec()
+	var loaded_array: Array = load_json_file(file_to_load)
 	
-	for item in loaded_array:
-		var new_resource = Person.new()
+	for item: Dictionary in loaded_array:
+		var new_resource: Person = Person.new()
 		new_resource.first_name = str(item.first_name) if item.first_name else ""
 		new_resource.last_name = str(item.last_name) if item.last_name else ""
 		new_resource.gender = str(item.gender) if item.gender else ""
@@ -190,20 +190,20 @@ func load_people_from_json(file_to_load: String, array_to_fill: Array, dict_to_f
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.full_name] = new_resource
 	
-	var end = Time.get_ticks_msec()
-	var time = (end - start)
+	var end: int = Time.get_ticks_msec()
+	var time: int = (end - start)
 	print("loaded " + str(array_to_fill.size()) + " people | in " + str(time) + " ms")
 
 
 func load_json_file(file_to_load: String) -> Array:
-	var file = FileAccess.open(file_to_load, FileAccess.READ)
+	var file: FileAccess = FileAccess.open(file_to_load, FileAccess.READ)
 	if file == null:
 		printerr("Failed to open file: " + file_to_load)
 		return Array()
 	
-	var content = file.get_as_text()
-	var json = JSON.new()
-	var expected_type := TYPE_ARRAY
+	var content: String = file.get_as_text()
+	var json: JSON = JSON.new()
+	var expected_type: int = TYPE_ARRAY
 	if json.parse(content) == OK:
 		if typeof(json.data) == expected_type:
 			return json.data

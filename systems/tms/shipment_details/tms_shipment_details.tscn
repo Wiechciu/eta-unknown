@@ -1,7 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://bmaoxf15lcni7"]
+[gd_scene load_steps=19 format=3 uid="uid://bmaoxf15lcni7"]
 
 [ext_resource type="Script" path="res://systems/tms/shipment_details/tms_shipment_details.gd" id="1_0f3ba"]
-[ext_resource type="PackedScene" uid="uid://bisun2rrujs6p" path="res://documents/document_dimension_set.tscn" id="2_s8pr3"]
+[ext_resource type="PackedScene" uid="uid://bisun2rrujs6p" path="res://documents/document_layouts/document_dimension_set.tscn" id="2_s8pr3"]
 [ext_resource type="PackedScene" uid="uid://baurmy6fwc0ye" path="res://systems/tms/shipment_details/dimensiont_sets/tms_dimension_set.tscn" id="2_socwm"]
 [ext_resource type="LabelSettings" uid="uid://dbxrdxwwawld3" path="res://systems/themes/document_label_label_settings.tres" id="3_yrx8i"]
 [ext_resource type="LabelSettings" uid="uid://tas3grgdcwul" path="res://systems/themes/document_value_label_settings.tres" id="4_xd1jn"]
@@ -11,7 +11,9 @@
 [ext_resource type="Script" path="res://systems/tms/shipment_details/tms_shipment_details_handling.gd" id="9_l03v4"]
 [ext_resource type="Script" path="res://systems/tms/shipment_details/tms_shipment_details_customs.gd" id="10_e8rh3"]
 [ext_resource type="Script" path="res://systems/tms/shipment_details/tms_shipment_details_events.gd" id="11_l03v4"]
-[ext_resource type="PackedScene" uid="uid://c8je307sddbjq" path="res://systems/tms/shipment_details/event_details/tms_event_details.tscn" id="11_s4hq1"]
+[ext_resource type="PackedScene" uid="uid://c8je307sddbjq" path="res://systems/tms/shipment_details/events/tms_event_details.tscn" id="11_s4hq1"]
+[ext_resource type="Script" path="res://systems/tms/shipment_details/tms_shipment_details_documentation.gd" id="13_l03v4"]
+[ext_resource type="PackedScene" uid="uid://bjpggakj5vtuj" path="res://systems/tms/shipment_details/documents/tms_document_details.tscn" id="14_e8rh3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0f3ba"]
 content_margin_left = 4.0
@@ -53,29 +55,30 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.61339, 0.61339, 0.61339, 1)
 
-[node name="ShipmentDetails" type="PanelContainer" node_paths=PackedStringArray("tab_container", "shipment_status", "shipment_number", "customer_reference", "shipper", "consignee", "origin", "destination", "incoterms", "service", "earliest_pickup", "latest_delivery", "shipment_cargo_details", "shipment_main_freight", "shipment_haulage", "shipment_handling", "shipment_customs", "shipment_events")]
+[node name="ShipmentDetails" type="PanelContainer" node_paths=PackedStringArray("_tab_container", "_shipment_status", "_shipment_number", "_customer_reference", "_shipper", "_consignee", "_origin", "_destination", "_incoterms", "_service", "_earliest_pickup", "_latest_delivery", "_shipment_cargo_details", "_shipment_main_freight", "_shipment_haulage", "_shipment_handling", "_shipment_customs", "_shipment_events", "_shipment_documentation")]
 offset_right = 900.0
 offset_bottom = 500.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_0f3ba")
 script = ExtResource("1_0f3ba")
-tab_container = NodePath("VBoxContainer/Tabs")
-shipment_status = NodePath("VBoxContainer/Buttons/ShipmentStatuses")
-shipment_number = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/References/TmsFieldValue/ShipmentNumber")
-customer_reference = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/References/TmsFieldValue3/CustomerReference")
-shipper = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Parties/TmsFieldValue/Shipper")
-consignee = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Parties/TmsFieldValue2/Consignee")
-origin = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Locations/TmsFieldValue/Origin")
-destination = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Locations/TmsFieldValue2/Destination")
-incoterms = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Service/TmsFieldValue/Incoterms")
-service = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Service/TmsFieldValue2/Service")
-earliest_pickup = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Dates/TmsFieldValue/EarliestPickup")
-latest_delivery = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Dates/TmsFieldValue2/LatestDelivery")
-shipment_cargo_details = NodePath("VBoxContainer/Tabs/Cargo details")
-shipment_main_freight = NodePath("VBoxContainer/Tabs/Main freight")
-shipment_haulage = NodePath("VBoxContainer/Tabs/Haulage")
-shipment_handling = NodePath("VBoxContainer/Tabs/Handling")
-shipment_customs = NodePath("VBoxContainer/Tabs/Customs")
-shipment_events = NodePath("VBoxContainer/Tabs/Events")
+_tab_container = NodePath("VBoxContainer/Tabs")
+_shipment_status = NodePath("VBoxContainer/Buttons/ShipmentStatuses")
+_shipment_number = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/References/TmsFieldValue/ShipmentNumber")
+_customer_reference = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/References/TmsFieldValue3/CustomerReference")
+_shipper = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Parties/TmsFieldValue/Shipper")
+_consignee = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Parties/TmsFieldValue2/Consignee")
+_origin = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Locations/TmsFieldValue/Origin")
+_destination = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Locations/TmsFieldValue2/Destination")
+_incoterms = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Service/TmsFieldValue/Incoterms")
+_service = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Service/TmsFieldValue2/Service")
+_earliest_pickup = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Dates/TmsFieldValue/EarliestPickup")
+_latest_delivery = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Dates/TmsFieldValue2/LatestDelivery")
+_shipment_cargo_details = NodePath("VBoxContainer/Tabs/Cargo details")
+_shipment_main_freight = NodePath("VBoxContainer/Tabs/Main freight")
+_shipment_haulage = NodePath("VBoxContainer/Tabs/Haulage")
+_shipment_handling = NodePath("VBoxContainer/Tabs/Handling")
+_shipment_customs = NodePath("VBoxContainer/Tabs/Customs")
+_shipment_events = NodePath("VBoxContainer/Tabs/Events")
+_shipment_documentation = NodePath("VBoxContainer/Tabs/Documentation")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -83,7 +86,7 @@ layout_mode = 2
 [node name="Tabs" type="TabContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 6
+current_tab = 7
 clip_tabs = false
 
 [node name="General" type="PanelContainer" parent="VBoxContainer/Tabs"]
@@ -1085,6 +1088,7 @@ layout_mode = 2
 text = "Arrange import handling"
 
 [node name="Events" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_planned_event_details_container", "_actual_event_details_container")]
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 script = ExtResource("11_l03v4")
@@ -1157,11 +1161,55 @@ layout_mode = 2
 [node name="TmsEventDetails6" parent="VBoxContainer/Tabs/Events/ScrollContainer/VBoxContainer/ActualEventsContainer" instance=ExtResource("11_s4hq1")]
 layout_mode = 2
 
-[node name="Documents" type="Label" parent="VBoxContainer/Tabs"]
-visible = false
+[node name="Documentation" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_documents_container")]
 layout_mode = 2
-text = "NOT IMPLEMENTED"
+theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
+script = ExtResource("13_l03v4")
+_documents_container = NodePath("ScrollContainer/VBoxContainer/DocumentsContainer")
+_document_details_scene = ExtResource("14_e8rh3")
 metadata/_tab_index = 7
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Tabs/Documentation"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Documentation/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TmsFieldLabel4" type="PanelContainer" parent="VBoxContainer/Tabs/Documentation/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+
+[node name="Label" type="Label" parent="VBoxContainer/Tabs/Documentation/ScrollContainer/VBoxContainer/TmsFieldLabel4"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Documents:"
+label_settings = ExtResource("3_yrx8i")
+text_overrun_behavior = 3
+
+[node name="DocumentsContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Documentation/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="TmsDocumentDetails" parent="VBoxContainer/Tabs/Documentation/ScrollContainer/VBoxContainer/DocumentsContainer" instance=ExtResource("14_e8rh3")]
+layout_mode = 2
+
+[node name="TmsDocumentDetails2" parent="VBoxContainer/Tabs/Documentation/ScrollContainer/VBoxContainer/DocumentsContainer" instance=ExtResource("14_e8rh3")]
+layout_mode = 2
+
+[node name="TmsDocumentDetails3" parent="VBoxContainer/Tabs/Documentation/ScrollContainer/VBoxContainer/DocumentsContainer" instance=ExtResource("14_e8rh3")]
+layout_mode = 2
+
+[node name="TmsDocumentDetails4" parent="VBoxContainer/Tabs/Documentation/ScrollContainer/VBoxContainer/DocumentsContainer" instance=ExtResource("14_e8rh3")]
+layout_mode = 2
+
+[node name="TmsDocumentDetails5" parent="VBoxContainer/Tabs/Documentation/ScrollContainer/VBoxContainer/DocumentsContainer" instance=ExtResource("14_e8rh3")]
+layout_mode = 2
+
+[node name="TmsDocumentDetails6" parent="VBoxContainer/Tabs/Documentation/ScrollContainer/VBoxContainer/DocumentsContainer" instance=ExtResource("14_e8rh3")]
+layout_mode = 2
 
 [node name="Accounting" type="Label" parent="VBoxContainer/Tabs"]
 visible = false
