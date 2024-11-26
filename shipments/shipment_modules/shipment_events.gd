@@ -46,6 +46,11 @@ func register_event(event: Event) -> void:
 	events_updated.emit()
 
 
+func remove_event(event: Event) -> void:
+	events.erase(event)
+	events_updated.emit()
+
+
 func create_new_planned_event(code: Event.Code, time: int, location: Location = null) -> EventPlanned:
 	var new_event: EventPlanned = EventPlanned.new().with_data(code, time, location)
 	GlobalTimer.create_time_event_from_event(new_event, self)
@@ -97,23 +102,23 @@ func notify(time_event: TimeEvent) -> void:
 	
 	match time_event.event.code:
 		Event.Code.BOK:
-			shipment.documentation.create_new_document(Document.Code.SPO, GlobalTimer.now, 1)
+			shipment.documentation.create_new_document_now(Document.Code.SPO, 1)
 		Event.Code.PUP:
-			shipment.documentation.create_new_document(Document.Code.PUO, GlobalTimer.now, 1)
+			shipment.documentation.create_new_document_now(Document.Code.PUO, 1)
 		Event.Code.CSE:
-			shipment.documentation.create_new_document(Document.Code.CDE, GlobalTimer.now, 1)
+			shipment.documentation.create_new_document_now(Document.Code.CDE, 1)
 		Event.Code.CSI:
-			shipment.documentation.create_new_document(Document.Code.CDI, GlobalTimer.now, 1)
+			shipment.documentation.create_new_document_now(Document.Code.CDI, 1)
 		Event.Code.DEP when shipment.main_freight.mode_of_transport != null and shipment.main_freight.mode_of_transport.code == ModeOfTransport.Code.AIR:
-			shipment.documentation.create_new_document(Document.Code.HWB, GlobalTimer.now, 1)
-			shipment.documentation.create_new_document(Document.Code.MWB, GlobalTimer.now, 1)
+			shipment.documentation.create_new_document_now(Document.Code.HWB, 1)
+			shipment.documentation.create_new_document_now(Document.Code.MWB, 1)
 		Event.Code.DEP when shipment.main_freight.mode_of_transport != null and shipment.main_freight.mode_of_transport.code == ModeOfTransport.Code.SEA:
-			shipment.documentation.create_new_document(Document.Code.HBL, GlobalTimer.now, 1)
-			shipment.documentation.create_new_document(Document.Code.MBL, GlobalTimer.now, 1)
+			shipment.documentation.create_new_document_now(Document.Code.HBL, 1)
+			shipment.documentation.create_new_document_now(Document.Code.MBL, 1)
 		Event.Code.REL:
-			shipment.documentation.create_new_document(Document.Code.DLO, GlobalTimer.now, 1)
+			shipment.documentation.create_new_document_now(Document.Code.DLO, 1)
 		Event.Code.DEL:
-			shipment.documentation.create_new_document(Document.Code.POD, GlobalTimer.now, 1)
+			shipment.documentation.create_new_document_now(Document.Code.POD, 1)
 
 
 static func _sort_ascending(a: Event, b: Event) -> bool:

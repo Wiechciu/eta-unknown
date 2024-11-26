@@ -34,7 +34,6 @@ func accept_shipment() -> bool:
 	if not Shipment.all_not_owned.is_empty():
 		var random_shipment: Shipment = Shipment.all_not_owned.pick_random()
 		random_shipment.accept(GameManager.player.employer as FreightForwarder)
-		#random_shipment.documentation.create_new_document(Document.Code.SPO, GlobalTimer.now, 1)
 		return true
 	else:
 		print("There are no more shipments to accept!")

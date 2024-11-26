@@ -24,10 +24,19 @@ func register_document(document: Document) -> void:
 	documentation_updated.emit()
 
 
+func remove_document(document: Document) -> void:
+	documents.erase(document)
+	documentation_updated.emit()
+
+
 func create_new_document(code: Document.Code, issued_time: int, number: int) -> Document:
 	var new_document: Document = Document.new().with_data(code, issued_time, number, shipment)
 	register_document(new_document)
 	return new_document
+
+
+func create_new_document_now(code: Document.Code, number: int) -> Document:
+	return create_new_document(code, GlobalTimer.now, number)
 
 
 static func _sort_ascending(a: Document, b: Document) -> bool:
