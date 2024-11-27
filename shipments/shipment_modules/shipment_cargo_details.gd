@@ -32,7 +32,7 @@ var total_value: float:
 func with_data(parent_shipment: Shipment) -> ShipmentCargoDetails:
 	self.shipment = parent_shipment
 	
-	self.cargo = GameManager.global_refs.cargos.pick_random()
+	self.cargo = GlobalRefs.cargos.pick_random()
 	if self.cargo.unit_size < 0:
 		self.slac = randi_range(100, 10000)
 	elif self.cargo.unit_size < 5:

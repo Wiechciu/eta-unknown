@@ -34,12 +34,12 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 
 
 func _on_arrange_export_customs_button_pressed() -> void:
-	shipment.customs.customs_agency_export = GameManager.global_refs.customs_agencies.pick_random()
+	shipment.customs.customs_agency_export = GlobalRefs.customs_agencies.pick_random()
 	shipment.events.create_new_planned_event(Event.Code.CSE, GlobalTimer.get_future_date_from_event(shipment.events.get_first_event_of_type(Event.Code.RCV), 1, 8))
 	refresh()
 
 
 func _on_arrange_import_customs_button_pressed() -> void:
-	shipment.customs.customs_agency_import = GameManager.global_refs.customs_agencies.pick_random()
+	shipment.customs.customs_agency_import = GlobalRefs.customs_agencies.pick_random()
 	shipment.events.create_new_planned_event(Event.Code.CSI, GlobalTimer.get_future_date_from_event(shipment.events.get_first_event_of_type(Event.Code.ARR), 0, 20))
 	refresh()

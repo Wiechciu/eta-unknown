@@ -74,10 +74,10 @@ func with_data(shipper_to_assign: Customer = null, consignee_to_assign: Customer
 	customer_reference = generate_random_customer_reference(randi_range(3, 5), randi_range(3, 5))
 	
 	if shipper_to_assign == null:
-		shipper_to_assign = GameManager.global_refs.customers.pick_random()
+		shipper_to_assign = GlobalRefs.customers_with_employees.pick_random()
 	shipper = shipper_to_assign
 	if consignee_to_assign == null:
-		consignee_to_assign = GameManager.global_refs.customers.pick_random()
+		consignee_to_assign = GlobalRefs.customers_with_employees.pick_random()
 	consignee = consignee_to_assign
 	export_contact_person = shipper.employees.pick_random()
 	import_contact_person = consignee.employees.pick_random()
@@ -86,8 +86,8 @@ func with_data(shipper_to_assign: Customer = null, consignee_to_assign: Customer
 		return null
 	
 	#FIXME sometimes origin or destination can be empty, because there are no locations in the customer country.
-	var origin_list: Array[Location] = GameManager.global_refs.locations.filter(Location.is_in_country.bind(shipper.country))
-	var destination_list: Array[Location] = GameManager.global_refs.locations.filter(Location.is_in_country.bind(consignee.country))
+	var origin_list: Array[Location] = GlobalRefs.locations.filter(Location.is_in_country.bind(shipper.country))
+	var destination_list: Array[Location] = GlobalRefs.locations.filter(Location.is_in_country.bind(consignee.country))
 	if origin_list.is_empty() or destination_list.is_empty():
 		return null
 	origin = origin_list.pick_random()
@@ -106,13 +106,13 @@ func with_data(shipper_to_assign: Customer = null, consignee_to_assign: Customer
 			incoterms_location = shipper.city_name
 	incoterms.place = incoterms_location
 	
-	GameManager.global_refs.shipments.append(self)
-	print("New shipment created. Shipment ID: %s. There are %s active shipments." % [shipment_id, GameManager.global_refs.shipments.size()])
+	GlobalRefs.shipments.append(self)
+	print("New shipment created. Shipment ID: %s. There are %s active shipments." % [shipment_id, GlobalRefs.shipments.size()])
 	return self
 
 
 func remove() -> void:
-	GameManager.global_refs.shipments.erase(self)
+	GlobalRefs.shipments.erase(self)
 
 
 func generate_random_customer_reference(string_length: int, number_length: int) -> String:

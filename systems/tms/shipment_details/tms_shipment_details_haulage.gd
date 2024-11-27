@@ -33,14 +33,14 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 
 
 func _on_arrange_pickup_button_pressed() -> void:
-	shipment.haulage.trucker_pickup = GameManager.global_refs.truckers.pick_random()
+	shipment.haulage.trucker_pickup = GlobalRefs.truckers.pick_random()
 	shipment.events.create_new_planned_event(Event.Code.PUP, GlobalTimer.get_future_date_from_event(shipment.events.get_first_event_of_type(Event.Code.ERL), 0, 12))
 	shipment.events.create_new_planned_event(Event.Code.RCV, GlobalTimer.get_future_date_from_event(shipment.events.get_first_event_of_type(Event.Code.PUP), 0, 17))
 	refresh()
 
 
 func _on_arrange_delivery_button_pressed() -> void:
-	shipment.haulage.trucker_delivery = GameManager.global_refs.truckers.pick_random()
+	shipment.haulage.trucker_delivery = GlobalRefs.truckers.pick_random()
 	shipment.events.create_new_planned_event(Event.Code.REL, GlobalTimer.get_future_date_from_event(shipment.events.get_first_event_of_type(Event.Code.LTS), 0, 6))
 	shipment.events.create_new_planned_event(Event.Code.DEL, GlobalTimer.get_future_date_from_event(shipment.events.get_first_event_of_type(Event.Code.REL), 0, 8))
 	refresh()

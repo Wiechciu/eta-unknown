@@ -29,10 +29,10 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 
 
 func _on_arrange_export_handling_button_pressed() -> void:
-	shipment.handling.handling_agent_export = GameManager.global_refs.handling_agents.pick_random()
+	shipment.handling.handling_agent_export = GlobalRefs.handling_agents.pick_random()
 	refresh()
 
 
 func _on_arrange_import_handling_button_pressed() -> void:
-	shipment.handling.handling_agent_import = GameManager.global_refs.handling_agents.pick_random()
+	shipment.handling.handling_agent_import = GlobalRefs.handling_agents.pick_random()
 	refresh()
