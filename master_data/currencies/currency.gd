@@ -2,10 +2,6 @@ class_name Currency
 extends Resource
 
 
-static var all: Array[Currency]
-static var all_dict: Dictionary[String, Currency]
-
-
 var code: String
 var name: String
 var exchange_rate_to_usd: float

@@ -21,11 +21,6 @@ enum Status {
 }
 
 
-static var all: Array[Shipment]
-static var all_not_owned: Array[Shipment]:
-	get:
-		return all.filter(func(shipment: Shipment) -> bool: return not shipment.is_owned)
-
 static var last_id: int = 0
 
 var shipment_id: int
@@ -65,59 +60,62 @@ var accounting: ShipmentAccounting
 
 func with_data(shipper_to_assign: Customer = null, consignee_to_assign: Customer = null) -> Shipment:
 	last_id += 1
-	self.shipment_id = last_id
+	shipment_id = last_id
 	
-	self.cargo_details = ShipmentCargoDetails.new().with_data(self)
-	self.main_freight = ShipmentMainFreight.new().with_data(self)
-	self.haulage = ShipmentHaulage.new().with_data(self)
-	self.handling = ShipmentHandling.new().with_data(self)
-	self.customs = ShipmentCustoms.new().with_data(self)
-	self.documentation = ShipmentDocumentation.new().with_data(self)
-	self.events = ShipmentEvents.new().with_data(self)
-	self.accounting = ShipmentAccounting.new().with_data(self)
+	cargo_details = ShipmentCargoDetails.new().with_data(self)
+	main_freight = ShipmentMainFreight.new().with_data(self)
+	haulage = ShipmentHaulage.new().with_data(self)
+	handling = ShipmentHandling.new().with_data(self)
+	customs = ShipmentCustoms.new().with_data(self)
+	documentation = ShipmentDocumentation.new().with_data(self)
+	events = ShipmentEvents.new().with_data(self)
+	accounting = ShipmentAccounting.new().with_data(self)
 	
-	self.customer_reference = generate_random_customer_reference(randi_range(3, 5), randi_range(3, 5))
+	customer_reference = generate_random_customer_reference(randi_range(3, 5), randi_range(3, 5))
 	
 	if shipper_to_assign == null:
-		shipper_to_assign = Customer.all_specific_with_employees.pick_random()
-	self.shipper = shipper_to_assign
+		shipper_to_assign = GameManager.global_refs.customers.pick_random()
+	shipper = shipper_to_assign
 	if consignee_to_assign == null:
-		consignee_to_assign = Customer.all_specific_with_employees.pick_random()
-	self.consignee = consignee_to_assign
-	self.export_contact_person = self.shipper.employees.pick_random()
-	self.import_contact_person = self.consignee.employees.pick_random()
+		consignee_to_assign = GameManager.global_refs.customers.pick_random()
+	consignee = consignee_to_assign
+	export_contact_person = shipper.employees.pick_random()
+	import_contact_person = consignee.employees.pick_random()
+	#FIXME make it always be in a different country.
+	if shipper.country == consignee.country:
+		return null
 	
-	#FIXME sometimes can be empty, because there are no locations in the customer country
-	var origin_list: Array[Location] = Location.all.filter(Location.is_in_country.bind(self.shipper.country))
-	var destination_list: Array[Location] = Location.all.filter(Location.is_in_country.bind(self.consignee.country))
+	#FIXME sometimes origin or destination can be empty, because there are no locations in the customer country.
+	var origin_list: Array[Location] = GameManager.global_refs.locations.filter(Location.is_in_country.bind(shipper.country))
+	var destination_list: Array[Location] = GameManager.global_refs.locations.filter(Location.is_in_country.bind(consignee.country))
 	if origin_list.is_empty() or destination_list.is_empty():
 		return null
-	self.origin = origin_list.pick_random()
-	self.destination = destination_list.pick_random()
+	origin = origin_list.pick_random()
+	destination = destination_list.pick_random()
 	
-	self.events.create_new_planned_event(Event.Code.ERL, GlobalTimer.get_future_date_from_now(randi_range(1, 20), 10, 0))
-	self.events.create_new_planned_event(Event.Code.LTS, GlobalTimer.get_future_date_from_event(self.events.get_first_event_of_type(Event.Code.ERL), randi_range(2, 30), 17, 0))
+	events.create_new_planned_event(Event.Code.ERL, GlobalTimer.get_future_date_from_now(randi_range(1, 20), 10, 0))
+	events.create_new_planned_event(Event.Code.LTS, GlobalTimer.get_future_date_from_event(events.get_first_event_of_type(Event.Code.ERL), randi_range(2, 30), 17, 0))
 	
-	self.service = Service.new().with_data_random()
-	self.incoterms = Incoterms.new().with_data_random()
+	service = Service.new().with_data_random()
+	incoterms = Incoterms.new().with_data_random()
 	var incoterms_location: String
-	match self.incoterms.group:
+	match incoterms.group:
 		"C", "D":
-			incoterms_location = self.consignee.city_name
+			incoterms_location = consignee.city_name
 		"E", "F":
-			incoterms_location = self.shipper.city_name
-	self.incoterms.place = incoterms_location
+			incoterms_location = shipper.city_name
+	incoterms.place = incoterms_location
 	
-	all.append(self)
-	print("New shipment created. Shipment ID: %s. There are %s active shipments." % [self.shipment_id, all.size()])
+	GameManager.global_refs.shipments.append(self)
+	print("New shipment created. Shipment ID: %s. There are %s active shipments." % [shipment_id, GameManager.global_refs.shipments.size()])
 	return self
 
 
 func remove() -> void:
-	all.erase(self)
+	GameManager.global_refs.shipments.erase(self)
 
 
-static func generate_random_customer_reference(string_length: int, number_length: int) -> String:
+func generate_random_customer_reference(string_length: int, number_length: int) -> String:
 	var random_customer_reference: String = ""
 	var allowed_characters_in_string: String = "abcdefghijklmnopqrstvwxyz"
 	var allowed_characters_in_number: String = "1234567890"
@@ -132,16 +130,6 @@ static func generate_random_customer_reference(string_length: int, number_length
 		random_customer_reference += allowed_characters_in_number[randi()% number_of_characters]
 	
 	return random_customer_reference
-
-
-static func sort_shipment_list_by_shipment_number(shipment_list: Array[Shipment]) -> Array[Shipment]:
-	shipment_list.sort_custom(_sort_ascending_by_shipment_number)
-	return shipment_list
-
-
-static func sort_shipment_list_by_earliest_pickup_date(shipment_list: Array[Shipment]) -> Array[Shipment]:
-	shipment_list.sort_custom(_sort_ascending_by_earliest_pickup_date)
-	return shipment_list
 
 
 func accept(new_owner: FreightForwarder) -> void:
@@ -165,6 +153,16 @@ func change_status(new_status: Status) -> void:
 
 func notify_details_changed() -> void:
 	details_changed.emit()
+
+
+static func sort_shipment_list_by_shipment_number(shipment_list: Array[Shipment]) -> Array[Shipment]:
+	shipment_list.sort_custom(_sort_ascending_by_shipment_number)
+	return shipment_list
+
+
+static func sort_shipment_list_by_earliest_pickup_date(shipment_list: Array[Shipment]) -> Array[Shipment]:
+	shipment_list.sort_custom(_sort_ascending_by_earliest_pickup_date)
+	return shipment_list
 
 
 static func _sort_ascending_by_shipment_number(a: Shipment, b: Shipment) -> bool:

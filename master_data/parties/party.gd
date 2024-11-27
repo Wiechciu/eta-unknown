@@ -2,13 +2,6 @@ class_name Party
 extends Resource
 
 
-static var all: Array[Party]
-static var all_dict: Dictionary[String, Party]
-static var all_with_employees: Array[Party]:
-	get:
-		return all.filter(has_employees)
-
-
 var name: String
 var street_name: String
 var street_number: String
@@ -27,7 +20,3 @@ var print_string: String:
 
 var employees: Array[Person]
 var balance: float
-
-
-static func has_employees(party_to_check: Party) -> bool:
-	return not party_to_check.employees.is_empty()

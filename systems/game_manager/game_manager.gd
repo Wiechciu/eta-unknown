@@ -1,6 +1,8 @@
 extends Node
 
 
+@export var json_loader: JsonLoader
+@export var global_refs: GlobalRefs
 var mutex: Mutex
 var thread: Thread
 var player: Person
@@ -9,23 +11,18 @@ var player: Person
 func _ready() -> void:
 	Debugger.assert_all_exported_properties(self)
 	
-	if not JsonLoader.is_node_ready():
-		await JsonLoader.ready
-	
-	GlobalTimer.new_day_started.connect(_initiate_thread)
-	
 	load_player()
 
 
 func load_player() -> void:
-	var player_company: FreightForwarder = FreightForwarder.all_specific_with_employees.pick_random()
+	var player_company: FreightForwarder = global_refs.freight_forwarders.pick_random()
 	player = player_company.employees.pick_random()
-	player.job_position = JobPosition.all_dict["Intern"]
+	player.job_position = global_refs.job_positions_dict["Intern"]
 	print("loaded player: " + player.full_name + ", working at: " + player.employer.name + ", as: " + player.job_position.title)
 
 
 func create_new_shipments() -> void:
-	for customer: Customer in Customer.all_specific_with_employees:
+	for customer: Customer in global_refs.customers:
 		var chance_to_create: float = 0.01
 		if randf() > chance_to_create:
 			continue
@@ -46,4 +43,5 @@ func _initiate_thread() -> void:
 
 # Thread must be disposed (or "joined"), for portability.
 func _exit_tree() -> void:
-	thread.wait_to_finish()
+	if thread != null:
+		thread.wait_to_finish()

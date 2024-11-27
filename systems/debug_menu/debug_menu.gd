@@ -27,12 +27,12 @@ func _on_accept_10_new_shipments_button_pressed() -> void:
 	for n: int in 10:
 		if accept_shipment() == false:
 			return
-	print("There are %s not owned shipments left!" % Shipment.all_not_owned.size())
+	print("There are %s not owned shipments left!" % GameManager.global_refs.shipments_not_owned.size())
 
 
 func accept_shipment() -> bool:
-	if not Shipment.all_not_owned.is_empty():
-		var random_shipment: Shipment = Shipment.all_not_owned.pick_random()
+	if not GameManager.global_refs.shipments_not_owned.is_empty():
+		var random_shipment: Shipment = GameManager.global_refs.shipments_not_owned.pick_random()
 		random_shipment.accept(GameManager.player.employer as FreightForwarder)
 		return true
 	else:

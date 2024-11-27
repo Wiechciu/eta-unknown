@@ -1,3 +1,4 @@
+class_name JsonLoader
 extends Node
 
 
@@ -15,17 +16,18 @@ func _ready() -> void:
 	
 	print("--- starting loading from JSONs ---")
 	var start: int = Time.get_ticks_msec()
-	load_cargo_from_json(cargo_json, Cargo.all, Cargo.all_dict)
-	load_currencies_from_json(currencies_json, Currency.all, Currency.all_dict)
-	load_countries_from_json(countries_json, Country.all, Country.all_dict)
-	load_locations_from_json(locations_json, Location.all, Location.all_dict)
-	load_parties_from_json(parties_json, Party.all, Party.all_dict)
-	load_job_positions_from_json(job_positions_json, JobPosition.all, JobPosition.all_dict)
-	load_people_from_json(people_json, Person.all, Person.all_dict)
+	load_cargo_from_json(cargo_json, GameManager.global_refs.cargos, GameManager.global_refs.cargos_dict)
+	load_currencies_from_json(currencies_json, GameManager.global_refs.currencies, GameManager.global_refs.currencies_dict)
+	load_countries_from_json(countries_json, GameManager.global_refs.countries, GameManager.global_refs.countries_dict)
+	load_locations_from_json(locations_json, GameManager.global_refs.locations, GameManager.global_refs.locations_dict)
+	load_parties_from_json(parties_json, GameManager.global_refs.parties, GameManager.global_refs.parties_dict)
+	load_job_positions_from_json(job_positions_json, GameManager.global_refs.job_positions, GameManager.global_refs.job_positions_dict)
+	load_people_from_json(people_json, GameManager.global_refs.people, GameManager.global_refs.people_dict)
 	
 	var end: int = Time.get_ticks_msec()
 	var time: int = (end - start)
 	print("--- finished loading from JSONs | in " + str(time) + " ms ---\n")
+	self.queue_free()
 
 
 func load_cargo_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
@@ -87,7 +89,7 @@ func load_locations_from_json(file_to_load: String, array_to_fill: Array, dict_t
 	for item: Dictionary in loaded_array:
 		var new_resource: Location = Location.new()
 		new_resource.code = (str(item.country) + str(item.location)) if item.country else ""
-		new_resource.country = Country.all_dict[item.country] if item.country else null
+		new_resource.country = GameManager.global_refs.countries_dict[item.country] if item.country else null
 		new_resource.name = str(item.name_wo_diacritics) if item.name_wo_diacritics else ""
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.code] = new_resource
@@ -106,30 +108,32 @@ func load_parties_from_json(file_to_load: String, array_to_fill: Array, dict_to_
 		match str(item.type):
 			"carrier":
 				new_resource = Carrier.new()
-				Carrier.all_specific.append(new_resource)
-				Carrier.all_specific_dict[new_resource.name] = new_resource
+				GameManager.global_refs.carriers.append(new_resource)
+				GameManager.global_refs.carriers_dict[new_resource.name] = new_resource
 			"customer":
 				new_resource = Customer.new()
-				Customer.all_specific.append(new_resource)
-				Customer.all_specific_dict[new_resource.name] = new_resource
+				GameManager.global_refs.customers.append(new_resource)
+				GameManager.global_refs.customers_dict[new_resource.name] = new_resource
 			"customs_agency":
 				new_resource = CustomsAgency.new()
-				CustomsAgency.all_specific.append(new_resource)
-				CustomsAgency.all_specific_dict[new_resource.name] = new_resource
+				GameManager.global_refs.customs_agencies.append(new_resource)
+				GameManager.global_refs.customs_agencies_dict[new_resource.name] = new_resource
 			"freight_forwarder":
 				new_resource = FreightForwarder.new()
-				FreightForwarder.all_specific.append(new_resource)
-				FreightForwarder.all_specific_dict[new_resource.name] = new_resource
+				GameManager.global_refs.freight_forwarders.append(new_resource)
+				GameManager.global_refs.freight_forwarders_dict[new_resource.name] = new_resource
 			"handling_agent":
 				new_resource = HandlingAgent.new()
-				HandlingAgent.all_specific.append(new_resource)
-				HandlingAgent.all_specific_dict[new_resource.name] = new_resource
+				GameManager.global_refs.handling_agents.append(new_resource)
+				GameManager.global_refs.handling_agents_dict[new_resource.name] = new_resource
 			"trucker":
 				new_resource = Trucker.new()
-				Trucker.all_specific.append(new_resource)
-				Trucker.all_specific_dict[new_resource.name] = new_resource
+				GameManager.global_refs.truckers.append(new_resource)
+				GameManager.global_refs.truckers_dict[new_resource.name] = new_resource
 		
 		if new_resource is Supplier:
+			GameManager.global_refs.suppliers.append(new_resource)
+			GameManager.global_refs.suppliers_dict[new_resource.name] = new_resource
 			(new_resource as Supplier).reliability_factor = randf_range(0.9, 1.0)
 			(new_resource as Supplier).cost_factor = randf_range(0.8, 1.0)
 		
@@ -139,19 +143,19 @@ func load_parties_from_json(file_to_load: String, array_to_fill: Array, dict_to_
 		new_resource.house_number = str(item.house_number) if item.house_number else ""
 		new_resource.postal_code = str(item.postal_code) if item.postal_code else ""
 		new_resource.city_name = str(item.city_name) if item.city_name else ""
-		new_resource.country = Country.all_dict[item.country_code] if item.country_code else null
+		new_resource.country = GameManager.global_refs.countries_dict[item.country_code] if item.country_code else null
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.name] = new_resource
 	
 	var end: int = Time.get_ticks_msec()
 	var time: int = (end - start)
 	print("loaded " + str(array_to_fill.size()) + " parties | in " + str(time) + " ms")
-	print("   loaded " + str(Carrier.all_specific.size()) + " carriers")
-	print("   loaded " + str(Customer.all_specific.size()) + " customers")
-	print("   loaded " + str(CustomsAgency.all_specific.size()) + " customs agencies")
-	print("   loaded " + str(FreightForwarder.all_specific.size()) + " freight forwarders")
-	print("   loaded " + str(HandlingAgent.all_specific.size()) + " handling agents")
-	print("   loaded " + str(Trucker.all_specific.size()) + " truckers")
+	print("   loaded " + str(GameManager.global_refs.carriers.size()) + " carriers")
+	print("   loaded " + str(GameManager.global_refs.customers.size()) + " customers")
+	print("   loaded " + str(GameManager.global_refs.customs_agencies.size()) + " customs agencies")
+	print("   loaded " + str(GameManager.global_refs.freight_forwarders.size()) + " freight forwarders")
+	print("   loaded " + str(GameManager.global_refs.handling_agents.size()) + " handling agents")
+	print("   loaded " + str(GameManager.global_refs.truckers.size()) + " truckers")
 
 
 func load_job_positions_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
@@ -183,10 +187,10 @@ func load_people_from_json(file_to_load: String, array_to_fill: Array, dict_to_f
 		new_resource.phone_number = str(item.phone_number) if item.phone_number else ""
 		new_resource.birthdate = str(item.birthdate) if item.birthdate else ""
 		new_resource.experience = Person.Experience.get(str(item.experience).to_upper()) if item.experience else Person.Experience.NOVICE
-		var employer: Party = Party.all.pick_random()
+		var employer: Party = GameManager.global_refs.parties.pick_random()
 		new_resource.employer = employer
 		employer.employees.append(new_resource)
-		new_resource.job_position = JobPosition.all.pick_random()
+		new_resource.job_position = GameManager.global_refs.job_positions.pick_random()
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.full_name] = new_resource
 	

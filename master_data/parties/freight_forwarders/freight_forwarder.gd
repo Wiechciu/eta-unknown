@@ -8,13 +8,6 @@ signal shipment_details_changed(shipment: Shipment)
 signal shipment_list_updated
 
 
-static var all_specific: Array[FreightForwarder]
-static var all_specific_dict: Dictionary[String, FreightForwarder]
-static var all_specific_with_employees: Array[FreightForwarder]:
-	get:
-		return all_specific.filter(Party.has_employees)
-
-
 var shipments: Array[Shipment]
 var last_shipment_number: int = 1000000
 var total_earnings: float
