@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GlobalRefs="*res://systems/global_refs/global_refs.tscn"
 GlobalTimer="*res://systems/global_timer/global_timer.tscn"
 GameManager="*res://systems/game_manager/game_manager.tscn"
+GlobalDebugger="*res://systems/global_debugger/global_debugger.gd"
 
 [debug]
 

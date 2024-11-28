@@ -8,8 +8,6 @@ var countries: Array[Country]
 var countries_dict: Dictionary[String, Country]
 var job_positions: Array[JobPosition]
 var job_positions_dict: Dictionary[String, JobPosition]
-var people: Array[Person]
-var people_dict: Dictionary[String, Person]
 
 var parties: Array[Party]
 var parties_with_employees: Array[Party]:
@@ -61,11 +59,13 @@ var seaports: Array[Location]:
 	get:
 		return locations.filter(func(location: Location) -> bool: return location.is_seaport)
 
+var people: Array[Person]
+var people_dict: Dictionary[String, Person]
+var people_with_employer: Array[Person]:
+	get:
+		return people.filter(func(person: Person) -> bool: return person.employer != null)
+
 var shipments: Array[Shipment]
 var shipments_not_owned: Array[Shipment]:
 	get:
 		return shipments.filter(func(shipment: Shipment) -> bool: return not shipment.is_owned)
-
-
-func _has_employees(party: Party) -> bool:
-	return not party.employees.is_empty()

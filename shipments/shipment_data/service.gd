@@ -34,5 +34,5 @@ func with_data_random() -> Service:
 	return self.with_data(get_random_code())
 
 
-static func get_random_code() -> Code:
+func get_random_code() -> Code:
 	return Code[Code.keys()[randi() % Code.size()]]

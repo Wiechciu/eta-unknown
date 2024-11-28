@@ -141,8 +141,9 @@ func accept(new_owner: FreightForwarder) -> void:
 
 
 func change_status(new_status: Status) -> void:
-	if status > new_status:
-		return
+	# This prevents the status to be changed from Cancelled
+	#if status > new_status:
+		#return
 	
 	status = new_status
 	if status == Status.COMPLETED:

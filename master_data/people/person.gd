@@ -8,12 +8,6 @@ enum Experience {
 	EXPERT,
 }
 
-static var all: Array[Person]
-static var all_dict: Dictionary[String, Person]
-static var all_with_employer: Array[Party]:
-	get:
-		return all.filter(has_employer)
-
 
 var first_name: String
 var last_name: String
@@ -28,7 +22,3 @@ var full_name: String:
 
 var employer: Party
 var job_position: JobPosition
-
-
-static func has_employer(person_to_check: Person) -> bool:
-	return person_to_check.employer != null

@@ -39,7 +39,7 @@ func create_new_document_now(code: Document.Code, number: int) -> Document:
 	return create_new_document(code, GlobalTimer.now, number)
 
 
-static func _sort_ascending(a: Document, b: Document) -> bool:
+func _sort_ascending(a: Document, b: Document) -> bool:
 	if a.issued_time < b.issued_time:
 		return true
 	return false

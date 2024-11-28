@@ -2,8 +2,6 @@ class_name RequestForQuotation
 extends Resource
 
 
-static var all: Array[RequestForQuotation]
-
 var requestor: Customer
 var shipment: Shipment
 var expected_total_cost: float
@@ -12,8 +10,6 @@ var quotations: Array[Quotation]
 
 
 func with_data(customer: Customer) -> RequestForQuotation:
-	all.append(self)
-	
 	self.requestor = customer
 	
 	var export_chance: float = 0.5

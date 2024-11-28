@@ -8,7 +8,7 @@ var player: Person
 
 
 func _ready() -> void:
-	Debugger.assert_all_exported_properties(self)
+	GlobalDebugger.assert_all_exported_properties(self)
 	
 	load_player()
 	GlobalTimer.new_day_started.connect(_initiate_thread)

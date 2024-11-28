@@ -1,7 +1,7 @@
-class_name Debugger
+extends Node
 
 
-static func assert_all_exported_properties(node: Node) -> void:
+func assert_all_exported_properties(node: Node) -> void:
 	var script: Script = node.get_script()
 	var property_list: Array[Dictionary] = script.get_script_property_list()
 	for property: Dictionary in property_list:

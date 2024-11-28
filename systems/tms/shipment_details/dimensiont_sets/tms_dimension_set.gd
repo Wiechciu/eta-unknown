@@ -10,7 +10,7 @@ extends Node
 
 
 func _ready() -> void:
-	Debugger.assert_all_exported_properties(self)
+	GlobalDebugger.assert_all_exported_properties(self)
 
 
 func with_data(dimension_set: DimensionSet) -> TmsDimensionSet:

@@ -12,7 +12,7 @@ extends Node
 
 
 func _ready() -> void:
-	Debugger.assert_all_exported_properties(self)
+	GlobalDebugger.assert_all_exported_properties(self)
 	
 	print("--- starting loading from JSONs ---")
 	var start: int = Time.get_ticks_msec()

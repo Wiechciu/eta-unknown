@@ -56,5 +56,5 @@ func with_data_random(place_to_assign: String = "") -> Incoterms:
 	return with_data(get_random_code(), place_to_assign)
 
 
-static func get_random_code() -> Code:
+func get_random_code() -> Code:
 	return Code[Code.keys()[randi() % Code.size()]]

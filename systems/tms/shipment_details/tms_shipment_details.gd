@@ -38,6 +38,7 @@ var shipment: Shipment
 @export var _shipment_customs: TmsShipmentDetailsCustoms
 @export var _shipment_events: TmsShipmentDetailsEvents
 @export var _shipment_documentation: TmsShipmentDetailsDocumentation
+@export var _shipment_accounting: TmsShipmentDetailsAccounting
 
 
 func _init() -> void:
@@ -45,7 +46,7 @@ func _init() -> void:
 
 
 func _ready() -> void:
-	Debugger.assert_all_exported_properties(self)
+	GlobalDebugger.assert_all_exported_properties(self)
 	
 	for status: String in Shipment.Status.keys():
 		_shipment_status.add_item(status)
@@ -93,6 +94,7 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 	_shipment_customs.load_shipment(shipment)
 	_shipment_events.load_shipment(shipment)
 	_shipment_documentation.load_shipment(shipment)
+	_shipment_accounting.load_shipment(shipment)
 
 
 func _on_close_button_pressed() -> void:

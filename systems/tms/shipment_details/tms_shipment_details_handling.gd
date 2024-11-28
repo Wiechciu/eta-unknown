@@ -11,7 +11,7 @@ var shipment: Shipment
 
 
 func _ready() -> void:
-	Debugger.assert_all_exported_properties(self)
+	GlobalDebugger.assert_all_exported_properties(self)
 	
 	_arrange_export_handling_button.pressed.connect(_on_arrange_export_handling_button_pressed)
 	_arrange_import_handling_button.pressed.connect(_on_arrange_import_handling_button_pressed)

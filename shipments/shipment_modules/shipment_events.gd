@@ -38,6 +38,11 @@ func register_event(event: Event) -> void:
 	
 	if event.code == Event.Code.PUP and event is EventPlanned:
 		shipment.change_status(Shipment.Status.PLANNED)
+		shipment.accounting.create_new_cost_charge(Charge.Code.PUP, randi_range(100, 150), GlobalRefs.currencies_dict["EUR"], shipment.haulage.trucker_pickup)
+		shipment.accounting.create_new_revenue_charge(Charge.Code.PUP, randi_range(120, 170), GlobalRefs.currencies_dict["EUR"], shipment.shipper)
+	if event.code == Event.Code.DEL and event is EventPlanned:
+		shipment.accounting.create_new_cost_charge(Charge.Code.DEL, randi_range(100, 150), GlobalRefs.currencies_dict["EUR"], shipment.haulage.trucker_delivery)
+		shipment.accounting.create_new_revenue_charge(Charge.Code.DEL, randi_range(120, 170), GlobalRefs.currencies_dict["EUR"], shipment.consignee)
 	elif event.code == Event.Code.PUP and event is EventActual:
 		shipment.change_status(Shipment.Status.IN_TRANSIT)
 	elif event.code == Event.Code.DEL and event is EventActual:
@@ -48,6 +53,10 @@ func register_event(event: Event) -> void:
 
 func remove_event(event: Event) -> void:
 	events.erase(event)
+	if event is EventPlanned:
+		planned_events.erase(event)
+	elif event is EventActual:
+		actual_events.erase(event)
 	events_updated.emit()
 
 
@@ -121,7 +130,7 @@ func notify(time_event: TimeEvent) -> void:
 			shipment.documentation.create_new_document_now(Document.Code.POD, 1)
 
 
-static func _sort_ascending(a: Event, b: Event) -> bool:
+func _sort_ascending(a: Event, b: Event) -> bool:
 	if a.time < b.time:
 		return true
 	return false

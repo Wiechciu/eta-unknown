@@ -17,7 +17,7 @@ var sort_type: SortType
 
 
 func _ready() -> void:
-	Debugger.assert_all_exported_properties(self)
+	GlobalDebugger.assert_all_exported_properties(self)
 	
 	if not GameManager.is_node_ready():
 		await GameManager.ready
