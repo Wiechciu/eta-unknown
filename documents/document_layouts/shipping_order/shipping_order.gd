@@ -33,7 +33,7 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 
 
 func _on_accept_button_pressed() -> void:
-	shipment.accept(GameManager.player.employer as FreightForwarder)
+	shipment.accept(GameManager.player_company as FreightForwarder)
 	queue_free()
 
 

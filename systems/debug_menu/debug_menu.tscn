@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cieydjj1npshf"]
 
-[ext_resource type="Script" path="res://systems/debug_menu/debug_menu.gd" id="1_mfke8"]
+[ext_resource type="Script" uid="uid://c0awv1eyv6ra4" path="res://systems/debug_menu/debug_menu.gd" id="1_mfke8"]
 [ext_resource type="PackedScene" uid="uid://byup0xasld7sf" path="res://documents/document_layouts/shipping_order/shipping_order.tscn" id="2_lwylx"]
 [ext_resource type="LabelSettings" uid="uid://ctkwvbi52ojou" path="res://systems/themes/menu_header_label_settings.tres" id="3_mis6s"]
 
@@ -29,6 +29,21 @@ layout_mode = 2
 text = "Debug Menu"
 label_settings = ExtResource("3_mis6s")
 
+[node name="NewRequestForQuotationButton" type="Button" parent="MarginContainer/VBoxContainer"]
+modulate = Color(0, 1, 0, 1)
+layout_mode = 2
+text = "New request for quotation"
+
+[node name="SendQuotationToRequestButton" type="Button" parent="MarginContainer/VBoxContainer"]
+modulate = Color(0, 1, 0, 1)
+layout_mode = 2
+text = "New quotation to request"
+
+[node name="NewShipmentButton" type="Button" parent="MarginContainer/VBoxContainer"]
+modulate = Color(0, 1, 0, 1)
+layout_mode = 2
+text = "New shipment"
+
 [node name="NewShippingOrderButton" type="Button" parent="MarginContainer/VBoxContainer"]
 modulate = Color(0, 1, 0, 1)
 layout_mode = 2
@@ -49,6 +64,9 @@ modulate = Color(1, 0.792449, 0.380258, 1)
 layout_mode = 2
 text = "Next day"
 
+[connection signal="pressed" from="MarginContainer/VBoxContainer/NewRequestForQuotationButton" to="." method="_on_new_request_for_quotation_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/SendQuotationToRequestButton" to="." method="_on_send_quotation_to_request_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/NewShipmentButton" to="." method="_on_new_shipment_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/NewShippingOrderButton" to="." method="_on_new_shipping_order_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/AcceptNewShipmentButton" to="." method="_on_accept_new_shipment_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Accept10NewShipmentsButton" to="." method="_on_accept_10_new_shipments_button_pressed"]

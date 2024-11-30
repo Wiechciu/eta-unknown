@@ -22,12 +22,12 @@ func _ready() -> void:
 	if not GameManager.is_node_ready():
 		await GameManager.ready
 	refresh_shipment_list_items()
-	(GameManager.player.employer as FreightForwarder).shipment_list_updated.connect(_on_shipment_list_updated)
+	(GameManager.player_company as FreightForwarder).shipment_list_updated.connect(_on_shipment_list_updated)
 
 
 func add_shipment(new_shipment: Shipment) -> void:
 	var new_shipment_list_item: TmsShipmentListItem = (_shipment_list_item_scene.instantiate() as TmsShipmentListItem).with_data(new_shipment)
-	new_shipment_list_item.name = "Shipment_" + str(new_shipment_list_item.shipment.shipment_id)
+	new_shipment_list_item.name = "Shipment_" + str(new_shipment_list_item.shipment.id)
 	new_shipment_list_item.pressed_with_shipment_data.connect(_on_shipment_list_item_pressed)
 	_shipment_container.add_child(new_shipment_list_item)
 
@@ -36,7 +36,7 @@ func refresh_shipment_list_items() -> void:
 	for child: Node in _shipment_container.get_children():
 		child.queue_free()
 	
-	var shipments: Array[Shipment] = (GameManager.player.employer as FreightForwarder).shipments
+	var shipments: Array[Shipment] = (GameManager.player_company as FreightForwarder).shipments
 	if not show_completed:
 		var shipments_not_completed: Array[Shipment] = shipments.filter(func(shipment: Shipment) -> bool: return not shipment.is_completed)
 		shipments = shipments_not_completed

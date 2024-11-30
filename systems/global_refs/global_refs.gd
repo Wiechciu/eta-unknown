@@ -69,3 +69,8 @@ var shipments: Array[Shipment]
 var shipments_not_owned: Array[Shipment]:
 	get:
 		return shipments.filter(func(shipment: Shipment) -> bool: return not shipment.is_owned)
+
+var requests_for_quotation: Array[RequestForQuotation]
+var requests_for_quotation_not_awarded: Array[RequestForQuotation]:
+	get:
+		return requests_for_quotation.filter(func(request: RequestForQuotation) -> bool: return not request.is_awarded)

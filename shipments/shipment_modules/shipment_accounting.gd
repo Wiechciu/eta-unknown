@@ -6,6 +6,7 @@ signal charges_updated
 
 
 var shipment: Shipment
+var request_for_quotation: RequestForQuotation
 var quotation: Quotation
 var charges: Array[Charge]
 var revenue_charges: Array[ChargeRevenue]

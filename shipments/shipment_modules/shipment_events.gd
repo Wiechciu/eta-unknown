@@ -100,7 +100,7 @@ func get_last_event_of_type(code: Event.Code) -> Event:
 
 
 func notify(time_event: TimeEvent) -> void:
-	print("Shipment ID: %s, number: %s, event: %s at %s" % [shipment.shipment_id, shipment.number, time_event.event.code_string, GlobalTimer.get_nice_datetime_string_from_unix_time(time_event.time)])
+	print("Shipment ID: %s, number: %s, event: %s at %s" % [shipment.id, shipment.number, time_event.event.code_string, GlobalTimer.get_nice_datetime_string_from_unix_time(time_event.time)])
 	
 	if time_event.event.code == Event.Code.LTS and not shipment.is_owned:
 		shipment.remove()

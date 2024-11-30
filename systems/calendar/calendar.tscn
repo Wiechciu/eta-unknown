@@ -1,13 +1,13 @@
 [gd_scene load_steps=7 format=3 uid="uid://b66husl1w3olw"]
 
-[ext_resource type="Script" path="res://systems/calendar/date_time.gd" id="1_ywo4k"]
+[ext_resource type="Script" uid="uid://sb00yo8xfccs" path="res://systems/calendar/date_time.gd" id="1_ywo4k"]
 [ext_resource type="LabelSettings" uid="uid://dbpx3q8ueafhu" path="res://systems/themes/calendar_label_settings.tres" id="2_gb54w"]
-[ext_resource type="Script" path="res://systems/calendar/calendar_popup.gd" id="3_bspw3"]
+[ext_resource type="Script" uid="uid://bnapmg17blmiy" path="res://systems/calendar/calendar_popup.gd" id="3_bspw3"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vp42h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ywo4k"]
-bg_color = Color(0.609701, 0.613308, 0.45809, 1)
+bg_color = Color(0.81908, 0.94228, 0.979786, 1)
 border_color = Color(0.172833, 0.172833, 0.172833, 1)
 corner_radius_top_left = 2
 corner_radius_top_right = 2
@@ -17,7 +17,7 @@ shadow_size = 2
 shadow_offset = Vector2(2, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bspw3"]
-bg_color = Color(0.411765, 0.407843, 0.254902, 0.419608)
+bg_color = Color(0.0845005, 0.447196, 0.499241, 0.419608)
 
 [node name="Calendar" type="PanelContainer"]
 offset_right = 162.0

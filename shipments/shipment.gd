@@ -23,7 +23,7 @@ enum Status {
 
 static var last_id: int = 0
 
-var shipment_id: int
+var id: int
 var status: Status
 var is_completed: bool:
 	get:
@@ -60,7 +60,7 @@ var accounting: ShipmentAccounting
 
 func with_data(shipper_to_assign: Customer = null, consignee_to_assign: Customer = null) -> Shipment:
 	last_id += 1
-	shipment_id = last_id
+	id = last_id
 	
 	cargo_details = ShipmentCargoDetails.new().with_data(self)
 	main_freight = ShipmentMainFreight.new().with_data(self)
@@ -107,7 +107,7 @@ func with_data(shipper_to_assign: Customer = null, consignee_to_assign: Customer
 	incoterms.place = incoterms_location
 	
 	GlobalRefs.shipments.append(self)
-	print("New shipment created. Shipment ID: %s. There are %s active shipments." % [shipment_id, GlobalRefs.shipments.size()])
+	print("New shipment created. Shipment ID: %s. There are %s active shipments." % [id, GlobalRefs.shipments.size()])
 	return self
 
 

@@ -132,7 +132,7 @@ func get_nice_date_string_from_event(event: Event) -> String:
 		return ""
 	return get_nice_date_string_from_unix_time(event.time)
 
-
+## The observer needs to have a "Notify" function to be able to receive the event
 func create_time_event_from_unix_time(time: int, observer: Object, event: Event = null) -> TimeEvent:
 	var new_time_event: TimeEvent = TimeEvent.new().with_data(time, observer, event)
 	time_events.append(new_time_event)
@@ -160,7 +160,7 @@ func _check_time_events() -> void:
 		counter += 1
 		if time_event.time > now:
 			break
-		time_event.notify()
+		time_event.notify_observer()
 		time_event_indexes_to_remove.push_front(counter)
 	
 	for time_event_index_to_remove: int in time_event_indexes_to_remove:

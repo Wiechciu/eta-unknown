@@ -15,6 +15,10 @@ func with_data(time_to_assign: int, observer_to_assign: Object, event_to_assign:
 	
 	return self
 
-
-func notify() -> void:
+## Notifies the observer, supplying self as a parameter. Observer has to have the following function to receive the notification
+## [codeblock]
+## func notify(time_event: TimeEvent) -> void:
+## 	pass
+## [/codeblock]
+func notify_observer() -> void:
 	observer.call("notify", self)

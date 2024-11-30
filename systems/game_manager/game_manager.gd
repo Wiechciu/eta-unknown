@@ -5,6 +5,7 @@ extends Node
 var mutex: Mutex
 var thread: Thread
 var player: Person
+var player_company: FreightForwarder
 
 
 func _ready() -> void:
@@ -15,10 +16,10 @@ func _ready() -> void:
 
 
 func load_player() -> void:
-	var player_company: FreightForwarder = GlobalRefs.freight_forwarders_with_employees.pick_random()
+	player_company = GlobalRefs.freight_forwarders_with_employees.pick_random()
 	player = player_company.employees.pick_random()
 	player.job_position = GlobalRefs.job_positions_dict["Intern"]
-	print("loaded player: " + player.full_name + ", working at: " + player.employer.name + ", as: " + player.job_position.title)
+	print("loaded player: " + player.full_name + ", working at: " + player_company.name + ", as: " + player.job_position.title)
 
 
 func create_new_shipments() -> void:
@@ -29,7 +30,8 @@ func create_new_shipments() -> void:
 		
 		for i: int in randi_range(0, 5):
 			mutex.lock()
-			customer.create_new_shipment()
+			customer.create_new_request_for_quotation()
+			#customer.create_new_shipment()
 			mutex.unlock()
 
 

@@ -19,6 +19,16 @@ func _on_next_day_button_pressed() -> void:
 	GlobalTimer.start_next_day()
 
 
+func _on_new_request_for_quotation_button_pressed() -> void:
+	var customer: Customer = GlobalRefs.customers_with_employees.pick_random() as Customer
+	customer.create_new_request_for_quotation()
+
+
+func _on_new_shipment_button_pressed() -> void:
+	var customer: Customer = GlobalRefs.customers_with_employees.pick_random() as Customer
+	customer.create_new_shipment()
+
+
 func _on_accept_new_shipment_button_pressed() -> void:
 	accept_shipment()
 
@@ -33,8 +43,15 @@ func _on_accept_10_new_shipments_button_pressed() -> void:
 func accept_shipment() -> bool:
 	if not GlobalRefs.shipments_not_owned.is_empty():
 		var random_shipment: Shipment = GlobalRefs.shipments_not_owned.pick_random()
-		random_shipment.accept(GameManager.player.employer as FreightForwarder)
+		random_shipment.accept(GameManager.player_company as FreightForwarder)
 		return true
 	else:
 		print("There are no more shipments to accept!")
 		return false
+
+
+func _on_send_quotation_to_request_button_pressed() -> void:
+	var request_for_quotation: RequestForQuotation = GlobalRefs.requests_for_quotation_not_awarded.pick_random() as RequestForQuotation
+	var quotation: Quotation = Quotation.new().with_data(request_for_quotation, GameManager.player_company)
+	request_for_quotation.register_quotation(quotation)
+	quotation.change_status(Quotation.Status.SUBMITTED)
