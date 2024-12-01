@@ -12,7 +12,8 @@ func _ready() -> void:
 	GlobalDebugger.assert_all_exported_properties(self)
 	
 	load_player()
-	GlobalTimer.new_day_started.connect(_initiate_thread)
+	#GlobalTimer.new_day_started.connect(_initiate_thread)
+	GlobalTimer.new_day_started.connect(create_new_shipments)
 
 
 func load_player() -> void:
@@ -29,10 +30,10 @@ func create_new_shipments() -> void:
 			continue
 		
 		for i: int in randi_range(0, 5):
-			mutex.lock()
+			if mutex: mutex.lock()
 			customer.create_new_request_for_quotation()
 			#customer.create_new_shipment()
-			mutex.unlock()
+			if mutex: mutex.unlock()
 
 
 func _initiate_thread() -> void:

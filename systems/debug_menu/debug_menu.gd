@@ -9,10 +9,6 @@ var counter: float
 
 
 func _process(delta: float) -> void:
-	#counter += delta
-	#if counter < 1:
-		#return
-	#counter = 0
 	fps.text = "FPS: %d" % Performance.get_monitor(Performance.TIME_FPS)
 	memory.text = "Memory: %d / %d" % [Performance.get_monitor(Performance.MEMORY_STATIC) / 10**6, Performance.get_monitor(Performance.MEMORY_STATIC_MAX) / 10**6]
 
@@ -50,7 +46,7 @@ func _on_accept_10_new_shipments_button_pressed() -> void:
 	for n: int in 10:
 		if accept_shipment() == false:
 			return
-	print("There are %s not owned shipments left!" % GlobalRefs.shipments_not_owned.size())
+	print("Currently owns %s shipments. There are %s not owned shipments left!" % [GameManager.player_company.shipments.size(), GlobalRefs.shipments_not_owned.size()])
 
 
 func accept_shipment() -> bool:
@@ -59,7 +55,7 @@ func accept_shipment() -> bool:
 		random_shipment.accept(GameManager.player_company as FreightForwarder)
 		return true
 	else:
-		print("There are no more shipments to accept!")
+		print("Currently owns %s shipments. There are no more shipments to accept!" % [GameManager.player_company.shipments.size()])
 		return false
 
 

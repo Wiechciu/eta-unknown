@@ -15,7 +15,6 @@ func _ready() -> void:
 	GlobalDebugger.assert_all_exported_properties(self)
 	
 	print("--- starting loading from JSONs ---")
-	var start: int = Time.get_ticks_msec()
 	load_cargo_from_json(cargo_json, GlobalRefs.cargos, GlobalRefs.cargos_dict)
 	load_currencies_from_json(currencies_json, GlobalRefs.currencies, GlobalRefs.currencies_dict)
 	load_countries_from_json(countries_json, GlobalRefs.countries, GlobalRefs.countries_dict)
@@ -24,14 +23,12 @@ func _ready() -> void:
 	load_job_positions_from_json(job_positions_json, GlobalRefs.job_positions, GlobalRefs.job_positions_dict)
 	load_people_from_json(people_json, GlobalRefs.people, GlobalRefs.people_dict)
 	
-	var end: int = Time.get_ticks_msec()
-	var time: int = (end - start)
-	print("--- finished loading from JSONs | in " + str(time) + " ms ---\n")
+	print("--- finished loading from JSONs ---\n")
 	self.queue_free()
 
 
 func load_cargo_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
-	var start: int = Time.get_ticks_msec()
+	GlobalDebugger.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
@@ -44,13 +41,11 @@ func load_cargo_from_json(file_to_load: String, array_to_fill: Array, dict_to_fi
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.description] = new_resource
 	
-	var end: int = Time.get_ticks_msec()
-	var time: int = (end - start)
-	print("loaded " + str(array_to_fill.size()) + " cargo | in " + str(time) + " ms")
+	print("loaded %s cargo | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
 
 
 func load_currencies_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
-	var start: int = Time.get_ticks_msec()
+	GlobalDebugger.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
@@ -61,13 +56,11 @@ func load_currencies_from_json(file_to_load: String, array_to_fill: Array, dict_
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.code] = new_resource
 	
-	var end: int = Time.get_ticks_msec()
-	var time: int = (end - start)
-	print("loaded " + str(array_to_fill.size()) + " currencies | in " + str(time) + " ms")
+	print("loaded %s currencies | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
 
 
 func load_countries_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
-	var start: int = Time.get_ticks_msec()
+	GlobalDebugger.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
@@ -77,13 +70,11 @@ func load_countries_from_json(file_to_load: String, array_to_fill: Array, dict_t
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.code] = new_resource
 	
-	var end: int = Time.get_ticks_msec()
-	var time: int = (end - start)
-	print("loaded " + str(array_to_fill.size()) + " countries | in " + str(time) + " ms")
+	print("loaded %s countries | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
 
 
 func load_locations_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
-	var start: int = Time.get_ticks_msec()
+	GlobalDebugger.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
@@ -94,20 +85,13 @@ func load_locations_from_json(file_to_load: String, array_to_fill: Array, dict_t
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.code] = new_resource
 		
-		if GlobalRefs.country_locations_dict.has(new_resource.country.code):
-			var array: Array = GlobalRefs.country_locations_dict[new_resource.country.code]
-			array.append(new_resource)
-			GlobalRefs.country_locations_dict[new_resource.country.code] = array
-		else:
-			GlobalRefs.country_locations_dict[new_resource.country.code] = [new_resource]
+		new_resource.country.locations.append(new_resource)
 	
-	var end: int = Time.get_ticks_msec()
-	var time: int = (end - start)
-	print("loaded " + str(array_to_fill.size()) + " locations | in " + str(time) + " ms")
+	print("loaded %s locations | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
 
 
 func load_parties_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
-	var start: int = Time.get_ticks_msec()
+	GlobalDebugger.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
@@ -154,9 +138,7 @@ func load_parties_from_json(file_to_load: String, array_to_fill: Array, dict_to_
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.name] = new_resource
 	
-	var end: int = Time.get_ticks_msec()
-	var time: int = (end - start)
-	print("loaded " + str(array_to_fill.size()) + " parties | in " + str(time) + " ms")
+	print("loaded %s parties | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
 	print("   loaded " + str(GlobalRefs.carriers.size()) + " carriers")
 	print("   loaded " + str(GlobalRefs.customers.size()) + " customers")
 	print("   loaded " + str(GlobalRefs.customs_agencies.size()) + " customs agencies")
@@ -166,7 +148,7 @@ func load_parties_from_json(file_to_load: String, array_to_fill: Array, dict_to_
 
 
 func load_job_positions_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
-	var start: int = Time.get_ticks_msec()
+	GlobalDebugger.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
@@ -176,13 +158,11 @@ func load_job_positions_from_json(file_to_load: String, array_to_fill: Array, di
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.title] = new_resource
 	
-	var end: int = Time.get_ticks_msec()
-	var time: int = (end - start)
-	print("loaded " + str(array_to_fill.size()) + " job positions | in " + str(time) + " ms")
+	print("loaded %s job positions | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
 
 
 func load_people_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
-	var start: int = Time.get_ticks_msec()
+	GlobalDebugger.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
@@ -201,9 +181,7 @@ func load_people_from_json(file_to_load: String, array_to_fill: Array, dict_to_f
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.full_name] = new_resource
 	
-	var end: int = Time.get_ticks_msec()
-	var time: int = (end - start)
-	print("loaded " + str(array_to_fill.size()) + " people | in " + str(time) + " ms")
+	print("loaded %s people | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
 
 
 func load_json_file(file_to_load: String) -> Array:

@@ -88,9 +88,8 @@ func with_data(shipper_to_assign: Customer = null, consignee_to_assign: Customer
 	#FIXME sometimes origin or destination can be empty, because there are no locations in the customer country.
 	#var origin_list: Array[Location] = GlobalRefs.locations.filter(Location.is_in_country.bind(shipper.country))
 	#var destination_list: Array[Location] = GlobalRefs.locations.filter(Location.is_in_country.bind(consignee.country))
-	var origin_list: Array = GlobalRefs.country_locations_dict[shipper.country.code]
-	var destination_list: Array = GlobalRefs.country_locations_dict[consignee.country.code]
-	
+	var origin_list: Array[Location] = shipper.country.locations
+	var destination_list: Array[Location] = consignee.country.locations
 	
 	if origin_list.is_empty() or destination_list.is_empty():
 		return null
@@ -158,25 +157,3 @@ func change_status(new_status: Status) -> void:
 
 func notify_details_changed() -> void:
 	details_changed.emit()
-
-
-static func sort_shipment_list_by_shipment_number(shipment_list: Array[Shipment]) -> Array[Shipment]:
-	shipment_list.sort_custom(_sort_ascending_by_shipment_number)
-	return shipment_list
-
-
-static func sort_shipment_list_by_earliest_pickup_date(shipment_list: Array[Shipment]) -> Array[Shipment]:
-	shipment_list.sort_custom(_sort_ascending_by_earliest_pickup_date)
-	return shipment_list
-
-
-static func _sort_ascending_by_shipment_number(a: Shipment, b: Shipment) -> bool:
-	if a.number < b.number:
-		return true
-	return false
-
-
-static func _sort_ascending_by_earliest_pickup_date(a: Shipment, b: Shipment) -> bool:
-	if a.events.get_first_event_of_type(Event.Code.ERL).time < b.events.get_first_event_of_type(Event.Code.ERL).time:
-		return true
-	return false

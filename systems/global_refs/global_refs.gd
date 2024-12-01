@@ -50,7 +50,6 @@ var truckers_dict: Dictionary[String, Trucker]
 
 var countries: Array[Country]
 var countries_dict: Dictionary[String, Country]
-var country_locations_dict: Dictionary[String, Array]
 
 var locations: Array[Location]
 var locations_dict: Dictionary[String, Location]

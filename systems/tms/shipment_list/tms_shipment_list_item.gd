@@ -33,6 +33,8 @@ func with_data(new_shipment: Shipment) -> TmsShipmentListItem:
 	match shipment.status:
 		Shipment.Status.COMPLETED:
 			modulate = Color.LIGHT_GREEN
+		_:
+			modulate = Color.WHITE
 	return self
 
 
