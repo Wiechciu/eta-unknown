@@ -68,6 +68,13 @@ func register_charge(charge: Charge) -> void:
 	charges_updated.emit()
 
 
+func register_charges_from_quotation(quotation_to_register: Quotation) -> void:
+	for charge_cost: ChargeCost in quotation_to_register.cost_charges:
+		register_charge(charge_cost)
+	for charge_revenue: ChargeRevenue in quotation_to_register.revenue_charges:
+		register_charge(charge_revenue)
+
+
 func remove_charge(charge: Charge) -> void:
 	charges.erase(charge)
 	if charge is ChargeRevenue:

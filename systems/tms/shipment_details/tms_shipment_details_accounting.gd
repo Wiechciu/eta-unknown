@@ -4,11 +4,11 @@ extends PanelContainer
 
 var shipment: Shipment
 
-@export var _quotation: Label
-@export var _revenue_total: Label
-@export var _cost_total: Label
-@export var _gross_profit: Label
-@export var _margin: Label
+@export var _quotation: TmsField
+@export var _revenue_total: TmsField
+@export var _cost_total: TmsField
+@export var _gross_profit: TmsField
+@export var _margin: TmsField
 @export var _revenue_container: Control
 @export var _cost_container: Control
 @export var _charge_scene: PackedScene
@@ -40,11 +40,11 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 	if not shipment.accounting.charges_updated.is_connected(refresh):
 		shipment.accounting.charges_updated.connect(refresh)
 	
-	_quotation.text = shipment.accounting.quotation.number if shipment.accounting.quotation else ""
-	_revenue_total.text = shipment.accounting.revenue_charges_sum_string
-	_cost_total.text = shipment.accounting.cost_charges_sum_string
-	_gross_profit.text = shipment.accounting.gross_profit_string
-	_margin.text = shipment.accounting.margin_string
+	_quotation.value.text = shipment.accounting.quotation.number if shipment.accounting.quotation else ""
+	_revenue_total.value.text = shipment.accounting.revenue_charges_sum_string
+	_cost_total.value.text = shipment.accounting.cost_charges_sum_string
+	_gross_profit.value.text = shipment.accounting.gross_profit_string
+	_margin.value.text = shipment.accounting.margin_string
 	
 	refresh_charges(_revenue_container, shipment.accounting.revenue_charges_as_charges)
 	refresh_charges(_cost_container, shipment.accounting.cost_charges_as_charges)

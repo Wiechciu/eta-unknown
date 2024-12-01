@@ -9,6 +9,7 @@ enum SortType {
 
 @export var _tms: Tms
 @export var _shipment_container: Control
+@export var _shipments_header: Label
 @export var _toggle_completed_button: Button
 @export var _sort_button: Button
 @export var _shipment_list_item_scene: PackedScene
@@ -48,7 +49,7 @@ func refresh_shipment_list_items() -> void:
 		SortType.BY_DATE:
 			shipments_sorted = Shipment.sort_shipment_list_by_earliest_pickup_date(shipments)
 	
-	
+	_shipments_header.text = "Shipments (%d):" % shipments.size()
 	for shipment: Shipment in shipments_sorted:
 		add_shipment(shipment)
 

@@ -1,10 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://bmaoxf15lcni7"]
+[gd_scene load_steps=21 format=3 uid="uid://bmaoxf15lcni7"]
 
 [ext_resource type="Script" uid="uid://e3utcmnb60hk" path="res://systems/tms/shipment_details/tms_shipment_details.gd" id="1_0f3ba"]
 [ext_resource type="PackedScene" uid="uid://bisun2rrujs6p" path="res://documents/document_layouts/document_dimension_set.tscn" id="2_s8pr3"]
+[ext_resource type="PackedScene" uid="uid://mkqshufe4qho" path="res://systems/tms/shipment_details/tms_fields/tms_field_short.tscn" id="2_sna7y"]
 [ext_resource type="PackedScene" uid="uid://baurmy6fwc0ye" path="res://systems/tms/shipment_details/dimensiont_sets/tms_dimension_set.tscn" id="2_socwm"]
-[ext_resource type="LabelSettings" uid="uid://dbxrdxwwawld3" path="res://systems/themes/document_label_label_settings.tres" id="3_yrx8i"]
-[ext_resource type="LabelSettings" uid="uid://tas3grgdcwul" path="res://systems/themes/document_value_label_settings.tres" id="4_xd1jn"]
+[ext_resource type="PackedScene" uid="uid://d38jhu4gmpcao" path="res://systems/tms/shipment_details/tms_fields/tms_field_long.tscn" id="4_sna7y"]
 [ext_resource type="Script" uid="uid://bjqmiamfcxq5p" path="res://systems/tms/shipment_details/tms_shipment_details_cargo_details.gd" id="5_gxcvw"]
 [ext_resource type="Script" uid="uid://tdw13a7ndcfh" path="res://systems/tms/shipment_details/tms_shipment_details_main_freight.gd" id="6_rx45m"]
 [ext_resource type="Script" uid="uid://xsm3f6p0fwfa" path="res://systems/tms/shipment_details/tms_shipment_details_haulage.gd" id="8_s4hq1"]
@@ -13,9 +13,11 @@
 [ext_resource type="Script" uid="uid://bjtjkm74hn0ne" path="res://systems/tms/shipment_details/tms_shipment_details_events.gd" id="11_l03v4"]
 [ext_resource type="PackedScene" uid="uid://c8je307sddbjq" path="res://systems/tms/shipment_details/events/tms_event_details.tscn" id="11_s4hq1"]
 [ext_resource type="Script" uid="uid://otpvc2hb6ygh" path="res://systems/tms/shipment_details/tms_shipment_details_documentation.gd" id="13_l03v4"]
+[ext_resource type="PackedScene" uid="uid://4v8nb2xu20ty" path="res://systems/tms/shipment_details/tms_fields/tms_field_label.tscn" id="13_toxsx"]
 [ext_resource type="PackedScene" uid="uid://bjpggakj5vtuj" path="res://systems/tms/shipment_details/documents/tms_document_details.tscn" id="14_e8rh3"]
 [ext_resource type="Script" uid="uid://bmet734528ly3" path="res://systems/tms/shipment_details/tms_shipment_details_accounting.gd" id="15_06odw"]
 [ext_resource type="PackedScene" uid="uid://bn8ycgwlov6yx" path="res://systems/tms/shipment_details/charges/tms_charge.tscn" id="16_d3w2o"]
+[ext_resource type="PackedScene" uid="uid://5ch1nu72o26" path="res://systems/tms/shipment_details/tms_fields/tms_field_placeholder.tscn" id="19_wu3do"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0f3ba"]
 content_margin_left = 4.0
@@ -41,26 +43,6 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ql6i1"]
-content_margin_left = 2.0
-content_margin_top = 2.0
-content_margin_right = 2.0
-content_margin_bottom = 2.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ek2n7"]
-content_margin_left = 4.0
-content_margin_right = 4.0
-bg_color = Color(0.91664, 0.91664, 0.91664, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.61339, 0.61339, 0.61339, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d3w2o"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sna7y"]
-
 [node name="ShipmentDetails" type="PanelContainer" node_paths=PackedStringArray("_tab_container", "_shipment_status", "_shipment_number", "_customer_reference", "_shipper", "_consignee", "_origin", "_destination", "_incoterms", "_service", "_earliest_pickup", "_latest_delivery", "_shipment_cargo_details", "_shipment_main_freight", "_shipment_haulage", "_shipment_handling", "_shipment_customs", "_shipment_events", "_shipment_documentation", "_shipment_accounting")]
 offset_right = 900.0
 offset_bottom = 500.0
@@ -68,16 +50,16 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_0f3ba")
 script = ExtResource("1_0f3ba")
 _tab_container = NodePath("VBoxContainer/Tabs")
 _shipment_status = NodePath("VBoxContainer/Buttons/ShipmentStatuses")
-_shipment_number = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/References/TmsFieldValue/ShipmentNumber")
-_customer_reference = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/References/TmsFieldValue3/CustomerReference")
-_shipper = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Parties/TmsFieldValue/Shipper")
-_consignee = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Parties/TmsFieldValue2/Consignee")
-_origin = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Locations/TmsFieldValue/Origin")
-_destination = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Locations/TmsFieldValue2/Destination")
-_incoterms = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Service/TmsFieldValue/Incoterms")
-_service = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Service/TmsFieldValue2/Service")
-_earliest_pickup = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Dates/TmsFieldValue/EarliestPickup")
-_latest_delivery = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Dates/TmsFieldValue2/LatestDelivery")
+_shipment_number = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/References/ShipmentNumber")
+_customer_reference = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/References/CustomerReference")
+_shipper = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Parties/Shipper")
+_consignee = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Parties/Consignee")
+_origin = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Locations/Origin")
+_destination = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Locations/Destination")
+_incoterms = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Service/Incoterms")
+_service = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Service/Service")
+_earliest_pickup = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Dates/EarliestPickup")
+_latest_delivery = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Dates/LatestDelivery")
 _shipment_cargo_details = NodePath("VBoxContainer/Tabs/Cargo details")
 _shipment_main_freight = NodePath("VBoxContainer/Tabs/Main freight")
 _shipment_haulage = NodePath("VBoxContainer/Tabs/Haulage")
@@ -112,303 +94,86 @@ size_flags_vertical = 3
 
 [node name="References" type="GridContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-columns = 4
+columns = 2
 
-[node name="TmsFieldLabel" type="PanelContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/References"]
-custom_minimum_size = Vector2(120, 0)
+[node name="ShipmentNumber" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/References" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+label_text = "Shipment no.:"
 
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/References/TmsFieldLabel"]
+[node name="CustomerReference" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/References" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-size_flags_vertical = 1
-text = "Shipment no:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue" type="PanelContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/References"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="ShipmentNumber" type="Label" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/References/TmsFieldValue"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
-
-[node name="TmsFieldLabel3" type="PanelContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/References"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
-
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/References/TmsFieldLabel3"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Customer ref:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue3" type="PanelContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/References"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="CustomerReference" type="Label" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/References/TmsFieldValue3"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
+label_text = "Customer ref.:"
 
 [node name="HSeparator4" type="HSeparator" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="Parties" type="GridContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-columns = 4
+columns = 2
 
-[node name="TmsFieldLabel" type="PanelContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Parties"]
-custom_minimum_size = Vector2(120, 0)
+[node name="Shipper" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Parties" instance=ExtResource("4_sna7y")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+label_text = "Shipper:"
 
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Parties/TmsFieldLabel"]
+[node name="Consignee" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Parties" instance=ExtResource("4_sna7y")]
 layout_mode = 2
-size_flags_vertical = 1
-text = "Shipper:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue" type="PanelContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Parties"]
-custom_minimum_size = Vector2(250, 130)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="Shipper" type="Label" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Parties/TmsFieldValue"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX asfdadf fds
-XXXfasdf
-fasd
-f"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 5
-
-[node name="TmsFieldLabel2" type="PanelContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Parties"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
-
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Parties/TmsFieldLabel2"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Consignee:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue2" type="PanelContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Parties"]
-custom_minimum_size = Vector2(250, 130)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="Consignee" type="Label" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Parties/TmsFieldValue2"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX asfdadf fds
-XXXfasdf
- sdfadsf
-fasd
-f"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 5
+label_text = "Consignee:"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="Locations" type="GridContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-columns = 4
+columns = 2
 
-[node name="TmsFieldLabel" type="PanelContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Locations"]
-custom_minimum_size = Vector2(120, 0)
+[node name="Origin" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Locations" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+label_text = "Origin:"
 
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Locations/TmsFieldLabel"]
+[node name="Destination" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Locations" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-size_flags_vertical = 1
-text = "Origin:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue" type="PanelContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Locations"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="Origin" type="Label" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Locations/TmsFieldValue"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
-
-[node name="TmsFieldLabel2" type="PanelContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Locations"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
-
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Locations/TmsFieldLabel2"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Destination:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue2" type="PanelContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Locations"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="Destination" type="Label" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Locations/TmsFieldValue2"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
+label_text = "Destination:"
 
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="Service" type="GridContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-columns = 4
+columns = 2
 
-[node name="TmsFieldLabel" type="PanelContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Service"]
-custom_minimum_size = Vector2(120, 0)
+[node name="Incoterms" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Service" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+label_text = "Incoterms:"
 
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Service/TmsFieldLabel"]
+[node name="Service" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Service" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-size_flags_vertical = 1
-text = "Incoterms:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue" type="PanelContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Service"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="Incoterms" type="Label" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Service/TmsFieldValue"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
-
-[node name="TmsFieldLabel2" type="PanelContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Service"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
-
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Service/TmsFieldLabel2"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Service:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue2" type="PanelContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Service"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="Service" type="Label" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Service/TmsFieldValue2"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
+label_text = "Service:"
 
 [node name="HSeparator3" type="HSeparator" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="Dates" type="GridContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-columns = 4
+columns = 2
 
-[node name="TmsFieldLabel" type="PanelContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Dates"]
-custom_minimum_size = Vector2(120, 0)
+[node name="EarliestPickup" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Dates" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+label_text = "Erl. pickup::"
 
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Dates/TmsFieldLabel"]
+[node name="LatestDelivery" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Dates" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-size_flags_vertical = 1
-text = "Erl. pickup:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
+label_text = "Lts. delivery:"
 
-[node name="TmsFieldValue" type="PanelContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Dates"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="EarliestPickup" type="Label" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Dates/TmsFieldValue"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
-
-[node name="TmsFieldLabel2" type="PanelContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Dates"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
-
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Dates/TmsFieldLabel2"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Lts. delivery:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue2" type="PanelContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Dates"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="LatestDelivery" type="Label" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Dates/TmsFieldValue2"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
-
-[node name="Cargo details" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_cargo_description", "_slac", "_total_quantity", "_total_weight", "_total_volume", "_dimension_sets_container")]
+[node name="Cargo details" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_description", "_slac", "_total_quantity", "_total_weight", "_total_volume", "_dimension_sets_container")]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 script = ExtResource("5_gxcvw")
-_cargo_description = NodePath("ScrollContainer/VBoxContainer/CargoDetailsSummary/TmsFieldValue4/CargoDescription")
-_slac = NodePath("ScrollContainer/VBoxContainer/CargoDetailsSummary/TmsFieldValue5/Slac")
-_total_quantity = NodePath("ScrollContainer/VBoxContainer/CargoDetailsSummary/TmsFieldValue/TotalQuantity")
-_total_weight = NodePath("ScrollContainer/VBoxContainer/CargoDetailsSummary/TmsFieldValue2/TotalWeight")
-_total_volume = NodePath("ScrollContainer/VBoxContainer/CargoDetailsSummary/TmsFieldValue3/TotalVolume")
+_description = NodePath("ScrollContainer/VBoxContainer/CargoDetailsSummary/Description")
+_slac = NodePath("ScrollContainer/VBoxContainer/CargoDetailsSummary/Slac")
+_total_quantity = NodePath("ScrollContainer/VBoxContainer/CargoDetailsSummary/TotalQuantity")
+_total_weight = NodePath("ScrollContainer/VBoxContainer/CargoDetailsSummary/TotalWeight")
+_total_volume = NodePath("ScrollContainer/VBoxContainer/CargoDetailsSummary/TotalVolume")
 _dimension_sets_container = NodePath("ScrollContainer/VBoxContainer/DimensionSets")
 _tms_dimension_set_scene = ExtResource("2_socwm")
 metadata/_tab_index = 1
@@ -423,132 +188,26 @@ size_flags_vertical = 3
 
 [node name="CargoDetailsSummary" type="GridContainer" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-columns = 2
 
-[node name="TmsFieldLabel4" type="PanelContainer" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary"]
-custom_minimum_size = Vector2(120, 0)
+[node name="Description" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+label_text = "Description:"
 
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary/TmsFieldLabel4"]
+[node name="Slac" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-size_flags_vertical = 1
-text = "Description:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
+label_text = "SLAC:"
 
-[node name="TmsFieldValue4" type="PanelContainer" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary"]
-custom_minimum_size = Vector2(250, 27)
+[node name="TotalQuantity" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
+label_text = "Total quantity:"
 
-[node name="CargoDescription" type="Label" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary/TmsFieldValue4"]
+[node name="TotalWeight" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
+label_text = "Total weight:"
 
-[node name="TmsFieldLabel5" type="PanelContainer" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary"]
-custom_minimum_size = Vector2(120, 0)
+[node name="TotalVolume" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
-
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary/TmsFieldLabel5"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "SLAC:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue5" type="PanelContainer" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="Slac" type="Label" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary/TmsFieldValue5"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
-
-[node name="TmsFieldLabel" type="PanelContainer" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
-
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary/TmsFieldLabel"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Total quantity:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue" type="PanelContainer" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="TotalQuantity" type="Label" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary/TmsFieldValue"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
-
-[node name="TmsFieldLabel2" type="PanelContainer" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
-
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary/TmsFieldLabel2"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Total weight:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue2" type="PanelContainer" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="TotalWeight" type="Label" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary/TmsFieldValue2"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
-
-[node name="TmsFieldLabel3" type="PanelContainer" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
-
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary/TmsFieldLabel3"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Total volume:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue3" type="PanelContainer" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="TotalVolume" type="Label" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary/TmsFieldValue3"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
+label_text = "Total volume:"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -568,10 +227,10 @@ visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 script = ExtResource("6_rx45m")
-_mode_of_transport = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/General/TmsFieldValue4/ModeOfTransport")
-_carrier = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/General/TmsFieldValue5/Carrier")
-_planned_departure = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/Dates/TmsFieldValue/PlannedDeparture")
-_planned_arrival = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/Dates/TmsFieldValue2/PlannedArrival")
+_mode_of_transport = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/General/ModeOfTransport")
+_carrier = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/General/Carrier")
+_planned_departure = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/Dates/PlannedDeparture")
+_planned_arrival = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/Dates/PlannedArrival")
 _arrange_main_freight_button = NodePath("VBoxContainer/Buttons/ArrangeMainFreightButton")
 metadata/_tab_index = 2
 
@@ -589,114 +248,29 @@ size_flags_vertical = 3
 
 [node name="General" type="GridContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-columns = 2
 
-[node name="TmsFieldLabel4" type="PanelContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer/General"]
-custom_minimum_size = Vector2(120, 0)
+[node name="ModeOfTransport" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer/General" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+label_text = "Mode of Tr.:"
 
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer/General/TmsFieldLabel4"]
+[node name="Carrier" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer/General" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-size_flags_vertical = 1
-text = "Mode of Tr.:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue4" type="PanelContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer/General"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="ModeOfTransport" type="Label" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer/General/TmsFieldValue4"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
-
-[node name="TmsFieldLabel5" type="PanelContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer/General"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
-
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer/General/TmsFieldLabel5"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Carrier:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue5" type="PanelContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer/General"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="Carrier" type="Label" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer/General/TmsFieldValue5"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
+label_text = "Carrier:"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="Dates" type="GridContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-columns = 4
+columns = 2
 
-[node name="TmsFieldLabel" type="PanelContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer/Dates"]
-custom_minimum_size = Vector2(120, 0)
+[node name="PlannedDeparture" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer/Dates" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+label_text = "Plan. depart.:"
 
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer/Dates/TmsFieldLabel"]
+[node name="PlannedArrival" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer/Dates" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-size_flags_vertical = 1
-text = "Plan. depart.:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue" type="PanelContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer/Dates"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="PlannedDeparture" type="Label" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer/Dates/TmsFieldValue"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
-
-[node name="TmsFieldLabel2" type="PanelContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer/Dates"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
-
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer/Dates/TmsFieldLabel2"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Plan. arrival:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue2" type="PanelContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer/Dates"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="PlannedArrival" type="Label" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer/Dates/TmsFieldValue2"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
+label_text = "Plan. arrival:"
 
 [node name="Buttons" type="HBoxContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer"]
 layout_mode = 2
@@ -711,10 +285,10 @@ visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 script = ExtResource("8_s4hq1")
-_trucker_pickup = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/General/TmsFieldValue4/TruckerPickup")
-_trucker_delivery = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/General/TmsFieldValue5/TruckerDelivery")
-_planned_pickup = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/Dates/TmsFieldValue/PlannedPickup")
-_planned_delivery = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/Dates/TmsFieldValue2/PlannedDelivery")
+_trucker_pickup = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/General/TruckerPickup")
+_trucker_delivery = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/General/TruckerDelivery")
+_planned_pickup = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/Dates/PlannedPickup")
+_planned_delivery = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/Dates/PlannedDelivery")
 _arrange_pickup_button = NodePath("VBoxContainer/Buttons/ArrangePickupButton")
 _arrange_delivery_button = NodePath("VBoxContainer/Buttons/ArrangeDeliveryButton")
 metadata/_tab_index = 3
@@ -733,114 +307,30 @@ size_flags_vertical = 3
 
 [node name="General" type="GridContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-columns = 4
+columns = 2
 
-[node name="TmsFieldLabel4" type="PanelContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer/General"]
-custom_minimum_size = Vector2(120, 0)
+[node name="TruckerPickup" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer/General" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+label_text = "Trucker PUP:"
 
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer/General/TmsFieldLabel4"]
+[node name="TruckerDelivery" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer/General" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-size_flags_vertical = 1
-text = "Trucker PUP:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue4" type="PanelContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer/General"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="TruckerPickup" type="Label" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer/General/TmsFieldValue4"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
-
-[node name="TmsFieldLabel5" type="PanelContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer/General"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
-
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer/General/TmsFieldLabel5"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Trucker DEL:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue5" type="PanelContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer/General"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="TruckerDelivery" type="Label" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer/General/TmsFieldValue5"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
+label_text = "Trucker DEL:"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="Dates" type="GridContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-columns = 4
+columns = 2
 
-[node name="TmsFieldLabel" type="PanelContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer/Dates"]
-custom_minimum_size = Vector2(120, 0)
+[node name="PlannedPickup" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer/Dates" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+label_text = "Plan. pickup:"
 
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer/Dates/TmsFieldLabel"]
+[node name="PlannedDelivery" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer/Dates" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-size_flags_vertical = 1
-text = "Plan. pickup:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue" type="PanelContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer/Dates"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="PlannedPickup" type="Label" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer/Dates/TmsFieldValue"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
-
-[node name="TmsFieldLabel2" type="PanelContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer/Dates"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
-
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer/Dates/TmsFieldLabel2"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Plan. delivery:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue2" type="PanelContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer/Dates"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="PlannedDelivery" type="Label" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer/Dates/TmsFieldValue2"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
+label_text = "Plan. delivery:"
 
 [node name="Buttons" type="HBoxContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer"]
 layout_mode = 2
@@ -859,8 +349,8 @@ visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 script = ExtResource("9_l03v4")
-_handling_agent_export = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/General/TmsFieldValue4/HandlingAgentExport")
-_handling_agent_import = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/General/TmsFieldValue5/HandlingAgentImport")
+_handling_agent_export = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/General/HandlingAgentExport")
+_handling_agent_import = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/General/HandlingAgentImport")
 _arrange_export_handling_button = NodePath("VBoxContainer/Buttons/ArrangeExportHandlingButton")
 _arrange_import_handling_button = NodePath("VBoxContainer/Buttons/ArrangeImportHandlingButton")
 metadata/_tab_index = 4
@@ -879,57 +369,15 @@ size_flags_vertical = 3
 
 [node name="General" type="GridContainer" parent="VBoxContainer/Tabs/Handling/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-columns = 4
+columns = 2
 
-[node name="TmsFieldLabel4" type="PanelContainer" parent="VBoxContainer/Tabs/Handling/VBoxContainer/ScrollContainer/VBoxContainer/General"]
-custom_minimum_size = Vector2(120, 0)
+[node name="HandlingAgentExport" parent="VBoxContainer/Tabs/Handling/VBoxContainer/ScrollContainer/VBoxContainer/General" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+label_text = "Hand. ag. exp:"
 
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Handling/VBoxContainer/ScrollContainer/VBoxContainer/General/TmsFieldLabel4"]
+[node name="HandlingAgentImport" parent="VBoxContainer/Tabs/Handling/VBoxContainer/ScrollContainer/VBoxContainer/General" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-size_flags_vertical = 1
-text = "Hand. ag. exp:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue4" type="PanelContainer" parent="VBoxContainer/Tabs/Handling/VBoxContainer/ScrollContainer/VBoxContainer/General"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="HandlingAgentExport" type="Label" parent="VBoxContainer/Tabs/Handling/VBoxContainer/ScrollContainer/VBoxContainer/General/TmsFieldValue4"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
-
-[node name="TmsFieldLabel5" type="PanelContainer" parent="VBoxContainer/Tabs/Handling/VBoxContainer/ScrollContainer/VBoxContainer/General"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
-
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Handling/VBoxContainer/ScrollContainer/VBoxContainer/General/TmsFieldLabel5"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Hand. ag. imp:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue5" type="PanelContainer" parent="VBoxContainer/Tabs/Handling/VBoxContainer/ScrollContainer/VBoxContainer/General"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="HandlingAgentImport" type="Label" parent="VBoxContainer/Tabs/Handling/VBoxContainer/ScrollContainer/VBoxContainer/General/TmsFieldValue5"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
+label_text = "Hand. ag. imp:"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/Tabs/Handling/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -951,10 +399,10 @@ visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 script = ExtResource("10_e8rh3")
-_customs_agency_export = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/General/TmsFieldValue4/CustomsAgencyExport")
-_customs_agency_import = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/General/TmsFieldValue5/CustomsAgencyImport")
-_export_customs_cleared_date = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/Dates/TmsFieldValue/ExportCustomsClearedDate")
-_import_customs_cleared_date = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/Dates/TmsFieldValue2/ImportCustomsClearedDate")
+_customs_agency_export = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/General/CustomsAgencyExport")
+_customs_agency_import = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/General/CustomsAgencyImport")
+_export_customs_cleared_date = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/Dates/ExportCustomsClearedDate")
+_import_customs_cleared_date = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/Dates/ImportCustomsClearedDate")
 _arrange_export_customs_button = NodePath("VBoxContainer/Buttons/ArrangeExportCustomsButton")
 _arrange_import_customs_button = NodePath("VBoxContainer/Buttons/ArrangeImportCustomsButton")
 metadata/_tab_index = 5
@@ -973,114 +421,30 @@ size_flags_vertical = 3
 
 [node name="General" type="GridContainer" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-columns = 4
+columns = 2
 
-[node name="TmsFieldLabel4" type="PanelContainer" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer/General"]
-custom_minimum_size = Vector2(120, 0)
+[node name="CustomsAgencyExport" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer/General" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+label_text = "Cust. ag. exp.:"
 
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer/General/TmsFieldLabel4"]
+[node name="CustomsAgencyImport" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer/General" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-size_flags_vertical = 1
-text = "Cust. ag. exp:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue4" type="PanelContainer" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer/General"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="CustomsAgencyExport" type="Label" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer/General/TmsFieldValue4"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
-
-[node name="TmsFieldLabel5" type="PanelContainer" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer/General"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
-
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer/General/TmsFieldLabel5"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Cust. ag. imp:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue5" type="PanelContainer" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer/General"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="CustomsAgencyImport" type="Label" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer/General/TmsFieldValue5"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
+label_text = "Cust. ag. imp.:"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="Dates" type="GridContainer" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-columns = 4
+columns = 2
 
-[node name="TmsFieldLabel" type="PanelContainer" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer/Dates"]
-custom_minimum_size = Vector2(120, 0)
+[node name="ExportCustomsClearedDate" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer/Dates" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+label_text = "Exp. cust. clr.:"
 
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer/Dates/TmsFieldLabel"]
+[node name="ImportCustomsClearedDate" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer/Dates" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-size_flags_vertical = 1
-text = "Exp cust. clr.:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue" type="PanelContainer" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer/Dates"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="ExportCustomsClearedDate" type="Label" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer/Dates/TmsFieldValue"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
-
-[node name="TmsFieldLabel2" type="PanelContainer" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer/Dates"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
-
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer/Dates/TmsFieldLabel2"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Imp cust. clr.:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue2" type="PanelContainer" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer/Dates"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="ImportCustomsClearedDate" type="Label" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer/Dates/TmsFieldValue2"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
+label_text = "Imp. cust. clr.:"
 
 [node name="Buttons" type="HBoxContainer" parent="VBoxContainer/Tabs/Customs/VBoxContainer"]
 layout_mode = 2
@@ -1112,17 +476,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TmsFieldLabel4" type="PanelContainer" parent="VBoxContainer/Tabs/Events/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(120, 0)
+[node name="PlannedEvents" parent="VBoxContainer/Tabs/Events/ScrollContainer/VBoxContainer" instance=ExtResource("13_toxsx")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
-
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Events/ScrollContainer/VBoxContainer/TmsFieldLabel4"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Planned events:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
+label_text = "Planned events:"
 
 [node name="PlannedEventsContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Events/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -1134,17 +490,9 @@ layout_mode = 2
 [node name="TmsEventDetails2" parent="VBoxContainer/Tabs/Events/ScrollContainer/VBoxContainer/PlannedEventsContainer" instance=ExtResource("11_s4hq1")]
 layout_mode = 2
 
-[node name="TmsFieldLabel5" type="PanelContainer" parent="VBoxContainer/Tabs/Events/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(120, 0)
+[node name="ActualEvents" parent="VBoxContainer/Tabs/Events/ScrollContainer/VBoxContainer" instance=ExtResource("13_toxsx")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
-
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Events/ScrollContainer/VBoxContainer/TmsFieldLabel5"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Actual events:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
+label_text = "Actual events:"
 
 [node name="ActualEventsContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Events/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -1185,17 +533,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TmsFieldLabel4" type="PanelContainer" parent="VBoxContainer/Tabs/Documentation/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(120, 0)
+[node name="Documents" parent="VBoxContainer/Tabs/Documentation/ScrollContainer/VBoxContainer" instance=ExtResource("13_toxsx")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
-
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Documentation/ScrollContainer/VBoxContainer/TmsFieldLabel4"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Documents:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
+label_text = "Documents:"
 
 [node name="DocumentsContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Documentation/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -1223,11 +563,11 @@ layout_mode = 2
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 script = ExtResource("15_06odw")
-_quotation = NodePath("ScrollContainer/VBoxContainer/Summary/TmsFieldValue4/Quotation")
-_revenue_total = NodePath("ScrollContainer/VBoxContainer/Summary/TmsFieldValue7/RevenueTotal")
-_cost_total = NodePath("ScrollContainer/VBoxContainer/Summary/TmsFieldValue6/CostTotal")
-_gross_profit = NodePath("ScrollContainer/VBoxContainer/Summary/TmsFieldValue/GrossProfit")
-_margin = NodePath("ScrollContainer/VBoxContainer/Summary/TmsFieldValue3/Margin")
+_quotation = NodePath("ScrollContainer/VBoxContainer/Summary/Quotation")
+_revenue_total = NodePath("ScrollContainer/VBoxContainer/Summary/RevenueTotal")
+_cost_total = NodePath("ScrollContainer/VBoxContainer/Summary/CostTotal")
+_gross_profit = NodePath("ScrollContainer/VBoxContainer/Summary/GrossProfit")
+_margin = NodePath("ScrollContainer/VBoxContainer/Summary/Margin")
 _revenue_container = NodePath("ScrollContainer/VBoxContainer/RevenueContainer")
 _cost_container = NodePath("ScrollContainer/VBoxContainer/CostContainer")
 _charge_scene = ExtResource("16_d3w2o")
@@ -1243,154 +583,37 @@ size_flags_vertical = 3
 
 [node name="Summary" type="GridContainer" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-columns = 4
+columns = 2
 
-[node name="TmsFieldLabel4" type="PanelContainer" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary"]
-custom_minimum_size = Vector2(120, 0)
+[node name="Quotation" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
+label_text = "Quotation:"
 
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary/TmsFieldLabel4"]
+[node name="TmsFieldPlaceholder" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary" instance=ExtResource("19_wu3do")]
 layout_mode = 2
-size_flags_vertical = 1
-text = "Quotation:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
 
-[node name="TmsFieldValue4" type="PanelContainer" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary"]
-custom_minimum_size = Vector2(250, 27)
+[node name="RevenueTotal" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
+label_text = "Revenue total:"
 
-[node name="Quotation" type="Label" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary/TmsFieldValue4"]
+[node name="CostTotal" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
+label_text = "Cost total:"
 
-[node name="Placeholder" type="PanelContainer" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary"]
-custom_minimum_size = Vector2(120, 0)
+[node name="GrossProfit" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_d3w2o")
+label_text = "Gross profit:"
 
-[node name="Placeholder2" type="PanelContainer" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary"]
-custom_minimum_size = Vector2(250, 27)
+[node name="Margin" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_sna7y")
+label_text = "Margin:"
 
-[node name="TmsFieldLabel7" type="PanelContainer" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary"]
-custom_minimum_size = Vector2(120, 0)
+[node name="HSeparator4" type="HSeparator" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
 
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary/TmsFieldLabel7"]
+[node name="RevenueCharges" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer" instance=ExtResource("13_toxsx")]
 layout_mode = 2
-size_flags_vertical = 1
-text = "Revenue total:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue7" type="PanelContainer" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="RevenueTotal" type="Label" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary/TmsFieldValue7"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
-
-[node name="TmsFieldLabel6" type="PanelContainer" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
-
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary/TmsFieldLabel6"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Cost total:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue6" type="PanelContainer" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="CostTotal" type="Label" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary/TmsFieldValue6"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
-
-[node name="TmsFieldLabel" type="PanelContainer" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
-
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary/TmsFieldLabel"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Gross profit:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue" type="PanelContainer" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="GrossProfit" type="Label" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary/TmsFieldValue"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
-
-[node name="TmsFieldLabel3" type="PanelContainer" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
-
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary/TmsFieldLabel3"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Margin:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
-
-[node name="TmsFieldValue3" type="PanelContainer" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary"]
-custom_minimum_size = Vector2(250, 27)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ek2n7")
-
-[node name="Margin" type="Label" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary/TmsFieldValue3"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "XXX"
-label_settings = ExtResource("4_xd1jn")
-text_overrun_behavior = 3
-max_lines_visible = 1
-
-[node name="TmsFieldLabel5" type="PanelContainer" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
-
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/TmsFieldLabel5"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Revenue:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
+label_text = "Revenue charges:"
 
 [node name="RevenueContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -1414,17 +637,9 @@ layout_mode = 2
 [node name="TmsEventDetails6" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/RevenueContainer" instance=ExtResource("11_s4hq1")]
 layout_mode = 2
 
-[node name="TmsFieldLabel6" type="PanelContainer" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer"]
-custom_minimum_size = Vector2(120, 0)
+[node name="CostCharges" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer" instance=ExtResource("13_toxsx")]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ql6i1")
-
-[node name="Label" type="Label" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/TmsFieldLabel6"]
-layout_mode = 2
-size_flags_vertical = 1
-text = "Cost:"
-label_settings = ExtResource("3_yrx8i")
-text_overrun_behavior = 3
+label_text = "Cost charges:"
 
 [node name="CostContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer"]
 layout_mode = 2

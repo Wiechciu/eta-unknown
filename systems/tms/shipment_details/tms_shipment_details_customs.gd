@@ -3,10 +3,10 @@ extends PanelContainer
 
 
 var shipment: Shipment
-@export var _customs_agency_export: Label
-@export var _customs_agency_import: Label
-@export var _export_customs_cleared_date: Label
-@export var _import_customs_cleared_date: Label
+@export var _customs_agency_export: TmsField
+@export var _customs_agency_import: TmsField
+@export var _export_customs_cleared_date: TmsField
+@export var _import_customs_cleared_date: TmsField
 
 @export var _arrange_export_customs_button: Button
 @export var _arrange_import_customs_button: Button
@@ -26,10 +26,10 @@ func refresh() -> void:
 func load_shipment(shipment_to_load: Shipment) -> void:
 	shipment = shipment_to_load
 	
-	_customs_agency_export.text = shipment.customs.customs_agency_export.name if shipment.customs.customs_agency_export else ""
-	_customs_agency_import.text = shipment.customs.customs_agency_import.name if shipment.customs.customs_agency_import else ""
-	_export_customs_cleared_date.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_type(Event.Code.CSE))
-	_import_customs_cleared_date.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_type(Event.Code.CSI))
+	_customs_agency_export.value.text = shipment.customs.customs_agency_export.name if shipment.customs.customs_agency_export else ""
+	_customs_agency_import.value.text = shipment.customs.customs_agency_import.name if shipment.customs.customs_agency_import else ""
+	_export_customs_cleared_date.value.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_type(Event.Code.CSE))
+	_import_customs_cleared_date.value.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_type(Event.Code.CSI))
 
 
 

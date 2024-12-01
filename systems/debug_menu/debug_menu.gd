@@ -1,7 +1,20 @@
 extends Control
 
 
+@export var fps: Label
+@export var memory: Label
 @export var shipping_order_scene: PackedScene
+
+var counter: float
+
+
+func _process(delta: float) -> void:
+	#counter += delta
+	#if counter < 1:
+		#return
+	#counter = 0
+	fps.text = "FPS: %d" % Performance.get_monitor(Performance.TIME_FPS)
+	memory.text = "Memory: %d / %d" % [Performance.get_monitor(Performance.MEMORY_STATIC) / 10**6, Performance.get_monitor(Performance.MEMORY_STATIC_MAX) / 10**6]
 
 
 func _on_new_shipping_order_button_pressed() -> void:

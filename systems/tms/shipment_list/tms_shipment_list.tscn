@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dkbqixm40xi7u"]
 
-[ext_resource type="Script" path="res://systems/tms/shipment_list/tms_shipment_list.gd" id="1_f2rsm"]
+[ext_resource type="Script" uid="uid://cl7we01wx8ir3" path="res://systems/tms/shipment_list/tms_shipment_list.gd" id="1_f2rsm"]
 [ext_resource type="PackedScene" uid="uid://dag450t1ydq8u" path="res://systems/tms/shipment_list/tms_shipment_list_item.tscn" id="2_jqska"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f2rsm"]
@@ -28,7 +28,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 
-[node name="ShipmentList" type="PanelContainer" node_paths=PackedStringArray("_shipment_container", "_toggle_completed_button", "_sort_button")]
+[node name="ShipmentList" type="PanelContainer" node_paths=PackedStringArray("_shipment_container", "_shipments_header", "_toggle_completed_button", "_sort_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -37,6 +37,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_f2rsm")
 script = ExtResource("1_f2rsm")
 _shipment_container = NodePath("VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer")
+_shipments_header = NodePath("VBoxContainer/HBoxContainer/Header")
 _toggle_completed_button = NodePath("VBoxContainer/HBoxContainer/ToggleCompletedButton")
 _sort_button = NodePath("VBoxContainer/HBoxContainer/SortButton")
 _shipment_list_item_scene = ExtResource("2_jqska")

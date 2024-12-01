@@ -135,8 +135,12 @@ func get_nice_date_string_from_event(event: Event) -> String:
 ## The observer needs to have a "Notify" function to be able to receive the event
 func create_time_event_from_unix_time(time: int, observer: Object, event: Event = null) -> TimeEvent:
 	var new_time_event: TimeEvent = TimeEvent.new().with_data(time, observer, event)
-	time_events.append(new_time_event)
-	time_events.sort_custom(_sort_time_events_ascending)
+	
+	if not time_events.is_empty() and new_time_event.time < time_events[0].time:
+		time_events.push_front(new_time_event)
+	else:
+		time_events.push_back(new_time_event)
+	
 	return new_time_event
 
 
@@ -154,6 +158,9 @@ func _sort_time_events_ascending(a: TimeEvent, b: TimeEvent) -> bool:
 
 
 func _check_time_events() -> void:
+	if not time_events.is_empty() and time_events[0].time <= now:
+		time_events.sort_custom(_sort_time_events_ascending)
+	
 	var counter: int = -1
 	var time_event_indexes_to_remove: Array[int]
 	for time_event: TimeEvent in time_events:

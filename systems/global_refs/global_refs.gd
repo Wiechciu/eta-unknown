@@ -4,8 +4,6 @@ var cargos: Array[Cargo]
 var cargos_dict: Dictionary[String, Cargo]
 var currencies: Array[Currency]
 var currencies_dict: Dictionary[String, Currency]
-var countries: Array[Country]
-var countries_dict: Dictionary[String, Country]
 var job_positions: Array[JobPosition]
 var job_positions_dict: Dictionary[String, JobPosition]
 
@@ -49,6 +47,10 @@ var truckers_with_employees: Array[Trucker]:
 	get:
 		return truckers.filter(func(party: Trucker) -> bool: return not party.employees.is_empty())
 var truckers_dict: Dictionary[String, Trucker]
+
+var countries: Array[Country]
+var countries_dict: Dictionary[String, Country]
+var country_locations_dict: Dictionary[String, Array]
 
 var locations: Array[Location]
 var locations_dict: Dictionary[String, Location]

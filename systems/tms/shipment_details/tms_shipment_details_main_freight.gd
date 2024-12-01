@@ -3,10 +3,10 @@ extends PanelContainer
 
 
 var shipment: Shipment
-@export var _mode_of_transport: Label
-@export var _carrier: Label
-@export var _planned_departure: Label
-@export var _planned_arrival: Label
+@export var _mode_of_transport: TmsField
+@export var _carrier: TmsField
+@export var _planned_departure: TmsField
+@export var _planned_arrival: TmsField
 
 @export var _arrange_main_freight_button: Button
 
@@ -24,10 +24,10 @@ func refresh() -> void:
 func load_shipment(shipment_to_load: Shipment) -> void:
 	shipment = shipment_to_load
 	
-	_mode_of_transport.text = shipment.main_freight.mode_of_transport.name if shipment.main_freight.mode_of_transport else ""
-	_carrier.text = shipment.main_freight.carrier.name if shipment.main_freight.carrier else ""
-	_planned_departure.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_type(Event.Code.DEP))
-	_planned_arrival.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_type(Event.Code.ARR))
+	_mode_of_transport.value.text = shipment.main_freight.mode_of_transport.name if shipment.main_freight.mode_of_transport else ""
+	_carrier.value.text = shipment.main_freight.carrier.name if shipment.main_freight.carrier else ""
+	_planned_departure.value.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_type(Event.Code.DEP))
+	_planned_arrival.value.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_type(Event.Code.ARR))
 
 
 func _on_arrange_main_freight_button_pressed() -> void:

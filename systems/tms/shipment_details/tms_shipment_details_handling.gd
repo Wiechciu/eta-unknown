@@ -3,8 +3,8 @@ extends PanelContainer
 
 
 var shipment: Shipment
-@export var _handling_agent_export: Label
-@export var _handling_agent_import: Label
+@export var _handling_agent_export: TmsField
+@export var _handling_agent_import: TmsField
 
 @export var _arrange_export_handling_button: Button
 @export var _arrange_import_handling_button: Button
@@ -24,8 +24,8 @@ func refresh() -> void:
 func load_shipment(shipment_to_load: Shipment) -> void:
 	shipment = shipment_to_load
 	
-	_handling_agent_export.text = shipment.handling.handling_agent_export.name if shipment.handling.handling_agent_export else ""
-	_handling_agent_import.text = shipment.handling.handling_agent_import.name if shipment.handling.handling_agent_import else ""
+	_handling_agent_export.value.text = shipment.handling.handling_agent_export.name if shipment.handling.handling_agent_export else ""
+	_handling_agent_import.value.text = shipment.handling.handling_agent_import.name if shipment.handling.handling_agent_import else ""
 
 
 func _on_arrange_export_handling_button_pressed() -> void:

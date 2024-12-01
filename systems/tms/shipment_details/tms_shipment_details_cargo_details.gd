@@ -4,11 +4,11 @@ extends PanelContainer
 
 var shipment: Shipment
 
-@export var _cargo_description: Label
-@export var _slac: Label
-@export var _total_quantity: Label
-@export var _total_weight: Label
-@export var _total_volume: Label
+@export var _description: TmsField
+@export var _slac: TmsField
+@export var _total_quantity: TmsField
+@export var _total_weight: TmsField
+@export var _total_volume: TmsField
 @export var _dimension_sets_container: Control
 @export var _tms_dimension_set_scene: PackedScene
 
@@ -24,11 +24,11 @@ func refresh() -> void:
 func load_shipment(shipment_to_load: Shipment) -> void:
 	shipment = shipment_to_load
 	
-	_cargo_description.text = shipment.cargo_details.cargo.description if shipment.cargo_details.cargo else ""
-	_slac.text = "%d pcs" % [shipment.cargo_details.slac]
-	_total_quantity.text = "%d pcs" % [shipment.cargo_details.total_quantity]
-	_total_weight.text = "%d kg" % [shipment.cargo_details.total_weight]
-	_total_volume.text = "%.3f cbm" % [shipment.cargo_details.total_volume]
+	_description.value.text = shipment.cargo_details.cargo.description if shipment.cargo_details.cargo else ""
+	_slac.value.text = "%d pcs" % [shipment.cargo_details.slac]
+	_total_quantity.value.text = "%d pcs" % [shipment.cargo_details.total_quantity]
+	_total_weight.value.text = "%d kg" % [shipment.cargo_details.total_weight]
+	_total_volume.value.text = "%.3f cbm" % [shipment.cargo_details.total_volume]
 
 	for child: Node in _dimension_sets_container.get_children():
 		child.queue_free()

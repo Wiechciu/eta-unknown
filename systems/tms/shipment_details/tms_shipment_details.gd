@@ -11,24 +11,24 @@ var shipment: Shipment
 @export var _shipment_status: OptionButton
 
 @export_group("References")
-@export var _shipment_number: Label
-@export var _customer_reference: Label
+@export var _shipment_number: TmsField
+@export var _customer_reference: TmsField
 
 @export_group("Parties")
-@export var _shipper: Label
-@export var _consignee: Label
+@export var _shipper: TmsField
+@export var _consignee: TmsField
 
 @export_group("Locations")
-@export var _origin: Label
-@export var _destination: Label
+@export var _origin: TmsField
+@export var _destination: TmsField
 
 @export_group("Service")
-@export var _incoterms: Label
-@export var _service: Label
+@export var _incoterms: TmsField
+@export var _service: TmsField
 
 @export_group("Dates")
-@export var _earliest_pickup: Label
-@export var _latest_delivery: Label
+@export var _earliest_pickup: TmsField
+@export var _latest_delivery: TmsField
 
 @export_group("Shipment modules")
 @export var _shipment_cargo_details: TmsShipmentDetailsCargoDetails
@@ -72,20 +72,20 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 	
 	_shipment_status.select(shipment.status)
 	
-	_shipment_number.text = str(shipment.number)
-	_customer_reference.text = shipment.customer_reference
+	_shipment_number.value.text = str(shipment.number)
+	_customer_reference.value.text = shipment.customer_reference
 	
-	_shipper.text = shipment.shipper.print_string if shipment.shipper else ""
-	_consignee.text = shipment.consignee.print_string if shipment.consignee else ""
+	_shipper.value.text = shipment.shipper.print_string if shipment.shipper else ""
+	_consignee.value.text = shipment.consignee.print_string if shipment.consignee else ""
 	
-	_origin.text = shipment.origin.print_string if shipment.origin else ""
-	_destination.text = shipment.destination.print_string if shipment.destination else ""
+	_origin.value.text = shipment.origin.print_string if shipment.origin else ""
+	_destination.value.text = shipment.destination.print_string if shipment.destination else ""
 	
-	_incoterms.text = shipment.incoterms.print_string
-	_service.text = shipment.service.name if shipment.service else ""
+	_incoterms.value.text = shipment.incoterms.print_string
+	_service.value.text = shipment.service.name if shipment.service else ""
 	
-	_earliest_pickup.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_type(Event.Code.ERL))
-	_latest_delivery.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_type(Event.Code.LTS))
+	_earliest_pickup.value.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_type(Event.Code.ERL))
+	_latest_delivery.value.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_type(Event.Code.LTS))
 	
 	_shipment_cargo_details.load_shipment(shipment)
 	_shipment_main_freight.load_shipment(shipment)

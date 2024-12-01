@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://jy36rrk78c2n"]
+
+[ext_resource type="Script" uid="uid://110ocip5xat2" path="res://systems/global_market/global_market.gd" id="1_8u81b"]
+
+[node name="GlobalMarket" type="Node"]
+script = ExtResource("1_8u81b")

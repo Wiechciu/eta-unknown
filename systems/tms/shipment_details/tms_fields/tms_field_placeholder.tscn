@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://5ch1nu72o26"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d3w2o"]
+
+[node name="TmsFieldPlaceholder" type="PanelContainer"]
+theme_override_styles/panel = SubResource("StyleBoxEmpty_d3w2o")

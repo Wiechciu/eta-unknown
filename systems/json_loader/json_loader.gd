@@ -93,6 +93,13 @@ func load_locations_from_json(file_to_load: String, array_to_fill: Array, dict_t
 		new_resource.name = str(item.name_wo_diacritics) if item.name_wo_diacritics else ""
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.code] = new_resource
+		
+		if GlobalRefs.country_locations_dict.has(new_resource.country.code):
+			var array: Array = GlobalRefs.country_locations_dict[new_resource.country.code]
+			array.append(new_resource)
+			GlobalRefs.country_locations_dict[new_resource.country.code] = array
+		else:
+			GlobalRefs.country_locations_dict[new_resource.country.code] = [new_resource]
 	
 	var end: int = Time.get_ticks_msec()
 	var time: int = (end - start)

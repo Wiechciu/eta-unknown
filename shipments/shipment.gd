@@ -86,12 +86,16 @@ func with_data(shipper_to_assign: Customer = null, consignee_to_assign: Customer
 		return null
 	
 	#FIXME sometimes origin or destination can be empty, because there are no locations in the customer country.
-	var origin_list: Array[Location] = GlobalRefs.locations.filter(Location.is_in_country.bind(shipper.country))
-	var destination_list: Array[Location] = GlobalRefs.locations.filter(Location.is_in_country.bind(consignee.country))
+	#var origin_list: Array[Location] = GlobalRefs.locations.filter(Location.is_in_country.bind(shipper.country))
+	#var destination_list: Array[Location] = GlobalRefs.locations.filter(Location.is_in_country.bind(consignee.country))
+	var origin_list: Array = GlobalRefs.country_locations_dict[shipper.country.code]
+	var destination_list: Array = GlobalRefs.country_locations_dict[consignee.country.code]
+	
+	
 	if origin_list.is_empty() or destination_list.is_empty():
 		return null
-	origin = origin_list.pick_random()
-	destination = destination_list.pick_random()
+	origin = origin_list.pick_random() as Location
+	destination = destination_list.pick_random() as Location
 	
 	events.create_new_planned_event(Event.Code.ERL, GlobalTimer.get_future_date_from_now(randi_range(1, 20), 10, 0))
 	events.create_new_planned_event(Event.Code.LTS, GlobalTimer.get_future_date_from_event(events.get_first_event_of_type(Event.Code.ERL), randi_range(2, 30), 17, 0))
