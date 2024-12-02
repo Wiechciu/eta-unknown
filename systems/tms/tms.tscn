@@ -1,13 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgytarte2suti"]
+[gd_scene load_steps=8 format=3 uid="uid://cgytarte2suti"]
 
 [ext_resource type="Script" uid="uid://b6t8wbp6uugxh" path="res://systems/tms/tms.gd" id="1_eiifu"]
 [ext_resource type="PackedScene" uid="uid://cxa2h82m4jg1l" path="res://systems/tms/tms_panel_header.tscn" id="2_ql6i1"]
+[ext_resource type="PackedScene" uid="uid://bk2s2lutco06v" path="res://systems/tms/navigation/tms_navigation.tscn" id="3_j065a"]
 [ext_resource type="PackedScene" uid="uid://dkbqixm40xi7u" path="res://systems/tms/shipment_list/tms_shipment_list.tscn" id="3_t5xli"]
 [ext_resource type="PackedScene" uid="uid://bmaoxf15lcni7" path="res://systems/tms/shipment_details/tms_shipment_details.tscn" id="4_nhplg"]
+[ext_resource type="PackedScene" uid="uid://cf1ag2bivl11t" path="res://systems/tms/tms_loading_screen/tms_loading_screen.tscn" id="5_t0vb8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mgofm"]
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
-[node name="Tms" type="PanelContainer" node_paths=PackedStringArray("shipment_list", "shipment_details")]
+[node name="Tms" type="PanelContainer" node_paths=PackedStringArray("panel_header", "loading_screen", "navigation", "shipment_list", "shipment_details")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -17,8 +28,11 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_mgofm")
 script = ExtResource("1_eiifu")
-shipment_list = NodePath("VBoxContainer/ShipmentList")
-shipment_details = NodePath("VBoxContainer/ShipmentDetails")
+panel_header = NodePath("VBoxContainer/PanelHeader")
+loading_screen = NodePath("TmsLoadingScreen")
+navigation = NodePath("VBoxContainer/HBoxContainer/NavigationPanel")
+shipment_list = NodePath("VBoxContainer/HBoxContainer/ShipmentList")
+shipment_details = NodePath("VBoxContainer/HBoxContainer/ShipmentDetails")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -28,13 +42,29 @@ theme_override_constants/separation = 0
 layout_mode = 2
 _control_to_move = NodePath("../..")
 
-[node name="ShipmentList" parent="VBoxContainer" node_paths=PackedStringArray("_tms") instance=ExtResource("3_t5xli")]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="NavigationPanel" parent="VBoxContainer/HBoxContainer" node_paths=PackedStringArray("_tms") instance=ExtResource("3_j065a")]
+layout_mode = 2
+_tms = NodePath("../../..")
+
+[node name="ShipmentList" parent="VBoxContainer/HBoxContainer" node_paths=PackedStringArray("_tms") instance=ExtResource("3_t5xli")]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
-_tms = NodePath("../..")
+_tms = NodePath("../../..")
 
-[node name="ShipmentDetails" parent="VBoxContainer" node_paths=PackedStringArray("_tms") instance=ExtResource("4_nhplg")]
+[node name="ShipmentDetails" parent="VBoxContainer/HBoxContainer" node_paths=PackedStringArray("_tms") instance=ExtResource("4_nhplg")]
+visible = false
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
-_tms = NodePath("../..")
+_tms = NodePath("../../..")
+
+[node name="TmsLoadingScreen" parent="." node_paths=PackedStringArray("tms") instance=ExtResource("5_t0vb8")]
+visible = false
+layout_mode = 2
+tms = NodePath("..")

@@ -2,6 +2,9 @@ class_name TmsPanelHeader
 extends Control
 
 
+signal close_button_pressed
+
+
 @export var _control_to_move: Control
 var is_moving: bool
 
@@ -19,3 +22,7 @@ func _on_gui_input(event: InputEvent) -> void:
 			is_moving = false
 	elif event is InputEventMouseMotion and is_moving:
 		_control_to_move.global_position = _control_to_move.global_position + (event as InputEventMouseMotion).relative
+
+
+func _on_close_button_pressed() -> void:
+	close_button_pressed.emit()

@@ -7,6 +7,7 @@ enum SortType {
 	BY_DATE,
 }
 
+
 @export var _tms: Tms
 @export var _shipment_container: Control
 @export var _shipments_header: Label
@@ -16,10 +17,21 @@ enum SortType {
 var show_completed: bool = true
 var sort_type: SortType
 var shipment_list_items: Array[TmsShipmentListItem]
+var thread: Thread
+var shipments_to_display: Array[Shipment]
 
 
-func _init() -> void:
-	visibility_changed.connect(_on_visibility_changed)
+func refresh_shipment_list_items_on_thread() -> void:
+	if thread != null:
+		thread.wait_to_finish()
+	thread = Thread.new()
+	thread.start(refresh_shipment_list_items)
+
+
+# Thread must be disposed (or "joined"), for portability.
+func _exit_tree() -> void:
+	if thread != null:
+		thread.wait_to_finish()
 
 
 func _ready() -> void:
@@ -28,16 +40,17 @@ func _ready() -> void:
 	refresh_shipment_list_items()
 
 
-func _on_visibility_changed() -> void:
-	if not GameManager.is_node_ready():
-		await GameManager.ready
-	var is_connected: bool = GameManager.player_company.shipment_list_updated.is_connected(refresh_shipment_list_items)
-	
-	if visible and not is_connected:
-		GameManager.player_company.shipment_list_updated.connect(refresh_shipment_list_items)
-		refresh_shipment_list_items()
-	elif not visible and is_connected:
+func close() -> void:
+	visible = false
+	if GameManager.player_company.shipment_list_updated.is_connected(refresh_shipment_list_items):
 		GameManager.player_company.shipment_list_updated.disconnect(refresh_shipment_list_items)
+
+
+func open() -> void:
+	visible = true
+	if not GameManager.player_company.shipment_list_updated.is_connected(refresh_shipment_list_items):
+		GameManager.player_company.shipment_list_updated.connect(refresh_shipment_list_items)
+	refresh_shipment_list_items()
 
 
 func clear_shipment_container() -> void:
@@ -57,26 +70,14 @@ func update_shipment_list_item(shipment_list_item: TmsShipmentListItem, new_ship
 	return shipment_list_item.with_data(new_shipment)
 
 
-func remove_shipment_list_item_by_id(id_to_remove: int) -> void:
-	shipment_list_items[id_to_remove].queue_free()
-	shipment_list_items.remove_at(id_to_remove)
+func remove_shipment_list_items(ids_to_remove: Array[int]) -> void:
+	for id_to_remove: int in ids_to_remove:
+		shipment_list_items[id_to_remove].queue_free()
+		shipment_list_items.remove_at(id_to_remove)
 
 
 func refresh_shipment_list_items() -> void:
-	var shipments: Array[Shipment] = (GameManager.player_company as FreightForwarder).shipments
-	if not show_completed:
-		var shipments_not_completed: Array[Shipment] = shipments.filter(func(shipment: Shipment) -> bool: return not shipment.is_completed)
-		shipments = shipments_not_completed
-	
-	var shipments_sorted: Array[Shipment]
-	match sort_type:
-		SortType.BY_NUMBER:
-			shipments_sorted = sort_shipment_list_by_shipment_number(shipments)
-		SortType.BY_DATE:
-			shipments_sorted = sort_shipment_list_by_earliest_pickup_date(shipments)
-	
-	var shipments_to_display: Array[Shipment]
-	shipments_to_display = shipments_sorted
+	filter_and_sort_shipment_list()
 	_shipments_header.text = "Shipments (%d):" % shipments_to_display.size()
 	
 	var shipments_size: int = shipments_to_display.size()
@@ -87,12 +88,27 @@ func refresh_shipment_list_items() -> void:
 		if counter <= shipments_size - 1 and counter <= list_items_size - 1:
 			update_shipment_list_item(shipment_list_items[counter], shipments_to_display[counter])
 		elif counter > shipments_size - 1:
-			list_item_ids_for_removal.append(counter)
+			list_item_ids_for_removal.push_front(counter)
 		elif counter > list_items_size - 1:
 			create_new_shipment_list_item(shipments_to_display[counter])
 	
-	for id_to_remove: int in list_item_ids_for_removal:
-		remove_shipment_list_item_by_id(id_to_remove)
+	remove_shipment_list_items(list_item_ids_for_removal)
+
+
+func filter_and_sort_shipment_list() -> void:
+	var shipments: Array[Shipment] = (GameManager.player_company as FreightForwarder).shipments
+	if not show_completed:
+		var shipments_not_completed: Array[Shipment] = shipments.filter(func(shipment: Shipment) -> bool: return not shipment.is_completed_or_cancelled)
+		shipments = shipments_not_completed
+	
+	var shipments_sorted: Array[Shipment]
+	match sort_type:
+		SortType.BY_NUMBER:
+			shipments_sorted = sort_shipment_list_by_shipment_number(shipments)
+		SortType.BY_DATE:
+			shipments_sorted = sort_shipment_list_by_earliest_pickup_date(shipments)
+	
+	shipments_to_display = shipments_sorted
 
 
 func _on_shipment_list_item_pressed(shipment_to_load: Shipment) -> void:

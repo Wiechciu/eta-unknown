@@ -1,0 +1,91 @@
+[gd_scene load_steps=14 format=3 uid="uid://dvpm8vxtia7au"]
+
+[ext_resource type="Script" uid="uid://bopojwj8du524" path="res://3d_scenes/computer.gd" id="1_ace01"]
+[ext_resource type="PackedScene" uid="uid://dl753wrtmui4e" path="res://systems/operating_system/operating_system.tscn" id="2_ptgvf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ace01"]
+size = Vector3(2.00488, 1.19963, 0.094696)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3l4wl"]
+albedo_color = Color(0, 0, 0, 1)
+metallic = 0.31
+roughness = 0.45
+
+[sub_resource type="BoxMesh" id="BoxMesh_82prh"]
+material = SubResource("StandardMaterial3D_3l4wl")
+size = Vector3(1.92, 1.08, 0.07)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ace01"]
+albedo_color = Color(0.340339, 0.340339, 0.340339, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ace01"]
+material = SubResource("StandardMaterial3D_ace01")
+size = Vector3(2, 1.15, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ptgvf"]
+material = SubResource("StandardMaterial3D_ace01")
+size = Vector3(1.105, 0.75, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8pfch"]
+material = SubResource("StandardMaterial3D_ace01")
+size = Vector3(0.05, 0.2, 0.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ptgvf"]
+albedo_color = Color(0.223103, 0.223103, 0.223103, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kooe7"]
+material = SubResource("StandardMaterial3D_ptgvf")
+size = Vector3(0.5, 0.05, 0.3)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ace01"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ptgvf"]
+size = Vector3(1.92, 1.08, 0.07)
+
+[node name="Computer" type="StaticBody3D" node_paths=PackedStringArray("_subviewport", "_input_area", "_screen_black")]
+script = ExtResource("1_ace01")
+_subviewport = NodePath("SubViewport")
+_os_scene = ExtResource("2_ptgvf")
+_input_area = NodePath("InputArea")
+_screen_black = NodePath("ScreenBlack")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.602258, -0.0225372)
+shape = SubResource("BoxShape3D_ace01")
+
+[node name="ScreenBlack" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.630231, 0)
+mesh = SubResource("BoxMesh_82prh")
+
+[node name="Frame" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.630231, -0.0221731)
+mesh = SubResource("BoxMesh_ace01")
+
+[node name="Frame2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.643708, -0.0571197)
+mesh = SubResource("BoxMesh_ptgvf")
+
+[node name="Leg" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.130231, 0)
+mesh = SubResource("BoxMesh_8pfch")
+
+[node name="Stand" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0302308, 0)
+mesh = SubResource("BoxMesh_kooe7")
+
+[node name="ScreenSprite" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.630231, 0.035109)
+pixel_size = 0.001
+double_sided = false
+texture = SubResource("ViewportTexture_ace01")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(1920, 1080)
+
+[node name="InputArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InputArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.630231, 0)
+shape = SubResource("BoxShape3D_ptgvf")

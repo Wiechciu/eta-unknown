@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmig0mcp2rse4"]
+
+[ext_resource type="Script" uid="uid://dnlopipkgf25w" path="res://systems/operating_system/os_app_icon.gd" id="1_j42na"]
+[ext_resource type="Texture2D" uid="uid://dipd68uiomkhw" path="res://icon.svg" id="1_r8636"]
+
+[node name="AppIcon" type="PanelContainer"]
+custom_minimum_size = Vector2(100, 0)
+script = ExtResource("1_j42na")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_r8636")
+expand_mode = 4
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "TMS"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+flat = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

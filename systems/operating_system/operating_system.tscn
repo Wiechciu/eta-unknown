@@ -1,0 +1,94 @@
+[gd_scene load_steps=13 format=3 uid="uid://dl753wrtmui4e"]
+
+[ext_resource type="Script" uid="uid://c0k32y6dedej4" path="res://systems/operating_system/operating_system.gd" id="1_raqbm"]
+[ext_resource type="Script" uid="uid://dl8sjycxexf0q" path="res://systems/operating_system/os_desktop.gd" id="3_2gwmb"]
+[ext_resource type="Script" uid="uid://cwxxsf5xrdc68" path="res://systems/operating_system/os_taskbar.gd" id="3_7dqhj"]
+[ext_resource type="Script" uid="uid://dvjhorl7vn7hs" path="res://systems/operating_system/os_calendar.gd" id="3_rg0tb"]
+[ext_resource type="PackedScene" uid="uid://cmig0mcp2rse4" path="res://systems/operating_system/os_app_icon.tscn" id="4_yoaf8"]
+[ext_resource type="Script" uid="uid://c7hm004adb8r0" path="res://systems/operating_system/os_start.gd" id="5_nlmep"]
+[ext_resource type="PackedScene" uid="uid://cgytarte2suti" path="res://systems/tms/tms.tscn" id="5_w7eab"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nlmep"]
+
+[sub_resource type="Gradient" id="Gradient_yoaf8"]
+colors = PackedColorArray(0, 0, 0, 1, 0.619608, 0.886275, 0.639216, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w7eab"]
+gradient = SubResource("Gradient_yoaf8")
+fill = 1
+fill_from = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yoaf8"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+texture = SubResource("GradientTexture2D_w7eab")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rg0tb"]
+content_margin_left = 4.0
+content_margin_top = 2.0
+content_margin_right = 4.0
+content_margin_bottom = 2.0
+bg_color = Color(0.125911, 0.125911, 0.125911, 1)
+
+[node name="OperatingSystem" type="PanelContainer" node_paths=PackedStringArray("_desktop", "_taskbar")]
+clip_contents = true
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_nlmep")
+script = ExtResource("1_raqbm")
+_desktop = NodePath("VBoxContainer/Desktop")
+_taskbar = NodePath("VBoxContainer/Taskbar")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Desktop" type="PanelContainer" parent="VBoxContainer" node_paths=PackedStringArray("_app_icons_container")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_yoaf8")
+script = ExtResource("3_2gwmb")
+_app_icons_container = NodePath("AppsContainer")
+
+[node name="AppsContainer" type="GridContainer" parent="VBoxContainer/Desktop"]
+layout_mode = 2
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 5
+columns = 5
+
+[node name="AppIcon" parent="VBoxContainer/Desktop/AppsContainer" instance=ExtResource("4_yoaf8")]
+layout_mode = 2
+app_scene = ExtResource("5_w7eab")
+
+[node name="Taskbar" type="PanelContainer" parent="VBoxContainer" node_paths=PackedStringArray("start")]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+script = ExtResource("3_7dqhj")
+start = NodePath("HBoxContainer/Start/Button")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Taskbar"]
+layout_mode = 2
+
+[node name="Start" type="PanelContainer" parent="VBoxContainer/Taskbar/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rg0tb")
+
+[node name="Button" type="Button" parent="VBoxContainer/Taskbar/HBoxContainer/Start"]
+layout_mode = 2
+text = "Close"
+script = ExtResource("5_nlmep")
+
+[node name="AppsContainer" type="HBoxContainer" parent="VBoxContainer/Taskbar/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Calendar" type="PanelContainer" parent="VBoxContainer/Taskbar/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rg0tb")
+
+[node name="Label" type="Label" parent="VBoxContainer/Taskbar/HBoxContainer/Calendar"]
+layout_mode = 2
+text = "Time"
+script = ExtResource("3_rg0tb")

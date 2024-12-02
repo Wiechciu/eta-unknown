@@ -1,30 +1,128 @@
-[gd_scene load_steps=4 format=3 uid="uid://b18oy35p17ir7"]
+[gd_scene load_steps=18 format=3 uid="uid://b18oy35p17ir7"]
 
 [ext_resource type="PackedScene" uid="uid://b66husl1w3olw" path="res://systems/calendar/calendar.tscn" id="1_82prh"]
 [ext_resource type="PackedScene" uid="uid://cieydjj1npshf" path="res://systems/debug_menu/debug_menu.tscn" id="2_8pfch"]
-[ext_resource type="PackedScene" uid="uid://cgytarte2suti" path="res://systems/tms/tms.tscn" id="3_kooe7"]
+[ext_resource type="PackedScene" uid="uid://dvpm8vxtia7au" path="res://3d_scenes/computer.tscn" id="4_8pfch"]
+[ext_resource type="PackedScene" uid="uid://ry5gcuu7gkh" path="res://3d_scenes/player.tscn" id="5_kooe7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8pfch"]
+albedo_color = Color(0, 0.227331, 0.227331, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_kooe7"]
+material = SubResource("StandardMaterial3D_8pfch")
+size = Vector2(10, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kooe7"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_a1rhb"]
+material = SubResource("StandardMaterial3D_kooe7")
+size = Vector2(10, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cybsn"]
+albedo_color = Color(0.446663, 0.715025, 0.999994, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5nt3u"]
+material = SubResource("StandardMaterial3D_cybsn")
+size = Vector2(4, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w7ts6"]
+albedo_color = Color(0.37686, 0.24273, 1.92523e-07, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dfqda"]
+material = SubResource("StandardMaterial3D_w7ts6")
+size = Vector3(2.945, 1, 0.7)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4ilw0"]
+material = SubResource("StandardMaterial3D_w7ts6")
+size = Vector3(0.725, 1, 0.7)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b4eag"]
+albedo_color = Color(0.1681, 0.0988086, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3kj7q"]
+material = SubResource("StandardMaterial3D_b4eag")
+size = Vector3(0.645, 0.6, 0.585)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dlj66"]
+albedo_color = Color(0.1681, 0.0988086, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3xujk"]
+material = SubResource("StandardMaterial3D_dlj66")
+size = Vector3(0.645, 1.82, 0.125)
 
 [node name="MainScene" type="Node"]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Calendar" parent="VBoxContainer" instance=ExtResource("1_82prh")]
-layout_mode = 2
+[node name="DebugMenu" parent="." instance=ExtResource("2_8pfch")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -254.0
+offset_right = 0.0
+offset_bottom = 379.0
+grow_horizontal = 0
 size_flags_horizontal = 0
 
-[node name="DebugMenu" parent="VBoxContainer" instance=ExtResource("2_8pfch")]
-layout_mode = 2
+[node name="Calendar" parent="." instance=ExtResource("1_82prh")]
 size_flags_horizontal = 0
 
-[node name="ScreenArea" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 250.0
-offset_top = 70.0
-offset_right = 1150.0
-offset_bottom = 640.0
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.491862, -0.552948, -0.672548, 1.1659e-08, -0.772446, 0.635081, -0.870673, 0.312372, 0.379936, 0, 0, 0)
+visible = false
+light_energy = 16.0
+shadow_enabled = true
 
-[node name="Tms" parent="ScreenArea" instance=ExtResource("3_kooe7")]
-layout_mode = 1
+[node name="Player" parent="." instance=ExtResource("5_kooe7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.50287)
+
+[node name="Room" type="Node3D" parent="."]
+
+[node name="Floor" type="MeshInstance3D" parent="Room"]
+mesh = SubResource("PlaneMesh_kooe7")
+
+[node name="Ceiling" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 4, 0)
+mesh = SubResource("PlaneMesh_a1rhb")
+
+[node name="Wall" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -5, 2, 0)
+mesh = SubResource("PlaneMesh_5nt3u")
+
+[node name="Wall2" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 2, -5)
+mesh = SubResource("PlaneMesh_5nt3u")
+
+[node name="Wall3" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(4.37114e-08, -1, 8.74228e-08, -1, -4.37114e-08, 0, 3.82137e-15, -8.74228e-08, -1, 5, 2, 0)
+mesh = SubResource("PlaneMesh_5nt3u")
+
+[node name="Wall4" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(-5.73206e-15, 1.31134e-07, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, 1.31134e-07, 0, 2, 5)
+mesh = SubResource("PlaneMesh_5nt3u")
+
+[node name="Furniture" type="Node3D" parent="Room"]
+
+[node name="Desk" type="MeshInstance3D" parent="Room/Furniture"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.17196, 0.5, -4.62863)
+mesh = SubResource("BoxMesh_dfqda")
+
+[node name="Desk2" type="MeshInstance3D" parent="Room/Furniture"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.27871, 0.5, -3.93385)
+mesh = SubResource("BoxMesh_4ilw0")
+
+[node name="Chair" type="MeshInstance3D" parent="Room/Furniture"]
+transform = Transform3D(0.736593, 0, -0.676336, 0, 1, 0, 0.676336, 0, 0.736593, -2.66618, 0.295483, -3.11923)
+mesh = SubResource("BoxMesh_3kj7q")
+
+[node name="Chair2" type="MeshInstance3D" parent="Room/Furniture/Chair"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.574706, 0.282785)
+mesh = SubResource("BoxMesh_3xujk")
+skeleton = NodePath("../..")
+
+[node name="Computer" parent="Room/Furniture" instance=ExtResource("4_8pfch")]
+transform = Transform3D(0.984115, 0, 0.177531, 0, 1, 0, -0.177531, 0, 0.984115, -2.28405, 1.04686, -4.62541)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.899273, 3.13926, 0.867195)
+light_color = Color(0.999999, 0.997743, 0.804051, 1)
+shadow_enabled = true
+omni_range = 100.0

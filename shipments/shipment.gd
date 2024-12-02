@@ -17,7 +17,6 @@ enum Status {
 	INVOICED,
 	COMPLETED,
 	CANCELLED,
-	REJECTED,
 }
 
 
@@ -25,9 +24,9 @@ static var last_id: int = 0
 
 var id: int
 var status: Status
-var is_completed: bool:
+var is_completed_or_cancelled: bool:
 	get:
-		return status == Status.COMPLETED 
+		return status == Status.COMPLETED or status == Status.CANCELLED
 
 # General
 var customer_reference: String

@@ -41,10 +41,6 @@ var shipment: Shipment
 @export var _shipment_accounting: TmsShipmentDetailsAccounting
 
 
-func _init() -> void:
-	visibility_changed.connect(_on_visibility_changed)
-
-
 func _ready() -> void:
 	GlobalDebugger.assert_all_exported_properties(self)
 	
@@ -52,15 +48,17 @@ func _ready() -> void:
 		_shipment_status.add_item(status)
 
 
-func _on_visibility_changed() -> void:
-	if not visible and shipment != null and shipment.details_changed.is_connected(refresh.unbind(1)):
+func close() -> void:
+	visible = false
+	if shipment != null and shipment.details_changed.is_connected(refresh.unbind(1)):
 		shipment.details_changed.disconnect(refresh.unbind(1))
 
 
-func open_shipment_details(shipment_to_load: Shipment) -> void:
+func open(shipment_to_load: Shipment) -> void:
 	load_shipment(shipment_to_load)
 	shipment.details_changed.connect(refresh.unbind(1))
 	_tab_container.current_tab = 0
+	visible = true
 
 
 func refresh() -> void:
@@ -98,7 +96,7 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 
 
 func _on_close_button_pressed() -> void:
-	_tms.close_shipment_details()
+	_tms.open_shipment_list()
 
 
 func _on_shipment_statuses_item_selected(index: int) -> void:

@@ -6,6 +6,9 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vp42h"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bspw3"]
+bg_color = Color(0.0845005, 0.447196, 0.499241, 0.419608)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ywo4k"]
 bg_color = Color(0.81908, 0.94228, 0.979786, 1)
 border_color = Color(0.172833, 0.172833, 0.172833, 1)
@@ -16,16 +19,38 @@ corner_radius_bottom_left = 2
 shadow_size = 2
 shadow_offset = Vector2(2, 2)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bspw3"]
-bg_color = Color(0.0845005, 0.447196, 0.499241, 0.419608)
-
 [node name="Calendar" type="PanelContainer"]
-offset_right = 162.0
-offset_bottom = 58.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -162.0
+offset_top = -58.0
+grow_horizontal = 0
+grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_vp42h")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
+
+[node name="CalendarPopup" type="PanelContainer" parent="HBoxContainer" node_paths=PackedStringArray("calendar_event")]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_bspw3")
+script = ExtResource("3_bspw3")
+calendar_event = NodePath("MarginContainer/CalendarPopup")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/CalendarPopup"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 2
+
+[node name="CalendarPopup" type="Label" parent="HBoxContainer/CalendarPopup/MarginContainer"]
+layout_mode = 2
+text = "XXXXXX"
 
 [node name="DateTime" type="PanelContainer" parent="HBoxContainer" node_paths=PackedStringArray("date", "time")]
 layout_mode = 2
@@ -64,21 +89,3 @@ label_settings = ExtResource("2_gb54w")
 layout_mode = 2
 text = "xxx"
 label_settings = ExtResource("2_gb54w")
-
-[node name="CalendarPopup" type="PanelContainer" parent="HBoxContainer" node_paths=PackedStringArray("calendar_event")]
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_styles/panel = SubResource("StyleBoxFlat_bspw3")
-script = ExtResource("3_bspw3")
-calendar_event = NodePath("MarginContainer/CalendarPopup")
-
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/CalendarPopup"]
-layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 2
-
-[node name="CalendarPopup" type="Label" parent="HBoxContainer/CalendarPopup/MarginContainer"]
-layout_mode = 2
-text = "XXXXXX"
