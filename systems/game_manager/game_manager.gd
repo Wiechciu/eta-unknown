@@ -16,6 +16,14 @@ func _ready() -> void:
 	GlobalTimer.new_day_started.connect(create_new_shipments)
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+
 func load_player() -> void:
 	player_company = GlobalRefs.freight_forwarders_with_employees.pick_random()
 	player = player_company.employees.pick_random()

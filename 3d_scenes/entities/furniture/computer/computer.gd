@@ -1,0 +1,172 @@
+extends Node3D
+
+
+@export var _subviewport: SubViewport
+@export var _os_scene: PackedScene
+@export var _input_area: Area3D
+@export var _camera: Camera3D
+@export var _light: SpotLight3D
+@export var _screen_black: MeshInstance3D
+
+var original_camera_position: Vector3
+var original_camera_rotation: Vector3
+var old_camera: Camera3D
+var is_focused: bool
+
+var focusing_time: float = 0.3
+
+var os: OperatingSystem
+
+
+func _ready() -> void:
+	GlobalDebugger.assert_all_exported_properties(self)
+	
+	_input_area.input_event.connect(_on_mouse_input_event)
+	_input_area.mouse_entered.connect(_on_mouse_entered_area)
+	_input_area.mouse_exited.connect(_on_mouse_exited_area)
+	
+	original_camera_position = _camera.position
+	original_camera_rotation = _camera.rotation
+	
+	_light.light_energy = 0.0
+	
+	for child: Node in get_children():
+		var interactable: Interactable = child as Interactable
+		if interactable != null:
+			interactable.interacted.connect(interact)
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel") and is_focused:
+		unfocus_view()
+		get_viewport().set_input_as_handled()
+
+
+func interact() -> void:
+	if is_focused:
+		unfocus_view()
+	else:
+		focus_view()
+
+
+func start_os() -> void:
+	if os != null:
+		return
+	
+	var tween: Tween = create_tween()
+	tween.parallel().tween_property(_light, "light_energy", 2.0, focusing_time)
+	
+	os = _os_scene.instantiate() as OperatingSystem
+	_subviewport.add_child(os)
+	os.closed.connect(_on_os_closed)
+
+
+func _on_os_closed() -> void:
+	var tween: Tween = create_tween()
+	tween.parallel().tween_property(_light, "light_energy", 0.0, focusing_time)
+
+	if is_focused:
+		unfocus_view()
+
+
+func focus_view() -> void:
+	is_focused = true
+	old_camera = get_viewport().get_camera_3d()
+	var tween: Tween = create_tween()
+	tween.parallel().tween_property(_camera, "global_position", _camera.global_position, focusing_time).from(old_camera.global_position)
+	tween.parallel().tween_property(_camera, "global_rotation", _camera.global_rotation, focusing_time).from(old_camera.global_rotation)
+	tween.parallel().tween_callback(_camera.make_current)
+	tween.tween_callback(start_os)
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+
+func unfocus_view() -> void:
+	var tween: Tween = create_tween()
+	tween.parallel().tween_property(_camera, "global_position", old_camera.global_position, focusing_time)
+	tween.parallel().tween_property(_camera, "global_rotation", old_camera.global_rotation, focusing_time)
+	tween.tween_callback(old_camera.make_current)
+	tween.tween_callback(func() -> void: _camera.position = original_camera_position)
+	tween.tween_callback(func() -> void: _camera.rotation = original_camera_rotation)
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	is_focused = false
+
+
+# Used for checking if the mouse is inside the Area3D.
+var is_mouse_inside: bool = false
+# The last processed input touch/mouse event. To calculate relative movement.
+var last_event_pos2D: Vector2
+# The time of the last event in seconds since engine start.
+var last_event_time: float = -1.0
+
+
+func _on_mouse_entered_area() -> void:
+	is_mouse_inside = true
+
+
+func _on_mouse_exited_area() -> void:
+	is_mouse_inside = false
+
+
+func _on_mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Vector3, _normal: Vector3, _shape_idx: int)  -> void:
+	# Get mesh size to detect edges and make conversions. This code only support PlaneMesh and QuadMesh.
+	var quad_mesh_size: Vector3 = _screen_black.mesh.size
+
+	# Event position in Area3D in world coordinate space.
+	var event_pos3D: Vector3 = event_position
+
+	# Current time in seconds since engine start.
+	var now: float = Time.get_ticks_msec() / 1000.0
+
+	# Convert position to a coordinate space relative to the Area3D node.
+	# NOTE: affine_inverse accounts for the Area3D node's scale, rotation, and position in the scene!
+	event_pos3D = _screen_black.global_transform.affine_inverse() * event_pos3D
+
+	# TODO: Adapt to bilboard mode or avoid completely.
+
+	var event_pos2D: Vector2 = Vector2()
+
+	if is_mouse_inside:
+		# Convert the relative event position from 3D to 2D.
+		event_pos2D = Vector2(event_pos3D.x, -event_pos3D.y)
+
+		# Right now the event position's range is the following: (-quad_size/2) -> (quad_size/2)
+		# We need to convert it into the following range: -0.5 -> 0.5
+		event_pos2D.x = event_pos2D.x / quad_mesh_size.x
+		event_pos2D.y = event_pos2D.y / quad_mesh_size.y
+		# Then we need to convert it into the following range: 0 -> 1
+		event_pos2D.x += 0.5
+		event_pos2D.y += 0.5
+
+		# Finally, we convert the position to the following range: 0 -> viewport.size
+		event_pos2D.x *= _subviewport.size.x
+		event_pos2D.y *= _subviewport.size.y
+		# We need to do these conversions so the event's position is in the viewport's coordinate system.
+
+	elif last_event_pos2D != null:
+		# Fall back to the last known event position.
+		event_pos2D = last_event_pos2D
+
+	# Set the event's position and global position.
+	event.position = event_pos2D
+	if event is InputEventMouse:
+		event.global_position = event_pos2D
+
+	# Calculate the relative event distance.
+	if event is InputEventMouseMotion or event is InputEventScreenDrag:
+		# If there is not a stored previous position, then we'll assume there is no relative motion.
+		if last_event_pos2D == null:
+			event.relative = Vector2(0, 0)
+		# If there is a stored previous position, then we'll calculate the relative position by subtracting
+		# the previous position from the new position. This will give us the distance the event traveled from prev_pos.
+		else:
+			event.relative = event_pos2D - last_event_pos2D
+			event.velocity = event.relative / (now - last_event_time)
+
+	# Update last_event_pos2D with the position we just calculated.
+	last_event_pos2D = event_pos2D
+
+	# Update last_event_time to current time.
+	last_event_time = now
+
+	# Finally, send the processed input event to the viewport.
+	_subviewport.push_input(event)

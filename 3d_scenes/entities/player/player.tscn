@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://ry5gcuu7gkh"]
+
+[ext_resource type="Script" uid="uid://ie4fwo4bx0a6" path="res://3d_scenes/entities/player/player.gd" id="1_d240i"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s4ok3"]
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_interaction_area", "_head", "_camera")]
+script = ExtResource("1_d240i")
+_interaction_area = NodePath("InteractionArea")
+_head = NodePath("Head")
+_camera = NodePath("Head/Camera3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_s4ok3")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("CapsuleShape3D_s4ok3")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+current = true
+
+[connection signal="body_entered" from="InteractionArea" to="InteractionArea" method="_on_body_entered"]
+[connection signal="body_exited" from="InteractionArea" to="InteractionArea" method="_on_body_exited"]
