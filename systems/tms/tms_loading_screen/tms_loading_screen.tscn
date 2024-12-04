@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://duwfojd33rqv" path="res://systems/tms/tms_loading_screen/tms_loading_screen.gd" id="1_48576"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5tqff"]
+bg_color = Color(0, 0.2, 0.364706, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_48576"]
 font_size = 100

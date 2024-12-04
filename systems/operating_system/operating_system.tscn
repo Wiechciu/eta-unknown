@@ -11,7 +11,8 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nlmep"]
 
 [sub_resource type="Gradient" id="Gradient_yoaf8"]
-colors = PackedColorArray(0, 0, 0, 1, 0.619608, 0.886275, 0.639216, 1)
+offsets = PackedFloat32Array(0, 0.270718, 1)
+colors = PackedColorArray(0.976471, 0.72549, 0.160784, 1, 0.757621, 0.824093, 0.454187, 1, 0.619608, 0.886275, 0.639216, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_w7eab"]
 gradient = SubResource("Gradient_yoaf8")

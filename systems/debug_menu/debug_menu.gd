@@ -13,6 +13,7 @@ var counter: float
 func _ready() -> void:
 	GlobalDebugger.assert_all_exported_properties(self)
 	status.text = ""
+	visible = false
 
 
 func _process(delta: float) -> void:

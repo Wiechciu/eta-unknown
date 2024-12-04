@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b18oy35p17ir7"]
+[gd_scene load_steps=18 format=3 uid="uid://b18oy35p17ir7"]
 
 [ext_resource type="PackedScene" uid="uid://b66husl1w3olw" path="res://systems/calendar/calendar.tscn" id="1_82prh"]
 [ext_resource type="PackedScene" uid="uid://cieydjj1npshf" path="res://systems/debug_menu/debug_menu.tscn" id="2_8pfch"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://buj838q1xidpo" path="res://3d_scenes/entities/furniture/desk.tscn" id="4_a1rhb"]
 [ext_resource type="PackedScene" uid="uid://crqxtd3cq7r2x" path="res://3d_scenes/entities/furniture/chair.tscn" id="5_cybsn"]
 [ext_resource type="PackedScene" uid="uid://ry5gcuu7gkh" path="res://3d_scenes/entities/player/player.tscn" id="5_kooe7"]
+[ext_resource type="PackedScene" uid="uid://d1u08m5d83m5e" path="res://3d_scenes/entities/furniture/lamp.tscn" id="7_cybsn"]
+[ext_resource type="PackedScene" uid="uid://b1k30fd4iurrb" path="res://3d_scenes/entities/furniture/lamp_standing.tscn" id="8_5nt3u"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8pfch"]
 
@@ -74,8 +76,18 @@ transform = Transform3D(0.984115, 0, 0.177531, 0, 1, 0, -0.177531, 0, 0.984115, 
 [node name="Desk" parent="Furniture" instance=ExtResource("4_a1rhb")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2.79831, 0, -4.2759)
 
+[node name="Desk2" parent="Furniture" instance=ExtResource("4_a1rhb")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.79697, 0, -2.95578)
+
 [node name="Chair" parent="Furniture" instance=ExtResource("5_cybsn")]
 transform = Transform3D(0.82081, 0, -0.571201, 0, 1, 0, 0.571201, 0, 0.82081, -3.37639, -3.57628e-07, -2.58713)
+
+[node name="Lamp" parent="Furniture" instance=ExtResource("7_cybsn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.80937, 1, -4.03984)
+visible = false
+
+[node name="Lamp2" parent="Furniture" instance=ExtResource("8_5nt3u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 
 [node name="Room" type="Node3D" parent="."]
 
@@ -104,6 +116,7 @@ mesh = SubResource("PlaneMesh_5nt3u")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.899273, 3.13926, 0.867195)
+visible = false
 light_color = Color(0.999999, 0.997743, 0.804051, 1)
 light_energy = 0.3
 shadow_enabled = true
