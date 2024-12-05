@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://dksi1q8iitdxl"]
+
+[ext_resource type="Script" uid="uid://ddlkf8qet6m5u" path="res://systems/operating_system/os_app_icon_taskbar.gd" id="1_t0vij"]
+[ext_resource type="Texture2D" uid="uid://dipd68uiomkhw" path="res://icon.svg" id="2_5kvjj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5kvjj"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 4.0
+content_margin_bottom = 1.0
+bg_color = Color(0, 0.282353, 0.419608, 0.572549)
+
+[node name="AppIconTaskbar" type="PanelContainer" node_paths=PackedStringArray("_label", "_icon")]
+custom_minimum_size = Vector2(100, 20)
+offset_right = 37.0
+offset_bottom = 23.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_5kvjj")
+script = ExtResource("1_t0vij")
+_label = NodePath("VBoxContainer/Label")
+_icon = NodePath("VBoxContainer/Icon")
+
+[node name="VBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_5kvjj")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "TMS"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+flat = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

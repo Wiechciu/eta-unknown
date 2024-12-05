@@ -1,12 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://dl753wrtmui4e"]
+[gd_scene load_steps=15 format=3 uid="uid://dl753wrtmui4e"]
 
 [ext_resource type="Script" uid="uid://c0k32y6dedej4" path="res://systems/operating_system/operating_system.gd" id="1_raqbm"]
+[ext_resource type="Script" uid="uid://bpyvdtiywfe2p" path="res://systems/operating_system/os_app_data.gd" id="2_2udgp"]
+[ext_resource type="Resource" uid="uid://bstvtyye7jrog" path="res://systems/operating_system/apps/tms_app_data.tres" id="2_w7eab"]
 [ext_resource type="Script" uid="uid://dl8sjycxexf0q" path="res://systems/operating_system/os_desktop.gd" id="3_2gwmb"]
 [ext_resource type="Script" uid="uid://cwxxsf5xrdc68" path="res://systems/operating_system/os_taskbar.gd" id="3_7dqhj"]
 [ext_resource type="Script" uid="uid://dvjhorl7vn7hs" path="res://systems/operating_system/os_calendar.gd" id="3_rg0tb"]
 [ext_resource type="PackedScene" uid="uid://cmig0mcp2rse4" path="res://systems/operating_system/os_app_icon.tscn" id="4_yoaf8"]
 [ext_resource type="Script" uid="uid://c7hm004adb8r0" path="res://systems/operating_system/os_start.gd" id="5_nlmep"]
-[ext_resource type="PackedScene" uid="uid://cgytarte2suti" path="res://systems/tms/tms.tscn" id="5_w7eab"]
+[ext_resource type="PackedScene" uid="uid://dksi1q8iitdxl" path="res://systems/operating_system/os_app_icon_taskbar.tscn" id="7_w7eab"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nlmep"]
 
@@ -41,17 +43,19 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_nlmep")
 script = ExtResource("1_raqbm")
 _desktop = NodePath("VBoxContainer/Desktop")
 _taskbar = NodePath("VBoxContainer/Taskbar")
+_app_data = Array[ExtResource("2_2udgp")]([ExtResource("2_w7eab")])
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Desktop" type="PanelContainer" parent="VBoxContainer" node_paths=PackedStringArray("_app_icons_container")]
+[node name="Desktop" type="PanelContainer" parent="VBoxContainer" node_paths=PackedStringArray("_apps_container")]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxTexture_yoaf8")
 script = ExtResource("3_2gwmb")
-_app_icons_container = NodePath("AppsContainer")
+_apps_container = NodePath("AppsContainer")
+_app_icon_scene = ExtResource("4_yoaf8")
 
 [node name="AppsContainer" type="GridContainer" parent="VBoxContainer/Desktop"]
 layout_mode = 2
@@ -61,13 +65,14 @@ columns = 5
 
 [node name="AppIcon" parent="VBoxContainer/Desktop/AppsContainer" instance=ExtResource("4_yoaf8")]
 layout_mode = 2
-app_scene = ExtResource("5_w7eab")
 
-[node name="Taskbar" type="PanelContainer" parent="VBoxContainer" node_paths=PackedStringArray("start")]
+[node name="Taskbar" type="PanelContainer" parent="VBoxContainer" node_paths=PackedStringArray("_start", "_apps_container")]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 script = ExtResource("3_7dqhj")
-start = NodePath("HBoxContainer/Start/Button")
+_start = NodePath("HBoxContainer/Start/Button")
+_apps_container = NodePath("HBoxContainer/AppsContainer")
+_app_icon_scene = ExtResource("7_w7eab")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Taskbar"]
 layout_mode = 2
@@ -84,6 +89,9 @@ script = ExtResource("5_nlmep")
 [node name="AppsContainer" type="HBoxContainer" parent="VBoxContainer/Taskbar/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="AppIconTaskbar" parent="VBoxContainer/Taskbar/HBoxContainer/AppsContainer" instance=ExtResource("7_w7eab")]
+layout_mode = 2
 
 [node name="Calendar" type="PanelContainer" parent="VBoxContainer/Taskbar/HBoxContainer"]
 layout_mode = 2

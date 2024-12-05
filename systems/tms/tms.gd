@@ -2,7 +2,6 @@ class_name Tms
 extends OsApp
 
 
-
 @export var panel_header: TmsPanelHeader
 
 @export var loading_screen: TmsLoadingScreen

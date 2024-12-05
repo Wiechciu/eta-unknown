@@ -12,8 +12,9 @@ var original_camera_position: Vector3
 var original_camera_rotation: Vector3
 var old_camera: Camera3D
 var is_focused: bool
+var is_transitioning: bool
 
-var focusing_time: float = 0.3
+var focusing_time: float = 0.5
 
 var os: OperatingSystem
 
@@ -43,6 +44,9 @@ func _input(event: InputEvent) -> void:
 
 
 func interact() -> void:
+	if is_transitioning:
+		return
+	
 	if is_focused:
 		unfocus_view()
 	else:
@@ -58,7 +62,7 @@ func start_os() -> void:
 	
 	os = _os_scene.instantiate() as OperatingSystem
 	_subviewport.add_child(os)
-	os.closed.connect(_on_os_closed)
+	os.tree_exited.connect(_on_os_closed)
 
 
 func _on_os_closed() -> void:
@@ -70,25 +74,35 @@ func _on_os_closed() -> void:
 
 
 func focus_view() -> void:
+	is_transitioning = true
 	is_focused = true
 	old_camera = get_viewport().get_camera_3d()
-	var tween: Tween = create_tween()
-	tween.parallel().tween_property(_camera, "global_position", _camera.global_position, focusing_time).from(old_camera.global_position)
-	tween.parallel().tween_property(_camera, "global_rotation", _camera.global_rotation, focusing_time).from(old_camera.global_rotation)
-	tween.parallel().tween_callback(_camera.make_current)
-	tween.tween_callback(start_os)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	_camera.make_current()
+	
+	var tween: Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_parallel(true)
+	tween.tween_property(_camera, "global_position", _camera.global_position, focusing_time).from(old_camera.global_position)
+	tween.tween_property(_camera, "global_rotation", _camera.global_rotation, focusing_time).from(old_camera.global_rotation)
+	await tween.finished
+	
+	start_os()
+	is_transitioning = false
 
 
 func unfocus_view() -> void:
-	var tween: Tween = create_tween()
-	tween.parallel().tween_property(_camera, "global_position", old_camera.global_position, focusing_time)
-	tween.parallel().tween_property(_camera, "global_rotation", old_camera.global_rotation, focusing_time)
-	tween.tween_callback(old_camera.make_current)
-	tween.tween_callback(func() -> void: _camera.position = original_camera_position)
-	tween.tween_callback(func() -> void: _camera.rotation = original_camera_rotation)
+	is_transitioning = true
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	var tween: Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_parallel(true)
+	tween.tween_property(_camera, "global_rotation", old_camera.global_rotation, focusing_time)
+	tween.tween_property(_camera, "global_position", old_camera.global_position, focusing_time)
+	await tween.finished
+	
+	old_camera.make_current()
+	_camera.position = original_camera_position
+	_camera.rotation = original_camera_rotation
 	is_focused = false
+	is_transitioning = false
 
 
 # Used for checking if the mouse is inside the Area3D.

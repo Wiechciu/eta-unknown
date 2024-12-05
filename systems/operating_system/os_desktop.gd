@@ -2,26 +2,28 @@ class_name OsDesktop
 extends PanelContainer
 
 
-signal app_opened(app: OsApp)
-signal app_closed(app: OsApp)
+signal icon_clicked(app: OsAppData)
 
 
-@export var _app_icons_container: Control
+@export var _apps_container: Control
+@export var _app_icon_scene: PackedScene
 
 
 func _ready() -> void:
-	for child: Node in _app_icons_container.get_children():
-		var app: OsAppIcon = child as OsAppIcon
-		app.app_opened.connect(_on_app_opened)
+	GlobalDebugger.assert_all_exported_properties(self)
+	for child: Node in _apps_container.get_children():
+		child.queue_free()
 
 
-func _on_app_opened(app: OsApp) -> void:
+func load_icon(app: OsAppData) -> void:
+	var icon: OsAppIcon = (_app_icon_scene.instantiate() as OsAppIcon).with_data(app)
+	icon.icon_clicked.connect(_on_icon_clicked)
+	_apps_container.add_child(icon)
+
+
+func _on_icon_clicked(app: OsAppData) -> void:
+	icon_clicked.emit(app)
+
+
+func load_app(app: OsApp) -> void:
 	add_child(app)
-	app.closed.connect(_on_app_closed)
-	app_opened.emit(app)
-
-
-func _on_app_closed(app: OsApp) -> void:
-	app.closed.disconnect(_on_app_closed)
-	app_closed.emit(app)
-	app.queue_free()
