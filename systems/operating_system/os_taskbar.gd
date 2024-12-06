@@ -28,7 +28,7 @@ func load_icon(app_data: OsAppData, app: OsApp) -> void:
 	_apps_container.add_child(icon)
 
 
-func _on_icon_clicked(app: OsAppData) -> void:
+func _on_icon_clicked(app: OsApp) -> void:
 	icon_clicked.emit(app)
 
 

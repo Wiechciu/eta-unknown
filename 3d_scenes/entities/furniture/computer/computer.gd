@@ -1,4 +1,5 @@
-extends Node3D
+class_name Computer
+extends StaticBody3D
 
 
 @export var _subviewport: SubViewport

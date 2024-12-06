@@ -64,6 +64,7 @@ interaction_radius = 2.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.74076, 0.812)
+cull_mask = 1048573
 
 [node name="ScreenSprite" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.74076, 0.035109)

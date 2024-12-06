@@ -17,11 +17,14 @@ const ONE_MONTH: int = 1 * 60 * 60 * 24 * 30 #FIXME - it's inaccurate and may ca
 const ONE_YEAR: int = 1 * 60 * 60 * 24 * 365 #FIXME - it's inaccurate and may cause issues
 const STARTING_DATE: String = "2025-01-01T08:00:00"
 
-@export var time_scale: int = 600
-@export var shift_start_hour: int = 8
-@export var shift_end_hour: int = 16
-@export var lunch_start_hour: int = 12
-@export var lunch_end_hour: int = 13
+var time_scale: int
+
+var normal_time_scale: int = 60
+var fast_time_scale: int = 6000
+var shift_start_hour: int = 8
+var shift_end_hour: int = 16
+var lunch_start_hour: int = 12
+var lunch_end_hour: int = 13
 
 var now_float: float
 var now: int:
@@ -44,6 +47,7 @@ var time_events: Array[TimeEvent]
 
 func _init() -> void:
 	now_float = Time.get_unix_time_from_datetime_string(STARTING_DATE)
+	time_scale = normal_time_scale
 
 
 func _ready() -> void:
@@ -176,3 +180,7 @@ func _check_time_events() -> void:
 	
 	for time_event_index_to_remove: int in time_event_indexes_to_remove:
 		time_events.remove_at(time_event_index_to_remove)
+
+
+func set_time_scale(scale: float) -> void:
+	time_scale = scale

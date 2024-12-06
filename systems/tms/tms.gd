@@ -14,10 +14,13 @@ extends OsApp
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	super._ready()
 	panel_header.close_button_pressed.connect(close)
-	loading_screen.start_loading()
+	panel_header.minimize_button_pressed.connect(minimize)
 	close_all()
+	
+	super.start()
+	await loading_screen.start_loading()
 
 
 func close_all() -> void:

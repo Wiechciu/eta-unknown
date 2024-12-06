@@ -21,3 +21,4 @@ func start_loading() -> void:
 	tween.set_parallel(false)
 	tween.tween_property(self, "modulate", Color.TRANSPARENT, 0.2)
 	tween.tween_callback(hide)
+	await tween.finished

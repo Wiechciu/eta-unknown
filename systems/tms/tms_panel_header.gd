@@ -2,6 +2,7 @@ class_name TmsPanelHeader
 extends Control
 
 
+signal minimize_button_pressed
 signal close_button_pressed
 
 
@@ -14,6 +15,7 @@ func _ready() -> void:
 
 
 func _on_gui_input(event: InputEvent) -> void:
+	print(_control_to_move.name)
 	if event is InputEventMouseButton:
 		if (event as InputEventMouseButton).pressed:
 			_control_to_move.move_to_front()
@@ -26,3 +28,7 @@ func _on_gui_input(event: InputEvent) -> void:
 
 func _on_close_button_pressed() -> void:
 	close_button_pressed.emit()
+
+
+func _on_minimize_button_pressed() -> void:
+	minimize_button_pressed.emit()

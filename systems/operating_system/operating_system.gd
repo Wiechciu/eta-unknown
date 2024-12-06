@@ -55,8 +55,10 @@ func _on_icon_desktop_clicked(app_data: OsAppData) -> void:
 
 
 func _on_icon_taskbar_clicked(app: OsApp) -> void:
-	#FIXME
-	print("Icon taskbar clicked")
+	if app.visible:
+		await app.minimize()
+	else:
+		await app.maximize()
 
 
 func _on_app_closed(app: OsApp) -> void:

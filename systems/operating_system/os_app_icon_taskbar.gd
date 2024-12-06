@@ -20,5 +20,4 @@ func with_data(app_data: OsAppData, app: OsApp) -> OsAppIconTaskbar:
 
 
 func _on_button_pressed() -> void:
-	#FIXME, error when clicking taskbar icon
 	icon_clicked.emit(_app)

@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://b66husl1w3olw"]
+[gd_scene load_steps=8 format=3 uid="uid://b66husl1w3olw"]
 
+[ext_resource type="Script" uid="uid://dx3l7o5dhih3h" path="res://systems/calendar/calendar.gd" id="1_fal74"]
 [ext_resource type="Script" uid="uid://sb00yo8xfccs" path="res://systems/calendar/date_time.gd" id="1_ywo4k"]
 [ext_resource type="LabelSettings" uid="uid://dbpx3q8ueafhu" path="res://systems/themes/calendar_label_settings.tres" id="2_gb54w"]
 [ext_resource type="Script" uid="uid://bnapmg17blmiy" path="res://systems/calendar/calendar_popup.gd" id="3_bspw3"]
@@ -30,6 +31,7 @@ offset_top = -58.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_vp42h")
+script = ExtResource("1_fal74")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
