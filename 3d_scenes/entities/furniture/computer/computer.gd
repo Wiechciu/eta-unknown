@@ -134,17 +134,15 @@ func _on_mouse_exited_area() -> void:
 
 
 func _on_mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Vector3, _normal: Vector3, _shape_idx: int)  -> void:
-	print(event)
 	# Get mesh size to detect edges and make conversions. This code only support PlaneMesh, QuadMesh and BoxMesh.
-	var mesh_size: Vector3 = screen_black.mesh.size
-	#var mesh_size: Vector2
-	#var mesh: Mesh = screen_black.mesh
-	#if mesh is BoxMesh:
-		#mesh_size = Vector2((mesh as BoxMesh).size.x, (mesh as BoxMesh).size.y)
-	#elif mesh is PlaneMesh:
-		#mesh_size = (mesh as PlaneMesh).size
-	#elif mesh is QuadMesh:
-		#mesh_size = (mesh as QuadMesh).size
+	var mesh_size: Vector2
+	var mesh: Mesh = screen_black.mesh
+	if mesh is BoxMesh:
+		mesh_size = Vector2((mesh as BoxMesh).size.x, (mesh as BoxMesh).size.y)
+	elif mesh is PlaneMesh:
+		mesh_size = (mesh as PlaneMesh).size
+	elif mesh is QuadMesh:
+		mesh_size = (mesh as QuadMesh).size
 	
 	# Event position in Area3D in world coordinate space.
 	var event_pos3D: Vector3 = event_position

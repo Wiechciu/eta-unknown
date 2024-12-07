@@ -70,7 +70,7 @@ func _init() -> void:
 
 func _ready() -> void:
 	GlobalDebugger.assert_all_exported_properties(self)
-	fade_screen.modulate.a = 0.0
+	fade_screen.visible = false
 
 
 func _process(delta: float) -> void:
@@ -121,9 +121,11 @@ func start_next_day() -> void:
 
 func start_next_day_with_fade() -> void:
 	var tween: Tween = create_tween()
+	tween.tween_callback(fade_screen.show)
 	tween.tween_method(func(alpha: float) -> void: fade_screen.modulate.a = alpha, 0.0, 1.0, fade_duration)
 	tween.tween_callback(start_next_day)
 	tween.tween_method(func(alpha: float) -> void: fade_screen.modulate.a = alpha, 1.0, 0.0, fade_duration)
+	tween.tween_callback(fade_screen.hide)
 
 
 func get_future_date_from_unix_time(original_date: int, plus_days: int = 0, hour: int = 0, minute: int = 0) -> int:
