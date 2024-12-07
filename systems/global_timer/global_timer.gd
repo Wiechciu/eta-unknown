@@ -39,6 +39,21 @@ var time_string: String:
 var time_dictionary: Dictionary:
 	get:
 		return Time.get_datetime_dict_from_unix_time(now)
+var weekday: int:
+	get:
+		return Time.get_date_dict_from_unix_time(now)["weekday"]
+var weekday_string: String:
+	get:
+		var day: String
+		match weekday:
+			0: day = "Monday"
+			1: day = "Tuesday"
+			2: day = "Wednesday"
+			3: day = "Thursday"
+			4: day = "Friday"
+			5: day = "Saturday"
+			6: day = "Sunday"
+		return day
 
 var current_hour: int
 var current_day: String

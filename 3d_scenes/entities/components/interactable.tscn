@@ -9,7 +9,6 @@ radius = 2.0
 script = ExtResource("1_u1lcw")
 label = NodePath("Label3D")
 collision_shape = NodePath("CollisionShape3D")
-label_text = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_u1lcw")

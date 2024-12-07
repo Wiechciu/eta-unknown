@@ -59,7 +59,6 @@ shape = SubResource("BoxShape3D_30c2g")
 disabled = true
 
 [node name="Interactable" parent="." instance=ExtResource("3_30c2g")]
-label_text = ""
 label_position = Vector3(0, 1.5, 0)
 interaction_radius = 2.0
 

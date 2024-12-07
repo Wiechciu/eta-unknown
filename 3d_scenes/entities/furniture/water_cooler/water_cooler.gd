@@ -22,7 +22,7 @@ func _process(delta: float) -> void:
 		return
 	
 	var distance_to_player: float = global_position.distance_to(player_in_range.global_position)
-	var new_time_scale: float = GlobalTimer.normal_time_scale * maxf(1, 1000 * ((collision_shape.shape as CylinderShape3D).radius - distance_to_player))
+	var new_time_scale: float = GlobalTimer.normal_time_scale * maxf(1, 100 * ((collision_shape.shape as CylinderShape3D).radius - distance_to_player))
 	GlobalTimer.set_time_scale(new_time_scale)
 
 

@@ -12,9 +12,10 @@ albedo_color = Color(0.0352941, 0.694118, 1, 1)
 material = SubResource("StandardMaterial3D_16yhp")
 size = Vector3(0.5, 0.5, 0.05)
 
-[node name="WallCalendar" type="StaticBody3D" node_paths=PackedStringArray("label")]
+[node name="WallCalendar" type="StaticBody3D" node_paths=PackedStringArray("weekday_label", "date_label")]
 script = ExtResource("1_16yhp")
-label = NodePath("Label3D")
+weekday_label = NodePath("Weekday")
+date_label = NodePath("Date")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_16yhp")
@@ -22,7 +23,17 @@ shape = SubResource("BoxShape3D_16yhp")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_dk8n4")
 
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.027636)
-text = "13
-Friday"
+[node name="Weekday" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.171482, 0.027636)
+pixel_size = 0.001
+text = "Wednesday"
+font_size = 77
+outline_size = 20
+
+[node name="Date" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0475406, 0.027636)
+pixel_size = 0.001
+text = "13.10
+"
+font_size = 162
+outline_size = 40
