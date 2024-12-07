@@ -11,7 +11,7 @@ content_margin_bottom = 1.0
 bg_color = Color(0, 0.282353, 0.419608, 0.572549)
 
 [node name="AppIconTaskbar" type="PanelContainer" node_paths=PackedStringArray("_label", "_icon")]
-custom_minimum_size = Vector2(100, 20)
+custom_minimum_size = Vector2(200, 20)
 offset_right = 37.0
 offset_bottom = 23.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_5kvjj")
@@ -21,7 +21,7 @@ _icon = NodePath("VBoxContainer/Icon")
 
 [node name="VBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
-theme_override_constants/separation = 5
+theme_override_constants/separation = 15
 
 [node name="Icon" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2
@@ -30,6 +30,7 @@ expand_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 25
 text = "TMS"
 horizontal_alignment = 1
 

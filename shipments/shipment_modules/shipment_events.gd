@@ -38,10 +38,14 @@ func register_event(event: Event) -> void:
 	
 	if event.code == Event.Code.PUP and event is EventPlanned:
 		shipment.change_status(Shipment.Status.PLANNED)
+		@warning_ignore("unsafe_property_access", "unsafe_call_argument")
 		shipment.accounting.create_new_cost_charge(Charge.Code.PUP, randi_range(100, 150), GlobalRefs.currencies_dict["EUR"], shipment.haulage.trucker_pickup)
+		@warning_ignore("unsafe_property_access", "unsafe_call_argument")
 		shipment.accounting.create_new_revenue_charge(Charge.Code.PUP, randi_range(120, 170), GlobalRefs.currencies_dict["EUR"], shipment.shipper)
 	if event.code == Event.Code.DEL and event is EventPlanned:
+		@warning_ignore("unsafe_property_access", "unsafe_call_argument")
 		shipment.accounting.create_new_cost_charge(Charge.Code.DEL, randi_range(100, 150), GlobalRefs.currencies_dict["EUR"], shipment.haulage.trucker_delivery)
+		@warning_ignore("unsafe_property_access", "unsafe_call_argument")
 		shipment.accounting.create_new_revenue_charge(Charge.Code.DEL, randi_range(120, 170), GlobalRefs.currencies_dict["EUR"], shipment.consignee)
 	elif event.code == Event.Code.PUP and event is EventActual:
 		shipment.change_status(Shipment.Status.IN_TRANSIT)
@@ -62,6 +66,7 @@ func remove_event(event: Event) -> void:
 
 func create_new_planned_event(code: Event.Code, time: int, location: Location = null) -> EventPlanned:
 	var new_event: EventPlanned = EventPlanned.new().with_data(code, time, location)
+	@warning_ignore("unsafe_method_access")
 	GlobalTimer.create_time_event_from_event(new_event, self)
 	register_event(new_event)
 	return new_event
@@ -74,6 +79,7 @@ func create_new_actual_event(code: Event.Code, time: int, location: Location = n
 
 
 func create_new_actual_event_now(code: Event.Code, location: Location = null, event_planned: EventPlanned = null) -> EventActual:
+	@warning_ignore("unsafe_property_access", "unsafe_call_argument")
 	return create_new_actual_event(code, GlobalTimer.now, location, event_planned)
 
 
@@ -100,6 +106,7 @@ func get_last_event_of_type(code: Event.Code) -> Event:
 
 
 func notify(time_event: TimeEvent) -> void:
+	@warning_ignore("unsafe_method_access")
 	print("Shipment ID: %s, number: %s, event: %s at %s" % [shipment.id, shipment.number, time_event.event.code_string, GlobalTimer.get_nice_datetime_string_from_unix_time(time_event.time)])
 	
 	if time_event.event.code == Event.Code.LTS and not shipment.is_owned:

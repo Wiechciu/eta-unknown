@@ -2,15 +2,15 @@ class_name OperatingSystem
 extends PanelContainer
 
 
-signal app_opened(app: OsApp)
-signal app_closed(app: OsApp)
+signal on_closing
 
 
 @export var _desktop: OsDesktop
 @export var _taskbar: OsTaskbar
 @export var _app_data: Array[OsAppData]
 
-var boot_duration: float = 0.3
+var boot_duration: float = 1
+var is_closing: bool
 
 
 func _ready() -> void:
@@ -36,6 +36,8 @@ func start() -> void:
 
 
 func close() -> void:
+	is_closing = true
+	on_closing.emit()
 	var tween: Tween = create_tween()
 	tween.tween_method(func(alpha: float) -> void: modulate.a = alpha, 1.0, 0.0, boot_duration).set_trans(Tween.TRANS_SINE)
 	await tween.finished
@@ -51,7 +53,6 @@ func _on_icon_desktop_clicked(app_data: OsAppData) -> void:
 	_desktop.load_app(app)
 	app.tree_exited.connect(_on_app_closed.bind(app))
 	_taskbar.load_icon(app_data, app)
-	app_opened.emit(app)
 
 
 func _on_icon_taskbar_clicked(app: OsApp) -> void:

@@ -32,6 +32,7 @@ var total_value: float:
 func with_data(parent_shipment: Shipment) -> ShipmentCargoDetails:
 	self.shipment = parent_shipment
 	
+	@warning_ignore("unsafe_property_access", "unsafe_method_access")
 	self.cargo = GlobalRefs.cargos.pick_random()
 	if self.cargo.unit_size < 0:
 		self.slac = randi_range(100, 10000)

@@ -21,14 +21,14 @@ var currency: Currency
 var revenue_charges: Array[ChargeRevenue]
 var revenue_charges_sum: float:
 	get:
-		var sum: float
+		var sum: float = 0.0
 		for charge: ChargeRevenue in revenue_charges:
 			sum += charge.amount
 		return sum
 var cost_charges: Array[ChargeCost]
 var cost_charges_sum: float:
 	get:
-		var sum: float
+		var sum: float = 0.0
 		for charge: ChargeCost in cost_charges:
 			sum += charge.amount
 		return sum
@@ -45,22 +45,27 @@ func with_data(request_for_quotation_to_apply: RequestForQuotation, quoting_forw
 	quoting_forwarder = quoting_forwarder_to_apply
 	
 	number = str(id)
+	@warning_ignore("unsafe_property_access")
 	currency = GlobalRefs.currencies_dict["EUR"]
+	@warning_ignore("unsafe_property_access", "unsafe_method_access", "unsafe_call_argument")
 	var afr_cost: ChargeCost = ChargeCost.new().with_data(Charge.Code.AFR, randi_range(3, 5) * shipment.cargo_details.total_weight, currency, GlobalRefs.carriers_with_employees.pick_random())
 	var afr_revenue: ChargeRevenue = ChargeRevenue.new().from_cost_with_margin(afr_cost, randf_range(0, 0.3), 0, request_for_quotation.requestor)
 	cost_charges.append(afr_cost)
 	revenue_charges.append(afr_revenue)
 	
+	@warning_ignore("unsafe_property_access", "unsafe_method_access", "unsafe_call_argument")
 	var pup_cost: ChargeCost = ChargeCost.new().with_data(Charge.Code.PUP, randi_range(50, 500), currency, GlobalRefs.carriers_with_employees.pick_random())
 	var pup_revenue: ChargeRevenue = ChargeRevenue.new().from_cost_with_margin(pup_cost, randf_range(0, 0.3), 0, request_for_quotation.requestor)
 	cost_charges.append(pup_cost)
 	revenue_charges.append(pup_revenue)
-
+	
+	@warning_ignore("unsafe_property_access", "unsafe_method_access", "unsafe_call_argument")
 	var del_cost: ChargeCost = ChargeCost.new().with_data(Charge.Code.DEL, randi_range(50, 500), currency, GlobalRefs.carriers_with_employees.pick_random())
 	var del_revenue: ChargeRevenue = ChargeRevenue.new().from_cost_with_margin(del_cost, randf_range(0, 0.3), 0, request_for_quotation.requestor)
 	cost_charges.append(del_cost)
 	revenue_charges.append(del_revenue)
 	
+	@warning_ignore("unsafe_property_access")
 	transit_time = GlobalTimer.ONE_DAY * randi_range(5, 25)
 	
 	status = Status.CREATED

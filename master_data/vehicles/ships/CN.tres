@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Ship" load_steps=2 format=3 uid="uid://4e1j8o54sj8u"]
+
+[ext_resource type="Script" uid="uid://v807gvyf2v7x" path="res://master_data/vehicles/ships/ship.gd" id="1_2xuft"]
+
+[resource]
+script = ExtResource("1_2xuft")
+code = "CN"
+name = "Container ship"
+cargo_hold_dimensions = Vector3(0, 0, 0)
+max_dimensions = 100.0
+max_load_weight = 1e+06
+max_load_volume = 10000.0
+max_speed = 20.0
+metadata/_custom_type_script = ExtResource("1_2xuft")

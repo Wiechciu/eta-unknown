@@ -2,6 +2,7 @@ class_name Tms
 extends OsApp
 
 
+@export var all_container: BoxContainer
 @export var panel_header: TmsPanelHeader
 
 @export var loading_screen: TmsLoadingScreen
@@ -18,15 +19,25 @@ func _ready() -> void:
 	panel_header.close_button_pressed.connect(close)
 	panel_header.minimize_button_pressed.connect(minimize)
 	close_all()
-	
+	hide_all()
 	super.start()
-	await loading_screen.start_loading()
+	loading_screen.start_loading()
+	await loading_screen.finished_loading
+	show_all()
 
 
 func close_all() -> void:
 	shipment_list.close()
 	shipment_details.close()
 	#quotation_list.close()
+
+
+func hide_all() -> void:
+	all_container.hide()
+
+
+func show_all() -> void:
+	all_container.show()
 
 
 func open_shipment_details(shipment: Shipment) -> void:
@@ -44,6 +55,7 @@ func open_quotation_list() -> void:
 	#quotation_list.open()
 
 
+@warning_ignore("unused_parameter")
 func open_quotation_details(quotation: Quotation) -> void:
 	close_all()
 	#quotation_details.open(quotation)

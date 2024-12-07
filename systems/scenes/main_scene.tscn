@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b18oy35p17ir7"]
+[gd_scene load_steps=21 format=3 uid="uid://b18oy35p17ir7"]
 
 [ext_resource type="PackedScene" uid="uid://b66husl1w3olw" path="res://systems/calendar/calendar.tscn" id="1_82prh"]
 [ext_resource type="PackedScene" uid="uid://cieydjj1npshf" path="res://systems/debug_menu/debug_menu.tscn" id="2_8pfch"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://d1u08m5d83m5e" path="res://3d_scenes/entities/furniture/lamp.tscn" id="7_cybsn"]
 [ext_resource type="PackedScene" uid="uid://b1k30fd4iurrb" path="res://3d_scenes/entities/furniture/lamp_standing.tscn" id="8_5nt3u"]
 [ext_resource type="PackedScene" uid="uid://b8xwh8i0jq6ja" path="res://3d_scenes/entities/furniture/water_cooler/water_cooler.tscn" id="9_w7ts6"]
+[ext_resource type="PackedScene" uid="uid://d0af2emp6dqbi" path="res://3d_scenes/entities/furniture/clock/clock.tscn" id="10_dfqda"]
+[ext_resource type="PackedScene" uid="uid://tsnn4cymm6qn" path="res://3d_scenes/entities/furniture/wall_calendar/wall_calendar.tscn" id="11_4ilw0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8pfch"]
 
@@ -86,6 +88,12 @@ visible = false
 [node name="Lamp2" parent="Furniture" instance=ExtResource("8_5nt3u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 
+[node name="WaterCooler" parent="Furniture" instance=ExtResource("9_w7ts6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.67861, 0, -2.92572)
+
+[node name="Clock" parent="Furniture" instance=ExtResource("10_dfqda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.758489, 2.74126, -4.98209)
+
 [node name="Room" type="Node3D" parent="."]
 
 [node name="Floor" type="MeshInstance3D" parent="Room"]
@@ -119,5 +127,5 @@ light_energy = 0.3
 shadow_enabled = true
 omni_range = 100.0
 
-[node name="WaterCooler" parent="." instance=ExtResource("9_w7ts6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.67861, 0, -2.92572)
+[node name="WallCalendar" parent="." instance=ExtResource("11_4ilw0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.733054, 1.80671, -4.99403)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dl753wrtmui4e"]
+[gd_scene load_steps=18 format=3 uid="uid://dl753wrtmui4e"]
 
 [ext_resource type="Script" uid="uid://c0k32y6dedej4" path="res://systems/operating_system/operating_system.gd" id="1_raqbm"]
 [ext_resource type="Script" uid="uid://bpyvdtiywfe2p" path="res://systems/operating_system/os_app_data.gd" id="2_2udgp"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dvjhorl7vn7hs" path="res://systems/operating_system/os_calendar.gd" id="3_rg0tb"]
 [ext_resource type="PackedScene" uid="uid://cmig0mcp2rse4" path="res://systems/operating_system/os_app_icon.tscn" id="4_yoaf8"]
 [ext_resource type="Script" uid="uid://c7hm004adb8r0" path="res://systems/operating_system/os_start.gd" id="5_nlmep"]
+[ext_resource type="PackedScene" uid="uid://cgytarte2suti" path="res://systems/tms/tms.tscn" id="6_1x0hc"]
 [ext_resource type="PackedScene" uid="uid://dksi1q8iitdxl" path="res://systems/operating_system/os_app_icon_taskbar.tscn" id="7_w7eab"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nlmep"]
@@ -22,17 +23,19 @@ fill = 1
 fill_from = Vector2(0, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yoaf8"]
+texture = SubResource("GradientTexture2D_w7eab")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2udgp"]
 content_margin_left = 10.0
 content_margin_top = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
-texture = SubResource("GradientTexture2D_w7eab")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2udgp"]
+bg_color = Color(0.332881, 0.332881, 0.332881, 1)
+border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rg0tb"]
-content_margin_left = 4.0
-content_margin_top = 2.0
-content_margin_right = 4.0
-content_margin_bottom = 2.0
 bg_color = Color(0.125911, 0.125911, 0.125911, 1)
 
 [node name="OperatingSystem" type="PanelContainer" node_paths=PackedStringArray("_desktop", "_taskbar")]
@@ -49,55 +52,98 @@ _app_data = Array[ExtResource("2_2udgp")]([ExtResource("2_w7eab")])
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Desktop" type="PanelContainer" parent="VBoxContainer" node_paths=PackedStringArray("_apps_container")]
+[node name="Desktop" type="PanelContainer" parent="VBoxContainer" node_paths=PackedStringArray("_app_icons_container", "_apps_container")]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxTexture_yoaf8")
 script = ExtResource("3_2gwmb")
+_app_icons_container = NodePath("PanelContainer/AppIconsContainer")
 _apps_container = NodePath("AppsContainer")
 _app_icon_scene = ExtResource("4_yoaf8")
 
-[node name="AppsContainer" type="GridContainer" parent="VBoxContainer/Desktop"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/Desktop"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2udgp")
+
+[node name="AppIconsContainer" type="GridContainer" parent="VBoxContainer/Desktop/PanelContainer"]
 layout_mode = 2
 theme_override_constants/h_separation = 5
 theme_override_constants/v_separation = 5
 columns = 5
 
-[node name="AppIcon" parent="VBoxContainer/Desktop/AppsContainer" instance=ExtResource("4_yoaf8")]
+[node name="AppIcon" parent="VBoxContainer/Desktop/PanelContainer/AppIconsContainer" instance=ExtResource("4_yoaf8")]
 layout_mode = 2
 
-[node name="Taskbar" type="PanelContainer" parent="VBoxContainer" node_paths=PackedStringArray("_start", "_apps_container")]
-custom_minimum_size = Vector2(0, 30)
+[node name="AppsContainer" type="Control" parent="VBoxContainer/Desktop"]
+clip_contents = true
 layout_mode = 2
+mouse_filter = 2
+
+[node name="Tms" parent="VBoxContainer/Desktop/AppsContainer" instance=ExtResource("6_1x0hc")]
+visible = false
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Taskbar" type="PanelContainer" parent="VBoxContainer" node_paths=PackedStringArray("_start", "_app_icons_container")]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2udgp")
 script = ExtResource("3_7dqhj")
-_start = NodePath("HBoxContainer/Start/Button")
-_apps_container = NodePath("HBoxContainer/AppsContainer")
+_start = NodePath("HBoxContainer/StartButton")
+_app_icons_container = NodePath("HBoxContainer/Control/AppIconsContainer")
 _app_icon_scene = ExtResource("7_w7eab")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Taskbar"]
 layout_mode = 2
 
 [node name="Start" type="PanelContainer" parent="VBoxContainer/Taskbar/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rg0tb")
 
-[node name="Button" type="Button" parent="VBoxContainer/Taskbar/HBoxContainer/Start"]
+[node name="StartButton" type="Button" parent="VBoxContainer/Taskbar/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+theme_type_variation = &"StartButton"
 text = "Close"
 script = ExtResource("5_nlmep")
 
-[node name="AppsContainer" type="HBoxContainer" parent="VBoxContainer/Taskbar/HBoxContainer"]
+[node name="Control" type="Control" parent="VBoxContainer/Taskbar/HBoxContainer"]
+clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="AppIconTaskbar" parent="VBoxContainer/Taskbar/HBoxContainer/AppsContainer" instance=ExtResource("7_w7eab")]
+[node name="AppIconsContainer" type="HBoxContainer" parent="VBoxContainer/Taskbar/HBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 2284.0
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="AppIconTaskbar" parent="VBoxContainer/Taskbar/HBoxContainer/Control/AppIconsContainer" instance=ExtResource("7_w7eab")]
 layout_mode = 2
+
+[node name="AppIconTaskbar2" parent="VBoxContainer/Taskbar/HBoxContainer/Control/AppIconsContainer" instance=ExtResource("7_w7eab")]
+layout_mode = 2
+
+[node name="CalendarLabel" type="Label" parent="VBoxContainer/Taskbar/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_type_variation = &"TaskbarCalendarLabel"
+theme_override_font_sizes/font_size = 25
+text = "Time"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_rg0tb")
 
 [node name="Calendar" type="PanelContainer" parent="VBoxContainer/Taskbar/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rg0tb")
-
-[node name="Label" type="Label" parent="VBoxContainer/Taskbar/HBoxContainer/Calendar"]
-layout_mode = 2
-text = "Time"
-script = ExtResource("3_rg0tb")

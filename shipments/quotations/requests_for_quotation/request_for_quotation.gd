@@ -42,17 +42,22 @@ func with_data(customer: Customer) -> RequestForQuotation:
 	if shipment == null:
 		return null
 	
+	@warning_ignore("unsafe_property_access")
 	var expected_rate_per_kg: float = GlobalMarket.market_rates_dict[shipment.origin.country.code + shipment.destination.country.code]
 	var margin_allowance: float = randf_range(1.05, 1.5)
 	expected_total_cost = shipment.cargo_details.total_weight * expected_rate_per_kg * margin_allowance
 	var random_day_offset: int = randi_range(1, 3)
 	var random_hour: int = randi_range(10, 16)
+	@warning_ignore("unsafe_method_access")
 	deadline_date = GlobalTimer.get_future_date_from_now(random_day_offset, random_hour)
+	@warning_ignore("unsafe_method_access")
 	deadline_time_event = GlobalTimer.create_time_event_from_unix_time(deadline_date, self)
 	award_criteria = AwardCriteria.values()[randi() % AwardCriteria.size()]
 	
 	shipment.accounting.request_for_quotation = self
+	@warning_ignore("unsafe_property_access", "unsafe_method_access")
 	GlobalRefs.requests_for_quotation.append(self)
+	@warning_ignore("unsafe_property_access", "unsafe_method_access")
 	print("New request for quotation created. RFQ ID: %s. There are %s active rfqs." % [id, GlobalRefs.requests_for_quotation.size()])
 	return self
 

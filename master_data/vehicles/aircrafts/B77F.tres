@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Aircraft" load_steps=2 format=3 uid="uid://ngtf0hbpmg6x"]
+
+[ext_resource type="Script" uid="uid://bah6eigid8w66" path="res://master_data/vehicles/aircrafts/aircraft.gd" id="1_abjpb"]
+
+[resource]
+script = ExtResource("1_abjpb")
+code = "B77F"
+name = "B777F"
+cargo_hold_dimensions = Vector3(0, 300, 0)
+max_dimensions = 372.0
+max_load_weight = 102000.0
+max_load_volume = 520.0
+max_speed = 900.0
+metadata/_custom_type_script = ExtResource("1_abjpb")

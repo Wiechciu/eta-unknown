@@ -1,0 +1,170 @@
+[gd_scene load_steps=21 format=3 uid="uid://d0af2emp6dqbi"]
+
+[ext_resource type="Script" uid="uid://c0vppcanitkf7" path="res://3d_scenes/entities/furniture/clock/clock.gd" id="1_2naov"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_cqxyg"]
+height = 0.15
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uu4ek"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_t5wag"]
+material = SubResource("StandardMaterial3D_uu4ek")
+inner_radius = 0.4
+outer_radius = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cqxyg"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2naov"]
+material = SubResource("StandardMaterial3D_cqxyg")
+height = 0.1
+cap_top = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3a11v"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_p11fo"]
+material = SubResource("StandardMaterial3D_3a11v")
+top_radius = 0.49
+bottom_radius = 0.49
+height = 0.01
+cap_bottom = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i6weh"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3xrfg"]
+material = SubResource("StandardMaterial3D_i6weh")
+top_radius = 0.03
+bottom_radius = 0.03
+height = 0.05
+cap_bottom = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jd8tk"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_tcv2x"]
+material = SubResource("StandardMaterial3D_jd8tk")
+size = Vector2(0.04, 0.2)
+center_offset = Vector3(0, 0.1, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q02fe"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_66xh1"]
+material = SubResource("StandardMaterial3D_q02fe")
+size = Vector2(0.02, 0.3)
+center_offset = Vector3(0, 0.15, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3xrfg"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_3a11v"]
+material = SubResource("StandardMaterial3D_3xrfg")
+size = Vector2(0.005, 0.35)
+center_offset = Vector3(0, 0.175, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2naov"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_2naov"]
+material = SubResource("StandardMaterial3D_2naov")
+size = Vector2(0.02, 0.08)
+center_offset = Vector3(0, 0.4, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_i6weh"]
+material = SubResource("StandardMaterial3D_2naov")
+size = Vector2(0.01, 0.03)
+center_offset = Vector3(0, 0.4, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_3xrfg"]
+material = SubResource("StandardMaterial3D_2naov")
+size = Vector2(0.01, 0.03)
+center_offset = Vector3(0, 0.4, 0)
+
+[node name="Clock" type="StaticBody3D" node_paths=PackedStringArray("hour_hand", "minute_hand", "second_hand")]
+script = ExtResource("1_2naov")
+hour_hand = NodePath("HourHand")
+minute_hand = NodePath("MinuteHand")
+second_hand = NodePath("SecondHand")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -8.85752e-10, 0.0202637)
+shape = SubResource("CylinderShape3D_cqxyg")
+
+[node name="Frame" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.05)
+mesh = SubResource("TorusMesh_t5wag")
+
+[node name="Base" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_2naov")
+
+[node name="Plate" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.05)
+mesh = SubResource("CylinderMesh_p11fo")
+
+[node name="Center" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.08)
+mesh = SubResource("CylinderMesh_3xrfg")
+
+[node name="HourHand" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.082832)
+mesh = SubResource("QuadMesh_tcv2x")
+
+[node name="MinuteHand" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.5, -0.866025, 0, 0.866025, -0.5, 0, 0, 0, 1, 0, 0, 0.1)
+mesh = SubResource("QuadMesh_66xh1")
+
+[node name="SecondHand" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.385906, -0.922538, 0, 0.922538, 0.385906, 0, 0, 0, 1, 0, 0, 0.1)
+visible = false
+mesh = SubResource("QuadMesh_3a11v")
+
+[node name="Marker0" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.06)
+mesh = SubResource("QuadMesh_2naov")
+
+[node name="Marker1" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, 0, 0, 0.06)
+mesh = SubResource("QuadMesh_i6weh")
+
+[node name="Marker2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0, 1, 0, 0, 0.06)
+mesh = SubResource("QuadMesh_3xrfg")
+
+[node name="Marker3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.06)
+mesh = SubResource("QuadMesh_2naov")
+
+[node name="Marker4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.5, 0.866025, 0, -0.866025, -0.5, 0, 0, 0, 1, 0, 0, 0.06)
+mesh = SubResource("QuadMesh_3xrfg")
+
+[node name="Marker5" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.866025, 0.5, 0, -0.5, -0.866025, 0, 0, 0, 1, 0, 0, 0.06)
+mesh = SubResource("QuadMesh_3xrfg")
+
+[node name="Marker6" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0.06)
+mesh = SubResource("QuadMesh_2naov")
+
+[node name="Marker7" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.866025, -0.5, 0, 0.5, -0.866025, 0, 0, 0, 1, 0, 0, 0.06)
+mesh = SubResource("QuadMesh_3xrfg")
+
+[node name="Marker8" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.5, -0.866025, 0, 0.866025, -0.5, 0, 0, 0, 1, 0, 0, 0.06)
+mesh = SubResource("QuadMesh_3xrfg")
+
+[node name="Marker9" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.19249e-08, -1, 0, 1, 1.19249e-08, 0, 0, 0, 1, 0, 0, 0.06)
+mesh = SubResource("QuadMesh_2naov")
+
+[node name="Marker10" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, -0.866025, 0, 0.866025, 0.5, 0, 0, 0, 1, 0, 0, 0.06)
+mesh = SubResource("QuadMesh_3xrfg")
+
+[node name="Marker11" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0, 1, 0, 0, 0.06)
+mesh = SubResource("QuadMesh_3xrfg")

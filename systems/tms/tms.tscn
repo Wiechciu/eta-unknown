@@ -13,12 +13,8 @@ border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
 border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
 
-[node name="Tms" type="PanelContainer" node_paths=PackedStringArray("panel_header", "loading_screen", "navigation", "shipment_list", "shipment_details")]
+[node name="Tms" type="PanelContainer" node_paths=PackedStringArray("all_container", "panel_header", "loading_screen", "navigation", "shipment_list", "shipment_details")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -28,6 +24,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_mgofm")
 script = ExtResource("1_eiifu")
+all_container = NodePath("VBoxContainer")
 panel_header = NodePath("VBoxContainer/PanelHeader")
 loading_screen = NodePath("TmsLoadingScreen")
 navigation = NodePath("VBoxContainer/HBoxContainer/NavigationPanel")

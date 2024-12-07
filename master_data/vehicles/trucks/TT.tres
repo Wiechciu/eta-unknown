@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Truck" load_steps=2 format=3 uid="uid://drbjctcif0752"]
+
+[ext_resource type="Script" uid="uid://c5toadx83f8e" path="res://master_data/vehicles/trucks/truck.gd" id="1_6k4lc"]
+
+[resource]
+script = ExtResource("1_6k4lc")
+code = "TT"
+name = "Trailer Truck"
+cargo_hold_dimensions = Vector3(13.6, 2.7, 2.4)
+max_dimensions = 13.6
+max_load_weight = 24000.0
+max_load_volume = 88.0
+max_speed = 90.0
+metadata/_custom_type_script = ExtResource("1_6k4lc")

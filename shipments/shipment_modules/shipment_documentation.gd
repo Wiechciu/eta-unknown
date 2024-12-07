@@ -36,6 +36,7 @@ func create_new_document(code: Document.Code, issued_time: int, number: int) -> 
 
 
 func create_new_document_now(code: Document.Code, number: int) -> Document:
+	@warning_ignore("unsafe_property_access", "unsafe_call_argument")
 	return create_new_document(code, GlobalTimer.now, number)
 
 

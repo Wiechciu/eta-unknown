@@ -66,6 +66,11 @@ var people_with_employer: Array[Person]:
 	get:
 		return people.filter(func(person: Person) -> bool: return person.employer != null)
 
+@export var vehicles: Array[Vehicle]
+@export var trucks: Array[Truck]
+@export var aircrafts: Array[Aircraft]
+@export var ships: Array[Ship]
+
 var shipments: Array[Shipment]
 var shipments_not_owned: Array[Shipment]:
 	get:

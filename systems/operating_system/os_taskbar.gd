@@ -7,14 +7,14 @@ signal icon_clicked(app: OsApp)
 
 
 @export var _start: OsStart
-@export var _apps_container: Control
+@export var _app_icons_container: Control
 @export var _app_icon_scene: PackedScene
 
 
 func _ready() -> void:
 	GlobalDebugger.assert_all_exported_properties(self)
 	_start.pressed.connect(_on_start_button_pressed)
-	for child: Node in _apps_container.get_children():
+	for child: Node in _app_icons_container.get_children():
 		child.queue_free()
 
 
@@ -25,7 +25,7 @@ func _on_start_button_pressed() -> void:
 func load_icon(app_data: OsAppData, app: OsApp) -> void:
 	var icon: OsAppIconTaskbar = (_app_icon_scene.instantiate() as OsAppIconTaskbar).with_data(app_data, app)
 	icon.icon_clicked.connect(_on_icon_clicked)
-	_apps_container.add_child(icon)
+	_app_icons_container.add_child(icon)
 
 
 func _on_icon_clicked(app: OsApp) -> void:
@@ -33,7 +33,7 @@ func _on_icon_clicked(app: OsApp) -> void:
 
 
 func remove_icon(app: OsApp) -> void:
-	for app_icon: OsAppIconTaskbar in _apps_container.get_children():
+	for app_icon: OsAppIconTaskbar in _app_icons_container.get_children():
 		if app_icon._app == app:
 			app_icon.queue_free()
 			return

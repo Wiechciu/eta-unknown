@@ -9,6 +9,10 @@ signal interacted
 @export var label: Label3D
 @export var collision_shape: CollisionShape3D
 
+@export var label_text: String:
+	set(value):
+		label_text = value
+		label.text = value
 @export var label_position: Vector3:
 	set(value):
 		label_position = value

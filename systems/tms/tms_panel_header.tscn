@@ -12,7 +12,7 @@ border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_h1byg"]
-font_size = 20
+font_size = 30
 shadow_color = Color(0, 0, 0, 0.439216)
 
 [node name="TmsPanelHeader" type="PanelContainer"]
@@ -35,12 +35,14 @@ label_settings = SubResource("LabelSettings_h1byg")
 [node name="MinimizeButton" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(31, 31)
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "__"
 flat = true
 
 [node name="CloseButton" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(31, 31)
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "X"
 flat = true
 

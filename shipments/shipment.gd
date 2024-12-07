@@ -73,9 +73,11 @@ func with_data(shipper_to_assign: Customer = null, consignee_to_assign: Customer
 	customer_reference = generate_random_customer_reference(randi_range(3, 5), randi_range(3, 5))
 	
 	if shipper_to_assign == null:
+		@warning_ignore("unsafe_property_access", "unsafe_method_access")
 		shipper_to_assign = GlobalRefs.customers_with_employees.pick_random()
 	shipper = shipper_to_assign
 	if consignee_to_assign == null:
+		@warning_ignore("unsafe_property_access", "unsafe_method_access")
 		consignee_to_assign = GlobalRefs.customers_with_employees.pick_random()
 	consignee = consignee_to_assign
 	export_contact_person = shipper.employees.pick_random()
@@ -92,10 +94,14 @@ func with_data(shipper_to_assign: Customer = null, consignee_to_assign: Customer
 	
 	if origin_list.is_empty() or destination_list.is_empty():
 		return null
+	@warning_ignore("unsafe_cast")
 	origin = origin_list.pick_random() as Location
+	@warning_ignore("unsafe_cast")
 	destination = destination_list.pick_random() as Location
 	
+	@warning_ignore("unsafe_method_access", "unsafe_call_argument")
 	events.create_new_planned_event(Event.Code.ERL, GlobalTimer.get_future_date_from_now(randi_range(1, 20), 10, 0))
+	@warning_ignore("unsafe_method_access", "unsafe_call_argument")
 	events.create_new_planned_event(Event.Code.LTS, GlobalTimer.get_future_date_from_event(events.get_first_event_of_type(Event.Code.ERL), randi_range(2, 30), 17, 0))
 	
 	service = Service.new().with_data_random()
@@ -108,12 +114,15 @@ func with_data(shipper_to_assign: Customer = null, consignee_to_assign: Customer
 			incoterms_location = shipper.city_name
 	incoterms.place = incoterms_location
 	
+	@warning_ignore("unsafe_property_access", "unsafe_method_access")
 	GlobalRefs.shipments.append(self)
+	@warning_ignore("unsafe_property_access", "unsafe_method_access")
 	print("New shipment created. Shipment ID: %s. There are %s active shipments." % [id, GlobalRefs.shipments.size()])
 	return self
 
 
 func remove() -> void:
+	@warning_ignore("unsafe_property_access", "unsafe_method_access")
 	GlobalRefs.shipments.erase(self)
 
 

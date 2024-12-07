@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Aircraft" load_steps=2 format=3 uid="uid://cla6nmn0um8u4"]
+
+[ext_resource type="Script" uid="uid://bah6eigid8w66" path="res://master_data/vehicles/aircrafts/aircraft.gd" id="1_44s1k"]
+
+[resource]
+script = ExtResource("1_44s1k")
+code = "A33F"
+name = "A330-200F"
+cargo_hold_dimensions = Vector3(0, 240, 0)
+max_dimensions = 358.0
+max_load_weight = 64480.0
+max_load_volume = 330.0
+max_speed = 900.0
+metadata/_custom_type_script = ExtResource("1_44s1k")

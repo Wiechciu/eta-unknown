@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Truck" load_steps=2 format=3 uid="uid://bjlfsp6vqy48l"]
+
+[ext_resource type="Script" uid="uid://c5toadx83f8e" path="res://master_data/vehicles/trucks/truck.gd" id="1_7wucg"]
+
+[resource]
+script = ExtResource("1_7wucg")
+code = "VN"
+name = "Van"
+cargo_hold_dimensions = Vector3(4.1, 2.3, 2.2)
+max_dimensions = 4.1
+max_load_weight = 1200.0
+max_load_volume = 20.0
+max_speed = 120.0
+metadata/_custom_type_script = ExtResource("1_7wucg")

@@ -44,14 +44,14 @@ albedo_color = Color(0.223103, 0.223103, 0.223103, 1)
 material = SubResource("StandardMaterial3D_ptgvf")
 size = Vector3(0.635, 0.05, 0.39)
 
-[node name="Computer" type="StaticBody3D" node_paths=PackedStringArray("_subviewport", "_input_area", "_camera", "_light", "_screen_black")]
+[node name="Computer" type="StaticBody3D" node_paths=PackedStringArray("subviewport", "input_area", "camera", "light", "screen_black")]
 script = ExtResource("1_ace01")
-_subviewport = NodePath("SubViewport")
-_os_scene = ExtResource("2_ptgvf")
-_input_area = NodePath("InputArea")
-_camera = NodePath("Camera3D")
-_light = NodePath("SpotLight3D")
-_screen_black = NodePath("3DModel/ScreenBlack")
+subviewport = NodePath("SubViewport")
+os_scene = ExtResource("2_ptgvf")
+input_area = NodePath("InputArea")
+camera = NodePath("Camera3D")
+light = NodePath("SpotLight3D")
+screen_black = NodePath("3DModel/ScreenBlack")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.659882, 0)
@@ -59,6 +59,7 @@ shape = SubResource("BoxShape3D_30c2g")
 disabled = true
 
 [node name="Interactable" parent="." instance=ExtResource("3_30c2g")]
+label_text = ""
 label_position = Vector3(0, 1.5, 0)
 interaction_radius = 2.0
 

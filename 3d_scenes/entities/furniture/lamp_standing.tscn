@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://b1k30fd4iurrb"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_e8jpf"]
-height = 1.0
+height = 1.9
 radius = 0.4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e8jpf"]
@@ -68,7 +68,7 @@ cap_bottom = false
 [node name="Lamp" type="StaticBody3D"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
 shape = SubResource("CylinderShape3D_e8jpf")
 
 [node name="Top" type="MeshInstance3D" parent="."]
@@ -100,5 +100,4 @@ mesh = SubResource("CylinderMesh_ttbpr")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.61804, 0)
 light_size = 0.3
 shadow_enabled = true
-shadow_bias = 1.0
 omni_range = 10.0

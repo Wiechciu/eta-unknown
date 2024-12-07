@@ -16,6 +16,7 @@ func _ready() -> void:
 	visible = false
 
 
+@warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
 	fps.text = "FPS: %d" % Performance.get_monitor(Performance.TIME_FPS)
 	memory.text = "Memory: %d / %d" % [Performance.get_monitor(Performance.MEMORY_STATIC) / 10**6, Performance.get_monitor(Performance.MEMORY_STATIC_MAX) / 10**6]
@@ -44,12 +45,14 @@ func _on_next_day_button_pressed() -> void:
 
 
 func _on_new_request_for_quotation_button_pressed() -> void:
+	@warning_ignore("unsafe_cast")
 	var customer: Customer = GlobalRefs.customers_with_employees.pick_random() as Customer
 	customer.create_new_request_for_quotation()
 	status.text = "There are %s not awarded rfqs." % [GlobalRefs.requests_for_quotation_not_awarded.size()]
 
 
 func _on_new_shipment_button_pressed() -> void:
+	@warning_ignore("unsafe_cast")
 	var customer: Customer = GlobalRefs.customers_with_employees.pick_random() as Customer
 	customer.create_new_shipment()
 	status.text = "There are %s not owned shipments." % [GlobalRefs.shipments_not_owned.size()]
@@ -80,6 +83,7 @@ func accept_shipment() -> bool:
 
 
 func _on_send_quotation_to_request_button_pressed() -> void:
+	@warning_ignore("unsafe_cast")
 	var request_for_quotation: RequestForQuotation = GlobalRefs.requests_for_quotation_not_awarded.pick_random() as RequestForQuotation
 	var quotation: Quotation = Quotation.new().with_data(request_for_quotation, GameManager.player_company)
 	request_for_quotation.register_quotation(quotation)

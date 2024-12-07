@@ -9,16 +9,28 @@ extends CharacterBody3D
 	get:
 		return _camera.current and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED
 
-var movement_speed: float = 3.0
+var movement_base_speed: float = 3.0
 var sprint_multiplier: float = 3.0
+var movement_actual_speed: float
+var acceleration_time: float = 0.5
 var rotation_speed: float = 0.005
 var jump_height: float = 3.0
+var head_bobbing_tween: Tween
+var head_bobbing_loop_duration: float = 0.5
+var head_resting_position: Vector3
+var head_max_offset: Vector3 = Vector3(0.0, 0.1, 0.0)
 
 
 func _ready() -> void:
 	GlobalDebugger.assert_all_exported_properties(self)
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	head_resting_position = _head.position
+	head_bobbing_tween = create_tween().set_loops()
+	head_bobbing_tween.tween_property(_head, "position", head_resting_position + head_max_offset, head_bobbing_loop_duration / 2)
+	head_bobbing_tween.tween_property(_head, "position", head_resting_position, head_bobbing_loop_duration / 2)
+	head_bobbing_tween.stop()
 
 
 func _process(delta: float) -> void:
@@ -26,6 +38,7 @@ func _process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	handle_sprint(event)
 	handle_rotation(event)
 	handle_jump(event)
 	handle_interaction(event)
@@ -37,8 +50,25 @@ func handle_movement(delta: float) -> void:
 	
 	var movement_vector2: Vector2 = Input.get_vector("left", "right", "forward", "backward")
 	var movement_vector3: Vector3 = Vector3(movement_vector2.x, 0, movement_vector2.y)
-	var is_sprinting: bool = Input.is_action_pressed("sprint")
-	translate_object_local(movement_vector3 * delta * movement_speed * (sprint_multiplier if is_sprinting else 1))
+	head_bobbing_tween.set_speed_scale(movement_actual_speed / movement_base_speed)
+	translate_object_local(movement_vector3 * delta * movement_actual_speed)
+	
+	if movement_vector3 != Vector3.ZERO and not head_bobbing_tween.is_running():
+		head_bobbing_tween.play()
+	elif movement_vector3 == Vector3.ZERO and head_bobbing_tween.is_running():
+		head_bobbing_tween.stop()
+		var tween: Tween = create_tween()
+		tween.tween_property(_head, "position", head_resting_position, 0.1)
+
+
+func handle_sprint(event: InputEvent) -> void:
+	if event.is_action_pressed("sprint"):
+		var tween: Tween = create_tween()
+		tween.tween_method(func(speed: float) -> void: movement_actual_speed = speed, movement_actual_speed, movement_base_speed * sprint_multiplier, acceleration_time)
+	
+	if event.is_action_released("sprint"):
+		var tween: Tween = create_tween()
+		tween.tween_method(func(speed: float) -> void: movement_actual_speed = speed, movement_actual_speed, movement_base_speed, acceleration_time)
 
 
 func handle_rotation(event: InputEvent) -> void:
@@ -46,8 +76,9 @@ func handle_rotation(event: InputEvent) -> void:
 		return
 	
 	if event is InputEventMouseMotion:
-		rotation.y -= event.relative.x * rotation_speed
-		_head.rotation.x -= event.relative.y * rotation_speed
+		var mouse_motion_event: InputEventMouseMotion = event as InputEventMouseMotion
+		rotation.y -= mouse_motion_event.relative.x * rotation_speed
+		_head.rotation.x -= mouse_motion_event.relative.y * rotation_speed
 		_head.rotation.x = clampf(_head.rotation.x, PI/-2, PI/2)
 
 
@@ -65,4 +96,5 @@ func handle_interaction(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
 		for area: Area3D in _interaction_area.get_overlapping_areas():
 			if area is Interactable:
-				area.interact()
+				var interactable: Interactable = area as Interactable
+				interactable.interact()

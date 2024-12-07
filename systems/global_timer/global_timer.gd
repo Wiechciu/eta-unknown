@@ -44,6 +44,9 @@ var current_hour: int
 var current_day: String
 var time_events: Array[TimeEvent]
 
+@export var fade_screen: ColorRect
+var fade_duration: float = 0.5
+
 
 func _init() -> void:
 	now_float = Time.get_unix_time_from_datetime_string(STARTING_DATE)
@@ -52,6 +55,7 @@ func _init() -> void:
 
 func _ready() -> void:
 	GlobalDebugger.assert_all_exported_properties(self)
+	fade_screen.modulate.a = 0.0
 
 
 func _process(delta: float) -> void:
@@ -59,6 +63,7 @@ func _process(delta: float) -> void:
 	_check_hour_change()
 	_check_day_change()
 	_check_time_events()
+
 
 func _check_hour_change() -> void:
 	var new_hour: int = time_dictionary["hour"]
@@ -88,10 +93,22 @@ func _check_day_change() -> void:
 
 
 func start_next_day() -> void:
-	var next_day_datetime_dictionary: Dictionary = Time.get_datetime_dict_from_unix_time(now + ONE_DAY)
-	next_day_datetime_dictionary["hour"] = shift_start_hour
-	next_day_datetime_dictionary["minute"] = 0
-	now_float = Time.get_unix_time_from_datetime_dict(next_day_datetime_dictionary)
+	var new_datetime_dictionary: Dictionary
+	if time_dictionary["hour"] < shift_start_hour:
+		new_datetime_dictionary = time_dictionary
+	else:
+		new_datetime_dictionary = Time.get_datetime_dict_from_unix_time(now + ONE_DAY)
+	
+	new_datetime_dictionary["hour"] = shift_start_hour
+	new_datetime_dictionary["minute"] = 0
+	now_float = Time.get_unix_time_from_datetime_dict(new_datetime_dictionary)
+
+
+func start_next_day_with_fade() -> void:
+	var tween: Tween = create_tween()
+	tween.tween_method(func(alpha: float) -> void: fade_screen.modulate.a = alpha, 0.0, 1.0, fade_duration)
+	tween.tween_callback(start_next_day)
+	tween.tween_method(func(alpha: float) -> void: fade_screen.modulate.a = alpha, 1.0, 0.0, fade_duration)
 
 
 func get_future_date_from_unix_time(original_date: int, plus_days: int = 0, hour: int = 0, minute: int = 0) -> int:
@@ -182,5 +199,5 @@ func _check_time_events() -> void:
 		time_events.remove_at(time_event_index_to_remove)
 
 
-func set_time_scale(scale: float) -> void:
+func set_time_scale(scale: int) -> void:
 	time_scale = scale

@@ -15,7 +15,6 @@ func _ready() -> void:
 
 
 func _on_gui_input(event: InputEvent) -> void:
-	print(_control_to_move.name)
 	if event is InputEventMouseButton:
 		if (event as InputEventMouseButton).pressed:
 			_control_to_move.move_to_front()

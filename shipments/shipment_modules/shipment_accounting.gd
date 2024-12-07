@@ -18,7 +18,7 @@ var revenue_charges_as_charges: Array[Charge]:
 #FIXME - there can be different currencies, need to calculate with exchange rates
 var revenue_charges_sum: float:
 	get:
-		var sum: float
+		var sum: float = 0.0
 		for charge: ChargeRevenue in revenue_charges:
 			sum += charge.amount
 		return sum
@@ -33,7 +33,7 @@ var cost_charges_as_charges: Array[Charge]:
 #FIXME - there can be different currencies, need to calculate with exchange rates
 var cost_charges_sum: float:
 	get:
-		var sum: float
+		var sum: float = 0.0
 		for charge: ChargeCost in cost_charges:
 			sum += charge.amount
 		return sum
