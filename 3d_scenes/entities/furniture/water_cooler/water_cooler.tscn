@@ -38,6 +38,7 @@ label_position = Vector3(0, 2, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 shape = SubResource("BoxShape3D_ja5kr")
+debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="Stand" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -52,3 +53,4 @@ mesh = SubResource("CylinderMesh_0x28t")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 shape = SubResource("CylinderShape3D_ja5kr")
+debug_color = Color(0, 0.6, 0.7, 0.42)

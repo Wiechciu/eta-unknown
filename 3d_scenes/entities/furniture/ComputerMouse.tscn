@@ -48,3 +48,4 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_c8i1s")
+debug_color = Color(0, 0.6, 0.7, 0.42)

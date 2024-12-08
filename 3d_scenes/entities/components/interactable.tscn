@@ -13,9 +13,12 @@ label_text = "PRESS_TO_INTERACT"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_u1lcw")
+debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="Label3D" type="Label3D" parent="."]
 billboard = 1
+modulate = Color(1, 1, 1, 0)
+outline_modulate = Color(0, 0, 0, 0)
 text = "PRESS_TO_INTERACT"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

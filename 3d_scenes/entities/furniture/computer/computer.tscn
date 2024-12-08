@@ -57,6 +57,7 @@ screen_black = NodePath("3DModel/ScreenBlack")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.659882, 0)
 shape = SubResource("BoxShape3D_30c2g")
 disabled = true
+debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="Interactable" parent="." instance=ExtResource("3_30c2g")]
 label_position = Vector3(0, 1.5, 0)
@@ -81,6 +82,7 @@ size = Vector2i(1920, 1080)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InputArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.74076, 0)
 shape = SubResource("BoxShape3D_ptgvf")
+debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="3DModel" type="Node3D" parent="."]
 
