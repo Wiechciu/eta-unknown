@@ -13,8 +13,8 @@ const ONE_MINUTE: int = 1 * 60
 const ONE_HOUR: int = 1 * 60 * 60
 const ONE_DAY: int = 1 * 60 * 60 * 24
 const ONE_WEEK: int = 1 * 60 * 60 * 24 * 7
-const ONE_MONTH: int = 1 * 60 * 60 * 24 * 30 #FIXME - it's inaccurate and may cause issues
-const ONE_YEAR: int = 1 * 60 * 60 * 24 * 365 #FIXME - it's inaccurate and may cause issues
+#const ONE_MONTH: int = 1 * 60 * 60 * 24 * 30 #FIXME - it's inaccurate and may cause issues
+#const ONE_YEAR: int = 1 * 60 * 60 * 24 * 365 #FIXME - it's inaccurate and may cause issues
 const STARTING_DATE: String = "2025-01-01T08:00:00"
 
 var time_scale: int
@@ -39,28 +39,32 @@ var time_string: String:
 var time_dictionary: Dictionary:
 	get:
 		return Time.get_datetime_dict_from_unix_time(now)
-var weekday: int:
+var current_year: int:
+	get:
+		return time_dictionary["year"]
+var current_month: int:
+	get:
+		return time_dictionary["month"]
+var current_month_string: String:
+	get:
+		return "MONTH%s" % current_month
+var current_day: int:
+	get:
+		return time_dictionary["day"]
+var current_weekday: int:
 	get:
 		return Time.get_date_dict_from_unix_time(now)["weekday"]
-var weekday_string: String:
+var current_weekday_string: String:
 	get:
-		var day: String
-		match weekday:
-			0: day = "Monday"
-			1: day = "Tuesday"
-			2: day = "Wednesday"
-			3: day = "Thursday"
-			4: day = "Friday"
-			5: day = "Saturday"
-			6: day = "Sunday"
-		return day
+		return "DAY%s" % current_weekday
 
-var current_hour: int
-var current_day: String
+var previous_hour: int
+var previous_day: String
 var time_events: Array[TimeEvent]
 
 @export var fade_screen: ColorRect
 var fade_duration: float = 0.5
+var is_fading: bool
 
 
 func _init() -> void:
@@ -82,7 +86,7 @@ func _process(delta: float) -> void:
 
 func _check_hour_change() -> void:
 	var new_hour: int = time_dictionary["hour"]
-	if new_hour == current_hour:
+	if new_hour == previous_hour:
 		return
 	
 	if new_hour == shift_start_hour:
@@ -94,15 +98,15 @@ func _check_hour_change() -> void:
 	if new_hour == lunch_end_hour:
 		lunch_ended.emit()
 	
-	current_hour = new_hour
+	previous_hour = new_hour
 
 
 func _check_day_change() -> void:
 	var new_day: String = date_string
-	if new_day == current_day:
+	if new_day == previous_day:
 		return
 	
-	current_day = new_day
+	previous_day = new_day
 	new_day_started.emit()
 	print("New day started: " + new_day)
 
@@ -120,12 +124,32 @@ func start_next_day() -> void:
 
 
 func start_next_day_with_fade() -> void:
+	if is_fading:
+		return
+	
+	is_fading = true
+	fade_screen.show()
+	
 	var tween: Tween = create_tween()
-	tween.tween_callback(fade_screen.show)
 	tween.tween_method(func(alpha: float) -> void: fade_screen.modulate.a = alpha, 0.0, 1.0, fade_duration)
 	tween.tween_callback(start_next_day)
 	tween.tween_method(func(alpha: float) -> void: fade_screen.modulate.a = alpha, 1.0, 0.0, fade_duration)
-	tween.tween_callback(fade_screen.hide)
+	await tween.finished
+	
+	fade_screen.hide()
+	is_fading = false
+
+
+func start_next_month() -> void:
+	var new_datetime_dictionary: Dictionary
+	new_datetime_dictionary = Time.get_datetime_dict_from_unix_time(now)
+	if current_month == 12:
+		new_datetime_dictionary["year"] = current_year + 1
+	new_datetime_dictionary["month"] = (current_month % 12) + 1
+	new_datetime_dictionary["day"] = 1
+	new_datetime_dictionary["hour"] = shift_start_hour
+	new_datetime_dictionary["minute"] = 0
+	now_float = Time.get_unix_time_from_datetime_dict(new_datetime_dictionary)
 
 
 func get_future_date_from_unix_time(original_date: int, plus_days: int = 0, hour: int = 0, minute: int = 0) -> int:

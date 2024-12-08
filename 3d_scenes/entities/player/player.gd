@@ -25,6 +25,7 @@ func _ready() -> void:
 	GlobalDebugger.assert_all_exported_properties(self)
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	movement_actual_speed = movement_base_speed
 	
 	head_resting_position = _head.position
 	head_bobbing_tween = create_tween().set_loops()

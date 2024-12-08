@@ -51,19 +51,19 @@ layout_mode = 2
 [node name="Header" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Shipments:"
+text = "SHIPMENTS"
 label_settings = SubResource("LabelSettings_f2rsm")
 
 [node name="ToggleCompletedButton" type="Button" parent="VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-text = "hide completed"
+text = "HIDE_COMPLETED"
 clip_text = true
 
 [node name="SortButton" type="Button" parent="VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-text = "sort by date"
+text = "SORT_BY_DATE"
 clip_text = true
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]

@@ -50,24 +50,24 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_0f3ba")
 script = ExtResource("1_0f3ba")
 _tab_container = NodePath("VBoxContainer/Tabs")
 _shipment_status = NodePath("VBoxContainer/Buttons/ShipmentStatuses")
-_shipment_number = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/References/ShipmentNumber")
-_customer_reference = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/References/CustomerReference")
-_shipper = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Parties/Shipper")
-_consignee = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Parties/Consignee")
-_origin = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Locations/Origin")
-_destination = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Locations/Destination")
-_incoterms = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Service/Incoterms")
-_service = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Service/Service")
-_earliest_pickup = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Dates/EarliestPickup")
-_latest_delivery = NodePath("VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Dates/LatestDelivery")
-_shipment_cargo_details = NodePath("VBoxContainer/Tabs/Cargo details")
-_shipment_main_freight = NodePath("VBoxContainer/Tabs/Main freight")
-_shipment_haulage = NodePath("VBoxContainer/Tabs/Haulage")
-_shipment_handling = NodePath("VBoxContainer/Tabs/Handling")
-_shipment_customs = NodePath("VBoxContainer/Tabs/Customs")
-_shipment_events = NodePath("VBoxContainer/Tabs/Events")
-_shipment_documentation = NodePath("VBoxContainer/Tabs/Documentation")
-_shipment_accounting = NodePath("VBoxContainer/Tabs/Accounting")
+_shipment_number = NodePath("VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer/References/ShipmentNumber")
+_customer_reference = NodePath("VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer/References/CustomerReference")
+_shipper = NodePath("VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer/Parties/Shipper")
+_consignee = NodePath("VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer/Parties/Consignee")
+_origin = NodePath("VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer/Locations/Origin")
+_destination = NodePath("VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer/Locations/Destination")
+_incoterms = NodePath("VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer/Service/Incoterms")
+_service = NodePath("VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer/Service/Service")
+_earliest_pickup = NodePath("VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer/Dates/EarliestPickup")
+_latest_delivery = NodePath("VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer/Dates/LatestDelivery")
+_shipment_cargo_details = NodePath("VBoxContainer/Tabs/CARGO_DETAILS")
+_shipment_main_freight = NodePath("VBoxContainer/Tabs/MAIN_FREIGHT")
+_shipment_haulage = NodePath("VBoxContainer/Tabs/HAULAGE")
+_shipment_handling = NodePath("VBoxContainer/Tabs/HANDLING")
+_shipment_customs = NodePath("VBoxContainer/Tabs/CUSTOMS")
+_shipment_events = NodePath("VBoxContainer/Tabs/EVENTS")
+_shipment_documentation = NodePath("VBoxContainer/Tabs/DOCUMENTATION")
+_shipment_accounting = NodePath("VBoxContainer/Tabs/ACCOUNTING")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -78,93 +78,93 @@ size_flags_vertical = 3
 current_tab = 8
 clip_tabs = false
 
-[node name="General" type="PanelContainer" parent="VBoxContainer/Tabs"]
+[node name="GENERAL" type="PanelContainer" parent="VBoxContainer/Tabs"]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 metadata/_tab_index = 0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Tabs/General"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Tabs/GENERAL"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/General/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/GENERAL/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="References" type="GridContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer"]
+[node name="References" type="GridContainer" parent="VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="ShipmentNumber" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/References" instance=ExtResource("2_sna7y")]
+[node name="ShipmentNumber" parent="VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer/References" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-label_text = "Shipment no.:"
+label_text = "SHIPMENT_NUMBER"
 
-[node name="CustomerReference" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/References" instance=ExtResource("2_sna7y")]
+[node name="CustomerReference" parent="VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer/References" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-label_text = "Customer ref.:"
+label_text = "CUSTOMER_REFERENCE"
 
-[node name="HSeparator4" type="HSeparator" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Parties" type="GridContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-columns = 2
-
-[node name="Shipper" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Parties" instance=ExtResource("4_sna7y")]
-layout_mode = 2
-label_text = "Shipper:"
-
-[node name="Consignee" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Parties" instance=ExtResource("4_sna7y")]
-layout_mode = 2
-label_text = "Consignee:"
-
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer"]
+[node name="HSeparator4" type="HSeparator" parent="VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Locations" type="GridContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer"]
+[node name="Parties" type="GridContainer" parent="VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="Origin" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Locations" instance=ExtResource("2_sna7y")]
+[node name="Shipper" parent="VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer/Parties" instance=ExtResource("4_sna7y")]
 layout_mode = 2
-label_text = "Origin:"
+label_text = "SHIPPER"
 
-[node name="Destination" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Locations" instance=ExtResource("2_sna7y")]
+[node name="Consignee" parent="VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer/Parties" instance=ExtResource("4_sna7y")]
 layout_mode = 2
-label_text = "Destination:"
+label_text = "CONSIGNEE"
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Service" type="GridContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-columns = 2
-
-[node name="Incoterms" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Service" instance=ExtResource("2_sna7y")]
-layout_mode = 2
-label_text = "Incoterms:"
-
-[node name="Service" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Service" instance=ExtResource("2_sna7y")]
-layout_mode = 2
-label_text = "Service:"
-
-[node name="HSeparator3" type="HSeparator" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Dates" type="GridContainer" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer"]
+[node name="Locations" type="GridContainer" parent="VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="EarliestPickup" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Dates" instance=ExtResource("2_sna7y")]
+[node name="Origin" parent="VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer/Locations" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-label_text = "Erl. pickup::"
+label_text = "ORIGIN"
 
-[node name="LatestDelivery" parent="VBoxContainer/Tabs/General/ScrollContainer/VBoxContainer/Dates" instance=ExtResource("2_sna7y")]
+[node name="Destination" parent="VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer/Locations" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-label_text = "Lts. delivery:"
+label_text = "DESTINATION"
 
-[node name="Cargo details" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_description", "_slac", "_total_quantity", "_total_weight", "_total_volume", "_dimension_sets_container")]
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Service" type="GridContainer" parent="VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Incoterms" parent="VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer/Service" instance=ExtResource("2_sna7y")]
+layout_mode = 2
+label_text = "INCOTERMS"
+
+[node name="Service" parent="VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer/Service" instance=ExtResource("2_sna7y")]
+layout_mode = 2
+label_text = "SERVICE"
+
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Dates" type="GridContainer" parent="VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="EarliestPickup" parent="VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer/Dates" instance=ExtResource("2_sna7y")]
+layout_mode = 2
+label_text = "EARLIEST_PICKUP"
+
+[node name="LatestDelivery" parent="VBoxContainer/Tabs/GENERAL/ScrollContainer/VBoxContainer/Dates" instance=ExtResource("2_sna7y")]
+layout_mode = 2
+label_text = "LATEST_DELIVERY"
+
+[node name="CARGO_DETAILS" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_description", "_slac", "_total_quantity", "_total_weight", "_total_volume", "_dimension_sets_container")]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
@@ -178,51 +178,51 @@ _dimension_sets_container = NodePath("ScrollContainer/VBoxContainer/DimensionSet
 _tms_dimension_set_scene = ExtResource("2_socwm")
 metadata/_tab_index = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Tabs/Cargo details"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Tabs/CARGO_DETAILS"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/CARGO_DETAILS/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="CargoDetailsSummary" type="GridContainer" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer"]
+[node name="CargoDetailsSummary" type="GridContainer" parent="VBoxContainer/Tabs/CARGO_DETAILS/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Description" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary" instance=ExtResource("2_sna7y")]
+[node name="Description" parent="VBoxContainer/Tabs/CARGO_DETAILS/ScrollContainer/VBoxContainer/CargoDetailsSummary" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-label_text = "Description:"
+label_text = "CARGO_DESCRIPTION"
 
-[node name="Slac" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary" instance=ExtResource("2_sna7y")]
+[node name="Slac" parent="VBoxContainer/Tabs/CARGO_DETAILS/ScrollContainer/VBoxContainer/CargoDetailsSummary" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-label_text = "SLAC:"
+label_text = "SLAC"
 
-[node name="TotalQuantity" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary" instance=ExtResource("2_sna7y")]
+[node name="TotalQuantity" parent="VBoxContainer/Tabs/CARGO_DETAILS/ScrollContainer/VBoxContainer/CargoDetailsSummary" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-label_text = "Total quantity:"
+label_text = "TOTAL_QUANTITY"
 
-[node name="TotalWeight" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary" instance=ExtResource("2_sna7y")]
+[node name="TotalWeight" parent="VBoxContainer/Tabs/CARGO_DETAILS/ScrollContainer/VBoxContainer/CargoDetailsSummary" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-label_text = "Total weight:"
+label_text = "TOTAL_WEIGHT"
 
-[node name="TotalVolume" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/CargoDetailsSummary" instance=ExtResource("2_sna7y")]
+[node name="TotalVolume" parent="VBoxContainer/Tabs/CARGO_DETAILS/ScrollContainer/VBoxContainer/CargoDetailsSummary" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-label_text = "Total volume:"
+label_text = "TOTAL_VOLUME"
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/Tabs/CARGO_DETAILS/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="DimensionSets" type="VBoxContainer" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer"]
+[node name="DimensionSets" type="VBoxContainer" parent="VBoxContainer/Tabs/CARGO_DETAILS/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = -1
 
-[node name="DimensionSet" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/DimensionSets" instance=ExtResource("2_s8pr3")]
+[node name="DimensionSet" parent="VBoxContainer/Tabs/CARGO_DETAILS/ScrollContainer/VBoxContainer/DimensionSets" instance=ExtResource("2_s8pr3")]
 layout_mode = 2
 
-[node name="DimensionSet2" parent="VBoxContainer/Tabs/Cargo details/ScrollContainer/VBoxContainer/DimensionSets" instance=ExtResource("2_s8pr3")]
+[node name="DimensionSet2" parent="VBoxContainer/Tabs/CARGO_DETAILS/ScrollContainer/VBoxContainer/DimensionSets" instance=ExtResource("2_s8pr3")]
 layout_mode = 2
 
-[node name="Main freight" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_mode_of_transport", "_carrier", "_planned_departure", "_planned_arrival", "_arrange_main_freight_button")]
+[node name="MAIN_FREIGHT" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_mode_of_transport", "_carrier", "_planned_departure", "_planned_arrival", "_arrange_main_freight_button")]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
@@ -234,53 +234,53 @@ _planned_arrival = NodePath("VBoxContainer/ScrollContainer/VBoxContainer/Dates/P
 _arrange_main_freight_button = NodePath("VBoxContainer/Buttons/ArrangeMainFreightButton")
 metadata/_tab_index = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Main freight"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/MAIN_FREIGHT"]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Tabs/MAIN_FREIGHT/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/MAIN_FREIGHT/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="General" type="GridContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="General" type="GridContainer" parent="VBoxContainer/Tabs/MAIN_FREIGHT/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="ModeOfTransport" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer/General" instance=ExtResource("2_sna7y")]
+[node name="ModeOfTransport" parent="VBoxContainer/Tabs/MAIN_FREIGHT/VBoxContainer/ScrollContainer/VBoxContainer/General" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-label_text = "Mode of Tr.:"
+label_text = "MODE_OF_TRANSPORT"
 
-[node name="Carrier" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer/General" instance=ExtResource("2_sna7y")]
+[node name="Carrier" parent="VBoxContainer/Tabs/MAIN_FREIGHT/VBoxContainer/ScrollContainer/VBoxContainer/General" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-label_text = "Carrier:"
+label_text = "CARRIER"
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/Tabs/MAIN_FREIGHT/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Dates" type="GridContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Dates" type="GridContainer" parent="VBoxContainer/Tabs/MAIN_FREIGHT/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="PlannedDeparture" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer/Dates" instance=ExtResource("2_sna7y")]
+[node name="PlannedDeparture" parent="VBoxContainer/Tabs/MAIN_FREIGHT/VBoxContainer/ScrollContainer/VBoxContainer/Dates" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-label_text = "Plan. depart.:"
+label_text = "PLANNED_DEPARTURE"
 
-[node name="PlannedArrival" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/ScrollContainer/VBoxContainer/Dates" instance=ExtResource("2_sna7y")]
+[node name="PlannedArrival" parent="VBoxContainer/Tabs/MAIN_FREIGHT/VBoxContainer/ScrollContainer/VBoxContainer/Dates" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-label_text = "Plan. arrival:"
+label_text = "PLANNED_ARRIVAL"
 
-[node name="Buttons" type="HBoxContainer" parent="VBoxContainer/Tabs/Main freight/VBoxContainer"]
+[node name="Buttons" type="HBoxContainer" parent="VBoxContainer/Tabs/MAIN_FREIGHT/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="ArrangeMainFreightButton" type="Button" parent="VBoxContainer/Tabs/Main freight/VBoxContainer/Buttons"]
+[node name="ArrangeMainFreightButton" type="Button" parent="VBoxContainer/Tabs/MAIN_FREIGHT/VBoxContainer/Buttons"]
 layout_mode = 2
-text = "Arrange main freight"
+text = "ARRANGE_MAIN_FREIGHT"
 
-[node name="Haulage" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_trucker_pickup", "_trucker_delivery", "_planned_pickup", "_planned_delivery", "_arrange_pickup_button", "_arrange_delivery_button")]
+[node name="HAULAGE" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_trucker_pickup", "_trucker_delivery", "_planned_pickup", "_planned_delivery", "_arrange_pickup_button", "_arrange_delivery_button")]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
@@ -293,58 +293,58 @@ _arrange_pickup_button = NodePath("VBoxContainer/Buttons/ArrangePickupButton")
 _arrange_delivery_button = NodePath("VBoxContainer/Buttons/ArrangeDeliveryButton")
 metadata/_tab_index = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Haulage"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/HAULAGE"]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Tabs/HAULAGE/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/HAULAGE/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="General" type="GridContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="General" type="GridContainer" parent="VBoxContainer/Tabs/HAULAGE/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="TruckerPickup" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer/General" instance=ExtResource("2_sna7y")]
+[node name="TruckerPickup" parent="VBoxContainer/Tabs/HAULAGE/VBoxContainer/ScrollContainer/VBoxContainer/General" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-label_text = "Trucker PUP:"
+label_text = "HAULIER_PICKUP"
 
-[node name="TruckerDelivery" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer/General" instance=ExtResource("2_sna7y")]
+[node name="TruckerDelivery" parent="VBoxContainer/Tabs/HAULAGE/VBoxContainer/ScrollContainer/VBoxContainer/General" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-label_text = "Trucker DEL:"
+label_text = "HAULIER_DELIVERY"
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/Tabs/HAULAGE/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Dates" type="GridContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Dates" type="GridContainer" parent="VBoxContainer/Tabs/HAULAGE/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="PlannedPickup" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer/Dates" instance=ExtResource("2_sna7y")]
+[node name="PlannedPickup" parent="VBoxContainer/Tabs/HAULAGE/VBoxContainer/ScrollContainer/VBoxContainer/Dates" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-label_text = "Plan. pickup:"
+label_text = "PLANNED_PICKUP"
 
-[node name="PlannedDelivery" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/ScrollContainer/VBoxContainer/Dates" instance=ExtResource("2_sna7y")]
+[node name="PlannedDelivery" parent="VBoxContainer/Tabs/HAULAGE/VBoxContainer/ScrollContainer/VBoxContainer/Dates" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-label_text = "Plan. delivery:"
+label_text = "PLANNED_DELIVERY"
 
-[node name="Buttons" type="HBoxContainer" parent="VBoxContainer/Tabs/Haulage/VBoxContainer"]
+[node name="Buttons" type="HBoxContainer" parent="VBoxContainer/Tabs/HAULAGE/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="ArrangePickupButton" type="Button" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/Buttons"]
+[node name="ArrangePickupButton" type="Button" parent="VBoxContainer/Tabs/HAULAGE/VBoxContainer/Buttons"]
 layout_mode = 2
-text = "Arrange pickup"
+text = "ARRANGE_PICKUP"
 
-[node name="ArrangeDeliveryButton" type="Button" parent="VBoxContainer/Tabs/Haulage/VBoxContainer/Buttons"]
+[node name="ArrangeDeliveryButton" type="Button" parent="VBoxContainer/Tabs/HAULAGE/VBoxContainer/Buttons"]
 layout_mode = 2
-text = "Arrange delivery"
+text = "ARRANGE_DELIVERY"
 
-[node name="Handling" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_handling_agent_export", "_handling_agent_import", "_arrange_export_handling_button", "_arrange_import_handling_button")]
+[node name="HANDLING" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_handling_agent_export", "_handling_agent_import", "_arrange_export_handling_button", "_arrange_import_handling_button")]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
@@ -355,46 +355,46 @@ _arrange_export_handling_button = NodePath("VBoxContainer/Buttons/ArrangeExportH
 _arrange_import_handling_button = NodePath("VBoxContainer/Buttons/ArrangeImportHandlingButton")
 metadata/_tab_index = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Handling"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/HANDLING"]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Tabs/Handling/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Tabs/HANDLING/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Handling/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/HANDLING/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="General" type="GridContainer" parent="VBoxContainer/Tabs/Handling/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="General" type="GridContainer" parent="VBoxContainer/Tabs/HANDLING/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="HandlingAgentExport" parent="VBoxContainer/Tabs/Handling/VBoxContainer/ScrollContainer/VBoxContainer/General" instance=ExtResource("2_sna7y")]
+[node name="HandlingAgentExport" parent="VBoxContainer/Tabs/HANDLING/VBoxContainer/ScrollContainer/VBoxContainer/General" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-label_text = "Hand. ag. exp:"
+label_text = "EXPORT_HANDLING_AGENT"
 
-[node name="HandlingAgentImport" parent="VBoxContainer/Tabs/Handling/VBoxContainer/ScrollContainer/VBoxContainer/General" instance=ExtResource("2_sna7y")]
+[node name="HandlingAgentImport" parent="VBoxContainer/Tabs/HANDLING/VBoxContainer/ScrollContainer/VBoxContainer/General" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-label_text = "Hand. ag. imp:"
+label_text = "IMPORT_HANDLING_AGENT"
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/Tabs/Handling/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/Tabs/HANDLING/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Buttons" type="HBoxContainer" parent="VBoxContainer/Tabs/Handling/VBoxContainer"]
+[node name="Buttons" type="HBoxContainer" parent="VBoxContainer/Tabs/HANDLING/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="ArrangeExportHandlingButton" type="Button" parent="VBoxContainer/Tabs/Handling/VBoxContainer/Buttons"]
+[node name="ArrangeExportHandlingButton" type="Button" parent="VBoxContainer/Tabs/HANDLING/VBoxContainer/Buttons"]
 layout_mode = 2
-text = "Arrange export handling"
+text = "ARRANGE_EXPORT_HANDLING"
 
-[node name="ArrangeImportHandlingButton" type="Button" parent="VBoxContainer/Tabs/Handling/VBoxContainer/Buttons"]
+[node name="ArrangeImportHandlingButton" type="Button" parent="VBoxContainer/Tabs/HANDLING/VBoxContainer/Buttons"]
 layout_mode = 2
-text = "Arrange import handling"
+text = "ARRANGE_IMPORT_HANDLING"
 
-[node name="Customs" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_customs_agency_export", "_customs_agency_import", "_export_customs_cleared_date", "_import_customs_cleared_date", "_arrange_export_customs_button", "_arrange_import_customs_button")]
+[node name="CUSTOMS" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_customs_agency_export", "_customs_agency_import", "_export_customs_cleared_date", "_import_customs_cleared_date", "_arrange_export_customs_button", "_arrange_import_customs_button")]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
@@ -407,58 +407,58 @@ _arrange_export_customs_button = NodePath("VBoxContainer/Buttons/ArrangeExportCu
 _arrange_import_customs_button = NodePath("VBoxContainer/Buttons/ArrangeImportCustomsButton")
 metadata/_tab_index = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Customs"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/CUSTOMS"]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Tabs/Customs/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Tabs/CUSTOMS/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/CUSTOMS/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="General" type="GridContainer" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="General" type="GridContainer" parent="VBoxContainer/Tabs/CUSTOMS/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="CustomsAgencyExport" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer/General" instance=ExtResource("2_sna7y")]
+[node name="CustomsAgencyExport" parent="VBoxContainer/Tabs/CUSTOMS/VBoxContainer/ScrollContainer/VBoxContainer/General" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-label_text = "Cust. ag. exp.:"
+label_text = "EXPORT_CUSTOMS_AGENCY"
 
-[node name="CustomsAgencyImport" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer/General" instance=ExtResource("2_sna7y")]
+[node name="CustomsAgencyImport" parent="VBoxContainer/Tabs/CUSTOMS/VBoxContainer/ScrollContainer/VBoxContainer/General" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-label_text = "Cust. ag. imp.:"
+label_text = "IMPORT_CUSTOMS_AGENCY"
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/Tabs/CUSTOMS/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Dates" type="GridContainer" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Dates" type="GridContainer" parent="VBoxContainer/Tabs/CUSTOMS/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="ExportCustomsClearedDate" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer/Dates" instance=ExtResource("2_sna7y")]
+[node name="ExportCustomsClearedDate" parent="VBoxContainer/Tabs/CUSTOMS/VBoxContainer/ScrollContainer/VBoxContainer/Dates" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-label_text = "Exp. cust. clr.:"
+label_text = "EXPORT_CUSTOMS_CLEARED"
 
-[node name="ImportCustomsClearedDate" parent="VBoxContainer/Tabs/Customs/VBoxContainer/ScrollContainer/VBoxContainer/Dates" instance=ExtResource("2_sna7y")]
+[node name="ImportCustomsClearedDate" parent="VBoxContainer/Tabs/CUSTOMS/VBoxContainer/ScrollContainer/VBoxContainer/Dates" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-label_text = "Imp. cust. clr.:"
+label_text = "IMPORT_CUSTOMS_CLEARED"
 
-[node name="Buttons" type="HBoxContainer" parent="VBoxContainer/Tabs/Customs/VBoxContainer"]
+[node name="Buttons" type="HBoxContainer" parent="VBoxContainer/Tabs/CUSTOMS/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="ArrangeExportCustomsButton" type="Button" parent="VBoxContainer/Tabs/Customs/VBoxContainer/Buttons"]
+[node name="ArrangeExportCustomsButton" type="Button" parent="VBoxContainer/Tabs/CUSTOMS/VBoxContainer/Buttons"]
 layout_mode = 2
-text = "Arrange export handling"
+text = "ARRANGE_EXPORT_CUSTOMS_CLEARANCE"
 
-[node name="ArrangeImportCustomsButton" type="Button" parent="VBoxContainer/Tabs/Customs/VBoxContainer/Buttons"]
+[node name="ArrangeImportCustomsButton" type="Button" parent="VBoxContainer/Tabs/CUSTOMS/VBoxContainer/Buttons"]
 layout_mode = 2
-text = "Arrange import handling"
+text = "ARRANGE_IMPORT_CUSTOMS_CLEARANCE"
 
-[node name="Events" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_planned_event_details_container", "_actual_event_details_container")]
+[node name="EVENTS" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_planned_event_details_container", "_actual_event_details_container")]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
@@ -468,55 +468,55 @@ _actual_event_details_container = NodePath("ScrollContainer/VBoxContainer/Actual
 _event_details_scene = ExtResource("11_s4hq1")
 metadata/_tab_index = 6
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Tabs/Events"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Tabs/EVENTS"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Events/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/EVENTS/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlannedEvents" parent="VBoxContainer/Tabs/Events/ScrollContainer/VBoxContainer" instance=ExtResource("13_toxsx")]
+[node name="PlannedEvents" parent="VBoxContainer/Tabs/EVENTS/ScrollContainer/VBoxContainer" instance=ExtResource("13_toxsx")]
 layout_mode = 2
-label_text = "Planned events:"
+label_text = "PLANNED_EVENTS"
 
-[node name="PlannedEventsContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Events/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = -1
-
-[node name="TmsEventDetails" parent="VBoxContainer/Tabs/Events/ScrollContainer/VBoxContainer/PlannedEventsContainer" instance=ExtResource("11_s4hq1")]
-layout_mode = 2
-
-[node name="TmsEventDetails2" parent="VBoxContainer/Tabs/Events/ScrollContainer/VBoxContainer/PlannedEventsContainer" instance=ExtResource("11_s4hq1")]
-layout_mode = 2
-
-[node name="ActualEvents" parent="VBoxContainer/Tabs/Events/ScrollContainer/VBoxContainer" instance=ExtResource("13_toxsx")]
-layout_mode = 2
-label_text = "Actual events:"
-
-[node name="ActualEventsContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Events/ScrollContainer/VBoxContainer"]
+[node name="PlannedEventsContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/EVENTS/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = -1
 
-[node name="TmsEventDetails" parent="VBoxContainer/Tabs/Events/ScrollContainer/VBoxContainer/ActualEventsContainer" instance=ExtResource("11_s4hq1")]
+[node name="TmsEventDetails" parent="VBoxContainer/Tabs/EVENTS/ScrollContainer/VBoxContainer/PlannedEventsContainer" instance=ExtResource("11_s4hq1")]
 layout_mode = 2
 
-[node name="TmsEventDetails2" parent="VBoxContainer/Tabs/Events/ScrollContainer/VBoxContainer/ActualEventsContainer" instance=ExtResource("11_s4hq1")]
+[node name="TmsEventDetails2" parent="VBoxContainer/Tabs/EVENTS/ScrollContainer/VBoxContainer/PlannedEventsContainer" instance=ExtResource("11_s4hq1")]
 layout_mode = 2
 
-[node name="TmsEventDetails3" parent="VBoxContainer/Tabs/Events/ScrollContainer/VBoxContainer/ActualEventsContainer" instance=ExtResource("11_s4hq1")]
+[node name="ActualEvents" parent="VBoxContainer/Tabs/EVENTS/ScrollContainer/VBoxContainer" instance=ExtResource("13_toxsx")]
+layout_mode = 2
+label_text = "ACTUAL_EVENTS"
+
+[node name="ActualEventsContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/EVENTS/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="TmsEventDetails" parent="VBoxContainer/Tabs/EVENTS/ScrollContainer/VBoxContainer/ActualEventsContainer" instance=ExtResource("11_s4hq1")]
 layout_mode = 2
 
-[node name="TmsEventDetails4" parent="VBoxContainer/Tabs/Events/ScrollContainer/VBoxContainer/ActualEventsContainer" instance=ExtResource("11_s4hq1")]
+[node name="TmsEventDetails2" parent="VBoxContainer/Tabs/EVENTS/ScrollContainer/VBoxContainer/ActualEventsContainer" instance=ExtResource("11_s4hq1")]
 layout_mode = 2
 
-[node name="TmsEventDetails5" parent="VBoxContainer/Tabs/Events/ScrollContainer/VBoxContainer/ActualEventsContainer" instance=ExtResource("11_s4hq1")]
+[node name="TmsEventDetails3" parent="VBoxContainer/Tabs/EVENTS/ScrollContainer/VBoxContainer/ActualEventsContainer" instance=ExtResource("11_s4hq1")]
 layout_mode = 2
 
-[node name="TmsEventDetails6" parent="VBoxContainer/Tabs/Events/ScrollContainer/VBoxContainer/ActualEventsContainer" instance=ExtResource("11_s4hq1")]
+[node name="TmsEventDetails4" parent="VBoxContainer/Tabs/EVENTS/ScrollContainer/VBoxContainer/ActualEventsContainer" instance=ExtResource("11_s4hq1")]
 layout_mode = 2
 
-[node name="Documentation" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_documents_container")]
+[node name="TmsEventDetails5" parent="VBoxContainer/Tabs/EVENTS/ScrollContainer/VBoxContainer/ActualEventsContainer" instance=ExtResource("11_s4hq1")]
+layout_mode = 2
+
+[node name="TmsEventDetails6" parent="VBoxContainer/Tabs/EVENTS/ScrollContainer/VBoxContainer/ActualEventsContainer" instance=ExtResource("11_s4hq1")]
+layout_mode = 2
+
+[node name="DOCUMENTATION" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_documents_container")]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
@@ -525,41 +525,41 @@ _documents_container = NodePath("ScrollContainer/VBoxContainer/DocumentsContaine
 _document_details_scene = ExtResource("14_e8rh3")
 metadata/_tab_index = 7
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Tabs/Documentation"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Tabs/DOCUMENTATION"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Documentation/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/DOCUMENTATION/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Documents" parent="VBoxContainer/Tabs/Documentation/ScrollContainer/VBoxContainer" instance=ExtResource("13_toxsx")]
+[node name="Documents" parent="VBoxContainer/Tabs/DOCUMENTATION/ScrollContainer/VBoxContainer" instance=ExtResource("13_toxsx")]
 layout_mode = 2
-label_text = "Documents:"
+label_text = "DOCUMENTS"
 
-[node name="DocumentsContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Documentation/ScrollContainer/VBoxContainer"]
+[node name="DocumentsContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/DOCUMENTATION/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = -1
 
-[node name="TmsDocumentDetails" parent="VBoxContainer/Tabs/Documentation/ScrollContainer/VBoxContainer/DocumentsContainer" instance=ExtResource("14_e8rh3")]
+[node name="TmsDocumentDetails" parent="VBoxContainer/Tabs/DOCUMENTATION/ScrollContainer/VBoxContainer/DocumentsContainer" instance=ExtResource("14_e8rh3")]
 layout_mode = 2
 
-[node name="TmsDocumentDetails2" parent="VBoxContainer/Tabs/Documentation/ScrollContainer/VBoxContainer/DocumentsContainer" instance=ExtResource("14_e8rh3")]
+[node name="TmsDocumentDetails2" parent="VBoxContainer/Tabs/DOCUMENTATION/ScrollContainer/VBoxContainer/DocumentsContainer" instance=ExtResource("14_e8rh3")]
 layout_mode = 2
 
-[node name="TmsDocumentDetails3" parent="VBoxContainer/Tabs/Documentation/ScrollContainer/VBoxContainer/DocumentsContainer" instance=ExtResource("14_e8rh3")]
+[node name="TmsDocumentDetails3" parent="VBoxContainer/Tabs/DOCUMENTATION/ScrollContainer/VBoxContainer/DocumentsContainer" instance=ExtResource("14_e8rh3")]
 layout_mode = 2
 
-[node name="TmsDocumentDetails4" parent="VBoxContainer/Tabs/Documentation/ScrollContainer/VBoxContainer/DocumentsContainer" instance=ExtResource("14_e8rh3")]
+[node name="TmsDocumentDetails4" parent="VBoxContainer/Tabs/DOCUMENTATION/ScrollContainer/VBoxContainer/DocumentsContainer" instance=ExtResource("14_e8rh3")]
 layout_mode = 2
 
-[node name="TmsDocumentDetails5" parent="VBoxContainer/Tabs/Documentation/ScrollContainer/VBoxContainer/DocumentsContainer" instance=ExtResource("14_e8rh3")]
+[node name="TmsDocumentDetails5" parent="VBoxContainer/Tabs/DOCUMENTATION/ScrollContainer/VBoxContainer/DocumentsContainer" instance=ExtResource("14_e8rh3")]
 layout_mode = 2
 
-[node name="TmsDocumentDetails6" parent="VBoxContainer/Tabs/Documentation/ScrollContainer/VBoxContainer/DocumentsContainer" instance=ExtResource("14_e8rh3")]
+[node name="TmsDocumentDetails6" parent="VBoxContainer/Tabs/DOCUMENTATION/ScrollContainer/VBoxContainer/DocumentsContainer" instance=ExtResource("14_e8rh3")]
 layout_mode = 2
 
-[node name="Accounting" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_quotation", "_revenue_total", "_cost_total", "_gross_profit", "_margin", "_revenue_container", "_cost_container")]
+[node name="ACCOUNTING" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_quotation", "_revenue_total", "_cost_total", "_gross_profit", "_margin", "_revenue_container", "_cost_container")]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 script = ExtResource("15_06odw")
@@ -573,94 +573,94 @@ _cost_container = NodePath("ScrollContainer/VBoxContainer/CostContainer")
 _charge_scene = ExtResource("16_d3w2o")
 metadata/_tab_index = 8
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Tabs/Accounting"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Tabs/ACCOUNTING"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Accounting/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/ACCOUNTING/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Summary" type="GridContainer" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer"]
+[node name="Summary" type="GridContainer" parent="VBoxContainer/Tabs/ACCOUNTING/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="Quotation" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary" instance=ExtResource("2_sna7y")]
+[node name="Quotation" parent="VBoxContainer/Tabs/ACCOUNTING/ScrollContainer/VBoxContainer/Summary" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-label_text = "Quotation:"
+label_text = "QUOTATION_NUMBER"
 
-[node name="TmsFieldPlaceholder" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary" instance=ExtResource("19_wu3do")]
-layout_mode = 2
-
-[node name="RevenueTotal" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary" instance=ExtResource("2_sna7y")]
-layout_mode = 2
-label_text = "Revenue total:"
-
-[node name="CostTotal" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary" instance=ExtResource("2_sna7y")]
-layout_mode = 2
-label_text = "Cost total:"
-
-[node name="GrossProfit" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary" instance=ExtResource("2_sna7y")]
-layout_mode = 2
-label_text = "Gross profit:"
-
-[node name="Margin" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/Summary" instance=ExtResource("2_sna7y")]
-layout_mode = 2
-label_text = "Margin:"
-
-[node name="HSeparator4" type="HSeparator" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer"]
+[node name="TmsFieldPlaceholder" parent="VBoxContainer/Tabs/ACCOUNTING/ScrollContainer/VBoxContainer/Summary" instance=ExtResource("19_wu3do")]
 layout_mode = 2
 
-[node name="RevenueCharges" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer" instance=ExtResource("13_toxsx")]
+[node name="RevenueTotal" parent="VBoxContainer/Tabs/ACCOUNTING/ScrollContainer/VBoxContainer/Summary" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-label_text = "Revenue charges:"
+label_text = "REVENUE_TOTAL"
 
-[node name="RevenueContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer"]
+[node name="CostTotal" parent="VBoxContainer/Tabs/ACCOUNTING/ScrollContainer/VBoxContainer/Summary" instance=ExtResource("2_sna7y")]
 layout_mode = 2
-theme_override_constants/separation = -1
+label_text = "COST_TOTAL"
 
-[node name="TmsEventDetails" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/RevenueContainer" instance=ExtResource("11_s4hq1")]
+[node name="GrossProfit" parent="VBoxContainer/Tabs/ACCOUNTING/ScrollContainer/VBoxContainer/Summary" instance=ExtResource("2_sna7y")]
 layout_mode = 2
+label_text = "GROSS_PROFIT"
 
-[node name="TmsEventDetails2" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/RevenueContainer" instance=ExtResource("11_s4hq1")]
+[node name="Margin" parent="VBoxContainer/Tabs/ACCOUNTING/ScrollContainer/VBoxContainer/Summary" instance=ExtResource("2_sna7y")]
 layout_mode = 2
+label_text = "MARGIN"
 
-[node name="TmsEventDetails3" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/RevenueContainer" instance=ExtResource("11_s4hq1")]
-layout_mode = 2
-
-[node name="TmsEventDetails4" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/RevenueContainer" instance=ExtResource("11_s4hq1")]
-layout_mode = 2
-
-[node name="TmsEventDetails5" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/RevenueContainer" instance=ExtResource("11_s4hq1")]
+[node name="HSeparator4" type="HSeparator" parent="VBoxContainer/Tabs/ACCOUNTING/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="TmsEventDetails6" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/RevenueContainer" instance=ExtResource("11_s4hq1")]
+[node name="RevenueCharges" parent="VBoxContainer/Tabs/ACCOUNTING/ScrollContainer/VBoxContainer" instance=ExtResource("13_toxsx")]
 layout_mode = 2
+label_text = "REVENUE_CHARGES"
 
-[node name="CostCharges" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer" instance=ExtResource("13_toxsx")]
-layout_mode = 2
-label_text = "Cost charges:"
-
-[node name="CostContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer"]
+[node name="RevenueContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/ACCOUNTING/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = -1
 
-[node name="TmsEventDetails" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/CostContainer" instance=ExtResource("11_s4hq1")]
+[node name="TmsEventDetails" parent="VBoxContainer/Tabs/ACCOUNTING/ScrollContainer/VBoxContainer/RevenueContainer" instance=ExtResource("11_s4hq1")]
 layout_mode = 2
 
-[node name="TmsEventDetails2" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/CostContainer" instance=ExtResource("11_s4hq1")]
+[node name="TmsEventDetails2" parent="VBoxContainer/Tabs/ACCOUNTING/ScrollContainer/VBoxContainer/RevenueContainer" instance=ExtResource("11_s4hq1")]
 layout_mode = 2
 
-[node name="TmsEventDetails3" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/CostContainer" instance=ExtResource("11_s4hq1")]
+[node name="TmsEventDetails3" parent="VBoxContainer/Tabs/ACCOUNTING/ScrollContainer/VBoxContainer/RevenueContainer" instance=ExtResource("11_s4hq1")]
 layout_mode = 2
 
-[node name="TmsEventDetails4" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/CostContainer" instance=ExtResource("11_s4hq1")]
+[node name="TmsEventDetails4" parent="VBoxContainer/Tabs/ACCOUNTING/ScrollContainer/VBoxContainer/RevenueContainer" instance=ExtResource("11_s4hq1")]
 layout_mode = 2
 
-[node name="TmsEventDetails5" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/CostContainer" instance=ExtResource("11_s4hq1")]
+[node name="TmsEventDetails5" parent="VBoxContainer/Tabs/ACCOUNTING/ScrollContainer/VBoxContainer/RevenueContainer" instance=ExtResource("11_s4hq1")]
 layout_mode = 2
 
-[node name="TmsEventDetails6" parent="VBoxContainer/Tabs/Accounting/ScrollContainer/VBoxContainer/CostContainer" instance=ExtResource("11_s4hq1")]
+[node name="TmsEventDetails6" parent="VBoxContainer/Tabs/ACCOUNTING/ScrollContainer/VBoxContainer/RevenueContainer" instance=ExtResource("11_s4hq1")]
+layout_mode = 2
+
+[node name="CostCharges" parent="VBoxContainer/Tabs/ACCOUNTING/ScrollContainer/VBoxContainer" instance=ExtResource("13_toxsx")]
+layout_mode = 2
+label_text = "COST_CHARGES"
+
+[node name="CostContainer" type="VBoxContainer" parent="VBoxContainer/Tabs/ACCOUNTING/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="TmsEventDetails" parent="VBoxContainer/Tabs/ACCOUNTING/ScrollContainer/VBoxContainer/CostContainer" instance=ExtResource("11_s4hq1")]
+layout_mode = 2
+
+[node name="TmsEventDetails2" parent="VBoxContainer/Tabs/ACCOUNTING/ScrollContainer/VBoxContainer/CostContainer" instance=ExtResource("11_s4hq1")]
+layout_mode = 2
+
+[node name="TmsEventDetails3" parent="VBoxContainer/Tabs/ACCOUNTING/ScrollContainer/VBoxContainer/CostContainer" instance=ExtResource("11_s4hq1")]
+layout_mode = 2
+
+[node name="TmsEventDetails4" parent="VBoxContainer/Tabs/ACCOUNTING/ScrollContainer/VBoxContainer/CostContainer" instance=ExtResource("11_s4hq1")]
+layout_mode = 2
+
+[node name="TmsEventDetails5" parent="VBoxContainer/Tabs/ACCOUNTING/ScrollContainer/VBoxContainer/CostContainer" instance=ExtResource("11_s4hq1")]
+layout_mode = 2
+
+[node name="TmsEventDetails6" parent="VBoxContainer/Tabs/ACCOUNTING/ScrollContainer/VBoxContainer/CostContainer" instance=ExtResource("11_s4hq1")]
 layout_mode = 2
 
 [node name="Buttons" type="HBoxContainer" parent="VBoxContainer"]
@@ -669,7 +669,7 @@ layout_mode = 2
 [node name="CloseButton" type="Button" parent="VBoxContainer/Buttons"]
 modulate = Color(1, 1, 0, 1)
 layout_mode = 2
-text = "Close"
+text = "CLOSE"
 
 [node name="ShipmentStatuses" type="OptionButton" parent="VBoxContainer/Buttons"]
 layout_mode = 2

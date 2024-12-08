@@ -12,22 +12,38 @@ signal interacted
 @export var label_text: String:
 	set(value):
 		label_text = value
-		label.text = value
+		if label != null:
+			label.text = value
 @export var label_position: Vector3:
 	set(value):
 		label_position = value
-		label.position = value
+		if label != null:
+			label.position = value
 @export var interaction_radius: float:
 	set(value):
 		interaction_radius = value
-		var sphere_shape: SphereShape3D = collision_shape.shape as SphereShape3D
-		if sphere_shape != null:
-			sphere_shape.radius = value
+		if collision_shape != null:
+			var sphere_shape: SphereShape3D = collision_shape.shape as SphereShape3D
+			if sphere_shape != null:
+				sphere_shape.radius = value
 
 
 func _ready() -> void:
+	GlobalDebugger.assert_all_exported_properties(self)
 	label.modulate.a = 0
 	label.outline_modulate.a = 0
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED:
+		update_localization()
+
+
+func update_localization() -> void:
+	if not is_node_ready():
+		await ready
+	var event_text: String = "[%s]" % InputMap.action_get_events("interact")[0].as_text().replace(" (Physical)", "")
+	label.text = tr(label_text).format({"action":event_text})
 
 
 func interact() -> void:

@@ -33,7 +33,6 @@ area = NodePath("Area3D")
 collision_shape = NodePath("Area3D/CollisionShape3D")
 
 [node name="Interactable" parent="." instance=ExtResource("2_3gfg8")]
-label_text = "Press [F] to start next day"
 label_position = Vector3(0, 2, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

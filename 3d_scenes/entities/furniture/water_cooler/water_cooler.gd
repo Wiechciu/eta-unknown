@@ -5,14 +5,12 @@ extends StaticBody3D
 @export var area: Area3D
 @export var collision_shape: CollisionShape3D
 var player_in_range: Player
-var distance_to_player: float
 
 
 func _ready() -> void:
 	GlobalDebugger.assert_all_exported_properties(self)
 	area.body_entered.connect(_on_body_entered)
 	area.body_exited.connect(_on_body_exited)
-	
 	register_interactable()
 
 
@@ -22,7 +20,7 @@ func _process(delta: float) -> void:
 		return
 	
 	var distance_to_player: float = global_position.distance_to(player_in_range.global_position)
-	var new_time_scale: float = GlobalTimer.normal_time_scale * maxf(1, 100 * ((collision_shape.shape as CylinderShape3D).radius - distance_to_player))
+	var new_time_scale: int = GlobalTimer.normal_time_scale * maxf(1, 100 * ((collision_shape.shape as CylinderShape3D).radius - distance_to_player))
 	GlobalTimer.set_time_scale(new_time_scale)
 
 

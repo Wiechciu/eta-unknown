@@ -107,10 +107,10 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_rg0tb")
 
 [node name="StartButton" type="Button" parent="VBoxContainer/Taskbar/HBoxContainer"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_type_variation = &"StartButton"
-text = "Close"
+text = "CLOSE"
 script = ExtResource("5_nlmep")
 
 [node name="Control" type="Control" parent="VBoxContainer/Taskbar/HBoxContainer"]
@@ -137,7 +137,7 @@ layout_mode = 2
 size_flags_vertical = 1
 theme_type_variation = &"TaskbarCalendarLabel"
 theme_override_font_sizes/font_size = 25
-text = "Time"
+text = "2025-01-01, 08:00"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("3_rg0tb")

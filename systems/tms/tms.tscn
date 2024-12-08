@@ -55,7 +55,6 @@ size_flags_vertical = 3
 _tms = NodePath("../../..")
 
 [node name="ShipmentDetails" parent="VBoxContainer/HBoxContainer" node_paths=PackedStringArray("_tms") instance=ExtResource("4_nhplg")]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://db7riwidjsxbu"]
+
+[ext_resource type="Script" uid="uid://cxh3u0n0nptw2" path="res://systems/ui/ui.gd" id="1_xemwu"]
+[ext_resource type="Script" uid="uid://cr6ck8pbq4a48" path="res://systems/ui/language.gd" id="2_5x0jx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xemwu"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.0686384, 0.151623, 0.306689, 1)
+
+[node name="Ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xemwu")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xemwu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Language" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/Language"]
+layout_mode = 2
+text = "LANGUAGE"
+
+[node name="Language" type="OptionButton" parent="PanelContainer/VBoxContainer/Language"]
+layout_mode = 2
+script = ExtResource("2_5x0jx")
+
+[connection signal="item_selected" from="PanelContainer/VBoxContainer/Language/Language" to="PanelContainer/VBoxContainer/Language/Language" method="_on_item_selected"]

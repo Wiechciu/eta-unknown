@@ -86,13 +86,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.80937, 1, -4.03984)
 visible = false
 
 [node name="Lamp2" parent="Furniture" instance=ExtResource("8_5nt3u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.316464, 0, -2.97947)
 
 [node name="WaterCooler" parent="Furniture" instance=ExtResource("9_w7ts6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.67861, 0, -2.92572)
 
 [node name="Clock" parent="Furniture" instance=ExtResource("10_dfqda")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.758489, 2.74126, -4.98209)
+
+[node name="WallCalendar" parent="Furniture" instance=ExtResource("11_4ilw0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.733054, 1.80671, -4.99403)
 
 [node name="Room" type="Node3D" parent="."]
 
@@ -126,6 +129,3 @@ light_color = Color(0.999999, 0.997743, 0.804051, 1)
 light_energy = 0.3
 shadow_enabled = true
 omni_range = 100.0
-
-[node name="WallCalendar" parent="." instance=ExtResource("11_4ilw0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.733054, 1.80671, -4.99403)

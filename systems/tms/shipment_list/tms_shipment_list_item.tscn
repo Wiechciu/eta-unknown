@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dag450t1ydq8u"]
 
-[ext_resource type="Script" path="res://systems/tms/shipment_list/tms_shipment_list_item.gd" id="1_bi60y"]
+[ext_resource type="Script" uid="uid://cyo7ib63572w7" path="res://systems/tms/shipment_list/tms_shipment_list_item.gd" id="1_bi60y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bi60y"]
 content_margin_left = 4.0

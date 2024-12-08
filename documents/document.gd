@@ -28,24 +28,7 @@ var code_string: String:
 		return Code.keys()[code]
 var name: String:
 	get:
-		match code:
-			Code.RFQ: return "Request for quotation"
-			Code.QUO: return "Quotation"
-			Code.SPO: return "Shipping order"
-			Code.HWB: return "House Air Waybill"
-			Code.MWB: return "Master Air Waybill"
-			Code.HBL: return "House Bill of Lading"
-			Code.MBL: return "Master Bill of Lading"
-			Code.CDE: return "Customs Declaration Export"
-			Code.CDI: return "Customs Declaration Import"
-			Code.PUO: return "Pickup order"
-			Code.DLO: return "Delivery order"
-			Code.POD: return "Proof of delivery"
-			Code.CIN: return "Commercial invoice"
-			Code.PKL: return "Packing list"
-			Code.MSD: return "Material safety data sheet"
-			Code.DGD: return "Dangerous goods declaration"
-			_: return "%s - unknown document" % code_string
+		return tr("DOCUMENT_" + code_string)
 var issued_time: int
 var number: int
 

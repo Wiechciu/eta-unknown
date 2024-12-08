@@ -1,8 +1,9 @@
 extends StaticBody3D
 
 
+@export var day_label: Label3D
+@export var month_label: Label3D
 @export var weekday_label: Label3D
-@export var date_label: Label3D
 
 
 func _ready() -> void:
@@ -12,10 +13,6 @@ func _ready() -> void:
 
 
 func update_calendar() -> void:
-	weekday_label.text = "{weekday}".format({
-		"weekday":GlobalTimer.weekday_string,
-		})
-	date_label.text = "{day}.{month}".format({
-		"day":"%02d" % GlobalTimer.time_dictionary["day"],
-		"month":"%02d" % GlobalTimer.time_dictionary["month"]
-		})
+	day_label.text = "%d" % GlobalTimer.current_day
+	month_label.text = GlobalTimer.current_month_string
+	weekday_label.text = GlobalTimer.current_weekday_string

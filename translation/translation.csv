@@ -1,0 +1,139 @@
+﻿keys;en;pl
+PRESS_TO_INTERACT;Press {action} to interact;Naciśnij {action}, aby wejść w interakcję
+LANGUAGE;Language;Język
+POLISH;Polish;Polski
+ENGLISH;English;Angielski
+TODAY_IS;Today is;Dzisiaj jest
+DAY0;Sunday;Niedziela
+DAY1;Monday;Poniedziałek
+DAY2;Tuesday;Wtorek
+DAY3;Wednesday;Środa
+DAY4;Thursday;Czwartek
+DAY5;Friday;Piątek
+DAY6;Saturday;Sobota
+MONTH1;January;Styczeń
+MONTH2;February;Luty
+MONTH3;March;Marzec
+MONTH4;April;Kwiecień
+MONTH5;May;Maj
+MONTH6;June;Czerwiec
+MONTH7;July;Lipiec
+MONTH8;August;Sierpień
+MONTH9;September;Wrzesień
+MONTH10;October;Październik
+MONTH11;November;Listopad
+MONTH12;December;Grudzień
+NAVIGATION;Navigation;Nawigacja
+SHIPMENTS;Shipments;Przesyłki
+QUOTATIONS;Quotations;Kwotacje
+CUSTOMERS;Customers;Klienci
+HIDE_COMPLETED;hide completed;ukryj zakończone
+SHOW_COMPLETED;show completed;pokaż zakończone
+SORT_BY_DATE;sort by date;sortuj po dacie
+SORT_BY_NUMBER;sort by number;sortuj po numerze
+GENERAL;General;Ogólne
+CARGO_DETAILS;Cargo details;Szczegóły ładunku
+MAIN_FREIGHT;Main freight;Fracht główny
+HAULAGE;Haulage;Dowóz
+HANDLING;Handling;Obsługa
+CUSTOMS;Customs;Odprawa
+EVENTS;Events;Zdarzenia
+DOCUMENTATION;Documentation;Dokumentacja
+ACCOUNTING;Accounting;Rozliczenie
+CLOSE;Close;Zamknij
+SHIPMENT_NUMBER;Shipment number;Numer przesyłki
+CUSTOMER_REFERENCE;Customer reference;Referencja klienta
+SHIPPER;Shipper;Nadawca
+CONSIGNEE;Consignee;Odbiorca
+ORIGIN;Origin;Miejsce nadania
+DESTINATION;Destination;Miejsce przeznaczenia
+INCOTERMS;Incoterms;Incoterms
+SERVICE;Service;Serwis
+EARLIEST_PICKUP;Earliest pickup;Najwcześniejszy odbiór
+LATEST_DELIVERY;Latest delivery;Najpóźniejsza dostawa
+CARGO_DESCRIPTION;Cargo description;Opis towaru
+DESCRIPTION;Description;Opis
+SLAC;SLAC;SLAC
+TOTAL_QUANTITY;Total quantity;Łączna ilość
+TOTAL_WEIGHT;Total weight;Łączna waga
+TOTAL_VOLUME;Total volume;Łączna objętość
+PCS;pcs;szt.
+CM;cm;cm
+KG;kg;kg
+CBM;cbm;m3
+MODE_OF_TRANSPORT;Mode of transport;Rodzaj transportu
+CARRIER;Carrier;Przewoźnik
+PLANNED_DEPARTURE;Planned departure;Planowany wylot
+PLANNED_ARRIVAL;Planned arrival;Planowany przylot
+ARRANGE_MAIN_FREIGHT;Arrange main freight;Zaaranżuj fracht główny
+HAULIER_PICKUP;Haulier pick up;Przewoźnik odbioru
+HAULIER_DELIVERY;Haulier delivery;Przewoźnik dostawy
+PLANNED_PICKUP;Planned pick up;Planowany odbiór
+PLANNED_DELIVERY;Planned delivery;Planowana dostawa
+ARRANGE_PICKUP;Arrange pickup;Zaaranżuj odbiór
+ARRANGE_DELIVERY;Arrange delivery;Zaaranżuj dostawę
+EXPORT_HANDLING_AGENT;Export handling agent;Agent obsługi eksportowej
+IMPORT_HANDLING_AGENT;Import handling agent;Agent obsługi importowej
+ARRANGE_EXPORT_HANDLING;Arrange export handling;Zaaranżuj obsługę eksportową
+ARRANGE_IMPORT_HANDLING;Arrange import handling;Zaaranżuj obsługę importową
+EXPORT_CUSTOMS_AGENCY;Export customs agency;Eksportowa agencja celna
+IMPORT_CUSTOMS_AGENCY;Import customs agency;Importowa agencja celna
+EXPORT_CUSTOMS_CLEARED;Export customs cleared;Eksportowa odprawa celna zakończona
+IMPORT_CUSTOMS_CLEARED;Import customs cleared;Importowa odprawa celna zakończona
+ARRANGE_EXPORT_CUSTOMS_CLEARANCE;Arrange export customs clearance;Zaaranżuj eksportową odprawę celną
+ARRANGE_IMPORT_CUSTOMS_CLEARANCE;Arrange import customs clearance;Zaaranżuj importową odprawę celną
+PLANNED_EVENTS;Planned events;Planowane zdarzenia
+ACTUAL_EVENTS;Actual events;Rzeczywiste zdarzenia
+DOCUMENTS;Documents;Dokumenty
+REVENUE_CHARGES;Revenue charges;Stawki przychodowe
+COST_CHARGES;Cost charges;Stawki kosztowe
+QUOTATION_NUMBER;Quotation number;Numer kwotacji
+REVENUE_TOTAL;Revenue total;Łączny przychód
+COST_TOTAL;Cost total;Łączne koszty
+GROSS_PROFIT;Gross profit;Profit brutto
+MARGIN;Margin;Marża
+STATUS_REQUESTED;Requested;Zlecona
+STATUS_QUOTED;Quoted;Wyceniona
+STATUS_ACCEPTED;Accepted;Zaakceptowana
+STATUS_PLANNED;Planned;Zaplanowana
+STATUS_IN_TRANSIT;In transit;W transporcie
+STATUS_DELIVERED;Delivered;Dostarczona
+STATUS_INVOICED;Invoiced;Zafakturowana
+STATUS_COMPLETED;Completed;Zakończona
+STATUS_CANCELLED;Cancelled;Anulowana
+EVENT_BOK;Received booking;Odebrano zlecenie
+EVENT_ERL;Earliest pickup;Najwcześniejszy odbiór
+EVENT_PUP;Picked up;Odebrano
+EVENT_RCV;Received at origin;Dostarczono do miejsca nadania
+EVENT_CSE;Export customs cleared;Eksportowa odprawa celna zakończona
+EVENT_DEP;Departed;Wyleciało / wypłynęło
+EVENT_ARR;Arrived;Doleciało / dopłynęło
+EVENT_CSI;Import customs cleared;Importowa odprawa celna zakończona
+EVENT_REL;Released for delivery;Zwolnione do dostawy
+EVENT_DEL;Delivered;Dostarczono
+EVENT_LTS;Latest delivery;Najpóźniejsza dostawa
+DOCUMENT_RFQ;Request for quotation;Zlecenie wyceny
+DOCUMENT_QUO;Quotation;Kwotacja
+DOCUMENT_SPO;Shipping order;Zlecenie transportowe
+DOCUMENT_HWB;House Air Waybill;Spedytorski lotniczy list przewozowy
+DOCUMENT_MWB;Master Air Waybill;Główny lotniczy list przewozowy
+DOCUMENT_HBL;House Bill of Lading;Spedytorski konosament
+DOCUMENT_MBL;Master Bill of Lading;Główny konosament
+DOCUMENT_CDE;Export Customs Declaration;Ekportowa deklaracja celna
+DOCUMENT_CDI;Import Customs Declaration;Importowa deklaracja celna
+DOCUMENT_PUO;Pickup order;Zlecenie odbioru
+DOCUMENT_DLO;Delivery order;Zlecenie dostawy
+DOCUMENT_POD;Proof of delivery;Potwierdzenie dostawy
+DOCUMENT_CIN;Commercial invoice;Faktura handlowa
+DOCUMENT_PKL;Packing list;Lista załadunkowa
+DOCUMENT_MSD;Material safety data sheet;Karta charakterystyki materiału
+DOCUMENT_DGD;Dangerous goods declaration;Deklaracja towarów niebezpiecznych
+CHARGE_AFR;Airfreight;Fracht lotniczy
+CHARGE_SFR;Seafreight;Fracht morski
+CHARGE_PUP;Pickup;Odbiór
+CHARGE_DEL;Delivery;Dostawa
+CHARGE_CSE;Export customs clearance;Eksportowa odprawa celna
+CHARGE_CSI;Import customs clearance;Importowa odprawa celna
+CHARGE_HDE;Export handling;Eksportowa obsługa
+CHARGE_HDI;Import handling;Importowa obsługa
+LOADING;loading;ładowanie

@@ -89,6 +89,11 @@ modulate = Color(1, 0.792449, 0.380258, 1)
 layout_mode = 2
 text = "Next day"
 
+[node name="NextMonthButton" type="Button" parent="MarginContainer/VBoxContainer"]
+modulate = Color(1, 0.792449, 0.380258, 1)
+layout_mode = 2
+text = "Next month"
+
 [node name="Status" type="Label" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
@@ -104,3 +109,4 @@ autowrap_mode = 2
 [connection signal="pressed" from="MarginContainer/VBoxContainer/AcceptNewShipmentButton" to="." method="_on_accept_new_shipment_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Accept10NewShipmentsButton" to="." method="_on_accept_10_new_shipments_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/NextDayButton" to="." method="_on_next_day_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/NextMonthButton" to="." method="_on_next_month_button_pressed"]

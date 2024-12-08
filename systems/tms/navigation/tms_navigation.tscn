@@ -40,7 +40,7 @@ text = "<"
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Navigation"
+text = "NAVIGATION"
 label_settings = SubResource("LabelSettings_essl5")
 horizontal_alignment = 1
 
@@ -50,18 +50,18 @@ layout_mode = 2
 [node name="ShipmentsButton" type="Button" parent="VBoxContainer/MenuItems"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
-text = "Shipments"
+text = "SHIPMENTS"
 
 [node name="QuotationsButton" type="Button" parent="VBoxContainer/MenuItems"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
-text = "Quotations"
+text = "QUOTATIONS"
 
 [node name="CustomersButton" type="Button" parent="VBoxContainer/MenuItems"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 disabled = true
-text = "Customers"
+text = "CUSTOMERS"
 
 [connection signal="pressed" from="VBoxContainer/Header/ToggleNavigationButton" to="." method="_on_toggle_navigation_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/MenuItems/ShipmentsButton" to="." method="_on_navigation_shipments_button_pressed"]

@@ -20,16 +20,7 @@ var code_string: String:
 		return Code.keys()[code]
 var name: String:
 	get:
-		match code:
-			Code.AFR: return "Airfreight"
-			Code.SFR: return "Seafreight"
-			Code.PUP: return "Pickup"
-			Code.DEL: return "Delivery"
-			Code.CSE: return "Export customs clearance"
-			Code.CSI: return "Import customs clearance"
-			Code.HDE: return "Export handling"
-			Code.HDI: return "Import handling"
-			_: return "%s - unknown charge" % code_string
+		return tr("CHARGE_" + code_string)
 var amount: float
 var amount_string: String:
 	get: return "%.2f" % amount

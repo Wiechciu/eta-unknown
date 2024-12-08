@@ -94,3 +94,8 @@ func _on_send_quotation_to_request_button_pressed() -> void:
 func _on_send_10_quotations_to_requests_button_pressed() -> void:
 	for n: int in 10:
 		_on_send_quotation_to_request_button_pressed()
+
+
+func _on_next_month_button_pressed() -> void:
+	GlobalTimer.start_next_month()
+	status.text = "Next month started."

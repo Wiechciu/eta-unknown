@@ -78,7 +78,7 @@ func remove_shipment_list_items(ids_to_remove: Array[int]) -> void:
 
 func refresh_shipment_list_items() -> void:
 	filter_and_sort_shipment_list()
-	_shipments_header.text = "Shipments (%d):" % shipments_to_display.size()
+	_shipments_header.text = "%s (%d):" % [tr("SHIPMENTS"), shipments_to_display.size()]
 	
 	var shipments_size: int = shipments_to_display.size()
 	var list_items_size: int = shipment_list_items.size()
@@ -118,9 +118,9 @@ func _on_shipment_list_item_pressed(shipment_to_load: Shipment) -> void:
 func _on_toggle_completed_button_pressed() -> void:
 	show_completed = not show_completed
 	if show_completed:
-		_toggle_completed_button.text = "hide completed"
+		_toggle_completed_button.text = tr("HIDE_COMPLETED")
 	else:
-		_toggle_completed_button.text = "show completed"
+		_toggle_completed_button.text = tr("SHOW_COMPLETED")
 	
 	refresh_shipment_list_items()
 
@@ -129,9 +129,9 @@ func _on_sort_button_pressed() -> void:
 	sort_type = SortType.values()[(sort_type + 1) % SortType.size()]
 	match sort_type:
 		SortType.BY_NUMBER:
-			_sort_button.text = "sort by date"
+			_sort_button.text = tr("SORT_BY_DATE")
 		SortType.BY_DATE:
-			_sort_button.text = "sort by number"
+			_sort_button.text = tr("SORT_BY_NUMBER")
 	
 	refresh_shipment_list_items()
 

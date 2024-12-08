@@ -15,9 +15,9 @@ func _ready() -> void:
 
 
 func with_data(dimension_set: DimensionSet) -> DocumentDimensionSet:
-	quantity.text = "%d pcs" % [dimension_set.quantity]
+	quantity.text = "%d %s" % [dimension_set.quantity, tr("PCS")]
 	length.text = "%d" % [dimension_set.length]
 	width.text = "%d" % [dimension_set.width]
-	height.text = "%d cm, " % [dimension_set.height]
-	total_weight.text = "%d kg" % [dimension_set.total_weight]
+	height.text = "%d %s, " % [dimension_set.height, tr("CM")]
+	total_weight.text = "%d %s" % [dimension_set.total_weight, tr("KG")]
 	return self
