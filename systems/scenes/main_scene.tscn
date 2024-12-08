@@ -1,14 +1,16 @@
-[gd_scene load_steps=17 format=3 uid="uid://b18oy35p17ir7"]
+[gd_scene load_steps=19 format=3 uid="uid://b18oy35p17ir7"]
 
 [ext_resource type="PackedScene" uid="uid://b66husl1w3olw" path="res://systems/calendar/calendar.tscn" id="1_82prh"]
 [ext_resource type="PackedScene" uid="uid://cieydjj1npshf" path="res://systems/debug_menu/debug_menu.tscn" id="2_8pfch"]
 [ext_resource type="PackedScene" uid="uid://dvpm8vxtia7au" path="res://3d_scenes/entities/furniture/computer/computer.tscn" id="4_8pfch"]
-[ext_resource type="PackedScene" uid="uid://buj838q1xidpo" path="res://3d_scenes/entities/furniture/desk.tscn" id="4_a1rhb"]
-[ext_resource type="PackedScene" uid="uid://crqxtd3cq7r2x" path="res://3d_scenes/entities/furniture/chair.tscn" id="5_cybsn"]
+[ext_resource type="PackedScene" uid="uid://bgv6k5514y7ll" path="res://3d_scenes/entities/furniture/desk.tscn" id="4_a1rhb"]
 [ext_resource type="PackedScene" uid="uid://ry5gcuu7gkh" path="res://3d_scenes/entities/player/player.tscn" id="5_kooe7"]
+[ext_resource type="PackedScene" uid="uid://pxvdpj18fd8u" path="res://3d_scenes/entities/furniture/ComputerMouse.tscn" id="7_3xujk"]
 [ext_resource type="PackedScene" uid="uid://b1k30fd4iurrb" path="res://3d_scenes/entities/furniture/lamp_standing.tscn" id="8_5nt3u"]
+[ext_resource type="PackedScene" uid="uid://bwiql8vmcwsjd" path="res://3d_scenes/entities/furniture/ChairDesk.tscn" id="9_3xujk"]
 [ext_resource type="PackedScene" uid="uid://b8xwh8i0jq6ja" path="res://3d_scenes/entities/furniture/water_cooler/water_cooler.tscn" id="9_w7ts6"]
 [ext_resource type="PackedScene" uid="uid://d0af2emp6dqbi" path="res://3d_scenes/entities/furniture/clock/clock.tscn" id="10_dfqda"]
+[ext_resource type="PackedScene" uid="uid://cwiq1yqbrsgn2" path="res://3d_scenes/entities/furniture/ComputerKeyboard.tscn" id="11_3xujk"]
 [ext_resource type="PackedScene" uid="uid://tsnn4cymm6qn" path="res://3d_scenes/entities/furniture/wall_calendar/wall_calendar.tscn" id="11_4ilw0"]
 [ext_resource type="PackedScene" uid="uid://chux5kmi5qqae" path="res://3d_scenes/entities/room/ceiling.tscn" id="12_dlj66"]
 [ext_resource type="PackedScene" uid="uid://crsqx0f6pvahi" path="res://3d_scenes/entities/room/floor.tscn" id="13_3xujk"]
@@ -52,29 +54,6 @@ shadow_enabled = true
 [node name="Player" parent="." instance=ExtResource("5_kooe7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.50287)
 
-[node name="Furniture" type="Node3D" parent="."]
-
-[node name="Computer" parent="Furniture" instance=ExtResource("4_8pfch")]
-transform = Transform3D(0.984115, 0, 0.177531, 0, 1, 0, -0.177531, 0, 0.984115, -2.91562, 0.983144, -4.34618)
-
-[node name="Desk" parent="Furniture" instance=ExtResource("4_a1rhb")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2.79831, 0, -4.2759)
-
-[node name="Chair" parent="Furniture" instance=ExtResource("5_cybsn")]
-transform = Transform3D(0.82081, 0, -0.571201, 0, 1, 0, 0.571201, 0, 0.82081, -3.37639, -3.57628e-07, -2.58713)
-
-[node name="Lamp2" parent="Furniture" instance=ExtResource("8_5nt3u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.316464, 0, -2.97947)
-
-[node name="WaterCooler" parent="Furniture" instance=ExtResource("9_w7ts6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.67861, 0, -2.92572)
-
-[node name="Clock" parent="Furniture" instance=ExtResource("10_dfqda")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.758489, 2.74126, -4.98209)
-
-[node name="WallCalendar" parent="Furniture" instance=ExtResource("11_4ilw0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.733054, 1.80671, -4.99403)
-
 [node name="Room" type="Node3D" parent="."]
 
 [node name="Floor" parent="Room" instance=ExtResource("13_3xujk")]
@@ -93,3 +72,32 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 0, 
 
 [node name="Ceiling" parent="Room" instance=ExtResource("12_dlj66")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+
+[node name="Furniture" type="Node3D" parent="."]
+
+[node name="ChairDesk" parent="Furniture" instance=ExtResource("9_3xujk")]
+transform = Transform3D(-2.59808, 0, 1.5, 0, 3, 0, -1.5, 0, -2.59808, -2.73839, 0, -2.82489)
+
+[node name="Desk" parent="Furniture" instance=ExtResource("4_a1rhb")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -4.01621, 0, -3.57508)
+
+[node name="Computer" parent="Furniture" instance=ExtResource("4_8pfch")]
+transform = Transform3D(0.984115, 0, 0.177531, 0, 1, 0, -0.177531, 0, 0.984115, -2.91562, 1.13259, -4.34618)
+
+[node name="ComputerMouse" parent="Furniture" instance=ExtResource("7_3xujk")]
+transform = Transform3D(-2.75625, 0, 1.18452, 0, 3, 0, -1.18452, 0, -2.75625, -2.12781, 1.15052, -3.98352)
+
+[node name="ComputerKeyboard" parent="Furniture" instance=ExtResource("11_3xujk")]
+transform = Transform3D(2.95295, 0, 0.529244, 0, 3, 0, -0.529244, 0, 2.95295, -3.23298, 1.15048, -3.55068)
+
+[node name="Lamp" parent="Furniture" instance=ExtResource("8_5nt3u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.316464, 0, -2.97947)
+
+[node name="WaterCooler" parent="Furniture" instance=ExtResource("9_w7ts6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.67861, 0, -2.92572)
+
+[node name="Clock" parent="Furniture" instance=ExtResource("10_dfqda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.758489, 2.74126, -4.98209)
+
+[node name="WallCalendar" parent="Furniture" instance=ExtResource("11_4ilw0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.733054, 1.80671, -4.99403)

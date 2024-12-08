@@ -16,8 +16,8 @@ func _on_item_selected(index: int) -> void:
 	TranslationServer.set_locale(locale)
 
 
-func get_item_index_by_text(text: String) -> int:
+func get_item_index_by_text(text_to_search: String) -> int:
 	for index: int in item_count:
-		if get_item_text(index) == text:
+		if get_item_text(index) == text_to_search:
 			return index
 	return -1

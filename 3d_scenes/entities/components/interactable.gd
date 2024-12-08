@@ -29,12 +29,16 @@ signal interacted
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	if not Engine.is_editor_hint():
+		GlobalDebugger.assert_all_exported_properties(self)
+	
 	label.modulate.a = 0
 	label.outline_modulate.a = 0
 
 
 func _notification(what: int) -> void:
+	if Engine.is_editor_hint():
+		return
 	if what == NOTIFICATION_TRANSLATION_CHANGED:
 		update_localization()
 
