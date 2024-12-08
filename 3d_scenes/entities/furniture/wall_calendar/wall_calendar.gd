@@ -14,5 +14,5 @@ func _ready() -> void:
 
 func update_calendar() -> void:
 	day_label.text = "%d" % GlobalTimer.current_day
-	month_label.text = GlobalTimer.current_month_string
+	month_label.text = GlobalTimer.current_month_genitive_string
 	weekday_label.text = GlobalTimer.current_weekday_string

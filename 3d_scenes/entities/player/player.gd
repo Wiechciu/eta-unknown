@@ -9,12 +9,12 @@ extends CharacterBody3D
 	get:
 		return _camera.current and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED
 
-var movement_base_speed: float = 3.0
+var movement_base_speed: float = 150.0
 var sprint_multiplier: float = 3.0
 var movement_actual_speed: float
 var acceleration_time: float = 0.5
 var rotation_speed: float = 0.005
-var jump_height: float = 3.0
+var jump_height: float = 5.0
 var head_bobbing_tween: Tween
 var head_bobbing_loop_duration: float = 0.5
 var head_resting_position: Vector3
@@ -34,8 +34,10 @@ func _ready() -> void:
 	head_bobbing_tween.stop()
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	handle_movement(delta)
+	apply_gravity(delta)
+	move_and_slide()
 
 
 func _input(event: InputEvent) -> void:
@@ -49,14 +51,18 @@ func handle_movement(delta: float) -> void:
 	if not _can_move:
 		return
 	
+	velocity.x = 0
+	velocity.z = 0
+	
 	var movement_vector2: Vector2 = Input.get_vector("left", "right", "forward", "backward")
 	var movement_vector3: Vector3 = Vector3(movement_vector2.x, 0, movement_vector2.y)
-	head_bobbing_tween.set_speed_scale(movement_actual_speed / movement_base_speed)
-	translate_object_local(movement_vector3 * delta * movement_actual_speed)
+	var direction_local: Vector3 = global_transform.basis * movement_vector3 
+	velocity += direction_local * delta * movement_actual_speed
 	
-	if movement_vector3 != Vector3.ZERO and not head_bobbing_tween.is_running():
+	head_bobbing_tween.set_speed_scale(movement_actual_speed / movement_base_speed)
+	if not head_bobbing_tween.is_running() and direction_local != Vector3.ZERO and is_on_floor():
 		head_bobbing_tween.play()
-	elif movement_vector3 == Vector3.ZERO and head_bobbing_tween.is_running():
+	elif head_bobbing_tween.is_running() and (direction_local == Vector3.ZERO or not is_on_floor()):
 		head_bobbing_tween.stop()
 		var tween: Tween = create_tween()
 		tween.tween_property(_head, "position", head_resting_position, 0.1)
@@ -84,12 +90,10 @@ func handle_rotation(event: InputEvent) -> void:
 
 
 func handle_jump(event: InputEvent) -> void:
-	if not _can_move:
+	if not _can_move or not is_on_floor():
 		return
 	
 	if event.is_action_pressed("jump"):
-		pass
-		#TODO fix
 		velocity += Vector3.UP * jump_height
 
 
@@ -99,3 +103,12 @@ func handle_interaction(event: InputEvent) -> void:
 			if area is Interactable:
 				var interactable: Interactable = area as Interactable
 				interactable.interact()
+
+
+func apply_gravity(delta: float) -> void:
+	if is_on_floor():
+		return
+	
+	var gravity_vector: Vector3 = PhysicsServer3D.area_get_param(get_viewport().find_world_3d().space, PhysicsServer3D.AREA_PARAM_GRAVITY_VECTOR)
+	var gravity_force: float = PhysicsServer3D.area_get_param(get_viewport().find_world_3d().space, PhysicsServer3D.AREA_PARAM_GRAVITY)
+	velocity += gravity_vector * gravity_force * delta

@@ -36,16 +36,24 @@ label_settings = SubResource("LabelSettings_h1byg")
 custom_minimum_size = Vector2(31, 31)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "__"
+text = "🗕"
+flat = true
+
+[node name="MaximizeButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(31, 31)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "◻"
 flat = true
 
 [node name="CloseButton" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(31, 31)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "X"
+text = "×"
 flat = true
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="pressed" from="HBoxContainer/MinimizeButton" to="." method="_on_minimize_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/MaximizeButton" to="." method="_on_maximize_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b18oy35p17ir7"]
+[gd_scene load_steps=17 format=3 uid="uid://b18oy35p17ir7"]
 
 [ext_resource type="PackedScene" uid="uid://b66husl1w3olw" path="res://systems/calendar/calendar.tscn" id="1_82prh"]
 [ext_resource type="PackedScene" uid="uid://cieydjj1npshf" path="res://systems/debug_menu/debug_menu.tscn" id="2_8pfch"]
@@ -6,11 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://buj838q1xidpo" path="res://3d_scenes/entities/furniture/desk.tscn" id="4_a1rhb"]
 [ext_resource type="PackedScene" uid="uid://crqxtd3cq7r2x" path="res://3d_scenes/entities/furniture/chair.tscn" id="5_cybsn"]
 [ext_resource type="PackedScene" uid="uid://ry5gcuu7gkh" path="res://3d_scenes/entities/player/player.tscn" id="5_kooe7"]
-[ext_resource type="PackedScene" uid="uid://d1u08m5d83m5e" path="res://3d_scenes/entities/furniture/lamp.tscn" id="7_cybsn"]
 [ext_resource type="PackedScene" uid="uid://b1k30fd4iurrb" path="res://3d_scenes/entities/furniture/lamp_standing.tscn" id="8_5nt3u"]
 [ext_resource type="PackedScene" uid="uid://b8xwh8i0jq6ja" path="res://3d_scenes/entities/furniture/water_cooler/water_cooler.tscn" id="9_w7ts6"]
 [ext_resource type="PackedScene" uid="uid://d0af2emp6dqbi" path="res://3d_scenes/entities/furniture/clock/clock.tscn" id="10_dfqda"]
 [ext_resource type="PackedScene" uid="uid://tsnn4cymm6qn" path="res://3d_scenes/entities/furniture/wall_calendar/wall_calendar.tscn" id="11_4ilw0"]
+[ext_resource type="PackedScene" uid="uid://chux5kmi5qqae" path="res://3d_scenes/entities/room/ceiling.tscn" id="12_dlj66"]
+[ext_resource type="PackedScene" uid="uid://crsqx0f6pvahi" path="res://3d_scenes/entities/room/floor.tscn" id="13_3xujk"]
+[ext_resource type="PackedScene" uid="uid://734624a1w6yh" path="res://3d_scenes/entities/room/wall.tscn" id="14_yatgx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8pfch"]
 
@@ -22,26 +24,6 @@ background_energy_multiplier = 0.0
 sky = SubResource("Sky_kooe7")
 glow_enabled = true
 glow_bloom = 0.3
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8pfch"]
-albedo_color = Color(0, 0.227331, 0.227331, 1)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_kooe7"]
-material = SubResource("StandardMaterial3D_8pfch")
-size = Vector2(10, 10)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kooe7"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_a1rhb"]
-material = SubResource("StandardMaterial3D_kooe7")
-size = Vector2(10, 10)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cybsn"]
-albedo_color = Color(0.446663, 0.715025, 0.999994, 1)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_5nt3u"]
-material = SubResource("StandardMaterial3D_cybsn")
-size = Vector2(4, 10)
 
 [node name="MainScene" type="Node"]
 
@@ -81,10 +63,6 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2.798
 [node name="Chair" parent="Furniture" instance=ExtResource("5_cybsn")]
 transform = Transform3D(0.82081, 0, -0.571201, 0, 1, 0, 0.571201, 0, 0.82081, -3.37639, -3.57628e-07, -2.58713)
 
-[node name="Lamp" parent="Furniture" instance=ExtResource("7_cybsn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.80937, 1, -4.03984)
-visible = false
-
 [node name="Lamp2" parent="Furniture" instance=ExtResource("8_5nt3u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.316464, 0, -2.97947)
 
@@ -99,33 +77,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.733054, 1.80671, -4.99403)
 
 [node name="Room" type="Node3D" parent="."]
 
-[node name="Floor" type="MeshInstance3D" parent="Room"]
-mesh = SubResource("PlaneMesh_kooe7")
+[node name="Floor" parent="Room" instance=ExtResource("13_3xujk")]
 
-[node name="Ceiling" type="MeshInstance3D" parent="Room"]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 4, 0)
-mesh = SubResource("PlaneMesh_a1rhb")
+[node name="Wall" parent="Room" instance=ExtResource("14_yatgx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
 
-[node name="Wall" type="MeshInstance3D" parent="Room"]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -5, 2, 0)
-mesh = SubResource("PlaneMesh_5nt3u")
+[node name="Wall2" parent="Room" instance=ExtResource("14_yatgx")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 5)
 
-[node name="Wall2" type="MeshInstance3D" parent="Room"]
-transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 2, -5)
-mesh = SubResource("PlaneMesh_5nt3u")
+[node name="Wall3" parent="Room" instance=ExtResource("14_yatgx")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5, 0, 0)
 
-[node name="Wall3" type="MeshInstance3D" parent="Room"]
-transform = Transform3D(4.37114e-08, -1, 8.74228e-08, -1, -4.37114e-08, 0, 3.82137e-15, -8.74228e-08, -1, 5, 2, 0)
-mesh = SubResource("PlaneMesh_5nt3u")
+[node name="Wall4" parent="Room" instance=ExtResource("14_yatgx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 0, 0)
 
-[node name="Wall4" type="MeshInstance3D" parent="Room"]
-transform = Transform3D(-5.73206e-15, 1.31134e-07, 1, -1, -4.37114e-08, 0, 4.37114e-08, -1, 1.31134e-07, 0, 2, 5)
-mesh = SubResource("PlaneMesh_5nt3u")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.899273, 3.13926, 0.867195)
-visible = false
-light_color = Color(0.999999, 0.997743, 0.804051, 1)
-light_energy = 0.3
-shadow_enabled = true
-omni_range = 100.0
+[node name="Ceiling" parent="Room" instance=ExtResource("12_dlj66")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)

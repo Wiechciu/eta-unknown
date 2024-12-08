@@ -47,7 +47,10 @@ var current_month: int:
 		return time_dictionary["month"]
 var current_month_string: String:
 	get:
-		return "MONTH%s" % current_month
+		return "MONTH_%s" % current_month
+var current_month_genitive_string: String:
+	get:
+		return "MONTH_GENITIVE_%s" % current_month
 var current_day: int:
 	get:
 		return time_dictionary["day"]
@@ -56,7 +59,7 @@ var current_weekday: int:
 		return Time.get_date_dict_from_unix_time(now)["weekday"]
 var current_weekday_string: String:
 	get:
-		return "DAY%s" % current_weekday
+		return "DAY_%s" % current_weekday
 
 var previous_hour: int
 var previous_day: String

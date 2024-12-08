@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://734624a1w6yh"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vtjef"]
+points = PackedVector3Array(2, 0, 5, -2, 0, 5, 2, 0, -5, -2, 0, -5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cybsn"]
+albedo_color = Color(0.446663, 0.715025, 0.999994, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5nt3u"]
+material = SubResource("StandardMaterial3D_cybsn")
+size = Vector2(4, 10)
+
+[node name="Wall" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 2, 0)
+shape = SubResource("ConvexPolygonShape3D_vtjef")
+
+[node name="Wall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 2, 0)
+mesh = SubResource("PlaneMesh_5nt3u")
+skeleton = NodePath("../..")

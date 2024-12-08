@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://chux5kmi5qqae"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_p0bcb"]
+points = PackedVector3Array(-5, 0, -5, -5, 0, 5, 5, 0, -5, 5, 0, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kooe7"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_a1rhb"]
+material = SubResource("StandardMaterial3D_kooe7")
+size = Vector2(10, 10)
+
+[node name="Ceiling" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_p0bcb")
+
+[node name="Ceiling" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 1.50996e-07, 0, -1.50996e-07, -1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("PlaneMesh_a1rhb")
+skeleton = NodePath("../..")

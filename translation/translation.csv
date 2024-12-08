@@ -1,28 +1,37 @@
 ﻿keys;en;pl
 PRESS_TO_INTERACT;Press {action} to interact;Naciśnij {action}, aby wejść w interakcję
-LANGUAGE;Language;Język
-POLISH;Polish;Polski
-ENGLISH;English;Angielski
 TODAY_IS;Today is;Dzisiaj jest
-DAY0;Sunday;Niedziela
-DAY1;Monday;Poniedziałek
-DAY2;Tuesday;Wtorek
-DAY3;Wednesday;Środa
-DAY4;Thursday;Czwartek
-DAY5;Friday;Piątek
-DAY6;Saturday;Sobota
-MONTH1;January;Styczeń
-MONTH2;February;Luty
-MONTH3;March;Marzec
-MONTH4;April;Kwiecień
-MONTH5;May;Maj
-MONTH6;June;Czerwiec
-MONTH7;July;Lipiec
-MONTH8;August;Sierpień
-MONTH9;September;Wrzesień
-MONTH10;October;Październik
-MONTH11;November;Listopad
-MONTH12;December;Grudzień
+DAY_0;Sunday;Niedziela
+DAY_1;Monday;Poniedziałek
+DAY_2;Tuesday;Wtorek
+DAY_3;Wednesday;Środa
+DAY_4;Thursday;Czwartek
+DAY_5;Friday;Piątek
+DAY_6;Saturday;Sobota
+MONTH_1;January;Styczeń
+MONTH_2;February;Luty
+MONTH_3;March;Marzec
+MONTH_4;April;Kwiecień
+MONTH_5;May;Maj
+MONTH_6;June;Czerwiec
+MONTH_7;July;Lipiec
+MONTH_8;August;Sierpień
+MONTH_9;September;Wrzesień
+MONTH_10;October;Październik
+MONTH_11;November;Listopad
+MONTH_12;December;Grudzień
+MONTH_GENITIVE_1;January;Stycznia
+MONTH_GENITIVE_2;February;Lutego
+MONTH_GENITIVE_3;March;Marca
+MONTH_GENITIVE_4;April;Kwietnia
+MONTH_GENITIVE_5;May;Maja
+MONTH_GENITIVE_6;June;Czerwca
+MONTH_GENITIVE_7;July;Lipca
+MONTH_GENITIVE_8;August;Sierpnia
+MONTH_GENITIVE_9;September;Września
+MONTH_GENITIVE_10;October;Października
+MONTH_GENITIVE_11;November;Listopada
+MONTH_GENITIVE_12;December;Grudnia
 NAVIGATION;Navigation;Nawigacja
 SHIPMENTS;Shipments;Przesyłki
 QUOTATIONS;Quotations;Kwotacje
@@ -137,3 +146,11 @@ CHARGE_CSI;Import customs clearance;Importowa odprawa celna
 CHARGE_HDE;Export handling;Eksportowa obsługa
 CHARGE_HDI;Import handling;Importowa obsługa
 LOADING;loading;ładowanie
+MENU;Menu;Menu
+PLAY;Play;Graj
+QUIT;Quit;Wyjdź
+SOUND;Sound;Dźwięk
+FULL_SCREEN;Full screen;Pełny ekran
+LANGUAGE;Language;Język
+POLISH;Polish;Polski
+ENGLISH;English;Angielski

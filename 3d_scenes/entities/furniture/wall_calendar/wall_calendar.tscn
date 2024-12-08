@@ -53,8 +53,8 @@ outline_size = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0667842, 0.027636)
 pixel_size = 0.001
 modulate = Color(0, 0, 0, 1)
-text = "September"
-font_size = 87
+text = "Października"
+font_size = 75
 outline_size = 0
 
 [node name="Weekday" type="Label3D" parent="LowerPart"]

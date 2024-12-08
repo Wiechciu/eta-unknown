@@ -31,3 +31,7 @@ func _on_close_button_pressed() -> void:
 
 func _on_minimize_button_pressed() -> void:
 	minimize_button_pressed.emit()
+
+
+func _on_maximize_button_pressed() -> void:
+	_control_to_move.position = Vector2.ZERO

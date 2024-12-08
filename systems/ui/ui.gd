@@ -15,10 +15,16 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func toggle_visibility() -> void:
-	if visible:
-		Input.mouse_mode = old_input_mouse_mode
-		hide()
-	else:
+	if not visible:
+		Engine.time_scale = 0
 		old_input_mouse_mode = Input.mouse_mode
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		show()
+	else:
+		Engine.time_scale = 1
+		Input.mouse_mode = old_input_mouse_mode
+		hide()
+
+
+func _on_play_button_pressed() -> void:
+	toggle_visibility()
