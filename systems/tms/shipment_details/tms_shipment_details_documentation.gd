@@ -2,10 +2,15 @@ class_name TmsShipmentDetailsDocumentation
 extends PanelContainer
 
 
+signal document_print_ordered(document: Document)
+
+
 var shipment: Shipment
 
 @export var _documents_container: Control
 @export var _document_details_scene: PackedScene
+
+@export var _print_button: Button
 
 
 func _init() -> void:
@@ -14,6 +19,8 @@ func _init() -> void:
 
 func _ready() -> void:
 	GlobalDebugger.assert_all_exported_properties(self)
+	
+	_print_button.pressed.connect(_on_print_button_pressed)
 
 
 func _on_visibility_changed() -> void:
@@ -44,3 +51,13 @@ func refresh_document_details(document_details_container: Control, documents: Ar
 	for document: Document in documents:
 		var document_details: TmsDocumentDetails = (_document_details_scene.instantiate() as TmsDocumentDetails).with_data(document)
 		document_details_container.add_child(document_details)
+
+
+func _on_print_button_pressed() -> void:
+	var documents: Array[Document] = shipment.documentation.documents
+	if documents.size() == 0:
+		print("No documents to print")
+		return
+	
+	for document: Document in documents:
+		document_print_ordered.emit(document)

@@ -1,6 +1,10 @@
 class_name OsApp
 extends Control
 
+
+signal document_print_ordered(document: Document)
+
+
 var boot_duration: float = 0.3
 
 

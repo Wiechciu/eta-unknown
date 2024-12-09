@@ -11,13 +11,13 @@ func _ready() -> void:
 
 
 func register_interactable() -> void:
-	for child: Node in get_children():
-		var interactable: Interactable = child as Interactable
-		if interactable != null:
-			interactable.interacted.connect(interact)
+	var interactable: Interactable = GlobalDebugger.get_child_of_type(self, Interactable) as Interactable
+	if interactable != null:
+		interactable.interacted.connect(interact)
 
 
-func interact() -> void:
+@warning_ignore("unused_parameter")
+func interact(node: Node) -> void:
 	toggle()
 
 

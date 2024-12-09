@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=4 uid="uid://camlixgb5adk5"]
+[gd_scene load_steps=12 format=4 uid="uid://camlixgb5adk5"]
 
 [ext_resource type="Script" uid="uid://h64icvcx3v55" path="res://3d_scenes/entities/furniture/printer/printer.gd" id="1_0slj8"]
 [ext_resource type="PackedScene" uid="uid://beffqttiv36q7" path="res://3d_scenes/entities/components/interactable.tscn" id="2_b3fi8"]
-[ext_resource type="PackedScene" uid="uid://dx6f662utr8ya" path="res://3d_scenes/entities/document/physical_document.tscn" id="2_llfar"]
+[ext_resource type="PackedScene" uid="uid://dx6f662utr8ya" path="res://3d_scenes/entities/items/physical_document/physical_document.tscn" id="2_llfar"]
+[ext_resource type="AudioStream" uid="uid://bby3836y552qy" path="res://3d_scenes/entities/furniture/printer/ROBOTIC_Servo_Medium_Shread_mono.wav" id="4_05xib"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0slj8"]
 albedo_color = Color(0.281187, 0.281187, 0.281187, 1)
@@ -70,12 +71,13 @@ _surfaces = [{
 "vertex_data": PackedByteArray("MzOzPuWWzT3NrEw/MzOzPqeM9j3NrEw/MzOzPuWWzT0AAAA/MzOzvuWWzT0AAAA/MzOzPuWWzT3QzEw9MzOzvuWWzT3QzEw9MzOzvuWWzT3NrEw/MzOzPuWWzT3QzEw9MzOzvuWWzT0AAAA/MzOzvqeM9j0AAAA/MzOzvqeM9j3NrEw/MzOzvuWWzT3NrEw/MzOzvqeM9j0AAAA/MzOzvuWWzT3NrEw/MzOzvuWWzT0AAAA/MzOzvqeM9j3QzEw9MzOzPqeM9j3NrEw/MzOzvqeM9j0AAAA/MzOzPqeM9j3NrEw/MzOzPuWWzT3NrEw/MzOzvuWWzT3NrEw/MzOzPuWWzT0AAAA/MzOzvuWWzT3NrEw/MzOzPuWWzT3NrEw/MzOzPqeM9j0AAAA/MzOzPqeM9j3NrEw/MzOzvqeM9j3QzEw9MzOzvuWWzT3NrEw/MzOzPuWWzT0AAAA/MzOzPuWWzT3QzEw9MzOzPqeM9j3QzEw9MzOzPqeM9j0AAAA/MzOzvqeM9j3QzEw9MzOzPqeM9j3NrEw/MzOzvqeM9j3NrEw/MzOzvqeM9j0AAAA/MzOzvqeM9j3NrEw/MzOzPqeM9j3NrEw/MzOzvuWWzT3NrEw/MzOzPqeM9j0AAAA/MzOzPuWWzT0AAAA/MzOzPqeM9j3NrEw/////f/9//n////9//3/+f////3//f/5//38AAP//AAD/fwAA//8AAP9/AAD//wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAAAAD/f/9//n8AAP9//3/+fwAA/3//f/5/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//////AAD/f/////8AAP9//////wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8//38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//////AAD/f/////8AAP9//////wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//////AAD/f/////8AAP9//////wAA/3//////AAD/f/////8AAP9//////wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8/////f/9//n////9//3/+f////3//f/5/")
 }]
 
-[node name="Printer" type="StaticBody3D" node_paths=PackedStringArray("document_spawn_position", "document_target_position", "screen")]
+[node name="Printer" type="StaticBody3D" node_paths=PackedStringArray("document_spawn_position", "document_target_position", "screen", "audio_player")]
 script = ExtResource("1_0slj8")
 document_spawn_position = NodePath("DocumentSpawnPosition")
 document_target_position = NodePath("DocumentTargetPosition")
 screen = NodePath("Screen")
 document_scene = ExtResource("2_llfar")
+audio_player = NodePath("AudioStreamPlayer3D")
 
 [node name="Interactable" parent="." instance=ExtResource("2_b3fi8")]
 
@@ -150,3 +152,6 @@ pixel_size = 0.001
 text = "0"
 font_size = 150
 outline_size = 30
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_05xib")

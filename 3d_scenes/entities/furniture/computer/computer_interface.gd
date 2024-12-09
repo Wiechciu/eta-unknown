@@ -1,0 +1,2 @@
+class_name ComputerInterface
+extends Node3D

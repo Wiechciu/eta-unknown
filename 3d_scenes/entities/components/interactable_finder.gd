@@ -1,0 +1,30 @@
+class_name InteractableFinder
+extends RayCast3D
+
+
+var interactable: Interactable
+var old_collider: Object
+
+
+@warning_ignore("unused_parameter")
+func _process(delta: float) -> void:
+	check_for_interactable()
+
+
+func check_for_interactable() -> void:
+	var new_collider: Object = get_collider()
+	if new_collider == old_collider:
+		return
+	
+	if interactable != null:
+		interactable.hide_label()
+	
+	old_collider = new_collider
+	interactable = GlobalDebugger.get_child_of_type(new_collider as Node, Interactable) as Interactable
+	if interactable != null:
+		interactable.show_label()
+
+
+func interact(node: Node) -> void:
+	if interactable != null:
+		interactable.interact(node)

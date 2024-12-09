@@ -8,6 +8,7 @@ signal on_closing
 @export var _desktop: OsDesktop
 @export var _taskbar: OsTaskbar
 @export var _app_data: Array[OsAppData]
+var interfaces: Array[ComputerInterface]
 
 var boot_duration: float = 1
 var is_closing: bool
@@ -49,9 +50,14 @@ func _on_start_button_pressed() -> void:
 
 
 func _on_icon_desktop_clicked(app_data: OsAppData) -> void:
+	start_app(app_data)
+
+
+func start_app(app_data: OsAppData) -> void:
 	var app: OsApp = app_data.scene.instantiate() as OsApp
 	_desktop.load_app(app)
 	app.tree_exited.connect(_on_app_closed.bind(app))
+	app.document_print_ordered.connect(_on_document_print_ordered)
 	_taskbar.load_icon(app_data, app)
 
 
@@ -64,3 +70,12 @@ func _on_icon_taskbar_clicked(app: OsApp) -> void:
 
 func _on_app_closed(app: OsApp) -> void:
 	_taskbar.remove_icon(app)
+
+
+func _on_document_print_ordered(document: Document) -> void:
+	for interface: ComputerInterface in interfaces:
+		var printer: Printer = interface as Printer
+		if printer != null:
+			printer.add_document_to_queue(document)
+			return
+	print("No printer connected")

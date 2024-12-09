@@ -8,6 +8,8 @@ extends StaticBody3D
 @export var camera: Camera3D
 @export var light: SpotLight3D
 @export var screen_black: MeshInstance3D
+@export var interfaces: Array[ComputerInterface]
+
 
 var original_camera_position: Vector3
 var original_camera_rotation: Vector3
@@ -42,13 +44,13 @@ func _input(event: InputEvent) -> void:
 
 
 func register_interactable() -> void:
-	for child: Node in get_children():
-		var interactable: Interactable = child as Interactable
-		if interactable != null:
-			interactable.interacted.connect(interact)
+	var interactable: Interactable = GlobalDebugger.get_child_of_type(self, Interactable) as Interactable
+	if interactable != null:
+		interactable.interacted.connect(interact)
 
 
-func interact() -> void:
+@warning_ignore("unused_parameter")
+func interact(node: Node) -> void:
 	if is_transitioning:
 		return
 	
@@ -63,6 +65,7 @@ func start_os() -> void:
 		return
 	
 	os = os_scene.instantiate() as OperatingSystem
+	os.interfaces = interfaces
 	subviewport.add_child(os)
 	os.on_closing.connect(_on_os_closing)
 	fade_in_lights()

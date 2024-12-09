@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://tsnn4cymm6qn"]
+[gd_scene load_steps=8 format=3 uid="uid://tsnn4cymm6qn"]
 
 [ext_resource type="Script" uid="uid://blc0oso6erktj" path="res://3d_scenes/entities/furniture/wall_calendar/wall_calendar.gd" id="1_16yhp"]
+[ext_resource type="PackedScene" uid="uid://beffqttiv36q7" path="res://3d_scenes/entities/components/interactable.tscn" id="2_dk8n4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_16yhp"]
 size = Vector3(0.5, 0.5, 0.05)
@@ -23,6 +24,9 @@ script = ExtResource("1_16yhp")
 day_label = NodePath("LowerPart/Day")
 month_label = NodePath("LowerPart/Month")
 weekday_label = NodePath("LowerPart/Weekday")
+
+[node name="Interactable" parent="." instance=ExtResource("2_dk8n4")]
+label_position = Vector3(0, 0.5, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_16yhp")
