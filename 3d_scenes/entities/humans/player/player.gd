@@ -1,10 +1,12 @@
 class_name Player
-extends CharacterBody3D
+extends Human
 
 
 @export var _interaction_area: Area3D
+@export var interactable_finder: InteractableFinder
 @export var _head: Node3D
 @export var _camera: Camera3D
+@export var crosshair: TextureRect
 @export var _can_move: bool:
 	get:
 		return _camera.current and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED
@@ -32,6 +34,10 @@ func _ready() -> void:
 	head_bobbing_tween.tween_property(_head, "position", head_resting_position + head_max_offset, head_bobbing_loop_duration / 2)
 	head_bobbing_tween.tween_property(_head, "position", head_resting_position, head_bobbing_loop_duration / 2)
 	head_bobbing_tween.stop()
+
+
+func _process(delta: float) -> void:
+	crosshair.visible = _can_move
 
 
 func _physics_process(delta: float) -> void:
@@ -99,17 +105,7 @@ func handle_jump(event: InputEvent) -> void:
 
 func handle_interaction(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
-		var closest_interactable: Interactable
-		var closest_distance: float = INF
-		for area: Area3D in _interaction_area.get_overlapping_areas():
-			if area is Interactable:
-				var interactable: Interactable = area as Interactable
-				var distance: float = global_position.distance_to(interactable.global_position)
-				if distance < closest_distance:
-					closest_interactable = interactable
-					closest_distance = distance
-		if closest_interactable != null:
-			closest_interactable.interact()
+		interactable_finder.interact(self)
 
 
 func apply_gravity(delta: float) -> void:

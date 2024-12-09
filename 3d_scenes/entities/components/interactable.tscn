@@ -1,27 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://beffqttiv36q7"]
+[gd_scene load_steps=2 format=3 uid="uid://beffqttiv36q7"]
 
 [ext_resource type="Script" uid="uid://dfn2dqgva8n14" path="res://3d_scenes/entities/components/interactable.gd" id="1_u1lcw"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_u1lcw"]
-radius = 1.5
-
-[node name="Interactable" type="Area3D" node_paths=PackedStringArray("label", "collision_shape")]
+[node name="Interactable" type="Node3D" node_paths=PackedStringArray("label")]
 script = ExtResource("1_u1lcw")
 label = NodePath("Label3D")
-collision_shape = NodePath("CollisionShape3D")
 label_text = "PRESS_TO_INTERACT"
-label_position = Vector3(0, 1, 0)
-interaction_radius = 2.0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_u1lcw")
-debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 billboard = 1
 no_depth_test = true
 text = "PRESS_TO_INTERACT"
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_body_exited"]

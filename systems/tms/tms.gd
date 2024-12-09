@@ -18,6 +18,8 @@ func _ready() -> void:
 	super._ready()
 	panel_header.close_button_pressed.connect(close)
 	panel_header.minimize_button_pressed.connect(minimize)
+	shipment_details._shipment_documentation.document_print_ordered.connect(_on_document_print_ordered)
+	
 	close_all()
 	hide_all()
 	super.start()
@@ -59,3 +61,7 @@ func open_quotation_list() -> void:
 func open_quotation_details(quotation: Quotation) -> void:
 	close_all()
 	#quotation_details.open(quotation)
+
+
+func _on_document_print_ordered(document: Document) -> void:
+	document_print_ordered.emit(document)

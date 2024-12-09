@@ -1,13 +1,17 @@
 class_name Printer
-extends StaticBody3D
+extends ComputerInterface
 
 
 @export var document_spawn_position: Node3D
 @export var document_target_position: Node3D
 @export var screen: Label3D
 @export var document_scene: PackedScene
-var printing_queue: Array[PhysicalDocument]
+@export var audio_player: AudioStreamPlayer3D
+
+var printing_queue: Array[Document]
 var is_printing: bool
+
+var printed_documents: Array[PhysicalDocument]
 
 
 func _ready() -> void:
@@ -22,34 +26,68 @@ func _process(delta: float) -> void:
 
 
 func register_interactable() -> void:
-	for child: Node in get_children():
-		var interactable: Interactable = child as Interactable
-		if interactable != null:
-			interactable.interacted.connect(interact)
+	var interactable: Interactable = GlobalDebugger.get_child_of_type(self, Interactable) as Interactable
+	if interactable != null:
+		interactable.interacted.connect(interact)
 
 
-func interact() -> void:
-	add_document_to_queue()
+func interact(node: Node) -> void:
+	pick_up_documents(node)
 
 
-func add_document_to_queue() -> void:
-	var document: PhysicalDocument = document_scene.instantiate() as PhysicalDocument
+func pick_up_documents(node: Node) -> void:
+	if printed_documents.size() == 0:
+		print("No documents to pick up.")
+		return
+	
+	var inventory: Inventory = GlobalDebugger.get_child_of_type(node, Inventory)
+	if inventory == null:
+		print("No inventory found.")
+		return
+	
+	for physical_document: PhysicalDocument in printed_documents:
+		inventory.add_item(physical_document)
+		remove_child(physical_document)
+	
+	print("Picked %s documents up." % printed_documents.size())
+	printed_documents.clear()
+
+
+## For debugging only
+func create_and_add_to_queue_random_document() -> void:
+	var document: Document = Document.new().with_data(randi_range(0, Document.Code.size()), GlobalTimer.now, 1, GlobalRefs.shipments.pick_random())
+	add_document_to_queue(document)
+
+
+func add_document_to_queue(document: Document) -> void:
 	printing_queue.append(document)
 
 
 func try_printing_next_document() -> void:
 	if is_printing:
 		return
-	var document: PhysicalDocument = printing_queue.pop_front()
+	var document: Document = printing_queue.pop_front()
 	if document == null:
 		return
 	
+	play_sound()
+	print_document(document)
+
+
+func play_sound() -> void:
+	audio_player.pitch_scale = randf_range(0.90, 1.10)
+	audio_player.play()
+
+
+func print_document(document: Document) -> void:
 	is_printing = true
-	add_child(document)
-	document.position = document_spawn_position.position
-	document.rotation.x = deg_to_rad(-90)
+	var physical_document: PhysicalDocument = (document_scene.instantiate() as PhysicalDocument).with_data(document)
+	add_child(physical_document)
+	physical_document.position = document_spawn_position.position
+	physical_document.rotation.x = deg_to_rad(-90)
 	
 	var tween: Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
-	tween.tween_method(func(new_position: Vector3) -> void: document.position = new_position, document_spawn_position.position, document_target_position.position, 1.0)
+	tween.tween_method(func(new_position: Vector3) -> void: physical_document.position = new_position, document_spawn_position.position, document_target_position.position, 1.0)
 	await tween.finished
+	printed_documents.append(physical_document)
 	is_printing = false

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://beffqttiv36q7" path="res://3d_scenes/entities/components/interactable.tscn" id="3_30c2g"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_30c2g"]
-size = Vector3(1.99902, 1.31488, 0.145508)
+size = Vector3(1.99902, 1.31488, 0.0751954)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ace01"]
 viewport_path = NodePath("SubViewport")
@@ -54,9 +54,8 @@ light = NodePath("SpotLight3D")
 screen_black = NodePath("3DModel/ScreenBlack")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.659882, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.659882, -0.0351563)
 shape = SubResource("BoxShape3D_30c2g")
-disabled = true
 debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="Interactable" parent="." instance=ExtResource("3_30c2g")]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dmwp5s37fvy1m"]
+[gd_scene load_steps=5 format=3 uid="uid://dmwp5s37fvy1m"]
 
 [ext_resource type="Script" uid="uid://c3di16bp70mps" path="res://3d_scenes/entities/environment/environment.gd" id="1_lobbm"]
 
@@ -13,13 +13,6 @@ sky = SubResource("Sky_kooe7")
 glow_enabled = true
 glow_bloom = 0.3
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5cac6"]
-albedo_color = Color(0, 0.329412, 0, 1)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_pyshm"]
-material = SubResource("StandardMaterial3D_5cac6")
-size = Vector2(1000, 1000)
-
 [node name="Environment" type="Node" node_paths=PackedStringArray("sun", "world_environment")]
 script = ExtResource("1_lobbm")
 sun = NodePath("Sun")
@@ -32,7 +25,3 @@ environment = SubResource("Environment_a1rhb")
 transform = Transform3D(-0.766044, -0.321394, -0.55667, 0, -0.866026, 0.5, -0.642788, 0.383022, 0.663414, 0, 0, 0)
 light_color = Color(1, 0.978189, 0.800825, 1)
 shadow_enabled = true
-
-[node name="Terrain" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-mesh = SubResource("PlaneMesh_pyshm")

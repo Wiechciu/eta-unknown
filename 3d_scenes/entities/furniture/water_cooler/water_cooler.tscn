@@ -1,7 +1,6 @@
-[gd_scene load_steps=15 format=4 uid="uid://b8xwh8i0jq6ja"]
+[gd_scene load_steps=14 format=4 uid="uid://b8xwh8i0jq6ja"]
 
 [ext_resource type="Script" uid="uid://c6022yrh6w412" path="res://3d_scenes/entities/furniture/water_cooler/water_cooler.gd" id="1_ja5kr"]
-[ext_resource type="PackedScene" uid="uid://beffqttiv36q7" path="res://3d_scenes/entities/components/interactable.tscn" id="2_3gfg8"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ja5kr"]
 height = 1.7
@@ -100,9 +99,6 @@ data = PackedVector3Array(-0.35, 1.01328e-06, 0.35, 0.35, 1.01328e-06, -0.35, -0
 script = ExtResource("1_ja5kr")
 area = NodePath("Area3D")
 collision_shape = NodePath("Area3D/CollisionShape3D")
-
-[node name="Interactable" parent="." instance=ExtResource("2_3gfg8")]
-label_position = Vector3(0, 2.5, 0)
 
 [node name="Area3D" type="Area3D" parent="."]
 

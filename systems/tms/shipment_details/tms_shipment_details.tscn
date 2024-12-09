@@ -75,7 +75,7 @@ layout_mode = 2
 [node name="Tabs" type="TabContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 8
+current_tab = 7
 clip_tabs = false
 
 [node name="GENERAL" type="PanelContainer" parent="VBoxContainer/Tabs"]
@@ -516,13 +516,13 @@ layout_mode = 2
 [node name="TmsEventDetails6" parent="VBoxContainer/Tabs/EVENTS/ScrollContainer/VBoxContainer/ActualEventsContainer" instance=ExtResource("11_s4hq1")]
 layout_mode = 2
 
-[node name="DOCUMENTATION" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_documents_container")]
-visible = false
+[node name="DOCUMENTATION" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_documents_container", "_print_button")]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 script = ExtResource("13_l03v4")
 _documents_container = NodePath("ScrollContainer/VBoxContainer/DocumentsContainer")
 _document_details_scene = ExtResource("14_e8rh3")
+_print_button = NodePath("ScrollContainer/VBoxContainer/Buttons/PrintButton")
 metadata/_tab_index = 7
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Tabs/DOCUMENTATION"]
@@ -559,7 +559,16 @@ layout_mode = 2
 [node name="TmsDocumentDetails6" parent="VBoxContainer/Tabs/DOCUMENTATION/ScrollContainer/VBoxContainer/DocumentsContainer" instance=ExtResource("14_e8rh3")]
 layout_mode = 2
 
+[node name="Buttons" type="HBoxContainer" parent="VBoxContainer/Tabs/DOCUMENTATION/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="PrintButton" type="Button" parent="VBoxContainer/Tabs/DOCUMENTATION/ScrollContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "PRINT"
+
 [node name="ACCOUNTING" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_quotation", "_revenue_total", "_cost_total", "_gross_profit", "_margin", "_revenue_container", "_cost_container")]
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 script = ExtResource("15_06odw")
