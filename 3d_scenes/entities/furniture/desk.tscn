@@ -97,7 +97,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_lrwwk")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_8bhak"]
-points = PackedVector3Array(-0.01, 0.35438, -0.38, -6.64778e-06, 0, -0.370036, -0.01, 0.35438, 0.00996181, -0.01, 0.384408, -0.38, 0.724475, 0.35438, -0.38, -6.64778e-06, 0, -4.01437e-05, 0.71441, 0, -0.370036, -0.01, 0.384408, 0.00996181, 0.724475, 0.35438, 0.00996181, 0.724475, 0.384408, -0.38, 0.71441, 0, -4.01437e-05, 0.724475, 0.384408, 0.00996181)
+points = PackedVector3Array(-0.01, 0.354381, -0.38, -6.65337e-06, 0, -0.370036, -0.01, 0.354381, 0.00996181, -0.01, 0.384408, -0.38, 0.724403, 0.354381, -0.38, -6.65337e-06, 0, -4.01437e-05, 0.71441, 0, -0.370036, -0.01, 0.384408, 0.00996181, 0.724403, 0.354381, 0.00996181, 0.724403, 0.384408, -0.38, 0.71441, 0, -4.01437e-05, 0.724403, 0.384408, 0.00996181)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4msfx"]
 points = PackedVector3Array(0, 0.000390619, -7.21911e-16, 0, 0.000390619, 0.163996, 0, 0.0503906, -7.21911e-16, 0.1968, 0.000390619, -7.21911e-16, 0.0821413, 0.0171878, 0.1763, 0, 0.0503906, 0.163996, 0.1968, 0.000390619, 0.163996, 0.1968, 0.0503906, -7.21911e-16, 0.0821413, 0.0335885, 0.1763, 0.114639, 0.0171878, 0.1763, 0.1968, 0.0503906, 0.163996, 0.114639, 0.0335885, 0.1763)
@@ -105,6 +105,7 @@ points = PackedVector3Array(0, 0.000390619, -7.21911e-16, 0, 0.000390619, 0.1639
 [node name="Desk" type="StaticBody3D"]
 
 [node name="Desk" type="MeshInstance3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 mesh = SubResource("ArrayMesh_leso5")
 skeleton = NodePath("")
 
@@ -114,8 +115,11 @@ mesh = SubResource("ArrayMesh_tdklc")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_8bhak")
+debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04, 0.274017, -0.164)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.12, 0.822051, -0.492)
 shape = SubResource("ConvexPolygonShape3D_4msfx")
+debug_color = Color(0, 0.6, 0.7, 0.42)

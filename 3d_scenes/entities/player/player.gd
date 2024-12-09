@@ -99,10 +99,17 @@ func handle_jump(event: InputEvent) -> void:
 
 func handle_interaction(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
+		var closest_interactable: Interactable
+		var closest_distance: float = INF
 		for area: Area3D in _interaction_area.get_overlapping_areas():
 			if area is Interactable:
 				var interactable: Interactable = area as Interactable
-				interactable.interact()
+				var distance: float = global_position.distance_to(interactable.global_position)
+				if distance < closest_distance:
+					closest_interactable = interactable
+					closest_distance = distance
+		if closest_interactable != null:
+			closest_interactable.interact()
 
 
 func apply_gravity(delta: float) -> void:

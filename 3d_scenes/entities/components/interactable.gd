@@ -31,9 +31,8 @@ signal interacted
 func _ready() -> void:
 	if not Engine.is_editor_hint():
 		GlobalDebugger.assert_all_exported_properties(self)
-	
-	label.modulate.a = 0
-	label.outline_modulate.a = 0
+		label.modulate.a = 0
+		label.outline_modulate.a = 0
 
 
 func _notification(what: int) -> void:

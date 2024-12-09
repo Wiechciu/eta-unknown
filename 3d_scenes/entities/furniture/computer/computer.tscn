@@ -61,7 +61,6 @@ debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="Interactable" parent="." instance=ExtResource("3_30c2g")]
 label_position = Vector3(0, 1.5, 0)
-interaction_radius = 2.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.74076, 0.812)

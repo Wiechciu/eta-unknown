@@ -1,20 +1,38 @@
-[gd_scene load_steps=4 format=3 uid="uid://crsqx0f6pvahi"]
+[gd_scene load_steps=4 format=4 uid="uid://dfmb5ul4bjq8"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_uj6uq"]
-points = PackedVector3Array(-5, 0, -5, -5, 0, 5, 5, 0, -5, 5, 0, 5)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uj6uq"]
+albedo_color = Color(1.2514e-06, 0.349365, 0.390443, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8pfch"]
-albedo_color = Color(0, 0.227331, 0.227331, 1)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_uj6uq"]
+data = PackedVector3Array(-5, -0.05, 5, -5, -0.05, -5, -5, 0.05, -5, 5, -0.05, -5, -5, -0.05, -5, -5, -0.05, 5, -5, 0.05, -5, -5, -0.05, -5, 5, -0.05, -5, -5, 0.05, -5, -5, 0.05, 5, -5, -0.05, 5, -5, -0.05, 5, -5, 0.05, 5, 5, 0.05, 5, 5, 0.05, 5, -5, 0.05, 5, -5, 0.05, -5, -5, -0.05, 5, 5, -0.05, 5, 5, -0.05, -5, 5, 0.05, 5, 5, -0.05, 5, -5, -0.05, 5, 5, -0.05, -5, 5, -0.05, 5, 5, 0.05, 5, 5, -0.05, -5, 5, 0.05, -5, -5, 0.05, -5, -5, 0.05, -5, 5, 0.05, -5, 5, 0.05, 5, 5, 0.05, 5, 5, 0.05, -5, 5, -0.05, -5)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_kooe7"]
-material = SubResource("StandardMaterial3D_8pfch")
-size = Vector2(10, 10)
+[sub_resource type="ArrayMesh" id="ArrayMesh_dt3od"]
+_surfaces = [{
+"aabb": AABB(-5, -0.05, -5, 10, 0.1, 10),
+"attribute_data": PackedByteArray("AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/"),
+"format": 34359738391,
+"material": SubResource("StandardMaterial3D_uj6uq"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 36,
+"vertex_data": PackedByteArray("AACgwM3MTL0AAKBAAACgwM3MTL0AAKDAAACgwM3MTD0AAKDAAACgQM3MTL0AAKDAAACgwM3MTL0AAKDAAACgwM3MTL0AAKBAAACgwM3MTD0AAKDAAACgwM3MTL0AAKDAAACgQM3MTL0AAKDAAACgwM3MTD0AAKDAAACgwM3MTD0AAKBAAACgwM3MTL0AAKBAAACgwM3MTL0AAKBAAACgwM3MTD0AAKBAAACgQM3MTD0AAKBAAACgQM3MTD0AAKBAAACgwM3MTD0AAKBAAACgwM3MTD0AAKDAAACgwM3MTL0AAKBAAACgQM3MTL0AAKBAAACgQM3MTL0AAKDAAACgQM3MTD0AAKBAAACgQM3MTL0AAKBAAACgwM3MTL0AAKBAAACgQM3MTL0AAKDAAACgQM3MTL0AAKBAAACgQM3MTD0AAKBAAACgQM3MTL0AAKDAAACgQM3MTD0AAKDAAACgwM3MTD0AAKDAAACgwM3MTD0AAKDAAACgQM3MTD0AAKDAAACgQM3MTD0AAKBAAACgQM3MTD0AAKBAAACgQM3MTD0AAKDAAACgQM3MTL0AAKDAAAD/f/9//n8AAP9//3/+fwAA/3//f/5//38AAP//AAD/fwAA//8AAP9/AAD//wAA/////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//////AAD/f/////8AAP9//////wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8/////f/9//n////9//3/+f////3//f/5//////wAA/z//////AAD/P/////8AAP8//3//////AAD/f/////8AAP9//////wAA////f/9//n////9//3/+f////3//f/5/")
+}]
 
 [node name="Floor" type="StaticBody3D"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("ConvexPolygonShape3D_uj6uq")
+[node name="Floor" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+visible = false
 
-[node name="Floor" type="MeshInstance3D" parent="."]
-mesh = SubResource("PlaneMesh_kooe7")
-skeleton = NodePath("../..")
+[node name="Floor" type="CSGBox3D" parent="Floor"]
+size = Vector3(10, 0.1, 10)
+material = SubResource("StandardMaterial3D_uj6uq")
+
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+shape = SubResource("ConcavePolygonShape3D_uj6uq")
+debug_color = Color(0, 0.6, 0.7, 0.42)
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+mesh = SubResource("ArrayMesh_dt3od")

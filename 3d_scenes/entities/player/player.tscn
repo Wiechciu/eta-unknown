@@ -7,8 +7,10 @@ albedo_color = Color(1, 1, 0.52549, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_sehua"]
 material = SubResource("StandardMaterial3D_ler6u")
+height = 1.8
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s4ok3"]
+height = 1.8
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_interaction_area", "_head", "_camera")]
 script = ExtResource("1_d240i")
@@ -17,27 +19,29 @@ _head = NodePath("Head")
 _camera = NodePath("Head/Camera3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 layers = 2
 mesh = SubResource("CapsuleMesh_sehua")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_s4ok3")
 debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="InteractionArea" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_s4ok3")
 debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="Head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 cull_mask = 1048573
 current = true
+far = 200.0
 
 [connection signal="body_entered" from="InteractionArea" to="InteractionArea" method="_on_body_entered"]
 [connection signal="body_exited" from="InteractionArea" to="InteractionArea" method="_on_body_exited"]
