@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b18oy35p17ir7"]
+[gd_scene load_steps=23 format=3 uid="uid://b18oy35p17ir7"]
 
 [ext_resource type="PackedScene" uid="uid://b66husl1w3olw" path="res://systems/calendar/calendar.tscn" id="1_82prh"]
 [ext_resource type="PackedScene" uid="uid://dmwp5s37fvy1m" path="res://3d_scenes/entities/environment/environment.tscn" id="1_pyshm"]
@@ -19,6 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://bvhgujk86reqg" path="res://3d_scenes/entities/furniture/bookcase_open_low.tscn" id="16_yatgx"]
 [ext_resource type="PackedScene" uid="uid://bu1wt1vjkrqnr" path="res://3d_scenes/entities/furniture/radio/radio.tscn" id="17_nvgr2"]
 [ext_resource type="PackedScene" uid="uid://bu17s686npp6w" path="res://3d_scenes/entities/room/wall_window.tscn" id="18_5cac6"]
+[ext_resource type="PackedScene" uid="uid://dx6f662utr8ya" path="res://3d_scenes/entities/document/physical_document.tscn" id="20_7ufp6"]
+[ext_resource type="PackedScene" uid="uid://camlixgb5adk5" path="res://3d_scenes/entities/furniture/printer/printer.tscn" id="21_nkfki"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_pyshm"]
 size = Vector2(10, 10)
@@ -106,6 +108,9 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.0213
 [node name="Radio" parent="Furniture/BookcaseOpenLow" instance=ExtResource("17_nvgr2")]
 transform = Transform3D(0.837604, 0, 0.546277, 0, 1, 0, -0.546277, 0, 0.837604, 0.572551, 1.11, -0.320422)
 
+[node name="BookcaseOpenLow2" parent="Furniture" instance=ExtResource("16_yatgx")]
+transform = Transform3D(-4.37114e-08, 0, -2.06788, 0, 0.559411, 0, 1, 0, -9.03899e-08, 3.46224, -2.38419e-07, 1.21438)
+
 [node name="Computer" parent="Furniture" instance=ExtResource("4_8pfch")]
 transform = Transform3D(0.908136, 0, 0.418675, 0, 1, 0, -0.418675, 0, 0.908136, -3.81671, 1.14594, -4.3742)
 
@@ -114,3 +119,9 @@ transform = Transform3D(-0.91875, 0, 0.39484, 0, 1, 0, -0.39484, 0, -0.91875, -2
 
 [node name="ComputerKeyboard" parent="Furniture" instance=ExtResource("11_3xujk")]
 transform = Transform3D(0.955051, 0, 0.296441, 0, 1, 0, -0.296441, 0, 0.955051, -3.97148, 1.15131, -3.58933)
+
+[node name="Document" parent="." instance=ExtResource("20_7ufp6")]
+transform = Transform3D(0.918135, -0.396267, 1.18097e-08, 0, 2.98023e-08, 1, -0.396267, -0.918135, 2.73626e-08, -2.61987, 1.15337, -4.05207)
+
+[node name="Printer" parent="." instance=ExtResource("21_nkfki")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.2338, 0.614818, 1.84404)

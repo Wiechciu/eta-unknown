@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://dx6f662utr8ya"]
+
+[ext_resource type="Texture2D" uid="uid://bldqpr61u55c8" path="res://3d_scenes/entities/document/front_page.png" id="1_n6wor"]
+[ext_resource type="Script" uid="uid://qhhxkbn3yarx" path="res://3d_scenes/entities/document/physical_document.gd" id="1_xcu1r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xcu1r"]
+albedo_texture = ExtResource("1_n6wor")
+
+[sub_resource type="QuadMesh" id="QuadMesh_m3oqy"]
+material = SubResource("StandardMaterial3D_xcu1r")
+size = Vector2(0.315, 0.435)
+
+[sub_resource type="QuadMesh" id="QuadMesh_3rrdp"]
+flip_faces = true
+size = Vector2(0.315, 0.435)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1ffdw"]
+points = PackedVector3Array(-0.105, -0.145, 0, 0.105, -0.145, 0, -0.105, 0.145, 0, 0.105, 0.145, 0)
+
+[node name="PhysicalDocument" type="StaticBody3D"]
+script = ExtResource("1_xcu1r")
+
+[node name="Front" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_m3oqy")
+
+[node name="Back" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_3rrdp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_1ffdw")
+debug_color = Color(0, 0.6, 0.7, 0.42)

@@ -1,0 +1,2 @@
+class_name PhysicalDocument
+extends StaticBody3D
