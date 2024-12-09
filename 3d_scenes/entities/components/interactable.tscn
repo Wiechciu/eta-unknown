@@ -20,6 +20,7 @@ debug_color = Color(0, 0.6, 0.7, 0.42)
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 billboard = 1
+no_depth_test = true
 text = "PRESS_TO_INTERACT"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

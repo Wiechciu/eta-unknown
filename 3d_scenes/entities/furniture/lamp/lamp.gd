@@ -2,7 +2,7 @@ extends StaticBody3D
 
 
 const MIN_ENERGY: float = 0.0
-const MAX_ENERGY: float = 0.5
+const MAX_ENERGY: float = 1.0
 
 @export var light: Light3D
 @export var emission_bodies: Array[MeshInstance3D]

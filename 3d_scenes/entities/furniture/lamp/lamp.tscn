@@ -110,3 +110,4 @@ light_energy = 0.0
 light_size = 0.3
 shadow_enabled = true
 omni_range = 10.0
+omni_shadow_mode = 0
