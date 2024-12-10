@@ -61,6 +61,10 @@ data = ExtResource("22_7ueml")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.50287)
 _can_move = null
 
+[node name="Employee" parent="." node_paths=PackedStringArray("target_nodes") instance=ExtResource("26_sd7sv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15824, 0, 0.172612)
+target_nodes = [NodePath("../TargetNode1"), NodePath("../TargetNode2"), NodePath("../TargetNode3"), NodePath("../TargetNode4")]
+
 [node name="Room" type="Node3D" parent="."]
 
 [node name="Floor" parent="Room" instance=ExtResource("13_3xujk")]
@@ -363,18 +367,14 @@ transform = Transform3D(-4.37114e-07, 0, 10, 0, 10, 0, -10, 0, -4.37114e-07, -10
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 492.109, -1, 0)
 mesh = SubResource("PlaneMesh_wl1sy")
 
-[node name="Employee" parent="." node_paths=PackedStringArray("target_nodes") instance=ExtResource("26_sd7sv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15824, 0, 0.172612)
-target_nodes = [NodePath("../TargetNode1"), NodePath("../TargetNode2"), NodePath("../TargetNode3"), NodePath("../TargetNode4")]
-
 [node name="TargetNode1" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.99969, 0, -2.7076)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.03037, 0, -1.71294)
 
 [node name="TargetNode2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.19119, 0, -3.49777)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.61471, -1.19209e-07, -2.56178)
 
 [node name="TargetNode3" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.18491, 0, 3.47954)
 
 [node name="TargetNode4" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.55045, 0, 3.68067)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.79136, 0, 3.57992)

@@ -565,7 +565,7 @@ size_flags_vertical = 10
 
 [node name="PrintButton" type="Button" parent="VBoxContainer/Tabs/DOCUMENTATION/ScrollContainer/VBoxContainer/Buttons"]
 layout_mode = 2
-text = "PRINT"
+text = "PRINT_ALL"
 
 [node name="ACCOUNTING" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_quotation", "_revenue_total", "_cost_total", "_gross_profit", "_margin", "_revenue_container", "_cost_container")]
 visible = false

@@ -21,7 +21,13 @@ func _ready() -> void:
 
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
-	screen.text = "%s" % printing_queue.size()
+	var number: int = printing_queue.size()
+	screen.text = "%s" % number
+	if number == 0:
+		screen.shaded = true
+	else:
+		screen.shaded = false
+	
 	try_printing_next_document()
 
 
@@ -37,7 +43,7 @@ func interact(node: Node) -> void:
 
 func pick_up_documents(node: Node) -> void:
 	if printed_documents.size() == 0:
-		print("No documents to pick up.")
+		ActionLogger.create_log("NO_DOCUMENTS", true)
 		return
 	
 	var inventory: Inventory = GlobalDebugger.get_child_of_type(node, Inventory)
@@ -49,7 +55,7 @@ func pick_up_documents(node: Node) -> void:
 		inventory.add_item(physical_document)
 		remove_child(physical_document)
 	
-	print("Picked %s documents up." % printed_documents.size())
+	ActionLogger.create_log(tr("PICKED_UP_DOCUMENTS").format({"amount":printed_documents.size()}))
 	printed_documents.clear()
 
 
