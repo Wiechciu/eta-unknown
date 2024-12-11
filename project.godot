@@ -23,6 +23,7 @@ GameManager="*res://systems/game_manager/game_manager.tscn"
 GlobalDebugger="*res://systems/global_debugger/global_debugger.gd"
 ActionLogger="*res://systems/action_logger/action_logger.tscn"
 GlobalMarket="*res://systems/global_market/global_market.tscn"
+SaveManager="*res://systems/save_manager/save_manager.tscn"
 
 [debug]
 

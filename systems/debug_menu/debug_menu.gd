@@ -99,3 +99,11 @@ func _on_send_10_quotations_to_requests_button_pressed() -> void:
 func _on_next_month_button_pressed() -> void:
 	GlobalTimer.start_next_month()
 	status.text = "Next month started."
+
+
+func _on_save_game_button_pressed() -> void:
+	SaveManager.save_game()
+
+
+func _on_load_game_button_pressed() -> void:
+	SaveManager.load_game()
