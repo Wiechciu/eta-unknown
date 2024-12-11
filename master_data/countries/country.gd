@@ -2,9 +2,9 @@ class_name Country
 extends Resource
 
 
-var id: int
-var code: String
-var name: String
+@export_storage var id: int
+@export_storage var code: String
+@export_storage var name: String
 var locations: Array[Location]
 
 

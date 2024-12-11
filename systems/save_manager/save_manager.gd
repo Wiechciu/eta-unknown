@@ -24,13 +24,16 @@ func save_game() -> void:
 	#for shipment: Shipment in GlobalRefs.shipments:
 		#file.store_var(shipment, true)
 	file.store_var(GlobalRefs.shipments[0], true)
+	
 	#file.store_var(GlobalRefs, true)
+	print("--- Saved to: %s ----" % save_file_name)
 
 
 func load_game() -> void:
 	var file: FileAccess = FileAccess.open(save_full_path, FileAccess.READ)
 	var content: Variant = file.get_var(true)
-	print("Loaded game:")
+	print("--- Loaded from: %s ----" % save_file_name)
 	print(content)
-	loaded_objects.append(content)
+	if content != null:
+		loaded_objects.append(content)
 	#add_child(content as Node)

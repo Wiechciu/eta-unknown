@@ -45,14 +45,14 @@ var is_owned: bool:
 		return owner != null
 
 # Shipment modules
-@export_storage var cargo_details: ShipmentCargoDetails
-@export_storage var main_freight: ShipmentMainFreight
-@export_storage var haulage: ShipmentHaulage
-@export_storage var handling: ShipmentHandling
-@export_storage var customs: ShipmentCustoms
-@export_storage var documentation: ShipmentDocumentation
-@export_storage var events: ShipmentEvents
-@export_storage var accounting: ShipmentAccounting
+var cargo_details: ShipmentCargoDetails
+var main_freight: ShipmentMainFreight
+var haulage: ShipmentHaulage
+var handling: ShipmentHandling
+var customs: ShipmentCustoms
+var documentation: ShipmentDocumentation
+var events: ShipmentEvents
+var accounting: ShipmentAccounting
 
 
 func with_data(shipper_to_assign: Customer = null, consignee_to_assign: Customer = null) -> Shipment:

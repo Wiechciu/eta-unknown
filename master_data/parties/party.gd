@@ -2,14 +2,14 @@ class_name Party
 extends Resource
 
 
-var id: int
-var name: String
-var street_name: String
-var street_number: String
-var house_number: String
-var postal_code: String
-var city_name: String
-var country: Country
+@export_storage var id: int
+@export_storage var name: String
+@export_storage var street_name: String
+@export_storage var street_number: String
+@export_storage var house_number: String
+@export_storage var postal_code: String
+@export_storage var city_name: String
+@export_storage var country: Country
 var print_string: String:
 	get:
 		var house_number_fixed: String = ("/" + house_number) if (house_number != null and house_number != "") else ""
@@ -20,7 +20,7 @@ var print_string: String:
 		+ "\n" + country.code + " " + country.name
 
 var employees: Array[Person]
-var balance: float
+@export_storage var balance: float
 
 
 @warning_ignore("shadowed_variable")

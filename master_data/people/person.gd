@@ -9,19 +9,19 @@ enum Experience {
 }
 
 
-var first_name: String
-var last_name: String
-var gender: String
-var email: String
-var phone_number: String
-var birthdate: String
-var experience: Experience
+@export_storage var first_name: String
+@export_storage var last_name: String
+@export_storage var gender: String
+@export_storage var email: String
+@export_storage var phone_number: String
+@export_storage var birthdate: String
+@export_storage var experience: Experience
 var full_name: String:
 	get:
 		return first_name + " " + last_name
 
-var employer: Party
-var job_position: JobPosition
+@export_storage var employer: Party
+@export_storage var job_position: JobPosition
 
 
 @warning_ignore("shadowed_variable")
