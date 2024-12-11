@@ -2,22 +2,25 @@ class_name TmsDimensionSet
 extends Node
 
 
-@export var _quantity: Label
-@export var _length: Label
-@export var _width: Label
-@export var _height: Label
-@export var _total_weight: Label
+var dimension_set: DimensionSet
+@export var quantity_label: Label
+@export var length_label: Label
+@export var width_label: Label
+@export var height_label: Label
+@export var total_weight_label: Label
 
 
 func _ready() -> void:
 	GlobalDebugger.assert_all_exported_properties(self)
 
 
+@warning_ignore("shadowed_variable")
 func with_data(dimension_set: DimensionSet) -> TmsDimensionSet:
-	_quantity.text = "%d pcs" % [dimension_set.quantity]
-	_length.text = "%d" % [dimension_set.length]
-	_width.text = "%d" % [dimension_set.width]
-	_height.text = "%d cm, " % [dimension_set.height]
-	_total_weight.text = "%d kg" % [dimension_set.total_weight]
+	self.dimension_set = dimension_set
+	quantity_label.text = "%d pcs" % [dimension_set.quantity]
+	length_label.text = "%d" % [dimension_set.length]
+	width_label.text = "%d" % [dimension_set.width]
+	height_label.text = "%d cm, " % [dimension_set.height]
+	total_weight_label.text = "%d kg" % [dimension_set.total_weight]
 
 	return self

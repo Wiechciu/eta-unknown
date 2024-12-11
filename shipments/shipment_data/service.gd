@@ -25,8 +25,9 @@ var name: String:
 			_: return "%s - unknown service" % code_string
 
 
-func with_data(code_to_assign: Code) -> Service:
-	self.code = code_to_assign
+@warning_ignore("shadowed_variable")
+func with_data(code: Code) -> Service:
+	self.code = code
 	return self
 
 

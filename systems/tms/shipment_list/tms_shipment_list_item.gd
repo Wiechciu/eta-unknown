@@ -7,13 +7,13 @@ signal pressed_with_shipment_data(shipment: Shipment)
 
 var shipment: Shipment
 
-@export var _shipment_number: Label
-@export var _earliest_pickup_date: Label
-@export var _shipper: Label
-@export var _origin: Label
-@export var _destination: Label
-@export var _total_weight: Label
-@export var _status: Label
+@export var shipment_number_label: Label
+@export var earliest_pickup_date_label: Label
+@export var shipper_label: Label
+@export var origin_label: Label
+@export var destination_label: Label
+@export var total_weight_label: Label
+@export var status_label: Label
 
 
 func _ready() -> void:
@@ -23,14 +23,14 @@ func _ready() -> void:
 func with_data(new_shipment: Shipment) -> TmsShipmentListItem:
 	shipment = new_shipment
 	
-	_shipment_number.text = str(shipment.number)
-	_earliest_pickup_date.text = GlobalTimer.get_nice_date_string_from_event(shipment.events.get_first_event_of_type(Event.Code.ERL))
-	_shipper.text = shipment.shipper.name
-	_origin.text = shipment.origin.code
-	_destination.text = shipment.destination.code
-	_total_weight.text = "%d %s" % [shipment.cargo_details.total_weight, tr("KG")]
+	shipment_number_label.text = str(shipment.number)
+	earliest_pickup_date_label.text = GlobalTimer.get_nice_date_string_from_event(shipment.events.get_first_event_of_type(Event.Code.ERL))
+	shipper_label.text = shipment.shipper.name
+	origin_label.text = shipment.origin.code
+	destination_label.text = shipment.destination.code
+	total_weight_label.text = "%d %s" % [shipment.cargo_details.total_weight, tr("KG")]
 	var status_text: String = "STATUS_" + Shipment.Status.keys()[shipment.status]
-	_status.text = status_text
+	status_label.text = status_text
 	match shipment.status:
 		Shipment.Status.COMPLETED:
 			modulate = Color.LIGHT_GREEN

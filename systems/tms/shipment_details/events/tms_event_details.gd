@@ -2,18 +2,21 @@ class_name TmsEventDetails
 extends Node
 
 
-@export var _code: Label
-@export var _name: Label
-@export var _time: Label
+var event: Event
+@export var code_label: Label
+@export var name_label: Label
+@export var time_label: Label
 
 
 func _ready() -> void:
 	GlobalDebugger.assert_all_exported_properties(self)
 
 
+@warning_ignore("shadowed_variable")
 func with_data(event: Event) -> TmsEventDetails:
-	_code.text = event.code_string
-	_name.text = event.name
-	_time.text = GlobalTimer.get_nice_datetime_string_from_event(event)
+	self.event = event
+	code_label.text = event.code_string
+	name_label.text = event.name
+	time_label.text = GlobalTimer.get_nice_datetime_string_from_event(event)
 	
 	return self

@@ -46,9 +46,10 @@ var print_string: String:
 		return code_string + " " + place
 
 
-func with_data(code_to_assign: Code, place_to_assign: String = "") -> Incoterms:
-	self.code = code_to_assign
-	self.place = place_to_assign
+@warning_ignore("shadowed_variable")
+func with_data(code: Code, place: String = "") -> Incoterms:
+	self.code = code
+	self.place = place
 	return self
 
 

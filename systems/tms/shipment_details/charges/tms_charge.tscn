@@ -18,16 +18,16 @@ font_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_mqdbu"]
 vertical = true
 
-[node name="TmsCharge" type="PanelContainer" node_paths=PackedStringArray("_code", "_name", "_amount", "_currency", "_party")]
+[node name="TmsCharge" type="PanelContainer" node_paths=PackedStringArray("code_label", "name_label", "amount_label", "currency_label", "party_label")]
 offset_right = 145.0
 offset_bottom = 25.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_6bitq")
 script = ExtResource("1_bs2vj")
-_code = NodePath("HboxContainer/Code")
-_name = NodePath("HboxContainer/Name")
-_amount = NodePath("HboxContainer/Amount")
-_currency = NodePath("HboxContainer/Currency")
-_party = NodePath("HboxContainer/Party")
+code_label = NodePath("HboxContainer/Code")
+name_label = NodePath("HboxContainer/Name")
+amount_label = NodePath("HboxContainer/Amount")
+currency_label = NodePath("HboxContainer/Currency")
+party_label = NodePath("HboxContainer/Party")
 
 [node name="HboxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2

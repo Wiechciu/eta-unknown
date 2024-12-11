@@ -5,18 +5,19 @@ extends Resource
 signal charges_updated
 
 
-var shipment: Shipment
-var request_for_quotation: RequestForQuotation
-var quotation: Quotation
-var charges: Array[Charge]
-var revenue_charges: Array[ChargeRevenue]
+@export_storage var shipment: Shipment
+@export_storage var request_for_quotation: RequestForQuotation
+@export_storage var quotation: Quotation
+@export_storage var charges: Array[Charge]
+@export_storage var revenue_charges: Array[ChargeRevenue]
+@export_storage var cost_charges: Array[ChargeCost]
+
 var revenue_charges_as_charges: Array[Charge]:
 	get:
 		var new_list: Array[Charge]
 		new_list.assign(revenue_charges)
 		return new_list
-#FIXME - there can be different currencies, need to calculate with exchange rates
-var revenue_charges_sum: float:
+var revenue_charges_sum: float: #FIXME - there can be different currencies, need to calculate with exchange rates
 	get:
 		var sum: float = 0.0
 		for charge: ChargeRevenue in revenue_charges:
@@ -24,14 +25,12 @@ var revenue_charges_sum: float:
 		return sum
 var revenue_charges_sum_string: String:
 		get: return "%.2f" % revenue_charges_sum
-var cost_charges: Array[ChargeCost]
 var cost_charges_as_charges: Array[Charge]:
 	get:
 		var new_list: Array[Charge]
 		new_list.assign(cost_charges)
 		return new_list
-#FIXME - there can be different currencies, need to calculate with exchange rates
-var cost_charges_sum: float:
+var cost_charges_sum: float: #FIXME - there can be different currencies, need to calculate with exchange rates
 	get:
 		var sum: float = 0.0
 		for charge: ChargeCost in cost_charges:

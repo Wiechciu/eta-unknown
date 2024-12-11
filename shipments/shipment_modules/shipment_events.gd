@@ -5,15 +5,15 @@ extends Resource
 signal events_updated
 
 
-var shipment: Shipment
-var events: Array[Event]
-var planned_events: Array[EventPlanned]
+@export_storage var shipment: Shipment
+@export_storage var events: Array[Event]
+@export_storage var planned_events: Array[EventPlanned]
+@export_storage var actual_events: Array[EventActual]
 var planned_events_as_events: Array[Event]:
 	get:
 		var new_list: Array[Event]
 		new_list.assign(planned_events)
 		return new_list
-var actual_events: Array[EventActual]
 var actual_events_as_events: Array[Event]:
 	get:
 		var new_list: Array[Event]

@@ -15,9 +15,8 @@ height = 1.8
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s4ok3"]
 height = 1.8
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("_interaction_area", "interactable_finder", "_head", "_camera", "crosshair")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("interactable_finder", "_head", "_camera", "crosshair")]
 script = ExtResource("1_d240i")
-_interaction_area = NodePath("InteractionArea")
 interactable_finder = NodePath("Head/Camera3D/InteractableFinder")
 _head = NodePath("Head")
 _camera = NodePath("Head/Camera3D")
@@ -34,15 +33,6 @@ mesh = SubResource("CapsuleMesh_sehua")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_s4ok3")
-debug_color = Color(0, 0.6, 0.7, 0.42)
-
-[node name="InteractionArea" type="Area3D" parent="."]
-visible = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-shape = SubResource("CapsuleShape3D_s4ok3")
-debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -69,6 +59,3 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("2_sehua")
-
-[connection signal="body_entered" from="InteractionArea" to="InteractionArea" method="_on_body_entered"]
-[connection signal="body_exited" from="InteractionArea" to="InteractionArea" method="_on_body_exited"]

@@ -35,9 +35,10 @@ var number: int
 var shipment: Shipment
 
 
-func with_data(code_to_assign: Code, issued_time_to_assign: int, number_to_assign: int, shipment_to_assign: Shipment) -> Document:
-	self.code = code_to_assign
-	self.issued_time = issued_time_to_assign
-	self.number = number_to_assign
-	self.shipment = shipment_to_assign
+@warning_ignore("shadowed_variable")
+func with_data(code: Code, issued_time: int, number: int, shipment: Shipment) -> Document:
+	self.code = code
+	self.issued_time = issued_time
+	self.number = number
+	self.shipment = shipment
 	return self

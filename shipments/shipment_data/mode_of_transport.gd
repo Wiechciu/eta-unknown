@@ -25,8 +25,9 @@ var name: String:
 			_: return "%s - unknown mode of transport" % code_string
 
 
-func with_data(code_to_assign: Code) -> ModeOfTransport:
-	self.code = code_to_assign
+@warning_ignore("shadowed_variable")
+func with_data(code: Code) -> ModeOfTransport:
+	self.code = code
 	return self
 
 

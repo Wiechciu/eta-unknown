@@ -24,7 +24,6 @@ func walk() -> void:
 		node.look_at(next_node.global_position)
 		index += 1
 	
-	var last_target_node: Node3D = target_nodes.back() as Node3D
 	global_position = target_nodes[-1].global_position
 	global_rotation = target_nodes[-2].global_rotation
 	

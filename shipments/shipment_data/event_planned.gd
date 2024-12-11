@@ -2,8 +2,10 @@ class_name EventPlanned
 extends Event
 
 
-func with_data(code_to_assign: Event.Code, time_to_assign: int, location_to_assign: Location = null) -> EventPlanned:
-	self.code = code_to_assign
-	self.time = time_to_assign
-	self.location = location_to_assign
+@warning_ignore("shadowed_variable", "shadowed_variable_base_class")
+func with_data(code: Event.Code, time: int, location: Location = null) -> EventPlanned:
+	self.code = code
+	self.time = time
+	self.location = location
+	
 	return self

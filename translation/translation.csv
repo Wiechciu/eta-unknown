@@ -156,5 +156,6 @@ POLISH;Polish;Polski
 ENGLISH;English;Angielski
 PRINT;Print;Drukuj
 PRINT_ALL;Print all;Drukuj wszystko
-NO_DOCUMENTS;No documents to pick up.;Nie ma dokumentów do zabrania.
+NO_DOCUMENTS_TO_PRINT;No documents to print.;Nie ma dokumentów do wydrukowania.
+NO_DOCUMENTS_TO_PICK_UP;No documents to pick up.;Nie ma dokumentów do zabrania.
 PICKED_UP_DOCUMENTS;Picked up {amount} documents.;Zabrano {amount} dokumentów.

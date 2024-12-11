@@ -5,6 +5,8 @@ extends Item
 var document: Document
 
 
-func with_data(document_to_assign: Document) -> PhysicalDocument:
-	document = document_to_assign
+@warning_ignore("shadowed_variable")
+func with_data(document: Document) -> PhysicalDocument:
+	self.document = document
+	
 	return self

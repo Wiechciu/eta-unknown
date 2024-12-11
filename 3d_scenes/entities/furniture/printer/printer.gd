@@ -43,7 +43,7 @@ func interact(node: Node) -> void:
 
 func pick_up_documents(node: Node) -> void:
 	if printed_documents.size() == 0:
-		ActionLogger.create_log("NO_DOCUMENTS", true)
+		ActionLogger.create_log("NO_DOCUMENTS_TO_PICK_UP", true)
 		return
 	
 	var inventory: Inventory = GlobalDebugger.get_child_of_type(node, Inventory)
@@ -61,7 +61,8 @@ func pick_up_documents(node: Node) -> void:
 
 ## For debugging only
 func create_and_add_to_queue_random_document() -> void:
-	var document: Document = Document.new().with_data(randi_range(0, Document.Code.size()), GlobalTimer.now, 1, GlobalRefs.shipments.pick_random())
+	@warning_ignore("unsafe_cast")
+	var document: Document = Document.new().with_data(randi_range(0, Document.Code.size()), GlobalTimer.now, 1, GlobalRefs.shipments.pick_random() as Shipment)
 	add_document_to_queue(document)
 
 

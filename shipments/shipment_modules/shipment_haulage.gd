@@ -2,10 +2,10 @@ class_name ShipmentHaulage
 extends Resource
 
 
-var shipment: Shipment
-var trucker_pickup: Trucker
-var trucker_delivery: Trucker
-var cost: String #TODO
+@export_storage var shipment: Shipment
+@export_storage var trucker_pickup: Trucker
+@export_storage var trucker_delivery: Trucker
+@export_storage var cost: String #TODO
 
 
 func with_data(parent_shipment: Shipment) -> ShipmentHaulage:

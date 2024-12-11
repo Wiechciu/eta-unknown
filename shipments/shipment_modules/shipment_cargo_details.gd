@@ -2,10 +2,10 @@ class_name ShipmentCargoDetails
 extends Resource
 
 
-var shipment: Shipment
-var cargo: Cargo
-var slac: int
-var dimension_sets: Array[DimensionSet]
+@export_storage var shipment: Shipment
+@export_storage var cargo: Cargo
+@export_storage var slac: int
+@export_storage var dimension_sets: Array[DimensionSet]
 var total_quantity: int:
 	get:
 		var total: int = 0

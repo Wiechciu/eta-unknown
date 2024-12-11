@@ -18,19 +18,19 @@ font_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_bi60y"]
 vertical = true
 
-[node name="ShipmentListItem" type="PanelContainer" node_paths=PackedStringArray("_shipment_number", "_earliest_pickup_date", "_shipper", "_origin", "_destination", "_total_weight", "_status")]
+[node name="ShipmentListItem" type="PanelContainer" node_paths=PackedStringArray("shipment_number_label", "earliest_pickup_date_label", "shipper_label", "origin_label", "destination_label", "total_weight_label", "status_label")]
 custom_minimum_size = Vector2(0, 40)
 offset_right = 367.0
 offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
 script = ExtResource("1_bi60y")
-_shipment_number = NodePath("HBoxContainer/ShipmentNumber")
-_earliest_pickup_date = NodePath("HBoxContainer/EarliestPickupDate")
-_shipper = NodePath("HBoxContainer/Shipper")
-_origin = NodePath("HBoxContainer/Origin")
-_destination = NodePath("HBoxContainer/Destination")
-_total_weight = NodePath("HBoxContainer/TotalWeight")
-_status = NodePath("HBoxContainer/Status")
+shipment_number_label = NodePath("HBoxContainer/ShipmentNumber")
+earliest_pickup_date_label = NodePath("HBoxContainer/EarliestPickupDate")
+shipper_label = NodePath("HBoxContainer/Shipper")
+origin_label = NodePath("HBoxContainer/Origin")
+destination_label = NodePath("HBoxContainer/Destination")
+total_weight_label = NodePath("HBoxContainer/TotalWeight")
+status_label = NodePath("HBoxContainer/Status")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2

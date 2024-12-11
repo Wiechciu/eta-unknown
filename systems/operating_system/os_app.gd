@@ -2,6 +2,7 @@ class_name OsApp
 extends Control
 
 
+@warning_ignore("unused_signal")
 signal document_print_ordered(document: Document)
 
 

@@ -5,8 +5,8 @@ extends Resource
 signal documentation_updated
 
 
-var shipment: Shipment
-var documents: Array[Document]
+@export_storage var shipment: Shipment
+@export_storage var documents: Array[Document]
 #var commercial_documents: Array[Document] #TODO
 #var transport_documents: Array[Document] #TODO
 #var customs_documents: Array[Document] #TODO

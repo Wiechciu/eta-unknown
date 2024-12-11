@@ -20,46 +20,44 @@ enum Status {
 }
 
 
-static var last_id: int = 0
-
-var id: int
-var status: Status
+@export_storage var id: int
+@export_storage var status: Status
 var is_completed_or_cancelled: bool:
 	get:
 		return status == Status.COMPLETED or status == Status.CANCELLED
 
 # General
-var customer_reference: String
-var export_contact_person: Person
-var import_contact_person: Person
-var shipper: Party
-var consignee: Party
-var origin: Location
-var destination: Location
-var service: Service
-var incoterms: Incoterms
+@export_storage var customer_reference: String
+@export_storage var export_contact_person: Person
+@export_storage var import_contact_person: Person
+@export_storage var shipper: Party
+@export_storage var consignee: Party
+@export_storage var origin: Location
+@export_storage var destination: Location
+@export_storage var service: Service
+@export_storage var incoterms: Incoterms
 
 # Accepted shipment variables
-var number: int
-var owner: FreightForwarder
+@export_storage var number: int
+@export_storage var owner: FreightForwarder
 var is_owned: bool:
 	get:
 		return owner != null
 
 # Shipment modules
-var cargo_details: ShipmentCargoDetails
-var main_freight: ShipmentMainFreight
-var haulage: ShipmentHaulage
-var handling: ShipmentHandling
-var customs: ShipmentCustoms
-var documentation: ShipmentDocumentation
-var events: ShipmentEvents
-var accounting: ShipmentAccounting
+@export_storage var cargo_details: ShipmentCargoDetails
+@export_storage var main_freight: ShipmentMainFreight
+@export_storage var haulage: ShipmentHaulage
+@export_storage var handling: ShipmentHandling
+@export_storage var customs: ShipmentCustoms
+@export_storage var documentation: ShipmentDocumentation
+@export_storage var events: ShipmentEvents
+@export_storage var accounting: ShipmentAccounting
 
 
 func with_data(shipper_to_assign: Customer = null, consignee_to_assign: Customer = null) -> Shipment:
-	last_id += 1
-	id = last_id
+	@warning_ignore("unsafe_property_access")
+	id = GlobalRefs.shipment_last_id
 	
 	cargo_details = ShipmentCargoDetails.new().with_data(self)
 	main_freight = ShipmentMainFreight.new().with_data(self)
@@ -80,20 +78,19 @@ func with_data(shipper_to_assign: Customer = null, consignee_to_assign: Customer
 		@warning_ignore("unsafe_property_access", "unsafe_method_access")
 		consignee_to_assign = GlobalRefs.customers_with_employees.pick_random()
 	consignee = consignee_to_assign
-	export_contact_person = shipper.employees.pick_random()
-	import_contact_person = consignee.employees.pick_random()
 	#FIXME make it always be in a different country.
 	if shipper.country == consignee.country:
 		return null
 	
-	#FIXME sometimes origin or destination can be empty, because there are no locations in the customer country.
-	#var origin_list: Array[Location] = GlobalRefs.locations.filter(Location.is_in_country.bind(shipper.country))
-	#var destination_list: Array[Location] = GlobalRefs.locations.filter(Location.is_in_country.bind(consignee.country))
+	export_contact_person = shipper.employees.pick_random()
+	import_contact_person = consignee.employees.pick_random()
+	
 	var origin_list: Array[Location] = shipper.country.locations
 	var destination_list: Array[Location] = consignee.country.locations
-	
+	#FIXME sometimes origin or destination can be empty, because there are no locations in the customer country.
 	if origin_list.is_empty() or destination_list.is_empty():
 		return null
+
 	@warning_ignore("unsafe_cast")
 	origin = origin_list.pick_random() as Location
 	@warning_ignore("unsafe_cast")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c8je307sddbjq"]
 
-[ext_resource type="Script" path="res://systems/tms/shipment_details/events/tms_event_details.gd" id="1_2d4yt"]
+[ext_resource type="Script" uid="uid://dk1hr70kar232" path="res://systems/tms/shipment_details/events/tms_event_details.gd" id="1_2d4yt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6bitq"]
 content_margin_left = 4.0
@@ -18,14 +18,14 @@ font_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_mqdbu"]
 vertical = true
 
-[node name="TmsEventDetails" type="PanelContainer" node_paths=PackedStringArray("_code", "_name", "_time")]
+[node name="TmsEventDetails" type="PanelContainer" node_paths=PackedStringArray("code_label", "name_label", "time_label")]
 offset_right = 145.0
 offset_bottom = 25.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_6bitq")
 script = ExtResource("1_2d4yt")
-_code = NodePath("HboxContainer/Code")
-_name = NodePath("HboxContainer/Name")
-_time = NodePath("HboxContainer/Time")
+code_label = NodePath("HboxContainer/Code")
+name_label = NodePath("HboxContainer/Name")
+time_label = NodePath("HboxContainer/Time")
 
 [node name="HboxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2

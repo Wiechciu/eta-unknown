@@ -2,7 +2,6 @@ class_name Player
 extends Human
 
 
-@export var _interaction_area: Area3D
 @export var interactable_finder: InteractableFinder
 @export var _head: Node3D
 @export var _camera: Camera3D
@@ -36,6 +35,7 @@ func _ready() -> void:
 	head_bobbing_tween.stop()
 
 
+@warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
 	crosshair.visible = _can_move
 

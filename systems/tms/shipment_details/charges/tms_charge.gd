@@ -2,22 +2,25 @@ class_name TmsCharge
 extends Node
 
 
-@export var _code: Label
-@export var _name: Label
-@export var _amount: Label
-@export var _currency: Label
-@export var _party: Label
+var charge: Charge
+@export var code_label: Label
+@export var name_label: Label
+@export var amount_label: Label
+@export var currency_label: Label
+@export var party_label: Label
 
 
 func _ready() -> void:
 	GlobalDebugger.assert_all_exported_properties(self)
 
 
+@warning_ignore("shadowed_variable")
 func with_data(charge: Charge) -> TmsCharge:
-	_code.text = charge.code_string
-	_name.text = charge.name
-	_amount.text = charge.amount_string
-	_currency.text = charge.currency.code
-	_party.text = charge.party.name
+	self.charge = charge
+	code_label.text = charge.code_string
+	name_label.text = charge.name
+	amount_label.text = charge.amount_string
+	currency_label.text = charge.currency.code
+	party_label.text = charge.party.name
 	
 	return self

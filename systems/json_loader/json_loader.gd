@@ -32,12 +32,15 @@ func load_cargo_from_json(file_to_load: String, array_to_fill: Array, dict_to_fi
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
-		var new_resource: Cargo = Cargo.new()
-		new_resource.description = str(item.description) if item.description else ""
-		new_resource.hs_code = str(item.hs_code) if item.hs_code else ""
-		new_resource.unit_value = item.unit_value if item.unit_value else 0.0
-		new_resource.unit_size = item.unit_size if item.unit_size else 0.0
-		new_resource.unit_weight = item.unit_weight if item.unit_weight else 0.0
+		@warning_ignore("unsafe_cast")
+		var new_resource: Cargo = Cargo.new().with_data(
+			GlobalRefs.cargo_last_id,
+			str(item.description) if item.description else "",
+			str(item.hs_code) if item.hs_code else "",
+			item.unit_value as float if item.unit_value else 0.0,
+			item.unit_size as float if item.unit_size else 0.0,
+			item.unit_weight as float if item.unit_weight else 0.0
+			)
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.description] = new_resource
 	
@@ -49,10 +52,13 @@ func load_currencies_from_json(file_to_load: String, array_to_fill: Array, dict_
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
-		var new_resource: Currency = Currency.new()
-		new_resource.code = str(item.code) if item.code else ""
-		new_resource.name = str(item.name) if item.name else ""
-		new_resource.exchange_rate_to_usd = item.exchange_rate_to_usd if item.exchange_rate_to_usd else 0.0
+		@warning_ignore("unsafe_cast")
+		var new_resource: Currency = Currency.new().with_data(
+			GlobalRefs.currency_last_id,
+			str(item.code) if item.code else "",
+			str(item.name) if item.name else "",
+			item.exchange_rate_to_usd as float if item.exchange_rate_to_usd else 0.0
+			)
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.code] = new_resource
 	
@@ -64,9 +70,11 @@ func load_countries_from_json(file_to_load: String, array_to_fill: Array, dict_t
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
-		var new_resource: Country = Country.new()
-		new_resource.code = str(item.code) if item.code else ""
-		new_resource.name = str(item.name) if item.name else ""
+		var new_resource: Country = Country.new().with_data(
+			GlobalRefs.country_last_id,
+			str(item.code) if item.code else "",
+			str(item.name) if item.name else ""
+			)
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.code] = new_resource
 	
@@ -78,10 +86,12 @@ func load_locations_from_json(file_to_load: String, array_to_fill: Array, dict_t
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
-		var new_resource: Location = Location.new()
-		new_resource.code = (str(item.country) + str(item.location)) if item.country else ""
-		new_resource.country = GlobalRefs.countries_dict[item.country] if item.country else null
-		new_resource.name = str(item.name_wo_diacritics) if item.name_wo_diacritics else ""
+		var new_resource: Location = Location.new().with_data(
+			GlobalRefs.location_last_id,
+			(str(item.country) + str(item.location)) if item.country else "",
+			str(item.name_wo_diacritics) if item.name_wo_diacritics else "",
+			GlobalRefs.countries_dict[item.country] if item.country else null
+			)
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.code] = new_resource
 		
@@ -128,13 +138,16 @@ func load_parties_from_json(file_to_load: String, array_to_fill: Array, dict_to_
 			(new_resource as Supplier).reliability_factor = randf_range(0.9, 1.0)
 			(new_resource as Supplier).cost_factor = randf_range(0.8, 1.0)
 		
-		new_resource.name = str(item.name) if item.name else ""
-		new_resource.street_name = str(item.street_name) if item.street_name else ""
-		new_resource.street_number = str(item.street_number) if item.street_number else ""
-		new_resource.house_number = str(item.house_number) if item.house_number else ""
-		new_resource.postal_code = str(item.postal_code) if item.postal_code else ""
-		new_resource.city_name = str(item.city_name) if item.city_name else ""
-		new_resource.country = GlobalRefs.countries_dict[item.country_code] if item.country_code else null
+		new_resource = new_resource.with_data(
+			GlobalRefs.party_last_id,
+			str(item.name) if item.name else "",
+			str(item.street_name) if item.street_name else "",
+			str(item.street_number) if item.street_number else "",
+			str(item.house_number) if item.house_number else "",
+			str(item.postal_code) if item.postal_code else "",
+			str(item.city_name) if item.city_name else "",
+			GlobalRefs.countries_dict[item.country_code] if item.country_code else null
+			)
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.name] = new_resource
 	
@@ -152,9 +165,12 @@ func load_job_positions_from_json(file_to_load: String, array_to_fill: Array, di
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
-		var new_resource: JobPosition = JobPosition.new()
-		new_resource.title = str(item.title) if item.title else ""
-		new_resource.salary = item.salary if item.salary else 0.0
+		@warning_ignore("unsafe_cast")
+		var new_resource: JobPosition = JobPosition.new().with_data(
+			GlobalRefs.job_position_last_id,
+			str(item.title) if item.title else "",
+			item.salary as float if item.salary else 0.0
+			)
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.title] = new_resource
 	
@@ -166,18 +182,20 @@ func load_people_from_json(file_to_load: String, array_to_fill: Array, dict_to_f
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
-		var new_resource: Person = Person.new()
-		new_resource.first_name = str(item.first_name) if item.first_name else ""
-		new_resource.last_name = str(item.last_name) if item.last_name else ""
-		new_resource.gender = str(item.gender) if item.gender else ""
-		new_resource.email = str(item.email) if item.email else ""
-		new_resource.phone_number = str(item.phone_number) if item.phone_number else ""
-		new_resource.birthdate = str(item.birthdate) if item.birthdate else ""
-		new_resource.experience = Person.Experience.get(str(item.experience).to_upper()) if item.experience else Person.Experience.NOVICE
-		var employer: Party = GlobalRefs.parties.pick_random()
-		new_resource.employer = employer
-		employer.employees.append(new_resource)
-		new_resource.job_position = GlobalRefs.job_positions.pick_random()
+		@warning_ignore("unsafe_cast")
+		var new_resource: Person = Person.new().with_data(
+			str(item.first_name) if item.first_name else "",
+			str(item.last_name) if item.last_name else "",
+			str(item.gender) if item.gender else "",
+			str(item.email) if item.email else "",
+			str(item.phone_number) if item.phone_number else "",
+			str(item.birthdate) if item.birthdate else "",
+			Person.Experience.get(str(item.experience).to_upper()) as Person.Experience if item.experience else Person.Experience.NOVICE,
+			GlobalRefs.parties.pick_random() as Party,
+			GlobalRefs.job_positions.pick_random() as JobPosition
+			)
+		new_resource.employer.employees.append(new_resource)
+		
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.full_name] = new_resource
 	

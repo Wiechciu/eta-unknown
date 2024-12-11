@@ -56,7 +56,7 @@ func refresh_document_details(document_details_container: Control, documents: Ar
 func _on_print_button_pressed() -> void:
 	var documents: Array[Document] = shipment.documentation.documents
 	if documents.size() == 0:
-		print("No documents to print")
+		ActionLogger.create_log("NO_DOCUMENTS_TO_PRINT")
 		return
 	
 	for document: Document in documents:

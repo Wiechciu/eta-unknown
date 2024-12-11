@@ -9,8 +9,6 @@ enum AwardCriteria {
 }
 
 
-static var last_id: int = 0
-
 var id: int
 var shipment: Shipment
 var requestor: Customer
@@ -27,9 +25,9 @@ var is_awarded: bool:
 
 
 func with_data(customer: Customer) -> RequestForQuotation:
-	last_id += 1
-	id = last_id
-
+	@warning_ignore("unsafe_property_access")
+	id = GlobalRefs.request_for_quotation_last_id
+	
 	requestor = customer
 	
 	var export_chance: float = 0.5

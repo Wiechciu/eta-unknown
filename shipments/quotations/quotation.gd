@@ -10,8 +10,6 @@ enum Status {
 }
 
 
-static var last_id: int = 0
-
 var id: int
 var shipment: Shipment
 var request_for_quotation: RequestForQuotation
@@ -36,13 +34,14 @@ var transit_time: int
 var status: Status
 
 
-func with_data(request_for_quotation_to_apply: RequestForQuotation, quoting_forwarder_to_apply: FreightForwarder) -> Quotation:
-	last_id += 1
-	id = last_id
+@warning_ignore("shadowed_variable")
+func with_data(request_for_quotation: RequestForQuotation, quoting_forwarder: FreightForwarder) -> Quotation:
+	@warning_ignore("unsafe_property_access")
+	id = GlobalRefs.quotation_last_id
 	
-	request_for_quotation = request_for_quotation_to_apply
+	self.request_for_quotation = request_for_quotation
 	shipment = request_for_quotation.shipment
-	quoting_forwarder = quoting_forwarder_to_apply
+	self.quoting_forwarder = quoting_forwarder
 	
 	number = str(id)
 	@warning_ignore("unsafe_property_access")

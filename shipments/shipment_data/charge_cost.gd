@@ -2,9 +2,11 @@ class_name ChargeCost
 extends Charge
 
 
-func with_data(code_to_assign: Charge.Code, amount_to_assign: float, currency_to_assign: Currency, party_to_assign: Party) -> ChargeCost:
-	self.code = code_to_assign
-	self.amount = amount_to_assign
-	self.currency = currency_to_assign
-	self.party = party_to_assign
+@warning_ignore("shadowed_variable", "shadowed_variable_base_class")
+func with_data(code: Charge.Code, amount: float, currency: Currency, party: Party) -> ChargeCost:
+	self.code = code
+	self.amount = amount
+	self.currency = currency
+	self.party = party
+	
 	return self

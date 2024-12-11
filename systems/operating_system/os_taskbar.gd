@@ -34,6 +34,6 @@ func _on_icon_clicked(app: OsApp) -> void:
 
 func remove_icon(app: OsApp) -> void:
 	for app_icon: OsAppIconTaskbar in _app_icons_container.get_children():
-		if app_icon._app == app:
+		if app_icon.app == app:
 			app_icon.queue_free()
 			return

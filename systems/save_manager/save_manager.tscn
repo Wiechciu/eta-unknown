@@ -4,3 +4,4 @@
 
 [node name="SaveManager" type="Node"]
 script = ExtResource("1_wunqo")
+loaded_objects = null
