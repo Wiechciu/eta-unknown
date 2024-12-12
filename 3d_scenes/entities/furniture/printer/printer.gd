@@ -59,13 +59,6 @@ func pick_up_documents(node: Node) -> void:
 	printed_documents.clear()
 
 
-## For debugging only
-func create_and_add_to_queue_random_document() -> void:
-	@warning_ignore("unsafe_cast")
-	var document: Document = Document.new().with_data(randi_range(0, Document.Code.size()), GlobalTimer.now, 1, GlobalRefs.shipments.pick_random() as Shipment)
-	add_document_to_queue(document)
-
-
 func add_document_to_queue(document: Document) -> void:
 	printing_queue.append(document)
 

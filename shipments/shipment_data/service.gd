@@ -10,7 +10,7 @@ enum Code {
 }
 
 
-var code: Code
+@export_storage var code: Code
 
 var code_string: String:
 	get:

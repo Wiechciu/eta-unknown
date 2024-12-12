@@ -2,15 +2,15 @@ class_name Location
 extends Resource
 
 
-var id: int
-var code: String
-var country: Country
-var name: String
+@export_storage var id: int
+@export_storage var code: String
+@export_storage var country: Country
+@export_storage var name: String
 var print_string: String:
 	get:
 		return code + ", " + name + ", " + country.code
-var is_airport: bool
-var is_seaport: bool
+@export_storage var is_airport: bool
+@export_storage var is_seaport: bool
 
 
 @warning_ignore("shadowed_variable")

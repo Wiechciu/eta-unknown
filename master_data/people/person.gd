@@ -8,7 +8,7 @@ enum Experience {
 	EXPERT,
 }
 
-
+@export_storage var id: int
 @export_storage var first_name: String
 @export_storage var last_name: String
 @export_storage var gender: String
@@ -25,7 +25,8 @@ var full_name: String:
 
 
 @warning_ignore("shadowed_variable")
-func with_data(first_name: String, last_name: String, gender: String, email: String, phone_number: String, birthdate: String, experience: Experience, employer: Party, job_position: JobPosition) -> Person:
+func with_data(id: int, first_name: String, last_name: String, gender: String, email: String, phone_number: String, birthdate: String, experience: Experience, employer: Party, job_position: JobPosition) -> Person:
+	self.id = id
 	self.first_name = first_name
 	self.last_name = last_name
 	self.gender = gender

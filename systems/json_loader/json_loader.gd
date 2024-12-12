@@ -34,7 +34,7 @@ func load_cargo_from_json(file_to_load: String, array_to_fill: Array, dict_to_fi
 	for item: Dictionary in loaded_array:
 		@warning_ignore("unsafe_cast")
 		var new_resource: Cargo = Cargo.new().with_data(
-			GlobalRefs.cargo_last_id,
+			GlobalRefs.get_cargo_id(),
 			str(item.description) if item.description else "",
 			str(item.hs_code) if item.hs_code else "",
 			item.unit_value as float if item.unit_value else 0.0,
@@ -54,7 +54,7 @@ func load_currencies_from_json(file_to_load: String, array_to_fill: Array, dict_
 	for item: Dictionary in loaded_array:
 		@warning_ignore("unsafe_cast")
 		var new_resource: Currency = Currency.new().with_data(
-			GlobalRefs.currency_last_id,
+			GlobalRefs.get_currency_id(),
 			str(item.code) if item.code else "",
 			str(item.name) if item.name else "",
 			item.exchange_rate_to_usd as float if item.exchange_rate_to_usd else 0.0
@@ -71,7 +71,7 @@ func load_countries_from_json(file_to_load: String, array_to_fill: Array, dict_t
 	
 	for item: Dictionary in loaded_array:
 		var new_resource: Country = Country.new().with_data(
-			GlobalRefs.country_last_id,
+			GlobalRefs.get_country_id(),
 			str(item.code) if item.code else "",
 			str(item.name) if item.name else ""
 			)
@@ -87,7 +87,7 @@ func load_locations_from_json(file_to_load: String, array_to_fill: Array, dict_t
 	
 	for item: Dictionary in loaded_array:
 		var new_resource: Location = Location.new().with_data(
-			GlobalRefs.location_last_id,
+			GlobalRefs.get_location_id(),
 			(str(item.country) + str(item.location)) if item.country else "",
 			str(item.name_wo_diacritics) if item.name_wo_diacritics else "",
 			GlobalRefs.countries_dict[item.country] if item.country else null
@@ -139,7 +139,7 @@ func load_parties_from_json(file_to_load: String, array_to_fill: Array, dict_to_
 			(new_resource as Supplier).cost_factor = randf_range(0.8, 1.0)
 		
 		new_resource = new_resource.with_data(
-			GlobalRefs.party_last_id,
+			GlobalRefs.get_party_id(),
 			str(item.name) if item.name else "",
 			str(item.street_name) if item.street_name else "",
 			str(item.street_number) if item.street_number else "",
@@ -167,7 +167,7 @@ func load_job_positions_from_json(file_to_load: String, array_to_fill: Array, di
 	for item: Dictionary in loaded_array:
 		@warning_ignore("unsafe_cast")
 		var new_resource: JobPosition = JobPosition.new().with_data(
-			GlobalRefs.job_position_last_id,
+			GlobalRefs.get_job_position_id(),
 			str(item.title) if item.title else "",
 			item.salary as float if item.salary else 0.0
 			)
@@ -184,6 +184,7 @@ func load_people_from_json(file_to_load: String, array_to_fill: Array, dict_to_f
 	for item: Dictionary in loaded_array:
 		@warning_ignore("unsafe_cast")
 		var new_resource: Person = Person.new().with_data(
+			GlobalRefs.get_person_id(),
 			str(item.first_name) if item.first_name else "",
 			str(item.last_name) if item.last_name else "",
 			str(item.gender) if item.gender else "",

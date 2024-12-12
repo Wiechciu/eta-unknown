@@ -5,7 +5,6 @@ extends PanelContainer
 var shipment: Shipment
 
 @export var _description: TmsField
-@export var _slac: TmsField
 @export var _total_quantity: TmsField
 @export var _total_weight: TmsField
 @export var _total_volume: TmsField
@@ -25,7 +24,6 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 	shipment = shipment_to_load
 	
 	_description.value.text = shipment.cargo_details.cargo.description if shipment.cargo_details.cargo else ""
-	_slac.value.text = "%d pcs" % [shipment.cargo_details.slac]
 	_total_quantity.value.text = "%d pcs" % [shipment.cargo_details.total_quantity]
 	_total_weight.value.text = "%d kg" % [shipment.cargo_details.total_weight]
 	_total_volume.value.text = "%.3f cbm" % [shipment.cargo_details.total_volume]

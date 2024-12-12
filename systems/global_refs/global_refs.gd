@@ -81,39 +81,49 @@ var requests_for_quotation_not_awarded: Array[RequestForQuotation]:
 	get:
 		return requests_for_quotation.filter(func(request: RequestForQuotation) -> bool: return not request.is_awarded)
 
-var cargo_last_id: int:
-	get:
-		cargo_last_id += 1
-		return cargo_last_id
-var currency_last_id: int:
-	get:
-		currency_last_id += 1
-		return currency_last_id
-var job_position_last_id: int:
-	get:
-		job_position_last_id += 1
-		return job_position_last_id
-var party_last_id: int:
-	get:
-		party_last_id += 1
-		return party_last_id
-var country_last_id: int:
-	get:
-		country_last_id += 1
-		return country_last_id
-var location_last_id: int:
-	get:
-		location_last_id += 1
-		return location_last_id
-var person_last_id: int:
-	get:
-		person_last_id += 1
-		return person_last_id
-var vehicle_last_id: int:
-	get:
-		vehicle_last_id += 1
-		return vehicle_last_id
+var cargo_last_id: int = -1
+var currency_last_id: int = -1
+var job_position_last_id: int = -1
+var party_last_id: int = -1
+var country_last_id: int = -1
+var location_last_id: int = -1
+var person_last_id: int = -1
+var vehicle_last_id: int = -1
 
-var shipment_last_id: int
-var quotation_last_id: int
-var request_for_quotation_last_id: int
+var shipment_last_id: int = -1
+var quotation_last_id: int = -1
+var request_for_quotation_last_id: int = -1
+
+func get_cargo_id() -> int:
+	cargo_last_id += 1
+	return cargo_last_id
+func get_currency_id() -> int:
+	currency_last_id += 1
+	return currency_last_id
+func get_job_position_id() -> int:
+	job_position_last_id += 1
+	return job_position_last_id
+func get_party_id() -> int:
+	party_last_id += 1
+	return party_last_id
+func get_country_id() -> int:
+	country_last_id += 1
+	return country_last_id
+func get_location_id() -> int:
+	location_last_id += 1
+	return location_last_id
+func get_person_id() -> int:
+	person_last_id += 1
+	return person_last_id
+func get_vehicle_id() -> int:
+	vehicle_last_id += 1
+	return vehicle_last_id
+func get_shipment_id() -> int:
+	shipment_last_id += 1
+	return shipment_last_id
+func get_quotation_id() -> int:
+	quotation_last_id += 1
+	return quotation_last_id
+func get_request_for_quotation_id() -> int:
+	request_for_quotation_last_id += 1
+	return request_for_quotation_last_id

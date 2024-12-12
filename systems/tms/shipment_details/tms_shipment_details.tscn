@@ -169,13 +169,13 @@ visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 script = ExtResource("5_gxcvw")
+_tms_dimension_set_scene = ExtResource("2_socwm")
 _description = NodePath("ScrollContainer/VBoxContainer/CargoDetailsSummary/Description")
 _slac = NodePath("ScrollContainer/VBoxContainer/CargoDetailsSummary/Slac")
 _total_quantity = NodePath("ScrollContainer/VBoxContainer/CargoDetailsSummary/TotalQuantity")
 _total_weight = NodePath("ScrollContainer/VBoxContainer/CargoDetailsSummary/TotalWeight")
 _total_volume = NodePath("ScrollContainer/VBoxContainer/CargoDetailsSummary/TotalVolume")
 _dimension_sets_container = NodePath("ScrollContainer/VBoxContainer/DimensionSets")
-_tms_dimension_set_scene = ExtResource("2_socwm")
 metadata/_tab_index = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Tabs/CARGO_DETAILS"]

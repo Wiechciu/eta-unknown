@@ -36,8 +36,8 @@ var status: Status
 
 @warning_ignore("shadowed_variable")
 func with_data(request_for_quotation: RequestForQuotation, quoting_forwarder: FreightForwarder) -> Quotation:
-	@warning_ignore("unsafe_property_access")
-	id = GlobalRefs.quotation_last_id
+	@warning_ignore("unsafe_method_access")
+	id = GlobalRefs.get_quotation_id()
 	
 	self.request_for_quotation = request_for_quotation
 	shipment = request_for_quotation.shipment

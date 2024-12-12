@@ -25,8 +25,8 @@ var is_awarded: bool:
 
 
 func with_data(customer: Customer) -> RequestForQuotation:
-	@warning_ignore("unsafe_property_access")
-	id = GlobalRefs.request_for_quotation_last_id
+	@warning_ignore("unsafe_method_access")
+	id = GlobalRefs.get_request_for_quotation_id()
 	
 	requestor = customer
 	
@@ -52,7 +52,6 @@ func with_data(customer: Customer) -> RequestForQuotation:
 	deadline_time_event = GlobalTimer.create_time_event_from_unix_time(deadline_date, self)
 	award_criteria = AwardCriteria.values()[randi() % AwardCriteria.size()]
 	
-	shipment.accounting.request_for_quotation = self
 	@warning_ignore("unsafe_property_access", "unsafe_method_access")
 	GlobalRefs.requests_for_quotation.append(self)
 	@warning_ignore("unsafe_property_access", "unsafe_method_access")

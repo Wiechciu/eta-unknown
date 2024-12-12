@@ -45,28 +45,32 @@ var is_owned: bool:
 		return owner != null
 
 # Shipment modules
-var cargo_details: ShipmentCargoDetails
-var main_freight: ShipmentMainFreight
-var haulage: ShipmentHaulage
-var handling: ShipmentHandling
-var customs: ShipmentCustoms
-var documentation: ShipmentDocumentation
-var events: ShipmentEvents
-var accounting: ShipmentAccounting
+@export_storage var cargo_details: ShipmentCargoDetails
+@export_storage var main_freight: ShipmentMainFreight
+@export_storage var haulage: ShipmentHaulage
+@export_storage var handling: ShipmentHandling
+@export_storage var customs: ShipmentCustoms
+@export_storage var documentation: ShipmentDocumentation
+@export_storage var events: ShipmentEvents
+@export_storage var accounting: ShipmentAccounting
 
 
 func with_data(shipper_to_assign: Customer = null, consignee_to_assign: Customer = null) -> Shipment:
-	@warning_ignore("unsafe_property_access")
-	id = GlobalRefs.shipment_last_id
+	@warning_ignore("unsafe_method_access")
+	id = GlobalRefs.get_shipment_id()
 	
-	cargo_details = ShipmentCargoDetails.new().with_data(self)
-	main_freight = ShipmentMainFreight.new().with_data(self)
-	haulage = ShipmentHaulage.new().with_data(self)
-	handling = ShipmentHandling.new().with_data(self)
-	customs = ShipmentCustoms.new().with_data(self)
-	documentation = ShipmentDocumentation.new().with_data(self)
-	events = ShipmentEvents.new().with_data(self)
-	accounting = ShipmentAccounting.new().with_data(self)
+	cargo_details = ShipmentCargoDetails.new().with_data_random()
+	main_freight = ShipmentMainFreight.new()
+	haulage = ShipmentHaulage.new()
+	handling = ShipmentHandling.new()
+	customs = ShipmentCustoms.new()
+	documentation = ShipmentDocumentation.new()
+	events = ShipmentEvents.new()
+	accounting = ShipmentAccounting.new()
+	
+	events.planned_event_registered.connect(_on_planned_event_registered)
+	events.actual_event_registered.connect(_on_actual_event_registered)
+	events.time_event_notification.connect(_on_time_event_notification)
 	
 	customer_reference = generate_random_customer_reference(randi_range(3, 5), randi_range(3, 5))
 	
@@ -118,6 +122,37 @@ func with_data(shipper_to_assign: Customer = null, consignee_to_assign: Customer
 	return self
 
 
+func load_saved_data(shipment: Shipment) -> Shipment:
+	self.id = shipment.id
+	self.status = shipment.status
+	self.customer_reference = shipment.customer_reference
+	self.export_contact_person = GlobalRefs.people[shipment.export_contact_person.id] if shipment.export_contact_person else null
+	self.import_contact_person = GlobalRefs.people[shipment.import_contact_person.id] if shipment.import_contact_person else null
+	self.shipper = GlobalRefs.parties[shipment.shipper.id] if shipment.shipper else null
+	self.consignee = GlobalRefs.parties[shipment.consignee.id] if shipment.consignee else null
+	self.origin = GlobalRefs.locations[shipment.origin.id] if shipment.origin else null
+	self.destination = GlobalRefs.locations[shipment.destination.id] if shipment.destination else null
+	self.service = Service.new().with_data(shipment.service.code) if shipment.service else null
+	self.incoterms = Incoterms.new().with_data(shipment.incoterms.code, shipment.incoterms.place) if shipment.incoterms else null
+	
+	self.number = shipment.number
+	self.owner = GlobalRefs.freight_forwarders[shipment.owner.id] if shipment.owner else null
+	
+	self.cargo_details = ShipmentCargoDetails.new().with_data(shipment.cargo_details.cargo, shipment.cargo_details.dimension_sets)
+	self.main_freight = ShipmentMainFreight.new().with_data(shipment.main_freight.mode_of_transport, shipment.main_freight.carrier)
+	self.haulage = ShipmentHaulage.new().with_data(shipment.haulage.trucker_pickup, shipment.haulage.trucker_delivery)
+	self.handling = ShipmentHandling.new().with_data(shipment.handling.handling_agent_export, shipment.handling.handling_agent_import)
+	self.customs = ShipmentCustoms.new().with_data(shipment.customs.customs_agency_export, shipment.customs.customs_agency_import)
+	self.documentation = ShipmentDocumentation.new().with_data(shipment.documentation.documents)
+	self.events = ShipmentEvents.new().with_data(shipment.events.events)
+	self.accounting = ShipmentAccounting.new().with_data(shipment.accounting.quotation, shipment.accounting.charges)
+	
+	@warning_ignore("unsafe_property_access", "unsafe_method_access")
+	GlobalRefs.shipments.append(self)
+	
+	return self
+
+
 func remove() -> void:
 	@warning_ignore("unsafe_property_access", "unsafe_method_access")
 	GlobalRefs.shipments.erase(self)
@@ -162,3 +197,56 @@ func change_status(new_status: Status) -> void:
 
 func notify_details_changed() -> void:
 	details_changed.emit()
+
+
+func _on_planned_event_registered(planned_event: EventPlanned) -> void:
+	if planned_event.code == Event.Code.PUP:
+		change_status(Shipment.Status.PLANNED)
+		@warning_ignore("unsafe_property_access", "unsafe_call_argument")
+		accounting.create_new_cost_charge(Charge.Code.PUP, randi_range(100, 150), GlobalRefs.currencies_dict["EUR"], haulage.trucker_pickup)
+		@warning_ignore("unsafe_property_access", "unsafe_call_argument")
+		accounting.create_new_revenue_charge(Charge.Code.PUP, randi_range(120, 170), GlobalRefs.currencies_dict["EUR"], shipper)
+	if planned_event.code == Event.Code.DEL:
+		@warning_ignore("unsafe_property_access", "unsafe_call_argument")
+		accounting.create_new_cost_charge(Charge.Code.DEL, randi_range(100, 150), GlobalRefs.currencies_dict["EUR"], haulage.trucker_delivery)
+		@warning_ignore("unsafe_property_access", "unsafe_call_argument")
+		accounting.create_new_revenue_charge(Charge.Code.DEL, randi_range(120, 170), GlobalRefs.currencies_dict["EUR"], consignee)
+
+
+func _on_actual_event_registered(actual_event: EventActual) -> void:
+	if actual_event.code == Event.Code.PUP:
+		change_status(Shipment.Status.IN_TRANSIT)
+	elif actual_event.code == Event.Code.DEL:
+		change_status(Shipment.Status.DELIVERED)
+
+
+func _on_time_event_notification(time_event: TimeEvent) -> void:
+	@warning_ignore("unsafe_method_access")
+	print("Shipment ID: %s, number: %s, event: %s at %s" % [id, number, time_event.event.code_string, GlobalTimer.get_nice_datetime_string_from_unix_time(time_event.time)])
+	
+	if time_event.event.code == Event.Code.LTS and not is_owned:
+		remove()
+	
+	#TODO: this is to be removed once proper events are created
+	if time_event.event.code != Event.Code.ERL and time_event.event.code != Event.Code.LTS:
+		events.create_new_actual_event_from_planned_event(time_event.event as EventPlanned)
+	
+	match time_event.event.code:
+		Event.Code.BOK:
+			documentation.create_new_document_now(Document.Code.SPO, 1)
+		Event.Code.PUP:
+			documentation.create_new_document_now(Document.Code.PUO, 1)
+		Event.Code.CSE:
+			documentation.create_new_document_now(Document.Code.CDE, 1)
+		Event.Code.CSI:
+			documentation.create_new_document_now(Document.Code.CDI, 1)
+		Event.Code.DEP when main_freight.mode_of_transport != null and main_freight.mode_of_transport.code == ModeOfTransport.Code.AIR:
+			documentation.create_new_document_now(Document.Code.HWB, 1)
+			documentation.create_new_document_now(Document.Code.MWB, 1)
+		Event.Code.DEP when main_freight.mode_of_transport != null and main_freight.mode_of_transport.code == ModeOfTransport.Code.SEA:
+			documentation.create_new_document_now(Document.Code.HBL, 1)
+			documentation.create_new_document_now(Document.Code.MBL, 1)
+		Event.Code.REL:
+			documentation.create_new_document_now(Document.Code.DLO, 1)
+		Event.Code.DEL:
+			documentation.create_new_document_now(Document.Code.POD, 1)

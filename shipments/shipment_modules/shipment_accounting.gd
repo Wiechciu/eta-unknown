@@ -5,8 +5,6 @@ extends Resource
 signal charges_updated
 
 
-@export_storage var shipment: Shipment
-@export_storage var request_for_quotation: RequestForQuotation
 @export_storage var quotation: Quotation
 @export_storage var charges: Array[Charge]
 @export_storage var revenue_charges: Array[ChargeRevenue]
@@ -52,9 +50,16 @@ var margin_string: String:
 		get: return "%.2f%%" % margin
 
 
-func with_data(parent_shipment: Shipment) -> ShipmentAccounting:
-	self.shipment = parent_shipment
+func with_data(quotation: Quotation, charges: Array[Charge]) -> ShipmentAccounting:
+	self.quotation = quotation
+	self.register_charges(charges)
+	
 	return self
+
+
+func register_charges(charges: Array[Charge]) -> void:
+	for charge: Charge in charges:
+		register_charge(charge)
 
 
 func register_charge(charge: Charge) -> void:

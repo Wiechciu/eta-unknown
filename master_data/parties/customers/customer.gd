@@ -16,3 +16,12 @@ func create_new_shipment() -> void:
 	var new_shipment: Shipment = Shipment.new().with_data(self, null)
 	if new_shipment != null:
 		shipments.append(new_shipment)
+
+
+func load_saved_request_for_quotation_data(request_for_quotation: RequestForQuotation) -> void:
+	pass #TODO, same as Shipment.load_saved_data
+
+
+func load_saved_shipment_data(shipment: Shipment) -> void:
+	var new_shipment: Shipment = Shipment.new().load_saved_data(shipment)
+	shipments.append(new_shipment)

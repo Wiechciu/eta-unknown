@@ -2,12 +2,10 @@
 extends Node
 
 
-@export_category("Debug")
+@export_category("Debug only")
 @export var open_save_location: bool:
 	set(value):
 		OS.shell_open(ProjectSettings.globalize_path(save_folder))
-
-@export var loaded_objects: Array
 
 
 ## C:\Users\wiech\AppData\Roaming\Godot\app_userdata\Freight Forwarding
@@ -17,23 +15,26 @@ var save_full_path: String:
 	get: return save_folder + save_file_name
 
 
-## TODO Doesn't store everything, need to apply Property Usage Storage flag?
-## https://docs.godotengine.org/en/stable/classes/class_%40globalscope.html#class-globalscope-constant-property-usage-storage
 func save_game() -> void:
 	var file: FileAccess = FileAccess.open(save_full_path, FileAccess.WRITE)
-	#for shipment: Shipment in GlobalRefs.shipments:
-		#file.store_var(shipment, true)
-	file.store_var(GlobalRefs.shipments[0], true)
-	
-	#file.store_var(GlobalRefs, true)
+	for shipment: Shipment in GlobalRefs.shipments:
+		file.store_var(shipment, true)
 	print("--- Saved to: %s ----" % save_file_name)
 
 
 func load_game() -> void:
 	var file: FileAccess = FileAccess.open(save_full_path, FileAccess.READ)
-	var content: Variant = file.get_var(true)
+	GlobalDebugger.start_timer()
 	print("--- Loaded from: %s ----" % save_file_name)
-	print(content)
-	if content != null:
-		loaded_objects.append(content)
-	#add_child(content as Node)
+	
+	var shipment_count: int = 0
+	
+	while file.get_position() < file.get_length():
+		var content: Variant = file.get_var(true)
+		
+		if content is Shipment:
+			shipment_count += 1
+			var shipment: Shipment = content as Shipment
+			(GlobalRefs.parties[shipment.shipper.id] as Customer).load_saved_shipment_data(shipment)
+	
+	print("loaded %s shipments | in %s ms" % [shipment_count, GlobalDebugger.get_elapsed_time()])

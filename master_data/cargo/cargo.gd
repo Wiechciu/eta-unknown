@@ -2,12 +2,12 @@ class_name Cargo
 extends Resource
 
 
-var id: int
-var description: String
-var hs_code: String
-var unit_value: float
-var unit_size: float
-var unit_weight: float
+@export_storage var id: int
+@export_storage var description: String
+@export_storage var hs_code: String
+@export_storage var unit_value: float
+@export_storage var unit_size: float
+@export_storage var unit_weight: float
 
 
 @warning_ignore("shadowed_variable")

@@ -3,9 +3,12 @@ extends Resource
 
 
 signal events_updated
+signal event_registered(event: Event)
+signal planned_event_registered(planned_event: EventPlanned)
+signal actual_event_registered(actual_event: EventActual)
+signal time_event_notification(time_event: TimeEvent)
 
 
-@export_storage var shipment: Shipment
 @export_storage var events: Array[Event]
 @export_storage var planned_events: Array[EventPlanned]
 @export_storage var actual_events: Array[EventActual]
@@ -21,37 +24,30 @@ var actual_events_as_events: Array[Event]:
 		return new_list
 
 
-func with_data(parent_shipment: Shipment) -> ShipmentEvents:
-	self.shipment = parent_shipment
+func with_data(events: Array[Event]) -> ShipmentEvents:
+	for event: Event in events:
+		self.register_event(event)
+	
 	return self
 
 
+func register_events(events: Event) -> void:
+	for event: Event in events:
+		register_event(event)
+
+
 func register_event(event: Event) -> void:
-	events.append(event)
-	events.sort_custom(_sort_ascending)
 	if event is EventPlanned:
 		planned_events.append(event)
 		planned_events.sort_custom(_sort_ascending)
+		planned_event_registered.emit(event as EventPlanned)
 	elif event is EventActual:
 		actual_events.append(event)
 		actual_events.sort_custom(_sort_ascending)
-	
-	if event.code == Event.Code.PUP and event is EventPlanned:
-		shipment.change_status(Shipment.Status.PLANNED)
-		@warning_ignore("unsafe_property_access", "unsafe_call_argument")
-		shipment.accounting.create_new_cost_charge(Charge.Code.PUP, randi_range(100, 150), GlobalRefs.currencies_dict["EUR"], shipment.haulage.trucker_pickup)
-		@warning_ignore("unsafe_property_access", "unsafe_call_argument")
-		shipment.accounting.create_new_revenue_charge(Charge.Code.PUP, randi_range(120, 170), GlobalRefs.currencies_dict["EUR"], shipment.shipper)
-	if event.code == Event.Code.DEL and event is EventPlanned:
-		@warning_ignore("unsafe_property_access", "unsafe_call_argument")
-		shipment.accounting.create_new_cost_charge(Charge.Code.DEL, randi_range(100, 150), GlobalRefs.currencies_dict["EUR"], shipment.haulage.trucker_delivery)
-		@warning_ignore("unsafe_property_access", "unsafe_call_argument")
-		shipment.accounting.create_new_revenue_charge(Charge.Code.DEL, randi_range(120, 170), GlobalRefs.currencies_dict["EUR"], shipment.consignee)
-	elif event.code == Event.Code.PUP and event is EventActual:
-		shipment.change_status(Shipment.Status.IN_TRANSIT)
-	elif event.code == Event.Code.DEL and event is EventActual:
-		shipment.change_status(Shipment.Status.DELIVERED)
-	
+		actual_event_registered.emit(event as EventActual)
+	events.append(event)
+	events.sort_custom(_sort_ascending)
+	event_registered.emit(event)
 	events_updated.emit()
 
 
@@ -106,35 +102,7 @@ func get_last_event_of_type(code: Event.Code) -> Event:
 
 
 func notify(time_event: TimeEvent) -> void:
-	@warning_ignore("unsafe_method_access")
-	print("Shipment ID: %s, number: %s, event: %s at %s" % [shipment.id, shipment.number, time_event.event.code_string, GlobalTimer.get_nice_datetime_string_from_unix_time(time_event.time)])
-	
-	if time_event.event.code == Event.Code.LTS and not shipment.is_owned:
-		shipment.remove()
-	
-	#TODO: this is to be removed once proper events are created
-	if time_event.event.code != Event.Code.ERL and time_event.event.code != Event.Code.LTS:
-		create_new_actual_event_from_planned_event(time_event.event as EventPlanned)
-	
-	match time_event.event.code:
-		Event.Code.BOK:
-			shipment.documentation.create_new_document_now(Document.Code.SPO, 1)
-		Event.Code.PUP:
-			shipment.documentation.create_new_document_now(Document.Code.PUO, 1)
-		Event.Code.CSE:
-			shipment.documentation.create_new_document_now(Document.Code.CDE, 1)
-		Event.Code.CSI:
-			shipment.documentation.create_new_document_now(Document.Code.CDI, 1)
-		Event.Code.DEP when shipment.main_freight.mode_of_transport != null and shipment.main_freight.mode_of_transport.code == ModeOfTransport.Code.AIR:
-			shipment.documentation.create_new_document_now(Document.Code.HWB, 1)
-			shipment.documentation.create_new_document_now(Document.Code.MWB, 1)
-		Event.Code.DEP when shipment.main_freight.mode_of_transport != null and shipment.main_freight.mode_of_transport.code == ModeOfTransport.Code.SEA:
-			shipment.documentation.create_new_document_now(Document.Code.HBL, 1)
-			shipment.documentation.create_new_document_now(Document.Code.MBL, 1)
-		Event.Code.REL:
-			shipment.documentation.create_new_document_now(Document.Code.DLO, 1)
-		Event.Code.DEL:
-			shipment.documentation.create_new_document_now(Document.Code.POD, 1)
+	time_event_notification.emit(time_event)
 
 
 func _sort_ascending(a: Event, b: Event) -> bool:
