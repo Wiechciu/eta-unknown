@@ -14,8 +14,13 @@ bg_color = Color(0.770178, 0.39356, 1, 1)
 font_size = 10
 
 [node name="DebugMenu" type="PanelContainer" node_paths=PackedStringArray("fps", "memory", "status")]
-offset_right = 168.0
-offset_bottom = 66.0
+top_level = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -387.0
+offset_bottom = 616.0
+grow_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_mis6s")
 script = ExtResource("1_mfke8")
 tms_scene = ExtResource("2_jw6r3")

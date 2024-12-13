@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cxh3u0n0nptw2" path="res://systems/ui/ui.gd" id="1_xemwu"]
 [ext_resource type="Script" uid="uid://cr6ck8pbq4a48" path="res://systems/ui/language.gd" id="2_5x0jx"]
-[ext_resource type="Script" uid="uid://fx4s7l2y7se4" path="res://systems/ui/sound.gd" id="3_hr65t"]
+[ext_resource type="PackedScene" uid="uid://dqyhkxg11nbe5" path="res://systems/ui/volume_slider.tscn" id="3_hr65t"]
 [ext_resource type="Script" uid="uid://bxalu3m73dsul" path="res://systems/ui/full_screen.gd" id="3_oihav"]
 [ext_resource type="Script" uid="uid://ctrvhihonkttf" path="res://systems/ui/quit_button.gd" id="5_hssc3"]
 
@@ -39,10 +39,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -150.0
+offset_left = -350.0
+offset_top = -200.0
 offset_right = 350.0
-offset_bottom = 150.0
+offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_xemwu")
@@ -74,21 +74,24 @@ layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("2_5x0jx")
 
-[node name="Sound" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="VolumeSlider" parent="PanelContainer/VBoxContainer" instance=ExtResource("3_hr65t")]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/Sound"]
+[node name="VolumeSlider2" parent="PanelContainer/VBoxContainer" instance=ExtResource("3_hr65t")]
 layout_mode = 2
-size_flags_horizontal = 3
-text = "SOUND"
+bus_name = &"Music"
 
-[node name="Sound" type="HSlider" parent="PanelContainer/VBoxContainer/Sound"]
+[node name="VolumeSlider3" parent="PanelContainer/VBoxContainer" instance=ExtResource("3_hr65t")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-min_value = -80.0
-max_value = 0.0
-script = ExtResource("3_hr65t")
+bus_name = &"Ui"
+
+[node name="VolumeSlider4" parent="PanelContainer/VBoxContainer" instance=ExtResource("3_hr65t")]
+layout_mode = 2
+bus_name = &"Voice"
+
+[node name="VolumeSlider5" parent="PanelContainer/VBoxContainer" instance=ExtResource("3_hr65t")]
+layout_mode = 2
+bus_name = &"Environment"
 
 [node name="FullScreen" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -96,6 +99,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="PanelContainer/VBoxContainer/FullScreen"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
 text = "FULL_SCREEN"
 
 [node name="FullScreen" type="CheckButton" parent="PanelContainer/VBoxContainer/FullScreen"]
@@ -120,7 +124,6 @@ text = "QUIT"
 script = ExtResource("5_hssc3")
 
 [connection signal="item_selected" from="PanelContainer/VBoxContainer/Language/Language" to="PanelContainer/VBoxContainer/Language/Language" method="_on_item_selected"]
-[connection signal="value_changed" from="PanelContainer/VBoxContainer/Sound/Sound" to="PanelContainer/VBoxContainer/Sound/Sound" method="_on_value_changed"]
 [connection signal="toggled" from="PanelContainer/VBoxContainer/FullScreen/FullScreen" to="PanelContainer/VBoxContainer/FullScreen/FullScreen" method="_on_toggled"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/QuitButton" to="PanelContainer/VBoxContainer/HBoxContainer/QuitButton" method="_on_pressed"]

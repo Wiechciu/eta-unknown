@@ -50,13 +50,15 @@ var margin_string: String:
 		get: return "%.2f%%" % margin
 
 
+@warning_ignore("shadowed_variable")
 func with_data(quotation: Quotation, charges: Array[Charge]) -> ShipmentAccounting:
 	self.quotation = quotation
-	self.register_charges(charges)
+	register_charges(charges)
 	
 	return self
 
 
+@warning_ignore("shadowed_variable")
 func register_charges(charges: Array[Charge]) -> void:
 	for charge: Charge in charges:
 		register_charge(charge)

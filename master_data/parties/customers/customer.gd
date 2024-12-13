@@ -18,6 +18,7 @@ func create_new_shipment() -> void:
 		shipments.append(new_shipment)
 
 
+@warning_ignore("unused_parameter")
 func load_saved_request_for_quotation_data(request_for_quotation: RequestForQuotation) -> void:
 	pass #TODO, same as Shipment.load_saved_data
 

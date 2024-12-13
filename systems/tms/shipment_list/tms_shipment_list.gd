@@ -35,6 +35,7 @@ func _exit_tree() -> void:
 
 
 func _ready() -> void:
+	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.assert_all_exported_properties(self)
 	clear_shipment_container()
 	refresh_shipment_list_items()

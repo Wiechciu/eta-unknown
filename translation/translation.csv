@@ -150,6 +150,11 @@ MENU;Menu;Menu
 PLAY;Play;Graj
 QUIT;Quit;Wyjdź
 SOUND;Sound;Dźwięk
+MASTER_VOLUME;Master volume;Głośność główna
+MUSIC_VOLUME;Music volume;Głośność muzyki
+UI_VOLUME;UI volume;Głośność interfejsu
+VOICE_VOLUME;Voice volume;Głośność mowy
+ENVIRONMENT_VOLUME;Environment volume;Głośność środowiska
 FULL_SCREEN;Full screen;Pełny ekran
 LANGUAGE;Language;Język
 POLISH;Polish;Polski
@@ -159,3 +164,4 @@ PRINT_ALL;Print all;Drukuj wszystko
 NO_DOCUMENTS_TO_PRINT;No documents to print.;Nie ma dokumentów do wydrukowania.
 NO_DOCUMENTS_TO_PICK_UP;No documents to pick up.;Nie ma dokumentów do zabrania.
 PICKED_UP_DOCUMENTS;Picked up {amount} documents.;Zabrano {amount} dokumentów.
+SIGNED_DOCUMENT;Signed document.;Podpisano dokument.

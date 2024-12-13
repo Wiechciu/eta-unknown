@@ -24,14 +24,15 @@ var actual_events_as_events: Array[Event]:
 		return new_list
 
 
+@warning_ignore("shadowed_variable")
 func with_data(events: Array[Event]) -> ShipmentEvents:
-	for event: Event in events:
-		self.register_event(event)
+	register_events(events)
 	
 	return self
 
 
-func register_events(events: Event) -> void:
+@warning_ignore("shadowed_variable")
+func register_events(events: Array[Event]) -> void:
 	for event: Event in events:
 		register_event(event)
 

@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ckjwq7l8s7n4h"]
+[gd_scene load_steps=4 format=3 uid="uid://ckjwq7l8s7n4h"]
 
 [ext_resource type="Script" uid="uid://cyonbpmu6hjqq" path="res://systems/action_logger/action_logger.gd" id="1_vvmix"]
+[ext_resource type="AudioStream" uid="uid://ogflvy7wru24" path="res://systems/action_logger/alert_error-01_3.wav" id="2_23spx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vvmix"]
 content_margin_left = 8.0
@@ -23,6 +24,8 @@ message_container = NodePath("PanelContainer/MessageContainer")
 audio_player = NodePath("AudioStreamPlayer")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_23spx")
+bus = &"Ui"
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1

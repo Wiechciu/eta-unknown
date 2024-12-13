@@ -126,16 +126,23 @@ func load_saved_data(shipment: Shipment) -> Shipment:
 	self.id = shipment.id
 	self.status = shipment.status
 	self.customer_reference = shipment.customer_reference
+	@warning_ignore("unsafe_property_access")
 	self.export_contact_person = GlobalRefs.people[shipment.export_contact_person.id] if shipment.export_contact_person else null
+	@warning_ignore("unsafe_property_access")
 	self.import_contact_person = GlobalRefs.people[shipment.import_contact_person.id] if shipment.import_contact_person else null
+	@warning_ignore("unsafe_property_access")
 	self.shipper = GlobalRefs.parties[shipment.shipper.id] if shipment.shipper else null
+	@warning_ignore("unsafe_property_access")
 	self.consignee = GlobalRefs.parties[shipment.consignee.id] if shipment.consignee else null
+	@warning_ignore("unsafe_property_access")
 	self.origin = GlobalRefs.locations[shipment.origin.id] if shipment.origin else null
+	@warning_ignore("unsafe_property_access")
 	self.destination = GlobalRefs.locations[shipment.destination.id] if shipment.destination else null
 	self.service = Service.new().with_data(shipment.service.code) if shipment.service else null
 	self.incoterms = Incoterms.new().with_data(shipment.incoterms.code, shipment.incoterms.place) if shipment.incoterms else null
 	
 	self.number = shipment.number
+	@warning_ignore("unsafe_property_access")
 	self.owner = GlobalRefs.freight_forwarders[shipment.owner.id] if shipment.owner else null
 	
 	self.cargo_details = ShipmentCargoDetails.new().with_data(shipment.cargo_details.cargo, shipment.cargo_details.dimension_sets)

@@ -34,6 +34,7 @@ func load_game() -> void:
 		
 		if content is Shipment:
 			shipment_count += 1
+			@warning_ignore("unsafe_cast")
 			var shipment: Shipment = content as Shipment
 			(GlobalRefs.parties[shipment.shipper.id] as Customer).load_saved_shipment_data(shipment)
 	

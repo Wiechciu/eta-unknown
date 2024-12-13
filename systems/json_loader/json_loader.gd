@@ -12,6 +12,7 @@ extends Node
 
 
 func _ready() -> void:
+	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.assert_all_exported_properties(self)
 	
 	print("--- starting loading from JSONs ---")
@@ -28,6 +29,7 @@ func _ready() -> void:
 
 
 func load_cargo_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
+	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
@@ -44,10 +46,12 @@ func load_cargo_from_json(file_to_load: String, array_to_fill: Array, dict_to_fi
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.description] = new_resource
 	
+	@warning_ignore("unsafe_method_access")
 	print("loaded %s cargo | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
 
 
 func load_currencies_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
+	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
@@ -62,10 +66,12 @@ func load_currencies_from_json(file_to_load: String, array_to_fill: Array, dict_
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.code] = new_resource
 	
+	@warning_ignore("unsafe_method_access")
 	print("loaded %s currencies | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
 
 
 func load_countries_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
+	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
@@ -78,10 +84,12 @@ func load_countries_from_json(file_to_load: String, array_to_fill: Array, dict_t
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.code] = new_resource
 	
+	@warning_ignore("unsafe_method_access")
 	print("loaded %s countries | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
 
 
 func load_locations_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
+	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
@@ -97,10 +105,12 @@ func load_locations_from_json(file_to_load: String, array_to_fill: Array, dict_t
 		
 		new_resource.country.locations.append(new_resource)
 	
+	@warning_ignore("unsafe_method_access")
 	print("loaded %s locations | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
 
 
 func load_parties_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
+	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
@@ -151,6 +161,7 @@ func load_parties_from_json(file_to_load: String, array_to_fill: Array, dict_to_
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.name] = new_resource
 	
+	@warning_ignore("unsafe_method_access")
 	print("loaded %s parties | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
 	print("   loaded " + str(GlobalRefs.carriers.size()) + " carriers")
 	print("   loaded " + str(GlobalRefs.customers.size()) + " customers")
@@ -161,6 +172,7 @@ func load_parties_from_json(file_to_load: String, array_to_fill: Array, dict_to_
 
 
 func load_job_positions_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
+	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
@@ -174,10 +186,12 @@ func load_job_positions_from_json(file_to_load: String, array_to_fill: Array, di
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.title] = new_resource
 	
+	@warning_ignore("unsafe_method_access")
 	print("loaded %s job positions | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
 
 
 func load_people_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
+	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
@@ -200,6 +214,7 @@ func load_people_from_json(file_to_load: String, array_to_fill: Array, dict_to_f
 		array_to_fill.append(new_resource)
 		dict_to_fill[new_resource.full_name] = new_resource
 	
+	@warning_ignore("unsafe_method_access")
 	print("loaded %s people | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
 
 

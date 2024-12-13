@@ -20,7 +20,7 @@ config/icon="res://icon.svg"
 GlobalRefs="*res://systems/global_refs/global_refs.tscn"
 GlobalTimer="*res://systems/global_timer/global_timer.tscn"
 GameManager="*res://systems/game_manager/game_manager.tscn"
-GlobalDebugger="*res://systems/global_debugger/global_debugger.gd"
+GlobalDebugger="*res://systems/global_debugger/global_debugger.tscn"
 ActionLogger="*res://systems/action_logger/action_logger.tscn"
 SaveManager="*res://systems/save_manager/save_manager.tscn"
 GlobalMarket="*res://systems/global_market/global_market.tscn"
@@ -33,6 +33,10 @@ gdscript/warnings/unsafe_property_access=1
 gdscript/warnings/unsafe_method_access=1
 gdscript/warnings/unsafe_cast=1
 gdscript/warnings/unsafe_call_argument=1
+
+[editor_plugins]
+
+enabled=PackedStringArray()
 
 [gui]
 

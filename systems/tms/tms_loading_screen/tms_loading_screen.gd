@@ -8,9 +8,9 @@ signal finished_loading
 @export var _title: Label
 @export var _progress_bar: ProgressBar
 
-var loading_time: float = 2
+var loading_time: float = 1
 var title_loading_delay: float = 0.2
-var title_loading_time: float = 1
+var title_loading_time: float = 0.5
 
 
 func start_loading() -> void:

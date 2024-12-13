@@ -1,8 +1,6 @@
-[gd_scene load_steps=30 format=3 uid="uid://b18oy35p17ir7"]
+[gd_scene load_steps=28 format=3 uid="uid://b18oy35p17ir7"]
 
-[ext_resource type="PackedScene" uid="uid://b66husl1w3olw" path="res://systems/calendar/calendar.tscn" id="1_82prh"]
 [ext_resource type="PackedScene" uid="uid://dmwp5s37fvy1m" path="res://3d_scenes/entities/environment/environment.tscn" id="1_pyshm"]
-[ext_resource type="PackedScene" uid="uid://cieydjj1npshf" path="res://systems/debug_menu/debug_menu.tscn" id="2_8pfch"]
 [ext_resource type="PackedScene" uid="uid://dvpm8vxtia7au" path="res://3d_scenes/entities/furniture/computer/computer.tscn" id="4_8pfch"]
 [ext_resource type="PackedScene" uid="uid://bgv6k5514y7ll" path="res://3d_scenes/entities/furniture/desk.tscn" id="4_a1rhb"]
 [ext_resource type="PackedScene" uid="uid://ry5gcuu7gkh" path="res://3d_scenes/entities/humans/player/player.tscn" id="5_kooe7"]
@@ -18,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://duwv0a75sbh32" path="res://3d_scenes/entities/room/wall.tscn" id="14_yatgx"]
 [ext_resource type="PackedScene" uid="uid://bvhgujk86reqg" path="res://3d_scenes/entities/furniture/bookcase_open_low.tscn" id="16_yatgx"]
 [ext_resource type="PackedScene" uid="uid://bu1wt1vjkrqnr" path="res://3d_scenes/entities/furniture/radio/radio.tscn" id="17_nvgr2"]
-[ext_resource type="PackedScene" uid="uid://bu17s686npp6w" path="res://3d_scenes/entities/room/wall_window.tscn" id="18_5cac6"]
+[ext_resource type="PackedScene" uid="uid://bt42d24wsevwl" path="res://3d_scenes/entities/room/wall_window.tscn" id="18_5cac6"]
 [ext_resource type="PackedScene" uid="uid://dx6f662utr8ya" path="res://3d_scenes/entities/items/physical_document/physical_document.tscn" id="20_7ufp6"]
 [ext_resource type="PackedScene" uid="uid://camlixgb5adk5" path="res://3d_scenes/entities/furniture/printer/printer.tscn" id="21_nkfki"]
 [ext_resource type="VoxelGIData" uid="uid://bw6kakxwlaxcj" path="res://systems/scenes/main_scene.VoxelGI_data.res" id="22_7ueml"]
@@ -41,25 +39,11 @@ size = Vector2(1000, 1000)
 
 [node name="Environment" parent="." instance=ExtResource("1_pyshm")]
 
-[node name="DebugMenu" parent="." instance=ExtResource("2_8pfch")]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -254.0
-offset_right = 0.0
-offset_bottom = 379.0
-grow_horizontal = 0
-size_flags_horizontal = 0
-
-[node name="Calendar" parent="." instance=ExtResource("1_82prh")]
-size_flags_horizontal = 0
-
 [node name="VoxelGI" type="VoxelGI" parent="."]
 data = ExtResource("22_7ueml")
 
 [node name="Player" parent="." instance=ExtResource("5_kooe7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.50287)
-_can_move = null
 
 [node name="Employee" parent="." node_paths=PackedStringArray("target_nodes") instance=ExtResource("26_sd7sv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15824, 0, 0.172612)

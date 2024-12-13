@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dw7p1e4gjimn0"]
+
+[ext_resource type="Script" uid="uid://j8pftd3kg0gc" path="res://systems/ui/ui_sound_component.gd" id="1_colbw"]
+[ext_resource type="AudioStream" uid="uid://b8s5ta7jv0nbh" path="res://systems/ui/navigation_hover-tap_1.wav" id="2_6qq75"]
+[ext_resource type="AudioStream" uid="uid://bljks67c6sk5n" path="res://systems/ui/navigation_others_ (2).wav" id="3_6qq75"]
+
+[node name="UiSoundComponent" type="Node" node_paths=PackedStringArray("hover_audio_player", "click_audio_player")]
+script = ExtResource("1_colbw")
+hover_audio_stream = ExtResource("2_6qq75")
+click_audio_stream = ExtResource("3_6qq75")
+hover_audio_player = NodePath("HoverAudioStreamPlayer")
+click_audio_player = NodePath("ClickAudioStreamPlayer")
+
+[node name="HoverAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Ui"
+
+[node name="ClickAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Ui"

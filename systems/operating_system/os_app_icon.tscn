@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cmig0mcp2rse4"]
+[gd_scene load_steps=4 format=3 uid="uid://cmig0mcp2rse4"]
 
 [ext_resource type="Script" uid="uid://dnlopipkgf25w" path="res://systems/operating_system/os_app_icon.gd" id="1_j42na"]
 [ext_resource type="Texture2D" uid="uid://dipd68uiomkhw" path="res://icon.svg" id="1_r8636"]
+[ext_resource type="PackedScene" uid="uid://bmcauqk83v5kh" path="res://systems/ui/ui_animation_component.tscn" id="3_ucrhe"]
 
 [node name="AppIcon" type="PanelContainer" node_paths=PackedStringArray("label", "icon")]
 custom_minimum_size = Vector2(100, 0)
@@ -25,5 +26,15 @@ horizontal_alignment = 1
 [node name="Button" type="Button" parent="."]
 layout_mode = 2
 flat = true
+
+[node name="UiAnimationComponent" parent="." node_paths=PackedStringArray("control_to_watch") instance=ExtResource("3_ucrhe")]
+control_to_watch = NodePath("../Button")
+animate_scale = true
+scale_animation_pivot_type = 1
+animation_out_duration = 0.5
+animation_in_ease_type = 1
+animation_out_ease_type = 1
+animation_in_transition_type = 6
+animation_out_transition_type = 9
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

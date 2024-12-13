@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dkbqixm40xi7u"]
+[gd_scene load_steps=8 format=3 uid="uid://dkbqixm40xi7u"]
 
 [ext_resource type="Script" uid="uid://cl7we01wx8ir3" path="res://systems/tms/shipment_list/tms_shipment_list.gd" id="1_f2rsm"]
 [ext_resource type="PackedScene" uid="uid://dag450t1ydq8u" path="res://systems/tms/shipment_list/tms_shipment_list_item.tscn" id="2_jqska"]
+[ext_resource type="PackedScene" uid="uid://bmcauqk83v5kh" path="res://systems/ui/ui_animation_component.tscn" id="3_3vxnl"]
+[ext_resource type="PackedScene" uid="uid://dw7p1e4gjimn0" path="res://systems/ui/ui_sound_component.tscn" id="4_a42xg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f2rsm"]
 content_margin_left = 4.0
@@ -55,16 +57,62 @@ text = "SHIPMENTS"
 label_settings = SubResource("LabelSettings_f2rsm")
 
 [node name="ToggleCompletedButton" type="Button" parent="VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 text = "HIDE_COMPLETED"
 clip_text = true
 
+[node name="UiAnimationComponent-Scale" parent="VBoxContainer/HBoxContainer/ToggleCompletedButton" instance=ExtResource("3_3vxnl")]
+animate_scale = true
+scale_animation_pivot_type = 3
+scale_animation_in_value = Vector2(1.05, 1.05)
+animation_in_duration = 0.5
+animation_out_duration = 0.5
+animation_in_ease_type = 1
+animation_out_ease_type = 1
+animation_in_transition_type = 6
+animation_out_transition_type = 9
+
+[node name="UiAnimationComponent-Color" parent="VBoxContainer/HBoxContainer/ToggleCompletedButton" instance=ExtResource("3_3vxnl")]
+animate_color = true
+color_animation_multiply = false
+color_animation_in_value = Color(0.622838, 0.839062, 1, 1)
+animation_in_duration = 0.2
+animation_out_duration = 0.2
+animation_in_ease_type = 1
+animation_in_transition_type = 1
+animation_out_transition_type = 1
+
+[node name="UiSoundComponent" parent="VBoxContainer/HBoxContainer/ToggleCompletedButton" instance=ExtResource("4_a42xg")]
+
 [node name="SortButton" type="Button" parent="VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 text = "SORT_BY_DATE"
 clip_text = true
+
+[node name="UiAnimationComponent-Scale" parent="VBoxContainer/HBoxContainer/SortButton" instance=ExtResource("3_3vxnl")]
+animate_scale = true
+scale_animation_pivot_type = 2
+scale_animation_in_value = Vector2(1.05, 1.05)
+animation_in_duration = 0.5
+animation_out_duration = 0.5
+animation_in_ease_type = 1
+animation_out_ease_type = 1
+animation_in_transition_type = 6
+animation_out_transition_type = 9
+
+[node name="UiAnimationComponent-Color" parent="VBoxContainer/HBoxContainer/SortButton" instance=ExtResource("3_3vxnl")]
+animate_color = true
+color_animation_multiply = false
+color_animation_in_value = Color(0.622838, 0.839062, 1, 1)
+animation_in_duration = 0.2
+animation_out_duration = 0.2
+animation_in_ease_type = 1
+animation_in_transition_type = 1
+animation_out_transition_type = 1
+
+[node name="UiSoundComponent" parent="VBoxContainer/HBoxContainer/SortButton" instance=ExtResource("4_a42xg")]
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2

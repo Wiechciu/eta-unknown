@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bk2s2lutco06v"]
+[gd_scene load_steps=7 format=3 uid="uid://bk2s2lutco06v"]
 
 [ext_resource type="Script" uid="uid://b3n7d1utyhpp3" path="res://systems/tms/navigation/tms_navigation.gd" id="1_essl5"]
+[ext_resource type="PackedScene" uid="uid://bmcauqk83v5kh" path="res://systems/ui/ui_animation_component.tscn" id="2_yh5k4"]
+[ext_resource type="PackedScene" uid="uid://dw7p1e4gjimn0" path="res://systems/ui/ui_sound_component.tscn" id="3_ksgse"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_essl5"]
 content_margin_left = 4.0
@@ -16,16 +18,19 @@ border_color = Color(0, 0, 0, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_essl5"]
 font_size = 40
 
-[node name="NavigationPanel" type="PanelContainer" node_paths=PackedStringArray("_toggle_navigation_button", "_panels_to_hide")]
+[node name="NavigationPanel" type="PanelContainer" node_paths=PackedStringArray("_toggle_navigation_button", "_panels_to_hide", "header")]
+clip_contents = true
 theme_override_styles/panel = SubResource("StyleBoxFlat_essl5")
 script = ExtResource("1_essl5")
 _toggle_navigation_button = NodePath("VBoxContainer/Header/ToggleNavigationButton")
 _panels_to_hide = [NodePath("VBoxContainer/Header/Label"), NodePath("VBoxContainer/MenuItems")]
+header = NodePath("VBoxContainer/Header")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="Header" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_essl5")
 
@@ -36,13 +41,24 @@ size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 30
 text = "<"
 
+[node name="UiAnimationComponent-Move" parent="VBoxContainer/Header/ToggleNavigationButton" instance=ExtResource("2_yh5k4")]
+animate_move = true
+move_offset_animation_in_value = Vector2(5, 0)
+animation_out_duration = 0.5
+animation_in_ease_type = 1
+animation_out_ease_type = 1
+animation_in_transition_type = 6
+animation_out_transition_type = 9
+
+[node name="UiSoundComponent" parent="VBoxContainer/Header/ToggleNavigationButton" instance=ExtResource("3_ksgse")]
+
 [node name="Label" type="Label" parent="VBoxContainer/Header"]
-custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "NAVIGATION"
 label_settings = SubResource("LabelSettings_essl5")
 horizontal_alignment = 1
+clip_text = true
 
 [node name="MenuItems" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -51,17 +67,50 @@ layout_mode = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "SHIPMENTS"
+clip_text = true
+
+[node name="UiAnimationComponent-Move" parent="VBoxContainer/MenuItems/ShipmentsButton" instance=ExtResource("2_yh5k4")]
+animate_move = true
+animation_out_duration = 0.5
+animation_in_ease_type = 1
+animation_out_ease_type = 1
+animation_in_transition_type = 6
+animation_out_transition_type = 9
+
+[node name="UiSoundComponent" parent="VBoxContainer/MenuItems/ShipmentsButton" instance=ExtResource("3_ksgse")]
 
 [node name="QuotationsButton" type="Button" parent="VBoxContainer/MenuItems"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "QUOTATIONS"
+clip_text = true
+
+[node name="UiAnimationComponent-Move" parent="VBoxContainer/MenuItems/QuotationsButton" instance=ExtResource("2_yh5k4")]
+animate_move = true
+animation_out_duration = 0.5
+animation_in_ease_type = 1
+animation_out_ease_type = 1
+animation_in_transition_type = 6
+animation_out_transition_type = 9
+
+[node name="UiSoundComponent" parent="VBoxContainer/MenuItems/QuotationsButton" instance=ExtResource("3_ksgse")]
 
 [node name="CustomersButton" type="Button" parent="VBoxContainer/MenuItems"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 disabled = true
 text = "CUSTOMERS"
+clip_text = true
+
+[node name="UiAnimationComponent-Move" parent="VBoxContainer/MenuItems/CustomersButton" instance=ExtResource("2_yh5k4")]
+animate_move = true
+animation_out_duration = 0.5
+animation_in_ease_type = 1
+animation_out_ease_type = 1
+animation_in_transition_type = 6
+animation_out_transition_type = 9
+
+[node name="UiSoundComponent" parent="VBoxContainer/MenuItems/CustomersButton" instance=ExtResource("3_ksgse")]
 
 [connection signal="pressed" from="VBoxContainer/Header/ToggleNavigationButton" to="." method="_on_toggle_navigation_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/MenuItems/ShipmentsButton" to="." method="_on_navigation_shipments_button_pressed"]

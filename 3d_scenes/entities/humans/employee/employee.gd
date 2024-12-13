@@ -15,6 +15,14 @@ var anim_idle: StringName = "idle/Root|Idle"
 func _ready() -> void:
 	GlobalDebugger.assert_all_exported_properties(self)
 	walk()
+	
+	register_interactable()
+
+
+func register_interactable() -> void:
+	var interactable: Interactable = GlobalDebugger.get_child_of_type(self, Interactable) as Interactable
+	if interactable != null:
+		interactable.interacted.connect(interact)
 
 
 func walk() -> void:
@@ -44,3 +52,8 @@ func walk() -> void:
 		tween.tween_method(func(new_position: Vector3) -> void: global_position = new_position, current_node.global_position, next_node.global_position, move_duration)
 		tween.tween_callback(animation_player.play.bind(anim_idle, 0.1))
 		index += 1
+
+
+@warning_ignore("unused_parameter")
+func interact(node: Node) -> void:
+	ActionLogger.create_log("Hi!")

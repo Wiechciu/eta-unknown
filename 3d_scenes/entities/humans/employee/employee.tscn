@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=4 uid="uid://da0yiss61kemr"]
+[gd_scene load_steps=11 format=4 uid="uid://da0yiss61kemr"]
 
 [ext_resource type="Script" uid="uid://dymdfjhnjxejw" path="res://3d_scenes/entities/humans/employee/employee.gd" id="1_cv3gx"]
 [ext_resource type="Script" uid="uid://bx755gagbe0ch" path="res://3d_scenes/entities/humans/human.gd" id="1_lcf01"]
+[ext_resource type="PackedScene" uid="uid://beffqttiv36q7" path="res://3d_scenes/entities/components/interactable.tscn" id="3_cpfqp"]
 [ext_resource type="Texture2D" uid="uid://cdmj17yt38ljx" path="res://3d_scenes/entities/humans/employee/casualMaleA.png" id="3_fcm60"]
 [ext_resource type="AnimationLibrary" uid="uid://bml1igp410pde" path="res://3d_scenes/entities/humans/employee/idle.fbx" id="4_prvgd"]
 [ext_resource type="AnimationLibrary" uid="uid://5ajoa155wwsp" path="res://3d_scenes/entities/humans/employee/walk.fbx" id="5_60ujo"]
@@ -181,6 +182,9 @@ radius = 0.2
 script = ExtResource("1_cv3gx")
 animation_player = NodePath("CharacterLargeMale/AnimationPlayer")
 metadata/_custom_type_script = ExtResource("1_lcf01")
+
+[node name="Interactable" parent="." instance=ExtResource("3_cpfqp")]
+label_position = Vector3(0, 2.245, 0)
 
 [node name="CharacterLargeMale" type="Node3D" parent="."]
 transform = Transform3D(-0.7, 0, -6.11959e-08, 0, 0.7, 0, 6.11959e-08, 0, -0.7, 0, 0.0900511, 0)

@@ -75,7 +75,7 @@ layout_mode = 2
 [node name="Tabs" type="TabContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 7
+current_tab = 1
 clip_tabs = false
 
 [node name="GENERAL" type="PanelContainer" parent="VBoxContainer/Tabs"]
@@ -164,18 +164,16 @@ label_text = "EARLIEST_PICKUP"
 layout_mode = 2
 label_text = "LATEST_DELIVERY"
 
-[node name="CARGO_DETAILS" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_description", "_slac", "_total_quantity", "_total_weight", "_total_volume", "_dimension_sets_container")]
-visible = false
+[node name="CARGO_DETAILS" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_description", "_total_quantity", "_total_weight", "_total_volume", "_dimension_sets_container")]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 script = ExtResource("5_gxcvw")
-_tms_dimension_set_scene = ExtResource("2_socwm")
 _description = NodePath("ScrollContainer/VBoxContainer/CargoDetailsSummary/Description")
-_slac = NodePath("ScrollContainer/VBoxContainer/CargoDetailsSummary/Slac")
 _total_quantity = NodePath("ScrollContainer/VBoxContainer/CargoDetailsSummary/TotalQuantity")
 _total_weight = NodePath("ScrollContainer/VBoxContainer/CargoDetailsSummary/TotalWeight")
 _total_volume = NodePath("ScrollContainer/VBoxContainer/CargoDetailsSummary/TotalVolume")
 _dimension_sets_container = NodePath("ScrollContainer/VBoxContainer/DimensionSets")
+_tms_dimension_set_scene = ExtResource("2_socwm")
 metadata/_tab_index = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Tabs/CARGO_DETAILS"]
@@ -192,10 +190,6 @@ layout_mode = 2
 [node name="Description" parent="VBoxContainer/Tabs/CARGO_DETAILS/ScrollContainer/VBoxContainer/CargoDetailsSummary" instance=ExtResource("2_sna7y")]
 layout_mode = 2
 label_text = "CARGO_DESCRIPTION"
-
-[node name="Slac" parent="VBoxContainer/Tabs/CARGO_DETAILS/ScrollContainer/VBoxContainer/CargoDetailsSummary" instance=ExtResource("2_sna7y")]
-layout_mode = 2
-label_text = "SLAC"
 
 [node name="TotalQuantity" parent="VBoxContainer/Tabs/CARGO_DETAILS/ScrollContainer/VBoxContainer/CargoDetailsSummary" instance=ExtResource("2_sna7y")]
 layout_mode = 2
@@ -517,6 +511,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="DOCUMENTATION" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_documents_container", "_print_button")]
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 script = ExtResource("13_l03v4")

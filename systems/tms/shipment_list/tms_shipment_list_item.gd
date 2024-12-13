@@ -15,9 +15,14 @@ var shipment: Shipment
 @export var total_weight_label: Label
 @export var status_label: Label
 
+@export var button: Button
+
 
 func _ready() -> void:
+	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.assert_all_exported_properties(self)
+	
+	button.pressed.connect(_on_button_pressed)
 
 
 func with_data(new_shipment: Shipment) -> TmsShipmentListItem:
@@ -31,15 +36,20 @@ func with_data(new_shipment: Shipment) -> TmsShipmentListItem:
 	total_weight_label.text = "%d %s" % [shipment.cargo_details.total_weight, tr("KG")]
 	var status_text: String = "STATUS_" + Shipment.Status.keys()[shipment.status]
 	status_label.text = status_text
-	match shipment.status:
-		Shipment.Status.COMPLETED:
-			modulate = Color.LIGHT_GREEN
-		Shipment.Status.CANCELLED:
-			modulate = Color.LIGHT_GRAY
-		_:
-			modulate = Color.WHITE
+	modulate = get_color_from_shipment_status(shipment.status)
+	
 	return self
 
 
 func _on_button_pressed() -> void:
 	pressed_with_shipment_data.emit(shipment)
+
+
+func get_color_from_shipment_status(status: Shipment.Status) -> Color:
+	match status:
+		Shipment.Status.COMPLETED:
+			return Color(0.75, 1.00, 0.85)
+		Shipment.Status.CANCELLED:
+			return Color.LIGHT_GRAY
+		_:
+			return Color.WHITE

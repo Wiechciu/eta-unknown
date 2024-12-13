@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dksi1q8iitdxl"]
+[gd_scene load_steps=5 format=3 uid="uid://dksi1q8iitdxl"]
 
 [ext_resource type="Script" uid="uid://ddlkf8qet6m5u" path="res://systems/operating_system/os_app_icon_taskbar.gd" id="1_t0vij"]
 [ext_resource type="Texture2D" uid="uid://dipd68uiomkhw" path="res://icon.svg" id="2_5kvjj"]
+[ext_resource type="PackedScene" uid="uid://bmcauqk83v5kh" path="res://systems/ui/ui_animation_component.tscn" id="3_5kvjj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5kvjj"]
 content_margin_left = 1.0
@@ -37,5 +38,15 @@ horizontal_alignment = 1
 [node name="Button" type="Button" parent="."]
 layout_mode = 2
 flat = true
+
+[node name="UiAnimationComponent" parent="." node_paths=PackedStringArray("control_to_watch") instance=ExtResource("3_5kvjj")]
+control_to_watch = NodePath("../Button")
+animate_scale = true
+scale_animation_pivot_type = 4
+animation_out_duration = 0.5
+animation_in_ease_type = 1
+animation_out_ease_type = 1
+animation_in_transition_type = 6
+animation_out_transition_type = 9
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -9,7 +9,9 @@ extends StaticBody3D
 @export var light: SpotLight3D
 @export var screen_black: MeshInstance3D
 @export var interfaces: Array[ComputerInterface]
-
+@export var audio_player: AudioStreamPlayer3D
+@export var start_audio_stream: AudioStream
+@export var close_audio_stream: AudioStream
 
 var original_camera_position: Vector3
 var original_camera_rotation: Vector3
@@ -69,10 +71,12 @@ func start_os() -> void:
 	subviewport.add_child(os)
 	os.on_closing.connect(_on_os_closing)
 	fade_in_lights()
+	play_start_sound()
 
 
 func _on_os_closing() -> void:
 	fade_out_lights()
+	play_close_sound()
 	if is_focused:
 		unfocus_view()
 
@@ -85,6 +89,16 @@ func fade_in_lights() -> void:
 func fade_out_lights() -> void:
 	var tween: Tween = create_tween()
 	tween.tween_method(func(energy: float) -> void: light.light_energy = energy ** 2, 1.0, 0.0, os.boot_duration).set_trans(Tween.TRANS_SINE)
+
+
+func play_start_sound() -> void:
+	audio_player.stream = start_audio_stream
+	audio_player.play()
+
+
+func play_close_sound() -> void:
+	audio_player.stream = close_audio_stream
+	audio_player.play()
 
 
 func focus_view() -> void:

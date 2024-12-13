@@ -25,14 +25,8 @@ var head_max_offset: Vector3 = Vector3(0.0, 0.1, 0.0)
 func _ready() -> void:
 	GlobalDebugger.assert_all_exported_properties(self)
 	
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	movement_actual_speed = movement_base_speed
-	
-	head_resting_position = _head.position
-	head_bobbing_tween = create_tween().set_loops()
-	head_bobbing_tween.tween_property(_head, "position", head_resting_position + head_max_offset, head_bobbing_loop_duration / 2)
-	head_bobbing_tween.tween_property(_head, "position", head_resting_position, head_bobbing_loop_duration / 2)
-	head_bobbing_tween.stop()
+	assign_person()
+	initial_setup()
 
 
 @warning_ignore("unused_parameter")
@@ -51,6 +45,24 @@ func _input(event: InputEvent) -> void:
 	handle_rotation(event)
 	handle_jump(event)
 	handle_interaction(event)
+
+
+func assign_person() -> void:
+	if not GameManager.is_node_ready():
+		await GameManager.ready
+	
+	person = GameManager.player_person
+
+
+func initial_setup() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	movement_actual_speed = movement_base_speed
+	
+	head_resting_position = _head.position
+	head_bobbing_tween = create_tween().set_loops()
+	head_bobbing_tween.tween_property(_head, "position", head_resting_position + head_max_offset, head_bobbing_loop_duration / 2)
+	head_bobbing_tween.tween_property(_head, "position", head_resting_position, head_bobbing_loop_duration / 2)
+	head_bobbing_tween.stop()
 
 
 func handle_movement(delta: float) -> void:

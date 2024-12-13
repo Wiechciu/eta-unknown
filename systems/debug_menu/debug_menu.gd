@@ -11,6 +11,7 @@ var counter: float
 
 
 func _ready() -> void:
+	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.assert_all_exported_properties(self)
 	status.text = ""
 	visible = false
@@ -102,8 +103,10 @@ func _on_next_month_button_pressed() -> void:
 
 
 func _on_save_game_button_pressed() -> void:
+	@warning_ignore("unsafe_method_access")
 	SaveManager.save_game()
 
 
 func _on_load_game_button_pressed() -> void:
+	@warning_ignore("unsafe_method_access")
 	SaveManager.load_game()

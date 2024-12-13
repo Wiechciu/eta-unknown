@@ -12,13 +12,14 @@ signal documentation_updated
 #var accounting_documents: Array[Document] #TODO
 
 
+@warning_ignore("shadowed_variable")
 func with_data(documents: Array[Document]) -> ShipmentDocumentation:
-	for document: Document in documents:
-		register_document(document)
+	register_documents(documents)
 	
 	return self
 
 
+@warning_ignore("shadowed_variable")
 func register_documents(documents: Array[Document]) -> void:
 	for document: Document in documents:
 		register_document(document)

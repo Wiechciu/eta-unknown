@@ -20,7 +20,7 @@ func _ready() -> void:
 	panel_header.minimize_button_pressed.connect(minimize)
 	shipment_details._shipment_documentation.document_print_ordered.connect(_on_document_print_ordered)
 	
-	close_all()
+	close_all_except_navigation()
 	hide_all()
 	super.start()
 	loading_screen.start_loading()
@@ -29,6 +29,11 @@ func _ready() -> void:
 
 
 func close_all() -> void:
+	navigation.close()
+	close_all_except_navigation()
+
+
+func close_all_except_navigation() -> void:
 	shipment_list.close()
 	shipment_details.close()
 	#quotation_list.close()

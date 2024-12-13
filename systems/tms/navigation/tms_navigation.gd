@@ -5,11 +5,13 @@ extends PanelContainer
 @export var _tms: Tms
 @export var _toggle_navigation_button: Button
 @export var _panels_to_hide: Array[Control]
+@export var header: Control
 
 var is_open: bool
 
 
 func _ready() -> void:
+	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.assert_all_exported_properties(self)
 	open()
 
@@ -30,14 +32,30 @@ func _on_toggle_navigation_button_pressed() -> void:
 
 
 func open() -> void:
+	if is_open:
+		return
+	
 	is_open = true
 	_toggle_navigation_button.text = "<"
+	
+	var tween: Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE).set_parallel()
+	tween.tween_method(func(value: float) -> void: header.custom_minimum_size.x = value, 50, 350, 0.2)
+	#await tween.finished
+	
 	for panel: Control in _panels_to_hide:
-		panel.visible = true
+		panel.show()
 
 
 func close() -> void:
+	if not is_open:
+		return
+	
 	is_open = false
 	_toggle_navigation_button.text = ">"
+	
+	var tween: Tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_SINE).set_parallel()
+	tween.tween_method(func(value: float) -> void: header.custom_minimum_size.x = value, 350, 50, 0.2)
+	await tween.finished
+	
 	for panel: Control in _panels_to_hide:
-		panel.visible = false
+		panel.hide()

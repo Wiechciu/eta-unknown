@@ -26,8 +26,9 @@ func create_log(message: String, is_error: bool = false) -> void:
 	change_modulate()
 	
 	if is_error:
-		#TODO: Add audio stream
+		audio_player.pitch_scale = randf_range(0.95, 1.05)
 		audio_player.play()
+		label.modulate = Color(0.9, 0.6, 0.7)
 	
 	var tween: Tween = label.create_tween()
 	tween.tween_interval(message_duration)
