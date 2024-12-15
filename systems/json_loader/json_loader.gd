@@ -19,11 +19,11 @@ func _ready() -> void:
 func start() -> void:
 	print("--- starting loading from JSONs ---")
 	load_cargo_from_json(cargo_json, GlobalRefs.cargos, GlobalRefs.cargos_dict)
-	load_currencies_from_json(currencies_json, GlobalRefs.currencies, GlobalRefs.currencies_dict)
-	load_countries_from_json(countries_json, GlobalRefs.countries, GlobalRefs.countries_dict)
-	load_locations_from_json(locations_json, GlobalRefs.locations, GlobalRefs.locations_dict)
-	load_parties_from_json(parties_json, GlobalRefs.parties, GlobalRefs.parties_dict)
+	load_currencies_from_json(currencies_json, GlobalRefs.currencies, GlobalRefs.currencies_dict, GlobalRefs.currencies_code_dict)
 	load_job_positions_from_json(job_positions_json, GlobalRefs.job_positions, GlobalRefs.job_positions_dict)
+	load_countries_from_json(countries_json, GlobalRefs.countries, GlobalRefs.countries_dict, GlobalRefs.countries_code_dict)
+	load_locations_from_json(locations_json, GlobalRefs.locations, GlobalRefs.locations_dict, GlobalRefs.locations_code_dict)
+	load_parties_from_json(parties_json, GlobalRefs.parties, GlobalRefs.parties_dict)
 	load_people_from_json(people_json, GlobalRefs.people, GlobalRefs.people_dict)
 	
 	print("--- finished loading from JSONs ---\n")
@@ -46,18 +46,19 @@ func load_cargo_from_json(file_to_load: String, array_to_fill: Array, dict_to_fi
 			item.unit_size as float if item.unit_size else 0.0,
 			item.unit_weight as float if item.unit_weight else 0.0
 			)
-		array_to_fill.append(new_resource)
-		dict_to_fill[new_resource.description] = new_resource
+		#array_to_fill.append(new_resource)
+		#dict_to_fill[new_resource.id] = new_resource
 	
 	@warning_ignore("unsafe_method_access")
 	print("loaded %s cargo | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
 
 
-func load_currencies_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
+func load_currencies_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary, code_dict_to_fill: Dictionary) -> void:
 	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.start_timer()
 	array_to_fill.clear()
 	dict_to_fill.clear()
+	code_dict_to_fill.clear()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
@@ -68,18 +69,41 @@ func load_currencies_from_json(file_to_load: String, array_to_fill: Array, dict_
 			str(item.name) if item.name else "",
 			item.exchange_rate_to_usd as float if item.exchange_rate_to_usd else 0.0
 			)
-		array_to_fill.append(new_resource)
-		dict_to_fill[new_resource.code] = new_resource
+		#array_to_fill.append(new_resource)
+		#dict_to_fill[new_resource.id] = new_resource
+		#code_dict_to_fill[new_resource.code] = new_resource
 	
 	@warning_ignore("unsafe_method_access")
 	print("loaded %s currencies | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
 
 
-func load_countries_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
+func load_job_positions_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
 	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.start_timer()
 	array_to_fill.clear()
 	dict_to_fill.clear()
+	var loaded_array: Array = load_json_file(file_to_load)
+	
+	for item: Dictionary in loaded_array:
+		@warning_ignore("unsafe_cast")
+		var new_resource: JobPosition = JobPosition.new().with_data(
+			GlobalRefs.get_job_position_id(),
+			str(item.title) if item.title else "",
+			item.salary as float if item.salary else 0.0
+			)
+		#array_to_fill.append(new_resource)
+		#dict_to_fill[new_resource.id] = new_resource
+	
+	@warning_ignore("unsafe_method_access")
+	print("loaded %s job positions | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
+
+
+func load_countries_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary, code_dict_to_fill: Dictionary) -> void:
+	@warning_ignore("unsafe_method_access")
+	GlobalDebugger.start_timer()
+	array_to_fill.clear()
+	dict_to_fill.clear()
+	code_dict_to_fill.clear()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
@@ -88,18 +112,20 @@ func load_countries_from_json(file_to_load: String, array_to_fill: Array, dict_t
 			str(item.code) if item.code else "",
 			str(item.name) if item.name else ""
 			)
-		array_to_fill.append(new_resource)
-		dict_to_fill[new_resource.code] = new_resource
+		#array_to_fill.append(new_resource)
+		#dict_to_fill[new_resource.id] = new_resource
+		#code_dict_to_fill[new_resource.code] = new_resource
 	
 	@warning_ignore("unsafe_method_access")
 	print("loaded %s countries | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
 
 
-func load_locations_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
+func load_locations_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary, code_dict_to_fill: Dictionary) -> void:
 	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.start_timer()
 	array_to_fill.clear()
 	dict_to_fill.clear()
+	code_dict_to_fill.clear()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
@@ -107,12 +133,11 @@ func load_locations_from_json(file_to_load: String, array_to_fill: Array, dict_t
 			GlobalRefs.get_location_id(),
 			(str(item.country) + str(item.location)) if item.country else "",
 			str(item.name_wo_diacritics) if item.name_wo_diacritics else "",
-			GlobalRefs.countries_dict[item.country] if item.country else null
+			GlobalRefs.countries_code_dict[item.country] if item.country else null
 			)
-		array_to_fill.append(new_resource)
-		dict_to_fill[new_resource.code] = new_resource
-		
-		new_resource.country.locations.append(new_resource)
+		#array_to_fill.append(new_resource)
+		#dict_to_fill[new_resource.id] = new_resource
+		#code_dict_to_fill[new_resource.code] = new_resource
 	
 	@warning_ignore("unsafe_method_access")
 	print("loaded %s locations | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
@@ -140,51 +165,54 @@ func load_parties_from_json(file_to_load: String, array_to_fill: Array, dict_to_
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
-		var new_resource: Party
-		match str(item.type):
-			"carrier":
-				new_resource = Carrier.new()
-				GlobalRefs.carriers.append(new_resource)
-				GlobalRefs.carriers_dict[item.name] = new_resource
-			"customer":
-				new_resource = Customer.new()
-				GlobalRefs.customers.append(new_resource)
-				GlobalRefs.customers_dict[item.name] = new_resource
-			"customs_agency":
-				new_resource = CustomsAgency.new()
-				GlobalRefs.customs_agencies.append(new_resource)
-				GlobalRefs.customs_agencies_dict[item.name] = new_resource
-			"freight_forwarder":
-				new_resource = FreightForwarder.new()
-				GlobalRefs.freight_forwarders.append(new_resource)
-				GlobalRefs.freight_forwarders_dict[item.name] = new_resource
-			"handling_agent":
-				new_resource = HandlingAgent.new()
-				GlobalRefs.handling_agents.append(new_resource)
-				GlobalRefs.handling_agents_dict[item.name] = new_resource
-			"trucker":
-				new_resource = Trucker.new()
-				GlobalRefs.truckers.append(new_resource)
-				GlobalRefs.truckers_dict[item.name] = new_resource
-		
-		if new_resource is Supplier:
-			GlobalRefs.suppliers.append(new_resource)
-			GlobalRefs.suppliers_dict[item.name] = new_resource
-			(new_resource as Supplier).reliability_factor = randf_range(0.9, 1.0)
-			(new_resource as Supplier).cost_factor = randf_range(0.8, 1.0)
-		
-		new_resource = new_resource.with_data(
+		var new_resource: Party = Party.new().with_data(
 			GlobalRefs.get_party_id(),
+			Party.Type.get(str(item.type).to_upper()) as Party.Type if item.type else Party.Type.CUSTOMER,
 			str(item.name) if item.name else "",
 			str(item.street_name) if item.street_name else "",
 			str(item.street_number) if item.street_number else "",
 			str(item.house_number) if item.house_number else "",
 			str(item.postal_code) if item.postal_code else "",
 			str(item.city_name) if item.city_name else "",
-			GlobalRefs.countries_dict[item.country_code] if item.country_code else null
+			GlobalRefs.countries_code_dict[item.country_code] if item.country_code else null,
+			[] as Array[Person],
+			0.0,
+			[] as Array[RequestForQuotation],
+			[] as Array[Shipment],
+			100000,
+			0.0,
+			0.0,
+			0.0,
 			)
-		array_to_fill.append(new_resource)
-		dict_to_fill[new_resource.name] = new_resource
+		
+		match new_resource.type:
+			Party.Type.CUSTOMER:
+				GlobalRefs.customers.append(new_resource)
+				GlobalRefs.customers_dict[new_resource.id] = new_resource
+			Party.Type.FREIGHT_FORWARDER:
+				GlobalRefs.freight_forwarders.append(new_resource)
+				GlobalRefs.freight_forwarders_dict[new_resource.id] = new_resource
+			Party.Type.CARRIER:
+				GlobalRefs.carriers.append(new_resource)
+				GlobalRefs.carriers_dict[new_resource.id] = new_resource
+			Party.Type.CUSTOMS_AGENCY:
+				GlobalRefs.customs_agencies.append(new_resource)
+				GlobalRefs.customs_agencies_dict[new_resource.id] = new_resource
+			Party.Type.HANDLING_AGENT:
+				GlobalRefs.handling_agents.append(new_resource)
+				GlobalRefs.handling_agents_dict[new_resource.id] = new_resource
+			Party.Type.TRUCKER:
+				GlobalRefs.truckers.append(new_resource)
+				GlobalRefs.truckers_dict[new_resource.id] = new_resource
+		
+		if new_resource.is_supplier:
+			GlobalRefs.suppliers.append(new_resource)
+			GlobalRefs.suppliers_dict[new_resource.id] = new_resource
+			new_resource.reliability_factor = randf_range(0.9, 1.0)
+			new_resource.cost_factor = randf_range(0.8, 1.0)
+		
+		#array_to_fill.append(new_resource)
+		#dict_to_fill[new_resource.id] = new_resource
 	
 	@warning_ignore("unsafe_method_access")
 	print("loaded %s parties | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
@@ -194,27 +222,6 @@ func load_parties_from_json(file_to_load: String, array_to_fill: Array, dict_to_
 	print("   loaded " + str(GlobalRefs.freight_forwarders.size()) + " freight forwarders")
 	print("   loaded " + str(GlobalRefs.handling_agents.size()) + " handling agents")
 	print("   loaded " + str(GlobalRefs.truckers.size()) + " truckers")
-
-
-func load_job_positions_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
-	@warning_ignore("unsafe_method_access")
-	GlobalDebugger.start_timer()
-	array_to_fill.clear()
-	dict_to_fill.clear()
-	var loaded_array: Array = load_json_file(file_to_load)
-	
-	for item: Dictionary in loaded_array:
-		@warning_ignore("unsafe_cast")
-		var new_resource: JobPosition = JobPosition.new().with_data(
-			GlobalRefs.get_job_position_id(),
-			str(item.title) if item.title else "",
-			item.salary as float if item.salary else 0.0
-			)
-		array_to_fill.append(new_resource)
-		dict_to_fill[new_resource.title] = new_resource
-	
-	@warning_ignore("unsafe_method_access")
-	print("loaded %s job positions | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
 
 
 func load_people_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
@@ -240,8 +247,8 @@ func load_people_from_json(file_to_load: String, array_to_fill: Array, dict_to_f
 			)
 		new_resource.employer.employees.append(new_resource)
 		
-		array_to_fill.append(new_resource)
-		dict_to_fill[new_resource.full_name] = new_resource
+		#array_to_fill.append(new_resource)
+		#dict_to_fill[new_resource.id] = new_resource
 	
 	@warning_ignore("unsafe_method_access")
 	print("loaded %s people | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])

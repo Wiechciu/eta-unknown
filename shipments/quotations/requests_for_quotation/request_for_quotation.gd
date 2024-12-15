@@ -11,7 +11,7 @@ enum AwardCriteria {
 
 var id: int
 var shipment: Shipment
-var requestor: Customer
+var requestor: Party
 var expected_total_cost: float
 var expected_transit_time: int
 var deadline_date: int
@@ -25,7 +25,7 @@ var deadline_time_event: TimeEvent
 
 
 @warning_ignore("shadowed_variable")
-func with_data(id: int, shipment: Shipment, requestor: Customer, expected_total_cost: float, expected_transit_time: int, deadline_date: int, award_criteria: AwardCriteria, quotations: Array[Quotation], awarded_quotation: Quotation, ) -> RequestForQuotation:
+func with_data(id: int, shipment: Shipment, requestor: Party, expected_total_cost: float, expected_transit_time: int, deadline_date: int, award_criteria: AwardCriteria, quotations: Array[Quotation], awarded_quotation: Quotation, ) -> RequestForQuotation:
 	self.id = id
 	self.shipment = shipment
 	self.requestor = requestor
@@ -40,11 +40,13 @@ func with_data(id: int, shipment: Shipment, requestor: Customer, expected_total_
 	
 	@warning_ignore("unsafe_property_access", "unsafe_method_access")
 	GlobalRefs.requests_for_quotation.append(self)
+	@warning_ignore("unsafe_property_access")
+	GlobalRefs.requests_for_quotation_dict[id] = self
 	
 	return self
 
 
-func with_data_random(customer: Customer) -> RequestForQuotation:
+func with_data_random(customer: Party) -> RequestForQuotation:
 	@warning_ignore("unsafe_method_access")
 	id = GlobalRefs.get_request_for_quotation_id()
 	
@@ -74,14 +76,17 @@ func with_data_random(customer: Customer) -> RequestForQuotation:
 	
 	@warning_ignore("unsafe_property_access", "unsafe_method_access")
 	GlobalRefs.requests_for_quotation.append(self)
-	@warning_ignore("unsafe_property_access", "unsafe_method_access")
-	print("New request for quotation created. RFQ ID: %s. There are %s active rfqs." % [id, GlobalRefs.requests_for_quotation.size()])
+	@warning_ignore("unsafe_property_access")
+	GlobalRefs.requests_for_quotation_dict[id] = self
+
+	#@warning_ignore("unsafe_property_access", "unsafe_method_access")
+	#print("New request for quotation created. RFQ ID: %s. There are %s active rfqs." % [id, GlobalRefs.requests_for_quotation.size()])
 	return self
 
 
 func register_quotation(new_quotation: Quotation) -> void:
 	quotations.append(new_quotation)
-	print("Quotation ID %s registered for Request ID %s. There are %s quotations registered." % [new_quotation.id, id, quotations.size()])
+	#print("Quotation ID %s registered for Request ID %s. There are %s quotations registered." % [new_quotation.id, id, quotations.size()])
 
 
 func finalize() -> void:
@@ -154,15 +159,22 @@ func to_dict() -> Dictionary:
 static func from_dict(data: Dictionary) -> RequestForQuotation:
 	return RequestForQuotation.new().with_data(
 		data["id"],
-		GlobalRefs.shipments[data["shipment_id"]],
-		GlobalRefs.parties[data["requestor_id"]],
+		null,
+		null,
 		data["expected_total_cost"],
 		data["expected_transit_time"],
 		data["deadline_date"],
 		data["award_criteria"],
-		Quotation.array_from_dict_id(data["quotation_ids"]),
-		GlobalRefs.quotations[data["awarded_quotation_id"]],
+		[] as Array[Quotation],
+		null,
 	)
+
+
+func assign_references_from_dict(data: Dictionary) -> void:
+	self.shipment = GlobalRefs.shipments_dict[data["shipment_id"] as int]
+	self.requestor = GlobalRefs.parties_dict[data["requestor_id"] as int]
+	self.quotations = Quotation.array_from_dict_id(data["quotation_ids"]) if data["quotation_ids"] else ([] as Array[Quotation])
+	self.awarded_quotation = GlobalRefs.quotations[data["awarded_quotation_id"] as int] if data["awarded_quotation_id"] else null
 
 
 static func array_to_dict(data: Array[RequestForQuotation]) -> Array[Dictionary]:
@@ -186,8 +198,8 @@ static func array_to_dict_id(data: Array[RequestForQuotation]) -> Array[int]:
 	return array
 
 
-static func array_from_dict_id(data: Array[int]) -> Array[RequestForQuotation]:
+static func array_from_dict_id(data: Array) -> Array[RequestForQuotation]:
 	var array: Array[RequestForQuotation]
 	for item: int in data:
-		array.append(GlobalRefs.requests_for_quotation[item])
+		array.append(GlobalRefs.requests_for_quotation_dict[item])
 	return array

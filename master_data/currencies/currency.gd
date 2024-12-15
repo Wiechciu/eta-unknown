@@ -15,6 +15,13 @@ func with_data(id: int, code: String, name: String, exchange_rate_to_usd: float)
 	self.name = name
 	self.exchange_rate_to_usd = exchange_rate_to_usd
 	
+	@warning_ignore("unsafe_property_access", "unsafe_method_access")
+	GlobalRefs.currencies.append(self)
+	@warning_ignore("unsafe_property_access")
+	GlobalRefs.currencies_dict[id] = self
+	@warning_ignore("unsafe_property_access")
+	GlobalRefs.currencies_code_dict[code] = self
+	
 	return self
 
 

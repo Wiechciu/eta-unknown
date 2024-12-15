@@ -47,14 +47,14 @@ func _on_next_day_button_pressed() -> void:
 
 func _on_new_request_for_quotation_button_pressed() -> void:
 	@warning_ignore("unsafe_cast")
-	var customer: Customer = GlobalRefs.customers_with_employees.pick_random() as Customer
+	var customer: Party = GlobalRefs.customers_with_employees.pick_random() as Party
 	customer.create_new_request_for_quotation()
 	status.text = "There are %s not awarded rfqs." % [GlobalRefs.requests_for_quotation_not_awarded.size()]
 
 
 func _on_new_shipment_button_pressed() -> void:
 	@warning_ignore("unsafe_cast")
-	var customer: Customer = GlobalRefs.customers_with_employees.pick_random() as Customer
+	var customer: Party = GlobalRefs.customers_with_employees.pick_random() as Party
 	if customer == null:
 		return
 	customer.create_new_shipment()
@@ -65,7 +65,7 @@ func _on_accept_new_shipment_button_pressed() -> void:
 	if GameManager.player.person.employer == null:
 		return
 	accept_shipment()
-	status.text = "Currently owns %s shipments.\nThere are %s not owned shipments left!" % [(GameManager.player.person.employer as FreightForwarder).shipments.size(), GlobalRefs.shipments_not_owned.size()]
+	status.text = "Currently owns %s shipments.\nThere are %s not owned shipments left!" % [(GameManager.player.person.employer as Party).shipments.size(), GlobalRefs.shipments_not_owned.size()]
 
 
 func _on_accept_10_new_shipments_button_pressed() -> void:
@@ -75,7 +75,7 @@ func _on_accept_10_new_shipments_button_pressed() -> void:
 	for n: int in 10:
 		if accept_shipment() == false:
 			return
-	status.text = "Currently owns %s shipments.\nThere are %s not owned shipments left!" % [(GameManager.player.person.employer as FreightForwarder).shipments.size(), GlobalRefs.shipments_not_owned.size()]
+	status.text = "Currently owns %s shipments.\nThere are %s not owned shipments left!" % [(GameManager.player.person.employer as Party).shipments.size(), GlobalRefs.shipments_not_owned.size()]
 	#print("Currently owns %s shipments. There are %s not owned shipments left!" % [GameManager.player_company.shipments.size(), GlobalRefs.shipments_not_owned.size()])
 
 
@@ -84,10 +84,10 @@ func accept_shipment() -> bool:
 		return false
 	if not GlobalRefs.shipments_not_owned.is_empty():
 		var random_shipment: Shipment = GlobalRefs.shipments_not_owned.pick_random()
-		random_shipment.accept(GameManager.player.person.employer as FreightForwarder)
+		random_shipment.accept(GameManager.player.person.employer as Party)
 		return true
 	else:
-		status.text = "Currently owns %s shipments.\nThere are no more shipments to accept!" % [(GameManager.player.person.employer as FreightForwarder).shipments.size()]
+		status.text = "Currently owns %s shipments.\nThere are no more shipments to accept!" % [(GameManager.player.person.employer as Party).shipments.size()]
 		#print("Currently owns %s shipments. There are no more shipments to accept!" % [GameManager.player_company.shipments.size()])
 		return false
 
@@ -101,7 +101,7 @@ func _on_send_quotation_to_request_button_pressed() -> void:
 	
 	@warning_ignore("unsafe_cast")
 	var request_for_quotation: RequestForQuotation = GlobalRefs.requests_for_quotation_not_awarded.pick_random() as RequestForQuotation
-	var quotation: Quotation = Quotation.new().with_data_random(request_for_quotation, GameManager.player.person.employer as FreightForwarder)
+	var quotation: Quotation = Quotation.new().with_data_random(request_for_quotation, GameManager.player.person.employer as Party)
 	request_for_quotation.register_quotation(quotation)
 	quotation.change_status(Quotation.Status.SUBMITTED)
 	status.text = "Quotation submitted."
@@ -118,3 +118,15 @@ func _on_next_month_button_pressed() -> void:
 	
 	GlobalTimer.start_next_month()
 	status.text = "Next month started."
+
+
+func _on_saving_test_case_button_pressed() -> void:
+	SaveManager.start_new_game()
+	await get_tree().process_frame
+	GlobalTimer.start_next_day()
+	await get_tree().process_frame
+	_on_accept_10_new_shipments_button_pressed()
+	await get_tree().process_frame
+	SaveManager.save_game()
+	await get_tree().process_frame
+	SaveManager.load_game()

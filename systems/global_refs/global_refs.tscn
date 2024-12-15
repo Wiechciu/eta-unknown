@@ -1,20 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://bjndjg4xh0keh"]
+[gd_scene load_steps=2 format=3 uid="uid://bjndjg4xh0keh"]
 
 [ext_resource type="Script" uid="uid://bp8cyi2njiujs" path="res://systems/global_refs/global_refs.gd" id="1_6qxei"]
-[ext_resource type="Script" uid="uid://pfulw2005whk" path="res://master_data/vehicles/vehicle.gd" id="2_s1tdj"]
-[ext_resource type="Resource" uid="uid://cla6nmn0um8u4" path="res://master_data/vehicles/aircrafts/A33F.tres" id="3_annvj"]
-[ext_resource type="Resource" uid="uid://4e1j8o54sj8u" path="res://master_data/vehicles/ships/CN.tres" id="5_mn30j"]
-[ext_resource type="Resource" uid="uid://bojt4fawmywof" path="res://master_data/vehicles/trucks/ST.tres" id="6_nfr7g"]
-[ext_resource type="Resource" uid="uid://drbjctcif0752" path="res://master_data/vehicles/trucks/TT.tres" id="7_c0p4b"]
-[ext_resource type="Resource" uid="uid://bjlfsp6vqy48l" path="res://master_data/vehicles/trucks/VN.tres" id="8_gdv2u"]
-[ext_resource type="Script" uid="uid://c5toadx83f8e" path="res://master_data/vehicles/trucks/truck.gd" id="9_2vqt4"]
-[ext_resource type="Script" uid="uid://bah6eigid8w66" path="res://master_data/vehicles/aircrafts/aircraft.gd" id="10_khyif"]
-[ext_resource type="Resource" uid="uid://ngtf0hbpmg6x" path="res://master_data/vehicles/aircrafts/B77F.tres" id="11_0wxyt"]
-[ext_resource type="Script" uid="uid://v807gvyf2v7x" path="res://master_data/vehicles/ships/ship.gd" id="12_gig1h"]
 
 [node name="GlobalRefs" type="Node"]
 script = ExtResource("1_6qxei")
-vehicles = Array[ExtResource("2_s1tdj")]([ExtResource("5_mn30j"), ExtResource("6_nfr7g"), ExtResource("7_c0p4b"), ExtResource("8_gdv2u"), ExtResource("3_annvj"), ExtResource("11_0wxyt")])
-trucks = Array[ExtResource("9_2vqt4")]([ExtResource("6_nfr7g"), ExtResource("7_c0p4b"), ExtResource("8_gdv2u")])
-aircrafts = Array[ExtResource("10_khyif")]([ExtResource("11_0wxyt"), ExtResource("3_annvj")])
-ships = Array[ExtResource("12_gig1h")]([ExtResource("5_mn30j")])

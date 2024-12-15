@@ -9,9 +9,9 @@ signal actual_event_registered(actual_event: Event)
 signal time_event_notification(time_event: TimeEvent)
 
 
-@export_storage var events: Array[Event]
-@export_storage var planned_events: Array[Event]
-@export_storage var actual_events: Array[Event]
+var events: Array[Event]
+var planned_events: Array[Event]
+var actual_events: Array[Event]
 #var planned_events_as_events: Array[Event]:
 	#get:
 		#var new_list: Array[Event]

@@ -13,7 +13,7 @@ enum Status {
 var id: int
 var shipment: Shipment
 var request_for_quotation: RequestForQuotation
-var quoting_forwarder: FreightForwarder
+var quoting_forwarder: Party
 var number: String
 var currency: Currency
 var revenue_charges: Array[Charge]
@@ -35,7 +35,7 @@ var status: Status
 
 
 @warning_ignore("shadowed_variable")
-func with_data(id: int, shipment: Shipment, request_for_quotation: RequestForQuotation, quoting_forwarder: FreightForwarder, number: String, currency: Currency, revenue_charges: Array[Charge], cost_charges: Array[Charge], transit_time: int, status: Status) -> Quotation:
+func with_data(id: int, shipment: Shipment, request_for_quotation: RequestForQuotation, quoting_forwarder: Party, number: String, currency: Currency, revenue_charges: Array[Charge], cost_charges: Array[Charge], transit_time: int, status: Status) -> Quotation:
 	self.id = id
 	self.shipment = shipment
 	self.request_for_quotation = request_for_quotation
@@ -49,12 +49,14 @@ func with_data(id: int, shipment: Shipment, request_for_quotation: RequestForQuo
 	
 	@warning_ignore("unsafe_property_access", "unsafe_method_access")
 	GlobalRefs.quotations.append(self)
-	
+	@warning_ignore("unsafe_property_access")
+	GlobalRefs.quotations_dict[id] = self
+
 	return self
 
 
 @warning_ignore("shadowed_variable")
-func with_data_random(request_for_quotation: RequestForQuotation, quoting_forwarder: FreightForwarder) -> Quotation:
+func with_data_random(request_for_quotation: RequestForQuotation, quoting_forwarder: Party) -> Quotation:
 	@warning_ignore("unsafe_method_access")
 	id = GlobalRefs.get_quotation_id()
 	
@@ -64,7 +66,7 @@ func with_data_random(request_for_quotation: RequestForQuotation, quoting_forwar
 	
 	number = str(id)
 	@warning_ignore("unsafe_property_access")
-	currency = GlobalRefs.currencies_dict["EUR"]
+	currency = GlobalRefs.currencies_code_dict["EUR"]
 	@warning_ignore("unsafe_property_access", "unsafe_method_access", "unsafe_call_argument")
 	var afr_cost: Charge = Charge.new().with_data(Charge.Code.AFR, Charge.Type.COST, randi_range(3, 5) * shipment.cargo_details.total_weight, currency, GlobalRefs.carriers_with_employees.pick_random())
 	var afr_revenue: Charge = Charge.new().from_cost_with_margin(afr_cost, randf_range(0, 0.3), 0, request_for_quotation.requestor)
@@ -87,7 +89,13 @@ func with_data_random(request_for_quotation: RequestForQuotation, quoting_forwar
 	transit_time = GlobalTimer.ONE_DAY * randi_range(5, 25)
 	
 	status = Status.CREATED
-	print("New quotation created, ID: %s." % [id])
+	
+	@warning_ignore("unsafe_property_access", "unsafe_method_access")
+	GlobalRefs.quotations.append(self)
+	@warning_ignore("unsafe_property_access")
+	GlobalRefs.quotations_dict[id] = self
+	
+	#print("New quotation created, ID: %s." % [id])
 	return self
 
 
@@ -117,16 +125,22 @@ func to_dict() -> Dictionary:
 static func from_dict(data: Dictionary) -> Quotation:
 	return Quotation.new().with_data(
 		data["id"],
-		GlobalRefs.shipments[data["shipment_id"]],
-		GlobalRefs.requests_for_quotation[data["request_for_quotation_id"]],
-		GlobalRefs.parties[data["quoting_forwarder_id"]],
+		null,
+		null,
+		null,
 		data["number"],
-		GlobalRefs.currencies[data["currency_id"]],
+		GlobalRefs.currencies_dict[data["currency_id"] as int],
 		Charge.array_from_dict(data["revenue_charges"]),
 		Charge.array_from_dict(data["cost_charges"]),
 		data["transit_time"],
 		data["status"],
 	)
+
+
+func assign_references_from_dict(data: Dictionary) -> void:
+	self.shipment = GlobalRefs.shipments_dict[data["shipment_id"] as int]
+	self.request_for_quotation = GlobalRefs.requests_for_quotation[data["request_for_quotation_id"] as int]
+	self.quoting_forwarder = GlobalRefs.parties_dict[data["quoting_forwarder_id"] as int]
 
 
 static func array_to_dict(data: Array[Quotation]) -> Array[Dictionary]:
@@ -150,8 +164,8 @@ static func array_to_dict_id(data: Array[Quotation]) -> Array[int]:
 	return array
 
 
-static func array_from_dict_id(data: Array[int]) -> Array[Quotation]:
+static func array_from_dict_id(data: Array) -> Array[Quotation]:
 	var array: Array[Quotation]
 	for item: int in data:
-		array.append(GlobalRefs.quotations[item])
+		array.append(GlobalRefs.quotations_dict[item])
 	return array

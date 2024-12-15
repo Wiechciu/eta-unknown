@@ -1,2 +1,2 @@
-class_name HandlingAgent
-extends Supplier
+#class_name HandlingAgent
+#extends Supplier

@@ -65,7 +65,7 @@ static func from_dict(data: Dictionary) -> Charge:
 		data["type"],
 		data["amount"],
 		data["currency"],
-		GlobalRefs.parties[data["party_id"]],
+		GlobalRefs.parties_dict[data["party_id"] as int],
 	)
 
 

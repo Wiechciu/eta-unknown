@@ -32,8 +32,8 @@ func close() -> void:
 	if GameManager.player.person.employer == null:
 		return
 	
-	if (GameManager.player.person.employer as FreightForwarder).shipment_list_updated.is_connected(refresh_shipment_list_items):
-		(GameManager.player.person.employer as FreightForwarder).shipment_list_updated.disconnect(refresh_shipment_list_items)
+	if (GameManager.player.person.employer as Party).shipment_list_updated.is_connected(refresh_shipment_list_items):
+		(GameManager.player.person.employer as Party).shipment_list_updated.disconnect(refresh_shipment_list_items)
 
 
 func open() -> void:
@@ -41,8 +41,8 @@ func open() -> void:
 	if GameManager.player.person.employer == null:
 		return
 	
-	if not (GameManager.player.person.employer as FreightForwarder).shipment_list_updated.is_connected(refresh_shipment_list_items):
-		(GameManager.player.person.employer as FreightForwarder).shipment_list_updated.connect(refresh_shipment_list_items)
+	if not (GameManager.player.person.employer as Party).shipment_list_updated.is_connected(refresh_shipment_list_items):
+		(GameManager.player.person.employer as Party).shipment_list_updated.connect(refresh_shipment_list_items)
 	refresh_shipment_list_items()
 
 
@@ -92,7 +92,7 @@ func filter_and_sort_shipment_list() -> void:
 	if GameManager.player.person.employer == null:
 		return
 	
-	var shipments: Array[Shipment] = (GameManager.player.person.employer as FreightForwarder).shipments
+	var shipments: Array[Shipment] = (GameManager.player.person.employer as Party).shipments
 	if not show_completed:
 		var shipments_not_completed: Array[Shipment] = shipments.filter(func(shipment: Shipment) -> bool: return not shipment.is_completed_or_cancelled)
 		shipments = shipments_not_completed

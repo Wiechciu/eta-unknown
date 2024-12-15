@@ -2,12 +2,12 @@ class_name ShipmentHandling
 extends Resource
 
 
-@export_storage var handling_agent_export: HandlingAgent #TODO
-@export_storage var handling_agent_import: HandlingAgent #TODO
+var handling_agent_export: Party #TODO
+var handling_agent_import: Party #TODO
 
 
 @warning_ignore("shadowed_variable")
-func with_data(handling_agent_export: HandlingAgent, handling_agent_import: HandlingAgent) -> ShipmentHandling:
+func with_data(handling_agent_export: Party, handling_agent_import: Party) -> ShipmentHandling:
 	self.handling_agent_export = handling_agent_export
 	self.handling_agent_import = handling_agent_import
 	

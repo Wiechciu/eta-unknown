@@ -2,9 +2,9 @@ class_name Country
 extends Resource
 
 
-@export_storage var id: int
-@export_storage var code: String
-@export_storage var name: String
+var id: int
+var code: String
+var name: String
 var locations: Array[Location]
 
 
@@ -13,6 +13,13 @@ func with_data(id: int, code: String, name: String) -> Country:
 	self.id = id
 	self.code = code
 	self.name = name
+	
+	@warning_ignore("unsafe_property_access", "unsafe_method_access")
+	GlobalRefs.countries.append(self)
+	@warning_ignore("unsafe_property_access")
+	GlobalRefs.countries_dict[id] = self
+	@warning_ignore("unsafe_property_access")
+	GlobalRefs.countries_code_dict[code] = self
 	
 	return self
 

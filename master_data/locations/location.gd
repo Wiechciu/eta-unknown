@@ -2,15 +2,15 @@ class_name Location
 extends Resource
 
 
-@export_storage var id: int
-@export_storage var code: String
-@export_storage var country: Country
-@export_storage var name: String
+var id: int
+var code: String
+var country: Country
+var name: String
 var print_string: String:
 	get:
 		return code + ", " + name + ", " + country.code
-@export_storage var is_airport: bool
-@export_storage var is_seaport: bool
+var is_airport: bool
+var is_seaport: bool
 
 
 @warning_ignore("shadowed_variable")
@@ -20,6 +20,15 @@ func with_data(id: int, code: String, name: String, country: Country) -> Locatio
 	self.name = name
 	self.country = country
 	
+	country.locations.append(self)
+	
+	@warning_ignore("unsafe_property_access", "unsafe_method_access")
+	GlobalRefs.locations.append(self)
+	@warning_ignore("unsafe_property_access")
+	GlobalRefs.locations_dict[id] = self
+	@warning_ignore("unsafe_property_access")
+	GlobalRefs.locations_code_dict[code] = self
+
 	return self
 
 
@@ -46,7 +55,7 @@ static func from_dict(data: Dictionary) -> Location:
 		data["id"],
 		data["code"],
 		data["name"],
-		GlobalRefs.countries[data["country_id"]],
+		GlobalRefs.countries_dict[data["country_id"] as int],
 	)
 
 

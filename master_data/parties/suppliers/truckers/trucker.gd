@@ -1,2 +1,2 @@
-class_name Trucker
-extends Supplier
+#class_name Trucker
+#extends Supplier

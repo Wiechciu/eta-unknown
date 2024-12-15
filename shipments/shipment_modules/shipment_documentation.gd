@@ -5,7 +5,7 @@ extends Resource
 signal documentation_updated
 
 
-@export_storage var documents: Array[Document]
+var documents: Array[Document]
 #var commercial_documents: Array[Document] #TODO
 #var transport_documents: Array[Document] #TODO
 #var customs_documents: Array[Document] #TODO

@@ -2,13 +2,13 @@ class_name DimensionSet
 extends Resource
 
 
-@export_storage var quantity: int
-@export_storage var length: float
-@export_storage var width: float
-@export_storage var height: float
-@export_storage var total_weight: float
-@export_storage var is_stackable: bool
-@export_storage var is_dg: bool
+var quantity: int
+var length: float
+var width: float
+var height: float
+var total_weight: float
+var is_stackable: bool
+var is_dg: bool
 var total_volume: float:
 	get:
 		return snappedf(quantity * length * width * height / 1000000, 0.001)

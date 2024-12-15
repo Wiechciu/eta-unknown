@@ -42,52 +42,12 @@ func load_game() -> void:
 func save_game_to_json() -> void:
 	var file: FileAccess = FileAccess.open(save_full_path, FileAccess.WRITE)
 	
-	var cargos: Array
-	for item: Cargo in GlobalRefs.cargos:
-		cargos.append(item.to_dict())
-	var currencies: Array
-	for item: Currency in GlobalRefs.currencies:
-		currencies.append(item.to_dict())
-	var job_positions: Array
-	for item: JobPosition in GlobalRefs.job_positions:
-		job_positions.append(item.to_dict())
-	var parties: Array
-	for item: Party in GlobalRefs.parties:
-		parties.append(item.to_dict())
-	var countries: Array
-	for item: Country in GlobalRefs.countries:
-		countries.append(item.to_dict())
-	var locations: Array
-	for item: Location in GlobalRefs.locations:
-		locations.append(item.to_dict())
-	var people: Array
-	for item: Person in GlobalRefs.people:
-		people.append(item.to_dict())
-	var shipments: Array
-	for item: Shipment in GlobalRefs.shipments:
-		shipments.append(item.to_dict())
-	var requests_for_quotation: Array
-	for item: RequestForQuotation in GlobalRefs.requests_for_quotation:
-		requests_for_quotation.append(item.to_dict())
-	var quotations: Array
-	for item: Quotation in GlobalRefs.quotations:
-		quotations.append(item.to_dict())
-	
-	# Prepare data
-	var data: Dictionary = {
-		"cargos": cargos,
-		"currencies": currencies,
-		"job_positions": job_positions,
-		"countries": countries,
-		"locations": locations,
-		"parties": parties,
-		"people": people,
-		"shipments": shipments,
-		"requests_for_quotation": requests_for_quotation,
-		"quotations": quotations,
-		"player_person_id": GameManager.player.person.id if GameManager.player.person else "",
-		"time": GlobalTimer.now_float,
-	}
+	## TODO: Reload scene, so that all Humans and furniture is reset before loading their state.
+	## TODO: Add furniture state, e.g. Computer open
+	## TODO: Add current pathing state to Employees
+	var data: Dictionary
+	data["time"] = GlobalTimer.now_float
+	data["global_refs"] = GlobalRefs.to_dict()
 	
 	file.store_string(JSON.stringify(data, "\t"))
 	file.close()
@@ -107,49 +67,8 @@ func load_game_from_json() -> void:
 	if data == null:
 		print("Couldn't load:", save_full_path)
 	
-	GlobalRefs.cargos.clear()
-	for data_item: Dictionary in data["cargos"]:
-		var item: Cargo = Cargo.from_dict(data_item)
-		GlobalRefs.cargos.append(item)
-	GlobalRefs.currencies.clear()
-	for data_item: Dictionary in data["currencies"]:
-		var item: Currency = Currency.from_dict(data_item)
-		GlobalRefs.currencies.append(item)
-	GlobalRefs.job_positions.clear()
-	for data_item: Dictionary in data["job_positions"]:
-		var item: JobPosition = JobPosition.from_dict(data_item)
-		GlobalRefs.job_positions.append(item)
-	GlobalRefs.countries.clear()
-	for data_item: Dictionary in data["countries"]:
-		var item: Country = Country.from_dict(data_item)
-		GlobalRefs.countries.append(item)
-	GlobalRefs.locations.clear()
-	for data_item: Dictionary in data["locations"]:
-		var item: Location = Location.from_dict(data_item)
-		GlobalRefs.locations.append(item)
-	GlobalRefs.parties.clear()
-	for data_item: Dictionary in data["parties"]:
-		var item: Party = Party.from_dict(data_item)
-		GlobalRefs.parties.append(item)
-	GlobalRefs.people.clear()
-	for data_item: Dictionary in data["people"]:
-		var item: Person = Person.from_dict(data_item)
-		GlobalRefs.people.append(item)
-	GlobalRefs.shipments.clear()
-	for data_item: Dictionary in data["shipments"]:
-		var item: Shipment = Shipment.from_dict(data_item)
-		GlobalRefs.shipments.append(item)
-	GlobalRefs.requests_for_quotation.clear()
-	for data_item: Dictionary in data["requests_for_quotation"]:
-		var item: RequestForQuotation = RequestForQuotation.from_dict(data_item)
-		GlobalRefs.requests_for_quotation.append(item)
-	GlobalRefs.quotations.clear()
-	for data_item: Dictionary in data["quotations"]:
-		var item: Quotation = Quotation.from_dict(data_item)
-		GlobalRefs.quotations.append(item)
-	
-	GameManager.player.person = GlobalRefs.people[data["player_person_id"]]
-	GlobalTimer.now_float = data["time"]
+	GlobalTimer.from_dict(data)
+	GlobalRefs.from_dict(data["global_refs"])
 	
 	print("--- Loaded from: %s ---" % save_file_name)
 	ActionLogger.create_log("Loaded from: %s." % save_file_name)

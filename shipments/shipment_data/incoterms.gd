@@ -17,8 +17,8 @@ enum Code {
 }
 
 
-@export_storage var code: Code
-@export_storage var place: String
+var code: Code
+var place: String
 
 var code_string: String:
 	get:
@@ -53,8 +53,9 @@ func with_data(code: Code, place: String = "") -> Incoterms:
 	return self
 
 
-func with_data_random(place_to_assign: String = "") -> Incoterms:
-	return with_data(get_random_code(), place_to_assign)
+@warning_ignore("shadowed_variable")
+func with_data_random(place: String = "") -> Incoterms:
+	return with_data(get_random_code(), place)
 
 
 func get_random_code() -> Code:

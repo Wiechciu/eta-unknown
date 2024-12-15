@@ -2,12 +2,12 @@ class_name ShipmentHaulage
 extends Resource
 
 
-@export_storage var trucker_pickup: Trucker
-@export_storage var trucker_delivery: Trucker
+var trucker_pickup: Party
+var trucker_delivery: Party
 
 
 @warning_ignore("shadowed_variable")
-func with_data(trucker_pickup: Trucker, trucker_delivery: Trucker) -> ShipmentHaulage:
+func with_data(trucker_pickup: Party, trucker_delivery: Party) -> ShipmentHaulage:
 	self.trucker_pickup = trucker_pickup
 	self.trucker_delivery = trucker_delivery
 	

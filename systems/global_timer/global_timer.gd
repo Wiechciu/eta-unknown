@@ -246,3 +246,8 @@ func _check_time_events() -> void:
 
 func set_time_scale(scale: int) -> void:
 	time_scale = scale
+
+
+func from_dict(data: Dictionary) -> void:
+	time_events.clear()
+	now_float = data["time"]

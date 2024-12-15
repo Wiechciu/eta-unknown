@@ -20,42 +20,42 @@ enum Status {
 }
 
 
-@export_storage var id: int
-@export_storage var status: Status
+var id: int
+var status: Status
 var is_completed_or_cancelled: bool:
 	get:
 		return status == Status.COMPLETED or status == Status.CANCELLED
 
 # General
-@export_storage var customer_reference: String
-@export_storage var export_contact_person: Person
-@export_storage var import_contact_person: Person
-@export_storage var shipper: Party
-@export_storage var consignee: Party
-@export_storage var origin: Location
-@export_storage var destination: Location
-@export_storage var service: Service
-@export_storage var incoterms: Incoterms
+var customer_reference: String
+var export_contact_person: Person
+var import_contact_person: Person
+var shipper: Party
+var consignee: Party
+var origin: Location
+var destination: Location
+var service: Service
+var incoterms: Incoterms
 
 # Accepted shipment variables
-@export_storage var number: int
-@export_storage var owner: FreightForwarder
+var number: int
+var owner: Party
 var is_owned: bool:
 	get:
 		return owner != null
 
 # Shipment modules
-@export_storage var cargo_details: ShipmentCargoDetails
-@export_storage var main_freight: ShipmentMainFreight
-@export_storage var haulage: ShipmentHaulage
-@export_storage var handling: ShipmentHandling
-@export_storage var customs: ShipmentCustoms
-@export_storage var documentation: ShipmentDocumentation
-@export_storage var events: ShipmentEvents
-@export_storage var accounting: ShipmentAccounting
+var cargo_details: ShipmentCargoDetails
+var main_freight: ShipmentMainFreight
+var haulage: ShipmentHaulage
+var handling: ShipmentHandling
+var customs: ShipmentCustoms
+var documentation: ShipmentDocumentation
+var events: ShipmentEvents
+var accounting: ShipmentAccounting
 
 
-func with_data(id: int, status: Status, customer_reference: String, export_contact_person: Person, import_contact_person: Person, shipper: Party, consignee: Party, origin: Location, destination: Location, service: Service, incoterms: Incoterms, number: int, owner: FreightForwarder, cargo: Cargo, dimension_sets: Array[DimensionSet], mode_of_transport: ModeOfTransport, carrier: Carrier, trucker_pickup: Trucker, trucker_delivery: Trucker, handling_agent_export: HandlingAgent, handling_agent_import: HandlingAgent, customs_agency_export: CustomsAgency, customs_agency_import: CustomsAgency, documents: Array[Document], events: Array[Event], quotation: Quotation, charges: Array[Charge]) -> Shipment:
+func with_data(id: int, status: Status, customer_reference: String, export_contact_person: Person, import_contact_person: Person, shipper: Party, consignee: Party, origin: Location, destination: Location, service: Service, incoterms: Incoterms, number: int, owner: Party, cargo: Cargo, dimension_sets: Array[DimensionSet], mode_of_transport: ModeOfTransport, carrier: Party, trucker_pickup: Party, trucker_delivery: Party, handling_agent_export: Party, handling_agent_import: Party, customs_agency_export: Party, customs_agency_import: Party, documents: Array[Document], events: Array[Event], quotation: Quotation, charges: Array[Charge]) -> Shipment:
 	self.id = id
 	self.status = status
 	self.customer_reference = customer_reference
@@ -82,11 +82,13 @@ func with_data(id: int, status: Status, customer_reference: String, export_conta
 	
 	@warning_ignore("unsafe_property_access", "unsafe_method_access")
 	GlobalRefs.shipments.append(self)
-	
+	@warning_ignore("unsafe_property_access")
+	GlobalRefs.shipments_dict[id] = self
+
 	return self
 
 
-func with_data_random(shipper_to_assign: Customer = null, consignee_to_assign: Customer = null) -> Shipment:
+func with_data_random(shipper_to_assign: Party = null, consignee_to_assign: Party = null) -> Shipment:
 	@warning_ignore("unsafe_method_access")
 	id = GlobalRefs.get_shipment_id()
 	
@@ -148,8 +150,11 @@ func with_data_random(shipper_to_assign: Customer = null, consignee_to_assign: C
 	
 	@warning_ignore("unsafe_property_access", "unsafe_method_access")
 	GlobalRefs.shipments.append(self)
-	@warning_ignore("unsafe_property_access", "unsafe_method_access")
-	print("New shipment created. Shipment ID: %s. There are %s active shipments." % [id, GlobalRefs.shipments.size()])
+	@warning_ignore("unsafe_property_access")
+	GlobalRefs.shipments_dict[id] = self
+	
+	#@warning_ignore("unsafe_property_access", "unsafe_method_access")
+	#print("New shipment created. Shipment ID: %s. There are %s active shipments." % [id, GlobalRefs.shipments.size()])
 	return self
 
 
@@ -175,7 +180,7 @@ func generate_random_customer_reference(string_length: int, number_length: int) 
 	return random_customer_reference
 
 
-func accept(new_owner: FreightForwarder) -> void:
+func accept(new_owner: Party) -> void:
 	events.create_new_actual_event_now(Event.Code.BOK)
 	change_status(Status.ACCEPTED)
 	owner = new_owner
@@ -203,14 +208,14 @@ func _on_planned_event_registered(planned_event: Event) -> void:
 	if planned_event.code == Event.Code.PUP:
 		change_status(Shipment.Status.PLANNED)
 		@warning_ignore("unsafe_property_access", "unsafe_call_argument")
-		accounting.create_new_cost_charge(Charge.Code.PUP, randi_range(100, 150), GlobalRefs.currencies_dict["EUR"], haulage.trucker_pickup)
+		accounting.create_new_cost_charge(Charge.Code.PUP, randi_range(100, 150), GlobalRefs.currencies_code_dict["EUR"], haulage.trucker_pickup)
 		@warning_ignore("unsafe_property_access", "unsafe_call_argument")
-		accounting.create_new_revenue_charge(Charge.Code.PUP, randi_range(120, 170), GlobalRefs.currencies_dict["EUR"], shipper)
+		accounting.create_new_revenue_charge(Charge.Code.PUP, randi_range(120, 170), GlobalRefs.currencies_code_dict["EUR"], shipper)
 	if planned_event.code == Event.Code.DEL:
 		@warning_ignore("unsafe_property_access", "unsafe_call_argument")
-		accounting.create_new_cost_charge(Charge.Code.DEL, randi_range(100, 150), GlobalRefs.currencies_dict["EUR"], haulage.trucker_delivery)
+		accounting.create_new_cost_charge(Charge.Code.DEL, randi_range(100, 150), GlobalRefs.currencies_code_dict["EUR"], haulage.trucker_delivery)
 		@warning_ignore("unsafe_property_access", "unsafe_call_argument")
-		accounting.create_new_revenue_charge(Charge.Code.DEL, randi_range(120, 170), GlobalRefs.currencies_dict["EUR"], consignee)
+		accounting.create_new_revenue_charge(Charge.Code.DEL, randi_range(120, 170), GlobalRefs.currencies_code_dict["EUR"], consignee)
 
 
 func _on_actual_event_registered(actual_event: Event) -> void:
@@ -294,31 +299,49 @@ static func from_dict(data: Dictionary) -> Shipment:
 		data["id"] as int,
 		data["status"] as Shipment.Status,
 		data["customer_reference"] as String,
-		GlobalRefs.people[data["export_contact_person_id"] as int] if data["export_contact_person_id"] else null,
-		GlobalRefs.people[data["import_contact_person_id"] as int] if data["import_contact_person_id"] else null,
-		GlobalRefs.parties[data["shipper_id"] as int] as Customer if data["shipper_id"] else null,
-		GlobalRefs.parties[data["consignee_id"] as int] as Customer if data["consignee_id"] else null,
-		GlobalRefs.locations[data["origin_id"] as int] if data["origin_id"] else null,
-		GlobalRefs.locations[data["destination_id"] as int] if data["destination_id"] else null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
 		Service.new().with_data(data["service_code"] as Service.Code) if data["service_code"] else null,
 		Incoterms.new().with_data(data["incoterms_code"] as Incoterms.Code, data["incoterms_place"] as String) if data["incoterms_code"] else null,
 		data["number"] as int,
-		GlobalRefs.parties[data["owner_id"] as int] as FreightForwarder if data["owner_id"] else null,
-		GlobalRefs.cargos[data["cargo_id"] as int] if data["cargo_id"] else null,
-		DimensionSet.array_from_dict(data["dimension_sets"] as Array) if data["dimension_sets"] else [],
+		null,
+		GlobalRefs.cargos_dict[data["cargo_id"] as int] if data["cargo_id"] else null,
+		DimensionSet.array_from_dict(data["dimension_sets"] as Array[Dictionary]) if data["dimension_sets"] else ([] as Array[DimensionSet]),
 		ModeOfTransport.new().with_data(data["mode_of_transport_code"] as ModeOfTransport.Code),
-		GlobalRefs.parties[data["carrier_id"] as int] as Carrier if data["carrier_id"] else null,
-		GlobalRefs.parties[data["trucker_pickup_id"] as int] as Trucker if data["trucker_pickup_id"] else null,
-		GlobalRefs.parties[data["trucker_delivery_id"] as int] as Trucker if data["trucker_delivery_id"] else null,
-		GlobalRefs.parties[data["handling_agent_export_id"] as int] as HandlingAgent if data["handling_agent_export_id"] else null,
-		GlobalRefs.parties[data["handling_agent_import_id"] as int] as HandlingAgent if data["handling_agent_import_id"] else null,
-		GlobalRefs.parties[data["customs_agency_export_id"] as int] as CustomsAgency if data["customs_agency_export_id"] else null,
-		GlobalRefs.parties[data["customs_agency_import_id"] as int] as CustomsAgency if data["customs_agency_import_id"] else null,
-		Document.array_from_dict(data["documents"] as Array) if data["documents"] else [], ##FIXME - crashes here
-		Event.array_from_dict(data["events"] as Array) if data["events"] else [],
-		GlobalRefs.quotations[data["quotation_id"] as int] if data["quotation_id"] else null,
-		Charge.array_from_dict(data["charges"] as Array) if data["charges"] else [],
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		Document.array_from_dict(data["documents"] as Array[Dictionary]) if data["documents"] else ([] as Array[Document]),
+		Event.array_from_dict(data["events"] as Array[Dictionary]) if data["events"] else ([] as Array[Event]),
+		null,
+		Charge.array_from_dict(data["charges"] as Array[Dictionary]) if data["charges"] else ([] as Array[Charge]),
 	)
+
+
+func assign_references_from_dict(data: Dictionary) -> void:
+	self.export_contact_person = GlobalRefs.people_dict[data["export_contact_person_id"] as int] if data["export_contact_person_id"] else null
+	self.import_contact_person = GlobalRefs.people_dict[data["import_contact_person_id"] as int] if data["import_contact_person_id"] else null
+	self.shipper = GlobalRefs.parties_dict[data["shipper_id"] as int] if data["shipper_id"] else null
+	self.consignee = GlobalRefs.parties_dict[data["consignee_id"] as int] if data["consignee_id"] else null
+	self.origin = GlobalRefs.locations_dict[data["origin_id"] as int] if data["origin_id"] else null
+	self.destination = GlobalRefs.locations_dict[data["destination_id"] as int] if data["destination_id"] else null
+	self.owner = GlobalRefs.parties_dict[data["owner_id"] as int] if data["owner_id"] else null
+	self.main_freight.carrier = GlobalRefs.parties_dict[data["carrier_id"] as int] if data["carrier_id"] else null
+	self.haulage.trucker_pickup = GlobalRefs.parties_dict[data["trucker_pickup_id"] as int] if data["trucker_pickup_id"] else null
+	self.haulage.trucker_delivery = GlobalRefs.parties_dict[data["trucker_delivery_id"] as int] if data["trucker_delivery_id"] else null
+	self.handling.handling_agent_export = GlobalRefs.parties_dict[data["handling_agent_export_id"] as int] if data["handling_agent_export_id"] else null
+	self.handling.handling_agent_import = GlobalRefs.parties_dict[data["handling_agent_import_id"] as int] if data["handling_agent_import_id"] else null
+	self.customs.customs_agency_export = GlobalRefs.parties_dict[data["customs_agency_export_id"] as int] if data["customs_agency_export_id"] else null
+	self.customs.customs_agency_import = GlobalRefs.parties_dict[data["customs_agency_import_id"] as int] if data["customs_agency_import_id"] else null
+	self.accounting.quotation = GlobalRefs.quotations_dict[data["quotation_id"] as int] if data["quotation_id"] else null
 
 
 static func array_to_dict(data: Array[Shipment]) -> Array[Dictionary]:
@@ -328,7 +351,7 @@ static func array_to_dict(data: Array[Shipment]) -> Array[Dictionary]:
 	return array
 
 
-static func array_from_dict(data: Array[Dictionary]) -> Array[Shipment]:
+static func array_from_dict(data: Array) -> Array[Shipment]:
 	var array: Array[Shipment]
 	for item: Dictionary in data:
 		array.append(Shipment.from_dict(item))
@@ -342,8 +365,8 @@ static func array_to_dict_id(data: Array[Shipment]) -> Array[int]:
 	return array
 
 
-static func array_from_dict_id(data: Array[int]) -> Array[Shipment]:
+static func array_from_dict_id(data: Array) -> Array[Shipment]:
 	var array: Array[Shipment]
 	for item: int in data:
-		array.append(GlobalRefs.shipments[item])
+		array.append(GlobalRefs.shipments_dict[item])
 	return array

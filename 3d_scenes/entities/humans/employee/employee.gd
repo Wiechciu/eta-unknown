@@ -13,6 +13,7 @@ var anim_idle: StringName = "idle/Root|Idle"
 
 
 func _ready() -> void:
+	super._ready()
 	GlobalDebugger.assert_all_exported_properties(self)
 	walk()
 	

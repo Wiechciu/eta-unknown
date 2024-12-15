@@ -13,6 +13,11 @@ func with_data(id: int, title: String, salary: float) -> JobPosition:
 	self.title = title
 	self.salary = salary
 	
+	@warning_ignore("unsafe_property_access", "unsafe_method_access")
+	GlobalRefs.job_positions.append(self)
+	@warning_ignore("unsafe_property_access")
+	GlobalRefs.job_positions_dict[id] = self
+	
 	return self
 
 

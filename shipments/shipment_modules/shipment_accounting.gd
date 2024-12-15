@@ -5,10 +5,10 @@ extends Resource
 signal charges_updated
 
 
-@export_storage var quotation: Quotation
-@export_storage var charges: Array[Charge]
-@export_storage var revenue_charges: Array[Charge]
-@export_storage var cost_charges: Array[Charge]
+var quotation: Quotation
+var charges: Array[Charge]
+var revenue_charges: Array[Charge]
+var cost_charges: Array[Charge]
 
 #var revenue_charges_as_charges: Array[Charge]:
 	#get:

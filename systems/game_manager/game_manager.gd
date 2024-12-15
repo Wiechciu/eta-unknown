@@ -33,7 +33,7 @@ func _ready() -> void:
 
 
 func create_new_shipments() -> void:
-	for customer: Customer in GlobalRefs.customers_with_employees:
+	for customer: Party in GlobalRefs.customers_with_employees:
 		var chance_to_create: float = 0.02
 		if randf() > chance_to_create:
 			continue
@@ -50,7 +50,7 @@ func create_new_shipments() -> void:
 		counter += 1
 		if counter > max_to_accept:
 			break
-		shipment.accept(player.person.employer as FreightForwarder)
+		shipment.accept(player.person.employer)
 
 
 func _initiate_thread() -> void:

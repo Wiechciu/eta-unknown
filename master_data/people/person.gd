@@ -8,20 +8,20 @@ enum Experience {
 	EXPERT,
 }
 
-@export_storage var id: int
-@export_storage var first_name: String
-@export_storage var last_name: String
-@export_storage var gender: String
-@export_storage var email: String
-@export_storage var phone_number: String
-@export_storage var birthdate: String
-@export_storage var experience: Experience
+var id: int
+var first_name: String
+var last_name: String
+var gender: String
+var email: String
+var phone_number: String
+var birthdate: String
+var experience: Experience
 var full_name: String:
 	get:
 		return first_name + " " + last_name
 
-@export_storage var employer: Party
-@export_storage var job_position: JobPosition
+var employer: Party
+var job_position: JobPosition
 
 
 @warning_ignore("shadowed_variable")
@@ -36,6 +36,11 @@ func with_data(id: int, first_name: String, last_name: String, gender: String, e
 	self.experience = experience
 	self.employer = employer
 	self.job_position = job_position
+	
+	@warning_ignore("unsafe_property_access", "unsafe_method_access")
+	GlobalRefs.people.append(self)
+	@warning_ignore("unsafe_property_access")
+	GlobalRefs.people_dict[id] = self
 	
 	return self
 
@@ -65,9 +70,13 @@ static func from_dict(data: Dictionary) -> Person:
 		data["phone_number"],
 		data["birthdate"],
 		data["experience"],
-		GlobalRefs.parties[data["employer_id"]],
-		GlobalRefs.job_positions[data["job_position_id"]],
+		null,
+		GlobalRefs.job_positions_dict[data["job_position_id"] as int],
 	)
+
+
+func assign_references_from_dict(data: Dictionary) -> void:
+	self.employer = GlobalRefs.parties_dict[data["employer_id"] as int]
 
 
 static func array_to_dict(data: Array[Person]) -> Array[Dictionary]:
@@ -81,4 +90,18 @@ static func array_from_dict(data: Array) -> Array[Person]:
 	var array: Array[Person]
 	for item: Dictionary in data:
 		array.append(Person.from_dict(item))
+	return array
+
+
+static func array_to_dict_id(data: Array[Person]) -> Array[int]:
+	var array: Array[int]
+	for item: Person in data:
+		array.append(item.id)
+	return array
+
+
+static func array_from_dict_id(data: Array) -> Array[Person]:
+	var array: Array[Person]
+	for item: int in data:
+		array.append(GlobalRefs.people_dict[item])
 	return array
