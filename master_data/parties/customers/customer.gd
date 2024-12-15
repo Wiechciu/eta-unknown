@@ -7,22 +7,12 @@ var shipments: Array[Shipment]
 
 
 func create_new_request_for_quotation() -> void:
-	var new_request: RequestForQuotation = RequestForQuotation.new().with_data(self)
+	var new_request: RequestForQuotation = RequestForQuotation.new().with_data_random(self)
 	if new_request != null:
 		requests_for_quotation.append(new_request)
 
 
 func create_new_shipment() -> void:
-	var new_shipment: Shipment = Shipment.new().with_data(self, null)
+	var new_shipment: Shipment = Shipment.new().with_data_random(self, null)
 	if new_shipment != null:
 		shipments.append(new_shipment)
-
-
-@warning_ignore("unused_parameter")
-func load_saved_request_for_quotation_data(request_for_quotation: RequestForQuotation) -> void:
-	pass #TODO, same as Shipment.load_saved_data
-
-
-func load_saved_shipment_data(shipment: Shipment) -> void:
-	var new_shipment: Shipment = Shipment.new().load_saved_data(shipment)
-	shipments.append(new_shipment)

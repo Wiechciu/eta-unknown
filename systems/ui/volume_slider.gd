@@ -12,6 +12,7 @@ extends Control
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
+		@warning_ignore("unsafe_method_access")
 		GlobalDebugger.assert_all_exported_properties(self)
 		
 		slider.value_changed.connect(_on_value_changed)

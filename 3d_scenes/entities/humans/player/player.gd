@@ -23,6 +23,7 @@ var head_max_offset: Vector3 = Vector3(0.0, 0.1, 0.0)
 
 
 func _ready() -> void:
+	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.assert_all_exported_properties(self)
 	
 	assign_person()
@@ -48,10 +49,18 @@ func _input(event: InputEvent) -> void:
 
 
 func assign_person() -> void:
-	if not GameManager.is_node_ready():
-		await GameManager.ready
+	@warning_ignore("unsafe_property_access")
+	GameManager.player = self
 	
-	person = GameManager.player_person
+	if GlobalRefs.freight_forwarders_with_employees.is_empty():
+		await SaveManager.game_loaded
+	
+	if person == null:
+		var company: FreightForwarder = GlobalRefs.freight_forwarders_with_employees.pick_random() as FreightForwarder
+		person = company.employees.pick_random() as Person
+		person.job_position = GlobalRefs.job_positions_dict["Intern"]
+	print("loaded player: " + person.full_name + ", working at: " + person.employer.name + ", as: " + person.job_position.title)
+
 
 
 func initial_setup() -> void:

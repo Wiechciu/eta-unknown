@@ -14,7 +14,9 @@ extends Node
 func _ready() -> void:
 	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.assert_all_exported_properties(self)
-	
+
+
+func start() -> void:
 	print("--- starting loading from JSONs ---")
 	load_cargo_from_json(cargo_json, GlobalRefs.cargos, GlobalRefs.cargos_dict)
 	load_currencies_from_json(currencies_json, GlobalRefs.currencies, GlobalRefs.currencies_dict)
@@ -25,12 +27,13 @@ func _ready() -> void:
 	load_people_from_json(people_json, GlobalRefs.people, GlobalRefs.people_dict)
 	
 	print("--- finished loading from JSONs ---\n")
-	self.queue_free()
 
 
 func load_cargo_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
 	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.start_timer()
+	array_to_fill.clear()
+	dict_to_fill.clear()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
@@ -53,6 +56,8 @@ func load_cargo_from_json(file_to_load: String, array_to_fill: Array, dict_to_fi
 func load_currencies_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
 	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.start_timer()
+	array_to_fill.clear()
+	dict_to_fill.clear()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
@@ -73,6 +78,8 @@ func load_currencies_from_json(file_to_load: String, array_to_fill: Array, dict_
 func load_countries_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
 	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.start_timer()
+	array_to_fill.clear()
+	dict_to_fill.clear()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
@@ -91,6 +98,8 @@ func load_countries_from_json(file_to_load: String, array_to_fill: Array, dict_t
 func load_locations_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
 	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.start_timer()
+	array_to_fill.clear()
+	dict_to_fill.clear()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
@@ -112,6 +121,22 @@ func load_locations_from_json(file_to_load: String, array_to_fill: Array, dict_t
 func load_parties_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
 	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.start_timer()
+	array_to_fill.clear()
+	dict_to_fill.clear()
+	GlobalRefs.carriers.clear()
+	GlobalRefs.carriers_dict.clear()
+	GlobalRefs.customers.clear()
+	GlobalRefs.customers_dict.clear()
+	GlobalRefs.customs_agencies.clear()
+	GlobalRefs.customs_agencies_dict.clear()
+	GlobalRefs.freight_forwarders.clear()
+	GlobalRefs.freight_forwarders_dict.clear()
+	GlobalRefs.handling_agents.clear()
+	GlobalRefs.handling_agents_dict.clear()
+	GlobalRefs.truckers.clear()
+	GlobalRefs.truckers_dict.clear()
+	GlobalRefs.suppliers.clear()
+	GlobalRefs.suppliers_dict.clear()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
@@ -120,31 +145,31 @@ func load_parties_from_json(file_to_load: String, array_to_fill: Array, dict_to_
 			"carrier":
 				new_resource = Carrier.new()
 				GlobalRefs.carriers.append(new_resource)
-				GlobalRefs.carriers_dict[new_resource.name] = new_resource
+				GlobalRefs.carriers_dict[item.name] = new_resource
 			"customer":
 				new_resource = Customer.new()
 				GlobalRefs.customers.append(new_resource)
-				GlobalRefs.customers_dict[new_resource.name] = new_resource
+				GlobalRefs.customers_dict[item.name] = new_resource
 			"customs_agency":
 				new_resource = CustomsAgency.new()
 				GlobalRefs.customs_agencies.append(new_resource)
-				GlobalRefs.customs_agencies_dict[new_resource.name] = new_resource
+				GlobalRefs.customs_agencies_dict[item.name] = new_resource
 			"freight_forwarder":
 				new_resource = FreightForwarder.new()
 				GlobalRefs.freight_forwarders.append(new_resource)
-				GlobalRefs.freight_forwarders_dict[new_resource.name] = new_resource
+				GlobalRefs.freight_forwarders_dict[item.name] = new_resource
 			"handling_agent":
 				new_resource = HandlingAgent.new()
 				GlobalRefs.handling_agents.append(new_resource)
-				GlobalRefs.handling_agents_dict[new_resource.name] = new_resource
+				GlobalRefs.handling_agents_dict[item.name] = new_resource
 			"trucker":
 				new_resource = Trucker.new()
 				GlobalRefs.truckers.append(new_resource)
-				GlobalRefs.truckers_dict[new_resource.name] = new_resource
+				GlobalRefs.truckers_dict[item.name] = new_resource
 		
 		if new_resource is Supplier:
 			GlobalRefs.suppliers.append(new_resource)
-			GlobalRefs.suppliers_dict[new_resource.name] = new_resource
+			GlobalRefs.suppliers_dict[item.name] = new_resource
 			(new_resource as Supplier).reliability_factor = randf_range(0.9, 1.0)
 			(new_resource as Supplier).cost_factor = randf_range(0.8, 1.0)
 		
@@ -174,6 +199,8 @@ func load_parties_from_json(file_to_load: String, array_to_fill: Array, dict_to_
 func load_job_positions_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
 	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.start_timer()
+	array_to_fill.clear()
+	dict_to_fill.clear()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
@@ -193,6 +220,8 @@ func load_job_positions_from_json(file_to_load: String, array_to_fill: Array, di
 func load_people_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
 	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.start_timer()
+	array_to_fill.clear()
+	dict_to_fill.clear()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:

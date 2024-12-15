@@ -15,16 +15,36 @@ var requestor: Customer
 var expected_total_cost: float
 var expected_transit_time: int
 var deadline_date: int
-var deadline_time_event: TimeEvent
 var award_criteria: AwardCriteria
 var quotations: Array[Quotation]
 var awarded_quotation: Quotation
 var is_awarded: bool:
 	get:
 		return awarded_quotation != null
+var deadline_time_event: TimeEvent
 
 
-func with_data(customer: Customer) -> RequestForQuotation:
+@warning_ignore("shadowed_variable")
+func with_data(id: int, shipment: Shipment, requestor: Customer, expected_total_cost: float, expected_transit_time: int, deadline_date: int, award_criteria: AwardCriteria, quotations: Array[Quotation], awarded_quotation: Quotation, ) -> RequestForQuotation:
+	self.id = id
+	self.shipment = shipment
+	self.requestor = requestor
+	self.expected_total_cost = expected_total_cost
+	self.expected_transit_time = expected_transit_time
+	self.deadline_date = deadline_date
+	self.award_criteria = award_criteria
+	self.quotations = quotations
+	self.awarded_quotation = awarded_quotation
+	
+	self.deadline_time_event = GlobalTimer.create_time_event_from_unix_time(deadline_date, self)
+	
+	@warning_ignore("unsafe_property_access", "unsafe_method_access")
+	GlobalRefs.requests_for_quotation.append(self)
+	
+	return self
+
+
+func with_data_random(customer: Customer) -> RequestForQuotation:
 	@warning_ignore("unsafe_method_access")
 	id = GlobalRefs.get_request_for_quotation_id()
 	
@@ -33,9 +53,9 @@ func with_data(customer: Customer) -> RequestForQuotation:
 	var export_chance: float = 0.5
 	var is_export: bool = randf() < export_chance
 	if is_export:
-		shipment = Shipment.new().with_data(customer, null)
+		shipment = Shipment.new().with_data_random(customer, null)
 	else:
-		shipment = Shipment.new().with_data(null, customer)
+		shipment = Shipment.new().with_data_random(null, customer)
 	
 	if shipment == null:
 		return null
@@ -115,3 +135,59 @@ func _sort_by_transit_time_ascending(a: Quotation, b: Quotation) -> bool:
 	if a.transit_time > b.transit_time:
 		return true
 	return false
+
+
+func to_dict() -> Dictionary:
+	return {
+		"id" = id,
+		"shipment_id" = shipment.id if shipment else "",
+		"requestor_id" = requestor.id if requestor else "",
+		"expected_total_cost" = expected_total_cost,
+		"expected_transit_time" = expected_transit_time,
+		"deadline_date" = deadline_date,
+		"award_criteria" = award_criteria,
+		"quotation_ids" = Quotation.array_to_dict_id(quotations),
+		"awarded_quotation_id" = awarded_quotation.id if awarded_quotation else "",
+	}
+
+
+static func from_dict(data: Dictionary) -> RequestForQuotation:
+	return RequestForQuotation.new().with_data(
+		data["id"],
+		GlobalRefs.shipments[data["shipment_id"]],
+		GlobalRefs.parties[data["requestor_id"]],
+		data["expected_total_cost"],
+		data["expected_transit_time"],
+		data["deadline_date"],
+		data["award_criteria"],
+		Quotation.array_from_dict_id(data["quotation_ids"]),
+		GlobalRefs.quotations[data["awarded_quotation_id"]],
+	)
+
+
+static func array_to_dict(data: Array[RequestForQuotation]) -> Array[Dictionary]:
+	var array: Array[Dictionary]
+	for item: RequestForQuotation in data:
+		array.append(item.to_dict())
+	return array
+
+
+static func array_from_dict(data: Array) -> Array[RequestForQuotation]:
+	var array: Array[RequestForQuotation]
+	for item: Dictionary in data:
+		array.append(RequestForQuotation.from_dict(item))
+	return array
+
+
+static func array_to_dict_id(data: Array[RequestForQuotation]) -> Array[int]:
+	var array: Array[int]
+	for item: RequestForQuotation in data:
+		array.append(item.id)
+	return array
+
+
+static func array_from_dict_id(data: Array[int]) -> Array[RequestForQuotation]:
+	var array: Array[RequestForQuotation]
+	for item: int in data:
+		array.append(GlobalRefs.requests_for_quotation[item])
+	return array

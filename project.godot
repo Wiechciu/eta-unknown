@@ -41,6 +41,7 @@ enabled=PackedStringArray()
 [gui]
 
 theme/custom="uid://ukt8dgouxdxt"
+theme/default_font_multichannel_signed_distance_field=true
 
 [input]
 

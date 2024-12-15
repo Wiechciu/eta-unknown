@@ -52,7 +52,7 @@ func connect_signals() -> void:
 	if play_sound_on_hover:
 		control_to_watch.mouse_entered.connect(play_hover_sound)
 	if play_sound_on_click and control_to_watch is Button:
-		control_to_watch.pressed.connect(play_click_sound)
+		(control_to_watch as Button).pressed.connect(play_click_sound)
 
 
 func play_hover_sound() -> void:

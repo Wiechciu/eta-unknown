@@ -29,7 +29,7 @@ func with_data(new_shipment: Shipment) -> TmsShipmentListItem:
 	shipment = new_shipment
 	
 	shipment_number_label.text = str(shipment.number)
-	earliest_pickup_date_label.text = GlobalTimer.get_nice_date_string_from_event(shipment.events.get_first_event_of_type(Event.Code.ERL))
+	earliest_pickup_date_label.text = GlobalTimer.get_nice_date_string_from_event(shipment.events.get_first_event_of_code(Event.Code.ERL))
 	shipper_label.text = shipment.shipper.name
 	origin_label.text = shipment.origin.code
 	destination_label.text = shipment.destination.code

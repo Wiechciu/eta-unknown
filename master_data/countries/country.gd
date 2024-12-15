@@ -15,3 +15,33 @@ func with_data(id: int, code: String, name: String) -> Country:
 	self.name = name
 	
 	return self
+
+
+func to_dict() -> Dictionary:
+	return {
+		"id": id,
+		"code": code,
+		"name": name,
+	}
+
+
+static func from_dict(data: Dictionary) -> Country:
+	return Country.new().with_data(
+		data["id"],
+		data["code"],
+		data["name"]
+	)
+
+
+static func array_to_dict(data: Array[Country]) -> Array[Dictionary]:
+	var array: Array[Dictionary]
+	for item: Country in data:
+		array.append(item.to_dict())
+	return array
+
+
+static func array_from_dict(data: Array) -> Array[Country]:
+	var array: Array[Country]
+	for item: Dictionary in data:
+		array.append(Country.from_dict(item))
+	return array

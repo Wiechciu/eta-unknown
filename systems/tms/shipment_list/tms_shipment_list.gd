@@ -17,21 +17,7 @@ enum SortType {
 var show_completed: bool = true
 var sort_type: SortType
 var shipment_list_items: Array[TmsShipmentListItem]
-var thread: Thread
 var shipments_to_display: Array[Shipment]
-
-
-func refresh_shipment_list_items_on_thread() -> void:
-	if thread != null:
-		thread.wait_to_finish()
-	thread = Thread.new()
-	thread.start(refresh_shipment_list_items)
-
-
-# Thread must be disposed (or "joined"), for portability.
-func _exit_tree() -> void:
-	if thread != null:
-		thread.wait_to_finish()
 
 
 func _ready() -> void:
@@ -43,14 +29,20 @@ func _ready() -> void:
 
 func close() -> void:
 	visible = false
-	if GameManager.player_company.shipment_list_updated.is_connected(refresh_shipment_list_items):
-		GameManager.player_company.shipment_list_updated.disconnect(refresh_shipment_list_items)
+	if GameManager.player.person.employer == null:
+		return
+	
+	if (GameManager.player.person.employer as FreightForwarder).shipment_list_updated.is_connected(refresh_shipment_list_items):
+		(GameManager.player.person.employer as FreightForwarder).shipment_list_updated.disconnect(refresh_shipment_list_items)
 
 
 func open() -> void:
 	visible = true
-	if not GameManager.player_company.shipment_list_updated.is_connected(refresh_shipment_list_items):
-		GameManager.player_company.shipment_list_updated.connect(refresh_shipment_list_items)
+	if GameManager.player.person.employer == null:
+		return
+	
+	if not (GameManager.player.person.employer as FreightForwarder).shipment_list_updated.is_connected(refresh_shipment_list_items):
+		(GameManager.player.person.employer as FreightForwarder).shipment_list_updated.connect(refresh_shipment_list_items)
 	refresh_shipment_list_items()
 
 
@@ -97,7 +89,10 @@ func refresh_shipment_list_items() -> void:
 
 
 func filter_and_sort_shipment_list() -> void:
-	var shipments: Array[Shipment] = (GameManager.player_company as FreightForwarder).shipments
+	if GameManager.player.person.employer == null:
+		return
+	
+	var shipments: Array[Shipment] = (GameManager.player.person.employer as FreightForwarder).shipments
 	if not show_completed:
 		var shipments_not_completed: Array[Shipment] = shipments.filter(func(shipment: Shipment) -> bool: return not shipment.is_completed_or_cancelled)
 		shipments = shipments_not_completed
@@ -119,9 +114,9 @@ func _on_shipment_list_item_pressed(shipment_to_load: Shipment) -> void:
 func _on_toggle_completed_button_pressed() -> void:
 	show_completed = not show_completed
 	if show_completed:
-		_toggle_completed_button.text = tr("HIDE_COMPLETED")
+		_toggle_completed_button.text = "HIDE_COMPLETED"
 	else:
-		_toggle_completed_button.text = tr("SHOW_COMPLETED")
+		_toggle_completed_button.text = "SHOW_COMPLETED"
 	
 	refresh_shipment_list_items()
 
@@ -130,9 +125,9 @@ func _on_sort_button_pressed() -> void:
 	sort_type = SortType.values()[(sort_type + 1) % SortType.size()]
 	match sort_type:
 		SortType.BY_NUMBER:
-			_sort_button.text = tr("SORT_BY_DATE")
+			_sort_button.text = "SORT_BY_DATE"
 		SortType.BY_DATE:
-			_sort_button.text = tr("SORT_BY_NUMBER")
+			_sort_button.text = "SORT_BY_NUMBER"
 	
 	refresh_shipment_list_items()
 
@@ -154,6 +149,6 @@ func _sort_ascending_by_shipment_number(a: Shipment, b: Shipment) -> bool:
 
 
 func _sort_ascending_by_earliest_pickup_date(a: Shipment, b: Shipment) -> bool:
-	if a.events.get_first_event_of_type(Event.Code.ERL).time < b.events.get_first_event_of_type(Event.Code.ERL).time:
+	if a.events.get_first_event_of_code(Event.Code.ERL).time < b.events.get_first_event_of_code(Event.Code.ERL).time:
 		return true
 	return false

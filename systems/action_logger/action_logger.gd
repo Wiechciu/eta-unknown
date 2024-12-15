@@ -28,7 +28,7 @@ func create_log(message: String, is_error: bool = false) -> void:
 	if is_error:
 		audio_player.pitch_scale = randf_range(0.95, 1.05)
 		audio_player.play()
-		label.modulate = Color(0.9, 0.6, 0.7)
+		label.modulate = Color(0.9, 0.3, 0.4)
 	
 	var tween: Tween = label.create_tween()
 	tween.tween_interval(message_duration)
@@ -36,6 +36,7 @@ func create_log(message: String, is_error: bool = false) -> void:
 	tween.tween_callback(label.queue_free)
 	tween.tween_callback(change_modulate)
 	
+	#FIXME - when more than messages are created at the same time, the limit will not fire
 	if message_container.get_child_count() > max_messages:
 		message_container.get_child(0).queue_free()
 

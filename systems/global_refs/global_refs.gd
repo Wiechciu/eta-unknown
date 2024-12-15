@@ -81,6 +81,8 @@ var requests_for_quotation_not_awarded: Array[RequestForQuotation]:
 	get:
 		return requests_for_quotation.filter(func(request: RequestForQuotation) -> bool: return not request.is_awarded)
 
+var quotations: Array[Quotation]
+
 var cargo_last_id: int = -1
 var currency_last_id: int = -1
 var job_position_last_id: int = -1

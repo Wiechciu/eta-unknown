@@ -36,8 +36,8 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 	if not shipment.events.events_updated.is_connected(refresh):
 		shipment.events.events_updated.connect(refresh)
 	
-	refresh_event_details(_planned_event_details_container, shipment.events.planned_events_as_events)
-	refresh_event_details(_actual_event_details_container, shipment.events.actual_events_as_events)
+	refresh_event_details(_planned_event_details_container, shipment.events.planned_events)
+	refresh_event_details(_actual_event_details_container, shipment.events.actual_events)
 
 
 func refresh_event_details(event_details_container: Control, events: Array[Event]) -> void:

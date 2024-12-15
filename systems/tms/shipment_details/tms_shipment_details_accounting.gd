@@ -47,8 +47,8 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 	_gross_profit.value.text = shipment.accounting.gross_profit_string
 	_margin.value.text = shipment.accounting.margin_string
 	
-	refresh_charges(_revenue_container, shipment.accounting.revenue_charges_as_charges)
-	refresh_charges(_cost_container, shipment.accounting.cost_charges_as_charges)
+	refresh_charges(_revenue_container, shipment.accounting.revenue_charges)
+	refresh_charges(_cost_container, shipment.accounting.cost_charges)
 
 
 func refresh_charges(charge_container: Control, charges: Array[Charge]) -> void:

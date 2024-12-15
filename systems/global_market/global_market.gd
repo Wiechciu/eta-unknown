@@ -4,7 +4,7 @@ extends Node
 var market_rates_dict: Dictionary[String, float]
 
 
-func _ready() -> void:
+func create_market_rates() -> void:
 	for first_country: Country in GlobalRefs.countries:
 		for second_country: Country in GlobalRefs.countries:
 			var market_rate: float = 0

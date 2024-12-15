@@ -66,7 +66,7 @@ var previous_day: String
 var time_events: Array[TimeEvent]
 
 @export var fade_screen: ColorRect
-var fade_duration: float = 0.5
+var fade_duration: float = 0.3
 var is_fading: bool
 
 

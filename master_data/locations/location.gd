@@ -29,3 +29,36 @@ static func is_in_country(location_to_check: Location, country_to_check: Country
 
 static func is_not_in_country(location_to_check: Location, country_to_check: Country) -> bool:
 	return not is_in_country(location_to_check, country_to_check)
+
+
+
+func to_dict() -> Dictionary:
+	return {
+		"id": id,
+		"code": code,
+		"name": name,
+		"country_id": country.id if country else "",
+	}
+
+
+static func from_dict(data: Dictionary) -> Location:
+	return Location.new().with_data(
+		data["id"],
+		data["code"],
+		data["name"],
+		GlobalRefs.countries[data["country_id"]],
+	)
+
+
+static func array_to_dict(data: Array[Location]) -> Array[Dictionary]:
+	var array: Array[Dictionary]
+	for item: Location in data:
+		array.append(item.to_dict())
+	return array
+
+
+static func array_from_dict(data: Array) -> Array[Location]:
+	var array: Array[Location]
+	for item: Dictionary in data:
+		array.append(Location.from_dict(item))
+	return array

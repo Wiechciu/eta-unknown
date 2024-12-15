@@ -20,6 +20,7 @@ func check_for_interactable() -> void:
 		interactable.hide_label()
 	
 	old_collider = new_collider
+	@warning_ignore("unsafe_method_access", "unsafe_cast")
 	interactable = GlobalDebugger.get_child_of_type(new_collider as Node, Interactable) as Interactable
 	if interactable != null:
 		interactable.show_label()

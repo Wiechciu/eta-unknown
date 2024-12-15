@@ -27,13 +27,13 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 	
 	_mode_of_transport.value.text = shipment.main_freight.mode_of_transport.name if shipment.main_freight.mode_of_transport else ""
 	_carrier.value.text = shipment.main_freight.carrier.name if shipment.main_freight.carrier else ""
-	_planned_departure.value.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_type(Event.Code.DEP))
-	_planned_arrival.value.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_type(Event.Code.ARR))
+	_planned_departure.value.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_code(Event.Code.DEP))
+	_planned_arrival.value.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_code(Event.Code.ARR))
 
 
 func _on_arrange_main_freight_button_pressed() -> void:
 	shipment.main_freight.mode_of_transport = ModeOfTransport.new().with_data_random()
 	shipment.main_freight.carrier = GlobalRefs.carriers.pick_random()
-	shipment.events.create_new_planned_event(Event.Code.DEP, GlobalTimer.get_future_date_from_event(shipment.events.get_first_event_of_type(Event.Code.ERL), 1, 12))
-	shipment.events.create_new_planned_event(Event.Code.ARR, GlobalTimer.get_future_date_from_event(shipment.events.get_first_event_of_type(Event.Code.LTS), -1, 12))
+	shipment.events.create_new_planned_event(Event.Code.DEP, GlobalTimer.get_future_date_from_event(shipment.events.get_first_event_of_code(Event.Code.ERL), 1, 12))
+	shipment.events.create_new_planned_event(Event.Code.ARR, GlobalTimer.get_future_date_from_event(shipment.events.get_first_event_of_code(Event.Code.LTS), -1, 12))
 	refresh()

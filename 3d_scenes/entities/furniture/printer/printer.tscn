@@ -147,12 +147,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0.077)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.123695, 0.679537)
 
 [node name="Screen" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.981627, 0.190809, 0, -0.190809, 0.981627, 0.17101, 0.571125, 0.540197)
+transform = Transform3D(1, 0, 0, 0, 0.981627, 0.190809, 0, -0.190809, 0.981627, 0.17101, 0.563687, 0.541643)
 pixel_size = 0.001
 text = "0"
-font_size = 150
-outline_size = 30
+font_size = 130
+outline_size = 4
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_05xib")
+volume_db = -15.0
 bus = &"Environment"

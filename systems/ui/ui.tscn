@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://db7riwidjsxbu"]
+[gd_scene load_steps=11 format=3 uid="uid://db7riwidjsxbu"]
 
 [ext_resource type="Script" uid="uid://cxh3u0n0nptw2" path="res://systems/ui/ui.gd" id="1_xemwu"]
 [ext_resource type="Script" uid="uid://cr6ck8pbq4a48" path="res://systems/ui/language.gd" id="2_5x0jx"]
 [ext_resource type="PackedScene" uid="uid://dqyhkxg11nbe5" path="res://systems/ui/volume_slider.tscn" id="3_hr65t"]
 [ext_resource type="Script" uid="uid://bxalu3m73dsul" path="res://systems/ui/full_screen.gd" id="3_oihav"]
+[ext_resource type="Script" uid="uid://cjuaw3d8fsxe1" path="res://systems/ui/save_button.gd" id="5_06iss"]
 [ext_resource type="Script" uid="uid://ctrvhihonkttf" path="res://systems/ui/quit_button.gd" id="5_hssc3"]
+[ext_resource type="Script" uid="uid://ct53rv3gcuw3s" path="res://systems/ui/new_game_button.gd" id="5_m8kx8"]
+[ext_resource type="Script" uid="uid://dejoy0exa03ui" path="res://systems/ui/load_button.gd" id="6_m8kx8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xemwu"]
 content_margin_left = 16.0
@@ -107,17 +110,35 @@ layout_mode = 2
 size_flags_horizontal = 2
 script = ExtResource("3_oihav")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
-theme_override_constants/separation = 100
+columns = 2
 
-[node name="PlayButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="PlayButton" type="Button" parent="PanelContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "PLAY"
 
-[node name="QuitButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="NewGameButton" type="Button" parent="PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NEW_GAME"
+script = ExtResource("5_m8kx8")
+
+[node name="SaveButton" type="Button" parent="PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SAVE"
+script = ExtResource("5_06iss")
+
+[node name="LoadButton" type="Button" parent="PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "LOAD"
+script = ExtResource("6_m8kx8")
+
+[node name="QuitButton" type="Button" parent="PanelContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "QUIT"
@@ -125,5 +146,8 @@ script = ExtResource("5_hssc3")
 
 [connection signal="item_selected" from="PanelContainer/VBoxContainer/Language/Language" to="PanelContainer/VBoxContainer/Language/Language" method="_on_item_selected"]
 [connection signal="toggled" from="PanelContainer/VBoxContainer/FullScreen/FullScreen" to="PanelContainer/VBoxContainer/FullScreen/FullScreen" method="_on_toggled"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/QuitButton" to="PanelContainer/VBoxContainer/HBoxContainer/QuitButton" method="_on_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/GridContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/GridContainer/NewGameButton" to="PanelContainer/VBoxContainer/GridContainer/NewGameButton" method="_on_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/GridContainer/SaveButton" to="PanelContainer/VBoxContainer/GridContainer/SaveButton" method="_on_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/GridContainer/LoadButton" to="PanelContainer/VBoxContainer/GridContainer/LoadButton" method="_on_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/GridContainer/QuitButton" to="PanelContainer/VBoxContainer/GridContainer/QuitButton" method="_on_pressed"]

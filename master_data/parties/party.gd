@@ -35,3 +35,43 @@ func with_data(id: int, name: String, street_name: String, street_number: String
 	self.country = country
 	
 	return self
+
+
+func to_dict() -> Dictionary:
+	return {
+		"id" = id,
+		"name" = name,
+		"street_name" = street_name,
+		"street_number" = street_number,
+		"house_number" = house_number,
+		"postal_code" = postal_code,
+		"city_name" = city_name,
+		"country_id" = country.id if country else "",
+	}
+
+
+static func from_dict(data: Dictionary) -> Party:
+	return Party.new().with_data(
+		data["id"],
+		data["name"],
+		data["street_name"],
+		data["street_number"],
+		data["house_number"],
+		data["postal_code"],
+		data["city_name"],
+		GlobalRefs.countries[data["country_id"]],
+	)
+
+
+static func array_to_dict(data: Array[Party]) -> Array[Dictionary]:
+	var array: Array[Dictionary]
+	for item: Party in data:
+		array.append(item.to_dict())
+	return array
+
+
+static func array_from_dict(data: Array) -> Array[Party]:
+	var array: Array[Party]
+	for item: Dictionary in data:
+		array.append(Party.from_dict(item))
+	return array

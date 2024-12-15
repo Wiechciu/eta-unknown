@@ -18,10 +18,10 @@ var code_string: String:
 var name: String:
 	get:
 		match code:
-			Code.AIR: return "Airfreight"
-			Code.SEA: return "Seafreight"
-			Code.LAND: return "Landfreight"
-			Code.RAIL: return "Railfreight"
+			Code.AIR: return "MOT_AIRFREIGHT"
+			Code.SEA: return "MOT_SEAFREIGHT"
+			Code.LAND: return "MOT_LANDFREIGHT"
+			Code.RAIL: return "MOT_RAILFREIGHT"
 			_: return "%s - unknown mode of transport" % code_string
 
 

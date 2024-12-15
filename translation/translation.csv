@@ -148,6 +148,9 @@ CHARGE_HDI;Import handling;Importowa obsługa
 LOADING;loading;ładowanie
 MENU;Menu;Menu
 PLAY;Play;Graj
+NEW_GAME;New game;Nowa gra
+SAVE;Save;Zapisz
+LOAD;Load;Wczytaj
 QUIT;Quit;Wyjdź
 SOUND;Sound;Dźwięk
 MASTER_VOLUME;Master volume;Głośność główna
@@ -165,3 +168,7 @@ NO_DOCUMENTS_TO_PRINT;No documents to print.;Nie ma dokumentów do wydrukowania.
 NO_DOCUMENTS_TO_PICK_UP;No documents to pick up.;Nie ma dokumentów do zabrania.
 PICKED_UP_DOCUMENTS;Picked up {amount} documents.;Zabrano {amount} dokumentów.
 SIGNED_DOCUMENT;Signed document.;Podpisano dokument.
+MOT_AIRFREIGHT;Aifreight;Fracht lotniczy
+MOT_SEAFREIGHT;Seafreight;Frach morski
+MOT_LANDFREIGHT;Landfreight;Fracht drogowy
+MOT_RAILFREIGHT;Railfreight;Fracht kolejowy

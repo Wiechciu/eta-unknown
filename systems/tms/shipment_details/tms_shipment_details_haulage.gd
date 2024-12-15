@@ -29,19 +29,19 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 	
 	_trucker_pickup.value.text = shipment.haulage.trucker_pickup.name if shipment.haulage.trucker_pickup else ""
 	_trucker_delivery.value.text = shipment.haulage.trucker_delivery.name if shipment.haulage.trucker_delivery else ""
-	_planned_pickup.value.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_type(Event.Code.PUP))
-	_planned_delivery.value.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_type(Event.Code.DEL))
+	_planned_pickup.value.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_code(Event.Code.PUP))
+	_planned_delivery.value.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_code(Event.Code.DEL))
 
 
 func _on_arrange_pickup_button_pressed() -> void:
 	shipment.haulage.trucker_pickup = GlobalRefs.truckers.pick_random()
-	shipment.events.create_new_planned_event(Event.Code.PUP, GlobalTimer.get_future_date_from_event(shipment.events.get_first_event_of_type(Event.Code.ERL), 0, 12))
-	shipment.events.create_new_planned_event(Event.Code.RCV, GlobalTimer.get_future_date_from_event(shipment.events.get_first_event_of_type(Event.Code.PUP), 0, 17))
+	shipment.events.create_new_planned_event(Event.Code.PUP, GlobalTimer.get_future_date_from_event(shipment.events.get_first_event_of_code(Event.Code.ERL), 0, 12))
+	shipment.events.create_new_planned_event(Event.Code.RCV, GlobalTimer.get_future_date_from_event(shipment.events.get_first_event_of_code(Event.Code.PUP), 0, 17))
 	refresh()
 
 
 func _on_arrange_delivery_button_pressed() -> void:
 	shipment.haulage.trucker_delivery = GlobalRefs.truckers.pick_random()
-	shipment.events.create_new_planned_event(Event.Code.REL, GlobalTimer.get_future_date_from_event(shipment.events.get_first_event_of_type(Event.Code.LTS), 0, 6))
-	shipment.events.create_new_planned_event(Event.Code.DEL, GlobalTimer.get_future_date_from_event(shipment.events.get_first_event_of_type(Event.Code.REL), 0, 8))
+	shipment.events.create_new_planned_event(Event.Code.REL, GlobalTimer.get_future_date_from_event(shipment.events.get_first_event_of_code(Event.Code.LTS), 0, 6))
+	shipment.events.create_new_planned_event(Event.Code.DEL, GlobalTimer.get_future_date_from_event(shipment.events.get_first_event_of_code(Event.Code.REL), 0, 8))
 	refresh()

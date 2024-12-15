@@ -28,7 +28,7 @@ var code_string: String:
 		return Code.keys()[code]
 var name: String:
 	get:
-		return tr("DOCUMENT_" + code_string)
+		return "DOCUMENT_" + code_string
 @export_storage var issued_time: int
 @export_storage var number: int
 
@@ -39,3 +39,33 @@ func with_data(code: Code, issued_time: int, number: int) -> Document:
 	self.issued_time = issued_time
 	self.number = number
 	return self
+
+
+func to_dict() -> Dictionary:
+	return {
+		"code" = code,
+		"issued_time" = issued_time,
+		"number" = number,
+	}
+
+
+static func from_dict(data: Dictionary) -> Document:
+	return Document.new().with_data(
+		data["code"],
+		data["issued_time"],
+		data["number"],
+	)
+
+
+static func array_to_dict(data: Array[Document]) -> Array[Dictionary]:
+	var array: Array[Dictionary]
+	for item: Document in data:
+		array.append(item.to_dict())
+	return array
+
+
+static func array_from_dict(data: Array) -> Array[Document]:
+	var array: Array[Document]
+	for item: Dictionary in data:
+		array.append(Document.from_dict(item))
+	return array
