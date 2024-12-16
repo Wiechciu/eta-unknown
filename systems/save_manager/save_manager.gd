@@ -1,4 +1,4 @@
-@tool
+## @tool ## Causes issues with project visibility
 extends Node
 
 
