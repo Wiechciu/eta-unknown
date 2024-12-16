@@ -30,7 +30,7 @@ var now_float: float
 var now: int:
 	get:
 		return int(now_float)
-var date_string: String:
+var current_date_string: String:
 	get:
 		return Time.get_date_string_from_unix_time(now)
 var time_string: String:
@@ -60,9 +60,12 @@ var current_weekday: int:
 var current_weekday_string: String:
 	get:
 		return "DAY_%s" % current_weekday
+var current_hour: int:
+	get:
+		return time_dictionary["hour"]
 
 var previous_hour: int
-var previous_day: String
+var previous_date_string: String
 var time_events: Array[TimeEvent]
 
 @export var fade_screen: ColorRect
@@ -78,7 +81,7 @@ func _init() -> void:
 func _ready() -> void:
 	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.assert_all_exported_properties(self)
-	fade_screen.visible = false
+	fade_screen.hide()
 
 
 func _process(delta: float) -> void:
@@ -89,30 +92,28 @@ func _process(delta: float) -> void:
 
 
 func _check_hour_change() -> void:
-	var new_hour: int = time_dictionary["hour"]
-	if new_hour == previous_hour:
+	if current_hour == previous_hour:
 		return
 	
-	if new_hour == shift_start_hour:
+	if current_hour == shift_start_hour:
 		shift_started.emit()
-	if new_hour == shift_end_hour:
+	if current_hour == shift_end_hour:
 		shift_ended.emit()
-	if new_hour == lunch_start_hour:
+	if current_hour == lunch_start_hour:
 		lunch_started.emit()
-	if new_hour == lunch_end_hour:
+	if current_hour == lunch_end_hour:
 		lunch_ended.emit()
 	
-	previous_hour = new_hour
+	previous_hour = current_hour
 
 
 func _check_day_change() -> void:
-	var new_day: String = date_string
-	if new_day == previous_day:
+	if current_date_string == previous_date_string:
 		return
 	
-	previous_day = new_day
+	previous_date_string = current_date_string
 	new_day_started.emit()
-	print("New day started: " + new_day)
+	print("New day started: " + current_date_string)
 
 
 func start_next_day() -> void:
@@ -251,3 +252,5 @@ func set_time_scale(scale: int) -> void:
 func from_dict(data: Dictionary) -> void:
 	time_events.clear()
 	now_float = data["time"]
+	previous_hour = current_hour
+	previous_date_string = current_date_string

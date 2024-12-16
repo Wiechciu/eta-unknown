@@ -52,7 +52,6 @@ func _input(event: InputEvent) -> void:
 
 
 func initial_setup() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	movement_actual_speed = movement_base_speed
 	
 	head_resting_position = _head.position

@@ -11,5 +11,5 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	date.text = str(GlobalTimer.date_string)
+	date.text = str(GlobalTimer.current_date_string)
 	time.text = str(GlobalTimer.time_string).left(-3)

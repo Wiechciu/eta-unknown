@@ -13,6 +13,9 @@ func _ready() -> void:
 func assign_person() -> void:
 	id = GlobalRefs.get_human_id()
 	
+	GlobalRefs.humans.append(self)
+	GlobalRefs.humans_dict[id] = self
+	
 	if GlobalRefs.freight_forwarders_with_employees.is_empty():
 		await SaveManager.game_loaded
 	
@@ -20,9 +23,6 @@ func assign_person() -> void:
 		var company: Party = GlobalRefs.freight_forwarders_with_employees.pick_random() as Party
 		person = company.employees.pick_random() as Person
 		person.job_position = GlobalRefs.job_positions_dict[0] ## Intern
-	
-	GlobalRefs.humans.append(self)
-	GlobalRefs.humans_dict[id] = self
 
 
 func to_dict() -> Dictionary:

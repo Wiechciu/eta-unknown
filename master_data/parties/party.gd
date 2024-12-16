@@ -79,6 +79,44 @@ func with_data(id: int, type: Type, name: String, street_name: String, street_nu
 	@warning_ignore("unsafe_property_access")
 	GlobalRefs.parties_dict[id] = self
 	
+	match self.type:
+		Party.Type.CUSTOMER:
+			@warning_ignore("unsafe_property_access", "unsafe_method_access")
+			GlobalRefs.customers.append(self)
+			@warning_ignore("unsafe_property_access")
+			GlobalRefs.customers_dict[self.id] = self
+		Party.Type.FREIGHT_FORWARDER:
+			@warning_ignore("unsafe_property_access", "unsafe_method_access")
+			GlobalRefs.freight_forwarders.append(self)
+			@warning_ignore("unsafe_property_access")
+			GlobalRefs.freight_forwarders_dict[self.id] = self
+		Party.Type.CARRIER:
+			@warning_ignore("unsafe_property_access", "unsafe_method_access")
+			GlobalRefs.carriers.append(self)
+			@warning_ignore("unsafe_property_access")
+			GlobalRefs.carriers_dict[self.id] = self
+		Party.Type.CUSTOMS_AGENCY:
+			@warning_ignore("unsafe_property_access", "unsafe_method_access")
+			GlobalRefs.customs_agencies.append(self)
+			@warning_ignore("unsafe_property_access")
+			GlobalRefs.customs_agencies_dict[self.id] = self
+		Party.Type.HANDLING_AGENT:
+			@warning_ignore("unsafe_property_access", "unsafe_method_access")
+			GlobalRefs.handling_agents.append(self)
+			@warning_ignore("unsafe_property_access")
+			GlobalRefs.handling_agents_dict[self.id] = self
+		Party.Type.TRUCKER:
+			@warning_ignore("unsafe_property_access", "unsafe_method_access")
+			GlobalRefs.truckers.append(self)
+			@warning_ignore("unsafe_property_access")
+			GlobalRefs.truckers_dict[self.id] = self
+	
+	if self.is_supplier:
+		@warning_ignore("unsafe_property_access", "unsafe_method_access")
+		GlobalRefs.suppliers.append(self)
+		@warning_ignore("unsafe_property_access")
+		GlobalRefs.suppliers_dict[self.id] = self
+
 	return self
 
 

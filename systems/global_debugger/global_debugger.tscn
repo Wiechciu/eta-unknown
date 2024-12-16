@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b66husl1w3olw" path="res://systems/calendar/calendar.tscn" id="3_2sjkd"]
 
 [node name="GlobalDebugger" type="Node"]
+process_mode = 3
 script = ExtResource("1_fw1kj")
 
 [node name="DebugMenu" parent="." instance=ExtResource("2_w26nk")]

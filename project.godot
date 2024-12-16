@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Freight Forwarding"
-run/main_scene="res://systems/scenes/main_scene.tscn"
+run/main_scene="res://systems/game_manager/game_manager.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 

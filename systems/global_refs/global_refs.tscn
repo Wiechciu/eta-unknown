@@ -3,4 +3,5 @@
 [ext_resource type="Script" uid="uid://bp8cyi2njiujs" path="res://systems/global_refs/global_refs.gd" id="1_6qxei"]
 
 [node name="GlobalRefs" type="Node"]
+process_mode = 3
 script = ExtResource("1_6qxei")

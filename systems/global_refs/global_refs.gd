@@ -147,51 +147,52 @@ func get_human_id() -> int:
 
 
 func to_dict() -> Dictionary:
-	var cargos: Array
-	for item: Cargo in GlobalRefs.cargos:
-		cargos.append(item.to_dict())
-	var currencies: Array
-	for item: Currency in GlobalRefs.currencies:
-		currencies.append(item.to_dict())
-	var job_positions: Array
-	for item: JobPosition in GlobalRefs.job_positions:
-		job_positions.append(item.to_dict())
-	var parties: Array
-	for item: Party in GlobalRefs.parties:
-		parties.append(item.to_dict())
-	var countries: Array
-	for item: Country in GlobalRefs.countries:
-		countries.append(item.to_dict())
-	var locations: Array
-	for item: Location in GlobalRefs.locations:
-		locations.append(item.to_dict())
-	var people: Array
-	for item: Person in GlobalRefs.people:
-		people.append(item.to_dict())
-	var shipments: Array
-	for item: Shipment in GlobalRefs.shipments:
-		shipments.append(item.to_dict())
-	var requests_for_quotation: Array
-	for item: RequestForQuotation in GlobalRefs.requests_for_quotation:
-		requests_for_quotation.append(item.to_dict())
-	var quotations: Array
-	for item: Quotation in GlobalRefs.quotations:
-		quotations.append(item.to_dict())
-	var humans: Array
-	for human: Human in GlobalRefs.humans:
-		humans.append(human.to_dict())
+	var cargos_temp_array: Array
+	for item: Cargo in self.cargos:
+		cargos_temp_array.append(item.to_dict())
+	var currencies_temp_array: Array
+	for item: Currency in self.currencies:
+		currencies_temp_array.append(item.to_dict())
+	var job_positions_temp_array: Array
+	for item: JobPosition in self.job_positions:
+		job_positions_temp_array.append(item.to_dict())
+	var parties_temp_array: Array
+	for item: Party in self.parties:
+		parties_temp_array.append(item.to_dict())
+	var countries_temp_array: Array
+	for item: Country in self.countries:
+		countries_temp_array.append(item.to_dict())
+	var locations_temp_array: Array
+	for item: Location in self.locations:
+		locations_temp_array.append(item.to_dict())
+	var people_temp_array: Array
+	for item: Person in self.people:
+		people_temp_array.append(item.to_dict())
+	var shipments_temp_array: Array
+	for item: Shipment in self.shipments:
+		shipments_temp_array.append(item.to_dict())
+	var requests_for_quotation_temp_array: Array
+	for item: RequestForQuotation in self.requests_for_quotation:
+		requests_for_quotation_temp_array.append(item.to_dict())
+	var quotations_temp_array: Array
+	for item: Quotation in self.quotations:
+		quotations_temp_array.append(item.to_dict())
+	var humans_temp_array: Array
+	for human: Human in self.humans:
+		humans_temp_array.append(human.to_dict())
 	
 	return {
-		"cargos": cargos,
-		"currencies": currencies,
-		"job_positions": job_positions,
-		"countries": countries,
-		"locations": locations,
-		"parties": parties,
-		"people": people,
-		"shipments": shipments,
-		"requests_for_quotation": requests_for_quotation,
-		"quotations": quotations,
+		"cargos": cargos_temp_array,
+		"currencies": currencies_temp_array,
+		"job_positions": job_positions_temp_array,
+		"countries": countries_temp_array,
+		"locations": locations_temp_array,
+		"parties": parties_temp_array,
+		"people": people_temp_array,
+		"shipments": shipments_temp_array,
+		"requests_for_quotation": requests_for_quotation_temp_array,
+		"quotations": quotations_temp_array,
+		"humans": humans_temp_array,
 		"cargo_last_id": cargo_last_id,
 		"currency_last_id": currency_last_id,
 		"job_position_last_id": job_position_last_id,
@@ -203,54 +204,33 @@ func to_dict() -> Dictionary:
 		"shipment_last_id": shipment_last_id,
 		"quotation_last_id": quotation_last_id,
 		"request_for_quotation_last_id": request_for_quotation_last_id,
-		"humans": humans,
+		"human_last_id": human_last_id,
 	}
 
 
 func from_dict(data: Dictionary) -> void:
-	GlobalRefs.cargos.clear()
-	GlobalRefs.cargos_dict.clear()
 	for data_item: Dictionary in data["cargos"]:
 		var item: Cargo = Cargo.from_dict(data_item)
-	GlobalRefs.currencies.clear()
-	GlobalRefs.currencies_dict.clear()
-	GlobalRefs.currencies_code_dict.clear()
 	for data_item: Dictionary in data["currencies"]:
 		var item: Currency = Currency.from_dict(data_item)
-	GlobalRefs.job_positions.clear()
-	GlobalRefs.job_positions_dict.clear()
 	for data_item: Dictionary in data["job_positions"]:
 		var item: JobPosition = JobPosition.from_dict(data_item)
-	GlobalRefs.countries.clear()
-	GlobalRefs.countries_dict.clear()
-	GlobalRefs.countries_code_dict.clear()
 	for data_item: Dictionary in data["countries"]:
 		var item: Country = Country.from_dict(data_item)
-	GlobalRefs.locations.clear()
-	GlobalRefs.locations_dict.clear()
-	GlobalRefs.locations_code_dict.clear()
 	for data_item: Dictionary in data["locations"]:
 		var item: Location = Location.from_dict(data_item)
-	GlobalRefs.parties.clear()
-	GlobalRefs.parties_dict.clear()
 	for data_item: Dictionary in data["parties"]:
 		var item: Party = Party.from_dict(data_item)
-	GlobalRefs.people.clear()
-	GlobalRefs.people_dict.clear()
 	for data_item: Dictionary in data["people"]:
 		var item: Person = Person.from_dict(data_item)
-	GlobalRefs.shipments.clear()
-	GlobalRefs.shipments_dict.clear()
 	for data_item: Dictionary in data["shipments"]:
 		var item: Shipment = Shipment.from_dict(data_item)
-	GlobalRefs.requests_for_quotation.clear()
-	GlobalRefs.requests_for_quotation_dict.clear()
 	for data_item: Dictionary in data["requests_for_quotation"]:
 		var item: RequestForQuotation = RequestForQuotation.from_dict(data_item)
-	GlobalRefs.quotations.clear()
-	GlobalRefs.quotations_dict.clear()
 	for data_item: Dictionary in data["quotations"]:
 		var item: Quotation = Quotation.from_dict(data_item)
+	for data_item: Dictionary in data["humans"]:
+		humans_dict[data_item["id"] as int].from_dict(data_item)
 	
 	for data_item: Dictionary in data["parties"]:
 		parties_dict[data_item["id"] as int].assign_references_from_dict(data_item)
@@ -263,9 +243,6 @@ func from_dict(data: Dictionary) -> void:
 	for data_item: Dictionary in data["quotations"]:
 		quotations_dict[data_item["id"] as int].assign_references_from_dict(data_item)
 	
-	for data_item: Dictionary in data["humans"]:
-		humans_dict[data_item["id"] as int].from_dict(data_item)
-	
 	cargo_last_id = data["cargo_last_id"]
 	currency_last_id = data["currency_last_id"]
 	job_position_last_id = data["job_position_last_id"]
@@ -277,3 +254,61 @@ func from_dict(data: Dictionary) -> void:
 	shipment_last_id = data["shipment_last_id"]
 	quotation_last_id = data["quotation_last_id"]
 	request_for_quotation_last_id = data["request_for_quotation_last_id"]
+	human_last_id = data["human_last_id"]
+
+
+func clear_all() -> void:
+	cargos.clear()
+	cargos_dict.clear()
+	currencies.clear()
+	currencies_dict.clear()
+	currencies_code_dict.clear()
+	job_positions.clear()
+	job_positions_dict.clear()
+	countries.clear()
+	countries_dict.clear()
+	countries_code_dict.clear()
+	locations.clear()
+	locations_dict.clear()
+	locations_code_dict.clear()
+	
+	parties.clear()
+	parties_dict.clear()
+	customers.clear()
+	customers_dict.clear()
+	freight_forwarders.clear()
+	freight_forwarders_dict.clear()
+	suppliers.clear()
+	suppliers_dict.clear()
+	carriers.clear()
+	carriers_dict.clear()
+	customs_agencies.clear()
+	customs_agencies_dict.clear()
+	handling_agents.clear()
+	handling_agents_dict.clear()
+	truckers.clear()
+	truckers_dict.clear()
+	
+	people.clear()
+	people_dict.clear()
+	shipments.clear()
+	shipments_dict.clear()
+	requests_for_quotation.clear()
+	requests_for_quotation_dict.clear()
+	quotations.clear()
+	quotations_dict.clear()
+	humans.clear()
+	humans_dict.clear()
+	
+	cargo_last_id = -1
+	currency_last_id = -1
+	job_position_last_id = -1
+	party_last_id = -1
+	country_last_id = -1
+	location_last_id = -1
+	person_last_id = -1
+	vehicle_last_id = -1
+	shipment_last_id = -1
+	quotation_last_id = -1
+	request_for_quotation_last_id = -1
+	human_last_id = -1

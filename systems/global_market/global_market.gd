@@ -12,3 +12,11 @@ func create_market_rates() -> void:
 				market_rate = snappedf(randf_range(3, 10), 0.01)
 			var key: String = first_country.code + second_country.code
 			market_rates_dict[key] = market_rate
+
+
+func from_dict(data: Dictionary) -> void:
+	market_rates_dict.assign(data)
+
+
+func clear_all() -> void:
+	market_rates_dict.clear()

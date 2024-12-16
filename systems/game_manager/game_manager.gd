@@ -4,6 +4,7 @@ extends Node
 signal player_person_loaded
 
 
+@export var main_scene: PackedScene
 @export var json_loader: JsonLoader
 var mutex: Mutex
 var thread: Thread
