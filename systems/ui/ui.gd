@@ -3,6 +3,7 @@ extends Control
 
 
 var old_input_mouse_mode: Input.MouseMode
+@export var main_menu: Control
 
 
 func _ready() -> void:
@@ -12,7 +13,7 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("ui_cancel") and SaveManager.is_game_loaded:
 		toggle_visibility()
 
 
@@ -28,6 +29,11 @@ func _on_play_button_pressed() -> void:
 
 
 func show_ui() -> void:
+	for child: Node in get_children():
+		if child == main_menu:
+			(child as Control).show()
+		else:
+			(child as Control).hide()
 	get_tree().paused = true
 	old_input_mouse_mode = Input.mouse_mode
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

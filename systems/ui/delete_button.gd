@@ -14,4 +14,4 @@ func _on_line_edit_text_changed(text: String) -> void:
 
 
 func _on_pressed() -> void:
-	SaveManager.load_game(save_name_line_edit.text)
+	SaveManager.delete_save_file(save_name_line_edit.text)

@@ -1,9 +1,6 @@
 extends Button
 
 
-@export var save_name_line_edit: SaveNameLineEdit
-
-
 func _ready() -> void:
 	visibility_changed.connect(_on_visibility_changed)
 	_on_visibility_changed()
@@ -14,7 +11,3 @@ func _on_visibility_changed() -> void:
 		disabled = false
 	else:
 		disabled = true
-
-
-func _on_pressed() -> void:
-	SaveManager.save_game(save_name_line_edit.text)

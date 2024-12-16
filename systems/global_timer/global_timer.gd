@@ -176,6 +176,10 @@ func get_future_date_from_now(plus_days: int = 0, hour: int = 0, minute: int = 0
 	return get_future_date_from_unix_time(now, plus_days, hour, minute)
 
 
+func get_nice_datetime_filename_string_from_now() -> String:
+	return Time.get_datetime_string_from_unix_time(now).replace("T", "_").replace("-", "_").replace(":", "_").left(-3)
+
+
 func get_nice_datetime_string_from_now() -> String:
 	return Time.get_datetime_string_from_unix_time(now).replace("T", ", ").left(-3)
 

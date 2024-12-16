@@ -5,7 +5,6 @@ extends Human
 @export var interactable_finder: InteractableFinder
 @export var _head: Node3D
 @export var _camera: Camera3D
-@export var crosshair: TextureRect
 @export var _can_move: bool:
 	get:
 		return _camera.current and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED
@@ -31,11 +30,6 @@ func _ready() -> void:
 	@warning_ignore("unsafe_property_access")
 	GameManager.player = self
 	initial_setup()
-
-
-@warning_ignore("unused_parameter")
-func _process(delta: float) -> void:
-	crosshair.visible = _can_move
 
 
 func _physics_process(delta: float) -> void:

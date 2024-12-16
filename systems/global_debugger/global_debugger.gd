@@ -45,3 +45,13 @@ func get_child_of_type(parent: Node, type: Variant) -> Node:
 		if is_instance_of(child, type):
 			return child
 	return null 
+
+
+func escape_characters_for_file_name(original_string: String, replace_space_with_underscore: bool = false) -> String:
+	var result: String = original_string
+	var unwanted_chars: Array[String] = [":", "/", "\\", "?", "*", "\"", "|", "%", "<", ">"]
+	for c: String in unwanted_chars:
+		result = result.replace(c,"_")
+	if replace_space_with_underscore:
+		result = result.replace(" ", "_")
+	return result

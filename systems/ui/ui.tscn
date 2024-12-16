@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://db7riwidjsxbu"]
+[gd_scene load_steps=20 format=3 uid="uid://db7riwidjsxbu"]
 
 [ext_resource type="Script" uid="uid://cxh3u0n0nptw2" path="res://systems/ui/ui.gd" id="1_xemwu"]
 [ext_resource type="Script" uid="uid://cr6ck8pbq4a48" path="res://systems/ui/language.gd" id="2_5x0jx"]
@@ -7,7 +7,14 @@
 [ext_resource type="Script" uid="uid://cjuaw3d8fsxe1" path="res://systems/ui/save_button.gd" id="5_06iss"]
 [ext_resource type="Script" uid="uid://ctrvhihonkttf" path="res://systems/ui/quit_button.gd" id="5_hssc3"]
 [ext_resource type="Script" uid="uid://ct53rv3gcuw3s" path="res://systems/ui/new_game_button.gd" id="5_m8kx8"]
+[ext_resource type="Script" uid="uid://bfnuurcaj01t4" path="res://systems/ui/play_button.gd" id="5_yuv0y"]
 [ext_resource type="Script" uid="uid://dejoy0exa03ui" path="res://systems/ui/load_button.gd" id="6_m8kx8"]
+[ext_resource type="Script" uid="uid://cckeoscqs6wbo" path="res://systems/ui/show_panel_button.gd" id="6_qi7t0"]
+[ext_resource type="Script" uid="uid://52ore7fgcb3d" path="res://systems/ui/back_button.gd" id="7_naojb"]
+[ext_resource type="Script" uid="uid://na5h6w1e35v" path="res://systems/ui/save_or_load_menu.gd" id="9_a7el2"]
+[ext_resource type="PackedScene" uid="uid://3ipdu30ooyv0" path="res://systems/ui/save_list_item.tscn" id="10_y1ln0"]
+[ext_resource type="Script" uid="uid://57mfiutskhqu" path="res://systems/ui/save_name_line_edit.gd" id="11_oqlsv"]
+[ext_resource type="Script" uid="uid://bhamemntiq6fp" path="res://systems/ui/delete_button.gd" id="15_fm32y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xemwu"]
 content_margin_left = 16.0
@@ -26,7 +33,16 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ytiqy"]
 
-[node name="Ui" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y1ln0"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0.202524, 0.350951, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bl64p"]
+
+[node name="Ui" type="Control" node_paths=PackedStringArray("main_menu")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -35,8 +51,26 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xemwu")
+main_menu = NodePath("MainMenu")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="MainMenu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.27451)
+
+[node name="PanelContainer" type="PanelContainer" parent="MainMenu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -44,111 +78,246 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -350.0
-offset_top = -200.0
+offset_top = -236.0
 offset_right = 350.0
-offset_bottom = 200.0
+offset_bottom = 236.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_xemwu")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/PanelContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MainMenu/PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "MENU"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="MainMenu/PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 theme_override_styles/separator = SubResource("StyleBoxEmpty_ytiqy")
 
-[node name="Language" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="Language" type="HBoxContainer" parent="MainMenu/PanelContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/Language"]
+[node name="Label" type="Label" parent="MainMenu/PanelContainer/VBoxContainer/Language"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "LANGUAGE"
 
-[node name="Language" type="OptionButton" parent="PanelContainer/VBoxContainer/Language"]
+[node name="Language" type="OptionButton" parent="MainMenu/PanelContainer/VBoxContainer/Language"]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("2_5x0jx")
 
-[node name="VolumeSlider" parent="PanelContainer/VBoxContainer" instance=ExtResource("3_hr65t")]
+[node name="VolumeSlider" parent="MainMenu/PanelContainer/VBoxContainer" instance=ExtResource("3_hr65t")]
 layout_mode = 2
 
-[node name="VolumeSlider2" parent="PanelContainer/VBoxContainer" instance=ExtResource("3_hr65t")]
+[node name="VolumeSlider2" parent="MainMenu/PanelContainer/VBoxContainer" instance=ExtResource("3_hr65t")]
 layout_mode = 2
 bus_name = &"Music"
 
-[node name="VolumeSlider3" parent="PanelContainer/VBoxContainer" instance=ExtResource("3_hr65t")]
+[node name="VolumeSlider3" parent="MainMenu/PanelContainer/VBoxContainer" instance=ExtResource("3_hr65t")]
 layout_mode = 2
 bus_name = &"Ui"
 
-[node name="VolumeSlider4" parent="PanelContainer/VBoxContainer" instance=ExtResource("3_hr65t")]
+[node name="VolumeSlider4" parent="MainMenu/PanelContainer/VBoxContainer" instance=ExtResource("3_hr65t")]
 layout_mode = 2
 bus_name = &"Voice"
 
-[node name="VolumeSlider5" parent="PanelContainer/VBoxContainer" instance=ExtResource("3_hr65t")]
+[node name="VolumeSlider5" parent="MainMenu/PanelContainer/VBoxContainer" instance=ExtResource("3_hr65t")]
 layout_mode = 2
 bus_name = &"Environment"
 
-[node name="FullScreen" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="FullScreen" type="HBoxContainer" parent="MainMenu/PanelContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/FullScreen"]
+[node name="Label" type="Label" parent="MainMenu/PanelContainer/VBoxContainer/FullScreen"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 text = "FULL_SCREEN"
 
-[node name="FullScreen" type="CheckButton" parent="PanelContainer/VBoxContainer/FullScreen"]
+[node name="FullScreen" type="CheckButton" parent="MainMenu/PanelContainer/VBoxContainer/FullScreen"]
 layout_mode = 2
 size_flags_horizontal = 2
 script = ExtResource("3_oihav")
 
-[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer"]
+[node name="Buttons" type="GridContainer" parent="MainMenu/PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
 columns = 2
 
-[node name="PlayButton" type="Button" parent="PanelContainer/VBoxContainer/GridContainer"]
+[node name="PlayButton" type="Button" parent="MainMenu/PanelContainer/VBoxContainer/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "PLAY"
+script = ExtResource("5_yuv0y")
 
-[node name="NewGameButton" type="Button" parent="PanelContainer/VBoxContainer/GridContainer"]
+[node name="NewGameButton" type="Button" parent="MainMenu/PanelContainer/VBoxContainer/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "NEW_GAME"
 script = ExtResource("5_m8kx8")
 
-[node name="SaveButton" type="Button" parent="PanelContainer/VBoxContainer/GridContainer"]
+[node name="SaveOrLoadButton" type="Button" parent="MainMenu/PanelContainer/VBoxContainer/Buttons" node_paths=PackedStringArray("control_to_show")]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "SAVE"
-script = ExtResource("5_06iss")
+text = "SAVE_OR_LOAD"
+script = ExtResource("6_qi7t0")
+control_to_show = NodePath("../../../../../SaveOrLoadMenu")
 
-[node name="LoadButton" type="Button" parent="PanelContainer/VBoxContainer/GridContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "LOAD"
-script = ExtResource("6_m8kx8")
-
-[node name="QuitButton" type="Button" parent="PanelContainer/VBoxContainer/GridContainer"]
+[node name="QuitButton" type="Button" parent="MainMenu/PanelContainer/VBoxContainer/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "QUIT"
 script = ExtResource("5_hssc3")
 
-[connection signal="item_selected" from="PanelContainer/VBoxContainer/Language/Language" to="PanelContainer/VBoxContainer/Language/Language" method="_on_item_selected"]
-[connection signal="toggled" from="PanelContainer/VBoxContainer/FullScreen/FullScreen" to="PanelContainer/VBoxContainer/FullScreen/FullScreen" method="_on_toggled"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/GridContainer/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/GridContainer/NewGameButton" to="PanelContainer/VBoxContainer/GridContainer/NewGameButton" method="_on_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/GridContainer/SaveButton" to="PanelContainer/VBoxContainer/GridContainer/SaveButton" method="_on_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/GridContainer/LoadButton" to="PanelContainer/VBoxContainer/GridContainer/LoadButton" method="_on_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/GridContainer/QuitButton" to="PanelContainer/VBoxContainer/GridContainer/QuitButton" method="_on_pressed"]
+[node name="SaveOrLoadMenu" type="Control" parent="." node_paths=PackedStringArray("container", "save_name_line_edit")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_a7el2")
+container = NodePath("PanelContainer/VBoxContainer/PanelContainer/ScrollContainer/Container")
+list_item_scene = ExtResource("10_y1ln0")
+save_name_line_edit = NodePath("PanelContainer/VBoxContainer/SaveNameLineEdit")
+
+[node name="Background" type="ColorRect" parent="SaveOrLoadMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.27451)
+
+[node name="PanelContainer" type="PanelContainer" parent="SaveOrLoadMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = -200.0
+offset_right = 450.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xemwu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SaveOrLoadMenu/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "SAVE_OR_LOAD"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ytiqy")
+
+[node name="PanelContainer" type="PanelContainer" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_y1ln0")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Container" type="VBoxContainer" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/PanelContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SaveListItem" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("10_y1ln0")]
+layout_mode = 2
+
+[node name="SaveListItem2" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("10_y1ln0")]
+layout_mode = 2
+
+[node name="SaveListItem3" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("10_y1ln0")]
+layout_mode = 2
+
+[node name="SaveListItem4" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("10_y1ln0")]
+layout_mode = 2
+
+[node name="SaveListItem5" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("10_y1ln0")]
+layout_mode = 2
+
+[node name="SaveListItem6" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("10_y1ln0")]
+layout_mode = 2
+
+[node name="SaveNameLineEdit" type="LineEdit" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Save-Name-Date"
+clear_button_enabled = true
+select_all_on_focus = true
+caret_blink = true
+script = ExtResource("11_oqlsv")
+
+[node name="Buttons" type="HBoxContainer" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="BackButton" type="Button" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons" node_paths=PackedStringArray("control_to_hide")]
+modulate = Color(0.482362, 0.778436, 0.915901, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "BACK"
+script = ExtResource("7_naojb")
+control_to_hide = NodePath("../../../..")
+
+[node name="HSeparator2" type="VSeparator" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+theme_override_constants/separation = 50
+theme_override_styles/separator = SubResource("StyleBoxEmpty_bl64p")
+
+[node name="LoadButton" type="Button" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons" node_paths=PackedStringArray("save_name_line_edit")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "LOAD"
+script = ExtResource("6_m8kx8")
+save_name_line_edit = NodePath("../../SaveNameLineEdit")
+
+[node name="SaveButton" type="Button" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons" node_paths=PackedStringArray("save_name_line_edit")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SAVE"
+script = ExtResource("5_06iss")
+save_name_line_edit = NodePath("../../SaveNameLineEdit")
+
+[node name="HSeparator" type="VSeparator" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+theme_override_constants/separation = 50
+theme_override_styles/separator = SubResource("StyleBoxEmpty_bl64p")
+
+[node name="DeleteButton" type="Button" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons" node_paths=PackedStringArray("save_name_line_edit")]
+modulate = Color(0.585388, 0, 0.0219403, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "DELETE"
+script = ExtResource("15_fm32y")
+save_name_line_edit = NodePath("../../SaveNameLineEdit")
+
+[connection signal="item_selected" from="MainMenu/PanelContainer/VBoxContainer/Language/Language" to="MainMenu/PanelContainer/VBoxContainer/Language/Language" method="_on_item_selected"]
+[connection signal="toggled" from="MainMenu/PanelContainer/VBoxContainer/FullScreen/FullScreen" to="MainMenu/PanelContainer/VBoxContainer/FullScreen/FullScreen" method="_on_toggled"]
+[connection signal="pressed" from="MainMenu/PanelContainer/VBoxContainer/Buttons/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MainMenu/PanelContainer/VBoxContainer/Buttons/NewGameButton" to="MainMenu/PanelContainer/VBoxContainer/Buttons/NewGameButton" method="_on_pressed"]
+[connection signal="pressed" from="MainMenu/PanelContainer/VBoxContainer/Buttons/SaveOrLoadButton" to="MainMenu/PanelContainer/VBoxContainer/Buttons/SaveOrLoadButton" method="_on_pressed"]
+[connection signal="pressed" from="MainMenu/PanelContainer/VBoxContainer/Buttons/QuitButton" to="MainMenu/PanelContainer/VBoxContainer/Buttons/QuitButton" method="_on_pressed"]
+[connection signal="pressed" from="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons/BackButton" to="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons/BackButton" method="_on_pressed"]
+[connection signal="pressed" from="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons/LoadButton" to="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons/LoadButton" method="_on_pressed"]
+[connection signal="pressed" from="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons/SaveButton" to="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons/SaveButton" method="_on_pressed"]
+[connection signal="pressed" from="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons/DeleteButton" to="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons/DeleteButton" method="_on_pressed"]
