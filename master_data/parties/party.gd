@@ -20,6 +20,8 @@ enum Type {
 
 var id: int
 var type: Type
+var type_string: String:
+	get: return "PARTY_TYPE_" + Type.keys()[type]
 var name: String
 var street_name: String
 var street_number: String

@@ -46,6 +46,8 @@ border_color = Color(0, 0, 0, 1)
 [node name="ShipmentDetails" type="PanelContainer" node_paths=PackedStringArray("_tab_container", "_shipment_status", "_shipment_number", "_customer_reference", "_shipper", "_consignee", "_origin", "_destination", "_incoterms", "_service", "_earliest_pickup", "_latest_delivery", "_shipment_cargo_details", "_shipment_main_freight", "_shipment_haulage", "_shipment_handling", "_shipment_customs", "_shipment_events", "_shipment_documentation", "_shipment_accounting")]
 offset_right = 900.0
 offset_bottom = 500.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_0f3ba")
 script = ExtResource("1_0f3ba")
 _tab_container = NodePath("VBoxContainer/Tabs")

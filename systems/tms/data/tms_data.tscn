@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=3 uid="uid://3npfgwncxa5v"]
+
+[ext_resource type="Script" uid="uid://d2vnlthqwubpm" path="res://systems/tms/data/tms_data.gd" id="1_ds5u5"]
+[ext_resource type="PackedScene" uid="uid://b0ltv27cnu57t" path="res://systems/tms/data/tms_data_party_list_item.tscn" id="2_gkxvh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f2rsm"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.91664, 0.91664, 0.91664, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_f2rsm"]
+font_size = 24
+font_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.341176)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w1aiy"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[node name="TmsData" type="PanelContainer" node_paths=PackedStringArray("container", "header", "party_type_filter")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_f2rsm")
+script = ExtResource("1_ds5u5")
+container = NodePath("VBoxContainer/PanelContainer/ScrollContainer/PartiesContainer")
+header = NodePath("VBoxContainer/HBoxContainer/Header")
+party_type_filter = NodePath("VBoxContainer/HBoxContainer/PartyTypeFilter")
+list_item_scene = ExtResource("2_gkxvh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Header" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "PARTIES"
+label_settings = SubResource("LabelSettings_f2rsm")
+
+[node name="PartyTypeFilter" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_w1aiy")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="PartiesContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = -1
+
+[node name="PartyListItem" parent="VBoxContainer/PanelContainer/ScrollContainer/PartiesContainer" instance=ExtResource("2_gkxvh")]
+layout_mode = 2

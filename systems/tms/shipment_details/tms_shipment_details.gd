@@ -46,7 +46,7 @@ func _ready() -> void:
 	GlobalDebugger.assert_all_exported_properties(self)
 	
 	for status: String in Shipment.Status.keys():
-		_shipment_status.add_item("STATUS_" + status.to_upper())
+		_shipment_status.add_item("SHIPMENT_STATUS_" + status.to_upper())
 
 
 func close() -> void:

@@ -8,23 +8,23 @@ enum SortType {
 }
 
 
-@export var _tms: Tms
-@export var _shipment_container: Control
-@export var _shipments_header: Label
-@export var _toggle_completed_button: Button
-@export var _sort_button: Button
-@export var _shipment_list_item_scene: PackedScene
+@export var tms: Tms
+@export var container: Control
+@export var header: Label
+@export var toggle_completed_button: Button
+@export var sort_button: Button
+@export var list_item_scene: PackedScene
 var show_completed: bool = true
 var sort_type: SortType
-var shipment_list_items: Array[TmsShipmentListItem]
-var shipments_to_display: Array[Shipment]
+var list_items: Array[TmsShipmentListItem]
+var items_to_display: Array[Shipment]
 
 
 func _ready() -> void:
 	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.assert_all_exported_properties(self)
-	clear_shipment_container()
-	refresh_shipment_list_items()
+	clear_container()
+	refresh_list_items()
 
 
 func close() -> void:
@@ -32,8 +32,8 @@ func close() -> void:
 	if GameManager.player.person.employer == null:
 		return
 	
-	if (GameManager.player.person.employer as Party).shipment_list_updated.is_connected(refresh_shipment_list_items):
-		(GameManager.player.person.employer as Party).shipment_list_updated.disconnect(refresh_shipment_list_items)
+	if (GameManager.player.person.employer as Party).shipment_list_updated.is_connected(refresh_list_items):
+		(GameManager.player.person.employer as Party).shipment_list_updated.disconnect(refresh_list_items)
 
 
 func open() -> void:
@@ -41,54 +41,54 @@ func open() -> void:
 	if GameManager.player.person.employer == null:
 		return
 	
-	if not (GameManager.player.person.employer as Party).shipment_list_updated.is_connected(refresh_shipment_list_items):
-		(GameManager.player.person.employer as Party).shipment_list_updated.connect(refresh_shipment_list_items)
-	refresh_shipment_list_items()
+	if not (GameManager.player.person.employer as Party).shipment_list_updated.is_connected(refresh_list_items):
+		(GameManager.player.person.employer as Party).shipment_list_updated.connect(refresh_list_items)
+	refresh_list_items()
 
 
-func clear_shipment_container() -> void:
-	for child: Node in _shipment_container.get_children():
+func clear_container() -> void:
+	for child: Node in container.get_children():
 		child.queue_free()
 
 
-func create_new_shipment_list_item(new_shipment: Shipment) -> TmsShipmentListItem:
-	var new_shipment_list_item: TmsShipmentListItem = (_shipment_list_item_scene.instantiate() as TmsShipmentListItem).with_data(new_shipment)
-	new_shipment_list_item.pressed_with_shipment_data.connect(_on_shipment_list_item_pressed)
-	_shipment_container.add_child(new_shipment_list_item)
-	shipment_list_items.append(new_shipment_list_item)
-	return new_shipment_list_item
+func create_new_list_item(shipment: Shipment) -> TmsShipmentListItem:
+	var new_list_item: TmsShipmentListItem = (list_item_scene.instantiate() as TmsShipmentListItem).with_data(shipment)
+	new_list_item.pressed_with_shipment_data.connect(_on_list_item_pressed)
+	container.add_child(new_list_item)
+	list_items.append(new_list_item)
+	return new_list_item
 
 
-func update_shipment_list_item(shipment_list_item: TmsShipmentListItem, new_shipment: Shipment) -> TmsShipmentListItem:
-	return shipment_list_item.with_data(new_shipment)
+func update_list_item(list_item: TmsShipmentListItem, shipment: Shipment) -> TmsShipmentListItem:
+	return list_item.with_data(shipment)
 
 
-func remove_shipment_list_items(ids_to_remove: Array[int]) -> void:
+func remove_list_items(ids_to_remove: Array[int]) -> void:
 	for id_to_remove: int in ids_to_remove:
-		shipment_list_items[id_to_remove].queue_free()
-		shipment_list_items.remove_at(id_to_remove)
+		list_items[id_to_remove].queue_free()
+		list_items.remove_at(id_to_remove)
 
 
-func refresh_shipment_list_items() -> void:
-	filter_and_sort_shipment_list()
-	_shipments_header.text = "%s (%d):" % [tr("SHIPMENTS"), shipments_to_display.size()]
+func refresh_list_items() -> void:
+	filter_and_sort_items()
+	header.text = "%s (%d):" % [tr("SHIPMENTS"), items_to_display.size()]
 	
-	var shipments_size: int = shipments_to_display.size()
-	var list_items_size: int = shipment_list_items.size()
+	var items_size: int = items_to_display.size()
+	var list_items_size: int = list_items.size()
 	var list_item_ids_for_removal: Array[int]
 	
-	for counter: int in maxi(shipments_size, list_items_size):
-		if counter <= shipments_size - 1 and counter <= list_items_size - 1:
-			update_shipment_list_item(shipment_list_items[counter], shipments_to_display[counter])
-		elif counter > shipments_size - 1:
+	for counter: int in maxi(items_size, list_items_size):
+		if counter <= items_size - 1 and counter <= list_items_size - 1:
+			update_list_item(list_items[counter], items_to_display[counter])
+		elif counter > items_size - 1:
 			list_item_ids_for_removal.push_front(counter)
 		elif counter > list_items_size - 1:
-			create_new_shipment_list_item(shipments_to_display[counter])
+			create_new_list_item(items_to_display[counter])
 	
-	remove_shipment_list_items(list_item_ids_for_removal)
+	remove_list_items(list_item_ids_for_removal)
 
 
-func filter_and_sort_shipment_list() -> void:
+func filter_and_sort_items() -> void:
 	if GameManager.player.person.employer == null:
 		return
 	
@@ -104,32 +104,32 @@ func filter_and_sort_shipment_list() -> void:
 		SortType.BY_DATE:
 			shipments_sorted = sort_shipment_list_by_earliest_pickup_date(shipments)
 	
-	shipments_to_display = shipments_sorted
+	items_to_display = shipments_sorted
 
 
-func _on_shipment_list_item_pressed(shipment_to_load: Shipment) -> void:
-	_tms.open_shipment_details(shipment_to_load)
+func _on_list_item_pressed(shipment_to_load: Shipment) -> void:
+	tms.open_shipment_details(shipment_to_load)
 
 
 func _on_toggle_completed_button_pressed() -> void:
 	show_completed = not show_completed
 	if show_completed:
-		_toggle_completed_button.text = "HIDE_COMPLETED"
+		toggle_completed_button.text = "HIDE_COMPLETED"
 	else:
-		_toggle_completed_button.text = "SHOW_COMPLETED"
+		toggle_completed_button.text = "SHOW_COMPLETED"
 	
-	refresh_shipment_list_items()
+	refresh_list_items()
 
 
 func _on_sort_button_pressed() -> void:
 	sort_type = SortType.values()[(sort_type + 1) % SortType.size()]
 	match sort_type:
 		SortType.BY_NUMBER:
-			_sort_button.text = "SORT_BY_DATE"
+			sort_button.text = "SORT_BY_DATE"
 		SortType.BY_DATE:
-			_sort_button.text = "SORT_BY_NUMBER"
+			sort_button.text = "SORT_BY_NUMBER"
 	
-	refresh_shipment_list_items()
+	refresh_list_items()
 
 
 func sort_shipment_list_by_shipment_number(shipment_list: Array[Shipment]) -> Array[Shipment]:

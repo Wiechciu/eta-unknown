@@ -75,9 +75,9 @@ CARRIER;Carrier;Przewoźnik
 PLANNED_DEPARTURE;Planned departure;Planowany wylot
 PLANNED_ARRIVAL;Planned arrival;Planowany przylot
 ARRANGE_MAIN_FREIGHT;Arrange main freight;Zaaranżuj fracht główny
-HAULIER_PICKUP;Haulier pick up;Przewoźnik odbioru
+HAULIER_PICKUP;Haulier pickup;Przewoźnik odbioru
 HAULIER_DELIVERY;Haulier delivery;Przewoźnik dostawy
-PLANNED_PICKUP;Planned pick up;Planowany odbiór
+PLANNED_PICKUP;Planned pickup;Planowany odbiór
 PLANNED_DELIVERY;Planned delivery;Planowana dostawa
 ARRANGE_PICKUP;Arrange pickup;Zaaranżuj odbiór
 ARRANGE_DELIVERY;Arrange delivery;Zaaranżuj dostawę
@@ -101,15 +101,15 @@ REVENUE_TOTAL;Revenue total;Łączny przychód
 COST_TOTAL;Cost total;Łączne koszty
 GROSS_PROFIT;Gross profit;Profit brutto
 MARGIN;Margin;Marża
-STATUS_REQUESTED;Requested;Zlecona
-STATUS_QUOTED;Quoted;Wyceniona
-STATUS_ACCEPTED;Accepted;Zaakceptowana
-STATUS_PLANNED;Planned;Zaplanowana
-STATUS_IN_TRANSIT;In transit;W transporcie
-STATUS_DELIVERED;Delivered;Dostarczona
-STATUS_INVOICED;Invoiced;Zafakturowana
-STATUS_COMPLETED;Completed;Zakończona
-STATUS_CANCELLED;Cancelled;Anulowana
+SHIPMENT_STATUS_REQUESTED;Requested;Zlecona
+SHIPMENT_STATUS_QUOTED;Quoted;Wyceniona
+SHIPMENT_STATUS_ACCEPTED;Accepted;Zaakceptowana
+SHIPMENT_STATUS_PLANNED;Planned;Zaplanowana
+SHIPMENT_STATUS_IN_TRANSIT;In transit;W transporcie
+SHIPMENT_STATUS_DELIVERED;Delivered;Dostarczona
+SHIPMENT_STATUS_INVOICED;Invoiced;Zafakturowana
+SHIPMENT_STATUS_COMPLETED;Completed;Zakończona
+SHIPMENT_STATUS_CANCELLED;Cancelled;Anulowana
 EVENT_BOK;Received booking;Odebrano zlecenie
 EVENT_ERL;Earliest pickup;Najwcześniejszy odbiór
 EVENT_PUP;Picked up;Odebrano
@@ -172,3 +172,12 @@ MOT_AIRFREIGHT;Aifreight;Fracht lotniczy
 MOT_SEAFREIGHT;Seafreight;Frach morski
 MOT_LANDFREIGHT;Landfreight;Fracht drogowy
 MOT_RAILFREIGHT;Railfreight;Fracht kolejowy
+DATA;Data;Dane
+PARTIES;Parties;Firmy
+PARTY_TYPE_ALL;All;Wszystkie
+PARTY_TYPE_CUSTOMER;Customer;Klient
+PARTY_TYPE_FREIGHT_FORWARDER;Freight forwarder;Spedytor
+PARTY_TYPE_CARRIER;Carrier;Przewoźnik
+PARTY_TYPE_CUSTOMS_AGENCY;Customs agency;Agencja celna
+PARTY_TYPE_HANDLING_AGENT;Handling agent;Agent obsługi naziemnej
+PARTY_TYPE_TRUCKER;Haulier;Przewoźnik drogowy

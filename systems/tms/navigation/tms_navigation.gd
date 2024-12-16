@@ -16,21 +16,6 @@ func _ready() -> void:
 	open()
 
 
-func _on_navigation_shipments_button_pressed() -> void:
-	_tms.open_shipment_list()
-
-
-func _on_navigation_quotations_button_pressed() -> void:
-	_tms.open_quotation_list()
-
-
-func _on_toggle_navigation_button_pressed() -> void:
-	if is_open:
-		close()
-	else:
-		open()
-
-
 func open() -> void:
 	if is_open:
 		return
@@ -59,3 +44,21 @@ func close() -> void:
 	
 	for panel: Control in _panels_to_hide:
 		panel.hide()
+
+
+func _on_toggle_navigation_button_pressed() -> void:
+	if is_open:
+		close()
+	else:
+		open()
+
+func _on_navigation_shipments_button_pressed() -> void:
+	_tms.open_shipment_list()
+
+
+func _on_navigation_quotations_button_pressed() -> void:
+	_tms.open_quotation_list()
+
+
+func _on_data_button_pressed() -> void:
+	_tms.open_data()

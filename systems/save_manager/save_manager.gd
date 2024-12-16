@@ -6,6 +6,7 @@ signal game_loaded
 
 
 @export var fade_screen: ColorRect
+@export var progress_bar: ProgressBar
 @export_category("Debug only")
 @export var open_save_location: bool:
 	set(value):
@@ -25,12 +26,16 @@ func _ready() -> void:
 
 
 func start_new_game() -> void:
+	progress_bar.value = 0.0
 	await fade_out()
 	GlobalRefs.clear_all()
 	GlobalMarket.clear_all()
+	await update_progress_bar(randf_range(10.0, 30.0))
 	await reload_main_scene()
+	await update_progress_bar(randf_range(40.0, 70.0))
 	GameManager.json_loader.start()
 	GlobalMarket.create_market_rates()
+	await update_progress_bar(100.0)
 	game_loaded.emit()
 	await fade_in()
 
@@ -40,11 +45,15 @@ func save_game() -> void:
 
 
 func load_game() -> void:
+	progress_bar.value = 0.0
 	await fade_out()
 	GlobalRefs.clear_all()
 	GlobalMarket.clear_all()
+	await update_progress_bar(randf_range(10.0, 30.0))
 	await reload_main_scene()
+	await update_progress_bar(randf_range(40.0, 70.0))
 	load_game_from_json()
+	await update_progress_bar(100.0)
 	game_loaded.emit()
 	await fade_in()
 
@@ -52,10 +61,10 @@ func load_game() -> void:
 func save_game_to_json() -> void:
 	var file: FileAccess = FileAccess.open(save_full_path, FileAccess.WRITE)
 	
-	## TODO: Reload scene, so that all Humans and furniture is reset before loading their state.
-	## TODO: Add furniture state, e.g. Computer open
-	## TODO: Add current pathing state to Employees
-	## TODO: Add market rates dictionary
+	## TODO Add furniture state, e.g. Computer open
+	## TODO Add current pathing state to Employees
+	## TODO Add Inventory state
+	
 	var data: Dictionary
 	data["time"] = GlobalTimer.now_float
 	data["global_refs"] = GlobalRefs.to_dict()
@@ -109,3 +118,9 @@ func fade_in() -> void:
 	await tween.finished
 	
 	fade_screen.hide()
+
+
+func update_progress_bar(value: float) -> void:
+	var tween: Tween = create_tween()
+	tween.tween_property(progress_bar, "value", value, 0.2)
+	await tween.finished

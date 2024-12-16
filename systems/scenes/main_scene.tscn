@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://b18oy35p17ir7"]
+[gd_scene load_steps=29 format=3 uid="uid://b18oy35p17ir7"]
 
 [ext_resource type="PackedScene" uid="uid://dmwp5s37fvy1m" path="res://3d_scenes/entities/environment/environment.tscn" id="1_pyshm"]
 [ext_resource type="PackedScene" uid="uid://dvpm8vxtia7au" path="res://3d_scenes/entities/furniture/computer/computer.tscn" id="4_8pfch"]
@@ -27,6 +27,9 @@
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_pyshm"]
 size = Vector2(10, 10)
+
+[sub_resource type="Resource" id="Resource_wl1sy"]
+metadata/__load_path__ = "res://3d_scenes/entities/document/physical_document.tscn"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5cac6"]
 albedo_color = Color(0, 0.329412, 0, 1)
@@ -127,6 +130,7 @@ transform = Transform3D(0.837604, 0, 0.546277, 0, 1, 0, -0.546277, 0, 0.837604, 
 
 [node name="Printer" parent="Furniture" instance=ExtResource("21_nkfki")]
 transform = Transform3D(1, 0, -1.42109e-14, 0, 1, 0, 1.06581e-14, 0, 1, -1.36925, 0.614818, -4.32853)
+document_scene = SubResource("Resource_wl1sy")
 
 [node name="BookcaseOpenLow2" parent="Furniture" instance=ExtResource("16_yatgx")]
 transform = Transform3D(1.2299, 0, 0, 0, 0.559411, 0, 1.31084e-14, 0, 1.58582, -2.1029, -1.1921e-07, -3.73453)

@@ -95,14 +95,13 @@ animation_out_transition_type = 9
 
 [node name="UiSoundComponent" parent="VBoxContainer/MenuItems/QuotationsButton" instance=ExtResource("3_ksgse")]
 
-[node name="CustomersButton" type="Button" parent="VBoxContainer/MenuItems"]
+[node name="DataButton" type="Button" parent="VBoxContainer/MenuItems"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
-disabled = true
-text = "CUSTOMERS"
+text = "DATA"
 clip_text = true
 
-[node name="UiAnimationComponent-Move" parent="VBoxContainer/MenuItems/CustomersButton" instance=ExtResource("2_yh5k4")]
+[node name="UiAnimationComponent-Move" parent="VBoxContainer/MenuItems/DataButton" instance=ExtResource("2_yh5k4")]
 animate_move = true
 animation_out_duration = 0.5
 animation_in_ease_type = 1
@@ -110,9 +109,9 @@ animation_out_ease_type = 1
 animation_in_transition_type = 6
 animation_out_transition_type = 9
 
-[node name="UiSoundComponent" parent="VBoxContainer/MenuItems/CustomersButton" instance=ExtResource("3_ksgse")]
+[node name="UiSoundComponent" parent="VBoxContainer/MenuItems/DataButton" instance=ExtResource("3_ksgse")]
 
 [connection signal="pressed" from="VBoxContainer/Header/ToggleNavigationButton" to="." method="_on_toggle_navigation_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/MenuItems/ShipmentsButton" to="." method="_on_navigation_shipments_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/MenuItems/QuotationsButton" to="." method="_on_navigation_quotations_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/MenuItems/CustomersButton" to="." method="_on_navigation_quotations_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MenuItems/DataButton" to="." method="_on_data_button_pressed"]

@@ -22,6 +22,8 @@ enum Status {
 
 var id: int
 var status: Status
+var status_string: String:
+	get: return "SHIPMENT_STATUS_" + Status.keys()[status]
 var is_completed_or_cancelled: bool:
 	get:
 		return status == Status.COMPLETED or status == Status.CANCELLED

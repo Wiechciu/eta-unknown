@@ -12,6 +12,7 @@ extends OsApp
 @export var shipment_details: TmsShipmentDetails
 #@export var quotation_list: TmsQuotationList
 #@export var quotation_details: TmsQuotationDetails
+@export var data: TmsData
 
 
 func _ready() -> void:
@@ -37,6 +38,9 @@ func close_all_except_navigation() -> void:
 	shipment_list.close()
 	shipment_details.close()
 	#quotation_list.close()
+	#quotation_details.close()
+	data.close()
+	#data_details.close()
 
 
 func hide_all() -> void:
@@ -47,14 +51,14 @@ func show_all() -> void:
 	all_container.show()
 
 
-func open_shipment_details(shipment: Shipment) -> void:
-	close_all()
-	shipment_details.open(shipment)
-
-
 func open_shipment_list() -> void:
 	close_all()
 	shipment_list.open()
+
+
+func open_shipment_details(shipment: Shipment) -> void:
+	close_all()
+	shipment_details.open(shipment)
 
 
 func open_quotation_list() -> void:
@@ -66,6 +70,16 @@ func open_quotation_list() -> void:
 func open_quotation_details(quotation: Quotation) -> void:
 	close_all()
 	#quotation_details.open(quotation)
+
+
+func open_data() -> void:
+	close_all()
+	data.open()
+
+
+func open_party_details(party: Party) -> void:
+	close_all()
+	#party_details.open(party)
 
 
 func _on_document_print_ordered(document: Document) -> void:

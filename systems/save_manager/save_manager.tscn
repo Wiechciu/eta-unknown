@@ -2,10 +2,11 @@
 
 [ext_resource type="Script" uid="uid://bt5p468xemxmo" path="res://systems/save_manager/save_manager.gd" id="1_wunqo"]
 
-[node name="SaveManager" type="Node" node_paths=PackedStringArray("fade_screen")]
+[node name="SaveManager" type="Node" node_paths=PackedStringArray("fade_screen", "progress_bar")]
 process_mode = 3
 script = ExtResource("1_wunqo")
 fade_screen = NodePath("FadeScreen")
+progress_bar = NodePath("FadeScreen/ProgressBar")
 
 [node name="FadeScreen" type="ColorRect" parent="."]
 z_index = 1
@@ -16,3 +17,19 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0.0705882, 0.152941, 0.305882, 1)
+
+[node name="ProgressBar" type="ProgressBar" parent="FadeScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -20.0
+offset_right = 100.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(100, 20)
+value = 10.0

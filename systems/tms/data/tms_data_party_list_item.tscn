@@ -1,0 +1,106 @@
+[gd_scene load_steps=7 format=3 uid="uid://b0ltv27cnu57t"]
+
+[ext_resource type="Script" uid="uid://bwfcfg336cwfs" path="res://systems/tms/data/tms_data_party_list_item.gd" id="1_xooph"]
+[ext_resource type="PackedScene" uid="uid://dw7p1e4gjimn0" path="res://systems/ui/ui_sound_component.tscn" id="2_8qs6h"]
+[ext_resource type="PackedScene" uid="uid://bmcauqk83v5kh" path="res://systems/ui/ui_animation_component.tscn" id="3_20wrm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bi60y"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bi60y"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_bi60y"]
+color = Color(0.753984, 0.753984, 0.753984, 1)
+grow_begin = 0.0
+grow_end = 0.0
+vertical = true
+
+[node name="PartyListItem" type="PanelContainer" node_paths=PackedStringArray("party_id", "party_name", "party_city_and_country", "party_type", "button")]
+custom_minimum_size = Vector2(0, 40)
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
+script = ExtResource("1_xooph")
+party_id = NodePath("HBoxContainer/Id")
+party_name = NodePath("HBoxContainer/Name")
+party_city_and_country = NodePath("HBoxContainer/CityAndCountry")
+party_type = NodePath("HBoxContainer/Type")
+button = NodePath("Button")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Id" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+text = "100"
+label_settings = SubResource("LabelSettings_bi60y")
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="VSeparator1" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_bi60y")
+
+[node name="Name" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Johnson & Johnson"
+label_settings = SubResource("LabelSettings_bi60y")
+clip_text = true
+
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_bi60y")
+
+[node name="CityAndCountry" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Hamburg, DE"
+label_settings = SubResource("LabelSettings_bi60y")
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="VSeparator3" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_bi60y")
+
+[node name="Type" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Freight forwarder"
+label_settings = SubResource("LabelSettings_bi60y")
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+flat = true
+
+[node name="UiSoundComponent" parent="Button" instance=ExtResource("2_8qs6h")]
+
+[node name="UiAnimationComponent-Move" parent="." node_paths=PackedStringArray("control_to_watch") instance=ExtResource("3_20wrm")]
+control_to_watch = NodePath("../Button")
+animate_move = true
+animation_out_duration = 0.5
+animation_in_ease_type = 1
+animation_out_ease_type = 1
+animation_in_transition_type = 6
+animation_out_transition_type = 9
+
+[node name="UiAnimationComponent-Color" parent="." node_paths=PackedStringArray("control_to_watch") instance=ExtResource("3_20wrm")]
+control_to_watch = NodePath("../Button")
+animate_color = true
+color_animation_in_value = Color(0.8, 0.95, 1, 1)
+animation_in_duration = 0.2
+animation_out_duration = 0.5
+animation_in_ease_type = 1
+animation_in_transition_type = 1
+animation_out_transition_type = 1

@@ -34,8 +34,7 @@ func with_data(new_shipment: Shipment) -> TmsShipmentListItem:
 	origin_label.text = shipment.origin.code
 	destination_label.text = shipment.destination.code
 	total_weight_label.text = "%d %s" % [shipment.cargo_details.total_weight, tr("KG")]
-	var status_text: String = "STATUS_" + Shipment.Status.keys()[shipment.status]
-	status_label.text = status_text
+	status_label.text = shipment.status_string
 	modulate = get_color_from_shipment_status(shipment.status)
 	
 	return self

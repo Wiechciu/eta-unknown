@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dkbqixm40xi7u"]
+[gd_scene load_steps=9 format=3 uid="uid://dkbqixm40xi7u"]
 
 [ext_resource type="Script" uid="uid://cl7we01wx8ir3" path="res://systems/tms/shipment_list/tms_shipment_list.gd" id="1_f2rsm"]
 [ext_resource type="PackedScene" uid="uid://dag450t1ydq8u" path="res://systems/tms/shipment_list/tms_shipment_list_item.tscn" id="2_jqska"]
@@ -30,19 +30,31 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 
-[node name="ShipmentList" type="PanelContainer" node_paths=PackedStringArray("_shipment_container", "_shipments_header", "_toggle_completed_button", "_sort_button")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bi60y"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[node name="ShipmentList" type="PanelContainer" node_paths=PackedStringArray("container", "header", "toggle_completed_button", "sort_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_f2rsm")
 script = ExtResource("1_f2rsm")
-_shipment_container = NodePath("VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer")
-_shipments_header = NodePath("VBoxContainer/HBoxContainer/Header")
-_toggle_completed_button = NodePath("VBoxContainer/HBoxContainer/ToggleCompletedButton")
-_sort_button = NodePath("VBoxContainer/HBoxContainer/SortButton")
-_shipment_list_item_scene = ExtResource("2_jqska")
+container = NodePath("VBoxContainer/PanelContainer/ScrollContainer/Container")
+header = NodePath("VBoxContainer/HBoxContainer/Header")
+toggle_completed_button = NodePath("VBoxContainer/HBoxContainer/ToggleCompletedButton")
+sort_button = NodePath("VBoxContainer/HBoxContainer/SortButton")
+list_item_scene = ExtResource("2_jqska")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -122,68 +134,87 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_w1aiy")
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="ShipmentContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/ScrollContainer"]
+[node name="Container" type="VBoxContainer" parent="VBoxContainer/PanelContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = -1
 
-[node name="ShipmentListItem" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+[node name="ShipmentListItem" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
 
-[node name="ShipmentListItem2" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+[node name="ShipmentListItem2" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
 
-[node name="ShipmentListItem3" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+[node name="ShipmentListItem3" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
 
-[node name="ShipmentListItem4" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+[node name="ShipmentListItem4" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
 
-[node name="ShipmentListItem5" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+[node name="ShipmentListItem5" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
 
-[node name="ShipmentListItem6" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+[node name="ShipmentListItem6" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
 
-[node name="ShipmentListItem7" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+[node name="ShipmentListItem7" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
 
-[node name="ShipmentListItem8" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+[node name="ShipmentListItem8" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
 
-[node name="ShipmentListItem9" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+[node name="ShipmentListItem9" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
 
-[node name="ShipmentListItem10" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+[node name="ShipmentListItem10" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
 
-[node name="ShipmentListItem11" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+[node name="ShipmentListItem11" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
 
-[node name="ShipmentListItem12" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+[node name="ShipmentListItem12" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
 
-[node name="ShipmentListItem13" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+[node name="ShipmentListItem13" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
 
-[node name="ShipmentListItem14" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+[node name="ShipmentListItem14" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
 
-[node name="ShipmentListItem15" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+[node name="ShipmentListItem15" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
 
-[node name="ShipmentListItem16" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+[node name="ShipmentListItem16" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
 
-[node name="ShipmentListItem17" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+[node name="ShipmentListItem17" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
 
-[node name="ShipmentListItem18" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+[node name="ShipmentListItem18" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
 
-[node name="ShipmentListItem19" parent="VBoxContainer/PanelContainer/ScrollContainer/ShipmentContainer" instance=ExtResource("2_jqska")]
+[node name="ShipmentListItem19" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ToggleCompletedButton" to="." method="_on_toggle_completed_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/SortButton" to="." method="_on_sort_button_pressed"]
