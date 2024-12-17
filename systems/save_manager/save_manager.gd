@@ -1,6 +1,8 @@
-## @tool ## Causes issues with project visibility
-extends Node
+## TODO Add furniture state, e.g. Computer open
+## TODO Add current pathing state to Employees
+## TODO Add Inventory state
 
+extends Node
 
 signal game_loaded
 signal game_saved
@@ -9,10 +11,6 @@ signal save_deleted
 
 @export var fade_screen: ColorRect
 @export var progress_bar: ProgressBar
-@export_category("Debug only")
-@export var open_save_location: bool:
-	set(value):
-		OS.shell_open(ProjectSettings.globalize_path(save_folder))
 
 ## C:\Users\wiech\AppData\Roaming\Godot\app_userdata\Freight Forwarding
 var save_folder: String = "user://saves/"
@@ -21,9 +19,10 @@ var save_file_extension_no_dot: String:
 	get:
 		return save_file_extension.replace(".", "")
 
-#var save_file_name: String = "save.json"
-#var save_full_path: String:
-	#get: return save_folder + save_file_name
+var autosave: bool
+var autosave_interval: int
+var current_interval_count: int = 0
+var autosave_file_name: String = "autosave"
 
 var fade_duration: float = 0.3
 var is_game_loaded: bool = false
@@ -35,6 +34,7 @@ var new_save_name: String:
 
 func _ready() -> void:
 	GlobalDebugger.assert_all_exported_properties(self)
+	GlobalTimer.new_day_started.connect(handle_autosave)
 	fade_screen.hide()
 
 
@@ -62,7 +62,7 @@ func save_game(save_file_name: String) -> void:
 
 func load_game(save_file_name: String) -> void:
 	if not save_file_exists(save_file_name):
-		ActionLogger.create_log("Save file doesn't exist: %s." % save_file_name, true)
+		ActionLogger.create_log(tr("SAVE_FILE_DOESNT_EXIST").format({"file_name":save_file_name}), true)
 		return
 	is_game_loaded = false
 	progress_bar.value = 0.0
@@ -82,22 +82,16 @@ func load_game(save_file_name: String) -> void:
 func save_game_to_json(save_file_name: String) -> void:
 	get_or_create_save_folder()
 	
-	var file: FileAccess = FileAccess.open(save_folder + save_file_name + save_file_extension, FileAccess.WRITE)
-	
-	## TODO Save file selection
-	## TODO Add furniture state, e.g. Computer open
-	## TODO Add current pathing state to Employees
-	## TODO Add Inventory state
-	
 	var data: Dictionary
+	data["metadata"] = generate_save_file_metadata(save_file_name)
 	data["time"] = GlobalTimer.now_float
 	data["global_refs"] = GlobalRefs.to_dict()
 	data["market_rates"] = GlobalMarket.market_rates_dict
 	
+	var file: FileAccess = FileAccess.open(save_folder + save_file_name + save_file_extension, FileAccess.WRITE)
 	file.store_string(JSON.stringify(data, "\t"))
 	file.close()
-	ActionLogger.create_log("Saved game as: %s." % save_file_name)
-
+	ActionLogger.create_log(tr("SAVED_GAME").format({"file_name":save_file_name}))
 
 func load_game_from_json(save_file_name: String) -> void:
 	var file: FileAccess = FileAccess.open(save_folder + save_file_name + save_file_extension, FileAccess.READ)
@@ -105,14 +99,14 @@ func load_game_from_json(save_file_name: String) -> void:
 	file.close()
 	
 	if data == null:
-		ActionLogger.create_log("Couldn't load save file: %s." % save_folder + save_file_name, true)
+		ActionLogger.create_log(tr("COULDNT_LOAD_SAVE_FILE").format({"file_name":save_file_name}), true)
 		return
 	
 	GlobalTimer.from_dict(data)
 	GlobalRefs.from_dict(data["global_refs"])
 	GlobalMarket.from_dict(data["market_rates"])
 
-	ActionLogger.create_log("Loaded from: %s." % save_file_name)
+	ActionLogger.create_log(tr("LOADED_SAVE_FILE").format({"file_name":save_file_name}))
 
 
 func reload_main_scene() -> void:
@@ -158,22 +152,53 @@ func get_or_create_save_folder() -> DirAccess:
 	return DirAccess.open(save_folder)
 
 
-func get_save_file_names_from_save_folder() -> Array[String]:
-	var save_file_names: Array[String]
+func get_save_files_metadata() -> Array[Dictionary]:
+	var save_file_metadata: Array[Dictionary]
 	var dir: DirAccess = get_or_create_save_folder()
 	for file_name: String in dir.get_files():
 		if file_name.get_extension() == save_file_extension_no_dot:
-			save_file_names.append(file_name.replace(save_file_extension, ""))
-	return save_file_names
+			var save_file_name: String = file_name.replace(save_file_extension, "")
+			var metadata: Dictionary = read_metadata_from_save_file(save_file_name)
+			save_file_metadata.append(metadata)
+	return save_file_metadata
 
 
 func delete_save_file(save_file_name: String) -> void:
 	if not save_file_exists(save_file_name):
-		ActionLogger.create_log("Save file doesn't exist: %s." % save_file_name, true)
+		ActionLogger.create_log(tr("SAVE_FILE_DOESNT_EXIST").format({"file_name":save_file_name}), true)
 		return
 	
 	DirAccess.remove_absolute(save_folder + save_file_name + save_file_extension)
-	ActionLogger.create_log("Save file deleted: %s." % save_file_name)
+	ActionLogger.create_log(tr("DELETED_SAVE_FILE").format({"file_name":save_file_name}))
+	#OS.move_to_trash(save_folder + save_file_name + save_file_extension) ## doesn't work
 	save_deleted.emit()
-	#OS.move_to_trash(save_folder + save_file_name + save_file_extension)
+
+
+func generate_save_file_metadata(save_file_name: String) -> Dictionary:
+	return {
+		"save_file_name": save_file_name,
+		"game_version": ProjectSettings.get_setting("application/config/version"),
+		"timestamp": Time.get_datetime_string_from_system().replace("T", ", "),
+	}
+
+
+func read_metadata_from_save_file(save_file_name: String) -> Dictionary:
+	var file: FileAccess = FileAccess.open(save_folder + save_file_name + save_file_extension, FileAccess.READ)
+	var data: Dictionary = JSON.parse_string(file.get_as_text())
+	file.close()
+	return data["metadata"] if data != null else null
+
+
+func is_version_matched(version: String) -> bool:
+	var current_version: String = ProjectSettings.get_setting("application/config/version")
+	return version == current_version
+
+
+func handle_autosave() -> void:
+	if not autosave:
+		return
 	
+	current_interval_count += 1
+	if current_interval_count >= autosave_interval:
+		current_interval_count = 0
+		save_game_to_json(autosave_file_name)

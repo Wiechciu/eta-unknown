@@ -7,7 +7,4 @@ func _ready() -> void:
 
 
 func _on_visibility_changed() -> void:
-	if SaveManager.is_game_loaded:
-		disabled = false
-	else:
-		disabled = true
+	disabled = not SaveManager.is_game_loaded

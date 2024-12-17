@@ -1,4 +1,5 @@
 @tool
+class_name VolumeSlider
 extends Control
 
 
@@ -8,7 +9,9 @@ extends Control
 		label.text = "%s_VOLUME" % value.to_upper()
 @export var label: Label
 @export var slider: Slider
-
+var value: float:
+	get: return slider.value
+	set(value): slider.value = value
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():

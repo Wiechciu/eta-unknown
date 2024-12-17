@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://xoadia8ml518"]
+
+[ext_resource type="Script" uid="uid://nru774yqmjfh" path="res://systems/ui/controls_list_item.gd" id="1_pyt88"]
+
+[node name="ControlsListItem" type="HBoxContainer" node_paths=PackedStringArray("action_label", "event_button")]
+script = ExtResource("1_pyt88")
+action_label = NodePath("ActionLabel")
+event_button = NodePath("EventButton")
+
+[node name="ActionLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ACTION"
+clip_text = true
+
+[node name="EventButton" type="Button" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "EVENT"
+clip_text = true

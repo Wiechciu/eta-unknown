@@ -24,7 +24,7 @@ func _ready() -> void:
 	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.assert_all_exported_properties(self)
 	clear_container()
-	refresh_list_items()
+	#refresh_list_items()
 
 
 func close() -> void:

@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://db7riwidjsxbu"]
+[gd_scene load_steps=36 format=3 uid="uid://db7riwidjsxbu"]
 
 [ext_resource type="Script" uid="uid://cxh3u0n0nptw2" path="res://systems/ui/ui.gd" id="1_xemwu"]
+[ext_resource type="Script" uid="uid://cbk66ldef8nie" path="res://systems/ui/version.gd" id="2_1i10y"]
 [ext_resource type="Script" uid="uid://cr6ck8pbq4a48" path="res://systems/ui/language.gd" id="2_5x0jx"]
 [ext_resource type="PackedScene" uid="uid://dqyhkxg11nbe5" path="res://systems/ui/volume_slider.tscn" id="3_hr65t"]
 [ext_resource type="Script" uid="uid://bxalu3m73dsul" path="res://systems/ui/full_screen.gd" id="3_oihav"]
@@ -9,12 +10,26 @@
 [ext_resource type="Script" uid="uid://ct53rv3gcuw3s" path="res://systems/ui/new_game_button.gd" id="5_m8kx8"]
 [ext_resource type="Script" uid="uid://bfnuurcaj01t4" path="res://systems/ui/play_button.gd" id="5_yuv0y"]
 [ext_resource type="Script" uid="uid://dejoy0exa03ui" path="res://systems/ui/load_button.gd" id="6_m8kx8"]
-[ext_resource type="Script" uid="uid://cckeoscqs6wbo" path="res://systems/ui/show_panel_button.gd" id="6_qi7t0"]
-[ext_resource type="Script" uid="uid://52ore7fgcb3d" path="res://systems/ui/back_button.gd" id="7_naojb"]
+[ext_resource type="Script" uid="uid://c6uqt2bygjh82" path="res://systems/ui/switch_panel_button.gd" id="7_bl64p"]
 [ext_resource type="Script" uid="uid://na5h6w1e35v" path="res://systems/ui/save_or_load_menu.gd" id="9_a7el2"]
 [ext_resource type="PackedScene" uid="uid://3ipdu30ooyv0" path="res://systems/ui/save_list_item.tscn" id="10_y1ln0"]
 [ext_resource type="Script" uid="uid://57mfiutskhqu" path="res://systems/ui/save_name_line_edit.gd" id="11_oqlsv"]
+[ext_resource type="Script" uid="uid://rqhdl0s5jms3" path="res://systems/ui/settings_menu.gd" id="12_5u55t"]
+[ext_resource type="Script" uid="uid://4a7w06fun1i2" path="res://systems/ui/difficulty.gd" id="13_bl64p"]
+[ext_resource type="Script" uid="uid://conjfprou1b6n" path="res://systems/ui/autosave.gd" id="15_5u55t"]
 [ext_resource type="Script" uid="uid://bhamemntiq6fp" path="res://systems/ui/delete_button.gd" id="15_fm32y"]
+[ext_resource type="Script" path="res://systems/ui/graphics_quality.gd" id="15_ony14"]
+[ext_resource type="Script" uid="uid://g8hj25s33m5s" path="res://systems/ui/controls_settings.gd" id="20_phplh"]
+[ext_resource type="PackedScene" uid="uid://xoadia8ml518" path="res://systems/ui/controls_list_item.tscn" id="21_ewkj2"]
+
+[sub_resource type="Gradient" id="Gradient_ony14"]
+offsets = PackedFloat32Array(0.401198, 1)
+colors = PackedColorArray(0.0605798, 0.63632, 1, 0.248, 0, 0, 0, 0.392157)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5u55t"]
+gradient = SubResource("Gradient_ony14")
+fill = 1
+fill_from = Vector2(0.5, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xemwu"]
 content_margin_left = 16.0
@@ -31,7 +46,15 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ony14"]
+color = Color(1, 1, 1, 1)
+thickness = 2
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ytiqy"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_5u55t"]
+color = Color(1, 1, 1, 1)
+thickness = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y1ln0"]
 content_margin_left = 2.0
@@ -42,7 +65,33 @@ bg_color = Color(0, 0.202524, 0.350951, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bl64p"]
 
-[node name="Ui" type="Control" node_paths=PackedStringArray("main_menu")]
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_1i10y"]
+color = Color(1, 1, 1, 1)
+thickness = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fm32y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5u55t"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1i10y"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+draw_center = false
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_phplh"]
+color = Color(1, 1, 1, 1)
+thickness = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ewkj2"]
+
+[node name="Ui" type="Control" node_paths=PackedStringArray("toggleable_panels_container", "main_menu")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -51,17 +100,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xemwu")
-main_menu = NodePath("MainMenu")
+toggleable_panels_container = NodePath("ToggleablePanelsContainer")
+main_menu = NodePath("ToggleablePanelsContainer/MainMenu")
 
-[node name="MainMenu" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Background" type="ColorRect" parent="MainMenu"]
+[node name="Background" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -70,133 +113,152 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.27451)
 
-[node name="PanelContainer" type="PanelContainer" parent="MainMenu"]
+[node name="Logo" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_5u55t")
+
+[node name="Label" type="Label" parent="Logo"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -174.5
+offset_top = 20.0
+offset_right = 174.5
+offset_bottom = 90.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.721194, 0.822293, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.588235)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 50
+text = "GAME_NAME"
+
+[node name="Version" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -34.8958
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 0.196078)
+theme_override_font_sizes/font_size = 20
+text = "version"
+vertical_alignment = 2
+script = ExtResource("2_1i10y")
+
+[node name="ToggleablePanelsContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainMenu" type="PanelContainer" parent="ToggleablePanelsContainer"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -350.0
-offset_top = -236.0
-offset_right = 350.0
-offset_bottom = 236.0
+offset_left = -250.0
+offset_top = -229.5
+offset_right = 250.0
+offset_bottom = 229.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_xemwu")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/MainMenu"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MainMenu/PanelContainer/VBoxContainer"]
+[node name="Header" type="Label" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "MENU"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="MainMenu/PanelContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
-theme_override_styles/separator = SubResource("StyleBoxEmpty_ytiqy")
+theme_override_styles/separator = SubResource("StyleBoxLine_ony14")
 
-[node name="Language" type="HBoxContainer" parent="MainMenu/PanelContainer/VBoxContainer"]
+[node name="Buttons" type="VBoxContainer" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-
-[node name="Label" type="Label" parent="MainMenu/PanelContainer/VBoxContainer/Language"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "LANGUAGE"
-
-[node name="Language" type="OptionButton" parent="MainMenu/PanelContainer/VBoxContainer/Language"]
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("2_5x0jx")
-
-[node name="VolumeSlider" parent="MainMenu/PanelContainer/VBoxContainer" instance=ExtResource("3_hr65t")]
-layout_mode = 2
-
-[node name="VolumeSlider2" parent="MainMenu/PanelContainer/VBoxContainer" instance=ExtResource("3_hr65t")]
-layout_mode = 2
-bus_name = &"Music"
-
-[node name="VolumeSlider3" parent="MainMenu/PanelContainer/VBoxContainer" instance=ExtResource("3_hr65t")]
-layout_mode = 2
-bus_name = &"Ui"
-
-[node name="VolumeSlider4" parent="MainMenu/PanelContainer/VBoxContainer" instance=ExtResource("3_hr65t")]
-layout_mode = 2
-bus_name = &"Voice"
-
-[node name="VolumeSlider5" parent="MainMenu/PanelContainer/VBoxContainer" instance=ExtResource("3_hr65t")]
-layout_mode = 2
-bus_name = &"Environment"
-
-[node name="FullScreen" type="HBoxContainer" parent="MainMenu/PanelContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MainMenu/PanelContainer/VBoxContainer/FullScreen"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
-text = "FULL_SCREEN"
-
-[node name="FullScreen" type="CheckButton" parent="MainMenu/PanelContainer/VBoxContainer/FullScreen"]
-layout_mode = 2
-size_flags_horizontal = 2
-script = ExtResource("3_oihav")
-
-[node name="Buttons" type="GridContainer" parent="MainMenu/PanelContainer/VBoxContainer"]
-layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 10
-columns = 2
 
-[node name="PlayButton" type="Button" parent="MainMenu/PanelContainer/VBoxContainer/Buttons"]
+[node name="PlayButton" type="Button" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "PLAY"
 script = ExtResource("5_yuv0y")
 
-[node name="NewGameButton" type="Button" parent="MainMenu/PanelContainer/VBoxContainer/Buttons"]
+[node name="HSeparator2" type="HSeparator" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons"]
+layout_mode = 2
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ytiqy")
+
+[node name="NewGameButton" type="Button" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "NEW_GAME"
 script = ExtResource("5_m8kx8")
 
-[node name="SaveOrLoadButton" type="Button" parent="MainMenu/PanelContainer/VBoxContainer/Buttons" node_paths=PackedStringArray("control_to_show")]
+[node name="SaveOrLoadButton" type="Button" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons" node_paths=PackedStringArray("control_to_hide", "control_to_show")]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SAVE_OR_LOAD"
-script = ExtResource("6_qi7t0")
-control_to_show = NodePath("../../../../../SaveOrLoadMenu")
+script = ExtResource("7_bl64p")
+control_to_hide = NodePath("../../..")
+control_to_show = NodePath("../../../../SaveOrLoadMenu")
 
-[node name="QuitButton" type="Button" parent="MainMenu/PanelContainer/VBoxContainer/Buttons"]
+[node name="HSeparator3" type="HSeparator" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons"]
+layout_mode = 2
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ytiqy")
+
+[node name="SettingsButton" type="Button" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons" node_paths=PackedStringArray("control_to_hide", "control_to_show")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SETTINGS"
+script = ExtResource("7_bl64p")
+control_to_hide = NodePath("../../..")
+control_to_show = NodePath("../../../../SettingsMenu")
+
+[node name="CreditsButton" type="Button" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons" node_paths=PackedStringArray("control_to_hide", "control_to_show")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CREDITS"
+script = ExtResource("7_bl64p")
+control_to_hide = NodePath("../../..")
+control_to_show = NodePath("../../../../CreditsMenu")
+
+[node name="HSeparator4" type="HSeparator" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons"]
+layout_mode = 2
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ytiqy")
+
+[node name="QuitButton" type="Button" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "QUIT"
 script = ExtResource("5_hssc3")
 
-[node name="SaveOrLoadMenu" type="Control" parent="." node_paths=PackedStringArray("container", "save_name_line_edit")]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("9_a7el2")
-container = NodePath("PanelContainer/VBoxContainer/PanelContainer/ScrollContainer/Container")
-list_item_scene = ExtResource("10_y1ln0")
-save_name_line_edit = NodePath("PanelContainer/VBoxContainer/SaveNameLineEdit")
-
-[node name="Background" type="ColorRect" parent="SaveOrLoadMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.27451)
-
-[node name="PanelContainer" type="PanelContainer" parent="SaveOrLoadMenu"]
+[node name="SaveOrLoadMenu" type="PanelContainer" parent="ToggleablePanelsContainer" node_paths=PackedStringArray("container", "save_name_line_edit")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -204,60 +266,70 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -450.0
-offset_top = -200.0
+offset_top = -225.5
 offset_right = 450.0
-offset_bottom = 200.0
+offset_bottom = 225.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_xemwu")
+script = ExtResource("9_a7el2")
+container = NodePath("VBoxContainer/PanelContainer/ScrollContainer/Container")
+list_item_scene = ExtResource("10_y1ln0")
+save_name_line_edit = NodePath("VBoxContainer/SaveNameLineEdit")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SaveOrLoadMenu/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/SaveOrLoadMenu"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer"]
+[node name="Header" type="Label" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "SAVE_OR_LOAD"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
-theme_override_styles/separator = SubResource("StyleBoxEmpty_ytiqy")
+theme_override_styles/separator = SubResource("StyleBoxLine_5u55t")
 
-[node name="PanelContainer" type="PanelContainer" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_y1ln0")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/PanelContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/PanelContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Container" type="VBoxContainer" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/PanelContainer/ScrollContainer"]
+[node name="Container" type="VBoxContainer" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/PanelContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SaveListItem" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("10_y1ln0")]
+[node name="SaveListItem" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("10_y1ln0")]
 layout_mode = 2
 
-[node name="SaveListItem2" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("10_y1ln0")]
+[node name="SaveListItem2" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("10_y1ln0")]
 layout_mode = 2
 
-[node name="SaveListItem3" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("10_y1ln0")]
+[node name="SaveListItem3" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("10_y1ln0")]
 layout_mode = 2
 
-[node name="SaveListItem4" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("10_y1ln0")]
+[node name="SaveListItem4" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("10_y1ln0")]
 layout_mode = 2
 
-[node name="SaveListItem5" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("10_y1ln0")]
+[node name="SaveListItem5" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("10_y1ln0")]
 layout_mode = 2
 
-[node name="SaveListItem6" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("10_y1ln0")]
+[node name="SaveListItem6" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("10_y1ln0")]
 layout_mode = 2
 
-[node name="SaveNameLineEdit" type="LineEdit" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ytiqy")
+
+[node name="SaveNameLineEdit" type="LineEdit" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer"]
 layout_mode = 2
 text = "Save-Name-Date"
 clear_button_enabled = true
@@ -265,59 +337,464 @@ select_all_on_focus = true
 caret_blink = true
 script = ExtResource("11_oqlsv")
 
-[node name="Buttons" type="HBoxContainer" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ytiqy")
+
+[node name="Buttons" type="HBoxContainer" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="BackButton" type="Button" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons" node_paths=PackedStringArray("control_to_hide")]
+[node name="BackButton" type="Button" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons" node_paths=PackedStringArray("control_to_hide", "control_to_show")]
 modulate = Color(0.482362, 0.778436, 0.915901, 1)
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.5
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 20
 text = "BACK"
-script = ExtResource("7_naojb")
-control_to_hide = NodePath("../../../..")
+script = ExtResource("7_bl64p")
+control_to_hide = NodePath("../../..")
+control_to_show = NodePath("../../../../MainMenu")
 
-[node name="HSeparator2" type="VSeparator" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons"]
+[node name="HSeparator2" type="VSeparator" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons"]
 layout_mode = 2
-theme_override_constants/separation = 50
+theme_override_constants/separation = 30
 theme_override_styles/separator = SubResource("StyleBoxEmpty_bl64p")
 
-[node name="LoadButton" type="Button" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons" node_paths=PackedStringArray("save_name_line_edit")]
+[node name="LoadButton" type="Button" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons" node_paths=PackedStringArray("save_name_line_edit")]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "LOAD"
 script = ExtResource("6_m8kx8")
 save_name_line_edit = NodePath("../../SaveNameLineEdit")
 
-[node name="SaveButton" type="Button" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons" node_paths=PackedStringArray("save_name_line_edit")]
+[node name="SaveButton" type="Button" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons" node_paths=PackedStringArray("save_name_line_edit")]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SAVE"
 script = ExtResource("5_06iss")
 save_name_line_edit = NodePath("../../SaveNameLineEdit")
 
-[node name="HSeparator" type="VSeparator" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons"]
+[node name="HSeparator" type="VSeparator" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons"]
 layout_mode = 2
-theme_override_constants/separation = 50
+theme_override_constants/separation = 30
 theme_override_styles/separator = SubResource("StyleBoxEmpty_bl64p")
 
-[node name="DeleteButton" type="Button" parent="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons" node_paths=PackedStringArray("save_name_line_edit")]
+[node name="DeleteButton" type="Button" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons" node_paths=PackedStringArray("save_name_line_edit")]
 modulate = Color(0.585388, 0, 0.0219403, 1)
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.5
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 20
 text = "DELETE"
 script = ExtResource("15_fm32y")
 save_name_line_edit = NodePath("../../SaveNameLineEdit")
 
-[connection signal="item_selected" from="MainMenu/PanelContainer/VBoxContainer/Language/Language" to="MainMenu/PanelContainer/VBoxContainer/Language/Language" method="_on_item_selected"]
-[connection signal="toggled" from="MainMenu/PanelContainer/VBoxContainer/FullScreen/FullScreen" to="MainMenu/PanelContainer/VBoxContainer/FullScreen/FullScreen" method="_on_toggled"]
-[connection signal="pressed" from="MainMenu/PanelContainer/VBoxContainer/Buttons/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="MainMenu/PanelContainer/VBoxContainer/Buttons/NewGameButton" to="MainMenu/PanelContainer/VBoxContainer/Buttons/NewGameButton" method="_on_pressed"]
-[connection signal="pressed" from="MainMenu/PanelContainer/VBoxContainer/Buttons/SaveOrLoadButton" to="MainMenu/PanelContainer/VBoxContainer/Buttons/SaveOrLoadButton" method="_on_pressed"]
-[connection signal="pressed" from="MainMenu/PanelContainer/VBoxContainer/Buttons/QuitButton" to="MainMenu/PanelContainer/VBoxContainer/Buttons/QuitButton" method="_on_pressed"]
-[connection signal="pressed" from="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons/BackButton" to="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons/BackButton" method="_on_pressed"]
-[connection signal="pressed" from="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons/LoadButton" to="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons/LoadButton" method="_on_pressed"]
-[connection signal="pressed" from="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons/SaveButton" to="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons/SaveButton" method="_on_pressed"]
-[connection signal="pressed" from="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons/DeleteButton" to="SaveOrLoadMenu/PanelContainer/VBoxContainer/Buttons/DeleteButton" method="_on_pressed"]
+[node name="SettingsMenu" type="PanelContainer" parent="ToggleablePanelsContainer" node_paths=PackedStringArray("tab_container", "reset_settings_button", "language", "difficulty", "autosave", "master_volume", "music_volume", "ui_volume", "voice_volume", "environment_volume", "graphics_quality", "fullscreen")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = -224.5
+offset_right = 450.0
+offset_bottom = 224.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xemwu")
+script = ExtResource("12_5u55t")
+tab_container = NodePath("VBoxContainer/TabContainer")
+reset_settings_button = NodePath("VBoxContainer/Buttons/ResetSettingsButton")
+language = NodePath("VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Language/Language")
+difficulty = NodePath("VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Difficulty/Difficulty")
+autosave = NodePath("VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Autosave")
+master_volume = NodePath("VBoxContainer/TabContainer/SETTINGS_AUDIO/VBoxContainer/Master")
+music_volume = NodePath("VBoxContainer/TabContainer/SETTINGS_AUDIO/VBoxContainer/Music")
+ui_volume = NodePath("VBoxContainer/TabContainer/SETTINGS_AUDIO/VBoxContainer/Ui")
+voice_volume = NodePath("VBoxContainer/TabContainer/SETTINGS_AUDIO/VBoxContainer/Voice")
+environment_volume = NodePath("VBoxContainer/TabContainer/SETTINGS_AUDIO/VBoxContainer/Environment")
+graphics_quality = NodePath("VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer/GraphicsQuality/GraphicsQuality")
+fullscreen = NodePath("VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer/Fullscreen/Fullscreen")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu"]
+layout_mode = 2
+
+[node name="Header" type="Label" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "SETTINGS"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxLine_1i10y")
+
+[node name="TabContainer" type="TabContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_fm32y")
+tab_alignment = 1
+current_tab = 3
+
+[node name="SETTINGS_GAME" type="PanelContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5u55t")
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME"]
+layout_mode = 2
+
+[node name="Language" type="HBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Language"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "LANGUAGE"
+
+[node name="Language" type="OptionButton" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Language"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("2_5x0jx")
+
+[node name="Difficulty" type="HBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Difficulty"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "DIFFICULTY"
+
+[node name="Difficulty" type="OptionButton" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Difficulty"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("13_bl64p")
+
+[node name="Autosave" type="HBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer" node_paths=PackedStringArray("check_box", "spin_box", "label")]
+layout_mode = 2
+theme_override_constants/separation = 0
+script = ExtResource("15_5u55t")
+check_box = NodePath("HBoxContainer/CheckBox")
+spin_box = NodePath("HBoxContainer/SpinBox")
+label = NodePath("HBoxContainer/Label")
+
+[node name="Label" type="Label" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Autosave"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "AUTOSAVE"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Autosave"]
+custom_minimum_size = Vector2(0, 43)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="CheckBox" type="CheckBox" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Autosave/HBoxContainer"]
+layout_mode = 2
+
+[node name="SpinBox" type="SpinBox" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Autosave/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+min_value = 1.0
+value = 5.0
+rounded = true
+allow_greater = true
+alignment = 2
+
+[node name="Label" type="Label" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Autosave/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "EVERY_X_DAYS"
+
+[node name="SETTINGS_AUDIO" type="PanelContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1i10y")
+metadata/_tab_index = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_AUDIO"]
+layout_mode = 2
+
+[node name="Master" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_AUDIO/VBoxContainer" instance=ExtResource("3_hr65t")]
+layout_mode = 2
+
+[node name="Music" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_AUDIO/VBoxContainer" instance=ExtResource("3_hr65t")]
+layout_mode = 2
+bus_name = &"Music"
+
+[node name="Ui" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_AUDIO/VBoxContainer" instance=ExtResource("3_hr65t")]
+layout_mode = 2
+bus_name = &"Ui"
+
+[node name="Voice" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_AUDIO/VBoxContainer" instance=ExtResource("3_hr65t")]
+layout_mode = 2
+bus_name = &"Voice"
+
+[node name="Environment" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_AUDIO/VBoxContainer" instance=ExtResource("3_hr65t")]
+layout_mode = 2
+bus_name = &"Environment"
+
+[node name="SETTINGS_VIDEO" type="PanelContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5u55t")
+metadata/_tab_index = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_VIDEO"]
+layout_mode = 2
+
+[node name="GraphicsQuality" type="HBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer/GraphicsQuality"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "GRAPHICS_QUALITY"
+
+[node name="GraphicsQuality" type="OptionButton" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer/GraphicsQuality"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("15_ony14")
+
+[node name="Fullscreen" type="HBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer/Fullscreen"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+text = "FULLSCREEN"
+
+[node name="Fullscreen" type="CheckButton" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer/Fullscreen"]
+layout_mode = 2
+size_flags_horizontal = 2
+script = ExtResource("3_oihav")
+
+[node name="SETTINGS_CONTROLS" type="PanelContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer" node_paths=PackedStringArray("container")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5u55t")
+script = ExtResource("20_phplh")
+container = NodePath("ScrollContainer/Container")
+list_item_scene = ExtResource("21_ewkj2")
+metadata/_tab_index = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_CONTROLS"]
+layout_mode = 2
+
+[node name="Container" type="VBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_CONTROLS/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ControlsListItem" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_CONTROLS/ScrollContainer/Container" instance=ExtResource("21_ewkj2")]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ytiqy")
+
+[node name="Buttons" type="HBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="BackButton" type="Button" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/Buttons" node_paths=PackedStringArray("control_to_hide", "control_to_show")]
+modulate = Color(0.482362, 0.778436, 0.915901, 1)
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 20
+text = "BACK"
+script = ExtResource("7_bl64p")
+control_to_hide = NodePath("../../..")
+control_to_show = NodePath("../../../../MainMenu")
+
+[node name="ResetSettingsButton" type="Button" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/Buttons"]
+modulate = Color(0.585388, 0, 0.0219403, 1)
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 20
+text = "RESET_SETTINGS"
+
+[node name="CreditsMenu" type="PanelContainer" parent="ToggleablePanelsContainer"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = -209.5
+offset_right = 450.0
+offset_bottom = 209.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xemwu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/CreditsMenu"]
+layout_mode = 2
+
+[node name="Header" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "CREDITS"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxLine_phplh")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="PanelContainer" type="PanelContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ewkj2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Header" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Game Development"
+horizontal_alignment = 1
+
+[node name="Person" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Jakub Wiecheć - WCHC"
+horizontal_alignment = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ewkj2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+
+[node name="Header" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Translation"
+horizontal_alignment = 1
+
+[node name="Person" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "English - Jakub Wiecheć"
+horizontal_alignment = 1
+
+[node name="Person2" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Polish - Jakub Wiecheć"
+horizontal_alignment = 1
+
+[node name="PanelContainer3" type="PanelContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ewkj2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer3"]
+layout_mode = 2
+
+[node name="Header" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer3/VBoxContainer"]
+layout_mode = 2
+text = "Game Development"
+horizontal_alignment = 1
+
+[node name="Person" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer3/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Jakub Wiecheć - WCHC"
+horizontal_alignment = 1
+
+[node name="PanelContainer4" type="PanelContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ewkj2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer4"]
+layout_mode = 2
+
+[node name="Header" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer4/VBoxContainer"]
+layout_mode = 2
+text = "Game Development"
+horizontal_alignment = 1
+
+[node name="Person" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer4/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Jakub Wiecheć - WCHC"
+horizontal_alignment = 1
+
+[node name="PanelContainer5" type="PanelContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ewkj2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer5"]
+layout_mode = 2
+
+[node name="Header" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer5/VBoxContainer"]
+layout_mode = 2
+text = "Game Development"
+horizontal_alignment = 1
+
+[node name="Person" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer5/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Jakub Wiecheć - WCHC"
+horizontal_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="BackButton" type="Button" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/Buttons" node_paths=PackedStringArray("control_to_hide", "control_to_show")]
+modulate = Color(0.482362, 0.778436, 0.915901, 1)
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 20
+text = "BACK"
+script = ExtResource("7_bl64p")
+control_to_hide = NodePath("../../..")
+control_to_show = NodePath("../../../../MainMenu")
+
+[connection signal="pressed" from="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons/NewGameButton" to="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons/NewGameButton" method="_on_pressed"]
+[connection signal="pressed" from="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons/SaveOrLoadButton" to="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons/SaveOrLoadButton" method="_on_pressed"]
+[connection signal="pressed" from="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons/SettingsButton" to="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons/SettingsButton" method="_on_pressed"]
+[connection signal="pressed" from="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons/CreditsButton" to="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons/CreditsButton" method="_on_pressed"]
+[connection signal="pressed" from="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons/QuitButton" to="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons/QuitButton" method="_on_pressed"]
+[connection signal="pressed" from="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons/BackButton" to="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons/BackButton" method="_on_pressed"]
+[connection signal="pressed" from="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons/LoadButton" to="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons/LoadButton" method="_on_pressed"]
+[connection signal="pressed" from="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons/SaveButton" to="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons/SaveButton" method="_on_pressed"]
+[connection signal="pressed" from="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons/DeleteButton" to="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons/DeleteButton" method="_on_pressed"]
+[connection signal="item_selected" from="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Language/Language" to="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Language/Language" method="_on_item_selected"]
+[connection signal="item_selected" from="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Difficulty/Difficulty" to="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Difficulty/Difficulty" method="_on_item_selected"]
+[connection signal="item_selected" from="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer/GraphicsQuality/GraphicsQuality" to="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer/GraphicsQuality/GraphicsQuality" method="_on_item_selected"]
+[connection signal="toggled" from="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer/Fullscreen/Fullscreen" to="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer/Fullscreen/Fullscreen" method="_on_toggled"]
+[connection signal="pressed" from="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/Buttons/BackButton" to="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/Buttons/BackButton" method="_on_pressed"]
+[connection signal="pressed" from="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/Buttons/ResetSettingsButton" to="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/Buttons/ResetSettingsButton" method="_on_pressed"]
+[connection signal="pressed" from="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/Buttons/BackButton" to="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/Buttons/BackButton" method="_on_pressed"]

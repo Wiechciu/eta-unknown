@@ -9,7 +9,7 @@ func assert_all_exported_properties(node: Node) -> void:
 	var property_list: Array[Dictionary] = script.get_script_property_list()
 	for property: Dictionary in property_list:
 		if property.usage == 4102: #4102 is an exported property 
-			var error_message: String = "Missing assignment of a property \"%s\" on node: \"%s\")"
+			var error_message: String = "-\"%s\"- property on node: -\"%s\"- is missing assignment)"
 			var property_name: String = property.name
 			var property_value: Variant = node.get(property_name)
 			assert(property_value != null, error_message % [property.name, str(node.get_path())])

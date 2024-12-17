@@ -2,13 +2,22 @@ extends Node
 
 
 signal player_person_loaded
+signal difficulty_changed
 
+
+enum Difficulty {
+	EASY,
+	MEDIUM,
+	HARD,
+}
 
 @export var main_scene: PackedScene
 @export var json_loader: JsonLoader
-var mutex: Mutex
-var thread: Thread
+#var mutex: Mutex
+#var thread: Thread
 var player: Player
+var difficulty: Difficulty
+
 #var player_person: Person
 #var player_company: FreightForwarder:
 	#get: return player_person.employer as FreightForwarder
@@ -40,10 +49,10 @@ func create_new_shipments() -> void:
 			continue
 		
 		for i: int in randi_range(0, 5):
-			if mutex: mutex.lock()
+			#if mutex: mutex.lock()
 			customer.create_new_request_for_quotation()
 			#customer.create_new_shipment()
-			if mutex: mutex.unlock()
+			#if mutex: mutex.unlock()
 	
 	var counter: int = 0
 	var max_to_accept: int = 5
@@ -53,16 +62,21 @@ func create_new_shipments() -> void:
 			break
 		shipment.accept(player.person.employer)
 
+#
+#func _initiate_thread() -> void:
+	#if thread != null:
+		#thread.wait_to_finish()
+	#mutex = Mutex.new()
+	#thread = Thread.new()
+	#thread.start(create_new_shipments)
+#
+#
+## Thread must be disposed (or "joined"), for portability.
+#func _exit_tree() -> void:
+	#if thread != null:
+		#thread.wait_to_finish()
 
-func _initiate_thread() -> void:
-	if thread != null:
-		thread.wait_to_finish()
-	mutex = Mutex.new()
-	thread = Thread.new()
-	thread.start(create_new_shipments)
 
-
-# Thread must be disposed (or "joined"), for portability.
-func _exit_tree() -> void:
-	if thread != null:
-		thread.wait_to_finish()
+func change_difficulty(difficulty: Difficulty) -> void:
+	self.difficulty = difficulty
+	difficulty_changed.emit()

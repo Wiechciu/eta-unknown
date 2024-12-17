@@ -2,12 +2,14 @@ class_name SaveListItem
 extends PanelContainer
 
 
-signal pressed_with_data(save_name: String)
+signal pressed_with_data(save_file_metadata: Dictionary)
 
 
-@export var label: Label
+@export var save_file_name: Label
+@export var timestamp: Label
+@export var game_version: Label
 @export var button: Button
-var save_name: String
+var save_file_metadata: Dictionary
 
 
 func _ready() -> void:
@@ -17,12 +19,21 @@ func _ready() -> void:
 	button.pressed.connect(_on_button_pressed)
 
 
-func with_data(save_name: String) -> SaveListItem:
-	self.label.text = save_name
-	self.save_name = save_name
+func with_data(save_file_metadata: Dictionary) -> SaveListItem:
+	self.save_file_name.text = save_file_metadata["save_file_name"]
+	self.timestamp.text = save_file_metadata["timestamp"]
+	
+	var version: String = save_file_metadata["game_version"]
+	if SaveManager.is_version_matched(version):
+		self.game_version.add_theme_color_override("font_color", Color.DARK_GREEN)
+	else:
+		self.game_version.add_theme_color_override("font_color", Color.DARK_RED)
+	self.game_version.text = "v%s" % version
+	
+	self.save_file_metadata = save_file_metadata
 	
 	return self
 
 
 func _on_button_pressed() -> void:
-	pressed_with_data.emit(save_name)
+	pressed_with_data.emit(save_file_metadata)

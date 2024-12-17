@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://3ipdu30ooyv0"]
+[gd_scene load_steps=6 format=3 uid="uid://3ipdu30ooyv0"]
 
 [ext_resource type="Script" uid="uid://bggxknsprxc75" path="res://systems/ui/save_list_item.gd" id="1_cv21f"]
 [ext_resource type="PackedScene" uid="uid://dw7p1e4gjimn0" path="res://systems/ui/ui_sound_component.tscn" id="2_ai7vv"]
@@ -11,13 +11,41 @@ content_margin_right = 4.0
 content_margin_bottom = 2.0
 bg_color = Color(0.773554, 0.869888, 1, 1)
 
-[node name="SaveListItem" type="PanelContainer" node_paths=PackedStringArray("label", "button")]
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ai7vv"]
+color = Color(0.103798, 6.257e-07, 0.560094, 1)
+thickness = 2
+vertical = true
+
+[node name="SaveListItem" type="PanelContainer" node_paths=PackedStringArray("save_file_name", "timestamp", "game_version", "button")]
 theme_override_styles/panel = SubResource("StyleBoxFlat_qi7t0")
 script = ExtResource("1_cv21f")
-label = NodePath("Label")
+save_file_name = NodePath("HBoxContainer/SaveFileName")
+timestamp = NodePath("HBoxContainer/Timestamp")
+game_version = NodePath("HBoxContainer/GameVersion")
 button = NodePath("Button")
 
-[node name="Label" type="Label" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Timestamp" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0019156, 0.107149, 0.535794, 1)
+text = "2025-01-02"
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_ai7vv")
+
+[node name="GameVersion" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0019156, 0.107149, 0.535794, 1)
+text = "v0.1.0"
+
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_ai7vv")
+
+[node name="SaveFileName" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.0019156, 0.107149, 0.535794, 1)
 text = "Save1"

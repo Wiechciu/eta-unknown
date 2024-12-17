@@ -1,4 +1,5 @@
 ﻿keys;en;pl
+GAME_NAME;ETA: Unknown;ETA: Nieznana
 PRESS_TO_INTERACT;Press {action} to interact;Naciśnij {action}, aby wejść w interakcję
 TODAY_IS;Today is;Dzisiaj jest
 DAY_0;Sunday;Niedziela
@@ -158,7 +159,8 @@ MUSIC_VOLUME;Music volume;Głośność muzyki
 UI_VOLUME;UI volume;Głośność interfejsu
 VOICE_VOLUME;Voice volume;Głośność mowy
 ENVIRONMENT_VOLUME;Environment volume;Głośność środowiska
-FULL_SCREEN;Full screen;Pełny ekran
+FULLSCREEN;Fullscreen;Pełny ekran
+GRAPHICS_QUALITY;Graphics quality;Jakość grafiki
 LANGUAGE;Language;Język
 POLISH;Polish;Polski
 ENGLISH;English;Angielski
@@ -181,3 +183,38 @@ PARTY_TYPE_CARRIER;Carrier;Przewoźnik
 PARTY_TYPE_CUSTOMS_AGENCY;Customs agency;Agencja celna
 PARTY_TYPE_HANDLING_AGENT;Handling agent;Agent obsługi naziemnej
 PARTY_TYPE_TRUCKER;Haulier;Przewoźnik drogowy
+SAVE_OR_LOAD;Save or load;Zapisz lub wczytaj
+SAVE;Save;Zapisz
+LOAD;Load;Wczytaj
+DELETE;Delete;Usuń
+BACK;Back;Wstecz
+SAVED_GAME;Saved game: {file_name};Zapisano grę: {file_name}
+COULDNT_LOAD_SAVE_FILE;Couldn't load save file: {file_name};Nie można wczytać zapisu gry: {file_name}
+LOADED_SAVE_FILE;Loaded save file: {file_name};Wczytano zapis gry: {file_name}
+SAVE_FILE_DOESNT_EXIST;Save file doesn't exist: {file_name};Zapis gry nie istnieje: {file_name}
+DELETED_SAVE_FILE;Deleted save file: {file_name};Usunięto zapis gry: {file_name}
+SETTINGS;Settings;Ustawienia
+RESET_SETTINGS;Reset settings;Zresetuj ustawienia
+SETTINGS_GAME;Game;Gra
+SETTINGS_AUDIO;Audio;Dźwięk
+SETTINGS_VIDEO;Video;Wideo
+SETTINGS_CONTROLS;Controls;Sterowanie
+CREDITS;Credits;Twórcy
+DIFFICULTY;Workflow chaos level;Poziom chaosu procesów
+DIFFICULTY_NAME_EASY;Smooth sailing;Gładka żegluga
+DIFFICULTY_NAME_MEDIUM;Keep it together;Trzymaj się kupy
+DIFFICULTY_NAME_HARD;Freightmare;Koszmar transportowy
+DIFFICULTY_DESCRIPTION_EASY;"Everything runs like clockwork; even the printer cooperates.";Wszystko działa jak w zegarku, nawet drukarka współpracuje.
+DIFFICULTY_DESCRIPTION_MEDIUM;Regular hiccups keep you on your toes, but nothing unmanageable. ;Regularne problemy utrzymują cię w gotowości, ale da się je opanować.
+DIFFICULTY_DESCRIPTION_HARD;Nonstop chaos that tests your skills and patience at every turn.;Nieustanny chaos, który testuje twoje umiejętności i cierpliwość.
+AUTOSAVE;Autosave;Zapis automatyczny
+EVERY_X_DAYS;every {amount} days;co {amount} dni
+ACTION_FORWARD;Forward;Do przodu
+ACTION_BACKWARD;Backward;Do tyłu
+ACTION_LEFT;Left;W lewo
+ACTION_RIGHT;Right;W prawo
+ACTION_SPRINT;Sprint;Sprint
+ACTION_JUMP;Jump;Skok
+ACTION_INTERACT;Interact;Interakcja
+ACTION_CANCEL;Cancel;Anulowanie
+ACTION_DEBUG_CONSOLE;Debug console;Konsola diagnostyczna
