@@ -88,12 +88,21 @@ func load_countries_from_json(file_to_load: String, array_to_fill: Array, dict_t
 	GlobalDebugger.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
+	var coordinate_max_x: int = 15
+	var coordinate_x: int = 0
+	var coordinate_y: int = 0
 	for item: Dictionary in loaded_array:
 		var new_resource: Country = Country.new().with_data(
 			GlobalRefs.get_country_id(),
 			str(item.code) if item.code else "",
-			str(item.name) if item.name else ""
+			str(item.name) if item.name else "",
+			Vector2(coordinate_x, coordinate_y),
 			)
+		if coordinate_x < coordinate_max_x:
+			coordinate_x += 1
+		else:
+			coordinate_x = 0
+			coordinate_y += 1
 	
 	@warning_ignore("unsafe_method_access")
 	print("loaded %s countries | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
