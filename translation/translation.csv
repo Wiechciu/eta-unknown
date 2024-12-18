@@ -168,6 +168,8 @@ PRINT;Print;Drukuj
 PRINT_ALL;Print all;Drukuj wszystko
 NO_DOCUMENTS_TO_PRINT;No documents to print.;Nie ma dokumentów do wydrukowania.
 NO_DOCUMENTS_TO_PICK_UP;No documents to pick up.;Nie ma dokumentów do zabrania.
+PRINTER_OUT_OF_INK;Printer ran out of ink.;Skończył się tusz w drukarce.
+PRINTER_JAMMED;Printer is jammed.;Drukarka się zacięła.
 PICKED_UP_DOCUMENTS;Picked up {amount} documents.;Zabrano {amount} dokumentów.
 SIGNED_DOCUMENT;Signed document.;Podpisano dokument.
 MOT_AIRFREIGHT;Aifreight;Fracht lotniczy

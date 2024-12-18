@@ -7,7 +7,7 @@ extends Human
 @export var _camera: Camera3D
 @export var _can_move: bool:
 	get:
-		return _camera.current and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED
+		return _camera.current and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and not is_immobilized
 
 var movement_base_speed: float = 150.0
 var sprint_multiplier: float = 3.0
@@ -19,6 +19,8 @@ var head_bobbing_tween: Tween
 var head_bobbing_loop_duration: float = 0.5
 var head_resting_position: Vector3
 var head_max_offset: Vector3 = Vector3(0.0, 0.1, 0.0)
+
+var is_immobilized: bool = false
 
 
 func _ready() -> void:
@@ -117,3 +119,11 @@ func apply_gravity(delta: float) -> void:
 	var gravity_vector: Vector3 = PhysicsServer3D.area_get_param(get_viewport().find_world_3d().space, PhysicsServer3D.AREA_PARAM_GRAVITY_VECTOR)
 	var gravity_force: float = PhysicsServer3D.area_get_param(get_viewport().find_world_3d().space, PhysicsServer3D.AREA_PARAM_GRAVITY)
 	velocity += gravity_vector * gravity_force * delta
+
+
+func immobilize() -> void:
+	is_immobilized = true
+
+
+func unimmobilize() -> void:
+	is_immobilized = false

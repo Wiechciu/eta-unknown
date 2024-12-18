@@ -1,9 +1,14 @@
-[gd_scene load_steps=12 format=4 uid="uid://camlixgb5adk5"]
+[gd_scene load_steps=20 format=4 uid="uid://camlixgb5adk5"]
 
 [ext_resource type="Script" uid="uid://h64icvcx3v55" path="res://3d_scenes/entities/furniture/printer/printer.gd" id="1_0slj8"]
 [ext_resource type="PackedScene" uid="uid://beffqttiv36q7" path="res://3d_scenes/entities/components/interactable.tscn" id="2_b3fi8"]
 [ext_resource type="PackedScene" uid="uid://dx6f662utr8ya" path="res://3d_scenes/entities/items/physical_document/physical_document.tscn" id="2_llfar"]
+[ext_resource type="AudioStream" uid="uid://dmg036dlnphkh" path="res://3d_scenes/entities/furniture/printer/state-change_confirm-down_4.wav" id="3_ml0s2"]
 [ext_resource type="AudioStream" uid="uid://bby3836y552qy" path="res://3d_scenes/entities/furniture/printer/ROBOTIC_Servo_Medium_Shread_mono.wav" id="4_05xib"]
+[ext_resource type="AudioStream" uid="uid://brgi7cmsvpcmq" path="res://3d_scenes/entities/furniture/printer/Robot_Oops.wav.wav" id="5_whxlh"]
+[ext_resource type="AudioStream" uid="uid://wl4unt5vrkrb" path="res://3d_scenes/entities/furniture/printer/Robot_Oy.wav.wav" id="6_a7js3"]
+[ext_resource type="Texture2D" uid="uid://cjaxponmtask3" path="res://3d_scenes/entities/furniture/printer/wrench.png" id="8_a7js3"]
+[ext_resource type="Texture2D" uid="uid://h1sfxtho1r42" path="res://3d_scenes/entities/furniture/printer/exclamation.png" id="9_0ag7d"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0slj8"]
 albedo_color = Color(0.281187, 0.281187, 0.281187, 1)
@@ -71,13 +76,29 @@ _surfaces = [{
 "vertex_data": PackedByteArray("MzOzPuWWzT3NrEw/MzOzPqeM9j3NrEw/MzOzPuWWzT0AAAA/MzOzvuWWzT0AAAA/MzOzPuWWzT3QzEw9MzOzvuWWzT3QzEw9MzOzvuWWzT3NrEw/MzOzPuWWzT3QzEw9MzOzvuWWzT0AAAA/MzOzvqeM9j0AAAA/MzOzvqeM9j3NrEw/MzOzvuWWzT3NrEw/MzOzvqeM9j0AAAA/MzOzvuWWzT3NrEw/MzOzvuWWzT0AAAA/MzOzvqeM9j3QzEw9MzOzPqeM9j3NrEw/MzOzvqeM9j0AAAA/MzOzPqeM9j3NrEw/MzOzPuWWzT3NrEw/MzOzvuWWzT3NrEw/MzOzPuWWzT0AAAA/MzOzvuWWzT3NrEw/MzOzPuWWzT3NrEw/MzOzPqeM9j0AAAA/MzOzPqeM9j3NrEw/MzOzvqeM9j3QzEw9MzOzvuWWzT3NrEw/MzOzPuWWzT0AAAA/MzOzPuWWzT3QzEw9MzOzPqeM9j3QzEw9MzOzPqeM9j0AAAA/MzOzvqeM9j3QzEw9MzOzPqeM9j3NrEw/MzOzvqeM9j3NrEw/MzOzvqeM9j0AAAA/MzOzvqeM9j3NrEw/MzOzPqeM9j3NrEw/MzOzvuWWzT3NrEw/MzOzPqeM9j0AAAA/MzOzPuWWzT0AAAA/MzOzPqeM9j3NrEw/////f/9//n////9//3/+f////3//f/5//38AAP//AAD/fwAA//8AAP9/AAD//wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAAAAD/f/9//n8AAP9//3/+fwAA/3//f/5/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//////AAD/f/////8AAP9//////wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8//38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//////AAD/f/////8AAP9//////wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//////AAD/f/////8AAP9//////wAA/3//////AAD/f/////8AAP9//////wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8/////f/9//n////9//3/+f////3//f/5/")
 }]
 
-[node name="Printer" type="StaticBody3D" node_paths=PackedStringArray("document_spawn_position", "document_target_position", "screen", "audio_player")]
+[sub_resource type="ViewportTexture" id="ViewportTexture_whxlh"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_whxlh"]
+bg_color = Color(0.336608, 0.336608, 0.336608, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a7js3"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="Printer" type="StaticBody3D" node_paths=PackedStringArray("document_spawn_position", "document_target_position", "screen", "document_count_label", "ink_progress_bar", "out_of_ink_symbol", "jammed_symbol", "audio_player")]
 script = ExtResource("1_0slj8")
 document_spawn_position = NodePath("DocumentSpawnPosition")
 document_target_position = NodePath("DocumentTargetPosition")
-screen = NodePath("Screen")
 document_scene = ExtResource("2_llfar")
+screen = NodePath("Screen")
+document_count_label = NodePath("SubViewport/DocumentCountLabel")
+ink_progress_bar = NodePath("SubViewport/ProgressBar")
+out_of_ink_symbol = NodePath("SubViewport/OutOfInkSymbol")
+jammed_symbol = NodePath("SubViewport/JammedSymbol")
 audio_player = NodePath("AudioStreamPlayer3D")
+printing_audio_streams = Array[AudioStream]([ExtResource("4_05xib")])
+out_of_ink_audio_streams = Array[AudioStream]([ExtResource("3_ml0s2")])
+jammed_audio_streams = Array[AudioStream]([ExtResource("5_whxlh"), ExtResource("6_a7js3")])
 
 [node name="Interactable" parent="." instance=ExtResource("2_b3fi8")]
 
@@ -146,8 +167,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0.077)
 [node name="DocumentTargetPosition" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.123695, 0.679537)
 
-[node name="Screen" type="Label3D" parent="."]
+[node name="Screen" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.981627, 0.190809, 0, -0.190809, 0.981627, 0.17101, 0.567861, 0.540832)
+pixel_size = 0.0009
+double_sided = false
+texture = SubResource("ViewportTexture_whxlh")
+
+[node name="ScreenOld" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.981627, 0.190809, 0, -0.190809, 0.981627, 0.17101, 0.563687, 0.541643)
+visible = false
 pixel_size = 0.001
 text = "0"
 font_size = 130
@@ -157,3 +185,64 @@ outline_size = 4
 stream = ExtResource("4_05xib")
 volume_db = -15.0
 bus = &"Environment"
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(302, 152)
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport"]
+custom_minimum_size = Vector2(50, 150)
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 1.0
+offset_top = -75.0
+offset_right = 51.0
+offset_bottom = 75.0
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_whxlh")
+theme_override_styles/fill = SubResource("StyleBoxFlat_a7js3")
+value = 30.0
+fill_mode = 3
+show_percentage = false
+
+[node name="OutOfInkSymbol" type="TextureRect" parent="SubViewport"]
+modulate = Color(0.986095, 0.704877, 3.85046e-07, 1)
+offset_left = 30.0
+offset_top = -10.0
+offset_right = 120.0
+offset_bottom = 80.0
+size_flags_vertical = 3
+texture = ExtResource("9_0ag7d")
+expand_mode = 1
+
+[node name="JammedSymbol" type="TextureRect" parent="SubViewport"]
+modulate = Color(0.937296, 0.376621, 5.77569e-07, 1)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -70.0
+offset_right = 120.0
+grow_vertical = 0
+size_flags_vertical = 3
+texture = ExtResource("8_a7js3")
+expand_mode = 1
+
+[node name="DocumentCountLabel" type="Label" parent="SubViewport"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -172.0
+offset_top = -75.0
+offset_bottom = 75.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 100
+text = "100"
+horizontal_alignment = 2
+vertical_alignment = 1
