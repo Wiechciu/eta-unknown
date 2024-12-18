@@ -38,7 +38,7 @@ func _notification(what: int) -> void:
 func update_localization() -> void:
 	if not is_node_ready():
 		await ready
-	var event_text: String = "[%s]" % InputMap.action_get_events("interact")[0].as_text().replace(" (Physical)", "")
+	var event_text: String = "[%s]" % (InputMap.action_get_events("interact")[0] as InputEventKey).as_text_physical_keycode()
 	label.text = tr(label_text).format({"action":event_text})
 
 

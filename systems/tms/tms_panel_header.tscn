@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cxa2h82m4jg1l"]
+[gd_scene load_steps=7 format=3 uid="uid://cxa2h82m4jg1l"]
 
 [ext_resource type="Script" uid="uid://cqo2mgxgfuy25" path="res://systems/tms/tms_panel_header.gd" id="1_1rwd0"]
+[ext_resource type="Texture2D" uid="uid://cxub2wdidinij" path="res://systems/tms/minus.png" id="2_2wjo8"]
+[ext_resource type="Texture2D" uid="uid://byp6aoo37qjph" path="res://systems/tms/cross.png" id="2_h737f"]
+[ext_resource type="Texture2D" uid="uid://c2a75lyih64k1" path="res://systems/tms/stop.png" id="2_tgj6a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pg08m"]
 content_margin_left = 16.0
@@ -36,22 +39,26 @@ label_settings = SubResource("LabelSettings_h1byg")
 custom_minimum_size = Vector2(31, 31)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "🗕"
+icon = ExtResource("2_2wjo8")
 flat = true
+vertical_icon_alignment = 2
+expand_icon = true
 
 [node name="MaximizeButton" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(31, 31)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "◻"
+icon = ExtResource("2_tgj6a")
 flat = true
+expand_icon = true
 
 [node name="CloseButton" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(31, 31)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "×"
+icon = ExtResource("2_h737f")
 flat = true
+expand_icon = true
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="pressed" from="HBoxContainer/MinimizeButton" to="." method="_on_minimize_button_pressed"]

@@ -15,6 +15,8 @@ extends PanelContainer
 @export var environment_volume: VolumeSlider
 @export var graphics_quality: OptionButton
 @export var fullscreen: CheckButton
+@export var controls_settings: ControlsSettings
+
 
 var settings_folder: String = "user://"
 var settings_file_name: String = "settings"
@@ -50,6 +52,14 @@ func save_settings() -> void:
 	config.set_value("audio", "environment_volume", environment_volume.value)
 	#config.set_value("video", "graphics_quality", graphics_quality.selected)
 	config.set_value("video", "fullscreen", fullscreen.button_pressed)
+	for action_name: String in InputMap.get_actions():
+		if action_name.begins_with("ui"):
+			continue
+		var counter: int = 0
+		for event: InputEvent in InputMap.action_get_events(action_name):
+			if event is InputEventKey:
+				config.set_value("controls", action_name + str(counter), event.physical_keycode)
+				counter += 1
 	config.save(settings_folder + settings_file_name + settings_file_extension)
 	print("Settings saved to file: %s." % (settings_file_name + settings_file_extension))
 
@@ -77,6 +87,17 @@ func load_settings() -> void:
 	environment_volume.value = config.get_value("audio", "environment_volume") as float
 	#graphics_quality.select(config.get_value("video", "graphics_quality") as int)
 	fullscreen.button_pressed = config.get_value("video", "fullscreen") as bool
+	for action_name: String in InputMap.get_actions():
+		if action_name.begins_with("ui"):
+			continue
+		InputMap.action_erase_events(action_name)
+		for counter: int in 2:
+			var keycode: Key = config.get_value("controls", action_name + str(counter), KEY_NONE)
+			if keycode != KEY_NONE:
+				var event: InputEventKey = InputEventKey.new()
+				event.physical_keycode = keycode
+				InputMap.action_add_event(action_name, event)
+	controls_settings.refresh_container()
 	print("Settings loaded from file: %s." % (settings_file_name + settings_file_extension))
 
 
@@ -92,4 +113,6 @@ func load_default_settings() -> void:
 	environment_volume.value = 1.0
 	#graphics_quality.select(0)
 	fullscreen.button_pressed = false
+	InputMap.load_from_project_settings()
+	controls_settings.refresh_container()
 	print("Default settings loaded.")

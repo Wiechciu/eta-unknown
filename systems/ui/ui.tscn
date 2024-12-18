@@ -393,7 +393,7 @@ text = "DELETE"
 script = ExtResource("15_fm32y")
 save_name_line_edit = NodePath("../../SaveNameLineEdit")
 
-[node name="SettingsMenu" type="PanelContainer" parent="ToggleablePanelsContainer" node_paths=PackedStringArray("tab_container", "reset_settings_button", "language", "difficulty", "autosave", "master_volume", "music_volume", "ui_volume", "voice_volume", "environment_volume", "graphics_quality", "fullscreen")]
+[node name="SettingsMenu" type="PanelContainer" parent="ToggleablePanelsContainer" node_paths=PackedStringArray("tab_container", "reset_settings_button", "language", "difficulty", "autosave", "master_volume", "music_volume", "ui_volume", "voice_volume", "environment_volume", "graphics_quality", "fullscreen", "controls_settings")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -420,6 +420,7 @@ voice_volume = NodePath("VBoxContainer/TabContainer/SETTINGS_AUDIO/VBoxContainer
 environment_volume = NodePath("VBoxContainer/TabContainer/SETTINGS_AUDIO/VBoxContainer/Environment")
 graphics_quality = NodePath("VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer/GraphicsQuality/GraphicsQuality")
 fullscreen = NodePath("VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer/Fullscreen/Fullscreen")
+controls_settings = NodePath("VBoxContainer/TabContainer/SETTINGS_CONTROLS")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu"]
 layout_mode = 2
@@ -440,10 +441,9 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_fm32y")
 tab_alignment = 1
-current_tab = 3
+current_tab = 0
 
 [node name="SETTINGS_GAME" type="PanelContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5u55t")
 metadata/_tab_index = 0
@@ -580,6 +580,7 @@ size_flags_horizontal = 2
 script = ExtResource("3_oihav")
 
 [node name="SETTINGS_CONTROLS" type="PanelContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer" node_paths=PackedStringArray("container")]
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5u55t")
 script = ExtResource("20_phplh")

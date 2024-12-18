@@ -39,7 +39,7 @@ func _ready() -> void:
 	register_interactable()
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("cancel") and is_focused:
 		unfocus_view()
 		get_viewport().set_input_as_handled()

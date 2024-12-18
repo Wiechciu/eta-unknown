@@ -38,7 +38,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	handle_sprint(event)
 	handle_rotation(event)
 	handle_jump(event)

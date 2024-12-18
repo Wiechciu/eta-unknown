@@ -1,11 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://xoadia8ml518"]
+[gd_scene load_steps=3 format=3 uid="uid://xoadia8ml518"]
 
 [ext_resource type="Script" uid="uid://nru774yqmjfh" path="res://systems/ui/controls_list_item.gd" id="1_pyt88"]
+[ext_resource type="Script" uid="uid://cst42jqfmcgr5" path="res://systems/ui/action_event_button.gd" id="2_fxokn"]
 
-[node name="ControlsListItem" type="HBoxContainer" node_paths=PackedStringArray("action_label", "event_button")]
+[node name="ControlsListItem" type="HBoxContainer" node_paths=PackedStringArray("action_label", "event_buttons")]
 script = ExtResource("1_pyt88")
 action_label = NodePath("ActionLabel")
-event_button = NodePath("EventButton")
+event_buttons = [NodePath("PrimaryEventButton"), NodePath("SecondaryEventButton")]
 
 [node name="ActionLabel" type="Label" parent="."]
 custom_minimum_size = Vector2(100, 0)
@@ -14,9 +15,17 @@ size_flags_horizontal = 3
 text = "ACTION"
 clip_text = true
 
-[node name="EventButton" type="Button" parent="."]
+[node name="PrimaryEventButton" type="Button" parent="."]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "EVENT"
 clip_text = true
+script = ExtResource("2_fxokn")
+is_primary = true
+
+[node name="SecondaryEventButton" type="Button" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+clip_text = true
+script = ExtResource("2_fxokn")

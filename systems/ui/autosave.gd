@@ -15,6 +15,7 @@ var value_number: int:
 	get: return int(spin_box.value)
 	set(value):
 		spin_box.value = value
+		_on_spin_box_value_changed(value)
 
 
 func _ready() -> void:

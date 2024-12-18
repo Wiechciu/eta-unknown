@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 	memory.text = "Memory: %d / %d" % [Performance.get_monitor(Performance.MEMORY_STATIC) / 10**6, Performance.get_monitor(Performance.MEMORY_STATIC_MAX) / 10**6]
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("debug_console"):
 		visible = not visible
 

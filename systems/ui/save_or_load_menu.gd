@@ -4,7 +4,7 @@ extends PanelContainer
 @export var container: Control
 @export var list_item_scene: PackedScene
 var list_items: Array[SaveListItem]
-var items_to_display: Array[Dictionary]
+var items_to_display: Array[SaveManager.SaveFileMetadata]
 
 @export var save_name_line_edit: SaveNameLineEdit
 
@@ -24,7 +24,7 @@ func clear_container() -> void:
 		child.queue_free()
 
 
-func create_new_list_item(save_file_metadata: Dictionary) -> SaveListItem:
+func create_new_list_item(save_file_metadata: SaveManager.SaveFileMetadata) -> SaveListItem:
 	var new_list_item: SaveListItem = (list_item_scene.instantiate() as SaveListItem).with_data(save_file_metadata)
 	new_list_item.pressed_with_data.connect(_on_list_item_pressed)
 	container.add_child(new_list_item)
@@ -32,7 +32,7 @@ func create_new_list_item(save_file_metadata: Dictionary) -> SaveListItem:
 	return new_list_item
 
 
-func update_list_item(list_item: SaveListItem, save_file_metadata: Dictionary) -> SaveListItem:
+func update_list_item(list_item: SaveListItem, save_file_metadata: SaveManager.SaveFileMetadata) -> SaveListItem:
 	return list_item.with_data(save_file_metadata)
 
 
@@ -65,15 +65,15 @@ func refresh_list_items() -> void:
 	if SaveManager.is_game_loaded:
 		save_name_line_edit.change_text(SaveManager.new_save_name)
 	elif not items_to_display.is_empty():
-		save_name_line_edit.change_text(items_to_display.front()["save_file_name"])
+		save_name_line_edit.change_text((items_to_display.front() as SaveManager.SaveFileMetadata).save_file_name)
 	else:
 		save_name_line_edit.change_text("")
 
 
 func filter_and_sort_items() -> void:
 	items_to_display = SaveManager.get_save_files_metadata()
-	items_to_display.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return a["timestamp"].naturalnocasecmp_to(b["timestamp"]) > 0)
+	items_to_display.sort_custom(func(a: SaveManager.SaveFileMetadata, b: SaveManager.SaveFileMetadata) -> bool: return a.timestamp.naturalnocasecmp_to(b.timestamp) > 0)
 
 
-func _on_list_item_pressed(save_file_metadata: Dictionary) -> void:
-	save_name_line_edit.change_text(save_file_metadata["save_file_name"])
+func _on_list_item_pressed(save_file_metadata: SaveManager.SaveFileMetadata) -> void:
+	save_name_line_edit.change_text(save_file_metadata.save_file_name)

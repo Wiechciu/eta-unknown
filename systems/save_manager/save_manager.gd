@@ -4,6 +4,18 @@
 
 extends Node
 
+
+class SaveFileMetadata:
+	var save_file_name: String
+	var game_version: String
+	var timestamp: String
+	func with_data(save_file_name: String, game_version: String, timestamp: String) -> SaveFileMetadata:
+		self.save_file_name = save_file_name
+		self.game_version = game_version
+		self.timestamp = timestamp
+		return self
+
+
 signal game_loaded
 signal game_saved
 signal save_deleted
@@ -23,6 +35,12 @@ var autosave: bool
 var autosave_interval: int
 var current_interval_count: int = 0
 var autosave_file_name: String = "autosave"
+
+var saves_metadata_file_name: String = "saves_metadata"
+var saves_metadata_file_extension: String = ".cfg"
+var saves_metadata_file_full_path: String:
+	get:
+		return save_folder + saves_metadata_file_name + saves_metadata_file_extension
 
 var fade_duration: float = 0.3
 var is_game_loaded: bool = false
@@ -83,7 +101,6 @@ func save_game_to_json(save_file_name: String) -> void:
 	get_or_create_save_folder()
 	
 	var data: Dictionary
-	data["metadata"] = generate_save_file_metadata(save_file_name)
 	data["time"] = GlobalTimer.now_float
 	data["global_refs"] = GlobalRefs.to_dict()
 	data["market_rates"] = GlobalMarket.market_rates_dict
@@ -91,7 +108,9 @@ func save_game_to_json(save_file_name: String) -> void:
 	var file: FileAccess = FileAccess.open(save_folder + save_file_name + save_file_extension, FileAccess.WRITE)
 	file.store_string(JSON.stringify(data, "\t"))
 	file.close()
+	create_metadata(save_file_name)
 	ActionLogger.create_log(tr("SAVED_GAME").format({"file_name":save_file_name}))
+
 
 func load_game_from_json(save_file_name: String) -> void:
 	var file: FileAccess = FileAccess.open(save_folder + save_file_name + save_file_extension, FileAccess.READ)
@@ -152,41 +171,15 @@ func get_or_create_save_folder() -> DirAccess:
 	return DirAccess.open(save_folder)
 
 
-func get_save_files_metadata() -> Array[Dictionary]:
-	var save_file_metadata: Array[Dictionary]
-	var dir: DirAccess = get_or_create_save_folder()
-	for file_name: String in dir.get_files():
-		if file_name.get_extension() == save_file_extension_no_dot:
-			var save_file_name: String = file_name.replace(save_file_extension, "")
-			var metadata: Dictionary = read_metadata_from_save_file(save_file_name)
-			save_file_metadata.append(metadata)
-	return save_file_metadata
-
-
 func delete_save_file(save_file_name: String) -> void:
 	if not save_file_exists(save_file_name):
 		ActionLogger.create_log(tr("SAVE_FILE_DOESNT_EXIST").format({"file_name":save_file_name}), true)
 		return
 	
 	DirAccess.remove_absolute(save_folder + save_file_name + save_file_extension)
+	delete_metadata(save_file_name)
 	ActionLogger.create_log(tr("DELETED_SAVE_FILE").format({"file_name":save_file_name}))
-	#OS.move_to_trash(save_folder + save_file_name + save_file_extension) ## doesn't work
 	save_deleted.emit()
-
-
-func generate_save_file_metadata(save_file_name: String) -> Dictionary:
-	return {
-		"save_file_name": save_file_name,
-		"game_version": ProjectSettings.get_setting("application/config/version"),
-		"timestamp": Time.get_datetime_string_from_system().replace("T", ", "),
-	}
-
-
-func read_metadata_from_save_file(save_file_name: String) -> Dictionary:
-	var file: FileAccess = FileAccess.open(save_folder + save_file_name + save_file_extension, FileAccess.READ)
-	var data: Dictionary = JSON.parse_string(file.get_as_text())
-	file.close()
-	return data["metadata"] if data != null else null
 
 
 func is_version_matched(version: String) -> bool:
@@ -202,3 +195,33 @@ func handle_autosave() -> void:
 	if current_interval_count >= autosave_interval:
 		current_interval_count = 0
 		save_game_to_json(autosave_file_name)
+
+
+func create_metadata(save_file_name: String) -> void:
+	var game_version: String = ProjectSettings.get_setting("application/config/version")
+	var timestamp: String = Time.get_datetime_string_from_system().replace("T", ", ")
+	
+	var config: ConfigFile = ConfigFile.new()
+	config.load(saves_metadata_file_full_path)
+	config.set_value(save_file_name, "game_version", game_version)
+	config.set_value(save_file_name, "timestamp", timestamp)
+	config.save(saves_metadata_file_full_path)
+
+
+func delete_metadata(save_file_name: String) -> void:
+	var config: ConfigFile = ConfigFile.new()
+	config.load(saves_metadata_file_full_path)
+	config.erase_section(save_file_name)
+	config.save(saves_metadata_file_full_path)
+
+
+func get_save_files_metadata() -> Array[SaveFileMetadata]:
+	var array: Array[SaveFileMetadata]
+	var config: ConfigFile = ConfigFile.new()
+	config.load(saves_metadata_file_full_path)
+	for save_file_name: String in config.get_sections():
+		var game_version: String = config.get_value(save_file_name, "game_version")
+		var timestamp: String = config.get_value(save_file_name, "timestamp")
+		var metadata: SaveFileMetadata = SaveFileMetadata.new().with_data(save_file_name, game_version, timestamp)
+		array.append(metadata)
+	return array

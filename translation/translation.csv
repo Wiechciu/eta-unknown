@@ -217,4 +217,21 @@ ACTION_SPRINT;Sprint;Sprint
 ACTION_JUMP;Jump;Skok
 ACTION_INTERACT;Interact;Interakcja
 ACTION_CANCEL;Cancel;Anulowanie
-ACTION_DEBUG_CONSOLE;Debug console;Konsola diagnostyczna
+ACTION_DEBUG_CONSOLE;Debug console;Konsola
+PRESS_KEY;Press key;Naciśnij klawisz
+KEY_SPACE;Space;Spacja
+KEY_SHIFT;Shift;Shift
+KEY_ESCAPE;Escape;Escape
+KEY_CTRL;Control;Control
+KEY_ALT;Alt;Alt
+KEY_UP;Arrow up;Strzałka w górę
+KEY_DOWN;Arrow down;Strzałka w dół
+KEY_LEFT;Arrow left;Strzałka w lewo
+KEY_RIGHT;Arrow right;Strzałka w prawo
+KEY_TAB;Tab;Tab
+KEY_CAPSLOCK;Caps lock;Caps lock
+KEY_BACKSPACE;Backspace;Backspace
+KEY_ENTER;Enter;Enter
+KEY_DELETE;Delete;Delete
+KEY_HOME;Home;Home
+KEY_QUOTELEFT;`;`
