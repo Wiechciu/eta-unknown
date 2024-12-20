@@ -14,8 +14,18 @@ func add_item(item: Item) -> void:
 		#ActionLogger.create_log("SIGNED_DOCUMENT")
 
 
+func add_items(items: Array[Item]) -> void:
+	for item: Item in items:
+		add_item(item)
+
+
 func remove_item(item: Item) -> void:
 	items.erase(item)
+
+
+func remove_items(items: Array[Item]) -> void:
+	for item: Item in items:
+		remove_item(item)
 
 
 func remove_all() -> void:

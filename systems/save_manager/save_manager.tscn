@@ -1,6 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6nv3euga8elm"]
+[gd_scene load_steps=4 format=3 uid="uid://c6nv3euga8elm"]
 
 [ext_resource type="Script" uid="uid://bt5p468xemxmo" path="res://systems/save_manager/save_manager.gd" id="1_wunqo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wunqo"]
+bg_color = Color(0.707382, 0.839701, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 4
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vrhik"]
+bg_color = Color(1.92523e-06, 0.660913, 0.820277, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="SaveManager" type="Node" node_paths=PackedStringArray("fade_screen", "progress_bar")]
 process_mode = 3
@@ -32,4 +48,8 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(100, 20)
-value = 10.0
+theme_override_colors/font_color = Color(3.7542e-06, 0.178988, 0.524898, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_wunqo")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vrhik")
+value = 30.0

@@ -11,6 +11,7 @@ enum Status {
 	SERVICING,
 }
 
+@export var printer_tray: Node3D
 @export var document_spawn_position: Node3D
 @export var document_target_position: Node3D
 @export var document_scene: PackedScene
@@ -23,12 +24,23 @@ enum Status {
 
 @export var audio_player: AudioStreamPlayer3D
 
-var status: Status
 
+var status: Status
 var printing_queue: Array[Document]
-var printed_documents: Array[PhysicalDocument]
+var position_offset_for_new_document: Vector3 = Vector3(0.0, 0.001, 0.0)
+#var printed_documents: Array[PhysicalDocument]
 var printing_time: float = 1.0
 @export var printing_audio_streams: Array[AudioStream]
+
+var is_out_of_paper: bool
+var base_paper_per_document: int = 1
+var paper_amount_stored: int
+var paper_amount_capacity: int = 500
+var paper_percentage: float:
+	get:
+		return float(paper_amount_stored) / float(paper_amount_capacity)
+var paper_refilling_time: float = 3.0
+@export var out_of_paper_audio_streams: Array[AudioStream]
 
 var is_out_of_ink: bool
 var base_ink_amount_per_document: float = 1.0
@@ -37,7 +49,7 @@ var ink_amount_capacity: float = 100.0
 var ink_percentage: float:
 	get:
 		return ink_amount_stored / ink_amount_capacity
-var refilling_time: float = 3.0
+var ink_refilling_time: float = 3.0
 @export var out_of_ink_audio_streams: Array[AudioStream]
 
 var is_jammed: bool
@@ -60,23 +72,17 @@ func _process(delta: float) -> void:
 	document_count_label.text = "%s" % documents_count
 	if documents_count == 0 and not is_out_of_ink and not is_jammed and status == Status.IDLE:
 		screen.shaded = true
-		#document_count_label.modulate = Color.GRAY
 	else:
 		screen.shaded = false
-		#document_count_label.modulate = Color.WHITE
 	
 	if is_out_of_ink:
-		#ink_progress_bar.modulate = Color.RED
 		out_of_ink_symbol.modulate.a = 1.0
 	else:
-		#ink_progress_bar.modulate = Color.WHITE
 		out_of_ink_symbol.modulate.a = 0.0
 	
 	if is_jammed:
-		#screen.modulate = Color.ORANGE_RED
 		jammed_symbol.modulate.a = 1.0
 	else:
-		#screen.modulate = Color.WHITE
 		jammed_symbol.modulate.a = 0.0
 	
 	ink_progress_bar.value = ink_amount_stored
@@ -104,25 +110,25 @@ func interact(node: Node) -> void:
 	if is_out_of_ink:
 		refill_ink(node)
 		return
-	pick_up_documents(node)
+	#pick_up_documents(node)
 
 
-func pick_up_documents(node: Node) -> void:
-	if printed_documents.size() == 0:
-		ActionLogger.create_log("NO_DOCUMENTS_TO_PICK_UP", true)
-		return
-	
-	var inventory: Inventory = GlobalDebugger.get_child_of_type(node, Inventory)
-	if inventory == null:
-		print("No inventory found.")
-		return
-	
-	for physical_document: PhysicalDocument in printed_documents:
-		inventory.add_item(physical_document)
-		remove_child(physical_document)
-	
-	ActionLogger.create_log(tr("PICKED_UP_DOCUMENTS").format({"amount":printed_documents.size()}))
-	printed_documents.clear()
+#func pick_up_documents(node: Node) -> void:
+	#if printed_documents.size() == 0:
+		#ActionLogger.create_log("NO_DOCUMENTS_TO_PICK_UP", true)
+		#return
+	#
+	#var inventory: Inventory = GlobalDebugger.get_child_of_type(node, Inventory)
+	#if inventory == null:
+		#print("No inventory found.")
+		#return
+	#
+	#for physical_document: PhysicalDocument in printed_documents:
+		#inventory.add_item(physical_document)
+		#remove_child(physical_document)
+	#
+	#ActionLogger.create_log(tr("PICKED_UP_DOCUMENTS").format({"amount":printed_documents.size()}))
+	#printed_documents.clear()
 
 
 func add_document_to_queue(document: Document) -> void:
@@ -151,14 +157,16 @@ func print_next_document() -> void:
 	
 	var document: Document = printing_queue.pop_front()
 	var physical_document: PhysicalDocument = (document_scene.instantiate() as PhysicalDocument).with_data(document)
-	add_child(physical_document)
+	
+	var offset: Vector3 = position_offset_for_new_document * printer_tray.get_child_count()
+	printer_tray.add_child(physical_document)
 	physical_document.position = document_spawn_position.position
 	physical_document.rotation.x = deg_to_rad(-90)
 	
 	var tween: Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
-	tween.tween_method(func(new_position: Vector3) -> void: physical_document.position = new_position, document_spawn_position.position, document_target_position.position, printing_time)
+	tween.tween_method(func(new_position: Vector3) -> void: physical_document.position = new_position, document_spawn_position.position, document_target_position.position + offset, printing_time)
 	await tween.finished
-	printed_documents.append(physical_document)
+	#printed_documents.append(physical_document)
 	
 	check_ink()
 	status = Status.IDLE
@@ -212,7 +220,7 @@ func refill_ink(node: Node) -> void:
 		player.immobilize()
 	
 	var tween: Tween = create_tween()
-	tween.tween_method(func(amount: float) -> void: ink_amount_stored = amount, ink_amount_stored, ink_amount_capacity, refilling_time)
+	tween.tween_method(func(amount: float) -> void: ink_amount_stored = amount, ink_amount_stored, ink_amount_capacity, ink_refilling_time)
 	await tween.finished
 	is_out_of_ink = false
 	

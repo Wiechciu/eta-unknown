@@ -23,7 +23,7 @@ func _ready() -> void:
 func register_interactable() -> void:
 	var interactable: Interactable = GlobalDebugger.get_child_of_type(self, Interactable) as Interactable
 	if interactable != null:
-		interactable.interacted.connect(interact)
+		interactable.interacted.connect(interact.unbind(1))
 
 
 func walk() -> void:
@@ -55,6 +55,5 @@ func walk() -> void:
 		index += 1
 
 
-@warning_ignore("unused_parameter")
-func interact(node: Node) -> void:
+func interact() -> void:
 	ActionLogger.create_log("Hi!")

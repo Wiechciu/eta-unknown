@@ -85,8 +85,9 @@ bg_color = Color(0.336608, 0.336608, 0.336608, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a7js3"]
 bg_color = Color(1, 1, 1, 1)
 
-[node name="Printer" type="StaticBody3D" node_paths=PackedStringArray("document_spawn_position", "document_target_position", "screen", "document_count_label", "ink_progress_bar", "out_of_ink_symbol", "jammed_symbol", "audio_player")]
+[node name="Printer" type="StaticBody3D" node_paths=PackedStringArray("printer_tray", "document_spawn_position", "document_target_position", "screen", "document_count_label", "ink_progress_bar", "out_of_ink_symbol", "jammed_symbol", "audio_player")]
 script = ExtResource("1_0slj8")
+printer_tray = NodePath("PrinterTray")
 document_spawn_position = NodePath("DocumentSpawnPosition")
 document_target_position = NodePath("DocumentTargetPosition")
 document_scene = ExtResource("2_llfar")
@@ -99,6 +100,14 @@ audio_player = NodePath("AudioStreamPlayer3D")
 printing_audio_streams = Array[AudioStream]([ExtResource("4_05xib")])
 out_of_ink_audio_streams = Array[AudioStream]([ExtResource("3_ml0s2")])
 jammed_audio_streams = Array[AudioStream]([ExtResource("5_whxlh"), ExtResource("6_a7js3")])
+
+[node name="PrinterTray" type="Node3D" parent="."]
+
+[node name="DocumentSpawnPosition" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.288376, 0.077)
+
+[node name="DocumentTargetPosition" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.123695, 0.679537)
 
 [node name="Interactable" parent="." instance=ExtResource("2_b3fi8")]
 
@@ -160,12 +169,6 @@ debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_whxlh")
-
-[node name="DocumentSpawnPosition" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0.077)
-
-[node name="DocumentTargetPosition" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.123695, 0.679537)
 
 [node name="Screen" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.981627, 0.190809, 0, -0.190809, 0.981627, 0.17101, 0.567861, 0.540832)

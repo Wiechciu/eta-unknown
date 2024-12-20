@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dx6f662utr8ya"]
+[gd_scene load_steps=9 format=3 uid="uid://dx6f662utr8ya"]
 
 [ext_resource type="Texture2D" uid="uid://bldqpr61u55c8" path="res://3d_scenes/entities/items/physical_document/front_page.png" id="1_n6wor"]
 [ext_resource type="Script" uid="uid://qhhxkbn3yarx" path="res://3d_scenes/entities/items/physical_document/physical_document.gd" id="1_xcu1r"]
+[ext_resource type="PackedScene" uid="uid://beffqttiv36q7" path="res://3d_scenes/entities/components/interactable.tscn" id="3_eul1g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xcu1r"]
 albedo_texture = ExtResource("1_n6wor")
@@ -17,8 +18,11 @@ size = Vector2(0.315, 0.435)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1ffdw"]
 points = PackedVector3Array(-0.105, -0.145, 0, 0.105, -0.145, 0, -0.105, 0.145, 0, 0.105, 0.145, 0)
 
-[node name="PhysicalDocument" type="StaticBody3D"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_eul1g"]
+
+[node name="PhysicalDocument" type="StaticBody3D" node_paths=PackedStringArray("group_area")]
 script = ExtResource("1_xcu1r")
+group_area = NodePath("GroupArea")
 
 [node name="Front" type="MeshInstance3D" parent="."]
 mesh = SubResource("QuadMesh_m3oqy")
@@ -28,4 +32,13 @@ mesh = SubResource("QuadMesh_3rrdp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_1ffdw")
+debug_color = Color(0, 0.6, 0.7, 0.42)
+
+[node name="Interactable" parent="." instance=ExtResource("3_eul1g")]
+label_position = Vector3(0, 0.5, 0)
+
+[node name="GroupArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GroupArea"]
+shape = SubResource("SphereShape3D_eul1g")
 debug_color = Color(0, 0.6, 0.7, 0.42)
