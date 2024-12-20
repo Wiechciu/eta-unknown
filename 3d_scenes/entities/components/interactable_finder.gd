@@ -17,13 +17,13 @@ func check_for_interactable() -> void:
 		return
 	
 	if interactable != null:
-		interactable.hide_label()
+		interactable.on_hover_end()
 	
 	old_collider = new_collider
 	@warning_ignore("unsafe_method_access", "unsafe_cast")
 	interactable = GlobalDebugger.get_child_of_type(new_collider as Node, Interactable) as Interactable
 	if interactable != null:
-		interactable.show_label()
+		interactable.on_hover_start()
 
 
 func interact(node: Node) -> void:

@@ -14,3 +14,4 @@ json_loader = NodePath("JsonLoader")
 [node name="JsonLoader" parent="." instance=ExtResource("2_fxq6w")]
 
 [node name="Ui" parent="." instance=ExtResource("3_hmira")]
+z_index = 1

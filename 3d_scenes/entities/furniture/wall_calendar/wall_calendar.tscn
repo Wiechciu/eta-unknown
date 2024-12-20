@@ -37,7 +37,6 @@ mesh = SubResource("BoxMesh_8vaxh")
 
 [node name="TodayIs" type="Label3D" parent="UpperPart"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.004, 0.000223905, 0.026)
-visible = false
 pixel_size = 0.001
 shaded = true
 double_sided = false
@@ -50,7 +49,6 @@ mesh = SubResource("BoxMesh_dk8n4")
 
 [node name="Day" type="Label3D" parent="LowerPart"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12687, 0.026)
-visible = false
 pixel_size = 0.001
 shaded = true
 double_sided = false
@@ -61,7 +59,6 @@ outline_size = 0
 
 [node name="Month" type="Label3D" parent="LowerPart"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0667842, 0.026)
-visible = false
 pixel_size = 0.001
 shaded = true
 double_sided = false
@@ -72,7 +69,6 @@ outline_size = 0
 
 [node name="Weekday" type="Label3D" parent="LowerPart"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.229862, -0.204134, 0.026)
-visible = false
 pixel_size = 0.001
 shaded = true
 double_sided = false

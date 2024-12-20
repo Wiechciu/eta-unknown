@@ -21,6 +21,11 @@ func with_data(item_count: int, item_name: String) -> InventoryItem:
 	return self
 
 
-func add_count(amount: int) -> void:
+func increase_count(amount: int) -> void:
 	item_count += amount
+	item_count_label.text = str(item_count)
+
+
+func decrease_count(amount: int) -> void:
+	item_count -= amount
 	item_count_label.text = str(item_count)
