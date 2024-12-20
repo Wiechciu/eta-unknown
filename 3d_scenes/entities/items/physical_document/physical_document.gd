@@ -17,6 +17,7 @@ func _ready() -> void:
 @warning_ignore("shadowed_variable")
 func with_data(document: Document) -> PhysicalDocument:
 	self.document = document
+	self.item_name = document.name
 	
 	return self
 

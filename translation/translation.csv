@@ -218,6 +218,7 @@ ACTION_RIGHT;Right;W prawo
 ACTION_SPRINT;Sprint;Sprint
 ACTION_JUMP;Jump;Skok
 ACTION_INTERACT;Interact;Interakcja
+ACTION_INVENTORY;Inventory;Inwentarz
 ACTION_CANCEL;Cancel;Anulowanie
 ACTION_DEBUG_CONSOLE;Debug console;Konsola
 PRESS_KEY;Press key;Naciśnij klawisz
@@ -237,3 +238,4 @@ KEY_ENTER;Enter;Enter
 KEY_DELETE;Delete;Delete
 KEY_HOME;Home;Home
 KEY_QUOTELEFT;`;`
+INVENTORY;Inventory;Inwentarz

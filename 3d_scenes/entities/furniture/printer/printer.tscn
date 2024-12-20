@@ -110,6 +110,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.288376, 0.077)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.123695, 0.679537)
 
 [node name="Interactable" parent="." instance=ExtResource("2_b3fi8")]
+label_position = Vector3(0, 1.1, 0)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 visible = false
@@ -165,7 +166,6 @@ material = SubResource("StandardMaterial3D_ml0s2")
 
 [node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConcavePolygonShape3D_myt44")
-debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_whxlh")

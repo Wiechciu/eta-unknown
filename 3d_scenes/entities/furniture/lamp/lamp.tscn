@@ -71,13 +71,11 @@ light = NodePath("OmniLight3D")
 emission_bodies = [NodePath("Top"), NodePath("Top2"), NodePath("Bulb")]
 
 [node name="Interactable" parent="." instance=ExtResource("2_7p2bv")]
-label_position = Vector3(0, 2.2, 0)
-interaction_radius = 1.5
+label_position = Vector3(0, 2.11, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
 shape = SubResource("CylinderShape3D_e8jpf")
-debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="Top" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6992, 0)

@@ -21,6 +21,7 @@ func refresh_container() -> void:
 	clear_container()
 	populate_container()
 
+
 func clear_container() -> void:
 	for child: Node in container.get_children():
 		child.queue_free()

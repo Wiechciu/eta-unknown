@@ -1,14 +1,46 @@
-[gd_scene load_steps=2 format=3 uid="uid://beffqttiv36q7"]
+[gd_scene load_steps=3 format=3 uid="uid://beffqttiv36q7"]
 
 [ext_resource type="Script" uid="uid://dfn2dqgva8n14" path="res://3d_scenes/entities/components/interactable.gd" id="1_u1lcw"]
 
-[node name="Interactable" type="Node3D" node_paths=PackedStringArray("label")]
+[sub_resource type="ViewportTexture" id="ViewportTexture_2338e"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Interactable" type="Node3D" node_paths=PackedStringArray("sprite", "label")]
 script = ExtResource("1_u1lcw")
-label = NodePath("Label3D")
+sprite = NodePath("Sprite3D")
+label = NodePath("SubViewport/Label")
 label_text = "PRESS_TO_INTERACT"
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 billboard = 1
 no_depth_test = true
 text = "PRESS_TO_INTERACT"
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.005
+billboard = 1
+double_sided = false
+no_depth_test = true
+texture = SubResource("ViewportTexture_2338e")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(1000, 40)
+
+[node name="Label" type="Label" parent="SubViewport"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.0
+offset_top = -17.5
+offset_right = 123.0
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "PRESS_TO_INTERACT"
+horizontal_alignment = 1

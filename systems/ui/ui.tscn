@@ -18,7 +18,7 @@
 [ext_resource type="Script" uid="uid://4a7w06fun1i2" path="res://systems/ui/difficulty.gd" id="13_bl64p"]
 [ext_resource type="Script" uid="uid://conjfprou1b6n" path="res://systems/ui/autosave.gd" id="15_5u55t"]
 [ext_resource type="Script" uid="uid://bhamemntiq6fp" path="res://systems/ui/delete_button.gd" id="15_fm32y"]
-[ext_resource type="Script" path="res://systems/ui/graphics_quality.gd" id="15_ony14"]
+[ext_resource type="Script" uid="uid://coqvlcdcl126x" path="res://systems/ui/graphics_quality.gd" id="15_ony14"]
 [ext_resource type="Script" uid="uid://g8hj25s33m5s" path="res://systems/ui/controls_settings.gd" id="20_phplh"]
 [ext_resource type="PackedScene" uid="uid://xoadia8ml518" path="res://systems/ui/controls_list_item.tscn" id="21_ewkj2"]
 
