@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://ry5gcuu7gkh"]
+[gd_scene load_steps=10 format=3 uid="uid://ry5gcuu7gkh"]
 
 [ext_resource type="Script" uid="uid://ie4fwo4bx0a6" path="res://3d_scenes/entities/humans/player/player.gd" id="1_d240i"]
 [ext_resource type="PackedScene" uid="uid://dr00pmvue7oj7" path="res://3d_scenes/entities/humans/inventory/inventory.tscn" id="2_pyeek"]
 [ext_resource type="Texture2D" uid="uid://bg00ph6d731y" path="res://3d_scenes/entities/humans/player/crosshair001.png" id="2_sehua"]
 [ext_resource type="PackedScene" uid="uid://iycq57so0s4d" path="res://3d_scenes/entities/components/interactable_finder.tscn" id="2_usmx8"]
 [ext_resource type="Script" uid="uid://c57rhvnlfd5ir" path="res://3d_scenes/entities/humans/player/crosshair.gd" id="5_1hnet"]
+[ext_resource type="Texture2D" uid="uid://obyr75jw67gq" path="res://3d_scenes/entities/humans/player/crosshair013.png" id="6_cwtjh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ler6u"]
 albedo_color = Color(1, 1, 0.52549, 1)
@@ -44,9 +45,23 @@ far = 200.0
 
 [node name="InteractableFinder" parent="Head/Camera3D" instance=ExtResource("2_usmx8")]
 
-[node name="Crosshair" type="TextureRect" parent="."]
+[node name="Crosshair" type="Control" parent="." node_paths=PackedStringArray("interactable_finder", "regular_crosshair", "interactable_crosshair")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("5_1hnet")
+interactable_finder = NodePath("../Head/Camera3D/InteractableFinder")
+regular_crosshair = NodePath("RegularCrosshair")
+interactable_crosshair = NodePath("InteractableCrosshair")
+
+[node name="RegularCrosshair" type="TextureRect" parent="Crosshair"]
 process_mode = 3
-self_modulate = Color(0, 0, 0, 0.192157)
+self_modulate = Color(1, 1, 1, 0.411765)
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -60,4 +75,22 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("2_sehua")
-script = ExtResource("5_1hnet")
+
+[node name="InteractableCrosshair" type="TextureRect" parent="Crosshair"]
+process_mode = 3
+self_modulate = Color(1, 1, 1, 0.411765)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 64)
+mouse_filter = 2
+texture = ExtResource("6_cwtjh")

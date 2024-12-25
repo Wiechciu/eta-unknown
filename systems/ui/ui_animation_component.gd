@@ -104,7 +104,6 @@ func setup() -> void:
 
 
 func animation_in() -> void:
-	
 	if tween_out != null and tween_out.is_running():
 		tween_out.stop()
 	

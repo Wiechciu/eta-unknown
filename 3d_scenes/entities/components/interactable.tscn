@@ -59,6 +59,7 @@ horizontal_alignment = 1
 
 [node name="HoverInformation" type="Control" parent="SubViewport"]
 layout_mode = 3
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

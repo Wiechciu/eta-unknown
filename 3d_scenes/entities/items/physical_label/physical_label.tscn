@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3 uid="uid://cfgtlxo30incr"]
+
+[ext_resource type="Script" uid="uid://fnniofs6r8wx" path="res://3d_scenes/entities/items/physical_label/physical_label.gd" id="1_qtgj3"]
+[ext_resource type="Texture2D" uid="uid://bldqpr61u55c8" path="res://3d_scenes/entities/items/physical_document/front_page.png" id="2_6jodi"]
+[ext_resource type="PackedScene" uid="uid://beffqttiv36q7" path="res://3d_scenes/entities/components/interactable.tscn" id="3_xr0db"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xcu1r"]
+albedo_texture = ExtResource("2_6jodi")
+
+[sub_resource type="QuadMesh" id="QuadMesh_m3oqy"]
+material = SubResource("StandardMaterial3D_xcu1r")
+size = Vector2(0.315, 0.435)
+
+[sub_resource type="QuadMesh" id="QuadMesh_3rrdp"]
+flip_faces = true
+size = Vector2(0.315, 0.435)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1ffdw"]
+points = PackedVector3Array(-0.105, -0.145, 0, 0.105, -0.145, 0, -0.105, 0.145, 0, 0.105, 0.145, 0)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_eul1g"]
+
+[node name="PhysicalLabel" type="StaticBody3D"]
+script = ExtResource("1_qtgj3")
+
+[node name="Front" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_m3oqy")
+
+[node name="Back" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_3rrdp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_1ffdw")
+
+[node name="Interactable" parent="." instance=ExtResource("3_xr0db")]
+label_position = Vector3(0, 0.5, 0)
+
+[node name="GroupArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GroupArea"]
+shape = SubResource("SphereShape3D_eul1g")
