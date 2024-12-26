@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlpdugk22fihs"]
+
+[ext_resource type="PackedScene" uid="uid://bydna202q8dsp" path="res://3d_scenes/entities/room/door.glb" id="1_nhgje"]
+[ext_resource type="Script" uid="uid://72h0fo4am1bh" path="res://3d_scenes/entities/room/door.gd" id="2_yfyjp"]
+[ext_resource type="PackedScene" uid="uid://beffqttiv36q7" path="res://3d_scenes/entities/components/interactable.tscn" id="3_ftavd"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_nhgje"]
+points = PackedVector3Array(0.03, 2, 0.9, -0.03, 2, 0.9, 0.03, 0, 0.9, 0.03, 2, 0, -0.03, 2, 0, -0.03, 0, 0.9, 0.03, 0, 0, -0.03, 0, 0)
+
+[node name="Door" type="StaticBody3D" node_paths=PackedStringArray("door_base", "door_base_collision_shape")]
+script = ExtResource("2_yfyjp")
+door_base = NodePath("door/Door/DoorBase")
+door_base_collision_shape = NodePath("CollisionShape3D")
+
+[node name="door" parent="." instance=ExtResource("1_nhgje")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, -0.54)
+shape = SubResource("ConvexPolygonShape3D_nhgje")
+
+[node name="Interactable" parent="." instance=ExtResource("3_ftavd")]
+label_position = Vector3(0, 1.29, 0)
+
+[editable path="door"]

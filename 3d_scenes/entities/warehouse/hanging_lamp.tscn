@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=3 uid="uid://bwig5i5noy212"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aib1u"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_a4gc7"]
+material = SubResource("StandardMaterial3D_aib1u")
+top_radius = 0.01
+bottom_radius = 0.01
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u5xk1"]
+albedo_color = Color(0.103744, 0.103744, 0.103743, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rvhr8"]
+lightmap_size_hint = Vector2i(17, 11)
+material = SubResource("StandardMaterial3D_u5xk1")
+top_radius = 0.1
+height = 0.5
+radial_segments = 16
+cap_bottom = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rvhr8"]
+albedo_color = Color(0.737192, 0.737194, 0.73719, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_iubcs"]
+lightmap_size_hint = Vector2i(17, 11)
+material = SubResource("StandardMaterial3D_rvhr8")
+flip_faces = true
+top_radius = 0.1
+height = 0.5
+radial_segments = 16
+cap_bottom = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_56r4u"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_u5xk1"]
+material = SubResource("StandardMaterial3D_56r4u")
+radius = 0.1
+height = 0.2
+
+[node name="HangingLamp" type="StaticBody3D"]
+
+[node name="Cable" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_a4gc7")
+
+[node name="Cone" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.25, 0)
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_rvhr8")
+
+[node name="Cone2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.25, 0)
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_iubcs")
+
+[node name="Bulb" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.31073, 0)
+cast_shadow = 0
+mesh = SubResource("SphereMesh_u5xk1")

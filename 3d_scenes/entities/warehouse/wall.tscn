@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=4 uid="uid://c4hxoy1gfpjcl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q1dpq"]
+albedo_color = Color(0.950895, 0.847629, 0.482792, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_hgvkg"]
+data = PackedVector3Array(-5, 0, 0.05, -5, 0, -0.05, -5, 5, -0.05, 5, 0, -0.05, -5, 0, -0.05, -5, 0, 0.05, -5, 5, -0.05, -5, 0, -0.05, 5, 0, -0.05, -5, 5, -0.05, -5, 5, 0.05, -5, 0, 0.05, -5, 0, 0.05, -5, 5, 0.05, 5, 5, 0.05, 5, 5, 0.05, -5, 5, 0.05, -5, 5, -0.05, -5, 0, 0.05, 5, 0, 0.05, 5, 0, -0.05, 5, 5, 0.05, 5, 0, 0.05, -5, 0, 0.05, 5, 0, -0.05, 5, 0, 0.05, 5, 5, 0.05, 5, 0, -0.05, 5, 5, -0.05, -5, 5, -0.05, -5, 5, -0.05, 5, 5, -0.05, 5, 5, 0.05, 5, 5, 0.05, 5, 5, -0.05, 5, 0, -0.05)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_b1bdh"]
+_surfaces = [{
+"aabb": AABB(-5, 0, -0.05, 10, 5, 0.1),
+"attribute_data": PackedByteArray("AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/"),
+"format": 34359738391,
+"material": SubResource("StandardMaterial3D_q1dpq"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 36,
+"vertex_data": PackedByteArray("AACgwAAAAADNzEw9AACgwAAAAADNzEy9AACgwAAAoEDNzEy9AACgQAAAAADNzEy9AACgwAAAAADNzEy9AACgwAAAAADNzEw9AACgwAAAoEDNzEy9AACgwAAAAADNzEy9AACgQAAAAADNzEy9AACgwAAAoEDNzEy9AACgwAAAoEDNzEw9AACgwAAAAADNzEw9AACgwAAAAADNzEw9AACgwAAAoEDNzEw9AACgQAAAoEDNzEw9AACgQAAAoEDNzEw9AACgwAAAoEDNzEw9AACgwAAAoEDNzEy9AACgwAAAAADNzEw9AACgQAAAAADNzEw9AACgQAAAAADNzEy9AACgQAAAoEDNzEw9AACgQAAAAADNzEw9AACgwAAAAADNzEw9AACgQAAAAADNzEy9AACgQAAAAADNzEw9AACgQAAAoEDNzEw9AACgQAAAAADNzEy9AACgQAAAoEDNzEy9AACgwAAAoEDNzEy9AACgwAAAoEDNzEy9AACgQAAAoEDNzEy9AACgQAAAoEDNzEw9AACgQAAAoEDNzEw9AACgQAAAoEDNzEy9AACgQAAAAADNzEy9AAD/f/9//n8AAP9//3/+fwAA/3//f/5//38AAP//AAD/fwAA//8AAP9/AAD//wAA/////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//////AAD/f/////8AAP9//////wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8/////f/9//n////9//3/+f////3//f/5//////wAA/z//////AAD/P/////8AAP8//3//////AAD/f/////8AAP9//////wAA////f/9//n////9//3/+f////3//f/5/")
+}]
+
+[node name="Wall" type="StaticBody3D"]
+
+[node name="Wall" type="CSGCombiner3D" parent="."]
+visible = false
+
+[node name="Wall" type="CSGBox3D" parent="Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+size = Vector3(10, 5, 0.1)
+material = SubResource("StandardMaterial3D_q1dpq")
+
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConcavePolygonShape3D_hgvkg")
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_b1bdh")
