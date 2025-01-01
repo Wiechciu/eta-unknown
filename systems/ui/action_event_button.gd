@@ -14,6 +14,7 @@ func _ready() -> void:
 	self.pressed.connect(_on_button_pressed)
 
 
+@warning_ignore("shadowed_variable")
 func with_data(action_name: String, event: InputEventKey) -> ActionEventButton:
 	self.action_name = action_name
 	self.event = event
@@ -32,6 +33,7 @@ func _on_button_pressed() -> void:
 	is_listening = true
 
 
+@warning_ignore("shadowed_variable")
 func _input(event: InputEvent) -> void:
 	if not is_listening:
 		return

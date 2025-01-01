@@ -77,6 +77,8 @@ func open_data() -> void:
 	data.open()
 
 
+
+@warning_ignore("unused_parameter")
 func open_party_details(party: Party) -> void:
 	close_all()
 	#party_details.open(party)

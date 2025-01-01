@@ -12,7 +12,6 @@ var items_to_display: Array[Party]
 
 
 func _ready() -> void:
-	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.assert_all_exported_properties(self)
 	
 	instantiate_filter()

@@ -16,11 +16,8 @@ func with_data(id: int, code: String, name: String, coordinates: Vector2) -> Cou
 	self.name = name
 	self.coordinates = coordinates
 	
-	@warning_ignore("unsafe_property_access", "unsafe_method_access")
 	GlobalRefs.countries.append(self)
-	@warning_ignore("unsafe_property_access")
 	GlobalRefs.countries_dict[id] = self
-	@warning_ignore("unsafe_property_access")
 	GlobalRefs.countries_code_dict[code] = self
 	
 	return self

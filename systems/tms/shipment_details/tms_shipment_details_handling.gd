@@ -11,7 +11,6 @@ var shipment: Shipment
 
 
 func _ready() -> void:
-	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.assert_all_exported_properties(self)
 	
 	_arrange_export_handling_button.pressed.connect(_on_arrange_export_handling_button_pressed)

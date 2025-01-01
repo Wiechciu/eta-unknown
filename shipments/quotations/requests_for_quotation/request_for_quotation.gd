@@ -38,16 +38,13 @@ func with_data(id: int, shipment: Shipment, requestor: Party, expected_total_cos
 	
 	self.deadline_time_event = GlobalTimer.create_time_event_from_unix_time(deadline_date, self)
 	
-	@warning_ignore("unsafe_property_access", "unsafe_method_access")
 	GlobalRefs.requests_for_quotation.append(self)
-	@warning_ignore("unsafe_property_access")
 	GlobalRefs.requests_for_quotation_dict[id] = self
 	
 	return self
 
 
 func with_data_random(customer: Party) -> RequestForQuotation:
-	@warning_ignore("unsafe_method_access")
 	id = GlobalRefs.get_request_for_quotation_id()
 	
 	requestor = customer
@@ -62,24 +59,18 @@ func with_data_random(customer: Party) -> RequestForQuotation:
 	if shipment == null:
 		return null
 	
-	@warning_ignore("unsafe_property_access")
 	var expected_rate_per_kg: float = GlobalMarket.market_rates_dict[shipment.origin.country.code + shipment.destination.country.code]
 	var margin_allowance: float = randf_range(1.05, 1.5)
 	expected_total_cost = shipment.cargo_details.total_weight * expected_rate_per_kg * margin_allowance
 	var random_day_offset: int = randi_range(1, 3)
 	var random_hour: int = randi_range(10, 16)
-	@warning_ignore("unsafe_method_access")
 	deadline_date = GlobalTimer.get_future_date_from_now(random_day_offset, random_hour)
-	@warning_ignore("unsafe_method_access")
 	deadline_time_event = GlobalTimer.create_time_event_from_unix_time(deadline_date, self)
 	award_criteria = AwardCriteria.values()[randi() % AwardCriteria.size()]
 	
-	@warning_ignore("unsafe_property_access", "unsafe_method_access")
 	GlobalRefs.requests_for_quotation.append(self)
-	@warning_ignore("unsafe_property_access")
 	GlobalRefs.requests_for_quotation_dict[id] = self
 
-	#@warning_ignore("unsafe_property_access", "unsafe_method_access")
 	#print("New request for quotation created. RFQ ID: %s. There are %s active rfqs." % [id, GlobalRefs.requests_for_quotation.size()])
 	return self
 
@@ -145,36 +136,36 @@ func _sort_by_transit_time_ascending(a: Quotation, b: Quotation) -> bool:
 func to_dict() -> Dictionary:
 	return {
 		"id" = id,
-		"shipment_id" = shipment.id if shipment else "",
-		"requestor_id" = requestor.id if requestor else "",
+		"shipment_id" = str(shipment.id) if shipment else "",
+		"requestor_id" = str(requestor.id) if requestor else "",
 		"expected_total_cost" = expected_total_cost,
 		"expected_transit_time" = expected_transit_time,
 		"deadline_date" = deadline_date,
 		"award_criteria" = award_criteria,
 		"quotation_ids" = Quotation.array_to_dict_id(quotations),
-		"awarded_quotation_id" = awarded_quotation.id if awarded_quotation else "",
+		"awarded_quotation_id" = str(awarded_quotation.id) if awarded_quotation else "",
 	}
 
 
 static func from_dict(data: Dictionary) -> RequestForQuotation:
 	return RequestForQuotation.new().with_data(
-		data["id"],
+		data.id,
 		null,
 		null,
-		data["expected_total_cost"],
-		data["expected_transit_time"],
-		data["deadline_date"],
-		data["award_criteria"],
+		data.expected_total_cost,
+		data.expected_transit_time,
+		data.deadline_date,
+		data.award_criteria,
 		[] as Array[Quotation],
 		null,
 	)
 
 
 func assign_references_from_dict(data: Dictionary) -> void:
-	self.shipment = GlobalRefs.shipments_dict[data["shipment_id"] as int]
-	self.requestor = GlobalRefs.parties_dict[data["requestor_id"] as int]
-	self.quotations = Quotation.array_from_dict_id(data["quotation_ids"]) if data["quotation_ids"] else ([] as Array[Quotation])
-	self.awarded_quotation = GlobalRefs.quotations[data["awarded_quotation_id"] as int] if data["awarded_quotation_id"] else null
+	self.shipment = GlobalRefs.shipments_dict[data.shipment_id as int]
+	self.requestor = GlobalRefs.parties_dict[data.requestor_id as int]
+	self.quotations = Quotation.array_from_dict_id(data.quotation_ids) if data.quotation_ids else ([] as Array[Quotation])
+	self.awarded_quotation = GlobalRefs.quotations[data.awarded_quotation_id as int] if data.awarded_quotation_id else null
 
 
 static func array_to_dict(data: Array[RequestForQuotation]) -> Array[Dictionary]:

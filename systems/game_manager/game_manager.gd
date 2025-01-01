@@ -1,7 +1,7 @@
 extends Node
 
 
-signal player_person_loaded
+#signal player_person_loaded
 signal difficulty_changed
 
 
@@ -24,7 +24,6 @@ var difficulty: Difficulty
 
 
 func _ready() -> void:
-	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.assert_all_exported_properties(self)
 	GlobalTimer.new_day_started.connect(create_new_shipments)
 
@@ -77,6 +76,7 @@ func create_new_shipments() -> void:
 		#thread.wait_to_finish()
 
 
+@warning_ignore("shadowed_variable")
 func change_difficulty(difficulty: Difficulty) -> void:
 	self.difficulty = difficulty
 	difficulty_changed.emit()

@@ -17,6 +17,7 @@ func _ready() -> void:
 	interactable_finder.on_hover_ended.connect(interactable_on_hover_ended)
 
 
+@warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
 	visible = Input.mouse_mode != Input.MOUSE_MODE_VISIBLE
 

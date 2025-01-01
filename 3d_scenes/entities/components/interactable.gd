@@ -25,7 +25,6 @@ signal interacted(node: Node)
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
-		@warning_ignore("unsafe_method_access")
 		GlobalDebugger.assert_all_exported_properties(self)
 		sprite.modulate.a = 0
 		#hover_information.modulate.a = 0

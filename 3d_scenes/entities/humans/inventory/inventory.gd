@@ -40,6 +40,7 @@ func add_item(item: Item) -> void:
 		inventory_items.append(new_inventory_item)
 
 
+@warning_ignore("shadowed_variable")
 func add_items(items: Array[Item]) -> void:
 	for item: Item in items:
 		add_item(item)
@@ -56,6 +57,7 @@ func remove_item(item: Item) -> void:
 			break
 
 
+@warning_ignore("shadowed_variable")
 func remove_items(items: Array[Item]) -> void:
 	for item: Item in items:
 		remove_item(item)

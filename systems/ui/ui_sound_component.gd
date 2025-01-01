@@ -34,7 +34,6 @@ func _ready() -> void:
 	assign_audio_stream()
 	connect_signals()
 	
-	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.assert_all_exported_properties(self)
 
 

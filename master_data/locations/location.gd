@@ -22,11 +22,8 @@ func with_data(id: int, code: String, name: String, country: Country) -> Locatio
 	
 	country.locations.append(self)
 	
-	@warning_ignore("unsafe_property_access", "unsafe_method_access")
 	GlobalRefs.locations.append(self)
-	@warning_ignore("unsafe_property_access")
 	GlobalRefs.locations_dict[id] = self
-	@warning_ignore("unsafe_property_access")
 	GlobalRefs.locations_code_dict[code] = self
 
 	return self
@@ -46,16 +43,16 @@ func to_dict() -> Dictionary:
 		"id": id,
 		"code": code,
 		"name": name,
-		"country_id": country.id if country else "",
+		"country_id": str(country.id) if country else "",
 	}
 
 
 static func from_dict(data: Dictionary) -> Location:
 	return Location.new().with_data(
-		data["id"],
-		data["code"],
-		data["name"],
-		GlobalRefs.countries_dict[data["country_id"] as int],
+		data.id,
+		data.code,
+		data.name,
+		GlobalRefs.countries_dict[data.country_id as int],
 	)
 
 

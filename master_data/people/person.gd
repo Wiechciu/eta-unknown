@@ -37,9 +37,7 @@ func with_data(id: int, first_name: String, last_name: String, gender: String, e
 	self.employer = employer
 	self.job_position = job_position
 	
-	@warning_ignore("unsafe_property_access", "unsafe_method_access")
 	GlobalRefs.people.append(self)
-	@warning_ignore("unsafe_property_access")
 	GlobalRefs.people_dict[id] = self
 	
 	return self
@@ -55,28 +53,28 @@ func to_dict() -> Dictionary:
 		"phone_number" = phone_number,
 		"birthdate" = birthdate,
 		"experience" = experience,
-		"employer_id" = employer.id if employer else "",
-		"job_position_id" = job_position.id if job_position else "",
+		"employer_id" = str(employer.id) if employer else "",
+		"job_position_id" = str(job_position.id) if job_position else "",
 	}
 
 
 static func from_dict(data: Dictionary) -> Person:
 	return Person.new().with_data(
-		data["id"],
-		data["first_name"],
-		data["last_name"],
-		data["gender"],
-		data["email"],
-		data["phone_number"],
-		data["birthdate"],
-		data["experience"],
+		data.id,
+		data.first_name,
+		data.last_name,
+		data.gender,
+		data.email,
+		data.phone_number,
+		data.birthdate,
+		data.experience,
 		null,
-		GlobalRefs.job_positions_dict[data["job_position_id"] as int],
+		GlobalRefs.job_positions_dict[data.job_position_id as int],
 	)
 
 
 func assign_references_from_dict(data: Dictionary) -> void:
-	self.employer = GlobalRefs.parties_dict[data["employer_id"] as int]
+	self.employer = GlobalRefs.parties_dict[data.employer_id as int]
 
 
 static func array_to_dict(data: Array[Person]) -> Array[Dictionary]:

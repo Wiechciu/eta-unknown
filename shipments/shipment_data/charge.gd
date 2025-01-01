@@ -55,17 +55,17 @@ func to_dict() -> Dictionary:
 		"type" = type,
 		"amount" = amount,
 		"currency" = currency,
-		"party_id" = party.id if party else "",
+		"party_id" = str(party.id) if party else "",
 	}
 
 
 static func from_dict(data: Dictionary) -> Charge:
 	return Charge.new().with_data(
-		data["code"],
-		data["type"],
-		data["amount"],
-		data["currency"],
-		GlobalRefs.parties_dict[data["party_id"] as int],
+		data.code,
+		data.type,
+		data.amount,
+		data.currency,
+		GlobalRefs.parties_dict[data.party_id as int],
 	)
 
 

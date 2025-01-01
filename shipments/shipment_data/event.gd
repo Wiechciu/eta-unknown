@@ -48,16 +48,16 @@ func to_dict() -> Dictionary:
 		"code" = code,
 		"type" = type,
 		"time" = time,
-		"location_id" = location.id if location else "",
+		"location_id" = str(location.id) if location else "",
 	}
 
 
 static func from_dict(data: Dictionary) -> Event:
 	return Event.new().with_data(
-		data["code"],
-		data["type"],
-		data["time"],
-		GlobalRefs.locations_dict[data["location_id"] as int] if data["location_id"] else null,
+		data.code,
+		data.type,
+		data.time,
+		GlobalRefs.locations_dict[data.location_id as int] if data.location_id else null,
 	)
 
 

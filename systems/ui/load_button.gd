@@ -9,8 +9,8 @@ func _ready() -> void:
 	_on_line_edit_text_changed(save_name_line_edit.text)
 
 
-func _on_line_edit_text_changed(text: String) -> void:
-	disabled = not SaveManager.save_file_exists(text)
+func _on_line_edit_text_changed(new_text: String) -> void:
+	disabled = not SaveManager.save_file_exists(new_text)
 
 
 func _on_pressed() -> void:

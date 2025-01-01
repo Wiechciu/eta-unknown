@@ -2,7 +2,6 @@ extends PanelContainer
 
 
 func _ready() -> void:
-	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.assert_all_exported_properties(self)
 	visible = false
 

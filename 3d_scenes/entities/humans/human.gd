@@ -28,7 +28,7 @@ func assign_person() -> void:
 func to_dict() -> Dictionary:
 	return {
 		"id" = id,
-		"person_id" = person.id if person else "",
+		"person_id" = str(person.id) if person else "",
 		"position_x" = position.x,
 		"position_y" = position.y,
 		"position_z" = position.z,

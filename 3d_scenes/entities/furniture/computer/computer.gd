@@ -196,24 +196,19 @@ func _on_mouse_input_event(_camera: Camera3D, event: InputEvent, event_position:
 		event_pos2D = last_event_pos2D
 
 	# Set the event's position and global position.
-	@warning_ignore("unsafe_property_access")
 	event.position = event_pos2D
 	if event is InputEventMouse:
-		@warning_ignore("unsafe_property_access")
 		event.global_position = event_pos2D
 
 	# Calculate the relative event distance.
 	if event is InputEventMouseMotion or event is InputEventScreenDrag:
 		# If there is not a stored previous position, then we'll assume there is no relative motion.
 		if last_event_pos2D == null:
-			@warning_ignore("unsafe_property_access")
 			event.relative = Vector2(0, 0)
 		# If there is a stored previous position, then we'll calculate the relative position by subtracting
 		# the previous position from the new position. This will give us the distance the event traveled from prev_pos.
 		else:
-			@warning_ignore("unsafe_property_access")
 			event.relative = event_pos2D - last_event_pos2D
-			@warning_ignore("unsafe_property_access")
 			event.velocity = event.relative / (now - last_event_time)
 
 	# Update last_event_pos2D with the position we just calculated.

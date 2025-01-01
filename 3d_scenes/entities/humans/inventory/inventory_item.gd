@@ -12,6 +12,7 @@ func _ready() -> void:
 	GlobalDebugger.assert_all_exported_properties(self)
 
 
+@warning_ignore("shadowed_variable")
 func with_data(item_count: int, item_name: String) -> InventoryItem:
 	self.item_count = item_count
 	self.item_name = item_name

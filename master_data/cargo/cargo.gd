@@ -19,9 +19,7 @@ func with_data(id: int, description: String, hs_code: String, unit_value: float,
 	self.unit_size = unit_size
 	self.unit_weight = unit_weight
 	
-	@warning_ignore("unsafe_property_access", "unsafe_method_access")
 	GlobalRefs.cargos.append(self)
-	@warning_ignore("unsafe_property_access")
 	GlobalRefs.cargos_dict[id] = self
 	
 	return self

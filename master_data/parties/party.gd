@@ -20,7 +20,7 @@ enum Type {
 
 var id: int
 var type: Type
-var type_string: String:
+var type_as_string: String:
 	get: return "PARTY_TYPE_" + Type.keys()[type]
 var name: String
 var street_name: String
@@ -76,47 +76,31 @@ func with_data(id: int, type: Type, name: String, street_name: String, street_nu
 	self.reliability_factor = reliability_factor
 	self.cost_factor = cost_factor
 	
-	@warning_ignore("unsafe_property_access", "unsafe_method_access")
 	GlobalRefs.parties.append(self)
-	@warning_ignore("unsafe_property_access")
 	GlobalRefs.parties_dict[id] = self
 	
 	match self.type:
 		Party.Type.CUSTOMER:
-			@warning_ignore("unsafe_property_access", "unsafe_method_access")
 			GlobalRefs.customers.append(self)
-			@warning_ignore("unsafe_property_access")
 			GlobalRefs.customers_dict[self.id] = self
 		Party.Type.FREIGHT_FORWARDER:
-			@warning_ignore("unsafe_property_access", "unsafe_method_access")
 			GlobalRefs.freight_forwarders.append(self)
-			@warning_ignore("unsafe_property_access")
 			GlobalRefs.freight_forwarders_dict[self.id] = self
 		Party.Type.CARRIER:
-			@warning_ignore("unsafe_property_access", "unsafe_method_access")
 			GlobalRefs.carriers.append(self)
-			@warning_ignore("unsafe_property_access")
 			GlobalRefs.carriers_dict[self.id] = self
 		Party.Type.CUSTOMS_AGENCY:
-			@warning_ignore("unsafe_property_access", "unsafe_method_access")
 			GlobalRefs.customs_agencies.append(self)
-			@warning_ignore("unsafe_property_access")
 			GlobalRefs.customs_agencies_dict[self.id] = self
 		Party.Type.HANDLING_AGENT:
-			@warning_ignore("unsafe_property_access", "unsafe_method_access")
 			GlobalRefs.handling_agents.append(self)
-			@warning_ignore("unsafe_property_access")
 			GlobalRefs.handling_agents_dict[self.id] = self
 		Party.Type.TRUCKER:
-			@warning_ignore("unsafe_property_access", "unsafe_method_access")
 			GlobalRefs.truckers.append(self)
-			@warning_ignore("unsafe_property_access")
 			GlobalRefs.truckers_dict[self.id] = self
 	
 	if self.is_supplier:
-		@warning_ignore("unsafe_property_access", "unsafe_method_access")
 		GlobalRefs.suppliers.append(self)
-		@warning_ignore("unsafe_property_access")
 		GlobalRefs.suppliers_dict[self.id] = self
 
 	return self
@@ -167,7 +151,7 @@ func to_dict() -> Dictionary:
 		"house_number" = house_number,
 		"postal_code" = postal_code,
 		"city_name" = city_name,
-		"country_id" = country.id if country else "",
+		"country_id" = str(country.id) if country else "",
 		"employee_ids" = Person.array_to_dict_id(employees),
 		"balance" = balance,
 		"request_for_quotation_ids" = RequestForQuotation.array_to_dict_id(requests_for_quotation),

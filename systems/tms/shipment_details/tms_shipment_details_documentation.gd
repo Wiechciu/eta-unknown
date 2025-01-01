@@ -18,7 +18,6 @@ func _init() -> void:
 
 
 func _ready() -> void:
-	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.assert_all_exported_properties(self)
 	
 	_print_button.pressed.connect(_on_print_button_pressed)
@@ -57,7 +56,6 @@ func refresh_document_details(document_details_container: Control, documents: Ar
 func _on_print_button_pressed() -> void:
 	var documents: Array[Document] = shipment.documentation.documents
 	if documents.size() == 0:
-		@warning_ignore("unsafe_method_access")
 		ActionLogger.create_log("NO_DOCUMENTS_TO_PRINT", true)
 		return
 	

@@ -26,10 +26,8 @@ var is_immobilized: bool = false
 func _ready() -> void:
 	super._ready()
 	
-	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.assert_all_exported_properties(self)
 	
-	@warning_ignore("unsafe_property_access")
 	GameManager.player = self
 	initial_setup()
 

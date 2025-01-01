@@ -14,6 +14,7 @@ func _ready() -> void:
 	GlobalDebugger.assert_all_exported_properties(self)
 
 
+@warning_ignore("shadowed_variable")
 func with_data(action_name: String) -> ControlsListItem:
 	self.action_name = action_name
 	action_label.text = "ACTION_%s" % action_name.to_upper()

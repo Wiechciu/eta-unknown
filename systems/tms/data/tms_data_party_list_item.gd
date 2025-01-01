@@ -16,19 +16,19 @@ var party: Party
 
 
 func _ready() -> void:
-	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.assert_all_exported_properties(self)
 	
 	button.pressed.connect(_on_button_pressed)
 
 
+@warning_ignore("shadowed_variable")
 func with_data(party: Party) -> TmsDataPartyListItem:
 	self.party = party
 	
 	party_id.text = str(party.id)
 	party_name.text = party.name
 	party_city_and_country.text = "%s, %s" % [party.city_name, party.country.code]
-	party_type.text = party.type_string
+	party_type.text = party.type_as_string
 	
 	return self
 

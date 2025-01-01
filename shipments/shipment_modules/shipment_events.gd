@@ -63,7 +63,6 @@ func remove_event(event: Event) -> void:
 
 func create_new_planned_event(code: Event.Code, time: int, location: Location = null) -> Event:
 	var new_event: Event = Event.new().with_data(code, Event.Type.PLANNED, time, location)
-	@warning_ignore("unsafe_method_access")
 	GlobalTimer.create_time_event_from_event(new_event, self)
 	register_event(new_event)
 	return new_event
@@ -76,7 +75,6 @@ func create_new_actual_event(code: Event.Code, time: int, location: Location = n
 
 
 func create_new_actual_event_now(code: Event.Code, location: Location = null) -> Event:
-	@warning_ignore("unsafe_property_access", "unsafe_call_argument")
 	return create_new_actual_event(code, GlobalTimer.now, location)
 
 

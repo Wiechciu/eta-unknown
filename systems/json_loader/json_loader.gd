@@ -12,30 +12,27 @@ extends Node
 
 
 func _ready() -> void:
-	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.assert_all_exported_properties(self)
 
 
 func start() -> void:
 	print("--- starting loading from JSONs ---")
-	load_cargo_from_json(cargo_json, GlobalRefs.cargos, GlobalRefs.cargos_dict)
-	load_currencies_from_json(currencies_json, GlobalRefs.currencies, GlobalRefs.currencies_dict, GlobalRefs.currencies_code_dict)
-	load_job_positions_from_json(job_positions_json, GlobalRefs.job_positions, GlobalRefs.job_positions_dict)
-	load_countries_from_json(countries_json, GlobalRefs.countries, GlobalRefs.countries_dict, GlobalRefs.countries_code_dict)
-	load_locations_from_json(locations_json, GlobalRefs.locations, GlobalRefs.locations_dict, GlobalRefs.locations_code_dict)
-	load_parties_from_json(parties_json, GlobalRefs.parties, GlobalRefs.parties_dict)
-	load_people_from_json(people_json, GlobalRefs.people, GlobalRefs.people_dict)
+	load_cargo_from_json(cargo_json)
+	load_currencies_from_json(currencies_json)
+	load_job_positions_from_json(job_positions_json)
+	load_countries_from_json(countries_json)
+	load_locations_from_json(locations_json)
+	load_parties_from_json(parties_json)
+	load_people_from_json(people_json)
 	print("--- finished loading from JSONs ---\n")
 
 
-func load_cargo_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
-	@warning_ignore("unsafe_method_access")
+func load_cargo_from_json(file_to_load: String) -> void:
 	GlobalDebugger.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
-		@warning_ignore("unsafe_cast")
-		var new_resource: Cargo = Cargo.new().with_data(
+		Cargo.new().with_data(
 			GlobalRefs.get_cargo_id(),
 			str(item.description) if item.description else "",
 			str(item.hs_code) if item.hs_code else "",
@@ -44,47 +41,39 @@ func load_cargo_from_json(file_to_load: String, array_to_fill: Array, dict_to_fi
 			item.unit_weight as float if item.unit_weight else 0.0
 			)
 	
-	@warning_ignore("unsafe_method_access")
-	print("loaded %s cargo | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
+	print("loaded %s cargo | in %s ms" % [GlobalRefs.cargos.size(), GlobalDebugger.get_elapsed_time()])
 
 
-func load_currencies_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary, code_dict_to_fill: Dictionary) -> void:
-	@warning_ignore("unsafe_method_access")
+func load_currencies_from_json(file_to_load: String) -> void:
 	GlobalDebugger.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
-		@warning_ignore("unsafe_cast")
-		var new_resource: Currency = Currency.new().with_data(
+		Currency.new().with_data(
 			GlobalRefs.get_currency_id(),
 			str(item.code) if item.code else "",
 			str(item.name) if item.name else "",
 			item.exchange_rate_to_usd as float if item.exchange_rate_to_usd else 0.0
 			)
 	
-	@warning_ignore("unsafe_method_access")
-	print("loaded %s currencies | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
+	print("loaded %s currencies | in %s ms" % [GlobalRefs.currencies.size(), GlobalDebugger.get_elapsed_time()])
 
 
-func load_job_positions_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
-	@warning_ignore("unsafe_method_access")
+func load_job_positions_from_json(file_to_load: String) -> void:
 	GlobalDebugger.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
-		@warning_ignore("unsafe_cast")
-		var new_resource: JobPosition = JobPosition.new().with_data(
+		JobPosition.new().with_data(
 			GlobalRefs.get_job_position_id(),
 			str(item.title) if item.title else "",
 			item.salary as float if item.salary else 0.0
 			)
 	
-	@warning_ignore("unsafe_method_access")
-	print("loaded %s job positions | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
+	print("loaded %s job positions | in %s ms" % [GlobalRefs.job_positions.size(), GlobalDebugger.get_elapsed_time()])
 
 
-func load_countries_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary, code_dict_to_fill: Dictionary) -> void:
-	@warning_ignore("unsafe_method_access")
+func load_countries_from_json(file_to_load: String) -> void:
 	GlobalDebugger.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
@@ -92,7 +81,7 @@ func load_countries_from_json(file_to_load: String, array_to_fill: Array, dict_t
 	var coordinate_x: int = 0
 	var coordinate_y: int = 0
 	for item: Dictionary in loaded_array:
-		var new_resource: Country = Country.new().with_data(
+		Country.new().with_data(
 			GlobalRefs.get_country_id(),
 			str(item.code) if item.code else "",
 			str(item.name) if item.name else "",
@@ -104,29 +93,25 @@ func load_countries_from_json(file_to_load: String, array_to_fill: Array, dict_t
 			coordinate_x = 0
 			coordinate_y += 1
 	
-	@warning_ignore("unsafe_method_access")
-	print("loaded %s countries | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
+	print("loaded %s countries | in %s ms" % [GlobalRefs.countries.size(), GlobalDebugger.get_elapsed_time()])
 
 
-func load_locations_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary, code_dict_to_fill: Dictionary) -> void:
-	@warning_ignore("unsafe_method_access")
+func load_locations_from_json(file_to_load: String) -> void:
 	GlobalDebugger.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
-		var new_resource: Location = Location.new().with_data(
+		Location.new().with_data(
 			GlobalRefs.get_location_id(),
 			(str(item.country) + str(item.location)) if item.country else "",
 			str(item.name_wo_diacritics) if item.name_wo_diacritics else "",
 			GlobalRefs.countries_code_dict[item.country] if item.country else null
 			)
 	
-	@warning_ignore("unsafe_method_access")
-	print("loaded %s locations | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
+	print("loaded %s locations | in %s ms" % [GlobalRefs.locations.size(), GlobalDebugger.get_elapsed_time()])
 
 
-func load_parties_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
-	@warning_ignore("unsafe_method_access")
+func load_parties_from_json(file_to_load: String) -> void:
 	GlobalDebugger.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
@@ -155,8 +140,7 @@ func load_parties_from_json(file_to_load: String, array_to_fill: Array, dict_to_
 			new_resource.reliability_factor = randf_range(0.9, 1.0)
 			new_resource.cost_factor = randf_range(0.8, 1.0)
 	
-	@warning_ignore("unsafe_method_access")
-	print("loaded %s parties | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
+	print("loaded %s parties | in %s ms" % [GlobalRefs.parties.size(), GlobalDebugger.get_elapsed_time()])
 	print("   loaded " + str(GlobalRefs.carriers.size()) + " carriers")
 	print("   loaded " + str(GlobalRefs.customers.size()) + " customers")
 	print("   loaded " + str(GlobalRefs.customs_agencies.size()) + " customs agencies")
@@ -165,13 +149,11 @@ func load_parties_from_json(file_to_load: String, array_to_fill: Array, dict_to_
 	print("   loaded " + str(GlobalRefs.truckers.size()) + " truckers")
 
 
-func load_people_from_json(file_to_load: String, array_to_fill: Array, dict_to_fill: Dictionary) -> void:
-	@warning_ignore("unsafe_method_access")
+func load_people_from_json(file_to_load: String) -> void:
 	GlobalDebugger.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
-		@warning_ignore("unsafe_cast")
 		var new_resource: Person = Person.new().with_data(
 			GlobalRefs.get_person_id(),
 			str(item.first_name) if item.first_name else "",
@@ -186,8 +168,7 @@ func load_people_from_json(file_to_load: String, array_to_fill: Array, dict_to_f
 			)
 		new_resource.employer.employees.append(new_resource)
 	
-	@warning_ignore("unsafe_method_access")
-	print("loaded %s people | in %s ms" % [array_to_fill.size(), GlobalDebugger.get_elapsed_time()])
+	print("loaded %s people | in %s ms" % [GlobalRefs.people.size(), GlobalDebugger.get_elapsed_time()])
 
 
 func load_json_file(file_to_load: String) -> Array:

@@ -55,7 +55,6 @@ func _ready() -> void:
 	
 	assign_controls()
 	
-	@warning_ignore("unsafe_method_access")
 	GlobalDebugger.assert_all_exported_properties(self)
 	
 	connect_signals()

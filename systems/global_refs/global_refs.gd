@@ -210,25 +210,25 @@ func to_dict() -> Dictionary:
 
 func from_dict(data: Dictionary) -> void:
 	for data_item: Dictionary in data["cargos"]:
-		var item: Cargo = Cargo.from_dict(data_item)
+		Cargo.from_dict(data_item)
 	for data_item: Dictionary in data["currencies"]:
-		var item: Currency = Currency.from_dict(data_item)
+		Currency.from_dict(data_item)
 	for data_item: Dictionary in data["job_positions"]:
-		var item: JobPosition = JobPosition.from_dict(data_item)
+		JobPosition.from_dict(data_item)
 	for data_item: Dictionary in data["countries"]:
-		var item: Country = Country.from_dict(data_item)
+		Country.from_dict(data_item)
 	for data_item: Dictionary in data["locations"]:
-		var item: Location = Location.from_dict(data_item)
+		Location.from_dict(data_item)
 	for data_item: Dictionary in data["parties"]:
-		var item: Party = Party.from_dict(data_item)
+		Party.from_dict(data_item)
 	for data_item: Dictionary in data["people"]:
-		var item: Person = Person.from_dict(data_item)
+		Person.from_dict(data_item)
 	for data_item: Dictionary in data["shipments"]:
-		var item: Shipment = Shipment.from_dict(data_item)
+		Shipment.from_dict(data_item)
 	for data_item: Dictionary in data["requests_for_quotation"]:
-		var item: RequestForQuotation = RequestForQuotation.from_dict(data_item)
+		RequestForQuotation.from_dict(data_item)
 	for data_item: Dictionary in data["quotations"]:
-		var item: Quotation = Quotation.from_dict(data_item)
+		Quotation.from_dict(data_item)
 	for data_item: Dictionary in data["humans"]:
 		humans_dict[data_item["id"] as int].from_dict(data_item)
 	

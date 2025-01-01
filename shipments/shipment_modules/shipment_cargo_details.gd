@@ -35,7 +35,6 @@ func with_data(cargo: Cargo, dimension_sets: Array[DimensionSet]) -> ShipmentCar
 
 
 func with_data_random() -> ShipmentCargoDetails:
-	@warning_ignore("unsafe_property_access", "unsafe_method_access")
 	var random_cargo: Cargo = GlobalRefs.cargos.pick_random()
 	var random_dimension_sets: Array[DimensionSet]
 	

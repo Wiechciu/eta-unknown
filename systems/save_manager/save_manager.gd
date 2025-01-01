@@ -9,6 +9,8 @@ class SaveFileMetadata:
 	var save_file_name: String
 	var game_version: String
 	var timestamp: String
+
+	@warning_ignore("shadowed_variable")
 	func with_data(save_file_name: String, game_version: String, timestamp: String) -> SaveFileMetadata:
 		self.save_file_name = save_file_name
 		self.game_version = game_version
