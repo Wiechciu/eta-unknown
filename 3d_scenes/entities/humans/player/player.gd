@@ -3,11 +3,11 @@ extends Human
 
 
 @export var interactable_finder: InteractableFinder
-@export var _head: Node3D
-@export var _camera: Camera3D
-@export var _can_move: bool:
+@export var head: Node3D
+@export var camera: Camera3D
+@export var can_move: bool:
 	get:
-		return _camera.current and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and not is_immobilized
+		return camera.current and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and not is_immobilized
 
 var movement_base_speed: float = 150.0
 var sprint_multiplier: float = 3.0
@@ -48,15 +48,15 @@ func _unhandled_input(event: InputEvent) -> void:
 func initial_setup() -> void:
 	movement_actual_speed = movement_base_speed
 	
-	head_resting_position = _head.position
+	head_resting_position = head.position
 	head_bobbing_tween = create_tween().set_loops()
-	head_bobbing_tween.tween_property(_head, "position", head_resting_position + head_max_offset, head_bobbing_loop_duration / 2)
-	head_bobbing_tween.tween_property(_head, "position", head_resting_position, head_bobbing_loop_duration / 2)
+	head_bobbing_tween.tween_property(head, "position", head_resting_position + head_max_offset, head_bobbing_loop_duration / 2)
+	head_bobbing_tween.tween_property(head, "position", head_resting_position, head_bobbing_loop_duration / 2)
 	head_bobbing_tween.stop()
 
 
 func handle_movement(delta: float) -> void:
-	if not _can_move:
+	if not can_move:
 		return
 	
 	velocity.x = 0
@@ -73,7 +73,7 @@ func handle_movement(delta: float) -> void:
 	elif head_bobbing_tween.is_running() and (direction_local == Vector3.ZERO or not is_on_floor()):
 		head_bobbing_tween.stop()
 		var tween: Tween = create_tween()
-		tween.tween_property(_head, "position", head_resting_position, 0.1)
+		tween.tween_property(head, "position", head_resting_position, 0.1)
 
 
 func handle_sprint(event: InputEvent) -> void:
@@ -87,18 +87,18 @@ func handle_sprint(event: InputEvent) -> void:
 
 
 func handle_rotation(event: InputEvent) -> void:
-	if not _can_move:
+	if not can_move:
 		return
 	
 	if event is InputEventMouseMotion:
 		var mouse_motion_event: InputEventMouseMotion = event as InputEventMouseMotion
 		rotation.y -= mouse_motion_event.relative.x * rotation_speed
-		_head.rotation.x -= mouse_motion_event.relative.y * rotation_speed
-		_head.rotation.x = clampf(_head.rotation.x, PI/-2, PI/2)
+		head.rotation.x -= mouse_motion_event.relative.y * rotation_speed
+		head.rotation.x = clampf(head.rotation.x, PI/-2, PI/2)
 
 
 func handle_jump(event: InputEvent) -> void:
-	if not _can_move or not is_on_floor():
+	if not can_move or not is_on_floor():
 		return
 	
 	if event.is_action_pressed("jump"):

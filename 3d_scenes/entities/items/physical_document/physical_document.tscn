@@ -32,6 +32,7 @@ mesh = SubResource("QuadMesh_3rrdp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_1ffdw")
+debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="Interactable" parent="." instance=ExtResource("3_eul1g")]
 
@@ -39,3 +40,4 @@ shape = SubResource("ConvexPolygonShape3D_1ffdw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GroupArea"]
 shape = SubResource("SphereShape3D_eul1g")
+debug_color = Color(0, 0.6, 0.7, 0.42)

@@ -23,7 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://dbh2di38sear8" path="res://3d_scenes/entities/trees/tree-large.glb" id="23_wl1sy"]
 [ext_resource type="PackedScene" uid="uid://j0s65b3tcmmh" path="res://3d_scenes/entities/trees/tree.glb" id="24_48y6e"]
 [ext_resource type="PackedScene" uid="uid://3ra1txvnlbm8" path="res://3d_scenes/entities/lake/lake.tscn" id="25_48y6e"]
-[ext_resource type="PackedScene" uid="uid://1a37344f8vm7" path="res://3d_scenes/entities/items/physical_cargo/crate.tscn" id="26_hjyx5"]
+[ext_resource type="PackedScene" uid="uid://1a37344f8vm7" path="res://3d_scenes/entities/items/physical_cargo/physical_cargo.tscn" id="26_hjyx5"]
 [ext_resource type="PackedScene" uid="uid://da0yiss61kemr" path="res://3d_scenes/entities/humans/employee/employee.tscn" id="26_sd7sv"]
 [ext_resource type="PackedScene" uid="uid://co5med20utehv" path="res://3d_scenes/entities/warehouse/warehouse.tscn" id="27_hjyx5"]
 [ext_resource type="PackedScene" uid="uid://ciib54nns85wi" path="res://3d_scenes/entities/room/wall_door.tscn" id="27_s2j11"]

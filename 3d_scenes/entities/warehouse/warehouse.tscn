@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b5k2ppl81po8k" path="res://3d_scenes/entities/warehouse/ladder.tscn" id="7_ms4l1"]
 [ext_resource type="PackedScene" uid="uid://d2d8fa2t45f24" path="res://3d_scenes/entities/warehouse/ladder_long.tscn" id="8_fnnr7"]
 [ext_resource type="PackedScene" uid="uid://bwig5i5noy212" path="res://3d_scenes/entities/warehouse/hanging_lamp.tscn" id="9_n14sm"]
-[ext_resource type="PackedScene" uid="uid://1a37344f8vm7" path="res://3d_scenes/entities/items/physical_cargo/crate.tscn" id="10_2te0m"]
+[ext_resource type="PackedScene" uid="uid://1a37344f8vm7" path="res://3d_scenes/entities/items/physical_cargo/physical_cargo.tscn" id="10_2te0m"]
 [ext_resource type="PackedScene" uid="uid://cu3atd7fwriun" path="res://3d_scenes/entities/warehouse/light_switch.tscn" id="10_chs6e"]
 [ext_resource type="PackedScene" uid="uid://rlghog833ws5" path="res://3d_scenes/entities/items/pallet/Pallet.tscn" id="11_chs6e"]
 

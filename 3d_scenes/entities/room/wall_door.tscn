@@ -38,6 +38,7 @@ material = SubResource("StandardMaterial3D_q1dpq")
 
 [node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConcavePolygonShape3D_cke5d")
+debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_7wyk3")

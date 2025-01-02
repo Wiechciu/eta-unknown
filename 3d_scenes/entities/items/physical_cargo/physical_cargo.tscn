@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://1a37344f8vm7"]
+[gd_scene load_steps=6 format=3 uid="uid://1a37344f8vm7"]
 
 [ext_resource type="Script" uid="uid://cw21hfyvxlxwl" path="res://3d_scenes/entities/items/physical_cargo/physical_cargo.gd" id="1_km5b5"]
+[ext_resource type="PackedScene" uid="uid://beffqttiv36q7" path="res://3d_scenes/entities/components/interactable.tscn" id="2_7728g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h22h4"]
 albedo_color = Color(0.777933, 0.39398, 3.85046e-07, 1)
@@ -10,8 +11,9 @@ material = SubResource("StandardMaterial3D_h22h4")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8d3nm"]
 
-[node name="Crate" type="StaticBody3D"]
+[node name="Crate" type="RigidBody3D" node_paths=PackedStringArray("collision_shape")]
 script = ExtResource("1_km5b5")
+collision_shape = NodePath("CollisionShape3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -20,3 +22,7 @@ mesh = SubResource("BoxMesh_af2um")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_8d3nm")
+debug_color = Color(0, 0.6, 0.7, 0.42)
+
+[node name="Interactable" parent="." instance=ExtResource("2_7728g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12056, 0)

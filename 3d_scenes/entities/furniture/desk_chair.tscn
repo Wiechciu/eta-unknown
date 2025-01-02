@@ -117,7 +117,9 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_6y614")
+debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.502425, 0.57, -0.48)
 shape = SubResource("ConvexPolygonShape3D_q47fj")
+debug_color = Color(0, 0.6, 0.7, 0.42)

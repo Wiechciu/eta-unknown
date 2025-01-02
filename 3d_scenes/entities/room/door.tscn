@@ -18,6 +18,7 @@ transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, -0.54)
 shape = SubResource("ConvexPolygonShape3D_nhgje")
+debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="Interactable" parent="." instance=ExtResource("3_ftavd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0592, 0)

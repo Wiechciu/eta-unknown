@@ -1,10 +1,11 @@
+class_name GlobalDebugger
 extends Node
 
 
-var start: int
+static var start: int
 
 
-func assert_all_exported_properties(node: Node) -> void:
+static func assert_all_exported_properties(node: Node) -> void:
 	var script: Script = node.get_script()
 	var property_list: Array[Dictionary] = script.get_script_property_list()
 	for property: Dictionary in property_list:
@@ -15,21 +16,21 @@ func assert_all_exported_properties(node: Node) -> void:
 			assert(property_value != null, error_message % [property.name, str(node.get_path())])
 
 
-func start_timer() -> void:
+static func start_timer() -> void:
 	start = Time.get_ticks_msec()
 
 
-func get_elapsed_time() -> int:
+static func get_elapsed_time() -> int:
 	var end: int = Time.get_ticks_msec()
 	return end - start
 
 
-func print_elapsed_time() -> void:
+static func print_elapsed_time() -> void:
 	print("Time elapsed: %s ms" % get_elapsed_time())
 
 
 ## Returns all children of given type.
-func get_children_of_type(parent: Node, type: Variant) -> Array:
+static func get_children_of_type(parent: Node, type: Variant) -> Array:
 	var array: Array
 	for child: Node in parent.get_children():
 		if is_instance_of(child, type):
@@ -38,7 +39,7 @@ func get_children_of_type(parent: Node, type: Variant) -> Array:
 
 
 ## Returns the first child of given type, will ignore the other children.
-func get_child_of_type(parent: Node, type: Variant) -> Node:
+static func get_child_of_type(parent: Node, type: Variant) -> Node:
 	if parent == null:
 		return null
 	for child: Node in parent.get_children():
@@ -47,7 +48,7 @@ func get_child_of_type(parent: Node, type: Variant) -> Node:
 	return null 
 
 
-func escape_characters_for_file_name(original_string: String, replace_space_with_underscore: bool = false) -> String:
+static func escape_characters_for_file_name(original_string: String, replace_space_with_underscore: bool = false) -> String:
 	var result: String = original_string
 	var unwanted_chars: Array[String] = [":", "/", "\\", "?", "*", "\"", "|", "%", "<", ">"]
 	for c: String in unwanted_chars:
