@@ -1,131 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://beffqttiv36q7"]
+[gd_scene load_steps=2 format=3 uid="uid://beffqttiv36q7"]
 
 [ext_resource type="Script" uid="uid://dfn2dqgva8n14" path="res://3d_scenes/entities/components/interactable.gd" id="1_u1lcw"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_2338e"]
-viewport_path = NodePath("SubViewport")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2338e"]
-content_margin_left = 8.0
-content_margin_top = 4.0
-content_margin_right = 8.0
-content_margin_bottom = 4.0
-bg_color = Color(0, 0.682353, 0.984314, 0.211765)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[node name="Interactable" type="Node3D" node_paths=PackedStringArray("sprite", "label", "hover_information")]
+[node name="Interactable" type="Node3D" node_paths=PackedStringArray("main_control", "label")]
 script = ExtResource("1_u1lcw")
-sprite = NodePath("Sprite3D")
-label = NodePath("SubViewport/HoverInformation/VBoxContainer/PressToInteract")
-hover_information = NodePath("SubViewport/HoverInformation")
-label_text = "PRESS_TO_INTERACT"
+main_control = NodePath("MainControl")
+label = NodePath("MainControl/PressToInteract")
 
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-visible = false
-billboard = 1
-no_depth_test = true
-text = "PRESS_TO_INTERACT"
+[node name="MainControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-pixel_size = 0.005
-billboard = 1
-double_sided = false
-no_depth_test = true
-texture = SubResource("ViewportTexture_2338e")
-
-[node name="SubViewport" type="SubViewport" parent="."]
-disable_3d = true
-transparent_bg = true
-size = Vector2i(1000, 1000)
-
-[node name="PressToInteract" type="Label" parent="SubViewport"]
+[node name="PressToInteract" type="Label" parent="MainControl"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -123.0
-offset_top = -17.5
+offset_top = -12.0
 offset_right = 123.0
-offset_bottom = 17.5
+offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 0.694118, 0.85098)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.54902)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 20
 text = "PRESS_TO_INTERACT"
 horizontal_alignment = 1
-
-[node name="HoverInformation" type="Control" parent="SubViewport"]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/HoverInformation"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -280.0
-offset_bottom = 152.0
-grow_horizontal = 0
-alignment = 1
-
-[node name="PressToInteract" type="Label" parent="SubViewport/HoverInformation/VBoxContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 4
-text = "PRESS_TO_INTERACT"
-horizontal_alignment = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="SubViewport/HoverInformation/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_2338e")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/HoverInformation/VBoxContainer/PanelContainer"]
-layout_mode = 2
-
-[node name="Name" type="Label" parent="SubViewport/HoverInformation/VBoxContainer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "Printer"
-horizontal_alignment = 1
-
-[node name="Param" type="HBoxContainer" parent="SubViewport/HoverInformation/VBoxContainer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="SubViewport/HoverInformation/VBoxContainer/PanelContainer/VBoxContainer/Param"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "Ink amount:"
-
-[node name="Value" type="Label" parent="SubViewport/HoverInformation/VBoxContainer/PanelContainer/VBoxContainer/Param"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "100/100"
-
-[node name="Param2" type="HBoxContainer" parent="SubViewport/HoverInformation/VBoxContainer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="SubViewport/HoverInformation/VBoxContainer/PanelContainer/VBoxContainer/Param2"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "Paper amount:"
-
-[node name="Value" type="Label" parent="SubViewport/HoverInformation/VBoxContainer/PanelContainer/VBoxContainer/Param2"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "200/500"
-
-[node name="SubViewportPreview" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0

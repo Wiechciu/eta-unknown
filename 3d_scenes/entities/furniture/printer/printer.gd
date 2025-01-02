@@ -58,6 +58,12 @@ var jamming_base_probability: float = 0.001
 var repairing_time: float = 3.0
 @export var jammed_audio_streams: Array[AudioStream]
 
+var is_tray_full: bool:
+	get:
+		return printer_tray.get_child_count() >= tray_capacity
+var tray_capacity: int = 100
+@export var tray_full_audio_streams: Array[AudioStream]
+
 
 func _ready() -> void:
 	GlobalDebugger.assert_all_exported_properties(self)
@@ -144,6 +150,8 @@ func try_printing_next_document() -> void:
 		return
 	if is_jammed:
 		return
+	if is_tray_full:
+		return
 	
 	print_next_document()
 
@@ -169,23 +177,31 @@ func print_next_document() -> void:
 	#printed_documents.append(physical_document)
 	
 	check_ink()
+	check_tray()
 	status = Status.IDLE
 
 
 func play_printing_sound() -> void:
 	audio_player.stream = printing_audio_streams.pick_random()
-	audio_player.pitch_scale = randf_range(0.90, 1.10)
-	audio_player.play()
+	play_sound()
 
 
 func play_out_of_ink_sound() -> void:
 	audio_player.stream = out_of_ink_audio_streams.pick_random()
-	audio_player.pitch_scale = randf_range(0.90, 1.10)
-	audio_player.play()
+	play_sound()
 
 
 func play_jammed_sound() -> void:
 	audio_player.stream = jammed_audio_streams.pick_random()
+	play_sound()
+
+
+func play_tray_full_sound() -> void:
+	audio_player.stream = tray_full_audio_streams.pick_random()
+	play_sound()
+
+
+func play_sound() -> void:
 	audio_player.pitch_scale = randf_range(0.90, 1.10)
 	audio_player.play()
 
@@ -207,6 +223,14 @@ func check_jamming() -> bool:
 	else:
 		prints_since_last_jam += 1
 	return is_jammed
+
+
+func check_tray() -> bool:
+	#is_tray_full = printer_tray.get_child_count() >= tray_capacity
+	if is_tray_full:
+		play_tray_full_sound()
+		ActionLogger.create_log("PRINTER_TRAY_FULL")
+	return is_tray_full
 
 
 func refill_ink(node: Node) -> void:

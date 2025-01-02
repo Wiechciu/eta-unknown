@@ -20,6 +20,6 @@ transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, -0.54)
 shape = SubResource("ConvexPolygonShape3D_nhgje")
 
 [node name="Interactable" parent="." instance=ExtResource("3_ftavd")]
-label_position = Vector3(0, 1.29, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0592, 0)
 
 [editable path="door"]

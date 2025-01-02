@@ -71,7 +71,7 @@ light = NodePath("OmniLight3D")
 emission_bodies = [NodePath("Top"), NodePath("Top2"), NodePath("Bulb")]
 
 [node name="Interactable" parent="." instance=ExtResource("2_7p2bv")]
-label_position = Vector3(0, 2.11, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58727, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)

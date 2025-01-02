@@ -1,4 +1,3 @@
-@tool
 class_name Interactable
 extends Node3D
 
@@ -6,28 +5,25 @@ extends Node3D
 signal interacted(node: Node)
 
 
-@export var sprite: Sprite3D
+@export var main_control: Control
 @export var label: Label
-@export var hover_information: Control
-
-
-@export var label_text: String:
-	set(value):
-		label_text = value
-		if label != null:
-			label.text = value
-@export var label_position: Vector3:
-	set(value):
-		label_position = value
-		if sprite != null:
-			sprite.position = value
 
 
 func _ready() -> void:
-	if not Engine.is_editor_hint():
-		GlobalDebugger.assert_all_exported_properties(self)
-		sprite.modulate.a = 0
-		#hover_information.modulate.a = 0
+	GlobalDebugger.assert_all_exported_properties(self)
+	main_control.modulate.a = 0
+
+
+func _process(delta: float) -> void:
+	#TODO: Optimize to not run every frame
+	if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
+		main_control.hide()
+	else:
+		main_control.show()
+		var margin: float = 5.0
+		main_control.position = get_viewport().get_camera_3d().unproject_position(self.global_position)
+		main_control.position.y = max(main_control.position.y, label.size.y / 2 + margin)
+		main_control.position.y = min(main_control.position.y, get_viewport().size.y - label.size.y / 2 - margin)
 
 
 func _notification(what: int) -> void:
@@ -41,7 +37,7 @@ func update_localization() -> void:
 	if not is_node_ready():
 		await ready
 	var event_text: String = "[%s]" % (InputMap.action_get_events("interact")[0] as InputEventKey).as_text_physical_keycode()
-	label.text = tr(label_text).format({"action":event_text})
+	label.text = tr("PRESS_TO_INTERACT").format({"action": event_text})
 
 
 func interact(node: Node) -> void:
@@ -50,17 +46,9 @@ func interact(node: Node) -> void:
 
 func on_hover_start() -> void:
 	var tween: Tween = create_tween()
-	tween.parallel().tween_method(func(alpha: float) -> void: sprite.modulate.a = alpha, 0.0, 1.0, 0.5)
-	#tween.parallel().tween_method(func(alpha: float) -> void: hover_information.modulate.a = alpha, 0.0, 1.0, 0.5)
-	
-	#var parent: Node3D = get_parent_node_3d()
-	#tween.parallel().tween_property(parent, "scale", Vector3.ONE * 1.1, 0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
+	tween.parallel().tween_method(func(alpha: float) -> void: main_control.modulate.a = alpha, 0.0, 1.0, 0.5)
 
 
 func on_hover_end() -> void:
 	var tween: Tween = create_tween()
-	tween.parallel().tween_method(func(alpha: float) -> void: sprite.modulate.a = alpha, 1.0, 0.0, 0.5)
-	#tween.parallel().tween_method(func(alpha: float) -> void: hover_information.modulate.a = alpha, 1.0, 0.0, 0.5)
-	
-	#var parent: Node3D = get_parent_node_3d()
-	#tween.parallel().tween_property(parent, "scale", Vector3.ONE * 1.0, 0.1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+	tween.parallel().tween_method(func(alpha: float) -> void: main_control.modulate.a = alpha, 1.0, 0.0, 0.5)

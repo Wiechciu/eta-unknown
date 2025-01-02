@@ -47,6 +47,7 @@ metadata/__load_path__ = "res://3d_scenes/entities/document/physical_document.ts
 
 [node name="VoxelGI" type="VoxelGI" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.77881, 0, 13.1568)
+visible = false
 size = Vector3(25.5576, 20, 46.3136)
 data = ExtResource("22_7ueml")
 
@@ -299,6 +300,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
 [node name="Ceiling" parent="Room" instance=ExtResource("12_dlj66")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
+[node name="WallDoor" parent="Room" instance=ExtResource("27_s2j11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
 [node name="Roof" type="MeshInstance3D" parent="Room"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.18388, 0)
 mesh = SubResource("PlaneMesh_pyshm")
@@ -316,9 +320,6 @@ visible = false
 light_energy = 16.0
 spot_angle = 120.0
 spot_angle_attenuation = 10.0
-
-[node name="WallDoor" parent="Room" instance=ExtResource("27_s2j11")]
-transform = Transform3D(0.999999, -0.00123925, -0.00107792, 0.00124206, 0.999996, 0.00261576, 0.00107468, -0.00261709, 0.999996, 0, 0, 5)
 
 [node name="Furniture" type="Node3D" parent="."]
 

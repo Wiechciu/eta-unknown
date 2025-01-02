@@ -116,17 +116,29 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.42216, 0, 4.29879)
 [node name="Crate4" parent="." instance=ExtResource("10_2te0m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.15666, 0, 4.24198)
 
+[node name="Crate5" parent="." instance=ExtResource("10_2te0m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.30068, 0.225, -2.71788)
+
+[node name="Crate6" parent="." instance=ExtResource("10_2te0m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.30068, 0.225, -4.31433)
+
+[node name="Crate7" parent="." instance=ExtResource("10_2te0m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.33909, 1.725, -6.67834)
+
+[node name="Crate8" parent="." instance=ExtResource("10_2te0m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.34067, 3.225, -6.85042)
+
 [node name="Pallet" parent="." instance=ExtResource("11_chs6e")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.15508, 0.127349, -1.21307)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.30468, 0.000201475, -1.30441)
 
 [node name="Pallet2" parent="." instance=ExtResource("11_chs6e")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.15338, 0.127349, -0.968266)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.24667, 0.000201713, -1.15901)
 
 [node name="Pallet3" parent="." instance=ExtResource("11_chs6e")]
-transform = Transform3D(0.871094, 0, -0.491117, 0, 1, 0, 0.491117, 0, 0.871094, 5.38298, 0.127349, -2.3696)
+transform = Transform3D(0.871094, 0, -0.491117, 0, 1, 0, 0.491117, 0, 0.871094, 5.22711, 0.000201713, -2.38346)
 
 [node name="Pallet4" parent="." instance=ExtResource("11_chs6e")]
-transform = Transform3D(0.990622, 0, -0.136632, 0, 1, 0, 0.136632, 0, 0.990622, 4.78816, 0.127349, -0.757862)
+transform = Transform3D(0.990622, 0, -0.136632, 0, 1, 0, 0.136632, 0, 0.990622, 4.66589, 0.000201594, -0.848621)
 
 [node name="Pallet5" parent="." instance=ExtResource("11_chs6e")]
-transform = Transform3D(0.5889, 0, -0.808206, 0, 1, 0, 0.808206, 0, 0.5889, 5.57755, 0.27171, -0.962487)
+transform = Transform3D(0.5889, 0, -0.808206, 0, 1, 0, 0.808206, 0, 0.5889, 6.57504, 0.144202, -1.09991)

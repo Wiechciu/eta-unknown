@@ -63,7 +63,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.659882, -0.0351563)
 shape = SubResource("BoxShape3D_30c2g")
 
 [node name="Interactable" parent="." instance=ExtResource("3_30c2g")]
-label_position = Vector3(0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.74076, 0.812)

@@ -184,7 +184,6 @@ animation_player = NodePath("CharacterLargeMale/AnimationPlayer")
 metadata/_custom_type_script = ExtResource("1_lcf01")
 
 [node name="Interactable" parent="." instance=ExtResource("3_cpfqp")]
-label_position = Vector3(0, 2.245, 0)
 
 [node name="CharacterLargeMale" type="Node3D" parent="."]
 transform = Transform3D(-0.7, 0, -6.11959e-08, 0, 0.7, 0, 6.11959e-08, 0, -0.7, 0, 0.0900511, 0)
@@ -614,4 +613,3 @@ autoplay = "idle/Root|Idle"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_prvgd")
-debug_color = Color(0, 0.6, 0.7, 0.42)

@@ -3,6 +3,10 @@ extends StaticBody3D
 
 @export var light: Light3D
 
+@export_category("Assigned internally")
+@export var mesh_on: MeshInstance3D
+@export var mesh_off: MeshInstance3D
+
 
 func _ready() -> void:
 	GlobalDebugger.assert_all_exported_properties(self)
@@ -22,5 +26,9 @@ func interact() -> void:
 func toggle() -> void:
 	if light.light_energy == 0.0:
 		light.light_energy = 1.0
+		mesh_on.show()
+		mesh_off.hide()
 	else:
 		light.light_energy = 0.0
+		mesh_on.hide()
+		mesh_off.show()
