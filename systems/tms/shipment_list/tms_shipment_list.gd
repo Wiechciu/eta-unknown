@@ -8,7 +8,7 @@ enum SortType {
 }
 
 
-@export var tms: Tms
+var tms: Tms
 @export var container: Control
 @export var header: Label
 @export var toggle_completed_button: Button
@@ -22,6 +22,8 @@ var items_to_display: Array[Shipment]
 
 func _ready() -> void:
 	UtilityTools.assert_all_exported_properties(self)
+	tms = UtilityTools.get_parent_of_type(self, Tms) as Tms
+
 	clear_container()
 	#refresh_list_items()
 

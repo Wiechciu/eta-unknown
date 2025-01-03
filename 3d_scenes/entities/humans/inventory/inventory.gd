@@ -2,6 +2,7 @@ class_name Inventory
 extends Node
 
 
+var player: Player
 var items: Array[Item]
 
 var is_open: bool:
@@ -12,9 +13,14 @@ var is_open: bool:
 @export var inventory_item_scene: PackedScene
 var inventory_items: Array[InventoryItem]
 
+var held_cargo: PhysicalCargo
+var last_held_cargo: PhysicalCargo
+var throw_force: float = 5.0
+
 
 func _ready() -> void:
 	UtilityTools.assert_all_exported_properties(self)
+	player = UtilityTools.get_parent_of_type(self, Player)
 	clear_container()
 	populate_container()
 	close()
@@ -102,3 +108,23 @@ func populate_container() -> void:
 			var new_inventory_item: InventoryItem = (inventory_item_scene.instantiate() as InventoryItem).with_data(1, item.item_name)
 			item_container.add_child(new_inventory_item)
 			inventory_items.append(new_inventory_item)
+
+
+func pick_up_cargo(cargo: PhysicalCargo) -> void:
+	held_cargo = cargo
+	last_held_cargo = cargo
+	held_cargo.reparent(player.head)
+	held_cargo.freeze = true
+	held_cargo.is_picked_up = true
+
+
+func drop_down_cargo() -> void:
+	held_cargo.reparent(get_tree().current_scene)
+	held_cargo.freeze = false
+	held_cargo.is_picked_up = false
+	held_cargo = null
+
+
+func throw_cargo() -> void:
+	drop_down_cargo()
+	last_held_cargo.apply_impulse(player.head.global_transform.basis * Vector3.FORWARD * throw_force)

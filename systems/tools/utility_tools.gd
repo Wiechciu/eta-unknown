@@ -48,6 +48,18 @@ static func get_child_of_type(parent: Node, type: Variant) -> Node:
 	return null 
 
 
+## Returns the first node's parent of given type, will be checked recursively until the given type parent is found or return null otherwise.
+static func get_parent_of_type(source_node: Node, type: Variant) -> Node:
+	if source_node == null:
+		return null
+	var parent: Node = source_node.get_parent()
+	while parent != null:
+		if is_instance_of(parent, type):
+			return parent
+		parent = parent.get_parent()
+	return null 
+
+
 static func escape_characters_for_file_name(original_string: String, replace_space_with_underscore: bool = false) -> String:
 	var result: String = original_string
 	var unwanted_chars: Array[String] = [":", "/", "\\", "?", "*", "\"", "|", "%", "<", ">"]

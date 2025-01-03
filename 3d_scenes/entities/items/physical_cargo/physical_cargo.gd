@@ -19,7 +19,7 @@ func register_interactable() -> void:
 
 func interact(node: Node) -> void:
 	if is_picked_up:
-		drop_down()
+		drop_down(node)
 	else:
 		pick_up(node)
 
@@ -27,14 +27,10 @@ func interact(node: Node) -> void:
 func pick_up(node: Node) -> void:
 	if node is Player:
 		var player: Player = node as Player
-		reparent(player.head)
-		#collision_shape.disabled = true
-		freeze = true
-		is_picked_up = true
+		player.inventory.pick_up_cargo(self)
 
 
-func drop_down() -> void:
-	reparent(get_tree().current_scene)
-	freeze = false
-	#collision_shape.disabled = false
-	is_picked_up = false
+func drop_down(node: Node) -> void:
+	if node is Player:
+		var player: Player = node as Player
+		player.inventory.drop_down_cargo()

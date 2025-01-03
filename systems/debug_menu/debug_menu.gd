@@ -119,13 +119,13 @@ func _on_next_month_button_pressed() -> void:
 	status.text = "Next month started."
 
 
-func _on_saving_test_case_button_pressed() -> void:
-	SaveManager.start_new_game()
-	await get_tree().process_frame
-	GlobalTimer.start_next_day()
-	await get_tree().process_frame
-	_on_accept_10_new_shipments_button_pressed()
-	await get_tree().process_frame
-	SaveManager.save_game()
-	await get_tree().process_frame
-	SaveManager.load_game()
+#func _on_saving_test_case_button_pressed() -> void:
+	#SaveManager.start_new_game()
+	#await get_tree().process_frame
+	#GlobalTimer.start_next_day()
+	#await get_tree().process_frame
+	#_on_accept_10_new_shipments_button_pressed()
+	#await get_tree().process_frame
+	#SaveManager.save_game()
+	#await get_tree().process_frame
+	#SaveManager.load_game()

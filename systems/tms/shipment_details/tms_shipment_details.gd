@@ -4,7 +4,7 @@ extends Control
 
 var shipment: Shipment
 
-@export var _tms: Tms
+var tms: Tms
 
 @export_category("Assigned internally")
 @export var _tab_container: TabContainer
@@ -43,6 +43,7 @@ var shipment: Shipment
 
 func _ready() -> void:
 	UtilityTools.assert_all_exported_properties(self)
+	tms = UtilityTools.get_parent_of_type(self, Tms) as Tms
 	
 	for status: String in Shipment.Status.keys():
 		_shipment_status.add_item("SHIPMENT_STATUS_" + status.to_upper())
@@ -96,7 +97,7 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 
 
 func _on_close_button_pressed() -> void:
-	_tms.open_shipment_list()
+	tms.open_shipment_list()
 
 
 func _on_shipment_statuses_item_selected(index: int) -> void:
