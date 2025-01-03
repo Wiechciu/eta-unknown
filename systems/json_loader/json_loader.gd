@@ -12,7 +12,7 @@ extends Node
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 
 
 func start() -> void:
@@ -28,7 +28,7 @@ func start() -> void:
 
 
 func load_cargo_from_json(file_to_load: String) -> void:
-	GlobalDebugger.start_timer()
+	UtilityTools.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
@@ -41,11 +41,11 @@ func load_cargo_from_json(file_to_load: String) -> void:
 			item.unit_weight as float if item.unit_weight else 0.0
 			)
 	
-	print("loaded %s cargo | in %s ms" % [GlobalRefs.cargos.size(), GlobalDebugger.get_elapsed_time()])
+	print("loaded %s cargo | in %s ms" % [GlobalRefs.cargos.size(), UtilityTools.get_elapsed_time()])
 
 
 func load_currencies_from_json(file_to_load: String) -> void:
-	GlobalDebugger.start_timer()
+	UtilityTools.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
@@ -56,11 +56,11 @@ func load_currencies_from_json(file_to_load: String) -> void:
 			item.exchange_rate_to_usd as float if item.exchange_rate_to_usd else 0.0
 			)
 	
-	print("loaded %s currencies | in %s ms" % [GlobalRefs.currencies.size(), GlobalDebugger.get_elapsed_time()])
+	print("loaded %s currencies | in %s ms" % [GlobalRefs.currencies.size(), UtilityTools.get_elapsed_time()])
 
 
 func load_job_positions_from_json(file_to_load: String) -> void:
-	GlobalDebugger.start_timer()
+	UtilityTools.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
@@ -70,11 +70,11 @@ func load_job_positions_from_json(file_to_load: String) -> void:
 			item.salary as float if item.salary else 0.0
 			)
 	
-	print("loaded %s job positions | in %s ms" % [GlobalRefs.job_positions.size(), GlobalDebugger.get_elapsed_time()])
+	print("loaded %s job positions | in %s ms" % [GlobalRefs.job_positions.size(), UtilityTools.get_elapsed_time()])
 
 
 func load_countries_from_json(file_to_load: String) -> void:
-	GlobalDebugger.start_timer()
+	UtilityTools.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	var coordinate_max_x: int = 15
@@ -93,11 +93,11 @@ func load_countries_from_json(file_to_load: String) -> void:
 			coordinate_x = 0
 			coordinate_y += 1
 	
-	print("loaded %s countries | in %s ms" % [GlobalRefs.countries.size(), GlobalDebugger.get_elapsed_time()])
+	print("loaded %s countries | in %s ms" % [GlobalRefs.countries.size(), UtilityTools.get_elapsed_time()])
 
 
 func load_locations_from_json(file_to_load: String) -> void:
-	GlobalDebugger.start_timer()
+	UtilityTools.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
@@ -108,11 +108,11 @@ func load_locations_from_json(file_to_load: String) -> void:
 			GlobalRefs.countries_code_dict[item.country] if item.country else null
 			)
 	
-	print("loaded %s locations | in %s ms" % [GlobalRefs.locations.size(), GlobalDebugger.get_elapsed_time()])
+	print("loaded %s locations | in %s ms" % [GlobalRefs.locations.size(), UtilityTools.get_elapsed_time()])
 
 
 func load_parties_from_json(file_to_load: String) -> void:
-	GlobalDebugger.start_timer()
+	UtilityTools.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
@@ -140,7 +140,7 @@ func load_parties_from_json(file_to_load: String) -> void:
 			new_resource.reliability_factor = randf_range(0.9, 1.0)
 			new_resource.cost_factor = randf_range(0.8, 1.0)
 	
-	print("loaded %s parties | in %s ms" % [GlobalRefs.parties.size(), GlobalDebugger.get_elapsed_time()])
+	print("loaded %s parties | in %s ms" % [GlobalRefs.parties.size(), UtilityTools.get_elapsed_time()])
 	print("   loaded " + str(GlobalRefs.carriers.size()) + " carriers")
 	print("   loaded " + str(GlobalRefs.customers.size()) + " customers")
 	print("   loaded " + str(GlobalRefs.customs_agencies.size()) + " customs agencies")
@@ -150,7 +150,7 @@ func load_parties_from_json(file_to_load: String) -> void:
 
 
 func load_people_from_json(file_to_load: String) -> void:
-	GlobalDebugger.start_timer()
+	UtilityTools.start_timer()
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
@@ -168,7 +168,7 @@ func load_people_from_json(file_to_load: String) -> void:
 			)
 		new_resource.employer.employees.append(new_resource)
 	
-	print("loaded %s people | in %s ms" % [GlobalRefs.people.size(), GlobalDebugger.get_elapsed_time()])
+	print("loaded %s people | in %s ms" % [GlobalRefs.people.size(), UtilityTools.get_elapsed_time()])
 
 
 func load_json_file(file_to_load: String) -> Array:

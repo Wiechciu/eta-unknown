@@ -24,7 +24,7 @@ func check_for_interactable() -> void:
 		interactable.on_hover_end()
 	
 	old_collider = new_collider
-	interactable = GlobalDebugger.get_child_of_type(new_collider as Node, Interactable) as Interactable
+	interactable = UtilityTools.get_child_of_type(new_collider as Node, Interactable) as Interactable
 	if interactable != null:
 		on_hover_started.emit()
 		interactable.on_hover_start()

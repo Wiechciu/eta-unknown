@@ -10,7 +10,7 @@ var is_signed: bool:
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 	register_interactable()
 
 
@@ -27,7 +27,7 @@ func sign_document(person: Person) -> void:
 
 
 func register_interactable() -> void:
-	var interactable: Interactable = GlobalDebugger.get_child_of_type(self, Interactable) as Interactable
+	var interactable: Interactable = UtilityTools.get_child_of_type(self, Interactable) as Interactable
 	if interactable != null:
 		interactable.interacted.connect(interact)
 
@@ -42,7 +42,7 @@ func pick_up_documents(node: Node) -> void:
 		if body is PhysicalDocument:
 			documents_in_group.append(body)
 	
-	var inventory: Inventory = GlobalDebugger.get_child_of_type(node, Inventory) as Inventory
+	var inventory: Inventory = UtilityTools.get_child_of_type(node, Inventory) as Inventory
 	if inventory == null:
 		print("No inventory found.")
 		return

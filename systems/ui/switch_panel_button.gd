@@ -6,7 +6,7 @@ extends Button
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 
 
 func _on_pressed() -> void:

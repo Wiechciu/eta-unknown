@@ -11,7 +11,7 @@ signal icon_clicked(app: OsAppData)
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 	for child: Node in _app_icons_container.get_children():
 		child.queue_free()
 	for child: Node in _apps_container.get_children():

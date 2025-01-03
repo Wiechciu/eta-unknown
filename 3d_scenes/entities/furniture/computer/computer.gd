@@ -25,7 +25,7 @@ var os: OperatingSystem
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 	
 	input_area.input_event.connect(_on_mouse_input_event)
 	input_area.mouse_entered.connect(_on_mouse_entered_area)
@@ -46,7 +46,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func register_interactable() -> void:
-	var interactable: Interactable = GlobalDebugger.get_child_of_type(self, Interactable) as Interactable
+	var interactable: Interactable = UtilityTools.get_child_of_type(self, Interactable) as Interactable
 	if interactable != null:
 		interactable.interacted.connect(interact.unbind(1))
 

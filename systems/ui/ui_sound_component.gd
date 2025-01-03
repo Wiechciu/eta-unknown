@@ -34,7 +34,7 @@ func _ready() -> void:
 	assign_audio_stream()
 	connect_signals()
 	
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 
 
 func assign_audio_stream() -> void:

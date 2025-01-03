@@ -12,7 +12,7 @@ signal icon_clicked(app: OsApp)
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 	_start.pressed.connect(_on_start_button_pressed)
 	for child: Node in _app_icons_container.get_children():
 		child.queue_free()

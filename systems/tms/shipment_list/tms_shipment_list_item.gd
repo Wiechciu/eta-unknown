@@ -19,7 +19,7 @@ var shipment: Shipment
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 	
 	button.pressed.connect(_on_button_pressed)
 

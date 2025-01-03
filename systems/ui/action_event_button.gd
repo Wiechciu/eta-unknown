@@ -10,7 +10,7 @@ var color_rect: ColorRect
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 	self.pressed.connect(_on_button_pressed)
 
 

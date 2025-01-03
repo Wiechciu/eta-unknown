@@ -15,7 +15,7 @@ var is_closing: bool
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 	
 	load_apps()
 	start()

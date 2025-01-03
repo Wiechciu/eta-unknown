@@ -18,7 +18,7 @@ func _init() -> void:
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 	
 	_print_button.pressed.connect(_on_print_button_pressed)
 

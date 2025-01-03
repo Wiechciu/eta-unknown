@@ -11,7 +11,7 @@ extends Node
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 
 
 func with_data(dimension_set: DimensionSet) -> DocumentDimensionSet:

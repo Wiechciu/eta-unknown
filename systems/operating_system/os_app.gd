@@ -10,7 +10,7 @@ var boot_duration: float = 0.3
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 
 
 func start() -> void:

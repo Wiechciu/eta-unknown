@@ -23,6 +23,7 @@ script = ExtResource("1_d240i")
 interactable_finder = NodePath("Head/Camera3D/InteractableFinder")
 head = NodePath("Head")
 camera = NodePath("Head/Camera3D")
+can_move = null
 
 [node name="Inventory" parent="." instance=ExtResource("2_pyeek")]
 

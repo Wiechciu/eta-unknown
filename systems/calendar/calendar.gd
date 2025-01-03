@@ -2,7 +2,7 @@ extends PanelContainer
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 	visible = false
 
 

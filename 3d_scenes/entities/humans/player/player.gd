@@ -26,7 +26,7 @@ var is_immobilized: bool = false
 func _ready() -> void:
 	super._ready()
 	
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 	
 	GameManager.player = self
 	initial_setup()

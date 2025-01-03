@@ -7,7 +7,7 @@ extends PanelContainer
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 	visibility_changed.connect(_on_visibility_changed)
 
 

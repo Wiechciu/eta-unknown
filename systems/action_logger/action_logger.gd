@@ -10,7 +10,7 @@ var fade_out_duration: float = 2.0
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 	for child: Node in message_container.get_children():
 		child.queue_free()
 	change_modulate()

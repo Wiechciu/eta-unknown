@@ -24,7 +24,7 @@ var settings_file_extension: String = ".cfg"
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 	visibility_changed.connect(_on_visibility_changed)
 	reset_settings_button.pressed.connect(load_default_settings)
 	load_settings()

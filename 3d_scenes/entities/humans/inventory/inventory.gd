@@ -14,7 +14,7 @@ var inventory_items: Array[InventoryItem]
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 	clear_container()
 	populate_container()
 	close()

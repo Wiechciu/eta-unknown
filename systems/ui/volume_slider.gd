@@ -15,7 +15,7 @@ var value: float:
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
-		GlobalDebugger.assert_all_exported_properties(self)
+		UtilityTools.assert_all_exported_properties(self)
 		
 		slider.value_changed.connect(_on_value_changed)
 

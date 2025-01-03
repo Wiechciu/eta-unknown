@@ -7,7 +7,7 @@ extends StaticBody3D
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 	GlobalTimer.new_day_started.connect(update_calendar)
 	register_interactable()
 
@@ -19,7 +19,7 @@ func update_calendar() -> void:
 
 
 func register_interactable() -> void:
-	var interactable: Interactable = GlobalDebugger.get_child_of_type(self, Interactable) as Interactable
+	var interactable: Interactable = UtilityTools.get_child_of_type(self, Interactable) as Interactable
 	if interactable != null:
 		interactable.interacted.connect(interact.unbind(1))
 

@@ -48,12 +48,12 @@ var fade_duration: float = 0.3
 var is_game_loaded: bool = false
 var new_save_name: String:
 	get: 
-		var company_name: String = GlobalDebugger.escape_characters_for_file_name(GameManager.player.person.employer.name, true)
+		var company_name: String = UtilityTools.escape_characters_for_file_name(GameManager.player.person.employer.name, true)
 		return "%s_%s" % [company_name, GlobalTimer.get_nice_datetime_filename_string_from_now()]
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 	GlobalTimer.new_day_started.connect(handle_autosave)
 	fade_screen.hide()
 

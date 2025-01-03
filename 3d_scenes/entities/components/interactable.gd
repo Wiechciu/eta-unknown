@@ -10,7 +10,7 @@ signal interacted(node: Node)
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 	main_control.modulate.a = 0
 
 

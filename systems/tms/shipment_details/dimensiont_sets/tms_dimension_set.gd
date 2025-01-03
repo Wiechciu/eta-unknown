@@ -11,7 +11,7 @@ var dimension_set: DimensionSet
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 
 
 @warning_ignore("shadowed_variable")

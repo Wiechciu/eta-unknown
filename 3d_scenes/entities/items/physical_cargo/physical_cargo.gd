@@ -12,7 +12,7 @@ func _ready() -> void:
 
 
 func register_interactable() -> void:
-	var interactable: Interactable = GlobalDebugger.get_child_of_type(self, Interactable) as Interactable
+	var interactable: Interactable = UtilityTools.get_child_of_type(self, Interactable) as Interactable
 	if interactable != null:
 		interactable.interacted.connect(interact)
 

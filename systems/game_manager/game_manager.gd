@@ -24,7 +24,7 @@ var difficulty: Difficulty
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 	GlobalTimer.new_day_started.connect(create_new_shipments)
 
 

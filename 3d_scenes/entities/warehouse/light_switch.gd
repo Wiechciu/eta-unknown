@@ -9,12 +9,12 @@ extends StaticBody3D
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 	register_interactable()
 
 
 func register_interactable() -> void:
-	var interactable: Interactable = GlobalDebugger.get_child_of_type(self, Interactable) as Interactable
+	var interactable: Interactable = UtilityTools.get_child_of_type(self, Interactable) as Interactable
 	if interactable != null:
 		interactable.interacted.connect(interact.unbind(1))
 

@@ -42,7 +42,7 @@ var shipment: Shipment
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 	
 	for status: String in Shipment.Status.keys():
 		_shipment_status.add_item("SHIPMENT_STATUS_" + status.to_upper())

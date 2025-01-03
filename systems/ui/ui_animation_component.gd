@@ -55,7 +55,7 @@ func _ready() -> void:
 	
 	assign_controls()
 	
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 	
 	connect_signals()
 	setup()

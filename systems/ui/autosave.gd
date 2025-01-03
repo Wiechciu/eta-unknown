@@ -19,7 +19,7 @@ var value_number: int:
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 	check_box.pressed.connect(_on_check_box_pressed)
 	spin_box.value_changed.connect(_on_spin_box_value_changed)
 	#line_edit.text_changed.connect(_on_line_edit_text_changed)

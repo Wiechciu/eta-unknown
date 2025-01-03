@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://dsf5ashry8vq8"]
+
+[ext_resource type="Script" uid="uid://dp8uyc0t2r3go" path="res://systems/tools/utility_tools.gd" id="1_5u70v"]
+[ext_resource type="PackedScene" uid="uid://cieydjj1npshf" path="res://systems/debug_menu/debug_menu.tscn" id="2_r7ysl"]
+[ext_resource type="PackedScene" uid="uid://b66husl1w3olw" path="res://systems/calendar/calendar.tscn" id="3_eyhfr"]
+
+[node name="DebugTools" type="Node"]
+process_mode = 3
+script = ExtResource("1_5u70v")
+
+[node name="DebugMenu" parent="." instance=ExtResource("2_r7ysl")]
+
+[node name="Calendar" parent="." instance=ExtResource("3_eyhfr")]

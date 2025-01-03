@@ -66,7 +66,7 @@ var tray_capacity: int = 100
 
 
 func _ready() -> void:
-	GlobalDebugger.assert_all_exported_properties(self)
+	UtilityTools.assert_all_exported_properties(self)
 	register_interactable()
 	ink_amount_stored = ink_amount_capacity
 	ink_progress_bar.max_value = ink_amount_capacity
@@ -104,7 +104,7 @@ func _process(delta: float) -> void:
 
 
 func register_interactable() -> void:
-	var interactable: Interactable = GlobalDebugger.get_child_of_type(self, Interactable) as Interactable
+	var interactable: Interactable = UtilityTools.get_child_of_type(self, Interactable) as Interactable
 	if interactable != null:
 		interactable.interacted.connect(interact)
 
@@ -124,7 +124,7 @@ func interact(node: Node) -> void:
 		#ActionLogger.create_log("NO_DOCUMENTS_TO_PICK_UP", true)
 		#return
 	#
-	#var inventory: Inventory = GlobalDebugger.get_child_of_type(node, Inventory)
+	#var inventory: Inventory = UtilityTools.get_child_of_type(node, Inventory)
 	#if inventory == null:
 		#print("No inventory found.")
 		#return

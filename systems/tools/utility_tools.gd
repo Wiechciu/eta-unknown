@@ -1,4 +1,4 @@
-class_name GlobalDebugger
+class_name UtilityTools
 extends Node
 
 
