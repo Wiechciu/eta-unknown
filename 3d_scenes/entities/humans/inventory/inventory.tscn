@@ -13,11 +13,12 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="Inventory" type="Node" node_paths=PackedStringArray("inventory_visual", "item_container")]
+[node name="Inventory" type="Node" node_paths=PackedStringArray("inventory_visual", "item_container", "throw_label")]
 script = ExtResource("1_epwy5")
 inventory_visual = NodePath("PanelContainer")
 item_container = NodePath("PanelContainer/VBoxContainer/ItemContainer")
 inventory_item_scene = ExtResource("2_8arrg")
+throw_label = NodePath("PressToThrow")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 offset_left = 20.0
@@ -41,3 +42,22 @@ layout_mode = 2
 
 [node name="InventoryItem" parent="PanelContainer/VBoxContainer/ItemContainer" instance=ExtResource("2_8arrg")]
 layout_mode = 2
+
+[node name="PressToThrow" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -123.0
+offset_top = -28.0
+offset_right = 123.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 0.694118, 0.85098)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.54902)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 20
+text = "PRESS_TO_THROW"
+horizontal_alignment = 1
