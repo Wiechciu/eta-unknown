@@ -14,6 +14,7 @@ func _ready() -> void:
 	main_control.modulate.a = 0
 
 
+@warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
 	#TODO: Optimize to not run every frame
 	if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:

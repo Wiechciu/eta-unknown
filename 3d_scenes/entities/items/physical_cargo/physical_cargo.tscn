@@ -32,9 +32,8 @@ _surfaces = [{
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7728g"]
 
-[node name="Crate" type="RigidBody3D" node_paths=PackedStringArray("collision_shape")]
+[node name="Crate" type="RigidBody3D"]
 script = ExtResource("1_km5b5")
-collision_shape = NodePath("")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 visible = false

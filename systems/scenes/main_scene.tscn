@@ -53,7 +53,6 @@ data = ExtResource("22_7ueml")
 
 [node name="Player" parent="." instance=ExtResource("5_kooe7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.50287)
-can_move = false
 
 [node name="Employee" parent="." node_paths=PackedStringArray("target_nodes") instance=ExtResource("26_sd7sv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15824, 0, 0.172612)

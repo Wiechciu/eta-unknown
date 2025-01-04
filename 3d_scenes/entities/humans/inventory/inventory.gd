@@ -16,10 +16,16 @@ var inventory_items: Array[InventoryItem]
 var held_cargo: PhysicalCargo
 var last_held_cargo: PhysicalCargo
 var holding_position_offset: Vector3 = Vector3(0, -1.5, -1.5) ##FIXME: cargo can have different sizes, so it has to be dynamic somehow
-var throw_force: float = 5.0
+var throw_force: float
+var max_throw_force: float = 5.0
 var pick_up_tween: Tween
 var pick_up_tween_duration: float = 0.5
+
+@export var throw_info_container: Control
 @export var throw_label: Label
+@export var hold_progress_bar: ProgressBar
+var hold_tween: Tween
+var hold_tween_duration: float = 1.0
 
 
 func _ready() -> void:
@@ -28,7 +34,8 @@ func _ready() -> void:
 	clear_container()
 	populate_container()
 	close()
-	throw_label.modulate.a = 0.0
+	throw_info_container.modulate.a = 0.0
+	hold_progress_bar.max_value = max_throw_force
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -39,7 +46,18 @@ func _unhandled_input(event: InputEvent) -> void:
 			open()
 	
 	if held_cargo != null and event.is_action_pressed("throw"):
+		hold_tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+		hold_tween.tween_method(
+			func(amount: float) -> void:
+				throw_force = amount
+				hold_progress_bar.value = amount,
+			0.0, max_throw_force, hold_tween_duration)
+	
+	if held_cargo != null and event.is_action_released("throw"):
 		throw_cargo()
+		if hold_tween:
+			hold_tween.kill()
+		hold_progress_bar.value = 0.0
 
 
 func _notification(what: int) -> void:
@@ -53,7 +71,7 @@ func update_localization() -> void:
 	if not is_node_ready():
 		await ready
 	var event_text: String = "[%s]" % (InputMap.action_get_events("throw")[0] as InputEventKey).as_text_physical_keycode()
-	throw_label.text = tr("PRESS_TO_THROW").format({"action": event_text})
+	throw_label.text = tr("HOLD_TO_THROW").format({"action": event_text})
 
 
 func add_item(item: Item) -> void:
@@ -100,9 +118,6 @@ func remove_items(items: Array[Item]) -> void:
 func open() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	inventory_visual.show()
-	#clear_container()
-	#await get_tree().process_frame
-	#populate_container()
 
 
 func close() -> void:
@@ -145,25 +160,25 @@ func pick_up_cargo(cargo: PhysicalCargo) -> void:
 	pick_up_tween = create_tween().set_parallel().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 	pick_up_tween.tween_property(held_cargo, "position", holding_position_offset, pick_up_tween_duration)
 	pick_up_tween.tween_property(held_cargo, "rotation", Vector3.ZERO, pick_up_tween_duration)
-	pick_up_tween.tween_method(func(alpha: float) -> void: throw_label.modulate.a = alpha, 0.0, 1.0, pick_up_tween_duration)
+	pick_up_tween.tween_method(func(alpha: float) -> void: throw_info_container.modulate.a = alpha, 0.0, 1.0, pick_up_tween_duration)
 
 
 func drop_down_cargo() -> void:
 	if held_cargo == null:
 		return
+	if pick_up_tween != null and pick_up_tween.is_valid():
+		pick_up_tween.kill()
 	held_cargo.reparent(get_tree().current_scene)
 	(UtilityTools.get_child_of_type(held_cargo, CollisionShape3D) as CollisionShape3D).disabled = false
 	held_cargo.freeze = false
 	held_cargo.is_picked_up = false
 	held_cargo = null
-	throw_label.modulate.a = 0.0
+	throw_info_container.modulate.a = 0.0
 
 
 func throw_cargo() -> void:
 	if held_cargo == null:
 		return
-	if pick_up_tween != null and pick_up_tween.is_valid():
-		pick_up_tween.kill()
 	drop_down_cargo()
 	var direction: Vector3 = player.head.global_transform.basis * (Vector3.FORWARD + Vector3.UP)
 	last_held_cargo.apply_impulse(direction * throw_force)

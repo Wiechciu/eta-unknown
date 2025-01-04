@@ -1,7 +1,7 @@
 ﻿keys;en;pl
 GAME_NAME;ETA: Unknown;ETA: Nieznana
 PRESS_TO_INTERACT;Press {action} to interact;Naciśnij {action}, aby wejść w interakcję
-PRESS_TO_THROW;Press {action} to throw;Naciśnij {action}, aby rzucić
+HOLD_TO_THROW;Hold {action} to throw;Przytrzymaj {action}, aby rzucić
 TODAY_IS;Today is;Dzisiaj jest
 DAY_0;Sunday;Niedziela
 DAY_1;Monday;Poniedziałek
@@ -220,6 +220,7 @@ ACTION_RIGHT;Right;W prawo
 ACTION_SPRINT;Sprint;Sprint
 ACTION_JUMP;Jump;Skok
 ACTION_INTERACT;Interact;Interakcja
+ACTION_THROW;Throw;Rzut
 ACTION_INVENTORY;Inventory;Inwentarz
 ACTION_CANCEL;Cancel;Anulowanie
 ACTION_DEBUG_CONSOLE;Debug console;Konsola

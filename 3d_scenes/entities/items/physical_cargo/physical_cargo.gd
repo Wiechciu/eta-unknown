@@ -18,19 +18,10 @@ func register_interactable() -> void:
 
 
 func interact(node: Node) -> void:
-	if is_picked_up:
-		drop_down(node)
-	else:
-		pick_up(node)
+	pick_up(node)
 
 
 func pick_up(node: Node) -> void:
-	if node is Player:
+	if !is_picked_up and node is Player:
 		var player: Player = node as Player
 		player.inventory.pick_up_cargo(self)
-
-
-func drop_down(node: Node) -> void:
-	if node is Player:
-		var player: Player = node as Player
-		player.inventory.drop_down_cargo()

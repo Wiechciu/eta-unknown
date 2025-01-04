@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dr00pmvue7oj7"]
+[gd_scene load_steps=7 format=3 uid="uid://dr00pmvue7oj7"]
 
 [ext_resource type="Script" uid="uid://bssgdq36jb8qu" path="res://3d_scenes/entities/humans/inventory/inventory.gd" id="1_epwy5"]
 [ext_resource type="PackedScene" uid="uid://ic0dtme2smyv" path="res://3d_scenes/entities/humans/inventory/inventory_item.tscn" id="2_8arrg"]
@@ -13,12 +13,30 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="Inventory" type="Node" node_paths=PackedStringArray("inventory_visual", "item_container", "throw_label")]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8arrg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8arrg"]
+bg_color = Color(1, 1, 1, 0.25098)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u3uda"]
+bg_color = Color(0.705882, 0, 0.294118, 0.647059)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Inventory" type="Node" node_paths=PackedStringArray("inventory_visual", "item_container", "throw_info_container", "throw_label", "hold_progress_bar")]
 script = ExtResource("1_epwy5")
 inventory_visual = NodePath("PanelContainer")
 item_container = NodePath("PanelContainer/VBoxContainer/ItemContainer")
 inventory_item_scene = ExtResource("2_8arrg")
-throw_label = NodePath("PressToThrow")
+throw_info_container = NodePath("VBoxContainer")
+throw_label = NodePath("VBoxContainer/HoldToThrow")
+hold_progress_bar = NodePath("VBoxContainer/HoldProgressBar")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 offset_left = 20.0
@@ -43,21 +61,42 @@ layout_mode = 2
 [node name="InventoryItem" parent="PanelContainer/VBoxContainer/ItemContainer" instance=ExtResource("2_8arrg")]
 layout_mode = 2
 
-[node name="PressToThrow" type="Label" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -123.0
-offset_top = -28.0
-offset_right = 123.0
+offset_left = -87.5
+offset_top = -67.0
+offset_right = 87.5
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="HoldToThrow" type="Label" parent="VBoxContainer"]
+layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1, 1, 0.694118, 0.85098)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 0.54902)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 20
-text = "PRESS_TO_THROW"
+text = "HOLD_TO_THROW"
 horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+theme_override_styles/separator = SubResource("StyleBoxEmpty_8arrg")
+
+[node name="HoldProgressBar" type="ProgressBar" parent="VBoxContainer"]
+custom_minimum_size = Vector2(150, 5)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_8arrg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_u3uda")
+show_percentage = false
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+theme_override_styles/separator = SubResource("StyleBoxEmpty_8arrg")

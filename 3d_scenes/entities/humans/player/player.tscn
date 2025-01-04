@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://ry5gcuu7gkh"]
+[gd_scene load_steps=10 format=3 uid="uid://ry5gcuu7gkh"]
 
 [ext_resource type="Script" uid="uid://ie4fwo4bx0a6" path="res://3d_scenes/entities/humans/player/player.gd" id="1_d240i"]
 [ext_resource type="PackedScene" uid="uid://dr00pmvue7oj7" path="res://3d_scenes/entities/humans/inventory/inventory.tscn" id="2_pyeek"]
 [ext_resource type="Texture2D" uid="uid://bg00ph6d731y" path="res://3d_scenes/entities/humans/player/crosshair001.png" id="2_sehua"]
 [ext_resource type="PackedScene" uid="uid://iycq57so0s4d" path="res://3d_scenes/entities/components/interactable_finder.tscn" id="2_usmx8"]
-[ext_resource type="Script" uid="uid://jerom6lekxwm" path="res://3d_scenes/entities/components/drop_location_finder.gd" id="4_jp54g"]
 [ext_resource type="Script" uid="uid://c57rhvnlfd5ir" path="res://3d_scenes/entities/humans/player/crosshair.gd" id="5_1hnet"]
 [ext_resource type="Texture2D" uid="uid://obyr75jw67gq" path="res://3d_scenes/entities/humans/player/crosshair013.png" id="6_cwtjh"]
 
@@ -46,10 +45,6 @@ current = true
 far = 200.0
 
 [node name="InteractableFinder" parent="Head/Camera3D" instance=ExtResource("2_usmx8")]
-
-[node name="DropLocationFinder" type="RayCast3D" parent="Head/Camera3D"]
-target_position = Vector3(0, 0, -2)
-script = ExtResource("4_jp54g")
 
 [node name="Crosshair" type="Control" parent="." node_paths=PackedStringArray("interactable_finder", "regular_crosshair", "interactable_crosshair")]
 layout_mode = 3

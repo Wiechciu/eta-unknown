@@ -8,9 +8,9 @@ const SUNRISE_FADE_END_RATIO: float = SUNRISE_FADE_START_RATIO + FADE_DURATION_R
 const SUNSET_FADE_START_RATIO: float = SUNRISE_FADE_START_RATIO + 0.5 - FADE_DURATION_RATIO
 const SUNSET_FADE_END_RATIO: float = SUNSET_FADE_START_RATIO + FADE_DURATION_RATIO
 const MIN_SUN_ENERGY: float = 0.0
-const MAX_SUN_ENERGY: float = 1.3
+const MAX_SUN_ENERGY: float = 1.5
 const MIN_ENVIRONMENT_ENERGY: float = 0.30
-const MAX_ENVIRONMENT_ENERGY: float = 1.5
+const MAX_ENVIRONMENT_ENERGY: float = 1.0
 
 @export var sun: DirectionalLight3D
 @export var world_environment: WorldEnvironment
