@@ -15,6 +15,7 @@ enum Status {
 @export var document_spawn_position: Node3D
 @export var document_target_position: Node3D
 @export var document_scene: PackedScene
+@export var print_type: Document.PrintType
 
 @export var screen: Sprite3D
 @export var document_count_label: Label
@@ -164,17 +165,21 @@ func print_next_document() -> void:
 	play_printing_sound()
 	
 	var document: Document = printing_queue.pop_front()
-	var physical_document: PhysicalDocument = (document_scene.instantiate() as PhysicalDocument).with_data(document)
+	var printed_document: Node3D
+	match print_type:
+		Document.PrintType.DOCUMENT:
+			printed_document = (document_scene.instantiate() as PhysicalDocument).with_data(document)
+		Document.PrintType.LABEL:
+			printed_document = (document_scene.instantiate() as PhysicalLabel).with_data(document)
 	
 	var offset: Vector3 = position_offset_for_new_document * printer_tray.get_child_count()
-	printer_tray.add_child(physical_document)
-	physical_document.position = document_spawn_position.position
-	physical_document.rotation.x = deg_to_rad(-90)
+	printer_tray.add_child(printed_document)
+	printed_document.position = document_spawn_position.position
+	printed_document.rotation.x = deg_to_rad(-90)
 	
 	var tween: Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
-	tween.tween_method(func(new_position: Vector3) -> void: physical_document.position = new_position, document_spawn_position.position, document_target_position.position + offset, printing_time)
+	tween.tween_method(func(new_position: Vector3) -> void: printed_document.position = new_position, document_spawn_position.position, document_target_position.position + offset, printing_time)
 	await tween.finished
-	#printed_documents.append(physical_document)
 	
 	check_ink()
 	check_tray()

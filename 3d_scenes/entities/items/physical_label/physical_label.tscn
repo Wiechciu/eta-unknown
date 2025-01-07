@@ -1,14 +1,15 @@
 [gd_scene load_steps=9 format=3 uid="uid://cfgtlxo30incr"]
 
 [ext_resource type="Script" uid="uid://fnniofs6r8wx" path="res://3d_scenes/entities/items/physical_label/physical_label.gd" id="1_qtgj3"]
-[ext_resource type="Texture2D" uid="uid://bldqpr61u55c8" path="res://3d_scenes/entities/items/physical_document/front_page.png" id="2_6jodi"]
+[ext_resource type="Texture2D" uid="uid://cfgwjbrr0bka4" path="res://3d_scenes/entities/items/physical_label/label_texture.png" id="2_qtgj3"]
 [ext_resource type="PackedScene" uid="uid://beffqttiv36q7" path="res://3d_scenes/entities/components/interactable.tscn" id="3_xr0db"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xcu1r"]
-albedo_texture = ExtResource("2_6jodi")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6jodi"]
+albedo_color = Color(1, 1, 0.568627, 1)
+albedo_texture = ExtResource("2_qtgj3")
 
-[sub_resource type="QuadMesh" id="QuadMesh_m3oqy"]
-material = SubResource("StandardMaterial3D_xcu1r")
+[sub_resource type="QuadMesh" id="QuadMesh_xr0db"]
+material = SubResource("StandardMaterial3D_6jodi")
 size = Vector2(0.315, 0.435)
 
 [sub_resource type="QuadMesh" id="QuadMesh_3rrdp"]
@@ -20,11 +21,12 @@ points = PackedVector3Array(-0.105, -0.145, 0, 0.105, -0.145, 0, -0.105, 0.145, 
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_eul1g"]
 
-[node name="PhysicalLabel" type="StaticBody3D"]
+[node name="PhysicalLabel" type="StaticBody3D" node_paths=PackedStringArray("group_area")]
 script = ExtResource("1_qtgj3")
+group_area = NodePath("GroupArea")
 
 [node name="Front" type="MeshInstance3D" parent="."]
-mesh = SubResource("QuadMesh_m3oqy")
+mesh = SubResource("QuadMesh_xr0db")
 
 [node name="Back" type="MeshInstance3D" parent="."]
 mesh = SubResource("QuadMesh_3rrdp")
@@ -33,7 +35,6 @@ mesh = SubResource("QuadMesh_3rrdp")
 shape = SubResource("ConvexPolygonShape3D_1ffdw")
 
 [node name="Interactable" parent="." instance=ExtResource("3_xr0db")]
-label_position = Vector3(0, 0.5, 0)
 
 [node name="GroupArea" type="Area3D" parent="."]
 

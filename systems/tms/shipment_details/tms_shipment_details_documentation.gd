@@ -2,15 +2,15 @@ class_name TmsShipmentDetailsDocumentation
 extends PanelContainer
 
 
-signal document_print_ordered(document: Document)
+signal document_print_ordered(document: Document, print_type: Document.PrintType)
 
 
 var shipment: Shipment
 
-@export var _documents_container: Control
-@export var _document_details_scene: PackedScene
-
-@export var _print_button: Button
+@export var print_all_button: Button
+@export var print_selected_button: Button
+@export var documents_container: Control
+@export var document_details_scene: PackedScene
 
 
 func _init() -> void:
@@ -20,7 +20,8 @@ func _init() -> void:
 func _ready() -> void:
 	UtilityTools.assert_all_exported_properties(self)
 	
-	_print_button.pressed.connect(_on_print_button_pressed)
+	print_all_button.pressed.connect(_on_print_all_button_pressed)
+	print_selected_button.pressed.connect(_on_print_selected_button_pressed)
 
 
 func _on_visibility_changed() -> void:
@@ -41,23 +42,45 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 	if not shipment.documentation.documentation_updated.is_connected(refresh):
 		shipment.documentation.documentation_updated.connect(refresh)
 	
-	refresh_document_details(_documents_container, shipment.documentation.documents)
+	refresh_document_details(shipment.documentation.documents)
 
 
-func refresh_document_details(document_details_container: Control, documents: Array[Document]) -> void:
-	for child: Node in document_details_container.get_children():
+func refresh_document_details(documents: Array[Document]) -> void:
+	for child: Node in documents_container.get_children():
 		child.queue_free()
 	
 	for document: Document in documents:
-		var document_details: TmsDocumentDetails = (_document_details_scene.instantiate() as TmsDocumentDetails).with_data(document)
-		document_details_container.add_child(document_details)
+		var document_details: TmsDocumentDetails = (document_details_scene.instantiate() as TmsDocumentDetails).with_data(document)
+		documents_container.add_child(document_details)
 
 
-func _on_print_button_pressed() -> void:
-	var documents: Array[Document] = shipment.documentation.documents
-	if documents.size() == 0:
+func _on_print_all_button_pressed() -> void:
+	var documents_to_print: Array[Document] = shipment.documentation.documents
+	var labels_to_print: Array[Document] = shipment.documentation.documents.filter(func(document: Document) -> bool: return Document.DOCUMENTS_WITH_LABELS.has(document.code))
+	
+	print_documents(documents_to_print, labels_to_print)
+
+
+func _on_print_selected_button_pressed() -> void:
+	var documents_to_print: Array[Document]
+	var labels_to_print: Array[Document]
+	for child: Node in documents_container.get_children():
+		var document_details: TmsDocumentDetails = child as TmsDocumentDetails
+		if document_details.document_check_box.button_pressed:
+			documents_to_print.append(document_details.document)
+		if document_details.label_check_box.button_pressed:
+			labels_to_print.append(document_details.document)
+	
+	print_documents(documents_to_print, labels_to_print)
+
+
+func print_documents(documents_to_print: Array[Document], labels_to_print: Array[Document]) -> void:
+	if documents_to_print.size() == 0 and labels_to_print.size() == 0:
 		ActionLogger.create_log("NO_DOCUMENTS_TO_PRINT", true)
 		return
 	
-	for document: Document in documents:
-		document_print_ordered.emit(document)
+	for document_to_print: Document in documents_to_print:
+		document_print_ordered.emit(document_to_print, Document.PrintType.DOCUMENT)
+	
+	for label_to_print: Document in labels_to_print:
+		document_print_ordered.emit(label_to_print, Document.PrintType.LABEL)

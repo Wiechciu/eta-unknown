@@ -77,6 +77,7 @@ func update_localization() -> void:
 func add_item(item: Item) -> void:
 	items.append(item)
 	
+	# TODO: Remove from here when proper signing is implemented.
 	if item is PhysicalDocument:
 		(item as PhysicalDocument).sign_document((get_parent() as Human).person)
 	
@@ -163,9 +164,10 @@ func pick_up_cargo(cargo: PhysicalCargo) -> void:
 	pick_up_tween.tween_method(func(alpha: float) -> void: throw_info_container.modulate.a = alpha, 0.0, 1.0, pick_up_tween_duration)
 
 
-func drop_down_cargo() -> void:
+func throw_cargo() -> void:
 	if held_cargo == null:
 		return
+	
 	if pick_up_tween != null and pick_up_tween.is_valid():
 		pick_up_tween.kill()
 	held_cargo.reparent(get_tree().current_scene)
@@ -174,11 +176,6 @@ func drop_down_cargo() -> void:
 	held_cargo.is_picked_up = false
 	held_cargo = null
 	throw_info_container.modulate.a = 0.0
-
-
-func throw_cargo() -> void:
-	if held_cargo == null:
-		return
-	drop_down_cargo()
+	
 	var direction: Vector3 = player.head.global_transform.basis * (Vector3.FORWARD + Vector3.UP)
 	last_held_cargo.apply_impulse(direction * throw_force)

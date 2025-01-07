@@ -125,7 +125,6 @@ material = SubResource("StandardMaterial3D_jpqbi")
 
 [node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConcavePolygonShape3D_jpqbi")
-debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_rbt72")

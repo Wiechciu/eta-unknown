@@ -72,10 +72,10 @@ func _on_app_closed(app: OsApp) -> void:
 	_taskbar.remove_icon(app)
 
 
-func _on_document_print_ordered(document: Document) -> void:
+func _on_document_print_ordered(document: Document, print_type: Document.PrintType) -> void:
 	for interface: ComputerInterface in interfaces:
 		var printer: Printer = interface as Printer
-		if printer != null:
+		if printer != null and printer.print_type == print_type:
 			printer.add_document_to_queue(document)
 			return
-	print("No printer connected")
+	print("No relevant printer connected")

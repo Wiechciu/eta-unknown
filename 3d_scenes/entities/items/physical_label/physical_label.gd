@@ -3,9 +3,6 @@ extends Item
 
 
 var document: Document
-var signed_by: Person
-var is_signed: bool:
-	get: return signed_by != null
 @export var group_area: Area3D
 
 
@@ -22,10 +19,6 @@ func with_data(document: Document) -> PhysicalLabel:
 	return self
 
 
-func sign_document(person: Person) -> void:
-	signed_by = person
-
-
 func register_interactable() -> void:
 	var interactable: Interactable = UtilityTools.get_child_of_type(self, Interactable) as Interactable
 	if interactable != null:
@@ -33,22 +26,22 @@ func register_interactable() -> void:
 
 
 func interact(node: Node) -> void:
-	pick_up_documents(node)
+	pick_up_labels(node)
 
 
-func pick_up_documents(node: Node) -> void:
-	var documents_in_group: Array[PhysicalDocument]
+func pick_up_labels(node: Node) -> void:
+	var labels_in_group: Array[PhysicalLabel]
 	for body: Node3D in group_area.get_overlapping_bodies():
-		if body is PhysicalDocument:
-			documents_in_group.append(body)
+		if body is PhysicalLabel:
+			labels_in_group.append(body)
 	
 	var inventory: Inventory = UtilityTools.get_child_of_type(node, Inventory) as Inventory
 	if inventory == null:
 		print("No inventory found.")
 		return
 	
-	for physical_document: PhysicalDocument in documents_in_group:
-		inventory.add_item(physical_document)
-		physical_document.get_parent().remove_child(physical_document)
+	for physical_label: PhysicalLabel in labels_in_group:
+		inventory.add_item(physical_label)
+		physical_label.get_parent().remove_child(physical_label)
 	
-	ActionLogger.create_log(tr("PICKED_UP_DOCUMENTS").format({"amount":documents_in_group.size()}))
+	ActionLogger.create_log(tr("PICKED_UP_DOCUMENTS").format({"amount":labels_in_group.size()}))

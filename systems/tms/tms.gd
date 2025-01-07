@@ -84,5 +84,5 @@ func open_party_details(party: Party) -> void:
 	#party_details.open(party)
 
 
-func _on_document_print_ordered(document: Document) -> void:
-	document_print_ordered.emit(document)
+func _on_document_print_ordered(document: Document, print_type: Document.PrintType) -> void:
+	document_print_ordered.emit(document, print_type)

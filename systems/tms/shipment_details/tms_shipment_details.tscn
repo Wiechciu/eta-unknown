@@ -77,7 +77,7 @@ layout_mode = 2
 [node name="Tabs" type="TabContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 1
+current_tab = 7
 clip_tabs = false
 
 [node name="GENERAL" type="PanelContainer" parent="VBoxContainer/Tabs"]
@@ -167,6 +167,7 @@ layout_mode = 2
 label_text = "LATEST_DELIVERY"
 
 [node name="CARGO_DETAILS" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_description", "_total_quantity", "_total_weight", "_total_volume", "_dimension_sets_container")]
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 script = ExtResource("5_gxcvw")
@@ -512,14 +513,14 @@ layout_mode = 2
 [node name="TmsEventDetails6" parent="VBoxContainer/Tabs/EVENTS/ScrollContainer/VBoxContainer/ActualEventsContainer" instance=ExtResource("11_s4hq1")]
 layout_mode = 2
 
-[node name="DOCUMENTATION" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_documents_container", "_print_button")]
-visible = false
+[node name="DOCUMENTATION" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("print_all_button", "print_selected_button", "documents_container")]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 script = ExtResource("13_l03v4")
-_documents_container = NodePath("ScrollContainer/VBoxContainer/DocumentsContainer")
-_document_details_scene = ExtResource("14_e8rh3")
-_print_button = NodePath("ScrollContainer/VBoxContainer/Buttons/PrintButton")
+print_all_button = NodePath("ScrollContainer/VBoxContainer/Buttons/PrintAllButton")
+print_selected_button = NodePath("ScrollContainer/VBoxContainer/Buttons/PrintSelectedButton")
+documents_container = NodePath("ScrollContainer/VBoxContainer/DocumentsContainer")
+document_details_scene = ExtResource("14_e8rh3")
 metadata/_tab_index = 7
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Tabs/DOCUMENTATION"]
@@ -560,9 +561,13 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 10
 
-[node name="PrintButton" type="Button" parent="VBoxContainer/Tabs/DOCUMENTATION/ScrollContainer/VBoxContainer/Buttons"]
+[node name="PrintAllButton" type="Button" parent="VBoxContainer/Tabs/DOCUMENTATION/ScrollContainer/VBoxContainer/Buttons"]
 layout_mode = 2
 text = "PRINT_ALL"
+
+[node name="PrintSelectedButton" type="Button" parent="VBoxContainer/Tabs/DOCUMENTATION/ScrollContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "PRINT_SELECTED"
 
 [node name="ACCOUNTING" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_quotation", "_revenue_total", "_cost_total", "_gross_profit", "_margin", "_revenue_container", "_cost_container")]
 visible = false

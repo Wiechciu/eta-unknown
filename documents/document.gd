@@ -2,6 +2,11 @@ class_name Document
 extends Resource
 
 
+enum PrintType {
+	DOCUMENT,
+	LABEL,
+}
+
 enum Code {
 	RFQ,
 	QUO,
@@ -21,6 +26,12 @@ enum Code {
 	DGD,
 }
 
+const DOCUMENTS_WITH_LABELS: Array[Document.Code] = [
+	Code.HWB,
+	Code.MWB,
+	Code.HBL,
+	Code.MBL,
+]
 
 var code: Code
 var code_string: String:

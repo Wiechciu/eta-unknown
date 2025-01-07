@@ -167,6 +167,7 @@ POLISH;Polish;Polski
 ENGLISH;English;Angielski
 PRINT;Print;Drukuj
 PRINT_ALL;Print all;Drukuj wszystko
+PRINT_SELECTED;Print selected;Drukuj zaznaczone
 NO_DOCUMENTS_TO_PRINT;No documents to print.;Nie ma dokumentów do wydrukowania.
 NO_DOCUMENTS_TO_PICK_UP;No documents to pick up.;Nie ma dokumentów do zabrania.
 PRINTER_OUT_OF_INK;Printer ran out of ink.;Skończył się tusz w drukarce.

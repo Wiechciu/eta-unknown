@@ -3,7 +3,7 @@ extends Control
 
 
 @warning_ignore("unused_signal")
-signal document_print_ordered(document: Document)
+signal document_print_ordered(document: Document, print_type: Document.PrintType)
 
 
 var boot_duration: float = 0.3

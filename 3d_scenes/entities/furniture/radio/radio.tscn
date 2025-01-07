@@ -142,7 +142,6 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.321608, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_mq2yb")
-debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.316708, 0)
