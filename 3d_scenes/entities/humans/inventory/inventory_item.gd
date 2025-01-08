@@ -2,6 +2,7 @@ class_name InventoryItem
 extends Control
 
 
+var item: Item
 var item_count: int
 var item_name: String
 @export var item_count_label: Label

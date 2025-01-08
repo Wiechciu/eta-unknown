@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjpggakj5vtuj"]
+[gd_scene load_steps=7 format=3 uid="uid://bjpggakj5vtuj"]
 
 [ext_resource type="Script" uid="uid://srpputytk6b8" path="res://systems/tms/shipment_details/documents/tms_document_details.gd" id="1_hc6y7"]
+[ext_resource type="Texture2D" uid="uid://b78act2ckoe5l" path="res://3d_scenes/entities/humans/inventory/check.png" id="2_a5e2p"]
+[ext_resource type="PackedScene" uid="uid://bmcauqk83v5kh" path="res://systems/ui/ui_animation_component.tscn" id="3_eat2i"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6bitq"]
 content_margin_left = 4.0
@@ -23,8 +25,8 @@ offset_right = 145.0
 offset_bottom = 25.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_6bitq")
 script = ExtResource("1_hc6y7")
-document_check_box = NodePath("HboxContainer/Control/DocumentCheckBox")
-label_check_box = NodePath("HboxContainer/Control2/LabelCheckBox")
+document_check_box = NodePath("HboxContainer/DocumentCheckBox")
+label_check_box = NodePath("HboxContainer/LabelCheckBox")
 code_label = NodePath("HboxContainer/Code")
 name_label = NodePath("HboxContainer/Name")
 number_label = NodePath("HboxContainer/Number")
@@ -33,7 +35,68 @@ time_label = NodePath("HboxContainer/Time")
 [node name="HboxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 
+[node name="DocumentCheckBox" type="Button" parent="HboxContainer"]
+modulate = Color(0, 0, 0, 0.196078)
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="HboxContainer/DocumentCheckBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_a5e2p")
+expand_mode = 2
+
+[node name="UiAnimationComponent" parent="HboxContainer/DocumentCheckBox" instance=ExtResource("3_eat2i")]
+animate_scale = true
+scale_animation_pivot_type = 1
+animate_color = true
+color_animation_multiply = false
+color_animation_in_value = Color(0, 0, 0, 1)
+animation_in_duration = 0.1
+animation_out_duration = 0.1
+animation_out_ease_type = 1
+animation_in_transition_type = 1
+animation_out_transition_type = 1
+
+[node name="LabelCheckBox" type="Button" parent="HboxContainer"]
+modulate = Color(0, 0, 0, 0.196078)
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+focus_mode = 0
+toggle_mode = true
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="HboxContainer/LabelCheckBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_a5e2p")
+expand_mode = 2
+
+[node name="UiAnimationComponent" parent="HboxContainer/LabelCheckBox" instance=ExtResource("3_eat2i")]
+animate_scale = true
+scale_animation_pivot_type = 1
+animate_color = true
+color_animation_multiply = false
+color_animation_in_value = Color(0, 0, 0, 1)
+animation_in_duration = 0.1
+animation_out_duration = 0.1
+animation_out_ease_type = 1
+animation_in_transition_type = 1
+animation_out_transition_type = 1
+
 [node name="Control" type="Control" parent="HboxContainer"]
+visible = false
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
@@ -43,6 +106,7 @@ offset_right = 24.0
 offset_bottom = 24.0
 
 [node name="Control2" type="Control" parent="HboxContainer"]
+visible = false
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 

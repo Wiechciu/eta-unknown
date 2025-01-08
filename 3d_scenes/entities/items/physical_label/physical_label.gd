@@ -42,6 +42,5 @@ func pick_up_labels(node: Node) -> void:
 	
 	for physical_label: PhysicalLabel in labels_in_group:
 		inventory.add_item(physical_label)
-		physical_label.get_parent().remove_child(physical_label)
 	
 	ActionLogger.create_log(tr("PICKED_UP_DOCUMENTS").format({"amount":labels_in_group.size()}))

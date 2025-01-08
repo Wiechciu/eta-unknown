@@ -45,6 +45,7 @@ func _ready() -> void:
 	UtilityTools.assert_all_exported_properties(self)
 	tms = UtilityTools.get_parent_of_type(self, Tms) as Tms
 	
+	_shipment_status.clear()
 	for status: String in Shipment.Status.keys():
 		_shipment_status.add_item("SHIPMENT_STATUS_" + status.to_upper())
 

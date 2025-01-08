@@ -25,6 +25,8 @@ enum Status {
 
 @export var audio_player: AudioStreamPlayer3D
 
+var serviceable: Serviceable
+
 
 var status: Status
 var printing_queue: Array[Document]
@@ -69,6 +71,7 @@ var tray_capacity: int = 100
 func _ready() -> void:
 	UtilityTools.assert_all_exported_properties(self)
 	register_interactable()
+	register_serviceable()
 	ink_amount_stored = ink_amount_capacity
 	ink_progress_bar.max_value = ink_amount_capacity
 
@@ -110,6 +113,10 @@ func register_interactable() -> void:
 		interactable.interacted.connect(interact)
 
 
+func register_serviceable() -> void:
+	serviceable = UtilityTools.get_child_of_type(self, Serviceable) as Serviceable
+
+
 func interact(node: Node) -> void:
 	if is_jammed:
 		repair(node)
@@ -117,25 +124,6 @@ func interact(node: Node) -> void:
 	if is_out_of_ink:
 		refill_ink(node)
 		return
-	#pick_up_documents(node)
-
-
-#func pick_up_documents(node: Node) -> void:
-	#if printed_documents.size() == 0:
-		#ActionLogger.create_log("NO_DOCUMENTS_TO_PICK_UP", true)
-		#return
-	#
-	#var inventory: Inventory = UtilityTools.get_child_of_type(node, Inventory)
-	#if inventory == null:
-		#print("No inventory found.")
-		#return
-	#
-	#for physical_document: PhysicalDocument in printed_documents:
-		#inventory.add_item(physical_document)
-		#remove_child(physical_document)
-	#
-	#ActionLogger.create_log(tr("PICKED_UP_DOCUMENTS").format({"amount":printed_documents.size()}))
-	#printed_documents.clear()
 
 
 func add_document_to_queue(document: Document) -> void:
@@ -243,6 +231,7 @@ func refill_ink(node: Node) -> void:
 		return
 	
 	status = Status.SERVICING
+	serviceable.start_service(ink_refilling_time)
 	
 	var player: Player = node as Player
 	if player != null:
@@ -264,6 +253,7 @@ func repair(node: Node) -> void:
 		return
 	
 	status = Status.SERVICING
+	serviceable.start_service(repairing_time)
 	
 	var player: Player = node as Player
 	if player != null:

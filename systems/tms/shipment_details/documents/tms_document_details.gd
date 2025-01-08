@@ -3,8 +3,8 @@ extends Node
 
 
 var document: Document
-@export var document_check_box: CheckBox
-@export var label_check_box: CheckBox
+@export var document_check_box: Button
+@export var label_check_box: Button
 @export var code_label: Label
 @export var name_label: Label
 @export var number_label: Label

@@ -57,8 +57,8 @@ func _ready() -> void:
 	
 	UtilityTools.assert_all_exported_properties(self)
 	
+	setup.call_deferred()
 	connect_signals()
-	setup()
 
 
 func assign_controls() -> void:
@@ -73,16 +73,10 @@ func assign_controls() -> void:
 func connect_signals() -> void:
 	control_to_watch.mouse_entered.connect(animation_in)
 	control_to_watch.mouse_exited.connect(animation_out)
-	control_to_watch.visibility_changed.connect(setup)
+	control_to_watch.visibility_changed.connect(_on_visibility_changed.call_deferred)
 
 
 func setup() -> void:
-	if not control_to_animate.visible:
-		return
-	await get_tree().process_frame
-	
-	#if animate_scale and scale_animation_centered:
-		#control_to_animate.pivot_offset = control_to_animate.size / 2
 	if animate_scale:
 		match scale_animation_pivot_type:
 			PivotType.DEFAULT:
@@ -98,11 +92,27 @@ func setup() -> void:
 			PivotType.BOTTOM_RIGHT:
 				control_to_animate.pivot_offset = control_to_animate.size
 	scale_animation_original_value = control_to_animate.scale
-	move_offset_animation_original_position = control_to_animate.position
 	color_animation_original_value = control_to_animate.modulate
+	_on_visibility_changed()
+
+
+func _on_visibility_changed() -> void:
+	if not control_to_animate.visible:
+		return
+	move_offset_animation_original_position = control_to_animate.position
+	
+	if control_to_watch is Button:
+		var button: Button = control_to_watch as Button
+		if button.disabled:
+			control_to_animate.modulate = Color.TRANSPARENT
 
 
 func animation_in() -> void:
+	if control_to_watch is Button:
+		var button: Button = control_to_watch as Button
+		if button.disabled:
+			return
+	
 	if tween_out != null and tween_out.is_running():
 		tween_out.stop()
 	
@@ -117,6 +127,11 @@ func animation_in() -> void:
 
 
 func animation_out() -> void:
+	if control_to_watch is Button:
+		var button: Button = control_to_watch as Button
+		if button.toggle_mode and button.button_pressed or button.disabled:
+			return
+	
 	if tween_in != null and tween_in.is_running():
 		tween_in.stop()
 	

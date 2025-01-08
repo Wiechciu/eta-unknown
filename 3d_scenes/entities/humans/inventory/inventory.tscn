@@ -1,17 +1,27 @@
-[gd_scene load_steps=7 format=3 uid="uid://dr00pmvue7oj7"]
+[gd_scene load_steps=10 format=3 uid="uid://dr00pmvue7oj7"]
 
 [ext_resource type="Script" uid="uid://bssgdq36jb8qu" path="res://3d_scenes/entities/humans/inventory/inventory.gd" id="1_epwy5"]
 [ext_resource type="PackedScene" uid="uid://ic0dtme2smyv" path="res://3d_scenes/entities/humans/inventory/inventory_item.tscn" id="2_8arrg"]
+[ext_resource type="Texture2D" uid="uid://byp6aoo37qjph" path="res://systems/tms/cross.png" id="3_tannb"]
+[ext_resource type="PackedScene" uid="uid://bmcauqk83v5kh" path="res://systems/ui/ui_animation_component.tscn" id="4_c4hgs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a1rpj"]
 content_margin_left = 5.0
 content_margin_top = 5.0
 content_margin_right = 5.0
 bg_color = Color(0, 0.329412, 0.443137, 0.713726)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0.392157)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_8arrg"]
+color = Color(1, 1, 1, 0.392157)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8arrg"]
 
@@ -29,39 +39,84 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="Inventory" type="Node" node_paths=PackedStringArray("inventory_visual", "item_container", "throw_info_container", "throw_label", "hold_progress_bar")]
+[node name="Inventory" type="Node" node_paths=PackedStringArray("inventory_visual", "close_button", "item_container", "throw_info_container", "throw_label", "hold_progress_bar")]
 script = ExtResource("1_epwy5")
-inventory_visual = NodePath("PanelContainer")
-item_container = NodePath("PanelContainer/VBoxContainer/ItemContainer")
+inventory_visual = NodePath("InventoryPanel")
+close_button = NodePath("InventoryPanel/VBoxContainer/HBoxContainer/CloseButton")
+item_container = NodePath("InventoryPanel/VBoxContainer/ItemContainer")
 inventory_item_scene = ExtResource("2_8arrg")
-throw_info_container = NodePath("VBoxContainer")
-throw_label = NodePath("VBoxContainer/HoldToThrow")
-hold_progress_bar = NodePath("VBoxContainer/HoldProgressBar")
+throw_info_container = NodePath("ThrowLabels")
+throw_label = NodePath("ThrowLabels/HoldToThrow")
+hold_progress_bar = NodePath("ThrowLabels/HoldProgressBar")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="InventoryPanel" type="PanelContainer" parent="."]
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 161.0
 offset_bottom = 211.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_a1rpj")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="InventoryPanel"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="InventoryPanel/VBoxContainer"]
 layout_mode = 2
+
+[node name="Header" type="Label" parent="InventoryPanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "INVENTORY"
+horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+[node name="CloseButton" type="Button" parent="InventoryPanel/VBoxContainer/HBoxContainer"]
+modulate = Color(1, 1, 1, 0.196078)
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+focus_mode = 0
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="InventoryPanel/VBoxContainer/HBoxContainer/CloseButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.5
+offset_top = -12.5
+offset_right = 12.5
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_tannb")
+expand_mode = 1
+
+[node name="UiAnimationComponent" parent="InventoryPanel/VBoxContainer/HBoxContainer/CloseButton" instance=ExtResource("4_c4hgs")]
+animate_scale = true
+scale_animation_pivot_type = 1
+animate_color = true
+color_animation_multiply = false
+animation_in_duration = 0.1
+animation_out_duration = 0.1
+animation_out_ease_type = 1
+animation_in_transition_type = 1
+animation_out_transition_type = 1
+
+[node name="HSeparator" type="HSeparator" parent="InventoryPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_8arrg")
+
+[node name="ItemContainer" type="VBoxContainer" parent="InventoryPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="InventoryItem" parent="InventoryPanel/VBoxContainer/ItemContainer" instance=ExtResource("2_8arrg")]
 layout_mode = 2
 
-[node name="ItemContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="InventoryItem2" parent="InventoryPanel/VBoxContainer/ItemContainer" instance=ExtResource("2_8arrg")]
 layout_mode = 2
 
-[node name="InventoryItem" parent="PanelContainer/VBoxContainer/ItemContainer" instance=ExtResource("2_8arrg")]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="ThrowLabels" type="VBoxContainer" parent="."]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -73,7 +128,7 @@ offset_right = 87.5
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="HoldToThrow" type="Label" parent="VBoxContainer"]
+[node name="HoldToThrow" type="Label" parent="ThrowLabels"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1, 1, 0.694118, 0.85098)
@@ -83,12 +138,12 @@ theme_override_font_sizes/font_size = 20
 text = "HOLD_TO_THROW"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="ThrowLabels"]
 layout_mode = 2
 theme_override_constants/separation = 5
 theme_override_styles/separator = SubResource("StyleBoxEmpty_8arrg")
 
-[node name="HoldProgressBar" type="ProgressBar" parent="VBoxContainer"]
+[node name="HoldProgressBar" type="ProgressBar" parent="ThrowLabels"]
 custom_minimum_size = Vector2(150, 5)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -96,7 +151,7 @@ theme_override_styles/background = SubResource("StyleBoxFlat_8arrg")
 theme_override_styles/fill = SubResource("StyleBoxFlat_u3uda")
 show_percentage = false
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="ThrowLabels"]
 layout_mode = 2
 theme_override_constants/separation = 5
 theme_override_styles/separator = SubResource("StyleBoxEmpty_8arrg")

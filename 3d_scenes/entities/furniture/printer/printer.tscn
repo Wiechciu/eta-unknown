@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://camlixgb5adk5"]
+[gd_scene load_steps=21 format=4 uid="uid://camlixgb5adk5"]
 
 [ext_resource type="Script" uid="uid://h64icvcx3v55" path="res://3d_scenes/entities/furniture/printer/printer.gd" id="1_0slj8"]
 [ext_resource type="PackedScene" uid="uid://beffqttiv36q7" path="res://3d_scenes/entities/components/interactable.tscn" id="2_b3fi8"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://wl4unt5vrkrb" path="res://3d_scenes/entities/furniture/printer/Robot_Oy.wav.wav" id="6_a7js3"]
 [ext_resource type="Texture2D" uid="uid://cjaxponmtask3" path="res://3d_scenes/entities/furniture/printer/wrench.png" id="8_a7js3"]
 [ext_resource type="Texture2D" uid="uid://h1sfxtho1r42" path="res://3d_scenes/entities/furniture/printer/exclamation.png" id="9_0ag7d"]
+[ext_resource type="PackedScene" uid="uid://dljaoqasoo50f" path="res://3d_scenes/entities/components/serviceable/serviceable.tscn" id="10_c5d6k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0slj8"]
 albedo_color = Color(0.281187, 0.281187, 0.281187, 1)
@@ -114,6 +115,11 @@ out_of_ink_audio_streams = Array[AudioStream]([ExtResource("3_ml0s2")])
 jammed_audio_streams = Array[AudioStream]([ExtResource("5_whxlh"), ExtResource("6_a7js3")])
 tray_full_audio_streams = Array[AudioStream]([ExtResource("5_whxlh"), ExtResource("6_a7js3")])
 
+[node name="Interactable" parent="." instance=ExtResource("2_b3fi8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+
+[node name="Serviceable" parent="." instance=ExtResource("10_c5d6k")]
+
 [node name="PrinterTray" type="Node3D" parent="."]
 
 [node name="DocumentSpawnPosition" type="Node3D" parent="."]
@@ -121,9 +127,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.288376, 0.077)
 
 [node name="DocumentTargetPosition" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.123695, 0.679537)
-
-[node name="Interactable" parent="." instance=ExtResource("2_b3fi8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 visible = false
@@ -179,6 +182,7 @@ material = SubResource("StandardMaterial3D_ml0s2")
 
 [node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConcavePolygonShape3D_myt44")
+debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_0ag7d")

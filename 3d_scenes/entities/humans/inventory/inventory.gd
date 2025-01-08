@@ -9,6 +9,7 @@ var is_open: bool:
 	get:
 		return inventory_visual.visible
 @export var inventory_visual: Control
+@export var close_button: Button
 @export var item_container: Control
 @export var inventory_item_scene: PackedScene
 var inventory_items: Array[InventoryItem]
@@ -36,6 +37,7 @@ func _ready() -> void:
 	close()
 	throw_info_container.modulate.a = 0.0
 	hold_progress_bar.max_value = max_throw_force
+	close_button.pressed.connect(close)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -91,6 +93,8 @@ func add_item(item: Item) -> void:
 		var new_inventory_item: InventoryItem = (inventory_item_scene.instantiate() as InventoryItem).with_data(1, item.item_name)
 		item_container.add_child(new_inventory_item)
 		inventory_items.append(new_inventory_item)
+	
+	item.get_parent().remove_child(item)
 
 
 @warning_ignore("shadowed_variable")

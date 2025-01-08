@@ -5,8 +5,8 @@ extends Resource
 enum Code {
 	AIR,
 	SEA,
-	LAND,
-	RAIL,
+	#LAND,
+	#RAIL,
 }
 
 
@@ -20,8 +20,8 @@ var name: String:
 		match code:
 			Code.AIR: return "MOT_AIRFREIGHT"
 			Code.SEA: return "MOT_SEAFREIGHT"
-			Code.LAND: return "MOT_LANDFREIGHT"
-			Code.RAIL: return "MOT_RAILFREIGHT"
+			#Code.LAND: return "MOT_LANDFREIGHT"
+			#Code.RAIL: return "MOT_RAILFREIGHT"
 			_: return "%s - unknown mode of transport" % code_string
 
 

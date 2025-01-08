@@ -33,15 +33,15 @@ const DOCUMENTS_WITH_LABELS: Array[Document.Code] = [
 	Code.MBL,
 ]
 
-var code: Code
+@export var code: Code
 var code_string: String:
 	get:
 		return Code.keys()[code]
 var name: String:
 	get:
 		return "DOCUMENT_" + code_string
-var issued_time: int
-var number: int
+@export var issued_time: int
+@export var number: int
 
 
 @warning_ignore("shadowed_variable")

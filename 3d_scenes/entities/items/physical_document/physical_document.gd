@@ -2,7 +2,7 @@ class_name PhysicalDocument
 extends Item
 
 
-var document: Document
+@export var document: Document
 var signed_by: Person
 var is_signed: bool:
 	get: return signed_by != null
@@ -10,6 +10,9 @@ var is_signed: bool:
 
 
 func _ready() -> void:
+	if document != null:
+		with_data(document)
+	
 	UtilityTools.assert_all_exported_properties(self)
 	register_interactable()
 
@@ -49,6 +52,5 @@ func pick_up_documents(node: Node) -> void:
 	
 	for physical_document: PhysicalDocument in documents_in_group:
 		inventory.add_item(physical_document)
-		physical_document.get_parent().remove_child(physical_document)
 	
 	ActionLogger.create_log(tr("PICKED_UP_DOCUMENTS").format({"amount":documents_in_group.size()}))

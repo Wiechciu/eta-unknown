@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://b18oy35p17ir7"]
+[gd_scene load_steps=35 format=3 uid="uid://b18oy35p17ir7"]
 
 [ext_resource type="PackedScene" uid="uid://dmwp5s37fvy1m" path="res://3d_scenes/entities/environment/environment.tscn" id="1_pyshm"]
 [ext_resource type="PackedScene" uid="uid://dvpm8vxtia7au" path="res://3d_scenes/entities/furniture/computer/computer.tscn" id="4_8pfch"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bvhgujk86reqg" path="res://3d_scenes/entities/furniture/bookcase_open_low.tscn" id="16_yatgx"]
 [ext_resource type="PackedScene" uid="uid://bu1wt1vjkrqnr" path="res://3d_scenes/entities/furniture/radio/radio.tscn" id="17_nvgr2"]
 [ext_resource type="PackedScene" uid="uid://bt42d24wsevwl" path="res://3d_scenes/entities/room/wall_window.tscn" id="18_5cac6"]
+[ext_resource type="Script" uid="uid://u2qdcbcwrk7l" path="res://documents/document.gd" id="20_5h8s7"]
 [ext_resource type="PackedScene" uid="uid://dx6f662utr8ya" path="res://3d_scenes/entities/items/physical_document/physical_document.tscn" id="20_7ufp6"]
 [ext_resource type="PackedScene" uid="uid://camlixgb5adk5" path="res://3d_scenes/entities/furniture/printer/printer.tscn" id="21_nkfki"]
 [ext_resource type="VoxelGIData" uid="uid://bw6kakxwlaxcj" path="res://systems/scenes/main_scene.VoxelGI_data.res" id="22_7ueml"]
@@ -38,6 +39,20 @@ size = Vector2(1000, 1000)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_pyshm"]
 size = Vector2(10, 10)
+
+[sub_resource type="Resource" id="Resource_707bl"]
+script = ExtResource("20_5h8s7")
+code = 1
+issued_time = 100
+number = 1
+metadata/_custom_type_script = ExtResource("20_5h8s7")
+
+[sub_resource type="Resource" id="Resource_5h8s7"]
+script = ExtResource("20_5h8s7")
+code = 0
+issued_time = 100
+number = 1
+metadata/_custom_type_script = ExtResource("20_5h8s7")
 
 [node name="MainScene" type="Node"]
 
@@ -339,6 +354,11 @@ transform = Transform3D(-0.761177, 0, 0.648544, 0, 1, 0, -0.648544, 0, -0.761177
 
 [node name="Document" parent="Furniture/Desk" instance=ExtResource("20_7ufp6")]
 transform = Transform3D(0.918135, -0.396267, 1.18097e-08, 0, 2.98023e-08, 1, -0.396267, -0.918135, 2.73626e-08, 1.81264, 1.15337, -0.42729)
+document = SubResource("Resource_707bl")
+
+[node name="Document2" parent="Furniture/Desk" instance=ExtResource("20_7ufp6")]
+transform = Transform3D(0.73723, 0.675641, -2.01357e-08, 0, 2.98023e-08, 1, 0.675641, -0.73723, 2.19712e-08, 8.8516, 0.39158, 1.83225)
+document = SubResource("Resource_5h8s7")
 
 [node name="Lamp" parent="Furniture" instance=ExtResource("8_5nt3u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.48057, 1.19209e-07, 1.78792)
