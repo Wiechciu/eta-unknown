@@ -9,12 +9,12 @@ signal lunch_ended
 
 
 const ONE_SECOND: int = 1
-const ONE_MINUTE: int = 1 * 60
-const ONE_HOUR: int = 1 * 60 * 60
-const ONE_DAY: int = 1 * 60 * 60 * 24
-const ONE_WEEK: int = 1 * 60 * 60 * 24 * 7
-#const ONE_MONTH: int = 1 * 60 * 60 * 24 * 30 #FIXME - it's inaccurate and may cause issues
-#const ONE_YEAR: int = 1 * 60 * 60 * 24 * 365 #FIXME - it's inaccurate and may cause issues
+const ONE_MINUTE: int = ONE_SECOND * 60
+const ONE_HOUR: int = ONE_MINUTE * 60
+const ONE_DAY: int = ONE_HOUR * 24
+const ONE_WEEK: int = ONE_DAY * 7
+#const ONE_MONTH: int = ONE_DAY * 30 #FIXME - it's inaccurate and may cause issues
+#const ONE_YEAR: int = ONE_DAY * 365 #FIXME - it's inaccurate and may cause issues
 const STARTING_DATE: String = "2025-01-01T08:00:00"
 
 var time_scale: int

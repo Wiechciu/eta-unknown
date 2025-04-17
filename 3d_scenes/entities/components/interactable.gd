@@ -47,9 +47,9 @@ func interact(node: Node) -> void:
 
 func on_hover_start() -> void:
 	var tween: Tween = create_tween()
-	tween.parallel().tween_method(func(alpha: float) -> void: main_control.modulate.a = alpha, 0.0, 1.0, 0.5)
+	tween.tween_property(main_control, "modulate:a", 1.0, 0.5)
 
 
 func on_hover_end() -> void:
 	var tween: Tween = create_tween()
-	tween.parallel().tween_method(func(alpha: float) -> void: main_control.modulate.a = alpha, 1.0, 0.0, 0.5)
+	tween.tween_property(main_control, "modulate:a", 0.0, 0.5)
