@@ -20,6 +20,8 @@ var full_name: String:
 	get:
 		return first_name + " " + last_name
 
+var skills: Array[SkillData]
+
 var employer: Party
 var job_position: JobPosition
 
@@ -39,6 +41,12 @@ func with_data(id: int, first_name: String, last_name: String, gender: String, e
 	
 	GlobalRefs.people.append(self)
 	GlobalRefs.people_dict[id] = self
+	
+	for skill: Skill in GlobalRefs.skills:
+		var skill_data: SkillData = SkillData.new()
+		skill_data.skill = skill
+		skill_data.value = 1.0
+		skills.append(skill_data)
 	
 	return self
 

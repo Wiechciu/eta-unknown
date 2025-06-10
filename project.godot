@@ -38,6 +38,18 @@ gdscript/warnings/inferred_declaration=2
 
 enabled=PackedStringArray()
 
+[file_customization]
+
+folder_colors={
+"res://3d_scenes/": "blue",
+"res://addons/": "red",
+"res://documents/": "gray",
+"res://master_data/": "purple",
+"res://shipments/": "orange",
+"res://sound/": "yellow",
+"res://systems/": "teal"
+}
+
 [gui]
 
 theme/custom="uid://ukt8dgouxdxt"
@@ -107,7 +119,7 @@ debug_console={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://translation/translation.en.translation", "res://translation/translation.pl.translation")
+locale/translations=PackedStringArray("res://systems/translation/translation.en.translation", "res://systems/translation/translation.pl.translation")
 
 [layer_names]
 

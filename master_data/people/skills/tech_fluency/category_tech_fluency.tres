@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SkillCategory" load_steps=2 format=3 uid="uid://cbxj2oxobf2l4"]
+
+[ext_resource type="Script" uid="uid://q2os2fkrr7m1" path="res://master_data/people/skills/skill_category.gd" id="1_d6t76"]
+
+[resource]
+script = ExtResource("1_d6t76")
+category_name = "Tech Fluency"
+category_description = "Modern logistics relies heavily on digital tools, from TMS platforms to spreadsheets and printers. This category covers your ability to operate office equipment and software efficiently, automate workflows, and solve tech issues. It boosts your personal productivity, reduces task delays, and unlocks tech-related shortcuts and automations."
+metadata/_custom_type_script = "uid://q2os2fkrr7m1"

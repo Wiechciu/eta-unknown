@@ -1,5 +1,9 @@
 extends Node
 
+
+@export var skill_categories: Array[SkillCategory]
+@export var skills: Array[Skill]
+
 var cargos: Array[Cargo]
 var cargos_dict: Dictionary[int, Cargo]
 var currencies: Array[Currency]

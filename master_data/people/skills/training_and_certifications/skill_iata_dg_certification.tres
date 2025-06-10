@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://dggbhq1w0r5jh"]
+
+[ext_resource type="Script" uid="uid://cb88ovqkdfiaj" path="res://master_data/people/skills/skill.gd" id="1_hv67b"]
+[ext_resource type="Resource" uid="uid://hrys7o0eb55t" path="res://master_data/people/skills/training_and_certifications/category_training_and_certifications.tres" id="2_qgil7"]
+
+[resource]
+script = ExtResource("1_hv67b")
+skill_name = "IATA DG Certification"
+skill_description = "Authorizes the handling of dangerous goods by air according to IATA rules. Unlocks DG air shipments and high-reward cargo types."
+skill_category = ExtResource("2_qgil7")
+max_value = 20.0
+metadata/_custom_type_script = "uid://cb88ovqkdfiaj"

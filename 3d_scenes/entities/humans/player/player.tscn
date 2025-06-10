@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://ry5gcuu7gkh"]
+[gd_scene load_steps=11 format=3 uid="uid://ry5gcuu7gkh"]
 
 [ext_resource type="Script" uid="uid://ie4fwo4bx0a6" path="res://3d_scenes/entities/humans/player/player.gd" id="1_d240i"]
 [ext_resource type="PackedScene" uid="uid://dr00pmvue7oj7" path="res://3d_scenes/entities/humans/inventory/inventory.tscn" id="2_pyeek"]
 [ext_resource type="Texture2D" uid="uid://bg00ph6d731y" path="res://3d_scenes/entities/humans/player/crosshair001.png" id="2_sehua"]
 [ext_resource type="PackedScene" uid="uid://iycq57so0s4d" path="res://3d_scenes/entities/components/interactable_finder.tscn" id="2_usmx8"]
+[ext_resource type="PackedScene" uid="uid://d2njagkieae76" path="res://3d_scenes/entities/humans/skills/skills.tscn" id="3_jp54g"]
 [ext_resource type="Script" uid="uid://c57rhvnlfd5ir" path="res://3d_scenes/entities/humans/player/crosshair.gd" id="5_1hnet"]
 [ext_resource type="Texture2D" uid="uid://obyr75jw67gq" path="res://3d_scenes/entities/humans/player/crosshair013.png" id="6_cwtjh"]
 
@@ -24,6 +25,8 @@ head = NodePath("Head")
 camera = NodePath("Head/Camera3D")
 
 [node name="Inventory" parent="." instance=ExtResource("2_pyeek")]
+
+[node name="Skills" parent="." instance=ExtResource("3_jp54g")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)

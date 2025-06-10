@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://dduduowloc71g"]
+
+[ext_resource type="Script" uid="uid://cb88ovqkdfiaj" path="res://master_data/people/skills/skill.gd" id="1_vtr44"]
+[ext_resource type="Resource" uid="uid://hrys7o0eb55t" path="res://master_data/people/skills/training_and_certifications/category_training_and_certifications.tres" id="2_7hbqw"]
+
+[resource]
+script = ExtResource("1_vtr44")
+skill_name = "Lean Logistics Certification"
+skill_description = "Applies lean thinking to warehousing, transport, and admin flows. Unlocks waste reduction initiatives and bonus savings."
+skill_category = ExtResource("2_7hbqw")
+max_value = 20.0
+metadata/_custom_type_script = "uid://cb88ovqkdfiaj"

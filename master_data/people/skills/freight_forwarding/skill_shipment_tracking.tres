@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://daicgeqr1d46w"]
+
+[ext_resource type="Script" uid="uid://cb88ovqkdfiaj" path="res://master_data/people/skills/skill.gd" id="1_1ncnm"]
+[ext_resource type="Resource" uid="uid://dhggi11dt0e3c" path="res://master_data/people/skills/freight_forwarding/category_freight_forwarding.tres" id="2_uydqk"]
+
+[resource]
+script = ExtResource("1_1ncnm")
+skill_name = "Shipment Tracking"
+skill_description = "Maintains real-time oversight of shipments using TMS or carrier tools. Minimizes customer inquiries and enables proactive delay management."
+skill_category = ExtResource("2_uydqk")
+max_value = 20.0
+metadata/_custom_type_script = "uid://cb88ovqkdfiaj"

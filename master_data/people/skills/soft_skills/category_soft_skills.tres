@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SkillCategory" load_steps=2 format=3 uid="uid://bxjxk3ur6pfp1"]
+
+[ext_resource type="Script" uid="uid://q2os2fkrr7m1" path="res://master_data/people/skills/skill_category.gd" id="1_so01h"]
+
+[resource]
+script = ExtResource("1_so01h")
+category_name = "Soft Skills"
+category_description = "Logistics isn’t just about moving freight - it’s about working with people under pressure. These interpersonal and cognitive skills determine how well you handle multitasking, leadership, communication, and stress. Improving soft skills reduces conflict, boosts team performance, and unlocks leadership opportunities."
+metadata/_custom_type_script = "uid://q2os2fkrr7m1"

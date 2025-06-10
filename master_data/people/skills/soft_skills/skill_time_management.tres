@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://qwjhjdaenl6q"]
+
+[ext_resource type="Script" uid="uid://cb88ovqkdfiaj" path="res://master_data/people/skills/skill.gd" id="1_7oim3"]
+[ext_resource type="Resource" uid="uid://bxjxk3ur6pfp1" path="res://master_data/people/skills/soft_skills/category_soft_skills.tres" id="2_dx6nv"]
+
+[resource]
+script = ExtResource("1_7oim3")
+skill_name = "Time Management"
+skill_description = "Effectively balances priorities across multiple shipments and responsibilities. Reduces overdue tasks and improves shipment timeliness."
+skill_category = ExtResource("2_dx6nv")
+max_value = 20.0
+metadata/_custom_type_script = "uid://cb88ovqkdfiaj"

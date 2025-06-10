@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SkillCategory" load_steps=2 format=3 uid="uid://daf6onx460ss"]
+
+[ext_resource type="Script" uid="uid://q2os2fkrr7m1" path="res://master_data/people/skills/skill_category.gd" id="1_p27ia"]
+
+[resource]
+script = ExtResource("1_p27ia")
+category_name = "Industry Knowledge"
+category_description = "These skills represent your understanding of how global logistics actually works - trade lanes, Incoterms, commodity handling, and geopolitical awareness. They help you make informed decisions, avoid disruptions, and gain access to specialized contracts. A high level of industry knowledge unlocks advanced routing, niche markets, and strategic bonuses."
+metadata/_custom_type_script = "uid://q2os2fkrr7m1"

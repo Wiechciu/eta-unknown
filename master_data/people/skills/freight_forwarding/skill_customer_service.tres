@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://cx1q5xkb8gqrj"]
+
+[ext_resource type="Script" uid="uid://cb88ovqkdfiaj" path="res://master_data/people/skills/skill.gd" id="1_yfu7a"]
+[ext_resource type="Resource" uid="uid://dhggi11dt0e3c" path="res://master_data/people/skills/freight_forwarding/category_freight_forwarding.tres" id="2_p6o11"]
+
+[resource]
+script = ExtResource("1_yfu7a")
+skill_name = "Customer Service"
+skill_description = "Manages expectations, handles inquiries, and resolves shipment issues professionally. Increases client loyalty and NPS (net promoter score)."
+skill_category = ExtResource("2_p6o11")
+max_value = 20.0
+metadata/_custom_type_script = "uid://cb88ovqkdfiaj"

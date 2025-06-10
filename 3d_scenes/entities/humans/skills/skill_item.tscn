@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://den86h7ycch47"]
+
+[ext_resource type="Script" uid="uid://d153ncyaqg4pq" path="res://3d_scenes/entities/humans/skills/skill_item.gd" id="1_mvydg"]
+[ext_resource type="PackedScene" uid="uid://csikevd7cm74m" path="res://systems/tooltip/tooltip_component.tscn" id="2_wyu3u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e77h3"]
+bg_color = Color(0.41598, 0.41598, 0.41598, 0)
+border_color = Color(1, 1, 1, 0.392157)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_qr233"]
+color = Color(1, 1, 1, 0.392157)
+grow_begin = 0.0
+grow_end = 0.0
+vertical = true
+
+[node name="SkillItem" type="PanelContainer" node_paths=PackedStringArray("skill_name_label", "skill_value_label")]
+offset_right = 150.0
+offset_bottom = 20.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_e77h3")
+script = ExtResource("1_mvydg")
+skill_name_label = NodePath("HBoxContainer/SkillName")
+skill_value_label = NodePath("HBoxContainer/SkillValue")
+
+[node name="TooltipComponent" parent="." instance=ExtResource("2_wyu3u")]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="SkillName" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 15
+text = "Skill name"
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_qr233")
+
+[node name="SkillValue" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "1 / 10"

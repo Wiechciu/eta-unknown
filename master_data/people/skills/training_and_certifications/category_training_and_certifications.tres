@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SkillCategory" load_steps=2 format=3 uid="uid://hrys7o0eb55t"]
+
+[ext_resource type="Script" uid="uid://q2os2fkrr7m1" path="res://master_data/people/skills/skill_category.gd" id="1_ndiir"]
+
+[resource]
+script = ExtResource("1_ndiir")
+category_name = "Training and Certifications"
+category_description = "These formal qualifications allow you to handle specific goods (like DG), operate in specific markets, or lead teams. They serve as gatekeepers to higher-tier missions, industry perks, and client trust. Earning certifications unlocks new cargo types, raises your reputation, and expands your operational capabilities."
+metadata/_custom_type_script = "uid://q2os2fkrr7m1"

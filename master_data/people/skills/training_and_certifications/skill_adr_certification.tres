@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://eft1gntu3un"]
+
+[ext_resource type="Script" uid="uid://cb88ovqkdfiaj" path="res://master_data/people/skills/skill.gd" id="1_r1eik"]
+[ext_resource type="Resource" uid="uid://hrys7o0eb55t" path="res://master_data/people/skills/training_and_certifications/category_training_and_certifications.tres" id="2_ck3wq"]
+
+[resource]
+script = ExtResource("1_r1eik")
+skill_name = "IMDG Certification"
+skill_description = "Required for road transportation of hazardous materials in Europe. Unlocks overland DG missions and equipment upgrades."
+skill_category = ExtResource("2_ck3wq")
+max_value = 20.0
+metadata/_custom_type_script = "uid://cb88ovqkdfiaj"

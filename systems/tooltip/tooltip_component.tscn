@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://csikevd7cm74m"]
+
+[ext_resource type="Script" uid="uid://cxfgfct7loh7o" path="res://systems/tooltip/tooltip_component.gd" id="1_5bx4o"]
+[ext_resource type="PackedScene" uid="uid://chd34lwigyb5e" path="res://systems/tooltip/tooltip.tscn" id="2_o0yvg"]
+
+[node name="TooltipComponent" type="Node"]
+script = ExtResource("1_5bx4o")
+tooltip_scene = ExtResource("2_o0yvg")
