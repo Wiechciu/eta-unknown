@@ -2,6 +2,7 @@ extends Node
 
 
 signal new_day_started
+signal new_hour_started
 signal shift_started
 signal shift_ended
 signal lunch_started
@@ -103,6 +104,7 @@ func _check_hour_change() -> void:
 	if current_hour == lunch_end_hour:
 		lunch_ended.emit()
 	
+	new_hour_started.emit()
 	previous_hour = current_hour
 
 

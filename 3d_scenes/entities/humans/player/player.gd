@@ -28,9 +28,9 @@ var is_immobilized: bool = false
 
 
 func _ready() -> void:
-	super._ready()
-	
 	UtilityTools.assert_all_exported_properties(self)
+	
+	super._ready()
 	inventory = UtilityTools.get_child_of_type(self, Inventory)
 	
 	GameManager.player = self

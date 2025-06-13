@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dr00pmvue7oj7"]
+[gd_scene load_steps=9 format=3 uid="uid://dr00pmvue7oj7"]
 
 [ext_resource type="Script" uid="uid://bssgdq36jb8qu" path="res://3d_scenes/entities/humans/inventory/inventory.gd" id="1_epwy5"]
 [ext_resource type="PackedScene" uid="uid://ic0dtme2smyv" path="res://3d_scenes/entities/humans/inventory/inventory_item.tscn" id="2_8arrg"]
@@ -22,8 +22,6 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_8arrg"]
 color = Color(1, 1, 1, 0.392157)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8arrg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8arrg"]
 bg_color = Color(1, 1, 1, 0.25098)
@@ -50,10 +48,10 @@ throw_label = NodePath("ThrowLabels/HoldToThrow")
 hold_progress_bar = NodePath("ThrowLabels/HoldProgressBar")
 
 [node name="InventoryPanel" type="PanelContainer" parent="."]
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 161.0
-offset_bottom = 211.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 197.0
+offset_bottom = 201.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_a1rpj")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="InventoryPanel"]
@@ -122,11 +120,14 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -87.5
-offset_top = -67.0
-offset_right = 87.5
+offset_left = -86.0
+offset_top = -63.0
+offset_right = 86.00006
+offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 0
+size_flags_vertical = 8
+theme_override_constants/separation = 10
 
 [node name="HoldToThrow" type="Label" parent="ThrowLabels"]
 layout_mode = 2
@@ -138,11 +139,6 @@ theme_override_font_sizes/font_size = 20
 text = "HOLD_TO_THROW"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="ThrowLabels"]
-layout_mode = 2
-theme_override_constants/separation = 5
-theme_override_styles/separator = SubResource("StyleBoxEmpty_8arrg")
-
 [node name="HoldProgressBar" type="ProgressBar" parent="ThrowLabels"]
 custom_minimum_size = Vector2(150, 5)
 layout_mode = 2
@@ -150,8 +146,3 @@ size_flags_horizontal = 4
 theme_override_styles/background = SubResource("StyleBoxFlat_8arrg")
 theme_override_styles/fill = SubResource("StyleBoxFlat_u3uda")
 show_percentage = false
-
-[node name="HSeparator2" type="HSeparator" parent="ThrowLabels"]
-layout_mode = 2
-theme_override_constants/separation = 5
-theme_override_styles/separator = SubResource("StyleBoxEmpty_8arrg")

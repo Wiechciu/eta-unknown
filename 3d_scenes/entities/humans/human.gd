@@ -2,6 +2,9 @@ class_name Human
 extends CharacterBody3D
 
 
+signal person_assigned
+
+
 var id: int
 var person: Person
 
@@ -23,6 +26,8 @@ func assign_person() -> void:
 		var company: Party = GlobalRefs.freight_forwarders_with_employees.pick_random() as Party
 		person = company.employees.pick_random() as Person
 		person.job_position = GlobalRefs.job_positions[0] ## Intern
+	
+	person_assigned.emit()
 
 
 func to_dict() -> Dictionary:

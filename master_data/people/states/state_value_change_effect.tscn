@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnj2nwu2j7ll1"]
+
+[ext_resource type="Script" uid="uid://ctrxvwjigce8e" path="res://master_data/people/states/state_value_change_effect.gd" id="1_v6pn1"]
+
+[node name="StateValueChangeEffect" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 18.0
+offset_bottom = 22.0
+size_flags_horizontal = 0
+script = ExtResource("1_v6pn1")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+offset_right = 18.0
+offset_bottom = 22.0
+theme_override_font_sizes/font_size = 15
+text = "+1"

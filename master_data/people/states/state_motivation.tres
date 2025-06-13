@@ -1,10 +1,15 @@
-[gd_resource type="Resource" script_class="State" load_steps=2 format=3 uid="uid://b4e6c6487lose"]
+[gd_resource type="Resource" script_class="State" load_steps=3 format=3 uid="uid://b4e6c6487lose"]
 
 [ext_resource type="Script" uid="uid://c6yc6wr60oe13" path="res://master_data/people/states/state.gd" id="1_ydhxo"]
+[ext_resource type="Texture2D" uid="uid://cfm78ceai0em" path="res://master_data/people/states/icons/state_motivation_icon.png" id="2_8lj3h"]
 
 [resource]
 script = ExtResource("1_ydhxo")
 state_name = "Motivation"
 state_description = "Willingness to take initiative."
-state_max_value = 100.0
+state_icon = ExtResource("2_8lj3h")
+min_value = 0.0
+max_value = 100.0
+regeneration_per_hour = -5.0
+regeneration_on_new_day = 50.0
 metadata/_custom_type_script = "uid://c6yc6wr60oe13"

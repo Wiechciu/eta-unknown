@@ -1,10 +1,15 @@
-[gd_resource type="Resource" script_class="State" load_steps=2 format=3 uid="uid://dbs7nv2dpg33p"]
+[gd_resource type="Resource" script_class="State" load_steps=3 format=3 uid="uid://dbs7nv2dpg33p"]
 
 [ext_resource type="Script" uid="uid://c6yc6wr60oe13" path="res://master_data/people/states/state.gd" id="1_a3cvo"]
+[ext_resource type="Texture2D" uid="uid://23xsxnbdu0em" path="res://master_data/people/states/icons/state_energy_icon.png" id="2_na01d"]
 
 [resource]
 script = ExtResource("1_a3cvo")
 state_name = "Energy"
 state_description = "Physical stamina throughout the day. Can influence task completion speed and accuracy."
-state_max_value = 100.0
+state_icon = ExtResource("2_na01d")
+min_value = 0.0
+max_value = 100.0
+regeneration_per_hour = -15.0
+regeneration_on_new_day = 100.0
 metadata/_custom_type_script = "uid://c6yc6wr60oe13"

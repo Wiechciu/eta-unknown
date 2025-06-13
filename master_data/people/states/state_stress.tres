@@ -1,10 +1,15 @@
-[gd_resource type="Resource" script_class="State" load_steps=2 format=3 uid="uid://l1binpo2tvcc"]
+[gd_resource type="Resource" script_class="State" load_steps=3 format=3 uid="uid://l1binpo2tvcc"]
 
 [ext_resource type="Script" uid="uid://c6yc6wr60oe13" path="res://master_data/people/states/state.gd" id="1_c25h5"]
+[ext_resource type="Texture2D" uid="uid://dnnubwd8jwgdi" path="res://master_data/people/states/icons/state_stress_icon.png" id="2_fo4au"]
 
 [resource]
 script = ExtResource("1_c25h5")
 state_name = "Stress"
 state_description = "Accumulated mental pressure."
-state_max_value = 100.0
+state_icon = ExtResource("2_fo4au")
+min_value = 0.0
+max_value = 100.0
+regeneration_per_hour = -5.0
+regeneration_on_new_day = -50.0
 metadata/_custom_type_script = "uid://c6yc6wr60oe13"

@@ -19,6 +19,13 @@ func with_data(skill_data: SkillData) -> SkillItem:
 	self.skill_data = skill_data
 	self.skill_icon_rect.texture = skill_data.skill.skill_icon if skill_data.skill.skill_icon != null else PlaceholderTexture2D.new()
 	self.skill_name_label.text = skill_data.skill.skill_name
+	
+	update_value()
+	
+	return self
+
+
+func update_value() -> void:
 	self.skill_value_label.text = "%d" % [skill_data.value]
 	
 	if skill_data.skill.max_value == 1:
@@ -30,8 +37,6 @@ func with_data(skill_data: SkillData) -> SkillItem:
 		skill_progress_bar.show()
 		self.skill_progress_bar.value = skill_data.value
 		self.skill_progress_bar.max_value = skill_data.skill.max_value
-	
-	return self
 
 
 func get_tooltip_icon() -> Texture2D:
