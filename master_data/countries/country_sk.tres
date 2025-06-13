@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Country" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://master_data/locations/location.gd" id="1_3wd4g"]
+[ext_resource type="Script" path="res://master_data/countries/country.gd" id="2_4jq02"]
+
+[resource]
+script = ExtResource("2_4jq02")
+id = 190
+code = "SK"
+name = "Slovakia"
+coordinates = Vector2(14, 11)
+locations = Array[ExtResource("1_3wd4g")]([])

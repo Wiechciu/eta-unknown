@@ -197,11 +197,11 @@ func notify_details_changed() -> void:
 func _on_planned_event_registered(planned_event: Event) -> void:
 	if planned_event.code == Event.Code.PUP:
 		change_status(Shipment.Status.PLANNED)
-		accounting.create_new_cost_charge(Charge.Code.PUP, randi_range(100, 150), GlobalRefs.currencies_code_dict["EUR"], haulage.trucker_pickup)
-		accounting.create_new_revenue_charge(Charge.Code.PUP, randi_range(120, 170), GlobalRefs.currencies_code_dict["EUR"], shipper)
+		accounting.create_new_cost_charge(Charge.Code.PUP, randi_range(100, 150), Currency.get_currency_by_code("EUR"), haulage.trucker_pickup)
+		accounting.create_new_revenue_charge(Charge.Code.PUP, randi_range(120, 170), Currency.get_currency_by_code("EUR"), shipper)
 	if planned_event.code == Event.Code.DEL:
-		accounting.create_new_cost_charge(Charge.Code.DEL, randi_range(100, 150), GlobalRefs.currencies_code_dict["EUR"], haulage.trucker_delivery)
-		accounting.create_new_revenue_charge(Charge.Code.DEL, randi_range(120, 170), GlobalRefs.currencies_code_dict["EUR"], consignee)
+		accounting.create_new_cost_charge(Charge.Code.DEL, randi_range(100, 150), Currency.get_currency_by_code("EUR"), haulage.trucker_delivery)
+		accounting.create_new_revenue_charge(Charge.Code.DEL, randi_range(120, 170), Currency.get_currency_by_code("EUR"), consignee)
 
 
 func _on_actual_event_registered(actual_event: Event) -> void:
@@ -294,7 +294,7 @@ static func from_dict(data: Dictionary) -> Shipment:
 		Incoterms.new().with_data(data.incoterms_code as Incoterms.Code, data.incoterms_place as String) if data.incoterms_code else null,
 		data.number as int,
 		null,
-		GlobalRefs.cargos_dict[data.cargo_id as int] if data.cargo_id else null,
+		GlobalRefs.cargos[data.cargo_id as int] if data.cargo_id else null,
 		DimensionSet.array_from_dict(data.dimension_sets as Array[Dictionary]) if data.dimension_sets else ([] as Array[DimensionSet]),
 		ModeOfTransport.new().with_data(data.mode_of_transport_code as ModeOfTransport.Code),
 		null,
@@ -316,8 +316,8 @@ func assign_references_from_dict(data: Dictionary) -> void:
 	self.import_contact_person = GlobalRefs.people_dict[data.import_contact_person_id as int] if data.import_contact_person_id else null
 	self.shipper = GlobalRefs.parties_dict[data.shipper_id as int] if data.shipper_id else null
 	self.consignee = GlobalRefs.parties_dict[data.consignee_id as int] if data.consignee_id else null
-	self.origin = GlobalRefs.locations_dict[data.origin_id as int] if data.origin_id else null
-	self.destination = GlobalRefs.locations_dict[data.destination_id as int] if data.destination_id else null
+	self.origin = GlobalRefs.locations[data.origin_id as int] if data.origin_id else null
+	self.destination = GlobalRefs.locations[data.destination_id as int] if data.destination_id else null
 	self.owner = GlobalRefs.parties_dict[data.owner_id as int] if data.owner_id else null
 	self.main_freight.carrier = GlobalRefs.parties_dict[data.carrier_id as int] if data.carrier_id else null
 	self.haulage.trucker_pickup = GlobalRefs.parties_dict[data.trucker_pickup_id as int] if data.trucker_pickup_id else null

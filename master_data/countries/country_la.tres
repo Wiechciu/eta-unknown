@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Country" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://master_data/locations/location.gd" id="1_vrc6x"]
+[ext_resource type="Script" path="res://master_data/countries/country.gd" id="2_akdnl"]
+
+[resource]
+script = ExtResource("2_akdnl")
+id = 117
+code = "LA"
+name = "Lao People's Democratic Republic"
+coordinates = Vector2(5, 7)
+locations = Array[ExtResource("1_vrc6x")]([])

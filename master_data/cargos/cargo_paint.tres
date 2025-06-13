@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Cargo" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://master_data/cargos/cargo.gd" id="1_8pus3"]
+
+[resource]
+script = ExtResource("1_8pus3")
+id = 45
+description = "Paint"
+hs_code = "320910"
+unit_value = 25.0
+unit_size = 1.0
+unit_weight = 2.0

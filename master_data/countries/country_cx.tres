@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Country" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://master_data/locations/location.gd" id="1_kg5fg"]
+[ext_resource type="Script" path="res://master_data/countries/country.gd" id="2_23unb"]
+
+[resource]
+script = ExtResource("2_23unb")
+id = 48
+code = "CX"
+name = "Christmas Island"
+coordinates = Vector2(0, 3)
+locations = Array[ExtResource("1_kg5fg")]([])

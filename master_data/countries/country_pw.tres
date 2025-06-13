@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Country" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://master_data/locations/location.gd" id="1_ljg0s"]
+[ext_resource type="Script" path="res://master_data/countries/country.gd" id="2_r25af"]
+
+[resource]
+script = ExtResource("2_r25af")
+id = 174
+code = "PW"
+name = "Palau"
+coordinates = Vector2(14, 10)
+locations = Array[ExtResource("1_ljg0s")]([])

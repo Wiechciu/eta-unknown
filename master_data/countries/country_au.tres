@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Country" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://master_data/locations/location.gd" id="1_l0sxa"]
+[ext_resource type="Script" path="res://master_data/countries/country.gd" id="2_k35ad"]
+
+[resource]
+script = ExtResource("2_k35ad")
+id = 12
+code = "AU"
+name = "Australia"
+coordinates = Vector2(12, 0)
+locations = Array[ExtResource("1_l0sxa")]([])

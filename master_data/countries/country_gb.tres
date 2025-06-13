@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Country" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://master_data/locations/location.gd" id="1_gyn3e"]
+[ext_resource type="Script" path="res://master_data/countries/country.gd" id="2_mucam"]
+
+[resource]
+script = ExtResource("2_mucam")
+id = 71
+code = "GB"
+name = "United Kingdom"
+coordinates = Vector2(7, 4)
+locations = Array[ExtResource("1_gyn3e")]([])

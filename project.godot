@@ -53,6 +53,8 @@ folder_colors={
 [gui]
 
 theme/custom="uid://ukt8dgouxdxt"
+theme/custom_font="uid://cs1yn8q07d5k4"
+theme/default_font_hinting=2
 theme/default_font_multichannel_signed_distance_field=true
 
 [input]

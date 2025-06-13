@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Country" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://master_data/locations/location.gd" id="1_ytn8i"]
+[ext_resource type="Script" path="res://master_data/countries/country.gd" id="2_d34h2"]
+
+[resource]
+script = ExtResource("2_d34h2")
+id = 35
+code = "CD"
+name = "Congo, The Democratic Republic of the"
+coordinates = Vector2(3, 2)
+locations = Array[ExtResource("1_ytn8i")]([])

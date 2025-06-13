@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://chd34lwigyb5e"]
 
 [ext_resource type="Script" uid="uid://bp130y35xqygy" path="res://systems/tooltip/tooltip.gd" id="1_7rjlb"]
-[ext_resource type="Texture2D" uid="uid://dk0mxwktkkd5b" path="res://master_data/people/skills/training_and_certifications/icons/skill_green_logistics_certification_icon.png" id="2_p7mdq"]
+[ext_resource type="Texture2D" uid="uid://ciwqcrdw7ve0p" path="res://3d_scenes/entities/humans/inventory/bin.png" id="2_p7mdq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7rjlb"]
 content_margin_left = 3.0
@@ -24,38 +24,46 @@ color = Color(0, 0, 0, 0.19607843)
 grow_begin = 0.0
 grow_end = 0.0
 
-[node name="Tooltip" type="PanelContainer" node_paths=PackedStringArray("icon_rect", "header_label", "body_label")]
-offset_right = 227.0
-offset_bottom = 41.0
+[node name="Tooltip" type="PanelContainer" node_paths=PackedStringArray("header_container", "icon_rect", "header_label", "body_label")]
+offset_right = 230.0
+offset_bottom = 44.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7rjlb")
 script = ExtResource("1_7rjlb")
-icon_rect = NodePath("VBoxContainer/HBoxContainer/Icon")
-header_label = NodePath("VBoxContainer/HBoxContainer/Header")
+header_container = NodePath("VBoxContainer/HeaderContainer")
+icon_rect = NodePath("VBoxContainer/HeaderContainer/HBoxContainer/Icon")
+header_label = NodePath("VBoxContainer/HeaderContainer/HBoxContainer/Header")
 body_label = NodePath("VBoxContainer/Body")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HeaderContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HeaderContainer"]
 layout_mode = 2
 
-[node name="Icon" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+[node name="Icon" type="TextureRect" parent="VBoxContainer/HeaderContainer/HBoxContainer"]
 modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 texture = ExtResource("2_p7mdq")
-expand_mode = 2
+expand_mode = 1
+stretch_mode = 5
 
-[node name="Header" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="Header" type="Label" parent="VBoxContainer/HeaderContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 12
-text = "Tooltip header"
+text = "Tooltip header stdr "
 autowrap_mode = 3
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/HeaderContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_7rjlb")
 

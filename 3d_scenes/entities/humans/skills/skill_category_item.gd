@@ -18,6 +18,10 @@ func with_data(skill_category: SkillCategory) -> SkillCategoryItem:
 	return self
 
 
+func get_tooltip_icon() -> Texture2D:
+	return skill_category.category_icon
+
+
 func get_tooltip_header() -> String:
 	return skill_category.category_name
 

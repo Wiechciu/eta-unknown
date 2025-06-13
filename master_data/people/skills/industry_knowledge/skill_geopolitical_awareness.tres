@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://cok3cvdnpu20r"]
+[gd_resource type="Resource" script_class="Skill" load_steps=4 format=3 uid="uid://cok3cvdnpu20r"]
 
 [ext_resource type="Script" uid="uid://cb88ovqkdfiaj" path="res://master_data/people/skills/skill.gd" id="1_7eu72"]
 [ext_resource type="Resource" uid="uid://daf6onx460ss" path="res://master_data/people/skills/industry_knowledge/category_industry_knowledge.tres" id="2_lm5lb"]
+[ext_resource type="Texture2D" uid="uid://nhs5l2ttijo" path="res://master_data/people/skills/industry_knowledge/icons/skill_geopolitical_awareness_icon.png" id="3_ekbji"]
 
 [resource]
 script = ExtResource("1_7eu72")
 skill_name = "Geopolitical Awareness"
 skill_description = "Tracks global events, strikes, embargoes, and regulatory changes. Reduces risk of disruption and enables proactive rerouting."
+skill_icon = ExtResource("3_ekbji")
 skill_category = ExtResource("2_lm5lb")
 max_value = 20.0
 metadata/_custom_type_script = "uid://cb88ovqkdfiaj"

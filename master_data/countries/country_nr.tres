@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Country" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://master_data/locations/location.gd" id="1_fm3rm"]
+[ext_resource type="Script" path="res://master_data/countries/country.gd" id="2_soeqr"]
+
+[resource]
+script = ExtResource("2_soeqr")
+id = 158
+code = "NR"
+name = "Nauru"
+coordinates = Vector2(14, 9)
+locations = Array[ExtResource("1_fm3rm")]([])

@@ -2,11 +2,11 @@ class_name Country
 extends Resource
 
 
-var id: int
-var code: String
-var name: String
-var coordinates: Vector2
-var locations: Array[Location]
+@export var id: int
+@export var code: String
+@export var name: String
+@export var coordinates: Vector2
+@export var locations: Array[Location]
 
 
 @warning_ignore("shadowed_variable")
@@ -17,10 +17,15 @@ func with_data(id: int, code: String, name: String, coordinates: Vector2) -> Cou
 	self.coordinates = coordinates
 	
 	GlobalRefs.countries.append(self)
-	GlobalRefs.countries_dict[id] = self
-	GlobalRefs.countries_code_dict[code] = self
 	
 	return self
+
+
+static func get_country_by_code(code: String) -> Country:
+	for country: Country in GlobalRefs.countries:
+		if country.code == code:
+			return country
+	return null
 
 
 func distance_to(other_country: Country) -> float:

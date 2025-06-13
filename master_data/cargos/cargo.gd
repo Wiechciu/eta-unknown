@@ -2,12 +2,12 @@ class_name Cargo
 extends Resource
 
 
-var id: int
-var description: String
-var hs_code: String
-var unit_value: float
-var unit_size: float
-var unit_weight: float
+@export var id: int
+@export var description: String
+@export var hs_code: String
+@export var unit_value: float
+@export var unit_size: float
+@export var unit_weight: float
 
 
 @warning_ignore("shadowed_variable")
@@ -20,7 +20,6 @@ func with_data(id: int, description: String, hs_code: String, unit_value: float,
 	self.unit_weight = unit_weight
 	
 	GlobalRefs.cargos.append(self)
-	GlobalRefs.cargos_dict[id] = self
 	
 	return self
 

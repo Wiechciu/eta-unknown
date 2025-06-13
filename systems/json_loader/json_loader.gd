@@ -17,14 +17,32 @@ func _ready() -> void:
 
 func start() -> void:
 	print("--- starting loading from JSONs ---")
-	load_cargo_from_json(cargo_json)
-	load_currencies_from_json(currencies_json)
-	load_job_positions_from_json(job_positions_json)
-	load_countries_from_json(countries_json)
+	#load_cargo_from_json(cargo_json)
+	#load_currencies_from_json(currencies_json)
+	#load_job_positions_from_json(job_positions_json)
+	#load_countries_from_json(countries_json)
 	load_locations_from_json(locations_json)
 	load_parties_from_json(parties_json)
 	load_people_from_json(people_json)
 	print("--- finished loading from JSONs ---\n")
+	
+	#save_resources_to_disk()
+
+
+func save_resources_to_disk() -> void:
+	var folder_path: String = "res://master_data/cargos/"
+	var dir: DirAccess = DirAccess.open(folder_path)
+	if not dir:
+		return
+	
+	for resource: Cargo in GlobalRefs.cargos:
+		var safe_name: String = "cargo_" + resource.description.strip_edges().to_lower().replace(" ", "_")
+		var path: String = folder_path.path_join("%s.tres" % safe_name)
+		var err: Error = ResourceSaver.save(resource, path)
+		if err != OK:
+			push_error("Failed to save: %s (error code: %d)" % [resource.description, err])
+		else:
+			print("Saved: %s" % path)
 
 
 func load_cargo_from_json(file_to_load: String) -> void:
@@ -35,7 +53,7 @@ func load_cargo_from_json(file_to_load: String) -> void:
 		Cargo.new().with_data(
 			GlobalRefs.get_cargo_id(),
 			str(item.description) if item.description else "",
-			str(item.hs_code) if item.hs_code else "",
+			str(int(item.hs_code)) if item.hs_code else "",
 			item.unit_value as float if item.unit_value else 0.0,
 			item.unit_size as float if item.unit_size else 0.0,
 			item.unit_weight as float if item.unit_weight else 0.0
@@ -44,56 +62,56 @@ func load_cargo_from_json(file_to_load: String) -> void:
 	print("loaded %s cargo | in %s ms" % [GlobalRefs.cargos.size(), UtilityTools.get_elapsed_time()])
 
 
-func load_currencies_from_json(file_to_load: String) -> void:
-	UtilityTools.start_timer()
-	var loaded_array: Array = load_json_file(file_to_load)
-	
-	for item: Dictionary in loaded_array:
-		Currency.new().with_data(
-			GlobalRefs.get_currency_id(),
-			str(item.code) if item.code else "",
-			str(item.name) if item.name else "",
-			item.exchange_rate_to_usd as float if item.exchange_rate_to_usd else 0.0
-			)
-	
-	print("loaded %s currencies | in %s ms" % [GlobalRefs.currencies.size(), UtilityTools.get_elapsed_time()])
+#func load_currencies_from_json(file_to_load: String) -> void:
+	#UtilityTools.start_timer()
+	#var loaded_array: Array = load_json_file(file_to_load)
+	#
+	#for item: Dictionary in loaded_array:
+		#Currency.new().with_data(
+			#GlobalRefs.get_currency_id(),
+			#str(item.code) if item.code else "",
+			#str(item.name) if item.name else "",
+			#item.exchange_rate_to_usd as float if item.exchange_rate_to_usd else 0.0
+			#)
+	#
+	#print("loaded %s currencies | in %s ms" % [GlobalRefs.currencies.size(), UtilityTools.get_elapsed_time()])
 
 
-func load_job_positions_from_json(file_to_load: String) -> void:
-	UtilityTools.start_timer()
-	var loaded_array: Array = load_json_file(file_to_load)
-	
-	for item: Dictionary in loaded_array:
-		JobPosition.new().with_data(
-			GlobalRefs.get_job_position_id(),
-			str(item.title) if item.title else "",
-			item.salary as float if item.salary else 0.0
-			)
-	
-	print("loaded %s job positions | in %s ms" % [GlobalRefs.job_positions.size(), UtilityTools.get_elapsed_time()])
+#func load_job_positions_from_json(file_to_load: String) -> void:
+	#UtilityTools.start_timer()
+	#var loaded_array: Array = load_json_file(file_to_load)
+	#
+	#for item: Dictionary in loaded_array:
+		#JobPosition.new().with_data(
+			#GlobalRefs.get_job_position_id(),
+			#str(item.title) if item.title else "",
+			#item.salary as float if item.salary else 0.0
+			#)
+	#
+	#print("loaded %s job positions | in %s ms" % [GlobalRefs.job_positions.size(), UtilityTools.get_elapsed_time()])
 
 
-func load_countries_from_json(file_to_load: String) -> void:
-	UtilityTools.start_timer()
-	var loaded_array: Array = load_json_file(file_to_load)
-	
-	var coordinate_max_x: int = 15
-	var coordinate_x: int = 0
-	var coordinate_y: int = 0
-	for item: Dictionary in loaded_array:
-		Country.new().with_data(
-			GlobalRefs.get_country_id(),
-			str(item.code) if item.code else "",
-			str(item.name) if item.name else "",
-			Vector2(coordinate_x, coordinate_y),
-			)
-		if coordinate_x < coordinate_max_x:
-			coordinate_x += 1
-		else:
-			coordinate_x = 0
-			coordinate_y += 1
-	
-	print("loaded %s countries | in %s ms" % [GlobalRefs.countries.size(), UtilityTools.get_elapsed_time()])
+#func load_countries_from_json(file_to_load: String) -> void:
+	#UtilityTools.start_timer()
+	#var loaded_array: Array = load_json_file(file_to_load)
+	#
+	#var coordinate_max_x: int = 15
+	#var coordinate_x: int = 0
+	#var coordinate_y: int = 0
+	#for item: Dictionary in loaded_array:
+		#Country.new().with_data(
+			#GlobalRefs.get_country_id(),
+			#str(item.code) if item.code else "",
+			#str(item.name) if item.name else "",
+			#Vector2(coordinate_x, coordinate_y),
+			#)
+		#if coordinate_x < coordinate_max_x:
+			#coordinate_x += 1
+		#else:
+			#coordinate_x = 0
+			#coordinate_y += 1
+	#
+	#print("loaded %s countries | in %s ms" % [GlobalRefs.countries.size(), UtilityTools.get_elapsed_time()])
 
 
 func load_locations_from_json(file_to_load: String) -> void:
@@ -105,41 +123,44 @@ func load_locations_from_json(file_to_load: String) -> void:
 			GlobalRefs.get_location_id(),
 			(str(item.country) + str(item.location)) if item.country else "",
 			str(item.name_wo_diacritics) if item.name_wo_diacritics else "",
-			GlobalRefs.countries_code_dict[item.country] if item.country else null
+			Country.get_country_by_code(item.country) if item.country else null
 			)
 	
 	print("loaded %s locations | in %s ms" % [GlobalRefs.locations.size(), UtilityTools.get_elapsed_time()])
 
 
-func load_parties_from_json(file_to_load: String) -> void:
+func load_parties_from_json(_file_to_load: String) -> void:
 	UtilityTools.start_timer()
-	var loaded_array: Array = load_json_file(file_to_load)
+	#var loaded_array: Array = load_json_file(file_to_load)
 	
-	for item: Dictionary in loaded_array:
-		var new_resource: Party = Party.new().with_data(
-			GlobalRefs.get_party_id(),
-			Party.Type.get(str(item.type).to_upper()) as Party.Type if item.type else Party.Type.CUSTOMER,
-			str(item.name) if item.name else "",
-			str(item.street_name) if item.street_name else "",
-			str(item.street_number) if item.street_number else "",
-			str(item.house_number) if item.house_number else "",
-			str(item.postal_code) if item.postal_code else "",
-			str(item.city_name) if item.city_name else "",
-			GlobalRefs.countries_code_dict[item.country_code] if item.country_code else null,
-			[] as Array[Person],
-			0.0,
-			[] as Array[RequestForQuotation],
-			[] as Array[Shipment],
-			100000,
-			0.0,
-			0.0,
-			0.0,
-			)
-		
-		if new_resource.is_supplier:
-			new_resource.reliability_factor = randf_range(0.9, 1.0)
-			new_resource.cost_factor = randf_range(0.8, 1.0)
-	
+	for i: int in 1000:
+		PartyGenerator.create_new()
+	#for item: Dictionary in loaded_array:
+		#var new_resource: Party = Party.new().with_data(
+			#GlobalRefs.get_party_id(),
+			#Party.Type.get(str(item.type).to_upper()) as Party.Type if item.type else Party.Type.CUSTOMER,
+			#str(item.name) if item.name else "",
+			#str(item.street_name) if item.street_name else "",
+			#str(item.street_number) if item.street_number else "",
+			#str(item.house_number) if item.house_number else "",
+			#str(item.postal_code) if item.postal_code else "",
+			#str(item.city_name) if item.city_name else "",
+			#GlobalRefs.countries_code_dict[item.country_code] if item.country_code else null,
+			#[] as Array[Person],
+			#0.0,
+			#[] as Array[RequestForQuotation],
+			#[] as Array[Shipment],
+			#100000,
+			#0.0,
+			#0.0,
+			#0.0,
+			#Party.generate_domain_for_company_name(item.name)
+			#)
+		#
+		#if new_resource.is_supplier:
+			#new_resource.reliability_factor = randf_range(0.9, 1.0)
+			#new_resource.cost_factor = randf_range(0.8, 1.0)
+	#
 	print("loaded %s parties | in %s ms" % [GlobalRefs.parties.size(), UtilityTools.get_elapsed_time()])
 	print("   loaded " + str(GlobalRefs.carriers.size()) + " carriers")
 	print("   loaded " + str(GlobalRefs.customers.size()) + " customers")
@@ -149,24 +170,28 @@ func load_parties_from_json(file_to_load: String) -> void:
 	print("   loaded " + str(GlobalRefs.truckers.size()) + " truckers")
 
 
-func load_people_from_json(file_to_load: String) -> void:
+func load_people_from_json(_file_to_load: String) -> void:
 	UtilityTools.start_timer()
-	var loaded_array: Array = load_json_file(file_to_load)
+	#var loaded_array: Array = load_json_file(file_to_load)
 	
-	for item: Dictionary in loaded_array:
-		var new_resource: Person = Person.new().with_data(
-			GlobalRefs.get_person_id(),
-			str(item.first_name) if item.first_name else "",
-			str(item.last_name) if item.last_name else "",
-			str(item.gender) if item.gender else "",
-			str(item.email) if item.email else "",
-			str(item.phone_number) if item.phone_number else "",
-			str(item.birthdate) if item.birthdate else "",
-			Person.Experience.get(str(item.experience).to_upper()) as Person.Experience if item.experience else Person.Experience.NOVICE,
-			GlobalRefs.parties.pick_random() as Party,
-			GlobalRefs.job_positions.pick_random() as JobPosition
-			)
-		new_resource.employer.employees.append(new_resource)
+	for i: int in 1000:
+		PersonGenerator.create_new()
+	
+	#for item: Dictionary in loaded_array:
+		#var new_resource: Person = Person.new().with_data(
+			#GlobalRefs.get_person_id(),
+			#str(item.first_name) if item.first_name else "",
+			#str(item.last_name) if item.last_name else "",
+			#GlobalRefs.genders.pick_random(),
+			##str(item.gender) if item.gender else "",
+			#str(item.email) if item.email else "",
+			#str(item.phone_number) if item.phone_number else "",
+			#str(item.birthdate) if item.birthdate else "",
+			#Person.Experience.get(str(item.experience).to_upper()) as Person.Experience if item.experience else Person.Experience.NOVICE,
+			#GlobalRefs.parties.pick_random() as Party,
+			#GlobalRefs.job_positions.pick_random() as JobPosition
+			#)
+		#new_resource.employer.employees.append(new_resource)
 	
 	print("loaded %s people | in %s ms" % [GlobalRefs.people.size(), UtilityTools.get_elapsed_time()])
 

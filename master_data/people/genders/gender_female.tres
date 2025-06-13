@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Gender" load_steps=2 format=3 uid="uid://ekyw858y4v28"]
+
+[ext_resource type="Script" uid="uid://dhyiqyu5jpifx" path="res://master_data/people/genders/gender.gd" id="1_i1as3"]
+
+[resource]
+script = ExtResource("1_i1as3")
+gender_name = "female"
+metadata/_custom_type_script = "uid://dhyiqyu5jpifx"

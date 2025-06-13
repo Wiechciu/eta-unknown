@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Country" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://master_data/locations/location.gd" id="1_v1r0l"]
+[ext_resource type="Script" path="res://master_data/countries/country.gd" id="2_t50y6"]
+
+[resource]
+script = ExtResource("2_t50y6")
+id = 141
+code = "MS"
+name = "Montserrat"
+coordinates = Vector2(13, 8)
+locations = Array[ExtResource("1_v1r0l")]([])

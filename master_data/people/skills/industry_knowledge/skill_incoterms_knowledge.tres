@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://b5u0niuer3mkm"]
+[gd_resource type="Resource" script_class="Skill" load_steps=4 format=3 uid="uid://b5u0niuer3mkm"]
 
 [ext_resource type="Script" uid="uid://cb88ovqkdfiaj" path="res://master_data/people/skills/skill.gd" id="1_ghmwg"]
 [ext_resource type="Resource" uid="uid://daf6onx460ss" path="res://master_data/people/skills/industry_knowledge/category_industry_knowledge.tres" id="2_4cl5t"]
+[ext_resource type="Texture2D" uid="uid://uhyyvgi5b2ob" path="res://master_data/people/skills/industry_knowledge/icons/skill_incoterms_knowledge_icon.png" id="3_ppsca"]
 
 [resource]
 script = ExtResource("1_ghmwg")
 skill_name = "Incoterms Knowledge"
 skill_description = "Thorough understanding of risk and cost transfer between buyer and seller. Prevents misquotes and contractual disputes."
+skill_icon = ExtResource("3_ppsca")
 skill_category = ExtResource("2_4cl5t")
 max_value = 20.0
 metadata/_custom_type_script = "uid://cb88ovqkdfiaj"

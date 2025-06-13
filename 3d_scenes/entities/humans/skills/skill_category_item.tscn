@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjbj88mhj7g0s"]
+[gd_scene load_steps=6 format=3 uid="uid://bjbj88mhj7g0s"]
 
 [ext_resource type="Script" uid="uid://doayam8if1mjx" path="res://3d_scenes/entities/humans/skills/skill_category_item.gd" id="1_8allk"]
 [ext_resource type="PackedScene" uid="uid://csikevd7cm74m" path="res://systems/tooltip/tooltip_component.tscn" id="2_rsrmq"]
+[ext_resource type="PackedScene" uid="uid://bmcauqk83v5kh" path="res://systems/ui/ui_animation_component.tscn" id="3_hbu4u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e77h3"]
 bg_color = Color(0.41598, 0.41598, 0.41598, 0)
@@ -13,6 +14,7 @@ grow_begin = 0.0
 grow_end = 0.0
 
 [node name="SkillCategoryItem" type="PanelContainer" node_paths=PackedStringArray("skill_category_name_label")]
+custom_minimum_size = Vector2(0, 25)
 offset_right = 150.0
 offset_bottom = 20.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_e77h3")
@@ -24,19 +26,23 @@ skill_category_name_label = NodePath("VBoxContainer/HBoxContainer/SkillCategoryN
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 0
-theme_override_styles/separator = SubResource("StyleBoxLine_l01oh")
-
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 
 [node name="SkillCategoryName" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 18
+mouse_filter = 1
+theme_override_font_sizes/font_size = 15
 text = "Category"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="UiAnimationComponent" parent="VBoxContainer/HBoxContainer/SkillCategoryName" instance=ExtResource("3_hbu4u")]
+animate_color = true
+color_animation_in_value = Color(0.99637455, 0.8946369, 0.45857948, 1)
+animation_in_duration = 0.19999999999708962
+animation_out_duration = 0.19999999999708962
 
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2

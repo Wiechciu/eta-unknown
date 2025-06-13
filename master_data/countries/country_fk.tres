@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Country" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://master_data/locations/location.gd" id="1_bnjt2"]
+[ext_resource type="Script" path="res://master_data/countries/country.gd" id="2_5iuvs"]
+
+[resource]
+script = ExtResource("2_5iuvs")
+id = 66
+code = "FK"
+name = "Falkland Islands (Malvinas)"
+coordinates = Vector2(2, 4)
+locations = Array[ExtResource("1_bnjt2")]([])

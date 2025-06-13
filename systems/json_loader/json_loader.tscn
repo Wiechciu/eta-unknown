@@ -4,7 +4,7 @@
 
 [node name="JsonLoader" type="Node"]
 script = ExtResource("1_elhwi")
-cargo_json = "res://master_data/cargo/cargo_json.json"
+cargo_json = "uid://dxl37m2a4xo5t"
 currencies_json = "res://master_data/currencies/currencies_json.json"
 countries_json = "res://master_data/countries/countries_json.json"
 locations_json = "res://master_data/locations/locations_json.json"

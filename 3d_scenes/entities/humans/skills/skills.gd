@@ -41,13 +41,9 @@ func populate_container() -> void:
 	var last_skill_category: SkillCategory = null
 	for skill_data: SkillData in player.person.skills:
 		if skill_data.skill.skill_category != last_skill_category:
-			var new_skill_category_item: SkillCategoryItem = (skill_category_item_scene.instantiate() as SkillCategoryItem).with_data(skill_data.skill.skill_category)
-			item_container.add_child(new_skill_category_item)
-			skill_category_items.append(new_skill_category_item)
+			add_skill_category(skill_data)
 			last_skill_category = skill_data.skill.skill_category
-		var new_skill_item: SkillItem = (skill_item_scene.instantiate() as SkillItem).with_data(skill_data)
-		item_container.add_child(new_skill_item)
-		skill_items.append(new_skill_item)
+		add_skill(skill_data)
 
 
 func open() -> void:
@@ -60,3 +56,15 @@ func open() -> void:
 func close() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	visual.hide()
+
+
+func add_skill(skill_data: SkillData) -> void:
+	var new_skill_item: SkillItem = (skill_item_scene.instantiate() as SkillItem).with_data(skill_data)
+	item_container.add_child(new_skill_item)
+	skill_items.append(new_skill_item)
+
+
+func add_skill_category(skill_data: SkillData) -> void:
+	var new_skill_category_item: SkillCategoryItem = (skill_category_item_scene.instantiate() as SkillCategoryItem).with_data(skill_data.skill.skill_category)
+	item_container.add_child(new_skill_category_item)
+	skill_category_items.append(new_skill_category_item)

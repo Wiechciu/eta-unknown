@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Cargo" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://master_data/cargos/cargo.gd" id="1_gal0o"]
+
+[resource]
+script = ExtResource("1_gal0o")
+id = 20
+description = "Cosmetics"
+hs_code = "330499"
+unit_value = 50.0
+unit_size = 0.2
+unit_weight = 0.15

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Country" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://master_data/locations/location.gd" id="1_43blg"]
+[ext_resource type="Script" path="res://master_data/countries/country.gd" id="2_kyubj"]
+
+[resource]
+script = ExtResource("2_kyubj")
+id = 43
+code = "CN"
+name = "China"
+coordinates = Vector2(11, 2)
+locations = Array[ExtResource("1_43blg")]([])

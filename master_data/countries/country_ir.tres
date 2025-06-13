@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Country" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://master_data/locations/location.gd" id="1_bfmtf"]
+[ext_resource type="Script" path="res://master_data/countries/country.gd" id="2_t5p2t"]
+
+[resource]
+script = ExtResource("2_t5p2t")
+id = 100
+code = "IR"
+name = "Iran, Islamic Republic of"
+coordinates = Vector2(4, 6)
+locations = Array[ExtResource("1_bfmtf")]([])

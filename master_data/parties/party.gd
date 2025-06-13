@@ -52,6 +52,8 @@ var is_supplier: bool:
 var reliability_factor: float
 var cost_factor: float
 
+var domain: String
+
 
 @warning_ignore("shadowed_variable")
 func with_data(id: int, type: Type, name: String, street_name: String, street_number: String, house_number: String, postal_code: String, city_name: String, country: Country, employees: Array[Person], balance: float, requests_for_quotation: Array[RequestForQuotation], shipments: Array[Shipment], last_shipment_number: int, total_earnings: float, reliability_factor: float, cost_factor: float) -> Party:
@@ -75,6 +77,8 @@ func with_data(id: int, type: Type, name: String, street_name: String, street_nu
 	
 	self.reliability_factor = reliability_factor
 	self.cost_factor = cost_factor
+	
+	self.domain = generate_domain_for_company_name(self.name)
 	
 	GlobalRefs.parties.append(self)
 	GlobalRefs.parties_dict[id] = self
@@ -104,6 +108,17 @@ func with_data(id: int, type: Type, name: String, street_name: String, street_nu
 		GlobalRefs.suppliers_dict[self.id] = self
 
 	return self
+
+
+func generate_domain_for_company_name(company_name: String) -> String:
+	var sanitized: String = company_name.to_lower()
+	var regex: RegEx = RegEx.new()
+	
+	# Keep only a-z and 0-9; remove everything else
+	regex.compile("[^a-z0-9]")
+	sanitized = regex.sub(sanitized, "", true)
+	
+	return sanitized + ".com"
 
 
 func accept_shipment(new_shipment: Shipment) -> void:
@@ -159,7 +174,7 @@ func to_dict() -> Dictionary:
 		"last_shipment_number" = last_shipment_number,
 		"total_earnings" = total_earnings,
 		"reliability_factor" = reliability_factor,
-		"cost_factor" = cost_factor
+		"cost_factor" = cost_factor,
 	}
 
 
@@ -173,7 +188,7 @@ static func from_dict(data: Dictionary) -> Party:
 		data["house_number"],
 		data["postal_code"],
 		data["city_name"],
-		GlobalRefs.countries_dict[data["country_id"] as int],
+		GlobalRefs.countries[data["country_id"] as int],
 		[] as Array[Person],
 		data["balance"],
 		[] as Array[RequestForQuotation],

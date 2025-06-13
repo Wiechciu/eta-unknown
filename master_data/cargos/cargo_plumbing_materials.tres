@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Cargo" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://master_data/cargos/cargo.gd" id="1_b0n4s"]
+
+[resource]
+script = ExtResource("1_b0n4s")
+id = 60
+description = "Plumbing materials"
+hs_code = "730793"
+unit_value = 90.0
+unit_size = 3.0
+unit_weight = 12.0

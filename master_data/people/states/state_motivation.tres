@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="State" load_steps=2 format=3 uid="uid://b4e6c6487lose"]
+
+[ext_resource type="Script" uid="uid://c6yc6wr60oe13" path="res://master_data/people/states/state.gd" id="1_ydhxo"]
+
+[resource]
+script = ExtResource("1_ydhxo")
+state_name = "Motivation"
+state_description = "Willingness to take initiative."
+state_max_value = 100.0
+metadata/_custom_type_script = "uid://c6yc6wr60oe13"

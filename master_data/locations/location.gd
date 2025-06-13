@@ -23,10 +23,15 @@ func with_data(id: int, code: String, name: String, country: Country) -> Locatio
 	country.locations.append(self)
 	
 	GlobalRefs.locations.append(self)
-	GlobalRefs.locations_dict[id] = self
-	GlobalRefs.locations_code_dict[code] = self
 
 	return self
+
+
+static func get_location_by_code(code: String) -> Location:
+	for location: Location in GlobalRefs.locations:
+		if location.code == code:
+			return location
+	return null
 
 
 static func is_in_country(location_to_check: Location, country_to_check: Country) -> bool:
@@ -52,7 +57,7 @@ static func from_dict(data: Dictionary) -> Location:
 		data.id,
 		data.code,
 		data.name,
-		GlobalRefs.countries_dict[data.country_id as int],
+		GlobalRefs.countries[data.country_id as int],
 	)
 
 

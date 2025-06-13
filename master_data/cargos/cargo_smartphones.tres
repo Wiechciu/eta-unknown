@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Cargo" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://master_data/cargos/cargo.gd" id="1_v8hmc"]
+
+[resource]
+script = ExtResource("1_v8hmc")
+id = 50
+description = "Smartphones"
+hs_code = "851713"
+unit_value = 700.0
+unit_size = 0.1
+unit_weight = 0.3

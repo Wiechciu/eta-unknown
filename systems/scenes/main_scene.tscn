@@ -70,6 +70,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.50287)
 [node name="Employee" parent="." node_paths=PackedStringArray("target_nodes") instance=ExtResource("26_sd7sv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15824, 0, 0.172612)
 target_nodes = [NodePath("../TargetNode1"), NodePath("../TargetNode2"), NodePath("../TargetNode3"), NodePath("../TargetNode4")]
+metadata/_custom_type_script = "uid://bx755gagbe0ch"
 
 [node name="Warehouse" parent="." instance=ExtResource("27_hjyx5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.73186, -1, 15.0399)

@@ -28,11 +28,11 @@ func _on_mouse_exited() -> void:
 func create_tooltip() -> void:
 	destroy_tooltip()
 	
-	# TODO: Fade in animation
 	tooltip = (tooltip_scene.instantiate() as Tooltip).with_data(parent.get_tooltip_icon(), parent.get_tooltip_header(), parent.get_tooltip_body())
 	get_tree().root.add_child(tooltip)
+	tooltip.fade_in()
 
 
 func destroy_tooltip() -> void:
 	if tooltip != null:
-		tooltip.queue_free()
+		tooltip.fade_out()

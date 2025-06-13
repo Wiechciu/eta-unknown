@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="JobPosition" load_steps=2 format=3 uid="uid://bdto114kmvp4q"]
+
+[ext_resource type="Script" uid="uid://8mjhj67rb671" path="res://master_data/people/job_position/job_position.gd" id="1_0rw46"]
+
+[resource]
+script = ExtResource("1_0rw46")
+id = 0
+title = ""
+salary = 0.0
+metadata/_custom_type_script = "uid://8mjhj67rb671"

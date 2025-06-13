@@ -1,6 +1,7 @@
 ﻿keys;en;pl
 GAME_NAME;ETA: Unknown;ETA: Nieznana
 PRESS_TO_INTERACT;Press {action} to interact;Naciśnij {action}, aby wejść w interakcję
+INTERACT_NOTHING;Nothing to do here;Nie ma tu nic do zrobienia
 HOLD_TO_THROW;Hold {action} to throw;Przytrzymaj {action}, aby rzucić
 TODAY_IS;Today is;Dzisiaj jest
 DAY_0;Sunday;Niedziela

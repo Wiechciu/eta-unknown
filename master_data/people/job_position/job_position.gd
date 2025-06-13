@@ -2,9 +2,9 @@ class_name JobPosition
 extends Resource
 
 
-var id: int
-var title: String
-var salary: float
+@export var id: int
+@export var title: String
+@export var salary: float
 
 
 @warning_ignore("shadowed_variable")
@@ -14,7 +14,6 @@ func with_data(id: int, title: String, salary: float) -> JobPosition:
 	self.salary = salary
 	
 	GlobalRefs.job_positions.append(self)
-	GlobalRefs.job_positions_dict[id] = self
 	
 	return self
 

@@ -1,24 +1,17 @@
 extends Node
 
-
+@export var genders: Array[Gender]
+@export var states: Array[State]
 @export var skill_categories: Array[SkillCategory]
 @export var skills: Array[Skill]
 
-var cargos: Array[Cargo]
-var cargos_dict: Dictionary[int, Cargo]
-var currencies: Array[Currency]
-var currencies_dict: Dictionary[int, Currency]
-var currencies_code_dict: Dictionary[String, Currency]
-var job_positions: Array[JobPosition]
-var job_positions_dict: Dictionary[int, JobPosition]
+@export var cargos: Array[Cargo]
+@export var currencies: Array[Currency]
+@export var job_positions: Array[JobPosition]
 
-var countries: Array[Country]
-var countries_dict: Dictionary[int, Country]
-var countries_code_dict: Dictionary[String, Country]
+@export var countries: Array[Country]
 
-var locations: Array[Location]
-var locations_dict: Dictionary[int, Location]
-var locations_code_dict: Dictionary[String, Location]
+@export var locations: Array[Location]
 var airports: Array[Location]:
 	get:
 		return locations.filter(func(location: Location) -> bool: return location.is_airport)
@@ -262,19 +255,7 @@ func from_dict(data: Dictionary) -> void:
 
 
 func clear_all() -> void:
-	cargos.clear()
-	cargos_dict.clear()
-	currencies.clear()
-	currencies_dict.clear()
-	currencies_code_dict.clear()
-	job_positions.clear()
-	job_positions_dict.clear()
-	countries.clear()
-	countries_dict.clear()
-	countries_code_dict.clear()
-	locations.clear()
-	locations_dict.clear()
-	locations_code_dict.clear()
+	locations.clear() ## TODO: Should I really save 16k locations to disk?
 	
 	parties.clear()
 	parties_dict.clear()

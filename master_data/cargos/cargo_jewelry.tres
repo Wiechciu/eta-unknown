@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Cargo" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://master_data/cargos/cargo.gd" id="1_vmw00"]
+
+[resource]
+script = ExtResource("1_vmw00")
+id = 4
+description = "Jewelry"
+hs_code = "711319"
+unit_value = 1000.0
+unit_size = 0.02
+unit_weight = 0.1

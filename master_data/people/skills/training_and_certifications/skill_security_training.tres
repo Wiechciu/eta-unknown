@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://cg2asqhteh1jc"]
+[gd_resource type="Resource" script_class="Skill" load_steps=4 format=3 uid="uid://cg2asqhteh1jc"]
 
 [ext_resource type="Script" uid="uid://cb88ovqkdfiaj" path="res://master_data/people/skills/skill.gd" id="1_lr8ry"]
 [ext_resource type="Resource" uid="uid://hrys7o0eb55t" path="res://master_data/people/skills/training_and_certifications/category_training_and_certifications.tres" id="2_tjkui"]
+[ext_resource type="Texture2D" uid="uid://21rgiatf25rw" path="res://master_data/people/skills/training_and_certifications/icons/skill_security_training_icon.png" id="3_tjkui"]
 
 [resource]
 script = ExtResource("1_lr8ry")
 skill_name = "Security Training"
 skill_description = "Covers anti-theft protocols, CTPAT, and facility access rules. Reduces cargo loss risk and enables secure shipment contracts."
+skill_icon = ExtResource("3_tjkui")
 skill_category = ExtResource("2_tjkui")
-max_value = 20.0
+max_value = 1.0
 metadata/_custom_type_script = "uid://cb88ovqkdfiaj"

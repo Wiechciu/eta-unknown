@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Cargo" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://master_data/cargos/cargo.gd" id="1_kuegp"]
+
+[resource]
+script = ExtResource("1_kuegp")
+id = 43
+description = "Shirts"
+hs_code = "610910"
+unit_value = 40.0
+unit_size = 0.3
+unit_weight = 0.4

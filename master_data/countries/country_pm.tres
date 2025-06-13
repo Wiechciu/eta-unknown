@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Country" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://master_data/locations/location.gd" id="1_ioqfq"]
+[ext_resource type="Script" path="res://master_data/countries/country.gd" id="2_repjk"]
+
+[resource]
+script = ExtResource("2_repjk")
+id = 169
+code = "PM"
+name = "Saint Pierre and Miquelon"
+coordinates = Vector2(9, 10)
+locations = Array[ExtResource("1_ioqfq")]([])

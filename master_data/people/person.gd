@@ -11,7 +11,7 @@ enum Experience {
 var id: int
 var first_name: String
 var last_name: String
-var gender: String
+var gender: Gender
 var email: String
 var phone_number: String
 var birthdate: String
@@ -20,14 +20,17 @@ var full_name: String:
 	get:
 		return first_name + " " + last_name
 
+var states: Array[StateData]
 var skills: Array[SkillData]
 
 var employer: Party
 var job_position: JobPosition
+var supervisor: Person
+var subordinates: Array[Person]
 
 
 @warning_ignore("shadowed_variable")
-func with_data(id: int, first_name: String, last_name: String, gender: String, email: String, phone_number: String, birthdate: String, experience: Experience, employer: Party, job_position: JobPosition) -> Person:
+func with_data(id: int, first_name: String, last_name: String, gender: Gender, email: String, phone_number: String, birthdate: String, experience: Experience, employer: Party, job_position: JobPosition) -> Person:
 	self.id = id
 	self.first_name = first_name
 	self.last_name = last_name
@@ -42,13 +45,26 @@ func with_data(id: int, first_name: String, last_name: String, gender: String, e
 	GlobalRefs.people.append(self)
 	GlobalRefs.people_dict[id] = self
 	
+	load_states()
+	load_skills()
+	
+	return self
+
+
+func load_states() -> void:
+	for state: State in GlobalRefs.states:
+		var state_data: StateData = StateData.new()
+		state_data.state = state
+		state_data.value = float(randi_range(0, state.max_value))
+		states.append(state_data)
+
+
+func load_skills() -> void:
 	for skill: Skill in GlobalRefs.skills:
 		var skill_data: SkillData = SkillData.new()
 		skill_data.skill = skill
-		skill_data.value = 1.0
+		skill_data.value = float(randi_range(0, skill.max_value))
 		skills.append(skill_data)
-	
-	return self
 
 
 func to_dict() -> Dictionary:
@@ -77,7 +93,7 @@ static func from_dict(data: Dictionary) -> Person:
 		data.birthdate,
 		data.experience,
 		null,
-		GlobalRefs.job_positions_dict[data.job_position_id as int],
+		GlobalRefs.job_positions[data.job_position_id as int],
 	)
 
 

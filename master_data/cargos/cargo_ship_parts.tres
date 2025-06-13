@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Cargo" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://master_data/cargos/cargo.gd" id="1_js6p2"]
+
+[resource]
+script = ExtResource("1_js6p2")
+id = 23
+description = "Ship parts"
+hs_code = "890690"
+unit_value = 1000.0
+unit_size = 12.0
+unit_weight = 70.0

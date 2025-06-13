@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Cargo" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://master_data/cargos/cargo.gd" id="1_m4ejq"]
+
+[resource]
+script = ExtResource("1_m4ejq")
+id = 12
+description = "Medical equipment"
+hs_code = "901890"
+unit_value = 600.0
+unit_size = 2.0
+unit_weight = 5.0

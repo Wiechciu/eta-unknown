@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://bpd7r2qf2pw4e"]
+[gd_resource type="Resource" script_class="Skill" load_steps=4 format=3 uid="uid://bpd7r2qf2pw4e"]
 
 [ext_resource type="Script" uid="uid://cb88ovqkdfiaj" path="res://master_data/people/skills/skill.gd" id="1_c6nkm"]
 [ext_resource type="Resource" uid="uid://hrys7o0eb55t" path="res://master_data/people/skills/training_and_certifications/category_training_and_certifications.tres" id="2_7kemx"]
+[ext_resource type="Texture2D" uid="uid://dk0mxwktkkd5b" path="res://master_data/people/skills/training_and_certifications/icons/skill_green_logistics_certification_icon.png" id="3_t66it"]
 
 [resource]
 script = ExtResource("1_c6nkm")
 skill_name = "Green Logistics Certification"
 skill_description = "Formal training in sustainability, CO₂ tracking, and modal optimization. Enables eco-routing, offsets, and green client bonuses."
+skill_icon = ExtResource("3_t66it")
 skill_category = ExtResource("2_7kemx")
-max_value = 20.0
+max_value = 1.0
 metadata/_custom_type_script = "uid://cb88ovqkdfiaj"

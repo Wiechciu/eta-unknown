@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Cargo" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://master_data/cargos/cargo.gd" id="1_dxoyg"]
+
+[resource]
+script = ExtResource("1_dxoyg")
+id = 65
+description = "Water"
+hs_code = "220110"
+unit_value = 1.0
+unit_size = 1.0
+unit_weight = 1.0

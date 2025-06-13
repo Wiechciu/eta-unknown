@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Cargo" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://master_data/cargos/cargo.gd" id="1_vlmjp"]
+
+[resource]
+script = ExtResource("1_vlmjp")
+id = 21
+description = "Pharmaceuticals"
+hs_code = "300490"
+unit_value = 450.0
+unit_size = 0.5
+unit_weight = 0.1

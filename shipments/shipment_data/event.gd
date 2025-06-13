@@ -57,7 +57,7 @@ static func from_dict(data: Dictionary) -> Event:
 		data.code,
 		data.type,
 		data.time,
-		GlobalRefs.locations_dict[data.location_id as int] if data.location_id else null,
+		GlobalRefs.locations[data.location_id as int] if data.location_id else null,
 	)
 
 

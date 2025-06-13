@@ -22,7 +22,7 @@ func assign_person() -> void:
 	if person == null:
 		var company: Party = GlobalRefs.freight_forwarders_with_employees.pick_random() as Party
 		person = company.employees.pick_random() as Person
-		person.job_position = GlobalRefs.job_positions_dict[0] ## Intern
+		person.job_position = GlobalRefs.job_positions[0] ## Intern
 
 
 func to_dict() -> Dictionary:

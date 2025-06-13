@@ -124,6 +124,8 @@ func interact(node: Node) -> void:
 	if is_out_of_ink:
 		refill_ink(node)
 		return
+	
+	ActionLogger.create_log("INTERACT_NOTHING")
 
 
 func add_document_to_queue(document: Document) -> void:

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Cargo" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://master_data/cargos/cargo.gd" id="1_yuxu8"]
+
+[resource]
+script = ExtResource("1_yuxu8")
+id = 67
+description = "Coffee"
+hs_code = "90111"
+unit_value = 40.0
+unit_size = 0.5
+unit_weight = 0.3

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Country" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://master_data/locations/location.gd" id="1_jq4cr"]
+[ext_resource type="Script" path="res://master_data/countries/country.gd" id="2_pyxbl"]
+
+[resource]
+script = ExtResource("2_pyxbl")
+id = 58
+code = "EE"
+name = "Estonia"
+coordinates = Vector2(10, 3)
+locations = Array[ExtResource("1_jq4cr")]([])

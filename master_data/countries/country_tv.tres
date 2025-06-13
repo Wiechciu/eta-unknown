@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Country" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://master_data/locations/location.gd" id="1_kcn8j"]
+[ext_resource type="Script" path="res://master_data/countries/country.gd" id="2_3d4tw"]
+
+[resource]
+script = ExtResource("2_3d4tw")
+id = 213
+code = "TV"
+name = "Tuvalu"
+coordinates = Vector2(5, 13)
+locations = Array[ExtResource("1_kcn8j")]([])

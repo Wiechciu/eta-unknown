@@ -2,10 +2,10 @@ class_name Currency
 extends Resource
 
 
-var id: int
-var code: String
-var name: String
-var exchange_rate_to_usd: float
+@export var id: int
+@export var code: String
+@export var name: String
+@export var exchange_rate_to_usd: float
 
 
 @warning_ignore("shadowed_variable")
@@ -16,14 +16,19 @@ func with_data(id: int, code: String, name: String, exchange_rate_to_usd: float)
 	self.exchange_rate_to_usd = exchange_rate_to_usd
 	
 	GlobalRefs.currencies.append(self)
-	GlobalRefs.currencies_dict[id] = self
-	GlobalRefs.currencies_code_dict[code] = self
 	
 	return self
 
 
 func get_exchange_rate_to(other_currency: Currency) -> float:
 	return exchange_rate_to_usd / other_currency.exchange_rate_to_usd
+
+
+static func get_currency_by_code(code: String) -> Currency:
+	for currency: Currency in GlobalRefs.currencies:
+		if currency.code == code:
+			return currency
+	return null
 
 
 func to_dict() -> Dictionary:

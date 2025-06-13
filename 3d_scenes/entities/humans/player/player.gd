@@ -69,21 +69,20 @@ func handle_movement(delta: float) -> void:
 	velocity.z = 0
 	handle_gravity(delta)
 	
-	if not can_move:
-		return
-	
-	var movement_vector2: Vector2 = Input.get_vector("left", "right", "forward", "backward")
-	var movement_vector3: Vector3 = Vector3(movement_vector2.x, 0, movement_vector2.y)
-	var direction_local: Vector3 = global_transform.basis * movement_vector3 
-	velocity += direction_local * delta * movement_actual_speed
+	if can_move:
+		var movement_vector2: Vector2 = Input.get_vector("left", "right", "forward", "backward")
+		var movement_vector3: Vector3 = Vector3(movement_vector2.x, 0, movement_vector2.y)
+		var direction_local: Vector3 = global_transform.basis * movement_vector3 
+		velocity += direction_local * delta * movement_actual_speed
 	
 	handle_head_bobbing()
 
+
 func handle_head_bobbing() -> void:
 	head_bobbing_tween.set_speed_scale(movement_actual_speed / movement_base_speed)
-	if not head_bobbing_tween.is_running() and velocity != Vector3.ZERO and is_on_floor():
+	if not head_bobbing_tween.is_running() and velocity != Vector3.ZERO and is_on_floor() and can_move:
 		head_bobbing_tween.play()
-	elif head_bobbing_tween.is_running() and (velocity == Vector3.ZERO or not is_on_floor()):
+	elif head_bobbing_tween.is_running() and (velocity == Vector3.ZERO or not is_on_floor() or not can_move):
 		head_bobbing_tween.stop()
 		var tween: Tween = create_tween()
 		tween.tween_property(head, "position", head_resting_position, 0.1)

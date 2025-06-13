@@ -62,7 +62,7 @@ func with_data_random(request_for_quotation: RequestForQuotation, quoting_forwar
 	self.quoting_forwarder = quoting_forwarder
 	
 	number = str(id)
-	currency = GlobalRefs.currencies_code_dict.EUR
+	currency = Currency.get_currency_by_code("EUR")
 	var afr_cost: Charge = Charge.new().with_data(Charge.Code.AFR, Charge.Type.COST, randi_range(3, 5) * shipment.cargo_details.total_weight, currency, GlobalRefs.carriers_with_employees.pick_random())
 	var afr_revenue: Charge = Charge.new().from_cost_with_margin(afr_cost, randf_range(0, 0.3), 0, request_for_quotation.requestor)
 	cost_charges.append(afr_cost)

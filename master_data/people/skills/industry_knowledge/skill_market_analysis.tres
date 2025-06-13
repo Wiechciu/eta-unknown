@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://dv3u55pmb2rjm"]
+[gd_resource type="Resource" script_class="Skill" load_steps=4 format=3 uid="uid://dv3u55pmb2rjm"]
 
 [ext_resource type="Script" uid="uid://cb88ovqkdfiaj" path="res://master_data/people/skills/skill.gd" id="1_elmo7"]
 [ext_resource type="Resource" uid="uid://daf6onx460ss" path="res://master_data/people/skills/industry_knowledge/category_industry_knowledge.tres" id="2_c38fl"]
+[ext_resource type="Texture2D" uid="uid://dbpgk8nvwts6c" path="res://master_data/people/skills/industry_knowledge/icons/skill_market_analysis_icon.png" id="3_l0u6x"]
 
 [resource]
 script = ExtResource("1_elmo7")
 skill_name = "Market Analysis"
 skill_description = "Follows freight trends, capacity fluctuations, and rate shifts. Helps make strategic decisions on carrier selection and pricing timing."
+skill_icon = ExtResource("3_l0u6x")
 skill_category = ExtResource("2_c38fl")
 max_value = 20.0
 metadata/_custom_type_script = "uid://cb88ovqkdfiaj"

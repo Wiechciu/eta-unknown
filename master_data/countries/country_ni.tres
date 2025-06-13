@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Country" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://master_data/locations/location.gd" id="1_42y4t"]
+[ext_resource type="Script" path="res://master_data/countries/country.gd" id="2_tmj12"]
+
+[resource]
+script = ExtResource("2_tmj12")
+id = 154
+code = "NI"
+name = "Nicaragua"
+coordinates = Vector2(10, 9)
+locations = Array[ExtResource("1_42y4t")]([])

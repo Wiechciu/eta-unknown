@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="JobPosition" load_steps=2 format=3 uid="uid://drcavo41i6g8d"]
+
+[ext_resource type="Script" uid="uid://8mjhj67rb671" path="res://master_data/people/job_position/job_position.gd" id="1_ps5ag"]
+
+[resource]
+script = ExtResource("1_ps5ag")
+id = 2
+title = "Senior Freight Forwarder"
+salary = 1400.0
+metadata/_custom_type_script = "uid://8mjhj67rb671"

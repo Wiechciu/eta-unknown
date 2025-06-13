@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Country" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://master_data/locations/location.gd" id="1_xv8ya"]
+[ext_resource type="Script" path="res://master_data/countries/country.gd" id="2_mdwrg"]
+
+[resource]
+script = ExtResource("2_mdwrg")
+id = 78
+code = "GM"
+name = "Gambia"
+coordinates = Vector2(14, 4)
+locations = Array[ExtResource("1_xv8ya")]([])

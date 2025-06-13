@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Currency" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://master_data/currencies/currency.gd" id="1_8wt14"]
+
+[resource]
+script = ExtResource("1_8wt14")
+id = 3
+code = "GBP"
+name = "British Pound Sterling"
+exchange_rate_to_usd = 1.25
