@@ -45,7 +45,10 @@ var saves_metadata_file_full_path: String:
 		return save_folder + saves_metadata_file_name + saves_metadata_file_extension
 
 var fade_duration: float = 0.3
+var is_loading_game: bool = false
+var is_saving_game: bool = false
 var is_game_loaded: bool = false
+
 var new_save_name: String:
 	get: 
 		var company_name: String = UtilityTools.escape_characters_for_file_name(GameManager.player.person.employer.name, true)
@@ -59,6 +62,7 @@ func _ready() -> void:
 
 
 func start_new_game() -> void:
+	is_loading_game = true
 	is_game_loaded = false
 	progress_bar.value = 0.0
 	await fade_out()
@@ -71,6 +75,7 @@ func start_new_game() -> void:
 	GlobalMarket.create_market_rates()
 	await update_progress_bar(100.0)
 	is_game_loaded = true
+	is_loading_game = false
 	game_loaded.emit()
 	await fade_in()
 
@@ -84,6 +89,7 @@ func load_game(save_file_name: String) -> void:
 	if not save_file_exists(save_file_name):
 		ActionLogger.create_log(tr("SAVE_FILE_DOESNT_EXIST").format({"file_name":save_file_name}), true)
 		return
+	is_loading_game = true
 	is_game_loaded = false
 	progress_bar.value = 0.0
 	await fade_out()
@@ -95,11 +101,14 @@ func load_game(save_file_name: String) -> void:
 	load_game_from_json(save_file_name)
 	await update_progress_bar(100.0)
 	is_game_loaded = true
+	is_loading_game = false
 	game_loaded.emit()
 	await fade_in()
 
 
 func save_game_to_json(save_file_name: String) -> void:
+	is_saving_game = true
+	
 	get_or_create_save_folder()
 	
 	var data: Dictionary
@@ -112,6 +121,8 @@ func save_game_to_json(save_file_name: String) -> void:
 	file.close()
 	create_metadata(save_file_name)
 	ActionLogger.create_log(tr("SAVED_GAME").format({"file_name":save_file_name}))
+	
+	is_saving_game = false
 
 
 func load_game_from_json(save_file_name: String) -> void:

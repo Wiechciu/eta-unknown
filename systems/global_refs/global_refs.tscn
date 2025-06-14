@@ -1,4 +1,4 @@
-[gd_scene load_steps=404 format=3 uid="uid://bjndjg4xh0keh"]
+[gd_scene load_steps=409 format=3 uid="uid://bjndjg4xh0keh"]
 
 [ext_resource type="Script" uid="uid://bp8cyi2njiujs" path="res://systems/global_refs/global_refs.gd" id="1_6qxei"]
 [ext_resource type="Script" uid="uid://q2os2fkrr7m1" path="res://master_data/people/skills/skill_category.gd" id="2_265ga"]
@@ -12,9 +12,14 @@
 [ext_resource type="Resource" uid="uid://b4e6c6487lose" path="res://master_data/people/states/state_motivation.tres" id="4_uder3"]
 [ext_resource type="Resource" uid="uid://l1binpo2tvcc" path="res://master_data/people/states/state_stress.tres" id="5_0ef4m"]
 [ext_resource type="Resource" uid="uid://bxjxk3ur6pfp1" path="res://master_data/people/skills/soft_skills/category_soft_skills.tres" id="5_dpdqx"]
+[ext_resource type="Script" uid="uid://cv2rc84hrtnua" path="res://master_data/people/personal_info/personal_info_data.gd" id="5_ydhbr"]
+[ext_resource type="Resource" uid="uid://bgcnmpg8rbexe" path="res://master_data/people/personal_info/personal_info_name.tres" id="6_3xmdx"]
 [ext_resource type="Resource" uid="uid://cbxj2oxobf2l4" path="res://master_data/people/skills/tech_fluency/category_tech_fluency.tres" id="6_mo8vh"]
+[ext_resource type="Resource" uid="uid://b372ebqt4cd0m" path="res://master_data/people/personal_info/personal_info_employer.tres" id="7_do2kt"]
 [ext_resource type="Resource" uid="uid://hrys7o0eb55t" path="res://master_data/people/skills/training_and_certifications/category_training_and_certifications.tres" id="7_kpf7x"]
+[ext_resource type="Resource" uid="uid://bwq8mdiqhtl7s" path="res://master_data/people/personal_info/personal_info_supervisor.tres" id="8_3h68w"]
 [ext_resource type="Script" uid="uid://cb88ovqkdfiaj" path="res://master_data/people/skills/skill.gd" id="8_v3def"]
+[ext_resource type="Resource" uid="uid://cnko4cld5w5k0" path="res://master_data/people/personal_info/personal_info_salary.tres" id="9_a7u6r"]
 [ext_resource type="Resource" uid="uid://cmo25kyoe03is" path="res://master_data/people/skills/freight_forwarding/skill_billing_and_cost_control.tres" id="9_uder3"]
 [ext_resource type="Resource" uid="uid://ckgpcd4hbfqa5" path="res://master_data/people/skills/freight_forwarding/skill_carrier_and_supplier_management.tres" id="10_0ef4m"]
 [ext_resource type="Resource" uid="uid://drxuwq56kqhei" path="res://master_data/people/skills/freight_forwarding/skill_cargo_handling.tres" id="10_pybxh"]
@@ -408,6 +413,7 @@
 process_mode = 3
 script = ExtResource("1_6qxei")
 genders = Array[ExtResource("2_f6vnp")]([ExtResource("3_5hlid"), ExtResource("4_isf54")])
+personal_info_data = Array[ExtResource("5_ydhbr")]([ExtResource("6_3xmdx"), ExtResource("7_do2kt"), ExtResource("8_3h68w"), ExtResource("9_a7u6r")])
 states = Array[ExtResource("2_kpf7x")]([ExtResource("3_v3def"), ExtResource("4_uder3"), ExtResource("5_0ef4m")])
 skill_categories = Array[ExtResource("2_265ga")]([ExtResource("3_pybxh"), ExtResource("4_fgltc"), ExtResource("5_dpdqx"), ExtResource("6_mo8vh"), ExtResource("7_kpf7x")])
 skills = Array[ExtResource("8_v3def")]([ExtResource("9_uder3"), ExtResource("10_pybxh"), ExtResource("10_0ef4m"), ExtResource("11_f6vnp"), ExtResource("12_5hlid"), ExtResource("13_isf54"), ExtResource("14_hc7fn"), ExtResource("15_rr1fn"), ExtResource("16_v2acn"), ExtResource("17_hbsro"), ExtResource("18_ifh3k"), ExtResource("19_m1ghu"), ExtResource("20_x80su"), ExtResource("21_n57id"), ExtResource("22_ibact"), ExtResource("23_choop"), ExtResource("24_du8gs"), ExtResource("25_ccccb"), ExtResource("26_jr8p0"), ExtResource("27_gp4hg"), ExtResource("28_xfl0a"), ExtResource("29_ymvsh"), ExtResource("30_mp8x4"), ExtResource("31_nrqu1"), ExtResource("32_r1r5t"), ExtResource("33_lwyxx"), ExtResource("34_tbr6a"), ExtResource("35_3eel4"), ExtResource("36_e1ldj"), ExtResource("37_wkmeq"), ExtResource("38_4pis4"), ExtResource("39_rmnf8"), ExtResource("40_yuqut"), ExtResource("41_776m3"), ExtResource("42_oqrtl"), ExtResource("43_mftuc"), ExtResource("44_084nv"), ExtResource("45_cp54n")])

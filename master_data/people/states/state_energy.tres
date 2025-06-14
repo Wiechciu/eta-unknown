@@ -8,6 +8,7 @@ script = ExtResource("1_a3cvo")
 state_name = "Energy"
 state_description = "Physical stamina throughout the day. Can influence task completion speed and accuracy."
 state_icon = ExtResource("2_na01d")
+initial_value = 100.0
 min_value = 0.0
 max_value = 100.0
 regeneration_per_hour = -15.0

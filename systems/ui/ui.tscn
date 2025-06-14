@@ -165,7 +165,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MainMenu" type="PanelContainer" parent="ToggleablePanelsContainer"]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -394,6 +393,7 @@ script = ExtResource("15_fm32y")
 save_name_line_edit = NodePath("../../SaveNameLineEdit")
 
 [node name="SettingsMenu" type="PanelContainer" parent="ToggleablePanelsContainer" node_paths=PackedStringArray("tab_container", "reset_settings_button", "language", "difficulty", "autosave", "master_volume", "music_volume", "ui_volume", "voice_volume", "environment_volume", "graphics_quality", "fullscreen", "controls_settings")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

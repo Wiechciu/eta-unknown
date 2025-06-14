@@ -9,7 +9,7 @@ var tooltip: Tooltip
 
 func _ready() -> void:
 	parent = get_parent()
-	if not parent.has_method("get_tooltip_header") and not parent.has_method("get_tooltip_body"):
+	if not parent.has_method("get_tooltip_body") or parent.get_tooltip_body() == "":
 		queue_free()
 		return
 	

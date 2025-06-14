@@ -7,6 +7,7 @@ signal person_assigned
 
 var id: int
 var person: Person
+var inventory: Inventory
 
 
 func _ready() -> void:

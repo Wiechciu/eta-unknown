@@ -20,6 +20,7 @@ var full_name: String:
 	get:
 		return first_name + " " + last_name
 
+var personal_infos: Array[PersonalInfo]
 var states: Array[StateData]
 var skills: Array[SkillData]
 
@@ -45,17 +46,32 @@ func with_data(id: int, first_name: String, last_name: String, gender: Gender, e
 	GlobalRefs.people.append(self)
 	GlobalRefs.people_dict[id] = self
 	
+	load_personal_info()
 	load_states()
 	load_skills()
 	
 	return self
 
 
+func load_personal_info() -> void:
+	for personal_info_data: PersonalInfoData in GlobalRefs.personal_info_data:
+		var personal_info: PersonalInfo = PersonalInfo.new()
+		personal_info.personal_info_data = personal_info_data
+		#FIXME do values somehow dynamically?
+		match personal_info.personal_info_data.name:
+			"Name": personal_info.value = full_name
+			"Employer": personal_info.value = employer.name if employer else "---"
+			"Supervisor": personal_info.value = supervisor.full_name if supervisor else "---"
+			"Salary": personal_info.value = str(job_position.salary) if job_position else "---"
+		personal_infos.append(personal_info)
+
+
 func load_states() -> void:
 	for state: State in GlobalRefs.states:
 		var state_data: StateData = StateData.new()
 		state_data.state = state
-		state_data.value = float(randi_range(0, state.max_value))
+		state_data.value = state.initial_value
+		state_data.initialize()
 		states.append(state_data)
 
 

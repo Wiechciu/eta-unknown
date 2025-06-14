@@ -9,6 +9,7 @@ radius = 0.4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e8jpf"]
 albedo_color = Color(0.902086, 0.875044, 0.717045, 1)
+emission_enabled = true
 emission = Color(0.901961, 0.87451, 0.717647, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_vgtjn"]
@@ -21,6 +22,7 @@ cap_top = false
 cap_bottom = false
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3ljn"]
+emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 0.5
 
@@ -35,6 +37,7 @@ cap_top = false
 cap_bottom = false
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u84x5"]
+emission_enabled = true
 emission = Color(1, 1, 1, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_qvthb"]
@@ -69,6 +72,7 @@ cap_bottom = false
 script = ExtResource("1_5dq48")
 light = NodePath("OmniLight3D")
 emission_bodies = [NodePath("Top"), NodePath("Top2"), NodePath("Bulb")]
+is_on = true
 
 [node name="Interactable" parent="." instance=ExtResource("2_7p2bv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58727, 0)
@@ -104,7 +108,6 @@ mesh = SubResource("CylinderMesh_ttbpr")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.61804, 0)
-light_energy = 0.0
 light_size = 0.3
 shadow_enabled = true
 omni_range = 10.0

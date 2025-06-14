@@ -17,4 +17,5 @@ func _on_visibility_changed() -> void:
 
 
 func _on_pressed() -> void:
-	SaveManager.save_game(save_name_line_edit.text)
+	if not SaveManager.is_saving_game:
+		SaveManager.save_game(save_name_line_edit.text)

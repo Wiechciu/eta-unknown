@@ -8,15 +8,22 @@ signal interacted(node: Node)
 @export var main_control: Control
 @export var label: Label
 
+var timer: float = 0.0
+var update_frequency: float = 0.01
+
 
 func _ready() -> void:
 	UtilityTools.assert_all_exported_properties(self)
 	main_control.modulate.a = 0
 
 
-@warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
 	#TODO: Optimize to not run every frame
+	timer += delta
+	if timer < update_frequency:
+		return
+	timer = 0.0
+	
 	if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
 		main_control.hide()
 	else:

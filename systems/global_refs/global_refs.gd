@@ -1,6 +1,7 @@
 extends Node
 
 @export var genders: Array[Gender]
+@export var personal_info_data: Array[PersonalInfoData]
 @export var states: Array[State]
 @export var skill_categories: Array[SkillCategory]
 @export var skills: Array[Skill]

@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://dj7xeswhh3g8g"]
+
+[ext_resource type="Script" uid="uid://bl54py824gooa" path="res://systems/menu/personal_info/personal_info_item.gd" id="1_wipl4"]
+[ext_resource type="PackedScene" uid="uid://csikevd7cm74m" path="res://systems/tooltip/tooltip_component.tscn" id="1_xhiqr"]
+[ext_resource type="PackedScene" uid="uid://bmcauqk83v5kh" path="res://systems/ui/ui_animation_component.tscn" id="2_wipl4"]
+[ext_resource type="Texture2D" uid="uid://23xsxnbdu0em" path="res://master_data/people/states/icons/state_energy_icon.png" id="3_b72vd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e77h3"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.41598, 0.41598, 0.41598, 0)
+border_color = Color(1, 1, 1, 0.392157)
+
+[node name="PersonalInfoItem" type="PanelContainer" node_paths=PackedStringArray("icon_rect", "name_label", "value_label")]
+theme_override_styles/panel = SubResource("StyleBoxFlat_e77h3")
+script = ExtResource("1_wipl4")
+icon_rect = NodePath("HBoxContainer/Icon")
+name_label = NodePath("HBoxContainer/Name")
+value_label = NodePath("HBoxContainer/Value")
+
+[node name="TooltipComponent" parent="." instance=ExtResource("1_xhiqr")]
+
+[node name="UiAnimationComponent" parent="." instance=ExtResource("2_wipl4")]
+animate_color = true
+color_animation_in_value = Color(0.99637455, 0.8946369, 0.45857948, 1)
+animation_in_duration = 0.1999999999970896
+animation_out_duration = 0.1999999999970896
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_b72vd")
+expand_mode = 2
+
+[node name="Name" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 15
+text = "Personal data name"
+
+[node name="Value" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 15
+text = "Personal data value"

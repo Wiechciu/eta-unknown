@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Supply" load_steps=2 format=3 uid="uid://dixavcmskyug2"]
+
+[ext_resource type="Script" uid="uid://gxn4ab5n6pfp" path="res://master_data/supplies/supply.gd" id="1_6vbif"]
+
+[resource]
+script = ExtResource("1_6vbif")
+supply_name = "PAPER"
+amount_per_use = 1.0
+amount_capacity = 500.0
+refilling_time = 3.0
+out_of_supply_streams = Array[AudioStream]([])
+refilling_supply_streams = Array[AudioStream]([])
+metadata/_custom_type_script = "uid://gxn4ab5n6pfp"

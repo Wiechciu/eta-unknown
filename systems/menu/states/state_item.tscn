@@ -1,0 +1,84 @@
+[gd_scene load_steps=9 format=3 uid="uid://drwethwa07tvc"]
+
+[ext_resource type="Script" uid="uid://uo22nfugu62o" path="res://systems/menu/states/state_item.gd" id="1_fabog"]
+[ext_resource type="PackedScene" uid="uid://dnj2nwu2j7ll1" path="res://master_data/people/states/state_value_change_effect.tscn" id="2_ylgp7"]
+[ext_resource type="PackedScene" uid="uid://csikevd7cm74m" path="res://systems/tooltip/tooltip_component.tscn" id="3_g6533"]
+[ext_resource type="PackedScene" uid="uid://bmcauqk83v5kh" path="res://systems/ui/ui_animation_component.tscn" id="4_besjf"]
+[ext_resource type="Texture2D" uid="uid://ciwqcrdw7ve0p" path="res://systems/menu/inventory/bin.png" id="4_m45bg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e77h3"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.41598, 0.41598, 0.41598, 0)
+border_color = Color(1, 1, 1, 0.392157)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qrtuj"]
+bg_color = Color(1, 1, 1, 0.19607843)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kms4t"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="StateItem" type="PanelContainer" node_paths=PackedStringArray("state_icon_rect", "state_name_label", "state_value_label", "state_progress_bar")]
+offset_right = 134.0
+offset_bottom = 22.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_e77h3")
+script = ExtResource("1_fabog")
+state_value_change_effect_scene = ExtResource("2_ylgp7")
+state_icon_rect = NodePath("HBoxContainer/StateIcon")
+state_name_label = NodePath("HBoxContainer/StateName")
+state_value_label = NodePath("HBoxContainer/ProgressBar/StateValue")
+state_progress_bar = NodePath("HBoxContainer/ProgressBar")
+
+[node name="TooltipComponent" parent="." instance=ExtResource("3_g6533")]
+
+[node name="UiAnimationComponent" parent="." instance=ExtResource("4_besjf")]
+animate_color = true
+color_animation_in_value = Color(0.99637455, 0.8946369, 0.45857948, 1)
+animation_in_duration = 0.1999999999970896
+animation_out_duration = 0.1999999999970896
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="StateIcon" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_m45bg")
+expand_mode = 2
+
+[node name="StateName" type="Label" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 15
+text = "State name"
+
+[node name="ProgressBar" type="ProgressBar" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_qrtuj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_kms4t")
+value = 20.0
+show_percentage = false
+
+[node name="StateValue" type="Label" parent="HBoxContainer/ProgressBar"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.13319641, 0.13319641, 0.13319638, 1)
+theme_override_font_sizes/font_size = 15
+text = "1"
+horizontal_alignment = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://b18oy35p17ir7"]
+[gd_scene load_steps=36 format=3 uid="uid://b18oy35p17ir7"]
 
 [ext_resource type="PackedScene" uid="uid://dmwp5s37fvy1m" path="res://3d_scenes/entities/environment/environment.tscn" id="1_pyshm"]
 [ext_resource type="PackedScene" uid="uid://dvpm8vxtia7au" path="res://3d_scenes/entities/furniture/computer/computer.tscn" id="4_8pfch"]
@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://cfgtlxo30incr" path="res://3d_scenes/entities/items/physical_label/physical_label.tscn" id="27_5h8s7"]
 [ext_resource type="PackedScene" uid="uid://co5med20utehv" path="res://3d_scenes/entities/warehouse/warehouse.tscn" id="27_hjyx5"]
 [ext_resource type="PackedScene" uid="uid://ciib54nns85wi" path="res://3d_scenes/entities/room/wall_door.tscn" id="27_s2j11"]
+[ext_resource type="PackedScene" uid="uid://b6b4ff3j1sb4" path="res://3d_scenes/entities/furniture/coffee_machine/coffee_machine.tscn" id="29_707bl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5cac6"]
 albedo_color = Color(0, 0.329412, 0, 1)
@@ -70,7 +71,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.50287)
 [node name="Employee" parent="." node_paths=PackedStringArray("target_nodes") instance=ExtResource("26_sd7sv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15824, 0, 0.172612)
 target_nodes = [NodePath("../TargetNode1"), NodePath("../TargetNode2"), NodePath("../TargetNode3"), NodePath("../TargetNode4")]
-metadata/_custom_type_script = "uid://bx755gagbe0ch"
 
 [node name="Warehouse" parent="." instance=ExtResource("27_hjyx5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.73186, -1, 15.0399)
@@ -362,7 +362,7 @@ transform = Transform3D(0.73723, 0.675641, -2.01357e-08, 0, 2.98023e-08, 1, 0.67
 document = SubResource("Resource_5h8s7")
 
 [node name="Lamp" parent="Furniture" instance=ExtResource("8_5nt3u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.48057, 1.19209e-07, 1.78792)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8372191, 1.19209e-07, 1.992213)
 
 [node name="WaterCooler" parent="Furniture" instance=ExtResource("9_w7ts6")]
 transform = Transform3D(0.238652, 0, -0.971105, 0, 1, 0, 0.971105, 0, 0.238652, 4.09313, -3.57628e-07, -4.06572)
@@ -392,6 +392,12 @@ print_type = 1
 
 [node name="BookcaseOpenLow3" parent="Furniture" instance=ExtResource("16_yatgx")]
 transform = Transform3D(1.2299, 0, 0, 0, 0.559411, 0, 1.31084e-14, 0, 1.58582, -0.45533, -1.1921e-07, -3.73453)
+
+[node name="BookcaseOpenLow4" parent="Furniture" instance=ExtResource("16_yatgx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.92116, -2.38419e-07, 1.3581101)
+
+[node name="CoffeeMachine" parent="Furniture/BookcaseOpenLow4" instance=ExtResource("29_707bl")]
+transform = Transform3D(1, 0, 7.1054274e-15, 0, 1, 0, -7.1054274e-15, 0, 1, 0.6070535, 1.1100001, -0.47856236)
 
 [node name="Crate" parent="Furniture" instance=ExtResource("26_hjyx5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.24275, -4.84287e-08, 4.11391)

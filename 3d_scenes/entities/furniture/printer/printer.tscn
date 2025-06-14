@@ -1,15 +1,30 @@
-[gd_scene load_steps=21 format=4 uid="uid://camlixgb5adk5"]
+[gd_scene load_steps=26 format=4 uid="uid://camlixgb5adk5"]
 
 [ext_resource type="Script" uid="uid://h64icvcx3v55" path="res://3d_scenes/entities/furniture/printer/printer.gd" id="1_0slj8"]
 [ext_resource type="PackedScene" uid="uid://beffqttiv36q7" path="res://3d_scenes/entities/components/interactable.tscn" id="2_b3fi8"]
 [ext_resource type="PackedScene" uid="uid://dx6f662utr8ya" path="res://3d_scenes/entities/items/physical_document/physical_document.tscn" id="2_llfar"]
-[ext_resource type="AudioStream" uid="uid://dmg036dlnphkh" path="res://3d_scenes/entities/furniture/printer/state-change_confirm-down_4.wav" id="3_ml0s2"]
 [ext_resource type="AudioStream" uid="uid://bby3836y552qy" path="res://3d_scenes/entities/furniture/printer/ROBOTIC_Servo_Medium_Shread_mono.wav" id="4_05xib"]
+[ext_resource type="Script" uid="uid://b16ctjt7ha2af" path="res://master_data/supplies/supply_data.gd" id="4_kmty4"]
+[ext_resource type="Resource" uid="uid://dm52o3k1qt8qc" path="res://master_data/supplies/supply_ink.tres" id="5_b4hva"]
 [ext_resource type="AudioStream" uid="uid://brgi7cmsvpcmq" path="res://3d_scenes/entities/furniture/printer/Robot_Oops.wav.wav" id="5_whxlh"]
 [ext_resource type="AudioStream" uid="uid://wl4unt5vrkrb" path="res://3d_scenes/entities/furniture/printer/Robot_Oy.wav.wav" id="6_a7js3"]
+[ext_resource type="Resource" uid="uid://dixavcmskyug2" path="res://master_data/supplies/supply_paper.tres" id="6_ws2is"]
 [ext_resource type="Texture2D" uid="uid://cjaxponmtask3" path="res://3d_scenes/entities/furniture/printer/wrench.png" id="8_a7js3"]
 [ext_resource type="Texture2D" uid="uid://h1sfxtho1r42" path="res://3d_scenes/entities/furniture/printer/exclamation.png" id="9_0ag7d"]
+[ext_resource type="AudioStream" uid="uid://d4j83u78elpt" path="res://3d_scenes/entities/furniture/printer/tool_ratchet.wav" id="9_kmty4"]
 [ext_resource type="PackedScene" uid="uid://dljaoqasoo50f" path="res://3d_scenes/entities/components/serviceable/serviceable.tscn" id="10_c5d6k"]
+
+[sub_resource type="Resource" id="Resource_lhsat"]
+script = ExtResource("4_kmty4")
+supply = ExtResource("5_b4hva")
+amount_stored = 0.0
+metadata/_custom_type_script = "uid://b16ctjt7ha2af"
+
+[sub_resource type="Resource" id="Resource_iydol"]
+script = ExtResource("4_kmty4")
+supply = ExtResource("6_ws2is")
+amount_stored = 0.0
+metadata/_custom_type_script = "uid://b16ctjt7ha2af"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0slj8"]
 albedo_color = Color(0.281187, 0.281187, 0.281187, 1)
@@ -110,9 +125,9 @@ out_of_ink_symbol = NodePath("SubViewport/OutOfInkSymbol")
 jammed_symbol = NodePath("SubViewport/JammedSymbol")
 audio_player = NodePath("AudioStreamPlayer3D")
 printing_audio_streams = Array[AudioStream]([ExtResource("4_05xib")])
-out_of_paper_audio_streams = Array[AudioStream]([ExtResource("5_whxlh"), ExtResource("6_a7js3")])
-out_of_ink_audio_streams = Array[AudioStream]([ExtResource("3_ml0s2")])
+supplies = Array[ExtResource("4_kmty4")]([SubResource("Resource_lhsat"), SubResource("Resource_iydol")])
 jammed_audio_streams = Array[AudioStream]([ExtResource("5_whxlh"), ExtResource("6_a7js3")])
+repairing_audio_streams = Array[AudioStream]([ExtResource("9_kmty4")])
 tray_full_audio_streams = Array[AudioStream]([ExtResource("5_whxlh"), ExtResource("6_a7js3")])
 
 [node name="Interactable" parent="." instance=ExtResource("2_b3fi8")]

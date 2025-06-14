@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Supply" load_steps=3 format=3 uid="uid://duemnkxsocutv"]
+
+[ext_resource type="AudioStream" uid="uid://d4ehtgjayiw8k" path="res://master_data/supplies/supply_water_refilling.wav" id="1_2en75"]
+[ext_resource type="Script" uid="uid://gxn4ab5n6pfp" path="res://master_data/supplies/supply.gd" id="1_cmaqu"]
+
+[resource]
+script = ExtResource("1_cmaqu")
+supply_name = "WATER"
+amount_per_use = 1.0
+amount_capacity = 2.0
+refilling_time = 3.0
+out_of_supply_streams = Array[AudioStream]([])
+refilling_supply_streams = Array[AudioStream]([ExtResource("1_2en75")])
+metadata/_custom_type_script = "uid://gxn4ab5n6pfp"

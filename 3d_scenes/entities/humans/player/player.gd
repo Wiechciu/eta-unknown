@@ -9,8 +9,6 @@ extends Human
 	get:
 		return camera.current and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and not is_immobilized
 
-var inventory: Inventory
-
 var movement_base_speed: float = 150.0
 var sprint_multiplier: float = 3.0
 var movement_actual_speed: float
@@ -26,12 +24,13 @@ var head_max_offset: Vector3 = Vector3(0.0, 0.1, 0.0)
 
 var is_immobilized: bool = false
 
+@export var menu: Menu
+
 
 func _ready() -> void:
 	UtilityTools.assert_all_exported_properties(self)
 	
 	super._ready()
-	inventory = UtilityTools.get_child_of_type(self, Inventory)
 	
 	GameManager.player = self
 	initial_setup()

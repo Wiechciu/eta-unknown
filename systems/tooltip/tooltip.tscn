@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://chd34lwigyb5e"]
 
 [ext_resource type="Script" uid="uid://bp130y35xqygy" path="res://systems/tooltip/tooltip.gd" id="1_7rjlb"]
-[ext_resource type="Texture2D" uid="uid://ciwqcrdw7ve0p" path="res://3d_scenes/entities/humans/inventory/bin.png" id="2_p7mdq"]
+[ext_resource type="Texture2D" uid="uid://ciwqcrdw7ve0p" path="res://systems/menu/inventory/bin.png" id="2_p7mdq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7rjlb"]
 content_margin_left = 3.0

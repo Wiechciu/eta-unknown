@@ -96,7 +96,22 @@ func finalize() -> void:
 				award_quotation(null)
 				return
 		AwardCriteria.MIXED:
-			pass #TODO - check which quotation is highest in both sortings combined
+			var min_cost: float = INF
+			var max_cost: float = -INF
+			var min_time: float = INF
+			var max_time: float = -INF
+			
+			for quotation: Quotation in quotations:
+				min_cost = min(min_cost, quotation.revenue_charges_sum)
+				max_cost = max(max_cost, quotation.revenue_charges_sum)
+				min_time = min(min_time, quotation.transit_time)
+				max_time = max(max_time, quotation.transit_time)
+			
+			quotations.sort_custom(func(a: Quotation, b: Quotation) -> bool:
+				var score_a: float = _calculate_mixed_score(a, min_cost, max_cost, min_time, max_time)
+				var score_b: float = _calculate_mixed_score(b, min_cost, max_cost, min_time, max_time)
+				return score_a > score_b
+			)
 	
 	award_quotation(quotations[0])
 
@@ -131,6 +146,23 @@ func _sort_by_transit_time_ascending(a: Quotation, b: Quotation) -> bool:
 	if a.transit_time > b.transit_time:
 		return true
 	return false
+
+
+#func _sort_by_mixed_score_descending(a: Quotation, b: Quotation) -> bool:
+	#var score_a = _calculate_mixed_score(a, min_cost, max_cost, min_time, max_time)
+	#var score_b = _calculate_mixed_score(b, min_cost, max_cost, min_time, max_time)
+	#return score_a > score_b
+
+
+# Lower cost and shorter time = higher score
+func _calculate_mixed_score(quote: Quotation, min_cost: float, max_cost: float, min_time: float, max_time: float) -> float:
+	var normalized_cost: float = 1.0 - (quote.revenue_charges_sum - min_cost) / max(0.0001, max_cost - min_cost)
+	var normalized_time: float = 1.0 - (quote.transit_time - min_time) / max(0.0001, max_time - min_time)
+	
+	var weight_price: float = 0.5
+	var weight_time: float = 0.5
+	
+	return normalized_cost * weight_price + normalized_time * weight_time
 
 
 func to_dict() -> Dictionary:

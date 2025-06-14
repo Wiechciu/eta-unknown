@@ -106,6 +106,9 @@ func focus_view() -> void:
 	old_camera = get_viewport().get_camera_3d()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	camera.make_current()
+	
+	GameManager.player.menu.hide_player_hud()
+	
 	start_os()
 	
 	var tween: Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_parallel(true)
@@ -124,6 +127,8 @@ func unfocus_view() -> void:
 	tween.tween_property(camera, "global_rotation", old_camera.global_rotation, focusing_time)
 	tween.tween_property(camera, "global_position", old_camera.global_position, focusing_time)
 	await tween.finished
+	
+	GameManager.player.menu.show_player_hud()
 	
 	old_camera.make_current()
 	camera.position = original_camera_position

@@ -39,7 +39,11 @@ var code_string: String:
 		return Code.keys()[code]
 var name: String:
 	get:
-		return "DOCUMENT_" + code_string
+		return tr("DOCUMENT_" + code_string)
+var description: String:
+	get:
+		#TODO do actual descriptions
+		return name + " description"
 @export var issued_time: int
 @export var number: int
 

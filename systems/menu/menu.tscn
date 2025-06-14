@@ -1,0 +1,331 @@
+[gd_scene load_steps=17 format=3 uid="uid://vtdpk1hginp7"]
+
+[ext_resource type="Script" uid="uid://bq0b0mbomd6iy" path="res://systems/menu/menu.gd" id="1_o1e7s"]
+[ext_resource type="PackedScene" uid="uid://drwethwa07tvc" path="res://systems/menu/states/state_item.tscn" id="2_cxurk"]
+[ext_resource type="Script" uid="uid://cuwfn7m7nv75b" path="res://systems/menu/states/states.gd" id="2_nqmbh"]
+[ext_resource type="Script" uid="uid://cqje1vjhncexi" path="res://systems/menu/skills/skills.gd" id="3_nqmbh"]
+[ext_resource type="Script" uid="uid://c4iqvpkx1jmw2" path="res://systems/menu/personal_info/personal_infos.gd" id="4_620km"]
+[ext_resource type="PackedScene" uid="uid://den86h7ycch47" path="res://systems/menu/skills/skill_item.tscn" id="4_n8w0x"]
+[ext_resource type="PackedScene" uid="uid://bjbj88mhj7g0s" path="res://systems/menu/skills/skill_category_item.tscn" id="5_620km"]
+[ext_resource type="PackedScene" uid="uid://dj7xeswhh3g8g" path="res://systems/menu/personal_info/personal_info_item.tscn" id="5_j1xt7"]
+[ext_resource type="PackedScene" uid="uid://ic0dtme2smyv" path="res://systems/menu/inventory/inventory_item.tscn" id="6_j1xt7"]
+[ext_resource type="Script" uid="uid://bssgdq36jb8qu" path="res://systems/menu/inventory/inventory_player_menu.gd" id="7_nqmbh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8owki"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0.32941177, 0.44313726, 0.7137255)
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lysyf"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_va821"]
+bg_color = Color(0, 0.16862746, 0.23529412, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q1u2b"]
+bg_color = Color(0, 0.16862746, 0.23529413, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nqmbh"]
+bg_color = Color(1, 1, 1, 0.25098)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n8w0x"]
+bg_color = Color(1, 1, 1, 0.64705884)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Menu" type="Control" node_paths=PackedStringArray("player_hud_container", "player_menu_container", "states", "states_hud_parent", "states_player_menu_parent")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_o1e7s")
+player_hud_container = NodePath("PlayerHud")
+player_menu_container = NodePath("PlayerMenu")
+states = NodePath("PlayerMenu/States/States")
+states_hud_parent = NodePath("PlayerHud")
+states_player_menu_parent = NodePath("PlayerMenu/States")
+
+[node name="PlayerHud" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 144.0
+offset_bottom = 78.0
+
+[node name="PlayerMenu" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 410.0
+offset_bottom = 712.0
+
+[node name="States" type="FoldableContainer" parent="PlayerMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_8owki")
+theme_override_styles/focus = SubResource("StyleBoxFlat_lysyf")
+theme_override_styles/title_collapsed_hover_panel = SubResource("StyleBoxFlat_va821")
+theme_override_styles/title_collapsed_panel = SubResource("StyleBoxFlat_va821")
+theme_override_styles/title_hover_panel = SubResource("StyleBoxFlat_q1u2b")
+theme_override_styles/title_panel = SubResource("StyleBoxFlat_q1u2b")
+title = "STATES"
+title_alignment = 1
+
+[node name="States" type="VBoxContainer" parent="PlayerMenu/States" node_paths=PackedStringArray("item_container")]
+layout_mode = 2
+script = ExtResource("2_nqmbh")
+state_item_scene = ExtResource("2_cxurk")
+item_container = NodePath(".")
+
+[node name="StateItem" parent="PlayerMenu/States/States" instance=ExtResource("2_cxurk")]
+layout_mode = 2
+
+[node name="StateItem2" parent="PlayerMenu/States/States" instance=ExtResource("2_cxurk")]
+layout_mode = 2
+
+[node name="StateItem3" parent="PlayerMenu/States/States" instance=ExtResource("2_cxurk")]
+layout_mode = 2
+
+[node name="PersonalInfos" type="FoldableContainer" parent="PlayerMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_8owki")
+theme_override_styles/focus = SubResource("StyleBoxFlat_lysyf")
+theme_override_styles/title_collapsed_hover_panel = SubResource("StyleBoxFlat_va821")
+theme_override_styles/title_collapsed_panel = SubResource("StyleBoxFlat_va821")
+theme_override_styles/title_hover_panel = SubResource("StyleBoxFlat_q1u2b")
+theme_override_styles/title_panel = SubResource("StyleBoxFlat_q1u2b")
+title = "PERSONAL_DATA"
+title_alignment = 1
+
+[node name="PersonalInfos" type="VBoxContainer" parent="PlayerMenu/PersonalInfos" node_paths=PackedStringArray("item_container")]
+layout_mode = 2
+script = ExtResource("4_620km")
+personal_info_item_scene = ExtResource("5_j1xt7")
+item_container = NodePath(".")
+
+[node name="PersonalInfoItem" parent="PlayerMenu/PersonalInfos/PersonalInfos" instance=ExtResource("5_j1xt7")]
+layout_mode = 2
+
+[node name="PersonalInfoItem2" parent="PlayerMenu/PersonalInfos/PersonalInfos" instance=ExtResource("5_j1xt7")]
+layout_mode = 2
+
+[node name="PersonalInfoItem3" parent="PlayerMenu/PersonalInfos/PersonalInfos" instance=ExtResource("5_j1xt7")]
+layout_mode = 2
+
+[node name="PersonalInfoItem4" parent="PlayerMenu/PersonalInfos/PersonalInfos" instance=ExtResource("5_j1xt7")]
+layout_mode = 2
+
+[node name="PersonalInfoItem5" parent="PlayerMenu/PersonalInfos/PersonalInfos" instance=ExtResource("5_j1xt7")]
+layout_mode = 2
+
+[node name="PersonalInfoItem6" parent="PlayerMenu/PersonalInfos/PersonalInfos" instance=ExtResource("5_j1xt7")]
+layout_mode = 2
+
+[node name="Skills" type="FoldableContainer" parent="PlayerMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_8owki")
+theme_override_styles/focus = SubResource("StyleBoxFlat_lysyf")
+theme_override_styles/title_collapsed_hover_panel = SubResource("StyleBoxFlat_va821")
+theme_override_styles/title_collapsed_panel = SubResource("StyleBoxFlat_va821")
+theme_override_styles/title_hover_panel = SubResource("StyleBoxFlat_q1u2b")
+theme_override_styles/title_panel = SubResource("StyleBoxFlat_q1u2b")
+title = "SKILLS"
+title_alignment = 1
+
+[node name="Skills" type="ScrollContainer" parent="PlayerMenu/Skills" node_paths=PackedStringArray("scroll_container", "item_container")]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+script = ExtResource("3_nqmbh")
+skill_item_scene = ExtResource("4_n8w0x")
+skill_category_item_scene = ExtResource("5_620km")
+scroll_container = NodePath(".")
+item_container = NodePath("ItemContainer")
+
+[node name="ItemContainer" type="VBoxContainer" parent="PlayerMenu/Skills/Skills"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 5
+
+[node name="SkillCategoryItem" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("5_620km")]
+layout_mode = 2
+
+[node name="SkillItem" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="SkillItem2" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="SkillItem3" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="SkillCategoryItem2" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("5_620km")]
+layout_mode = 2
+
+[node name="SkillItem4" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="SkillItem5" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="SkillItem6" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="SkillItem7" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="SkillItem8" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="SkillItem9" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="SkillItem10" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="SkillItem11" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="SkillItem12" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="SkillItem13" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="SkillItem14" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="SkillItem15" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="SkillItem16" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="SkillItem17" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="SkillItem18" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="SkillItem19" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="SkillItem20" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="SkillItem21" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="SkillItem22" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="SkillItem23" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="SkillItem24" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="SkillItem25" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="SkillItem26" parent="PlayerMenu/Skills/Skills/ItemContainer" instance=ExtResource("4_n8w0x")]
+layout_mode = 2
+
+[node name="Inventory" type="FoldableContainer" parent="PlayerMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_8owki")
+theme_override_styles/focus = SubResource("StyleBoxFlat_lysyf")
+theme_override_styles/title_collapsed_hover_panel = SubResource("StyleBoxFlat_va821")
+theme_override_styles/title_collapsed_panel = SubResource("StyleBoxFlat_va821")
+theme_override_styles/title_hover_panel = SubResource("StyleBoxFlat_q1u2b")
+theme_override_styles/title_panel = SubResource("StyleBoxFlat_q1u2b")
+folded = true
+title = "INVENTORY"
+title_alignment = 1
+
+[node name="Inventory" type="VBoxContainer" parent="PlayerMenu/Inventory" node_paths=PackedStringArray("item_container", "throw_info_container", "throw_label", "hold_progress_bar")]
+visible = false
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_constants/separation = 0
+script = ExtResource("7_nqmbh")
+item_container = NodePath(".")
+inventory_item_scene = ExtResource("6_j1xt7")
+throw_info_container = NodePath("../../../ThrowLabels")
+throw_label = NodePath("../../../ThrowLabels/HoldToThrow")
+hold_progress_bar = NodePath("../../../ThrowLabels/HoldProgressBar")
+
+[node name="InventoryItem" parent="PlayerMenu/Inventory/Inventory" instance=ExtResource("6_j1xt7")]
+layout_mode = 2
+
+[node name="InventoryItem3" parent="PlayerMenu/Inventory/Inventory" instance=ExtResource("6_j1xt7")]
+visible = false
+layout_mode = 2
+
+[node name="InventoryItem2" parent="PlayerMenu/Inventory/Inventory" instance=ExtResource("6_j1xt7")]
+visible = false
+layout_mode = 2
+
+[node name="ThrowLabels" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -86.0
+offset_top = -43.0
+offset_right = 86.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+theme_override_constants/separation = 10
+
+[node name="HoldToThrow" type="Label" parent="ThrowLabels"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 0.694118, 0.85098)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.54902)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 20
+text = "HOLD_TO_THROW"
+horizontal_alignment = 1
+
+[node name="HoldProgressBar" type="ProgressBar" parent="ThrowLabels"]
+custom_minimum_size = Vector2(150, 5)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_nqmbh")
+theme_override_styles/fill = SubResource("StyleBoxFlat_n8w0x")
+show_percentage = false

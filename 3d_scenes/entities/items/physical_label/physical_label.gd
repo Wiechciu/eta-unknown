@@ -15,6 +15,7 @@ func _ready() -> void:
 func with_data(document: Document) -> PhysicalLabel:
 	self.document = document
 	self.item_name = document.name
+	self.item_description = document.description
 	
 	return self
 

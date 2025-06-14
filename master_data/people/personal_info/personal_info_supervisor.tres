@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PersonalInfoData" load_steps=2 format=3 uid="uid://bwq8mdiqhtl7s"]
+
+[ext_resource type="Script" uid="uid://cv2rc84hrtnua" path="res://master_data/people/personal_info/personal_info_data.gd" id="1_ncvc1"]
+
+[resource]
+script = ExtResource("1_ncvc1")
+name = "Supervisor"
+description = "Supervisor of an individual."
+metadata/_custom_type_script = "uid://cv2rc84hrtnua"
