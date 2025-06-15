@@ -35,12 +35,12 @@ func clear_container() -> void:
 
 
 func populate_container() -> void:
-	for state_data: StateData in player.person.states:
-		add_state(state_data)
+	for state: State in player.person.states:
+		add_state(state)
 
 
-func add_state(state_data: StateData) -> void:
-	var new_state_item: StateItem = (state_item_scene.instantiate() as StateItem).with_data(state_data)
+func add_state(state: State) -> void:
+	var new_state_item: StateItem = (state_item_scene.instantiate() as StateItem).with_data(state)
 	item_container.add_child(new_state_item)
 	state_items.append(new_state_item)
 

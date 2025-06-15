@@ -36,14 +36,14 @@ var position_offset_for_new_document: Vector3 = Vector3(0.0, 0.001, 0.0)
 var printing_time: float = 1.0
 @export var printing_audio_streams: Array[AudioStream]
 
-@export var supplies: Array[SupplyData]
+@export var supplies: Array[Supply]
 var is_out_of_any_supply: bool:
 	get:
-		for supply_data: SupplyData in supplies:
-			if supply_data.is_out_of_supply:
+		for supply: Supply in supplies:
+			if supply.is_out_of_supply:
 				return true
 		return false
-var ink_supply: SupplyData
+var ink_supply: Supply
 
 var is_jammed: bool
 var prints_since_last_jam: int
@@ -64,13 +64,13 @@ func _ready() -> void:
 	register_interactable()
 	register_serviceable()
 	
-	for supply_data: SupplyData in supplies:
-		supply_data.amount_stored = supply_data.supply.amount_capacity
+	for supply: Supply in supplies:
+		supply.amount_stored = supply.supply_data.amount_capacity
 		
 		#FIXME to be modular
-		if supply_data.supply.supply_name == "INK":
-			ink_supply = supply_data
-			ink_progress_bar.max_value = supply_data.supply.amount_capacity
+		if supply.supply_data.supply_name == "INK":
+			ink_supply = supply
+			ink_progress_bar.max_value = supply.supply_data.amount_capacity
 
 
 @warning_ignore("unused_parameter")
@@ -123,9 +123,9 @@ func interact(node: Node) -> void:
 		repair(node)
 		return
 	
-	for supply_data: SupplyData in supplies:
-		if supply_data.is_out_of_supply:
-			refill_supply(supply_data, node)
+	for supply: Supply in supplies:
+		if supply.is_out_of_supply:
+			refill_supply(supply, node)
 			return
 	
 	ActionLogger.create_log("INTERACT_NOTHING")
@@ -194,8 +194,8 @@ func play_tray_full_sound() -> void:
 	play_sound()
 
 
-func play_out_of_supply_sound(supply_data: SupplyData) -> void:
-	audio_player.stream = supply_data.supply.out_of_supply_streams.pick_random()
+func play_out_of_supply_sound(supply: Supply) -> void:
+	audio_player.stream = supply.supply_data.out_of_supply_streams.pick_random()
 	play_sound()
 
 
@@ -208,12 +208,12 @@ func play_sound(with_pitch_variable: bool = true) -> void:
 
 
 func check_supplies() -> void:
-	for supply_data: SupplyData in supplies:
+	for supply: Supply in supplies:
 		
-		supply_data.amount_stored -= (supply_data.supply.amount_per_use * GameManager.difficulty)
-		if supply_data.is_out_of_supply:
-			play_out_of_supply_sound(supply_data)
-			ActionLogger.create_log(tr("OUT_OF_SUPPLY").format({"supply_name": tr(supply_data.supply.supply_name)}))
+		supply.amount_stored -= (supply.supply_data.amount_per_use * GameManager.difficulty)
+		if supply.is_out_of_supply:
+			play_out_of_supply_sound(supply)
+			ActionLogger.create_log(tr("OUT_OF_SUPPLY").format({"supply_name": tr(supply.supply_data.supply_name)}))
 
 
 func check_jamming() -> bool:
@@ -233,16 +233,16 @@ func check_tray() -> bool:
 	return is_tray_full
 
 
-func refill_supply(supply_data: SupplyData, node: Node) -> void:
+func refill_supply(supply: Supply, node: Node) -> void:
 	status = Status.SERVICING
-	serviceable.start_service(supply_data.supply.refilling_time, supply_data.supply.refilling_supply_streams.pick_random())
+	serviceable.start_service(supply.supply_data.refilling_time, supply.supply_data.refilling_supply_streams.pick_random())
 	
 	var player: Player = node as Player
 	if player != null:
 		player.immobilize()
 	
 	var tween: Tween = create_tween()
-	tween.tween_method(func(amount: float) -> void: supply_data.amount_stored = amount, supply_data.amount_stored, supply_data.supply.amount_capacity, supply_data.supply.refilling_time)
+	tween.tween_method(func(amount: float) -> void: supply.amount_stored = amount, supply.amount_stored, supply.supply_data.amount_capacity, supply.supply_data.refilling_time)
 	await tween.finished
 	
 	player.unimmobilize()

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="State" load_steps=3 format=3 uid="uid://b4e6c6487lose"]
 
-[ext_resource type="Script" uid="uid://c6yc6wr60oe13" path="res://master_data/people/states/state.gd" id="1_ydhxo"]
+[ext_resource type="Script" uid="uid://c6yc6wr60oe13" path="res://master_data/people/states/state_data.gd" id="1_ydhxo"]
 [ext_resource type="Texture2D" uid="uid://cfm78ceai0em" path="res://master_data/people/states/icons/state_motivation_icon.png" id="2_8lj3h"]
 
 [resource]

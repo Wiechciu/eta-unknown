@@ -2,9 +2,9 @@ extends Node
 
 @export var genders: Array[Gender]
 @export var personal_info_data: Array[PersonalInfoData]
-@export var states: Array[State]
+@export var states: Array[StateDataNew]
 @export var skill_categories: Array[SkillCategory]
-@export var skills: Array[Skill]
+@export var skills: Array[SkillData]
 
 @export var cargos: Array[Cargo]
 @export var currencies: Array[Currency]

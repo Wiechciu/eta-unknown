@@ -2,25 +2,25 @@
 
 [ext_resource type="Script" uid="uid://dra42b4o8qwqi" path="res://entities/furniture/coffee_machine/coffee_machine.gd" id="1_davym"]
 [ext_resource type="PackedScene" uid="uid://beffqttiv36q7" path="res://systems/components/interactable/interactable.tscn" id="2_2bleh"]
-[ext_resource type="Script" uid="uid://c6yc6wr60oe13" path="res://master_data/people/states/state.gd" id="2_6x1mm"]
+[ext_resource type="Script" uid="uid://c6yc6wr60oe13" path="res://master_data/people/states/state_data.gd" id="2_6x1mm"]
 [ext_resource type="Resource" uid="uid://dbs7nv2dpg33p" path="res://master_data/people/states/state_energy.tres" id="3_22p86"]
 [ext_resource type="PackedScene" uid="uid://dljaoqasoo50f" path="res://systems/components/serviceable/serviceable.tscn" id="3_b116b"]
 [ext_resource type="AudioStream" uid="uid://bby3836y552qy" path="res://entities/furniture/printer/ROBOTIC_Servo_Medium_Shread_mono.wav" id="4_2wqcn"]
 [ext_resource type="Resource" uid="uid://l1binpo2tvcc" path="res://master_data/people/states/state_stress.tres" id="4_3hwwl"]
 [ext_resource type="AudioStream" uid="uid://c4yk1d2c5ktir" path="res://entities/furniture/coffee_machine/coffee_machine_making_coffee.wav" id="5_22p86"]
-[ext_resource type="Script" uid="uid://b16ctjt7ha2af" path="res://master_data/supplies/supply_data.gd" id="6_uwnbp"]
+[ext_resource type="Script" uid="uid://b16ctjt7ha2af" path="res://master_data/supplies/supply.gd" id="6_uwnbp"]
 [ext_resource type="Resource" uid="uid://cm2xsrssk8soa" path="res://master_data/supplies/supply_coffee_beans.tres" id="7_7w8c8"]
 [ext_resource type="Resource" uid="uid://duemnkxsocutv" path="res://master_data/supplies/supply_water.tres" id="8_ythw8"]
 
 [sub_resource type="Resource" id="Resource_r1mi8"]
 script = ExtResource("6_uwnbp")
-supply = ExtResource("7_7w8c8")
+supply_data = ExtResource("8_ythw8")
 amount_stored = 0.0
 metadata/_custom_type_script = "uid://b16ctjt7ha2af"
 
 [sub_resource type="Resource" id="Resource_j3gqe"]
 script = ExtResource("6_uwnbp")
-supply = ExtResource("8_ythw8")
+supply_data = ExtResource("7_7w8c8")
 amount_stored = 0.0
 metadata/_custom_type_script = "uid://b16ctjt7ha2af"
 

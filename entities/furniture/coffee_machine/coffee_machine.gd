@@ -15,10 +15,10 @@ var serviceable: Serviceable
 var status: Status
 
 var making_coffee_time: float = 4.3
-@export var affected_states: Dictionary[State, float]
+@export var affected_states: Dictionary[StateDataNew, float]
 @export var making_coffee_audio_streams: Array[AudioStream]
 
-@export var supplies: Array[SupplyData]
+@export var supplies: Array[Supply]
 
 @export var particles: GPUParticles3D
 
@@ -28,8 +28,8 @@ func _ready() -> void:
 	register_interactable()
 	register_serviceable()
 	
-	for supply_data: SupplyData in supplies:
-		supply_data.amount_stored = supply_data.supply.amount_capacity
+	for supply: Supply in supplies:
+		supply.amount_stored = supply.supply_data.amount_capacity
 	particles.amount_ratio = 0.0
 
 func register_interactable() -> void:
@@ -47,25 +47,25 @@ func interact(node: Node) -> void:
 		ActionLogger.create_log("INTERACT_BUSY")
 		return
 	
-	for supply_data: SupplyData in supplies:
-		if supply_data.is_out_of_supply:
-			refill_supply(supply_data, node)
+	for supply: Supply in supplies:
+		if supply.is_out_of_supply:
+			refill_supply(supply, node)
 			return
 	
 	if status == Status.IDLE:
 		make_coffee(node)
 
 
-func refill_supply(supply_data: SupplyData, node: Node) -> void:
+func refill_supply(supply: Supply, node: Node) -> void:
 	status = Status.SERVICING
-	serviceable.start_service(supply_data.supply.refilling_time, supply_data.supply.refilling_supply_streams.pick_random())
+	serviceable.start_service(supply.supply_data.refilling_time, supply.supply_data.refilling_supply_streams.pick_random())
 	
 	var player: Player = node as Player
 	if player != null:
 		player.immobilize()
 	
 	var tween: Tween = create_tween()
-	tween.tween_method(func(amount: float) -> void: supply_data.amount_stored = amount, supply_data.amount_stored, supply_data.supply.amount_capacity, supply_data.supply.refilling_time)
+	tween.tween_method(func(amount: float) -> void: supply.amount_stored = amount, supply.amount_stored, supply.supply_data.amount_capacity, supply.supply_data.refilling_time)
 	await tween.finished
 	
 	player.unimmobilize()
@@ -80,9 +80,9 @@ func make_coffee(node: Node) -> void:
 	await get_tree().create_timer(making_coffee_time).timeout
 	var human: Human = node as Human
 	if human != null:
-		for state_data: StateData in human.person.states:
-			if affected_states.has(state_data.state):
-				state_data.change_value(affected_states[state_data.state])
+		for state: State in human.person.states:
+			if affected_states.has(state.state_data):
+				state.change_value(affected_states[state.state_data])
 		
 	
 		ActionLogger.create_log("Ahhh...")
@@ -97,8 +97,8 @@ func play_making_coffee_sound() -> void:
 	play_sound(false)
 
 
-func play_out_of_supply_sound(supply_data: SupplyData) -> void:
-	audio_player.stream = supply_data.supply.out_of_supply_streams.pick_random()
+func play_out_of_supply_sound(supply: Supply) -> void:
+	audio_player.stream = supply.supply_data.out_of_supply_streams.pick_random()
 	play_sound()
 
 
@@ -111,9 +111,9 @@ func play_sound(with_pitch_variable: bool = true) -> void:
 
 
 func check_supplies() -> void:
-	for supply_data: SupplyData in supplies:
+	for supply: Supply in supplies:
 		
-		supply_data.amount_stored -= (supply_data.supply.amount_per_use * GameManager.difficulty)
-		if supply_data.is_out_of_supply:
-			play_out_of_supply_sound(supply_data)
-			ActionLogger.create_log(tr("OUT_OF_SUPPLY").format({"supply_name": tr(supply_data.supply.supply_name)}))
+		supply.amount_stored -= (supply.supply_data.amount_per_use * GameManager.difficulty)
+		if supply.is_out_of_supply:
+			play_out_of_supply_sound(supply)
+			ActionLogger.create_log(tr("OUT_OF_SUPPLY").format({"supply_name": tr(supply.supply_data.supply_name)}))

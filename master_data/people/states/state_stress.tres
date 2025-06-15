@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="State" load_steps=3 format=3 uid="uid://l1binpo2tvcc"]
 
-[ext_resource type="Script" uid="uid://c6yc6wr60oe13" path="res://master_data/people/states/state.gd" id="1_c25h5"]
+[ext_resource type="Script" uid="uid://c6yc6wr60oe13" path="res://master_data/people/states/state_data.gd" id="1_c25h5"]
 [ext_resource type="Texture2D" uid="uid://dnnubwd8jwgdi" path="res://master_data/people/states/icons/state_stress_icon.png" id="2_fo4au"]
 
 [resource]

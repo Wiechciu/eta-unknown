@@ -2,7 +2,7 @@ class_name SkillItem
 extends Control
 
 
-var skill_data: SkillData
+var skill: Skill
 @export var skill_icon_rect: TextureRect
 @export var skill_name_label: Label
 @export var skill_value_label: Label
@@ -15,10 +15,10 @@ func _ready() -> void:
 
 
 @warning_ignore("shadowed_variable")
-func with_data(skill_data: SkillData) -> SkillItem:
-	self.skill_data = skill_data
-	self.skill_icon_rect.texture = skill_data.skill.skill_icon if skill_data.skill.skill_icon != null else PlaceholderTexture2D.new()
-	self.skill_name_label.text = skill_data.skill.skill_name
+func with_data(skill: Skill) -> SkillItem:
+	self.skill = skill
+	self.skill_icon_rect.texture = skill.skill_data.skill_icon if skill.skill_data.skill_icon != null else PlaceholderTexture2D.new()
+	self.skill_name_label.text = skill.skill_data.skill_name
 	
 	update_value()
 	
@@ -26,35 +26,35 @@ func with_data(skill_data: SkillData) -> SkillItem:
 
 
 func update_value() -> void:
-	self.skill_value_label.text = "%d" % [skill_data.value]
+	self.skill_value_label.text = "%d" % [skill.value]
 	
-	if skill_data.skill.max_value == 1:
+	if skill.skill_data.max_value == 1:
 		skill_checkbox.show()
 		skill_progress_bar.hide()
-		skill_checkbox.button_pressed = skill_data.value == skill_data.skill.max_value
+		skill_checkbox.button_pressed = skill.value == skill.skill_data.max_value
 	else:
 		skill_checkbox.hide()
 		skill_progress_bar.show()
-		self.skill_progress_bar.value = skill_data.value
-		self.skill_progress_bar.max_value = skill_data.skill.max_value
+		self.skill_progress_bar.value = skill.value
+		self.skill_progress_bar.max_value = skill.skill_data.max_value
 
 
 func get_tooltip_icon() -> Texture2D:
-	if skill_data == null:
+	if skill == null:
 		return null
 	
-	return skill_data.skill.skill_icon
+	return skill.skill_data.skill_icon
 
 
 func get_tooltip_header() -> String:
-	if skill_data == null:
+	if skill == null:
 		return ""
 	
-	return "%s (%d / %d)" % [skill_data.skill.skill_name, skill_data.value, skill_data.skill.max_value]
+	return "%s (%d / %d)" % [skill.skill_data.skill_name, skill.value, skill.skill_data.max_value]
 
 
 func get_tooltip_body() -> String:
-	if skill_data == null:
+	if skill == null:
 		return ""
 	
-	return skill_data.skill.skill_description
+	return skill.skill_data.skill_description

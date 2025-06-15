@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://beffqttiv36q7" path="res://systems/components/interactable/interactable.tscn" id="2_b3fi8"]
 [ext_resource type="PackedScene" uid="uid://dx6f662utr8ya" path="res://entities/items/physical_document/physical_document.tscn" id="2_llfar"]
 [ext_resource type="AudioStream" uid="uid://bby3836y552qy" path="res://entities/furniture/printer/ROBOTIC_Servo_Medium_Shread_mono.wav" id="4_05xib"]
-[ext_resource type="Script" uid="uid://b16ctjt7ha2af" path="res://master_data/supplies/supply_data.gd" id="4_kmty4"]
+[ext_resource type="Script" uid="uid://b16ctjt7ha2af" path="res://master_data/supplies/supply.gd" id="4_kmty4"]
 [ext_resource type="Resource" uid="uid://dm52o3k1qt8qc" path="res://master_data/supplies/supply_ink.tres" id="5_b4hva"]
 [ext_resource type="AudioStream" uid="uid://brgi7cmsvpcmq" path="res://entities/furniture/printer/Robot_Oops.wav.wav" id="5_whxlh"]
 [ext_resource type="AudioStream" uid="uid://wl4unt5vrkrb" path="res://entities/furniture/printer/Robot_Oy.wav.wav" id="6_a7js3"]
@@ -14,15 +14,15 @@
 [ext_resource type="AudioStream" uid="uid://d4j83u78elpt" path="res://entities/furniture/printer/tool_ratchet.wav" id="9_kmty4"]
 [ext_resource type="PackedScene" uid="uid://dljaoqasoo50f" path="res://systems/components/serviceable/serviceable.tscn" id="10_c5d6k"]
 
-[sub_resource type="Resource" id="Resource_lhsat"]
+[sub_resource type="Resource" id="Resource_svcao"]
 script = ExtResource("4_kmty4")
-supply = ExtResource("5_b4hva")
+supply_data = ExtResource("6_ws2is")
 amount_stored = 0.0
 metadata/_custom_type_script = "uid://b16ctjt7ha2af"
 
-[sub_resource type="Resource" id="Resource_iydol"]
+[sub_resource type="Resource" id="Resource_7hgjo"]
 script = ExtResource("4_kmty4")
-supply = ExtResource("6_ws2is")
+supply_data = ExtResource("5_b4hva")
 amount_stored = 0.0
 metadata/_custom_type_script = "uid://b16ctjt7ha2af"
 
@@ -125,7 +125,7 @@ out_of_ink_symbol = NodePath("SubViewport/OutOfInkSymbol")
 jammed_symbol = NodePath("SubViewport/JammedSymbol")
 audio_player = NodePath("AudioStreamPlayer3D")
 printing_audio_streams = Array[AudioStream]([ExtResource("4_05xib")])
-supplies = Array[ExtResource("4_kmty4")]([SubResource("Resource_lhsat"), SubResource("Resource_iydol")])
+supplies = Array[ExtResource("4_kmty4")]([SubResource("Resource_svcao"), SubResource("Resource_7hgjo")])
 jammed_audio_streams = Array[AudioStream]([ExtResource("5_whxlh"), ExtResource("6_a7js3")])
 repairing_audio_streams = Array[AudioStream]([ExtResource("9_kmty4")])
 tray_full_audio_streams = Array[AudioStream]([ExtResource("5_whxlh"), ExtResource("6_a7js3")])

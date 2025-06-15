@@ -1,15 +1,11 @@
-#TODO Change SupplyData with Supply, the same with StateData and SkillData
 class_name SupplyData
 extends Resource
 
 
-@export var supply: Supply
-@export var amount_stored: float
+@export var supply_name: String
+@export var amount_per_use: float = 1.0
+@export var amount_capacity: float = 100.0
+@export var refilling_time: float = 3.0
 
-
-var amount_percentage: float:
-	get:
-		return amount_stored / supply.amount_capacity
-var is_out_of_supply: bool:
-	get:
-		return amount_stored < supply.amount_per_use
+@export var out_of_supply_streams: Array[AudioStream]
+@export var refilling_supply_streams: Array[AudioStream]

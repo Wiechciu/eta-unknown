@@ -107,8 +107,8 @@ var full_name: String:
 		return first_name + " " + last_name
 
 var personal_infos: Array[PersonalInfo]
-var states: Array[StateData]
-var skills: Array[SkillData]
+var states: Array[State]
+var skills: Array[Skill]
 
 var employer: Party
 var job_position: JobPosition
@@ -181,20 +181,20 @@ func load_personal_info() -> void:
 
 
 func load_states() -> void:
-	for state: State in GlobalRefs.states:
-		var state_data: StateData = StateData.new()
-		state_data.state = state
-		state_data.value = state.initial_value
-		state_data.initialize()
-		states.append(state_data)
+	for state_data: StateDataNew in GlobalRefs.states:
+		var state: State = State.new()
+		state.state_data = state_data
+		state.value = state_data.initial_value
+		state.initialize()
+		states.append(state)
 
 
 func load_skills() -> void:
-	for skill: Skill in GlobalRefs.skills:
-		var skill_data: SkillData = SkillData.new()
-		skill_data.skill = skill
-		skill_data.value = float(randi_range(0, int(skill.max_value)))
-		skills.append(skill_data)
+	for skill_data: SkillData in GlobalRefs.skills:
+		var new_skill: Skill = Skill.new()
+		new_skill.skill_data = skill_data
+		new_skill.value = float(randi_range(0, int(skill_data.max_value)))
+		skills.append(new_skill)
 
 
 func to_dict() -> Dictionary:

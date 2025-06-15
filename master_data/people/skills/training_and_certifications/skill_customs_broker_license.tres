@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=4 format=3 uid="uid://cceq2uu8kyqpm"]
 
-[ext_resource type="Script" uid="uid://cb88ovqkdfiaj" path="res://master_data/people/skills/skill.gd" id="1_7ylef"]
+[ext_resource type="Script" uid="uid://cb88ovqkdfiaj" path="res://master_data/people/skills/skill_data.gd" id="1_7ylef"]
 [ext_resource type="Resource" uid="uid://hrys7o0eb55t" path="res://master_data/people/skills/training_and_certifications/category_training_and_certifications.tres" id="2_mjflc"]
 [ext_resource type="Texture2D" uid="uid://dgpbvp2q76efy" path="res://master_data/people/skills/training_and_certifications/icons/skill_customs_broker_license_icon.png" id="3_8mndo"]
 

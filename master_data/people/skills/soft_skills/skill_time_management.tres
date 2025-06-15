@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=4 format=3 uid="uid://qwjhjdaenl6q"]
 
-[ext_resource type="Script" uid="uid://cb88ovqkdfiaj" path="res://master_data/people/skills/skill.gd" id="1_7oim3"]
+[ext_resource type="Script" uid="uid://cb88ovqkdfiaj" path="res://master_data/people/skills/skill_data.gd" id="1_7oim3"]
 [ext_resource type="Resource" uid="uid://bxjxk3ur6pfp1" path="res://master_data/people/skills/soft_skills/category_soft_skills.tres" id="2_dx6nv"]
 [ext_resource type="Texture2D" uid="uid://c682i8vowtb2g" path="res://master_data/people/skills/soft_skills/icons/skill_time_management_icon.png" id="3_45mtq"]
 

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=4 format=3 uid="uid://cok3cvdnpu20r"]
 
-[ext_resource type="Script" uid="uid://cb88ovqkdfiaj" path="res://master_data/people/skills/skill.gd" id="1_7eu72"]
+[ext_resource type="Script" uid="uid://cb88ovqkdfiaj" path="res://master_data/people/skills/skill_data.gd" id="1_7eu72"]
 [ext_resource type="Resource" uid="uid://daf6onx460ss" path="res://master_data/people/skills/industry_knowledge/category_industry_knowledge.tres" id="2_lm5lb"]
 [ext_resource type="Texture2D" uid="uid://nhs5l2ttijo" path="res://master_data/people/skills/industry_knowledge/icons/skill_geopolitical_awareness_icon.png" id="3_ekbji"]
 

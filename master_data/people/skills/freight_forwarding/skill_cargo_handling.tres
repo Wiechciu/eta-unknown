@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=4 format=3 uid="uid://drxuwq56kqhei"]
 
-[ext_resource type="Script" uid="uid://cb88ovqkdfiaj" path="res://master_data/people/skills/skill.gd" id="1_01vhx"]
+[ext_resource type="Script" uid="uid://cb88ovqkdfiaj" path="res://master_data/people/skills/skill_data.gd" id="1_01vhx"]
 [ext_resource type="Resource" uid="uid://dhggi11dt0e3c" path="res://master_data/people/skills/freight_forwarding/category_freight_forwarding.tres" id="2_04lmr"]
 [ext_resource type="Texture2D" uid="uid://c0nsbotjpvf32" path="res://master_data/people/skills/freight_forwarding/icons/skill_cargo_handling_icon.png" id="3_04lmr"]
 

@@ -5,17 +5,17 @@ extends Control
 var tween_duration: float = 1.0
 
 
-func initialize(state: State, change_amount: float) -> void:
+func initialize(state_data: StateDataNew, change_amount: float) -> void:
 	var operator_sign: String
 	if change_amount > 0:
 		operator_sign = "+"
-		if state.positive_effect:
+		if state_data.positive_effect:
 			$Label.modulate = Color.WHITE
 		else:
 			$Label.modulate = Color.INDIAN_RED
 	elif change_amount < 0:
 		operator_sign = "-"
-		if state.positive_effect:
+		if state_data.positive_effect:
 			$Label.modulate = Color.INDIAN_RED
 		else:
 			$Label.modulate = Color.WHITE
