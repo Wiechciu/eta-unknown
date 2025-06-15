@@ -1,4 +1,4 @@
-[gd_scene load_steps=453 format=3 uid="uid://bjndjg4xh0keh"]
+[gd_scene load_steps=470 format=3 uid="uid://bjndjg4xh0keh"]
 
 [ext_resource type="Script" uid="uid://bp8cyi2njiujs" path="res://systems/global_refs/global_refs.gd" id="1_6qxei"]
 [ext_resource type="Script" uid="uid://q2os2fkrr7m1" path="res://master_data/people/skills/skill_category.gd" id="2_265ga"]
@@ -452,6 +452,23 @@
 [ext_resource type="Resource" uid="uid://dy0e823phpbrx" path="res://master_data/events/event_pup.tres" id="450_bryi8"]
 [ext_resource type="Resource" uid="uid://bu2cl21d4q4yb" path="res://master_data/events/event_rcv.tres" id="451_fhxph"]
 [ext_resource type="Resource" uid="uid://cmpn00q37n240" path="res://master_data/events/event_rel.tres" id="452_lytc6"]
+[ext_resource type="Script" uid="uid://dnxy7pgl4t3dh" path="res://master_data/modes_of_transport/mode_of_transport.gd" id="453_1npsl"]
+[ext_resource type="Script" uid="uid://kpdu55ly8hk0" path="res://master_data/incoterms/incoterms_data.gd" id="453_st2n3"]
+[ext_resource type="Resource" uid="uid://b78kfw3ps32ao" path="res://master_data/modes_of_transport/mode_of_transport_air.tres" id="454_fuevv"]
+[ext_resource type="Resource" uid="uid://dncdw6k0ti7rw" path="res://master_data/incoterms/incoterms_cfr.tres" id="454_h374r"]
+[ext_resource type="Resource" uid="uid://bx8vte43g47gr" path="res://master_data/modes_of_transport/mode_of_transport_lnd.tres" id="455_q440q"]
+[ext_resource type="Resource" uid="uid://d4grknksowo76" path="res://master_data/incoterms/incoterms_cif.tres" id="455_t0nav"]
+[ext_resource type="Resource" uid="uid://dxh3w17xyech5" path="res://master_data/modes_of_transport/mode_of_transport_ral.tres" id="456_e4ifh"]
+[ext_resource type="Resource" uid="uid://crf6458rawaox" path="res://master_data/incoterms/incoterms_cip.tres" id="456_ll4ri"]
+[ext_resource type="Resource" uid="uid://dq6v7yef2h56r" path="res://master_data/incoterms/incoterms_cpt.tres" id="457_5i8ku"]
+[ext_resource type="Resource" uid="uid://d3ds3w2jmkpy" path="res://master_data/modes_of_transport/mode_of_transport_sea.tres" id="457_gjgbe"]
+[ext_resource type="Resource" uid="uid://bwgg74oqq7udq" path="res://master_data/incoterms/incoterms_dap.tres" id="458_1npsl"]
+[ext_resource type="Resource" uid="uid://cslw0s744sbu1" path="res://master_data/incoterms/incoterms_ddp.tres" id="459_fuevv"]
+[ext_resource type="Resource" uid="uid://2rgag0hdd8e6" path="res://master_data/incoterms/incoterms_dpu.tres" id="460_q440q"]
+[ext_resource type="Resource" uid="uid://c274yeaxh2uig" path="res://master_data/incoterms/incoterms_exw.tres" id="461_e4ifh"]
+[ext_resource type="Resource" uid="uid://c167mlrseag42" path="res://master_data/incoterms/incoterms_fas.tres" id="462_gjgbe"]
+[ext_resource type="Resource" uid="uid://diwj73f3wx3qh" path="res://master_data/incoterms/incoterms_fca.tres" id="463_pjp03"]
+[ext_resource type="Resource" uid="uid://c7t616km0osx7" path="res://master_data/incoterms/incoterms_fob.tres" id="464_887ru"]
 
 [node name="GlobalRefs" type="Node"]
 process_mode = 3
@@ -468,3 +485,5 @@ countries = Array[ExtResource("83_vagvf")]([ExtResource("84_ewrcv"), ExtResource
 documents = Array[ExtResource("415_0eloi")]([ExtResource("416_llbwe"), ExtResource("417_6mmty"), ExtResource("418_khjs2"), ExtResource("419_b0y8a"), ExtResource("420_ebu1l"), ExtResource("421_g4n88"), ExtResource("422_ajmqt"), ExtResource("423_ljbme"), ExtResource("424_xjoqi"), ExtResource("425_wrr33"), ExtResource("426_lqbeu"), ExtResource("427_dtf5e"), ExtResource("428_c8t3y"), ExtResource("429_wh8vo"), ExtResource("430_lpdac"), ExtResource("431_e8x24")])
 charges = Array[ExtResource("432_xjoqi")]([ExtResource("433_wrr33"), ExtResource("434_lqbeu"), ExtResource("435_dtf5e"), ExtResource("436_c8t3y"), ExtResource("437_wh8vo"), ExtResource("438_lpdac"), ExtResource("439_e8x24"), ExtResource("440_fvk4i")])
 events = Array[ExtResource("441_u41x5")]([ExtResource("442_5wjg6"), ExtResource("443_idcr4"), ExtResource("444_qup2g"), ExtResource("445_qwtsj"), ExtResource("446_hslbm"), ExtResource("447_phgqu"), ExtResource("448_6gta0"), ExtResource("449_d7yar"), ExtResource("450_bryi8"), ExtResource("451_fhxph"), ExtResource("452_lytc6")])
+modes_of_transport = Array[ExtResource("453_1npsl")]([ExtResource("454_fuevv"), ExtResource("457_gjgbe"), ExtResource("455_q440q"), ExtResource("456_e4ifh")])
+incoterms = Array[ExtResource("453_st2n3")]([ExtResource("454_h374r"), ExtResource("455_t0nav"), ExtResource("456_ll4ri"), ExtResource("457_5i8ku"), ExtResource("458_1npsl"), ExtResource("459_fuevv"), ExtResource("460_q440q"), ExtResource("461_e4ifh"), ExtResource("462_gjgbe"), ExtResource("463_pjp03"), ExtResource("464_887ru")])

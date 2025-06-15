@@ -1,0 +1,146 @@
+[gd_scene load_steps=7 format=3 uid="uid://dag450t1ydq8u"]
+
+[ext_resource type="Script" uid="uid://cyo7ib63572w7" path="res://systems/operating_system/apps/tms/shipment_list/tms_shipment_list_item.gd" id="1_bi60y"]
+[ext_resource type="PackedScene" uid="uid://dw7p1e4gjimn0" path="res://systems/ui/ui_sound_component.tscn" id="2_14sil"]
+[ext_resource type="PackedScene" uid="uid://bmcauqk83v5kh" path="res://systems/ui/ui_animation_component.tscn" id="2_ut8jw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bi60y"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bi60y"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_bi60y"]
+color = Color(0.753984, 0.753984, 0.753984, 1)
+grow_begin = 0.0
+grow_end = 0.0
+vertical = true
+
+[node name="ShipmentListItem" type="PanelContainer" node_paths=PackedStringArray("shipment_number_label", "earliest_pickup_date_label", "shipper_label", "origin_label", "destination_label", "total_weight_label", "status_label", "button")]
+custom_minimum_size = Vector2(0, 40)
+offset_right = 730.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
+script = ExtResource("1_bi60y")
+shipment_number_label = NodePath("HBoxContainer/ShipmentNumber")
+earliest_pickup_date_label = NodePath("HBoxContainer/EarliestPickupDate")
+shipper_label = NodePath("HBoxContainer/Shipper")
+origin_label = NodePath("HBoxContainer/Origin")
+destination_label = NodePath("HBoxContainer/Destination")
+total_weight_label = NodePath("HBoxContainer/TotalWeight")
+status_label = NodePath("HBoxContainer/Status")
+button = NodePath("Button")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="ShipmentNumber" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+text = "1000001"
+label_settings = SubResource("LabelSettings_bi60y")
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="VSeparator5" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_bi60y")
+
+[node name="EarliestPickupDate" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "2025-01-05"
+label_settings = SubResource("LabelSettings_bi60y")
+
+[node name="VSeparator6" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_bi60y")
+
+[node name="Shipper" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "Shipper"
+label_settings = SubResource("LabelSettings_bi60y")
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_bi60y")
+
+[node name="Origin" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+text = "Origin"
+label_settings = SubResource("LabelSettings_bi60y")
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_bi60y")
+
+[node name="Destination" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+text = "Destination"
+label_settings = SubResource("LabelSettings_bi60y")
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="VSeparator3" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_bi60y")
+
+[node name="TotalWeight" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Weight"
+label_settings = SubResource("LabelSettings_bi60y")
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="VSeparator4" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_bi60y")
+
+[node name="Status" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Status"
+label_settings = SubResource("LabelSettings_bi60y")
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+flat = true
+
+[node name="UiSoundComponent" parent="Button" instance=ExtResource("2_14sil")]
+
+[node name="UiAnimationComponent-Move" parent="." node_paths=PackedStringArray("control_to_watch") instance=ExtResource("2_ut8jw")]
+control_to_watch = NodePath("../Button")
+animate_move = true
+animation_out_duration = 0.5
+animation_in_ease_type = 1
+animation_out_ease_type = 1
+animation_in_transition_type = 6
+animation_out_transition_type = 9
+
+[node name="UiAnimationComponent-Color" parent="." node_paths=PackedStringArray("control_to_watch") instance=ExtResource("2_ut8jw")]
+control_to_watch = NodePath("../Button")
+animate_color = true
+color_animation_in_value = Color(0.8, 0.95, 1, 1)
+animation_in_duration = 0.2
+animation_out_duration = 0.5
+animation_in_ease_type = 1
+animation_in_transition_type = 1
+animation_out_transition_type = 1

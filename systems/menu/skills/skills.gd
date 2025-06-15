@@ -46,12 +46,12 @@ func populate_container() -> void:
 
 
 func add_skill(skill: Skill) -> void:
-	var new_skill_item: SkillItem = (skill_item_scene.instantiate() as SkillItem).with_data(skill)
+	var new_skill_item: SkillItem = (skill_item_scene.instantiate() as SkillItem).initialize(skill)
 	item_container.add_child(new_skill_item)
 	skill_items.append(new_skill_item)
 
 
 func add_skill_category(skill: Skill) -> void:
-	var new_skill_category_item: SkillCategoryItem = (skill_category_item_scene.instantiate() as SkillCategoryItem).with_data(skill.skill_data.skill_category)
+	var new_skill_category_item: SkillCategoryItem = (skill_category_item_scene.instantiate() as SkillCategoryItem).initialize(skill.skill_data.skill_category)
 	item_container.add_child(new_skill_category_item)
 	skill_category_items.append(new_skill_category_item)

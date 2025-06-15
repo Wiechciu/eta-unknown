@@ -11,14 +11,15 @@ var is_signed: bool:
 
 func _ready() -> void:
 	if document != null:
-		with_data(document)
+		self.item_name = document.document_data.name
+		self.item_description = document.document_data.description
 	
 	UtilityTools.assert_all_exported_properties(self)
 	register_interactable()
 
 
 @warning_ignore("shadowed_variable")
-func with_data(document: Document) -> PhysicalDocument:
+func initialize(document: Document) -> PhysicalDocument:
 	self.document = document
 	self.item_name = document.document_data.name
 	self.item_description = document.document_data.description

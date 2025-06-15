@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_ni88f")
-name = "Proof of Delivery"
-code = "POD"
+code = "PUO"
+name = "Pickup Order"
 description = "Instructs a carrier or local transport partner to collect the cargo from the shipper. It includes pickup details and any special handling instructions."
 metadata/_custom_type_script = "uid://36nkh5njfyvw"

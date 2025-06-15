@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://bn326sk3yfdna"]
+
+[ext_resource type="Script" uid="uid://bbtialufgiern" path="res://systems/operating_system/os_app_loading_screen.gd" id="1_hyag3"]
+[ext_resource type="Texture2D" uid="uid://cx8f37dagx66e" path="res://systems/operating_system/apps/tms/contrast.png" id="2_ykdf1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5tqff"]
+bg_color = Color(0, 0.2, 0.364706, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_48576"]
+font_size = 100
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_48576"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_saeul"]
+font_size = 15
+
+[node name="OsAppLoadingScreen" type="PanelContainer" node_paths=PackedStringArray("icon_rect", "title_label", "progress_bar")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5tqff")
+script = ExtResource("1_hyag3")
+icon_rect = NodePath("VBoxContainer/Icon")
+title_label = NodePath("VBoxContainer/Title")
+progress_bar = NodePath("VBoxContainer/ProgressBar")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+texture = ExtResource("2_ykdf1")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Corp TMS"
+label_settings = SubResource("LabelSettings_48576")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+theme_override_styles/separator = SubResource("StyleBoxEmpty_48576")
+
+[node name="Loading" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "LOADING"
+label_settings = SubResource("LabelSettings_saeul")
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+max_value = 1.0

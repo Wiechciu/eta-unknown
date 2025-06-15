@@ -14,10 +14,10 @@ func _ready() -> void:
 	UtilityTools.assert_all_exported_properties(self)
 
 
-func with_data(dimension_set: DimensionSet) -> DocumentDimensionSet:
-	quantity.text = "%d %s" % [dimension_set.quantity, tr("PCS")]
-	length.text = "%d" % [dimension_set.length]
-	width.text = "%d" % [dimension_set.width]
-	height.text = "%d %s, " % [dimension_set.height, tr("CM")]
-	total_weight.text = "%d %s" % [dimension_set.total_weight, tr("KG")]
+func initialize(dimension_set: DimensionSet) -> DocumentDimensionSet:
+	self.quantity.text = "%d %s" % [dimension_set.quantity, tr("PCS")]
+	self.length.text = "%d" % [dimension_set.length]
+	self.width.text = "%d" % [dimension_set.width]
+	self.height.text = "%d %s, " % [dimension_set.height, tr("CM")]
+	self.total_weight.text = "%d %s" % [dimension_set.total_weight, tr("KG")]
 	return self

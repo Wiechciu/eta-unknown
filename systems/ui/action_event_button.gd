@@ -15,7 +15,7 @@ func _ready() -> void:
 
 
 @warning_ignore("shadowed_variable")
-func with_data(action_name: String, event: InputEventKey) -> ActionEventButton:
+func initialize(action_name: String, event: InputEventKey) -> ActionEventButton:
 	self.action_name = action_name
 	self.event = event
 	if event:
@@ -42,7 +42,7 @@ func _input(event: InputEvent) -> void:
 		return
 	
 	if event.is_action_pressed("cancel") or not event is InputEventKey:
-		with_data(self.action_name, self.event)
+		initialize(self.action_name, self.event)
 		get_viewport().set_input_as_handled()
 		is_listening = false
 		unblock_screen()
@@ -53,7 +53,7 @@ func _input(event: InputEvent) -> void:
 		if self.event:
 			InputMap.action_erase_event(self.action_name, self.event)
 		InputMap.action_add_event(self.action_name, event)
-		with_data(self.action_name, event)
+		initialize(self.action_name, event)
 		recreate_secondary_event()
 		get_viewport().set_input_as_handled()
 		is_listening = false

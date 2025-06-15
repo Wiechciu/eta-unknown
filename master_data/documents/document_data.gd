@@ -1,6 +1,7 @@
 class_name DocumentData
 extends Resource
 
+
 @export var code: String
 @export var name: String
 @export var description: String

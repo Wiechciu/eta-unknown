@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cfgtlxo30incr"]
+[gd_scene load_steps=10 format=3 uid="uid://cfgtlxo30incr"]
 
 [ext_resource type="Script" uid="uid://fnniofs6r8wx" path="res://entities/items/physical_label/physical_label.gd" id="1_qtgj3"]
-[ext_resource type="Texture2D" uid="uid://cfgwjbrr0bka4" path="res://entities/items/physical_label/label_texture.png" id="2_qtgj3"]
+[ext_resource type="Texture2D" uid="uid://cgdq2usueha4m" path="res://entities/items/physical_label/physical_label_icon.png" id="2_8bcb6"]
+[ext_resource type="Texture2D" uid="uid://cfgwjbrr0bka4" path="res://entities/items/physical_label/physical_label_texture.png" id="2_qtgj3"]
 [ext_resource type="PackedScene" uid="uid://beffqttiv36q7" path="res://systems/components/interactable/interactable.tscn" id="3_xr0db"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6jodi"]
@@ -24,6 +25,7 @@ points = PackedVector3Array(-0.105, -0.145, 0, 0.105, -0.145, 0, -0.105, 0.145, 
 [node name="PhysicalLabel" type="StaticBody3D" node_paths=PackedStringArray("group_area")]
 script = ExtResource("1_qtgj3")
 group_area = NodePath("GroupArea")
+item_icon = ExtResource("2_8bcb6")
 
 [node name="Front" type="MeshInstance3D" parent="."]
 mesh = SubResource("QuadMesh_xr0db")

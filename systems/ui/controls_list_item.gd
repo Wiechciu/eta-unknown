@@ -15,14 +15,14 @@ func _ready() -> void:
 
 
 @warning_ignore("shadowed_variable")
-func with_data(action_name: String) -> ControlsListItem:
+func initialize(action_name: String) -> ControlsListItem:
 	self.action_name = action_name
-	action_label.text = "ACTION_%s" % action_name.to_upper()
+	self.action_label.text = "ACTION_%s" % action_name.to_upper()
 	
 	var events: Array[InputEvent] = InputMap.action_get_events(action_name)
 	var counter: int = 0
 	for event_button: ActionEventButton in event_buttons:
-		event_button.with_data(action_name, events[counter] as InputEventKey if (events.size() > counter) else null)
+		event_button.initialize(action_name, events[counter] as InputEventKey if (events.size() > counter) else null)
 		counter += 1
 	
 	return self

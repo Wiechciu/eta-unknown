@@ -19,7 +19,7 @@ func _ready() -> void:
 
 
 @warning_ignore("shadowed_variable")
-func with_data(save_file_metadata: SaveManager.SaveFileMetadata) -> SaveListItem:
+func initialize(save_file_metadata: SaveManager.SaveFileMetadata) -> SaveListItem:
 	self.save_file_name.text = save_file_metadata.save_file_name
 	self.timestamp.text = save_file_metadata.timestamp
 	

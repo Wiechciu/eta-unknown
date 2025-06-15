@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="IncotermsData" load_steps=2 format=3 uid="uid://diwj73f3wx3qh"]
+
+[ext_resource type="Script" uid="uid://kpdu55ly8hk0" path="res://master_data/incoterms/incoterms_data.gd" id="1_fewa3"]
+
+[resource]
+script = ExtResource("1_fewa3")
+code = "FCA"
+name = "Free Carrier"
+description = "The seller delivers goods to a carrier or agreed location. Risk transfers to the buyer once the goods are handed over to the carrier."
+metadata/_custom_type_script = "uid://kpdu55ly8hk0"

@@ -1,0 +1,84 @@
+class_name Tms
+extends OsApp
+
+
+@export var all_container: BoxContainer
+
+@export var loading_screen: OsAppLoadingScreen
+@export var navigation: TmsNavigation
+
+@export var shipment_list: TmsShipmentList
+@export var shipment_details: TmsShipmentDetails
+#@export var quotation_list: TmsQuotationList
+#@export var quotation_details: TmsQuotationDetails
+@export var data: TmsData
+
+
+func _ready() -> void:
+	super._ready()
+	shipment_details._shipment_documentation.document_print_ordered.connect(_on_document_print_ordered)
+	
+	close_all_except_navigation()
+	hide_all()
+	super.start()
+	loading_screen.start_loading()
+	await loading_screen.finished_loading
+	show_all()
+
+
+func close_all() -> void:
+	navigation.close()
+	close_all_except_navigation()
+
+
+func close_all_except_navigation() -> void:
+	shipment_list.close()
+	shipment_details.close()
+	#quotation_list.close()
+	#quotation_details.close()
+	data.close()
+	#data_details.close()
+
+
+func hide_all() -> void:
+	all_container.hide()
+
+
+func show_all() -> void:
+	all_container.show()
+
+
+func open_shipment_list() -> void:
+	close_all()
+	shipment_list.open()
+
+
+func open_shipment_details(shipment: Shipment) -> void:
+	close_all()
+	shipment_details.open(shipment)
+
+
+func open_quotation_list() -> void:
+	close_all()
+	#quotation_list.open()
+
+
+@warning_ignore("unused_parameter")
+func open_quotation_details(quotation: Quotation) -> void:
+	close_all()
+	#quotation_details.open(quotation)
+
+
+func open_data() -> void:
+	close_all()
+	data.open()
+
+
+@warning_ignore("unused_parameter")
+func open_party_details(party: Party) -> void:
+	close_all()
+	#party_details.open(party)
+
+
+func _on_document_print_ordered(document: Document, print_type: Document.PrintType) -> void:
+	document_print_ordered.emit(document, print_type)

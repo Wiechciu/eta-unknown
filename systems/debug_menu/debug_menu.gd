@@ -29,10 +29,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_new_shipping_order_button_pressed() -> void:
 	var new_shipping_order: ShippingOrder = shipping_order_scene.instantiate()
-	var new_shipment: Shipment = Shipment.new().with_data_random()
+	var new_shipment: Shipment = Shipment.create_new_with_random_data()
 	if new_shipment == null:
 		return
-	new_shipping_order.load_shipment(Shipment.new().with_data_random())
+	new_shipping_order.load_shipment(Shipment.create_new_with_random_data())
 	
 	get_tree().root.add_child(new_shipping_order)
 	new_shipping_order.position.x = 300
@@ -100,7 +100,7 @@ func _on_send_quotation_to_request_button_pressed() -> void:
 	
 	@warning_ignore("unsafe_cast")
 	var request_for_quotation: RequestForQuotation = GlobalRefs.requests_for_quotation_not_awarded.pick_random() as RequestForQuotation
-	var quotation: Quotation = Quotation.new().with_data_random(request_for_quotation, GameManager.player.person.employer as Party)
+	var quotation: Quotation = Quotation.create_new_with_random_data(request_for_quotation, GameManager.player.person.employer as Party)
 	request_for_quotation.register_quotation(quotation)
 	quotation.change_status(Quotation.Status.SUBMITTED)
 	status.text = "Quotation submitted."

@@ -35,35 +35,33 @@ var status: Status
 
 
 @warning_ignore("shadowed_variable")
-func with_data(id: int, shipment: Shipment, request_for_quotation: RequestForQuotation, quoting_forwarder: Party, number: String, currency: Currency, revenue_charges: Array[Charge], cost_charges: Array[Charge], transit_time: int, status: Status) -> Quotation:
-	self.id = id
-	self.shipment = shipment
-	self.request_for_quotation = request_for_quotation
-	self.quoting_forwarder = quoting_forwarder
-	self.number = number
-	self.currency = currency
-	self.revenue_charges = revenue_charges
-	self.cost_charges = cost_charges
-	self.transit_time = transit_time
-	self.status = status
+static func create_new(id: int, shipment: Shipment, request_for_quotation: RequestForQuotation, quoting_forwarder: Party, number: String, currency: Currency, revenue_charges: Array[Charge], cost_charges: Array[Charge], transit_time: int, status: Status) -> Quotation:
+	var new_quotation: Quotation = Quotation.new()
+	new_quotation.id = id
+	new_quotation.shipment = shipment
+	new_quotation.request_for_quotation = request_for_quotation
+	new_quotation.quoting_forwarder = quoting_forwarder
+	new_quotation.number = number
+	new_quotation.currency = currency
+	new_quotation.revenue_charges = revenue_charges
+	new_quotation.cost_charges = cost_charges
+	new_quotation.transit_time = transit_time
+	new_quotation.status = status
 	
-	GlobalRefs.quotations.append(self)
-	GlobalRefs.quotations_dict[id] = self
+	GlobalRefs.quotations.append(new_quotation)
+	GlobalRefs.quotations_dict[id] = new_quotation
 
-	return self
+	return new_quotation
 
 
 @warning_ignore("shadowed_variable")
-func with_data_random(request_for_quotation: RequestForQuotation, quoting_forwarder: Party) -> Quotation:
-	id = GlobalRefs.get_quotation_id()
+static func create_new_with_random_data(request_for_quotation: RequestForQuotation, quoting_forwarder: Party) -> Quotation:
+	var id: int = GlobalRefs.get_quotation_id()
 	
-	self.request_for_quotation = request_for_quotation
-	shipment = request_for_quotation.shipment
-	self.quoting_forwarder = quoting_forwarder
-	
-	number = str(id)
-	currency = Currency.get_currency_by_code("EUR")
-	var afr_cost: Charge = Charge.create_new("AFR", Charge.Type.COST, randi_range(3, 5) * shipment.cargo_details.total_weight, currency, GlobalRefs.carriers_with_employees.pick_random())
+	var currency: Currency = Currency.get_currency_by_code("EUR")
+	var cost_charges: Array[Charge]
+	var revenue_charges: Array[Charge]
+	var afr_cost: Charge = Charge.create_new("AFR", Charge.Type.COST, randi_range(3, 5) * request_for_quotation.shipment.cargo_details.total_weight, currency, GlobalRefs.carriers_with_employees.pick_random())
 	var afr_revenue: Charge = Charge.create_new_from_cost_with_margin(afr_cost, randf_range(0, 0.3), 0, request_for_quotation.requestor)
 	cost_charges.append(afr_cost)
 	revenue_charges.append(afr_revenue)
@@ -78,15 +76,22 @@ func with_data_random(request_for_quotation: RequestForQuotation, quoting_forwar
 	cost_charges.append(del_cost)
 	revenue_charges.append(del_revenue)
 	
-	transit_time = GlobalTimer.ONE_DAY * randi_range(5, 25)
+	var transit_time: int = GlobalTimer.ONE_DAY * randi_range(5, 25)
 	
-	status = Status.CREATED
+	var status: Status = Status.CREATED
 	
-	GlobalRefs.quotations.append(self)
-	GlobalRefs.quotations_dict[id] = self
-	
-	#print("New quotation created, ID: %s." % [id])
-	return self
+	return create_new(
+		id,
+		request_for_quotation.shipment,
+		request_for_quotation,
+		quoting_forwarder,
+		str(id),
+		currency,
+		revenue_charges,
+		cost_charges,
+		transit_time,
+		status
+	)
 
 
 func change_status(new_status: Status) -> void:

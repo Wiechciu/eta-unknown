@@ -9,26 +9,25 @@ signal actual_event_registered(actual_event: Event)
 signal time_event_notification(time_event: TimeEvent)
 
 
+var shipment: Shipment
 var events: Array[Event]
 var planned_events: Array[Event]
 var actual_events: Array[Event]
-#var planned_events_as_events: Array[Event]:
-	#get:
-		#var new_list: Array[Event]
-		#new_list.assign(planned_events)
-		#return new_list
-#var actual_events_as_events: Array[Event]:
-	#get:
-		#var new_list: Array[Event]
-		#new_list.assign(actual_events)
-		#return new_list
 
 
 @warning_ignore("shadowed_variable")
-func with_data(events: Array[Event]) -> ShipmentEvents:
-	register_events(events)
+static func create_new(shipment: Shipment, events: Array[Event]) -> ShipmentEvents:
+	var new_shipment_events: ShipmentEvents = ShipmentEvents.new()
 	
-	return self
+	# The below is for debugging only for random generated shipments
+	new_shipment_events.planned_event_registered.connect(_on_planned_event_registered.bind(shipment))
+	new_shipment_events.actual_event_registered.connect(_on_actual_event_registered.bind(shipment))
+	new_shipment_events.time_event_notification.connect(_on_time_event_notification.bind(shipment))
+	
+	new_shipment_events.shipment = shipment
+	new_shipment_events.register_events(events)
+	
+	return new_shipment_events
 
 
 @warning_ignore("shadowed_variable")
@@ -42,6 +41,7 @@ func register_event(event: Event) -> void:
 		planned_events.append(event)
 		planned_events.sort_custom(_sort_ascending)
 		planned_event_registered.emit(event)
+		GlobalTimer.create_time_event_from_event(event, self)
 	elif event.type == Event.Type.ACTUAL:
 		actual_events.append(event)
 		actual_events.sort_custom(_sort_ascending)
@@ -61,25 +61,24 @@ func remove_event(event: Event) -> void:
 	events_updated.emit()
 
 
-func create_new_planned_event(code: String, time: int, location: Location = null) -> Event:
+func register_new_planned_event(code: String, time: int, location: Location = null) -> Event:
 	var new_event: Event = Event.create_new(code, Event.Type.PLANNED, time, location)
-	GlobalTimer.create_time_event_from_event(new_event, self)
 	register_event(new_event)
 	return new_event
 
 
-func create_new_actual_event(code: String, time: int, location: Location = null) -> Event:
+func register_new_actual_event(code: String, time: int, location: Location = null) -> Event:
 	var new_event: Event = Event.create_new(code, Event.Type.ACTUAL, time, location)
 	register_event(new_event)
 	return new_event
 
 
-func create_new_actual_event_now(code: String, location: Location = null) -> Event:
-	return create_new_actual_event(code, GlobalTimer.now, location)
+func register_new_actual_event_now(code: String, location: Location = null) -> Event:
+	return register_new_actual_event(code, GlobalTimer.now, location)
 
 
-func create_new_actual_event_from_planned_event(event_planned: Event) -> Event:
-	return create_new_actual_event(event_planned.event_data.code, event_planned.time, event_planned.location)
+func register_new_actual_event_from_planned_event(event_planned: Event) -> Event:
+	return register_new_actual_event(event_planned.event_data.code, event_planned.time, event_planned.location)
 
 
 func get_all_events_of_code(code: String) -> Array[Event]:
@@ -108,3 +107,52 @@ func _sort_ascending(a: Event, b: Event) -> bool:
 	if a.time < b.time:
 		return true
 	return false
+
+
+# The below is for debugging only for random generated shipments
+static func _on_planned_event_registered(planned_event: Event, shipment: Shipment) -> void:
+	if planned_event.event_data.code == "PUP":
+		shipment.change_status(Shipment.Status.PLANNED)
+		shipment.accounting.create_new_cost_charge("PUP", randi_range(100, 150), Currency.get_currency_by_code("EUR"), shipment.haulage.trucker_pickup)
+		shipment.accounting.create_new_revenue_charge("PUP", randi_range(120, 170), Currency.get_currency_by_code("EUR"), shipment.shipper)
+	if planned_event.event_data.code == "DEL":
+		shipment.accounting.create_new_cost_charge("DEL", randi_range(100, 150), Currency.get_currency_by_code("EUR"), shipment.haulage.trucker_delivery)
+		shipment.accounting.create_new_revenue_charge("DEL", randi_range(120, 170), Currency.get_currency_by_code("EUR"), shipment.consignee)
+
+
+static func _on_actual_event_registered(actual_event: Event, shipment: Shipment) -> void:
+	if actual_event.event_data.code == "PUP":
+		shipment.change_status(Shipment.Status.IN_TRANSIT)
+	elif actual_event.event_data.code == "DEL":
+		shipment.change_status(Shipment.Status.DELIVERED)
+
+
+static func _on_time_event_notification(time_event: TimeEvent, shipment: Shipment) -> void:
+	print("Shipment ID: %s, number: %s, event: %s at %s" % [shipment.id, shipment.number, time_event.event.event_data.code, GlobalTimer.get_nice_datetime_string_from_unix_time(time_event.time)])
+	
+	if time_event.event.event_data.code == "LTS" and not shipment.is_owned:
+		shipment.remove()
+	
+	#TODO: this is to be removed once proper events are created
+	if time_event.event.event_data.code != "ERL" and time_event.event.event_data.code != "LTS":
+		shipment.events.register_new_actual_event_from_planned_event(time_event.event)
+	
+	match time_event.event.event_data.code:
+		"BOK":
+			shipment.documentation.create_new_document_now("SPO", 1)
+		"PUP":
+			shipment.documentation.create_new_document_now("PUO", 1)
+		"CSE":
+			shipment.documentation.create_new_document_now("CDE", 1)
+		"CSI":
+			shipment.documentation.create_new_document_now("CDI", 1)
+		"DEP" when shipment.main_freight.mode_of_transport != null and shipment.main_freight.mode_of_transport == ModeOfTransport.get_mode_of_transport_by_code("AIR"):
+			shipment.documentation.create_new_document_now("HWB", 1)
+			shipment.documentation.create_new_document_now("MWB", 1)
+		"DEP" when shipment.main_freight.mode_of_transport != null and shipment.main_freight.mode_of_transport == ModeOfTransport.get_mode_of_transport_by_code("AIR"):
+			shipment.documentation.create_new_document_now("HBL", 1)
+			shipment.documentation.create_new_document_now("MBL", 1)
+		"REL":
+			shipment.documentation.create_new_document_now("DLO", 1)
+		"DEL":
+			shipment.documentation.create_new_document_now("POD", 1)

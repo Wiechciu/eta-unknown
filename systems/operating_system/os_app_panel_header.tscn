@@ -1,0 +1,78 @@
+[gd_scene load_steps=9 format=3 uid="uid://dr7k5nsfgoobv"]
+
+[ext_resource type="Script" uid="uid://dpuglksdr7tw5" path="res://systems/operating_system/os_app_panel_header.gd" id="1_cfrb7"]
+[ext_resource type="Texture2D" uid="uid://cxub2wdidinij" path="res://systems/operating_system/minus.png" id="2_h7nph"]
+[ext_resource type="Texture2D" uid="uid://c2a75lyih64k1" path="res://systems/operating_system/stop.png" id="3_wa0jo"]
+[ext_resource type="Texture2D" uid="uid://byp6aoo37qjph" path="res://systems/operating_system/cross.png" id="4_wcxak"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pg08m"]
+content_margin_left = 16.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 3.0
+bg_color = Color(0, 0.201066, 0.365454, 1)
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_cfrb7"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bn56w"]
+gradient = SubResource("Gradient_cfrb7")
+
+[sub_resource type="LabelSettings" id="LabelSettings_h1byg"]
+font_size = 30
+shadow_color = Color(0, 0, 0, 0.439216)
+
+[node name="OsAppPanelHeader" type="PanelContainer" node_paths=PackedStringArray("icon_rect", "title_label")]
+offset_right = 62.0
+offset_bottom = 35.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pg08m")
+script = ExtResource("1_cfrb7")
+icon_rect = NodePath("HBoxContainer/Icon")
+title_label = NodePath("HBoxContainer/Title")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_bn56w")
+expand_mode = 2
+
+[node name="Title" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+mouse_default_cursor_shape = 6
+text = "App name"
+label_settings = SubResource("LabelSettings_h1byg")
+
+[node name="MinimizeButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(31, 31)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+icon = ExtResource("2_h7nph")
+flat = true
+vertical_icon_alignment = 2
+expand_icon = true
+
+[node name="MaximizeButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(31, 31)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+icon = ExtResource("3_wa0jo")
+flat = true
+expand_icon = true
+
+[node name="CloseButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(31, 31)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+icon = ExtResource("4_wcxak")
+flat = true
+expand_icon = true
+
+[connection signal="pressed" from="HBoxContainer/MinimizeButton" to="." method="_on_minimize_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/MaximizeButton" to="." method="_on_maximize_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]

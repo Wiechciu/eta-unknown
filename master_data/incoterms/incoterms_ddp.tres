@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="IncotermsData" load_steps=2 format=3 uid="uid://cslw0s744sbu1"]
+
+[ext_resource type="Script" uid="uid://kpdu55ly8hk0" path="res://master_data/incoterms/incoterms_data.gd" id="1_pdvib"]
+
+[resource]
+script = ExtResource("1_pdvib")
+code = "DDP"
+name = "Delivered Duty Paid"
+description = "The seller covers everything: transport, customs clearance, and duties. The buyer simply receives the goods at the destination."
+metadata/_custom_type_script = "uid://kpdu55ly8hk0"

@@ -22,6 +22,8 @@ var seaports: Array[Location]:
 @export var documents: Array[DocumentData]
 @export var charges: Array[ChargeData]
 @export var events: Array[EventData]
+@export var modes_of_transport: Array[ModeOfTransport]
+@export var incoterms: Array[IncotermsData]
 
 @export var vehicles: Array[Vehicle]
 @export var trucks: Array[Truck]

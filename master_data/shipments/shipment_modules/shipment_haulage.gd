@@ -7,8 +7,9 @@ var trucker_delivery: Party
 
 
 @warning_ignore("shadowed_variable")
-func with_data(trucker_pickup: Party, trucker_delivery: Party) -> ShipmentHaulage:
-	self.trucker_pickup = trucker_pickup
-	self.trucker_delivery = trucker_delivery
+static func create_new(trucker_pickup: Party, trucker_delivery: Party) -> ShipmentHaulage:
+	var new_shipment_haulage: ShipmentHaulage = ShipmentHaulage.new()
+	new_shipment_haulage.trucker_pickup = trucker_pickup
+	new_shipment_haulage.trucker_delivery = trucker_delivery
 	
-	return self
+	return new_shipment_haulage

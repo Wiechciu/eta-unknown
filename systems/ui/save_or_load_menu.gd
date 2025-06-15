@@ -24,7 +24,7 @@ func clear_container() -> void:
 
 
 func create_new_list_item(save_file_metadata: SaveManager.SaveFileMetadata) -> SaveListItem:
-	var new_list_item: SaveListItem = (list_item_scene.instantiate() as SaveListItem).with_data(save_file_metadata)
+	var new_list_item: SaveListItem = (list_item_scene.instantiate() as SaveListItem).initialize(save_file_metadata)
 	new_list_item.pressed_with_data.connect(_on_list_item_pressed)
 	container.add_child(new_list_item)
 	list_items.append(new_list_item)
@@ -32,7 +32,7 @@ func create_new_list_item(save_file_metadata: SaveManager.SaveFileMetadata) -> S
 
 
 func update_list_item(list_item: SaveListItem, save_file_metadata: SaveManager.SaveFileMetadata) -> SaveListItem:
-	return list_item.with_data(save_file_metadata)
+	return list_item.initialize(save_file_metadata)
 
 
 func remove_list_items(ids_to_remove: Array[int]) -> void:

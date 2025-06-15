@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="IncotermsData" load_steps=2 format=3 uid="uid://d4grknksowo76"]
+
+[ext_resource type="Script" uid="uid://kpdu55ly8hk0" path="res://master_data/incoterms/incoterms_data.gd" id="1_l00uv"]
+
+[resource]
+script = ExtResource("1_l00uv")
+code = "CIF"
+name = "Cost, Insurance and Freight"
+description = "Same as CFR, but the seller also provides minimum insurance coverage. Risk still transfers at the port of loading."
+metadata/_custom_type_script = "uid://kpdu55ly8hk0"

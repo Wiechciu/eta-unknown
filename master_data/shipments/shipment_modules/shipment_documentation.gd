@@ -13,10 +13,11 @@ var documents: Array[Document]
 
 
 @warning_ignore("shadowed_variable")
-func with_data(documents: Array[Document]) -> ShipmentDocumentation:
-	register_documents(documents)
+static func create_new(documents: Array[Document]) -> ShipmentDocumentation:
+	var new_shipment_documentation: ShipmentDocumentation = ShipmentDocumentation.new()
+	new_shipment_documentation.register_documents(documents)
 	
-	return self
+	return new_shipment_documentation
 
 
 @warning_ignore("shadowed_variable")

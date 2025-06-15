@@ -1,0 +1,220 @@
+[gd_scene load_steps=9 format=3 uid="uid://dkbqixm40xi7u"]
+
+[ext_resource type="Script" uid="uid://cl7we01wx8ir3" path="res://systems/operating_system/apps/tms/shipment_list/tms_shipment_list.gd" id="1_f2rsm"]
+[ext_resource type="PackedScene" uid="uid://dag450t1ydq8u" path="res://systems/operating_system/apps/tms/shipment_list/tms_shipment_list_item.tscn" id="2_jqska"]
+[ext_resource type="PackedScene" uid="uid://bmcauqk83v5kh" path="res://systems/ui/ui_animation_component.tscn" id="3_3vxnl"]
+[ext_resource type="PackedScene" uid="uid://dw7p1e4gjimn0" path="res://systems/ui/ui_sound_component.tscn" id="4_a42xg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f2rsm"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.91664, 0.91664, 0.91664, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_f2rsm"]
+font_size = 24
+font_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.341176)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w1aiy"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bi60y"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[node name="ShipmentList" type="PanelContainer" node_paths=PackedStringArray("container", "header", "toggle_completed_button", "sort_button")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_f2rsm")
+script = ExtResource("1_f2rsm")
+container = NodePath("VBoxContainer/PanelContainer/ScrollContainer/Container")
+header = NodePath("VBoxContainer/HBoxContainer/Header")
+toggle_completed_button = NodePath("VBoxContainer/HBoxContainer/ToggleCompletedButton")
+sort_button = NodePath("VBoxContainer/HBoxContainer/SortButton")
+list_item_scene = ExtResource("2_jqska")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Header" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SHIPMENTS"
+label_settings = SubResource("LabelSettings_f2rsm")
+
+[node name="ToggleCompletedButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "HIDE_COMPLETED"
+clip_text = true
+
+[node name="UiAnimationComponent-Scale" parent="VBoxContainer/HBoxContainer/ToggleCompletedButton" instance=ExtResource("3_3vxnl")]
+animate_scale = true
+scale_animation_pivot_type = 3
+scale_animation_in_value = Vector2(1.05, 1.05)
+animation_in_duration = 0.5
+animation_out_duration = 0.5
+animation_in_ease_type = 1
+animation_out_ease_type = 1
+animation_in_transition_type = 6
+animation_out_transition_type = 9
+
+[node name="UiAnimationComponent-Color" parent="VBoxContainer/HBoxContainer/ToggleCompletedButton" instance=ExtResource("3_3vxnl")]
+animate_color = true
+color_animation_multiply = false
+color_animation_in_value = Color(0.622838, 0.839062, 1, 1)
+animation_in_duration = 0.2
+animation_out_duration = 0.2
+animation_in_ease_type = 1
+animation_in_transition_type = 1
+animation_out_transition_type = 1
+
+[node name="UiSoundComponent" parent="VBoxContainer/HBoxContainer/ToggleCompletedButton" instance=ExtResource("4_a42xg")]
+
+[node name="SortButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "SORT_BY_DATE"
+clip_text = true
+
+[node name="UiAnimationComponent-Scale" parent="VBoxContainer/HBoxContainer/SortButton" instance=ExtResource("3_3vxnl")]
+animate_scale = true
+scale_animation_pivot_type = 2
+scale_animation_in_value = Vector2(1.05, 1.05)
+animation_in_duration = 0.5
+animation_out_duration = 0.5
+animation_in_ease_type = 1
+animation_out_ease_type = 1
+animation_in_transition_type = 6
+animation_out_transition_type = 9
+
+[node name="UiAnimationComponent-Color" parent="VBoxContainer/HBoxContainer/SortButton" instance=ExtResource("3_3vxnl")]
+animate_color = true
+color_animation_multiply = false
+color_animation_in_value = Color(0.622838, 0.839062, 1, 1)
+animation_in_duration = 0.2
+animation_out_duration = 0.2
+animation_in_ease_type = 1
+animation_in_transition_type = 1
+animation_out_transition_type = 1
+
+[node name="UiSoundComponent" parent="VBoxContainer/HBoxContainer/SortButton" instance=ExtResource("4_a42xg")]
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_w1aiy")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Container" type="VBoxContainer" parent="VBoxContainer/PanelContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = -1
+
+[node name="ShipmentListItem" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
+
+[node name="ShipmentListItem2" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
+
+[node name="ShipmentListItem3" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
+
+[node name="ShipmentListItem4" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
+
+[node name="ShipmentListItem5" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
+
+[node name="ShipmentListItem6" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
+
+[node name="ShipmentListItem7" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
+
+[node name="ShipmentListItem8" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
+
+[node name="ShipmentListItem9" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
+
+[node name="ShipmentListItem10" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
+
+[node name="ShipmentListItem11" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
+
+[node name="ShipmentListItem12" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
+
+[node name="ShipmentListItem13" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
+
+[node name="ShipmentListItem14" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
+
+[node name="ShipmentListItem15" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
+
+[node name="ShipmentListItem16" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
+
+[node name="ShipmentListItem17" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
+
+[node name="ShipmentListItem18" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
+
+[node name="ShipmentListItem19" parent="VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("2_jqska")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bi60y")
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ToggleCompletedButton" to="." method="_on_toggle_completed_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/SortButton" to="." method="_on_sort_button_pressed"]

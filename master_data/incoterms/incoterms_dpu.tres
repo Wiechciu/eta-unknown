@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="IncotermsData" load_steps=2 format=3 uid="uid://2rgag0hdd8e6"]
+
+[ext_resource type="Script" uid="uid://kpdu55ly8hk0" path="res://master_data/incoterms/incoterms_data.gd" id="1_fxhah"]
+
+[resource]
+script = ExtResource("1_fxhah")
+code = "DPU"
+name = "Delivered at Place Unloaded"
+description = "The seller bears all costs and risks until the goods are unloaded at the agreed destination. Import customs are the buyer’s responsibility."
+metadata/_custom_type_script = "uid://kpdu55ly8hk0"

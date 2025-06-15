@@ -13,7 +13,7 @@ func _ready() -> void:
 
 
 @warning_ignore("shadowed_variable")
-func with_data(personal_info: PersonalInfo) -> PersonalInfoItem:
+func initialize(personal_info: PersonalInfo) -> PersonalInfoItem:
 	self.personal_info = personal_info
 	self.icon_rect.texture = personal_info.personal_info_data.icon if personal_info.personal_info_data.icon != null else PlaceholderTexture2D.new()
 	self.name_label.text = personal_info.personal_info_data.name

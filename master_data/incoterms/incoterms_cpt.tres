@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="IncotermsData" load_steps=2 format=3 uid="uid://dq6v7yef2h56r"]
+
+[ext_resource type="Script" uid="uid://kpdu55ly8hk0" path="res://master_data/incoterms/incoterms_data.gd" id="1_v4p2b"]
+
+[resource]
+script = ExtResource("1_v4p2b")
+code = "CPT"
+name = "Carriage Paid To"
+description = "The seller pays for transport to the named destination. Risk shifts to the buyer once the goods are handed over to the first carrier."
+metadata/_custom_type_script = "uid://kpdu55ly8hk0"

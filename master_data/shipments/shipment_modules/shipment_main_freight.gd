@@ -7,8 +7,9 @@ var carrier: Party
 
 
 @warning_ignore("shadowed_variable")
-func with_data(mode_of_transport: ModeOfTransport, carrier: Party) -> ShipmentMainFreight:
-	self.mode_of_transport = mode_of_transport
-	self.carrier = carrier
+static func create_new(mode_of_transport: ModeOfTransport, carrier: Party) -> ShipmentMainFreight:
+	var new_shipment_main_freight: ShipmentMainFreight = ShipmentMainFreight.new()
+	new_shipment_main_freight.mode_of_transport = mode_of_transport
+	new_shipment_main_freight.carrier = carrier
 	
-	return self
+	return new_shipment_main_freight

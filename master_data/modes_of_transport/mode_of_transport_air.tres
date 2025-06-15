@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ModeOfTransportData" load_steps=2 format=3 uid="uid://b78kfw3ps32ao"]
+
+[ext_resource type="Script" uid="uid://dnxy7pgl4t3dh" path="res://master_data/modes_of_transport/mode_of_transport.gd" id="1_wmfbt"]
+
+[resource]
+script = ExtResource("1_wmfbt")
+code = "AIR"
+name = "Airfreight"
+description = ""
+metadata/_custom_type_script = "uid://dnxy7pgl4t3dh"

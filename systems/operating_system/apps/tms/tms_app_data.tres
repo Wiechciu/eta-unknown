@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="OsAppData" load_steps=4 format=3 uid="uid://bstvtyye7jrog"]
+
+[ext_resource type="Texture2D" uid="uid://cx8f37dagx66e" path="res://systems/operating_system/apps/tms/contrast.png" id="1_idwbx"]
+[ext_resource type="PackedScene" uid="uid://cgytarte2suti" path="res://systems/operating_system/apps/tms/tms.tscn" id="2_wf5s1"]
+[ext_resource type="Script" uid="uid://bpyvdtiywfe2p" path="res://systems/operating_system/os_app_data.gd" id="3_p70q5"]
+
+[resource]
+script = ExtResource("3_p70q5")
+name = "TMS"
+icon = ExtResource("1_idwbx")
+scene = ExtResource("2_wf5s1")
+metadata/_custom_type_script = "uid://bpyvdtiywfe2p"

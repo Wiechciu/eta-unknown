@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="IncotermsData" load_steps=2 format=3 uid="uid://bwgg74oqq7udq"]
+
+[ext_resource type="Script" uid="uid://kpdu55ly8hk0" path="res://master_data/incoterms/incoterms_data.gd" id="1_q2jbi"]
+
+[resource]
+script = ExtResource("1_q2jbi")
+code = "DAP"
+name = "Delivered At Place"
+description = "The seller delivers goods ready for unloading at the named place. The buyer takes over at that point and handles import customs if needed."
+metadata/_custom_type_script = "uid://kpdu55ly8hk0"

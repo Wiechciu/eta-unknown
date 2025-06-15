@@ -7,7 +7,7 @@ signal on_closing
 
 @export var _desktop: OsDesktop
 @export var _taskbar: OsTaskbar
-@export var _app_data: Array[OsAppData]
+@export var os_app_datas: Array[OsAppData]
 var interfaces: Array[ComputerInterface]
 
 var boot_duration: float = 1
@@ -22,8 +22,8 @@ func _ready() -> void:
 
 
 func load_apps() -> void:
-	for app_data: OsAppData in _app_data:
-		_desktop.load_icon(app_data)
+	for os_app_data: OsAppData in os_app_datas:
+		_desktop.load_icon(os_app_data)
 
 
 func start() -> void:
@@ -49,24 +49,31 @@ func _on_start_button_pressed() -> void:
 	close()
 
 
-func _on_icon_desktop_clicked(app_data: OsAppData) -> void:
-	start_app(app_data)
+func _on_icon_desktop_clicked(os_app_data: OsAppData) -> void:
+	start_app(os_app_data)
 
 
-func start_app(app_data: OsAppData) -> void:
-	var app: OsApp = app_data.scene.instantiate() as OsApp
-	_desktop.load_app(app)
-	app.tree_exited.connect(_on_app_closed.bind(app))
-	app.document_print_ordered.connect(_on_document_print_ordered)
-	_taskbar.load_icon(app_data, app)
+func start_app(os_app_data: OsAppData) -> void:
+	var os_app: OsApp = os_app_data.scene.instantiate() as OsApp
+	os_app.os_app_name = os_app_data.name
+	os_app.os_app_icon = os_app_data.icon
+	_desktop.load_app(os_app)
+	os_app.tree_exited.connect(_on_app_closed.bind(os_app))
+	os_app.document_print_ordered.connect(_on_document_print_ordered)
+	_taskbar.load_icon(os_app_data, os_app)
 
 
-func _on_icon_taskbar_clicked(app: OsApp) -> void:
-	if app.visible:
-		await app.minimize()
+func _on_icon_taskbar_clicked(os_app: OsApp) -> void:
+	var is_app_at_front: bool = os_app.get_parent().get_children().back() == os_app
+	
+	if os_app.visible and is_app_at_front:
+		await os_app.minimize()
+		os_app.get_parent().move_child(os_app, 0)
+	elif os_app.visible:
+		os_app.move_to_front()
 	else:
-		await app.maximize()
-
+		os_app.move_to_front()
+		await os_app.maximize()
 
 func _on_app_closed(app: OsApp) -> void:
 	_taskbar.remove_icon(app)

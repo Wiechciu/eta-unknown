@@ -38,6 +38,6 @@ func populate_container() -> void:
 
 
 func add_personal_info(personal_info: PersonalInfo) -> void:
-	var new_personal_info_item: PersonalInfoItem = (personal_info_item_scene.instantiate() as PersonalInfoItem).with_data(personal_info)
+	var new_personal_info_item: PersonalInfoItem = (personal_info_item_scene.instantiate() as PersonalInfoItem).initialize(personal_info)
 	item_container.add_child(new_personal_info_item)
 	personal_info_items.append(new_personal_info_item)

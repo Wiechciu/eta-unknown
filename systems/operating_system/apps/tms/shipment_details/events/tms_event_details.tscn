@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8je307sddbjq"]
+
+[ext_resource type="Script" uid="uid://dk1hr70kar232" path="res://systems/operating_system/apps/tms/shipment_details/events/tms_event_details.gd" id="1_2d4yt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6bitq"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(0.91664, 0.91664, 0.91664, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.61339, 0.61339, 0.61339, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_l7kq4"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_mqdbu"]
+vertical = true
+
+[node name="TmsEventDetails" type="PanelContainer" node_paths=PackedStringArray("code_label", "name_label", "time_label")]
+offset_right = 145.0
+offset_bottom = 25.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_6bitq")
+script = ExtResource("1_2d4yt")
+code_label = NodePath("HboxContainer/Code")
+name_label = NodePath("HboxContainer/Name")
+time_label = NodePath("HboxContainer/Time")
+
+[node name="HboxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Code" type="Label" parent="HboxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "PUP"
+label_settings = SubResource("LabelSettings_l7kq4")
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="VSeparator1" type="VSeparator" parent="HboxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_mqdbu")
+
+[node name="Name" type="Label" parent="HboxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+text = "Picked up"
+label_settings = SubResource("LabelSettings_l7kq4")
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="VSeparator2" type="VSeparator" parent="HboxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_mqdbu")
+
+[node name="Time" type="Label" parent="HboxContainer"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+text = "2025-01-05, 10:00"
+label_settings = SubResource("LabelSettings_l7kq4")
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="VSeparator3" type="VSeparator" parent="HboxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_mqdbu")

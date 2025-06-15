@@ -11,7 +11,7 @@ extends Control
 @export var fade_out_duration: float = 0.2
 
 
-func with_data(icon_texture: Texture2D, header_text: String, body_text: String) -> Tooltip:
+func initialize(icon_texture: Texture2D, header_text: String, body_text: String) -> Tooltip:
 	if header_text == "":
 		header_container.hide()
 	else:
@@ -21,7 +21,7 @@ func with_data(icon_texture: Texture2D, header_text: String, body_text: String) 
 		else:
 			icon_rect.hide()
 	
-	body_label.text = body_text
+	self.body_label.text = body_text
 	
 	return self
 

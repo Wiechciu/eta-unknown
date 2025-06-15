@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=3 uid="uid://cgytarte2suti"]
+
+[ext_resource type="Script" uid="uid://b6t8wbp6uugxh" path="res://systems/operating_system/apps/tms/tms.gd" id="1_eiifu"]
+[ext_resource type="PackedScene" uid="uid://dr7k5nsfgoobv" path="res://systems/operating_system/os_app_panel_header.tscn" id="2_tch8m"]
+[ext_resource type="PackedScene" uid="uid://bk2s2lutco06v" path="res://systems/operating_system/apps/tms/navigation/tms_navigation.tscn" id="3_j065a"]
+[ext_resource type="PackedScene" uid="uid://dkbqixm40xi7u" path="res://systems/operating_system/apps/tms/shipment_list/tms_shipment_list.tscn" id="3_t5xli"]
+[ext_resource type="PackedScene" uid="uid://bmaoxf15lcni7" path="res://systems/operating_system/apps/tms/shipment_details/tms_shipment_details.tscn" id="4_nhplg"]
+[ext_resource type="PackedScene" uid="uid://3npfgwncxa5v" path="res://systems/operating_system/apps/tms/data/tms_data.tscn" id="6_1o54k"]
+[ext_resource type="PackedScene" uid="uid://bn326sk3yfdna" path="res://systems/operating_system/os_app_loading_screen.tscn" id="7_tch8m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mgofm"]
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+
+[node name="Tms" type="PanelContainer" node_paths=PackedStringArray("all_container", "loading_screen", "navigation", "shipment_list", "shipment_details", "data")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_mgofm")
+script = ExtResource("1_eiifu")
+all_container = NodePath("VBoxContainer")
+loading_screen = NodePath("OsAppLoadingScreen")
+navigation = NodePath("VBoxContainer/HBoxContainer/NavigationPanel")
+shipment_list = NodePath("VBoxContainer/HBoxContainer/ShipmentList")
+shipment_details = NodePath("VBoxContainer/HBoxContainer/ShipmentDetails")
+data = NodePath("VBoxContainer/HBoxContainer/TmsData")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="OsAppPanelHeader" parent="VBoxContainer" instance=ExtResource("2_tch8m")]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="NavigationPanel" parent="VBoxContainer/HBoxContainer" node_paths=PackedStringArray("_tms") instance=ExtResource("3_j065a")]
+layout_mode = 2
+_tms = NodePath("../../..")
+
+[node name="ShipmentList" parent="VBoxContainer/HBoxContainer" instance=ExtResource("3_t5xli")]
+layout_mode = 2
+
+[node name="ShipmentDetails" parent="VBoxContainer/HBoxContainer" instance=ExtResource("4_nhplg")]
+visible = false
+layout_mode = 2
+
+[node name="TmsData" parent="VBoxContainer/HBoxContainer" node_paths=PackedStringArray("tms") instance=ExtResource("6_1o54k")]
+layout_mode = 2
+tms = NodePath("../../..")
+
+[node name="OsAppLoadingScreen" parent="." instance=ExtResource("7_tch8m")]
+layout_mode = 2

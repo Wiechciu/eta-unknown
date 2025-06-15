@@ -3,7 +3,7 @@ extends PanelContainer
 
 
 signal start_pressed
-signal icon_clicked(app: OsApp)
+signal icon_clicked(os_app: OsApp)
 
 
 @export var _start: OsStart
@@ -22,18 +22,18 @@ func _on_start_button_pressed() -> void:
 	start_pressed.emit()
 
 
-func load_icon(app_data: OsAppData, app: OsApp) -> void:
-	var icon: OsAppIconTaskbar = (_app_icon_scene.instantiate() as OsAppIconTaskbar).with_data(app_data, app)
+func load_icon(os_app_data: OsAppData, os_app: OsApp) -> void:
+	var icon: OsAppIconTaskbar = (_app_icon_scene.instantiate() as OsAppIconTaskbar).initialize(os_app_data, os_app)
 	icon.icon_clicked.connect(_on_icon_clicked)
 	_app_icons_container.add_child(icon)
 
 
-func _on_icon_clicked(app: OsApp) -> void:
-	icon_clicked.emit(app)
+func _on_icon_clicked(os_app: OsApp) -> void:
+	icon_clicked.emit(os_app)
 
 
-func remove_icon(app: OsApp) -> void:
+func remove_icon(os_app: OsApp) -> void:
 	for app_icon: OsAppIconTaskbar in _app_icons_container.get_children():
-		if app_icon.app == app:
+		if app_icon.os_app == os_app:
 			app_icon.queue_free()
 			return

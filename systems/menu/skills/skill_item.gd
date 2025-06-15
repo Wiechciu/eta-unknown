@@ -15,7 +15,7 @@ func _ready() -> void:
 
 
 @warning_ignore("shadowed_variable")
-func with_data(skill: Skill) -> SkillItem:
+func initialize(skill: Skill) -> SkillItem:
 	self.skill = skill
 	self.skill_icon_rect.texture = skill.skill_data.skill_icon if skill.skill_data.skill_icon != null else PlaceholderTexture2D.new()
 	self.skill_name_label.text = skill.skill_data.skill_name

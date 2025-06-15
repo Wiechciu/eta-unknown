@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ic0dtme2smyv"]
+[gd_scene load_steps=10 format=3 uid="uid://ic0dtme2smyv"]
 
 [ext_resource type="Script" uid="uid://ddstixiv8qcdb" path="res://systems/menu/inventory/inventory_item.gd" id="1_htea5"]
 [ext_resource type="PackedScene" uid="uid://csikevd7cm74m" path="res://systems/tooltip/tooltip_component.tscn" id="2_c00nx"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bjc77hvnqbicy" path="res://systems/menu/inventory/question_mark.png" id="2_yo00f"]
 [ext_resource type="PackedScene" uid="uid://bmcauqk83v5kh" path="res://systems/ui/ui_animation_component.tscn" id="3_uyox6"]
 [ext_resource type="Texture2D" uid="uid://ciwqcrdw7ve0p" path="res://systems/menu/inventory/bin.png" id="3_yo00f"]
+[ext_resource type="Texture2D" uid="uid://cgdq2usueha4m" path="res://entities/items/physical_label/physical_label_icon.png" id="5_0qcso"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e77h3"]
 bg_color = Color(0.41598, 0.41598, 0.41598, 0)
@@ -17,13 +18,14 @@ grow_begin = 0.0
 grow_end = 0.0
 vertical = true
 
-[node name="InventoryItem" type="PanelContainer" node_paths=PackedStringArray("item_count_label", "item_name_label", "checkbox_button", "remove_button")]
+[node name="InventoryItem" type="PanelContainer" node_paths=PackedStringArray("item_count_label", "item_name_label", "item_icon_rect", "checkbox_button", "remove_button")]
 offset_right = 150.0
 offset_bottom = 20.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_e77h3")
 script = ExtResource("1_htea5")
 item_count_label = NodePath("HBoxContainer/ItemCount")
 item_name_label = NodePath("HBoxContainer/ItemName")
+item_icon_rect = NodePath("HBoxContainer/ItemIcon")
 checkbox_button = NodePath("HBoxContainer/CheckBoxButton")
 remove_button = NodePath("HBoxContainer/RemoveButton")
 
@@ -70,6 +72,11 @@ animation_out_transition_type = 1
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_yo00f")
+
+[node name="ItemIcon" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_0qcso")
+expand_mode = 2
 
 [node name="ItemCount" type="Label" parent="HBoxContainer"]
 layout_mode = 2

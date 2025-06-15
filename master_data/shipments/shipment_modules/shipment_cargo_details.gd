@@ -28,19 +28,23 @@ var total_value: float:
 
 
 @warning_ignore("shadowed_variable")
-func with_data(cargo: Cargo, dimension_sets: Array[DimensionSet]) -> ShipmentCargoDetails:
-	self.cargo = cargo
-	self.dimension_sets = dimension_sets
-	return self
+static func create_new(cargo: Cargo, dimension_sets: Array[DimensionSet]) -> ShipmentCargoDetails:
+	var new_shipment_cargo_details: ShipmentCargoDetails = ShipmentCargoDetails.new()
+	new_shipment_cargo_details.cargo = cargo
+	new_shipment_cargo_details.dimension_sets = dimension_sets
+	return new_shipment_cargo_details
 
 
-func with_data_random() -> ShipmentCargoDetails:
+static func create_new_with_random_data() -> ShipmentCargoDetails:
 	var random_cargo: Cargo = GlobalRefs.cargos.pick_random()
 	var random_dimension_sets: Array[DimensionSet]
 	
 	var dimension_set_count: int = randi_range(1, 5)
 	for n: int in dimension_set_count:
-		var new_dimension_set: DimensionSet = DimensionSet.new().with_data_random()
+		var new_dimension_set: DimensionSet = DimensionSet.create_new_with_random_data()
 		random_dimension_sets.append(new_dimension_set)
 	
-	return with_data(random_cargo, random_dimension_sets)
+	return create_new(
+		random_cargo,
+		random_dimension_sets
+	)

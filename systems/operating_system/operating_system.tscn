@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://c0k32y6dedej4" path="res://systems/operating_system/operating_system.gd" id="1_raqbm"]
 [ext_resource type="Script" uid="uid://bpyvdtiywfe2p" path="res://systems/operating_system/os_app_data.gd" id="2_2udgp"]
-[ext_resource type="Resource" uid="uid://bstvtyye7jrog" path="res://systems/operating_system/apps/tms_app_data.tres" id="2_w7eab"]
+[ext_resource type="Resource" uid="uid://bstvtyye7jrog" path="res://systems/operating_system/apps/tms/tms_app_data.tres" id="2_w7eab"]
 [ext_resource type="Script" uid="uid://dl8sjycxexf0q" path="res://systems/operating_system/os_desktop.gd" id="3_2gwmb"]
 [ext_resource type="Script" uid="uid://cwxxsf5xrdc68" path="res://systems/operating_system/os_taskbar.gd" id="3_7dqhj"]
 [ext_resource type="Script" uid="uid://dvjhorl7vn7hs" path="res://systems/operating_system/os_calendar.gd" id="3_rg0tb"]
+[ext_resource type="Resource" uid="uid://bdy7xorwui5vh" path="res://systems/operating_system/apps/mailor/mailor_app_data.tres" id="4_l7l5k"]
 [ext_resource type="PackedScene" uid="uid://cmig0mcp2rse4" path="res://systems/operating_system/os_app_icon.tscn" id="4_yoaf8"]
 [ext_resource type="Script" uid="uid://c7hm004adb8r0" path="res://systems/operating_system/os_start.gd" id="5_nlmep"]
-[ext_resource type="PackedScene" uid="uid://cgytarte2suti" path="res://systems/tms/tms.tscn" id="6_1x0hc"]
 [ext_resource type="PackedScene" uid="uid://dksi1q8iitdxl" path="res://systems/operating_system/os_app_icon_taskbar.tscn" id="7_w7eab"]
 [ext_resource type="Texture2D" uid="uid://dfbrdsdq5sxkm" path="res://systems/operating_system/power.png" id="9_l7l5k"]
 [ext_resource type="PackedScene" uid="uid://bmcauqk83v5kh" path="res://systems/ui/ui_animation_component.tscn" id="10_mn4pm"]
@@ -48,7 +48,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_nlmep")
 script = ExtResource("1_raqbm")
 _desktop = NodePath("VBoxContainer/Desktop")
 _taskbar = NodePath("VBoxContainer/Taskbar")
-_app_data = Array[ExtResource("2_2udgp")]([ExtResource("2_w7eab")])
+os_app_datas = Array[ExtResource("2_2udgp")]([ExtResource("2_w7eab"), ExtResource("4_l7l5k")])
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -80,15 +80,6 @@ layout_mode = 2
 clip_contents = true
 layout_mode = 2
 mouse_filter = 2
-
-[node name="Tms" parent="VBoxContainer/Desktop/AppsContainer" instance=ExtResource("6_1x0hc")]
-visible = false
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
 
 [node name="Taskbar" type="PanelContainer" parent="VBoxContainer" node_paths=PackedStringArray("_start", "_app_icons_container")]
 custom_minimum_size = Vector2(0, 60)

@@ -31,5 +31,5 @@ func populate_container() -> void:
 	for action_name: String in InputMap.get_actions():
 		if action_name.begins_with("ui"):
 			continue
-		var list_item: ControlsListItem = (list_item_scene.instantiate() as ControlsListItem).with_data(action_name)
+		var list_item: ControlsListItem = (list_item_scene.instantiate() as ControlsListItem).initialize(action_name)
 		container.add_child(list_item)

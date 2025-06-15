@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="IncotermsData" load_steps=2 format=3 uid="uid://c7t616km0osx7"]
+
+[ext_resource type="Script" uid="uid://kpdu55ly8hk0" path="res://master_data/incoterms/incoterms_data.gd" id="1_c7qml"]
+
+[resource]
+script = ExtResource("1_c7qml")
+code = "FOB"
+name = "Free On Board"
+description = "Also for sea freight, the seller loads goods onto the ship. Risk transfers at the point of loading; the buyer pays for the sea journey onward."
+metadata/_custom_type_script = "uid://kpdu55ly8hk0"

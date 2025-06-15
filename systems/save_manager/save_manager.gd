@@ -11,11 +11,12 @@ class SaveFileMetadata:
 	var timestamp: String
 
 	@warning_ignore("shadowed_variable")
-	func with_data(save_file_name: String, game_version: String, timestamp: String) -> SaveFileMetadata:
-		self.save_file_name = save_file_name
-		self.game_version = game_version
-		self.timestamp = timestamp
-		return self
+	static func create_new(save_file_name: String, game_version: String, timestamp: String) -> SaveFileMetadata:
+		var new_save_file_metadata: SaveFileMetadata = SaveFileMetadata.new()
+		new_save_file_metadata.save_file_name = save_file_name
+		new_save_file_metadata.game_version = game_version
+		new_save_file_metadata.timestamp = timestamp
+		return new_save_file_metadata
 
 
 signal game_loaded
@@ -235,6 +236,6 @@ func get_save_files_metadata() -> Array[SaveFileMetadata]:
 	for save_file_name: String in config.get_sections():
 		var game_version: String = config.get_value(save_file_name, "game_version")
 		var timestamp: String = config.get_value(save_file_name, "timestamp")
-		var metadata: SaveFileMetadata = SaveFileMetadata.new().with_data(save_file_name, game_version, timestamp)
+		var metadata: SaveFileMetadata = SaveFileMetadata.create_new(save_file_name, game_version, timestamp)
 		array.append(metadata)
 	return array

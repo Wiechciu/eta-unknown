@@ -68,9 +68,10 @@ func add_item(item: Item) -> void:
 			found_similar_item = true
 			break
 	if not found_similar_item:
-		var new_inventory_item: InventoryItem = (inventory_item_scene.instantiate() as InventoryItem).with_data(item)
+		var new_inventory_item: InventoryItem = (inventory_item_scene.instantiate() as InventoryItem).initialize(item)
 		item_container.add_child(new_inventory_item)
 		inventory_items.append(new_inventory_item)
+		new_inventory_item.remove_button_pressed.connect(on_remove_button_pressed.bind(new_inventory_item))
 
 
 func add_items(items_to_add: Array[Item]) -> void:
@@ -80,9 +81,10 @@ func add_items(items_to_add: Array[Item]) -> void:
 
 func remove_item(item: Item) -> void:
 	for inventory_item: InventoryItem in inventory_items:
-		if inventory_item.item_name == item.item_name:
-			inventory_item.decrease_count(1)
-			if inventory_item.item_count <= 0:
+		if inventory_item.items.has(item):
+			inventory_item.remove_item(item)
+			if inventory_item.items.size() <= 0:
+				inventory_items.erase(inventory_item)
 				inventory_item.queue_free()
 			break
 
@@ -108,3 +110,7 @@ func on_cargo_picked_up() -> void:
 
 func on_cargo_thrown() -> void:
 	throw_info_container.modulate.a = 0.0
+
+
+func on_remove_button_pressed(inventory_item: InventoryItem) -> void:
+	remove_item(inventory_item.items.back())

@@ -2,22 +2,22 @@ class_name OsAppIcon
 extends PanelContainer
 
 
-signal icon_clicked(app_data: OsAppData)
+signal icon_clicked(os_app_data: OsAppData)
 
 
 @export var label: Label
 @export var icon: TextureRect
-var app_data: OsAppData
+var os_app_data: OsAppData
 
 
 @warning_ignore("shadowed_variable")
-func with_data(app_data: OsAppData) -> OsAppIcon:
-	self.app_data = app_data
-	self.label.text = app_data.name
-	self.icon.texture = app_data.icon
+func initialize(os_app_data: OsAppData) -> OsAppIcon:
+	self.os_app_data = os_app_data
+	self.label.text = os_app_data.name
+	self.icon.texture = os_app_data.icon
 	
 	return self
 
 
 func _on_button_pressed() -> void:
-	icon_clicked.emit(app_data)
+	icon_clicked.emit(os_app_data)

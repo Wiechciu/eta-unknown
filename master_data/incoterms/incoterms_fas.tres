@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="IncotermsData" load_steps=2 format=3 uid="uid://c167mlrseag42"]
+
+[ext_resource type="Script" uid="uid://kpdu55ly8hk0" path="res://master_data/incoterms/incoterms_data.gd" id="1_oeqhs"]
+
+[resource]
+script = ExtResource("1_oeqhs")
+code = "FAS"
+name = "Free Alongside Ship"
+description = "Used for sea freight, the seller places goods next to the vessel at the port. The buyer handles loading, ocean freight, and all costs beyond."
+metadata/_custom_type_script = "uid://kpdu55ly8hk0"

@@ -197,63 +197,63 @@ func load_skills() -> void:
 		skills.append(new_skill)
 
 
-func to_dict() -> Dictionary:
-	return {
-		"id" = id,
-		"first_name" = first_name,
-		"last_name" = last_name,
-		"gender" = gender,
-		"email" = email,
-		"phone_number" = phone_number,
-		"birthdate" = birthdate,
-		"experience" = experience,
-		"employer_id" = str(employer.id) if employer else "",
-		"job_position_id" = str(job_position.id) if job_position else "",
-	}
-
-
-static func from_dict(data: Dictionary) -> Person:
-	return Person.new().with_data(
-		data.id,
-		data.first_name,
-		data.last_name,
-		data.gender,
-		data.email,
-		data.phone_number,
-		data.birthdate,
-		data.experience,
-		null,
-		GlobalRefs.job_positions[data.job_position_id as int],
-	)
-
-
-func assign_references_from_dict(data: Dictionary) -> void:
-	self.employer = GlobalRefs.parties_dict[data.employer_id as int]
-
-
-static func array_to_dict(data: Array[Person]) -> Array[Dictionary]:
-	var array: Array[Dictionary]
-	for item: Person in data:
-		array.append(item.to_dict())
-	return array
-
-
-static func array_from_dict(data: Array) -> Array[Person]:
-	var array: Array[Person]
-	for item: Dictionary in data:
-		array.append(Person.from_dict(item))
-	return array
-
-
-static func array_to_dict_id(data: Array[Person]) -> Array[int]:
-	var array: Array[int]
-	for item: Person in data:
-		array.append(item.id)
-	return array
-
-
-static func array_from_dict_id(data: Array) -> Array[Person]:
-	var array: Array[Person]
-	for item: int in data:
-		array.append(GlobalRefs.people_dict[item])
-	return array
+#func to_dict() -> Dictionary:
+	#return {
+		#"id" = id,
+		#"first_name" = first_name,
+		#"last_name" = last_name,
+		#"gender" = gender,
+		#"email" = email,
+		#"phone_number" = phone_number,
+		#"birthdate" = birthdate,
+		#"experience" = experience,
+		#"employer_id" = str(employer.id) if employer else "",
+		#"job_position_id" = str(job_position.id) if job_position else "",
+	#}
+#
+#
+#static func from_dict(data: Dictionary) -> Person:
+	#return Person.new().with_data(
+		#data.id,
+		#data.first_name,
+		#data.last_name,
+		#data.gender,
+		#data.email,
+		#data.phone_number,
+		#data.birthdate,
+		#data.experience,
+		#null,
+		#GlobalRefs.job_positions[data.job_position_id as int],
+	#)
+#
+#
+#func assign_references_from_dict(data: Dictionary) -> void:
+	#self.employer = GlobalRefs.parties_dict[data.employer_id as int]
+#
+#
+#static func array_to_dict(data: Array[Person]) -> Array[Dictionary]:
+	#var array: Array[Dictionary]
+	#for item: Person in data:
+		#array.append(item.to_dict())
+	#return array
+#
+#
+#static func array_from_dict(data: Array) -> Array[Person]:
+	#var array: Array[Person]
+	#for item: Dictionary in data:
+		#array.append(Person.from_dict(item))
+	#return array
+#
+#
+#static func array_to_dict_id(data: Array[Person]) -> Array[int]:
+	#var array: Array[int]
+	#for item: Person in data:
+		#array.append(item.id)
+	#return array
+#
+#
+#static func array_from_dict_id(data: Array) -> Array[Person]:
+	#var array: Array[Person]
+	#for item: int in data:
+		#array.append(GlobalRefs.people_dict[item])
+	#return array

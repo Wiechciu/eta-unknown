@@ -40,7 +40,7 @@ func populate_container() -> void:
 
 
 func add_state(state: State) -> void:
-	var new_state_item: StateItem = (state_item_scene.instantiate() as StateItem).with_data(state)
+	var new_state_item: StateItem = (state_item_scene.instantiate() as StateItem).initialize(state)
 	item_container.add_child(new_state_item)
 	state_items.append(new_state_item)
 

@@ -18,7 +18,7 @@ func _ready() -> void:
 
 
 @warning_ignore("shadowed_variable")
-func with_data(state: State) -> StateItem:
+func initialize(state: State) -> StateItem:
 	self.state = state
 	self.state_icon_rect.texture = state.state_data.state_icon if state.state_data.state_icon != null else PlaceholderTexture2D.new()
 	self.state_name_label.text = state.state_data.state_name

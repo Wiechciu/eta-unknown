@@ -25,8 +25,6 @@ func initialize(state_data: StateDataNew, change_amount: float) -> void:
 	
 	$Label.text = "%s%d" % [operator_sign, absf(change_amount)]
 	
-	
-	
 	$Label.modulate.a = 0.0
 	var tween: Tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)

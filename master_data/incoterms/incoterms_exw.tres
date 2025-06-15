@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="IncotermsData" load_steps=2 format=3 uid="uid://c274yeaxh2uig"]
+
+[ext_resource type="Script" uid="uid://kpdu55ly8hk0" path="res://master_data/incoterms/incoterms_data.gd" id="1_xqo5k"]
+
+[resource]
+script = ExtResource("1_xqo5k")
+code = "EXW"
+name = "Ex Works"
+description = "The seller makes the goods available at their premises. The buyer bears all costs and risks from pickup to final delivery."
+metadata/_custom_type_script = "uid://kpdu55ly8hk0"

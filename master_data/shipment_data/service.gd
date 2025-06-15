@@ -1,3 +1,4 @@
+#TODO: Convert to proper Resource
 class_name Service
 extends Resource
 
@@ -26,14 +27,15 @@ var name: String:
 
 
 @warning_ignore("shadowed_variable")
-func with_data(code: Code) -> Service:
-	self.code = code
-	return self
+static func create_new(code: Code) -> Service:
+	var new_service: Service = Service.new()
+	new_service.code = code
+	return new_service
 
 
-func with_data_random() -> Service:
-	return self.with_data(get_random_code())
+static func create_new_with_random_data() -> Service:
+	return create_new(get_random_code())
 
 
-func get_random_code() -> Code:
+static func get_random_code() -> Code:
 	return Code[Code.keys()[randi() % Code.size()]]

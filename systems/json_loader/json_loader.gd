@@ -50,7 +50,7 @@ func load_cargo_from_json(file_to_load: String) -> void:
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
-		Cargo.new().with_data(
+		Cargo.create_new(
 			GlobalRefs.get_cargo_id(),
 			str(item.description) if item.description else "",
 			str(int(item.hs_code)) if item.hs_code else "",
@@ -119,7 +119,7 @@ func load_locations_from_json(file_to_load: String) -> void:
 	var loaded_array: Array = load_json_file(file_to_load)
 	
 	for item: Dictionary in loaded_array:
-		Location.new().with_data(
+		Location.create_new(
 			GlobalRefs.get_location_id(),
 			(str(item.country) + str(item.location)) if item.country else "",
 			str(item.name_wo_diacritics) if item.name_wo_diacritics else "",

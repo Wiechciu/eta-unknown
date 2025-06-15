@@ -51,11 +51,12 @@ var margin_string: String:
 
 
 @warning_ignore("shadowed_variable")
-func with_data(quotation: Quotation, charges: Array[Charge]) -> ShipmentAccounting:
-	self.quotation = quotation
-	register_charges(charges)
+static func create_new(quotation: Quotation, charges: Array[Charge]) -> ShipmentAccounting:
+	var new_shipment_accounting: ShipmentAccounting = ShipmentAccounting.new()
+	new_shipment_accounting.quotation = quotation
+	new_shipment_accounting.register_charges(charges)
 	
-	return self
+	return new_shipment_accounting
 
 
 @warning_ignore("shadowed_variable")

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://4v8nb2xu20ty"]
+
+[ext_resource type="Script" uid="uid://duf53eij5lg7o" path="res://systems/operating_system/apps/tms/shipment_details/tms_fields/tms_field_label.gd" id="1_2rnmt"]
+[ext_resource type="LabelSettings" uid="uid://dbxrdxwwawld3" path="res://systems/themes/document_label_label_settings.tres" id="2_ep6ug"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_toxsx"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+
+[node name="TmsFieldLabel" type="HBoxContainer" node_paths=PackedStringArray("label")]
+offset_right = 120.0
+offset_bottom = 27.0
+script = ExtResource("1_2rnmt")
+label = NodePath("PanelContainer/Label")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_toxsx")
+
+[node name="Label" type="Label" parent="PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "<Field_Label>"
+label_settings = ExtResource("2_ep6ug")

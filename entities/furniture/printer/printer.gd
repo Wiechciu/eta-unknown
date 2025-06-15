@@ -161,9 +161,9 @@ func print_next_document() -> void:
 	var printed_document: Node3D
 	match print_type:
 		Document.PrintType.DOCUMENT:
-			printed_document = (document_scene.instantiate() as PhysicalDocument).with_data(document)
+			printed_document = (document_scene.instantiate() as PhysicalDocument).initialize(document)
 		Document.PrintType.LABEL:
-			printed_document = (document_scene.instantiate() as PhysicalLabel).with_data(document)
+			printed_document = (document_scene.instantiate() as PhysicalLabel).initialize(document)
 	
 	var offset: Vector3 = position_offset_for_new_document * printer_tray.get_child_count()
 	printer_tray.add_child(printed_document)

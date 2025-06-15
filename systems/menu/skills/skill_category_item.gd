@@ -11,7 +11,7 @@ func _ready() -> void:
 
 
 @warning_ignore("shadowed_variable")
-func with_data(skill_category: SkillCategory) -> SkillCategoryItem:
+func initialize(skill_category: SkillCategory) -> SkillCategoryItem:
 	self.skill_category = skill_category
 	self.skill_category_name_label.text = skill_category.category_name
 	

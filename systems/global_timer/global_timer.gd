@@ -210,7 +210,7 @@ func get_nice_date_string_from_event(event: Event) -> String:
 
 ## The observer needs to have a "Notify" function to be able to receive the event
 func create_time_event_from_unix_time(time: int, observer: Object, event: Event = null) -> TimeEvent:
-	var new_time_event: TimeEvent = TimeEvent.new().with_data(time, observer, event)
+	var new_time_event: TimeEvent = TimeEvent.create_new(time, observer, event)
 	
 	if not time_events.is_empty() and new_time_event.time < time_events[0].time:
 		time_events.push_front(new_time_event)

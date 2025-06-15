@@ -58,67 +58,68 @@ var accounting: ShipmentAccounting
 
 
 @warning_ignore("shadowed_variable")
-func with_data(id: int, status: Status, customer_reference: String, export_contact_person: Person, import_contact_person: Person, shipper: Party, consignee: Party, origin: Location, destination: Location, service: Service, incoterms: Incoterms, number: int, owner: Party, cargo: Cargo, dimension_sets: Array[DimensionSet], mode_of_transport: ModeOfTransport, carrier: Party, trucker_pickup: Party, trucker_delivery: Party, handling_agent_export: Party, handling_agent_import: Party, customs_agency_export: Party, customs_agency_import: Party, documents: Array[Document], events: Array[Event], quotation: Quotation, charges: Array[Charge]) -> Shipment:
-	self.id = id
-	self.status = status
-	self.customer_reference = customer_reference
-	self.export_contact_person = export_contact_person
-	self.import_contact_person = import_contact_person
-	self.shipper = shipper
-	self.consignee = consignee
-	self.origin = origin
-	self.destination = destination
-	self.service = service
-	self.incoterms = incoterms
+static func create_new(id: int, status: Status, customer_reference: String, export_contact_person: Person, import_contact_person: Person, shipper: Party, consignee: Party, origin: Location, destination: Location, service: Service, incoterms: Incoterms, number: int, owner: Party, cargo: Cargo, dimension_sets: Array[DimensionSet], mode_of_transport: ModeOfTransport, carrier: Party, trucker_pickup: Party, trucker_delivery: Party, handling_agent_export: Party, handling_agent_import: Party, customs_agency_export: Party, customs_agency_import: Party, documents: Array[Document], events: Array[Event], quotation: Quotation, charges: Array[Charge]) -> Shipment:
+	var new_shipment: Shipment = Shipment.new()
+	new_shipment.id = id
+	new_shipment.status = status
+	new_shipment.customer_reference = customer_reference
+	new_shipment.export_contact_person = export_contact_person
+	new_shipment.import_contact_person = import_contact_person
+	new_shipment.shipper = shipper
+	new_shipment.consignee = consignee
+	new_shipment.origin = origin
+	new_shipment.destination = destination
+	new_shipment.service = service
+	new_shipment.incoterms = incoterms
 	
-	self.number = number
-	self.owner = owner
+	new_shipment.number = number
+	new_shipment.owner = owner
 	
-	self.cargo_details = ShipmentCargoDetails.new().with_data(cargo, dimension_sets)
-	self.main_freight = ShipmentMainFreight.new().with_data(mode_of_transport, carrier)
-	self.haulage = ShipmentHaulage.new().with_data(trucker_pickup, trucker_delivery)
-	self.handling = ShipmentHandling.new().with_data(handling_agent_export, handling_agent_import)
-	self.customs = ShipmentCustoms.new().with_data(customs_agency_export, customs_agency_import)
-	self.documentation = ShipmentDocumentation.new().with_data(documents)
-	self.events = ShipmentEvents.new().with_data(events)
-	self.accounting = ShipmentAccounting.new().with_data(quotation, charges)
+	new_shipment.cargo_details = ShipmentCargoDetails.create_new(cargo, dimension_sets)
+	new_shipment.main_freight = ShipmentMainFreight.create_new(mode_of_transport, carrier)
+	new_shipment.haulage = ShipmentHaulage.create_new(trucker_pickup, trucker_delivery)
+	new_shipment.handling = ShipmentHandling.create_new(handling_agent_export, handling_agent_import)
+	new_shipment.customs = ShipmentCustoms.create_new(customs_agency_export, customs_agency_import)
+	new_shipment.documentation = ShipmentDocumentation.create_new(documents)
+	new_shipment.events = ShipmentEvents.create_new(new_shipment, events)
+	new_shipment.accounting = ShipmentAccounting.create_new(quotation, charges)
 	
-	GlobalRefs.shipments.append(self)
-	GlobalRefs.shipments_dict[id] = self
+	GlobalRefs.shipments.append(new_shipment)
+	GlobalRefs.shipments_dict[id] = new_shipment
 
-	return self
+	return new_shipment
 
 
-func with_data_random(shipper_to_assign: Party = null, consignee_to_assign: Party = null) -> Shipment:
-	id = GlobalRefs.get_shipment_id()
+static func create_new_with_random_data(shipper_to_assign: Party = null, consignee_to_assign: Party = null) -> Shipment:
+	var id: int = GlobalRefs.get_shipment_id()
 	
-	cargo_details = ShipmentCargoDetails.new().with_data_random()
-	main_freight = ShipmentMainFreight.new()
-	haulage = ShipmentHaulage.new()
-	handling = ShipmentHandling.new()
-	customs = ShipmentCustoms.new()
-	documentation = ShipmentDocumentation.new()
-	events = ShipmentEvents.new()
-	accounting = ShipmentAccounting.new()
+	#var cargo_details: ShipmentCargoDetails = ShipmentCargoDetails.create_new_with_random_data()
+	#var main_freight: ShipmentMainFreight = ShipmentMainFreight.new()
+	#var haulage: ShipmentHaulage = ShipmentHaulage.new()
+	#var handling: ShipmentHandling = ShipmentHandling.new()
+	#var customs: ShipmentCustoms = ShipmentCustoms.new()
+	#var documentation: ShipmentDocumentation = ShipmentDocumentation.new()
+	#var events: ShipmentEvents = ShipmentEvents.new()
+	#var accounting: ShipmentAccounting = ShipmentAccounting.new()
 	
-	events.planned_event_registered.connect(_on_planned_event_registered)
-	events.actual_event_registered.connect(_on_actual_event_registered)
-	events.time_event_notification.connect(_on_time_event_notification)
-	
-	customer_reference = generate_random_customer_reference(randi_range(3, 5), randi_range(3, 5))
+	var events: Array[Event]
+	events.append(Event.create_new("ERL", Event.Type.PLANNED, GlobalTimer.get_future_date_from_now(randi_range(1, 20), 10, 0)))
+	events.append(Event.create_new("LTS", Event.Type.PLANNED, GlobalTimer.get_future_date_from_event(events[0], randi_range(2, 30), 17, 0)))
+
+	var customer_reference: String = generate_random_customer_reference(randi_range(3, 5), randi_range(3, 5))
 	
 	if shipper_to_assign == null:
 		shipper_to_assign = GlobalRefs.customers_with_employees.pick_random()
-	shipper = shipper_to_assign
+	var shipper: Party = shipper_to_assign
 	if consignee_to_assign == null:
 		consignee_to_assign = GlobalRefs.customers_with_employees.pick_random()
-	consignee = consignee_to_assign
+	var consignee: Party = consignee_to_assign
 	#FIXME make it always be in a different country.
 	if shipper.country == consignee.country:
 		return null
 	
-	export_contact_person = shipper.employees.pick_random()
-	import_contact_person = consignee.employees.pick_random()
+	var export_contact_person: Person = shipper.employees.pick_random()
+	var import_contact_person: Person = consignee.employees.pick_random()
 	
 	var origin_list: Array[Location] = shipper.country.locations
 	var destination_list: Array[Location] = consignee.country.locations
@@ -126,34 +127,63 @@ func with_data_random(shipper_to_assign: Party = null, consignee_to_assign: Part
 	if origin_list.is_empty() or destination_list.is_empty():
 		return null
 
-	origin = origin_list.pick_random() as Location
-	destination = destination_list.pick_random() as Location
+	var origin: Location = origin_list.pick_random() as Location
+	var destination: Location = destination_list.pick_random() as Location
 	
-	events.create_new_planned_event("ERL", GlobalTimer.get_future_date_from_now(randi_range(1, 20), 10, 0))
-	events.create_new_planned_event("LTS", GlobalTimer.get_future_date_from_event(events.get_first_event_of_code("ERL"), randi_range(2, 30), 17, 0))
-	
-	service = Service.new().with_data_random()
-	incoterms = Incoterms.new().with_data_random()
+	var service: Service = Service.create_new_with_random_data()
+	var incoterms: Incoterms = Incoterms.create_new_with_random_data()
 	var incoterms_location: String
-	match incoterms.group:
+	match incoterms.incoterms_data.group:
 		"C", "D":
 			incoterms_location = consignee.city_name
 		"E", "F":
 			incoterms_location = shipper.city_name
 	incoterms.place = incoterms_location
 	
-	GlobalRefs.shipments.append(self)
-	GlobalRefs.shipments_dict[id] = self
+	var random_cargo: Cargo = GlobalRefs.cargos.pick_random()
+	var random_dimension_sets: Array[DimensionSet]
 	
-	#print("New shipment created. Shipment ID: %s. There are %s active shipments." % [id, GlobalRefs.shipments.size()])
-	return self
+	var dimension_set_count: int = randi_range(1, 5)
+	for n: int in dimension_set_count:
+		var new_dimension_set: DimensionSet = DimensionSet.create_new_with_random_data()
+		random_dimension_sets.append(new_dimension_set)
+	
+	return create_new(
+		id,
+		Status.REQUESTED,
+		customer_reference,
+		export_contact_person,
+		import_contact_person,
+		shipper,
+		consignee,
+		origin,
+		destination,
+		service,
+		incoterms,
+		0,
+		null,
+		random_cargo,
+		random_dimension_sets,
+		GlobalRefs.modes_of_transport.pick_random(),
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		[],
+		events,
+		null,
+		[]
+	)
 
 
 func remove() -> void:
 	GlobalRefs.shipments.erase(self)
 
 
-func generate_random_customer_reference(string_length: int, number_length: int) -> String:
+static func generate_random_customer_reference(string_length: int, number_length: int) -> String:
 	var random_customer_reference: String = ""
 	var allowed_characters_in_string: String = "abcdefghijklmnopqrstvwxyz"
 	var allowed_characters_in_number: String = "1234567890"
@@ -171,7 +201,7 @@ func generate_random_customer_reference(string_length: int, number_length: int) 
 
 
 func accept(new_owner: Party) -> void:
-	events.create_new_actual_event_now("BOK")
+	events.register_new_actual_event_now("BOK")
 	change_status(Status.ACCEPTED)
 	owner = new_owner
 	number = owner.get_next_shipment_number()
@@ -192,54 +222,6 @@ func change_status(new_status: Status) -> void:
 
 func notify_details_changed() -> void:
 	details_changed.emit()
-
-
-func _on_planned_event_registered(planned_event: Event) -> void:
-	if planned_event.event_data.code == "PUP":
-		change_status(Shipment.Status.PLANNED)
-		accounting.create_new_cost_charge("PUP", randi_range(100, 150), Currency.get_currency_by_code("EUR"), haulage.trucker_pickup)
-		accounting.create_new_revenue_charge("PUP", randi_range(120, 170), Currency.get_currency_by_code("EUR"), shipper)
-	if planned_event.event_data.code == "DEL":
-		accounting.create_new_cost_charge("DEL", randi_range(100, 150), Currency.get_currency_by_code("EUR"), haulage.trucker_delivery)
-		accounting.create_new_revenue_charge("DEL", randi_range(120, 170), Currency.get_currency_by_code("EUR"), consignee)
-
-
-func _on_actual_event_registered(actual_event: Event) -> void:
-	if actual_event.event_data.code == "PUP":
-		change_status(Shipment.Status.IN_TRANSIT)
-	elif actual_event.event_data.code == "DEL":
-		change_status(Shipment.Status.DELIVERED)
-
-
-func _on_time_event_notification(time_event: TimeEvent) -> void:
-	print("Shipment ID: %s, number: %s, event: %s at %s" % [id, number, time_event.event.event_data.code, GlobalTimer.get_nice_datetime_string_from_unix_time(time_event.time)])
-	
-	if time_event.event.event_data.code == "LTS" and not is_owned:
-		remove()
-	
-	#TODO: this is to be removed once proper events are created
-	if time_event.event.event_data.code != "ERL" and time_event.event.event_data.code != "LTS":
-		events.create_new_actual_event_from_planned_event(time_event.event)
-	
-	match time_event.event.event_data.code:
-		"BOK":
-			documentation.create_new_document_now("SPO", 1)
-		"PUP":
-			documentation.create_new_document_now("PUO", 1)
-		"CSE":
-			documentation.create_new_document_now("CDE", 1)
-		"CSI":
-			documentation.create_new_document_now("CDI", 1)
-		"DEP" when main_freight.mode_of_transport != null and main_freight.mode_of_transport.code == ModeOfTransport.Code.AIR:
-			documentation.create_new_document_now("HWB", 1)
-			documentation.create_new_document_now("MWB", 1)
-		"DEP" when main_freight.mode_of_transport != null and main_freight.mode_of_transport.code == ModeOfTransport.Code.SEA:
-			documentation.create_new_document_now("HBL", 1)
-			documentation.create_new_document_now("MBL", 1)
-		"REL":
-			documentation.create_new_document_now("DLO", 1)
-		"DEL":
-			documentation.create_new_document_now("POD", 1)
 
 
 #func to_dict() -> Dictionary:

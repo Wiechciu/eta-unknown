@@ -21,58 +21,60 @@ var awarded_quotation: Quotation
 var is_awarded: bool:
 	get:
 		return awarded_quotation != null
+
 var deadline_time_event: TimeEvent
 
 
 @warning_ignore("shadowed_variable")
-func with_data(id: int, shipment: Shipment, requestor: Party, expected_total_cost: float, expected_transit_time: int, deadline_date: int, award_criteria: AwardCriteria, quotations: Array[Quotation], awarded_quotation: Quotation, ) -> RequestForQuotation:
-	self.id = id
-	self.shipment = shipment
-	self.requestor = requestor
-	self.expected_total_cost = expected_total_cost
-	self.expected_transit_time = expected_transit_time
-	self.deadline_date = deadline_date
-	self.award_criteria = award_criteria
-	self.quotations = quotations
-	self.awarded_quotation = awarded_quotation
+static func create_new(id: int, shipment: Shipment, requestor: Party, expected_total_cost: float, expected_transit_time: int, deadline_date: int, award_criteria: AwardCriteria, quotations: Array[Quotation], awarded_quotation: Quotation, ) -> RequestForQuotation:
+	var new_request_for_quotation: RequestForQuotation = RequestForQuotation.new()
+	new_request_for_quotation.id = id
+	new_request_for_quotation.shipment = shipment
+	new_request_for_quotation.requestor = requestor
+	new_request_for_quotation.expected_total_cost = expected_total_cost
+	new_request_for_quotation.expected_transit_time = expected_transit_time
+	new_request_for_quotation.deadline_date = deadline_date
+	new_request_for_quotation.award_criteria = award_criteria
+	new_request_for_quotation.quotations = quotations
+	new_request_for_quotation.awarded_quotation = awarded_quotation
 	
-	self.deadline_time_event = GlobalTimer.create_time_event_from_unix_time(deadline_date, self)
+	new_request_for_quotation.deadline_time_event = GlobalTimer.create_time_event_from_unix_time(deadline_date, new_request_for_quotation)
 	
-	GlobalRefs.requests_for_quotation.append(self)
-	GlobalRefs.requests_for_quotation_dict[id] = self
+	GlobalRefs.requests_for_quotation.append(new_request_for_quotation)
+	GlobalRefs.requests_for_quotation_dict[id] = new_request_for_quotation
 	
-	return self
+	return new_request_for_quotation
 
 
-func with_data_random(customer: Party) -> RequestForQuotation:
-	id = GlobalRefs.get_request_for_quotation_id()
-	
-	requestor = customer
-	
+static func create_new_with_random_data(customer: Party) -> RequestForQuotation:
 	var export_chance: float = 0.5
 	var is_export: bool = randf() < export_chance
+	var random_shipment: Shipment
 	if is_export:
-		shipment = Shipment.new().with_data_random(customer, null)
+		random_shipment = Shipment.create_new_with_random_data(customer, null)
 	else:
-		shipment = Shipment.new().with_data_random(null, customer)
+		random_shipment = Shipment.create_new_with_random_data(null, customer)
 	
-	if shipment == null:
+	if random_shipment == null:
 		return null
 	
-	var expected_rate_per_kg: float = GlobalMarket.market_rates_dict[shipment.origin.country.code + shipment.destination.country.code]
+	var expected_rate_per_kg: float = GlobalMarket.market_rates_dict[random_shipment.origin.country.code + random_shipment.destination.country.code]
 	var margin_allowance: float = randf_range(1.05, 1.5)
-	expected_total_cost = shipment.cargo_details.total_weight * expected_rate_per_kg * margin_allowance
 	var random_day_offset: int = randi_range(1, 3)
 	var random_hour: int = randi_range(10, 16)
-	deadline_date = GlobalTimer.get_future_date_from_now(random_day_offset, random_hour)
-	deadline_time_event = GlobalTimer.create_time_event_from_unix_time(deadline_date, self)
-	award_criteria = AwardCriteria.values()[randi() % AwardCriteria.size()]
+	var random_deadline_date: int = GlobalTimer.get_future_date_from_now(random_day_offset, random_hour)
 	
-	GlobalRefs.requests_for_quotation.append(self)
-	GlobalRefs.requests_for_quotation_dict[id] = self
-
-	#print("New request for quotation created. RFQ ID: %s. There are %s active rfqs." % [id, GlobalRefs.requests_for_quotation.size()])
-	return self
+	return create_new(
+		GlobalRefs.get_request_for_quotation_id(),
+		random_shipment,
+		customer,
+		random_shipment.cargo_details.total_weight * expected_rate_per_kg * margin_allowance,
+		0,
+		random_deadline_date,
+		AwardCriteria.values()[randi() % AwardCriteria.size()],
+		[],
+		null
+	)
 
 
 func register_quotation(new_quotation: Quotation) -> void:
@@ -159,7 +161,7 @@ func _calculate_mixed_score(quote: Quotation, min_cost: float, max_cost: float, 
 	var normalized_cost: float = 1.0 - (quote.revenue_charges_sum - min_cost) / max(0.0001, max_cost - min_cost)
 	var normalized_time: float = 1.0 - (quote.transit_time - min_time) / max(0.0001, max_time - min_time)
 	
-	var weight_price: float = 0.5
+	var weight_price: float = 0.5 #TODO: make the weights dynamic and variable for each rfq, then get rid of AwardCriteria
 	var weight_time: float = 0.5
 	
 	return normalized_cost * weight_price + normalized_time * weight_time

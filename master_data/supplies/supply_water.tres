@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Supply" load_steps=3 format=3 uid="uid://duemnkxsocutv"]
 
-[ext_resource type="AudioStream" uid="uid://d4ehtgjayiw8k" path="res://master_data/supplies/supply_water_refilling.wav" id="1_2en75"]
+[ext_resource type="AudioStream" uid="uid://d4ehtgjayiw8k" path="res://master_data/supplies/sounds/supply_water_refilling.wav" id="1_2en75"]
 [ext_resource type="Script" uid="uid://gxn4ab5n6pfp" path="res://master_data/supplies/supply_data.gd" id="1_cmaqu"]
 
 [resource]

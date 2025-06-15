@@ -28,7 +28,7 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 	for child: Node in _dimension_sets_container.get_children():
 		child.queue_free()
 	for dimension_set: DimensionSet in shipment.cargo_details.dimension_sets:
-		var document_dimension_set: DocumentDimensionSet = (_document_dimension_set_scene.instantiate() as DocumentDimensionSet).with_data(dimension_set)
+		var document_dimension_set: DocumentDimensionSet = (_document_dimension_set_scene.instantiate() as DocumentDimensionSet).initialize(dimension_set)
 		_dimension_sets_container.add_child(document_dimension_set)
 
 
