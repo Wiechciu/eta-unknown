@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DocumentData" load_steps=2 format=3 uid="uid://bl1ahhfs3rgp0"]
+
+[ext_resource type="Script" uid="uid://36nkh5njfyvw" path="res://master_data/documents/document_data.gd" id="1_rvtx5"]
+
+[resource]
+script = ExtResource("1_rvtx5")
+name = "Delivery Order"
+code = "DLO"
+description = "Signed by the consignee, this confirms successful delivery of goods. It's a key document for closing the transport process and invoicing."
+metadata/_custom_type_script = "uid://36nkh5njfyvw"

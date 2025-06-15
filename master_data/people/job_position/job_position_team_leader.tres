@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_ywb23")
-id = 4
-title = "Manager"
-salary = 2200.0
+id = 3
+title = "Team Leader"
+salary = 1700.0
 metadata/_custom_type_script = "uid://8mjhj67rb671"

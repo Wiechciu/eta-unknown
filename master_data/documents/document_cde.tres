@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DocumentData" load_steps=2 format=3 uid="uid://c2lv8amw323py"]
+
+[ext_resource type="Script" uid="uid://36nkh5njfyvw" path="res://master_data/documents/document_data.gd" id="1_6tm8x"]
+
+[resource]
+script = ExtResource("1_6tm8x")
+name = "Export Customs Declaration"
+code = "CDE"
+description = "Submitted to customs to declare goods leaving the country. It’s mandatory for legal export clearance."
+metadata/_custom_type_script = "uid://36nkh5njfyvw"

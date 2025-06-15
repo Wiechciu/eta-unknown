@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EventData" load_steps=2 format=3 uid="uid://cmpn00q37n240"]
+
+[ext_resource type="Script" uid="uid://dyn65awiswbe4" path="res://master_data/events/event_data.gd" id="1_nnps1"]
+
+[resource]
+script = ExtResource("1_nnps1")
+code = "REL"
+name = "Released for Delivery"
+description = "The shipment is out of customs and approved for final delivery to the consignee. This often triggers handover to the local carrier."
+metadata/_custom_type_script = "uid://dyn65awiswbe4"

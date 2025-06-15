@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EventData" load_steps=2 format=3 uid="uid://bqagptoqvwcck"]
+
+[ext_resource type="Script" uid="uid://dyn65awiswbe4" path="res://master_data/events/event_data.gd" id="1_av880"]
+
+[resource]
+script = ExtResource("1_av880")
+code = "CSE"
+name = "Export Customs Cleared"
+description = "The shipment has successfully passed export customs. It's now cleared to leave the country."
+metadata/_custom_type_script = "uid://dyn65awiswbe4"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DocumentData" load_steps=2 format=3 uid="uid://cedah2c4eaphg"]
+
+[ext_resource type="Script" uid="uid://36nkh5njfyvw" path="res://master_data/documents/document_data.gd" id="1_kohue"]
+
+[resource]
+script = ExtResource("1_kohue")
+name = "Masterial Safety Data Sheet"
+code = "MSD"
+description = "Outlines hazards, handling, and safety measures for a chemical product. Required when shipping potentially hazardous materials."
+metadata/_custom_type_script = "uid://36nkh5njfyvw"

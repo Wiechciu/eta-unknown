@@ -11,7 +11,6 @@ extends Node
 @export var job_positions: Array[JobPosition]
 
 @export var countries: Array[Country]
-
 @export var locations: Array[Location]
 var airports: Array[Location]:
 	get:
@@ -19,6 +18,10 @@ var airports: Array[Location]:
 var seaports: Array[Location]:
 	get:
 		return locations.filter(func(location: Location) -> bool: return location.is_seaport)
+
+@export var documents: Array[DocumentData]
+@export var charges: Array[ChargeData]
+@export var events: Array[EventData]
 
 @export var vehicles: Array[Vehicle]
 @export var trucks: Array[Truck]
@@ -144,115 +147,115 @@ func get_human_id() -> int:
 	return human_last_id
 
 
-func to_dict() -> Dictionary:
-	var cargos_temp_array: Array
-	for item: Cargo in self.cargos:
-		cargos_temp_array.append(item.to_dict())
-	var currencies_temp_array: Array
-	for item: Currency in self.currencies:
-		currencies_temp_array.append(item.to_dict())
-	var job_positions_temp_array: Array
-	for item: JobPosition in self.job_positions:
-		job_positions_temp_array.append(item.to_dict())
-	var parties_temp_array: Array
-	for item: Party in self.parties:
-		parties_temp_array.append(item.to_dict())
-	var countries_temp_array: Array
-	for item: Country in self.countries:
-		countries_temp_array.append(item.to_dict())
-	var locations_temp_array: Array
-	for item: Location in self.locations:
-		locations_temp_array.append(item.to_dict())
-	var people_temp_array: Array
-	for item: Person in self.people:
-		people_temp_array.append(item.to_dict())
-	var shipments_temp_array: Array
-	for item: Shipment in self.shipments:
-		shipments_temp_array.append(item.to_dict())
-	var requests_for_quotation_temp_array: Array
-	for item: RequestForQuotation in self.requests_for_quotation:
-		requests_for_quotation_temp_array.append(item.to_dict())
-	var quotations_temp_array: Array
-	for item: Quotation in self.quotations:
-		quotations_temp_array.append(item.to_dict())
-	var humans_temp_array: Array
-	for human: Human in self.humans:
-		humans_temp_array.append(human.to_dict())
-	
-	return {
-		"cargos": cargos_temp_array,
-		"currencies": currencies_temp_array,
-		"job_positions": job_positions_temp_array,
-		"countries": countries_temp_array,
-		"locations": locations_temp_array,
-		"parties": parties_temp_array,
-		"people": people_temp_array,
-		"shipments": shipments_temp_array,
-		"requests_for_quotation": requests_for_quotation_temp_array,
-		"quotations": quotations_temp_array,
-		"humans": humans_temp_array,
-		"cargo_last_id": cargo_last_id,
-		"currency_last_id": currency_last_id,
-		"job_position_last_id": job_position_last_id,
-		"party_last_id": party_last_id,
-		"country_last_id": country_last_id,
-		"location_last_id": location_last_id,
-		"person_last_id": person_last_id,
-		"vehicle_last_id": vehicle_last_id,
-		"shipment_last_id": shipment_last_id,
-		"quotation_last_id": quotation_last_id,
-		"request_for_quotation_last_id": request_for_quotation_last_id,
-		"human_last_id": human_last_id,
-	}
-
-
-func from_dict(data: Dictionary) -> void:
-	for data_item: Dictionary in data["cargos"]:
-		Cargo.from_dict(data_item)
-	for data_item: Dictionary in data["currencies"]:
-		Currency.from_dict(data_item)
-	for data_item: Dictionary in data["job_positions"]:
-		JobPosition.from_dict(data_item)
-	for data_item: Dictionary in data["countries"]:
-		Country.from_dict(data_item)
-	for data_item: Dictionary in data["locations"]:
-		Location.from_dict(data_item)
-	for data_item: Dictionary in data["parties"]:
-		Party.from_dict(data_item)
-	for data_item: Dictionary in data["people"]:
-		Person.from_dict(data_item)
-	for data_item: Dictionary in data["shipments"]:
-		Shipment.from_dict(data_item)
-	for data_item: Dictionary in data["requests_for_quotation"]:
-		RequestForQuotation.from_dict(data_item)
-	for data_item: Dictionary in data["quotations"]:
-		Quotation.from_dict(data_item)
-	for data_item: Dictionary in data["humans"]:
-		humans_dict[data_item["id"] as int].from_dict(data_item)
-	
-	for data_item: Dictionary in data["parties"]:
-		parties_dict[data_item["id"] as int].assign_references_from_dict(data_item)
-	for data_item: Dictionary in data["people"]:
-		people_dict[data_item["id"] as int].assign_references_from_dict(data_item)
-	for data_item: Dictionary in data["shipments"]:
-		shipments_dict[data_item["id"] as int].assign_references_from_dict(data_item)
-	for data_item: Dictionary in data["requests_for_quotation"]:
-		requests_for_quotation_dict[data_item["id"] as int].assign_references_from_dict(data_item)
-	for data_item: Dictionary in data["quotations"]:
-		quotations_dict[data_item["id"] as int].assign_references_from_dict(data_item)
-	
-	cargo_last_id = data["cargo_last_id"]
-	currency_last_id = data["currency_last_id"]
-	job_position_last_id = data["job_position_last_id"]
-	party_last_id = data["party_last_id"]
-	country_last_id = data["country_last_id"]
-	location_last_id = data["location_last_id"]
-	person_last_id = data["person_last_id"]
-	vehicle_last_id = data["vehicle_last_id"]
-	shipment_last_id = data["shipment_last_id"]
-	quotation_last_id = data["quotation_last_id"]
-	request_for_quotation_last_id = data["request_for_quotation_last_id"]
-	human_last_id = data["human_last_id"]
+#func to_dict() -> Dictionary:
+	#var cargos_temp_array: Array
+	#for item: Cargo in self.cargos:
+		#cargos_temp_array.append(item.to_dict())
+	#var currencies_temp_array: Array
+	#for item: Currency in self.currencies:
+		#currencies_temp_array.append(item.to_dict())
+	#var job_positions_temp_array: Array
+	#for item: JobPosition in self.job_positions:
+		#job_positions_temp_array.append(item.to_dict())
+	#var parties_temp_array: Array
+	#for item: Party in self.parties:
+		#parties_temp_array.append(item.to_dict())
+	#var countries_temp_array: Array
+	#for item: Country in self.countries:
+		#countries_temp_array.append(item.to_dict())
+	#var locations_temp_array: Array
+	#for item: Location in self.locations:
+		#locations_temp_array.append(item.to_dict())
+	#var people_temp_array: Array
+	#for item: Person in self.people:
+		#people_temp_array.append(item.to_dict())
+	#var shipments_temp_array: Array
+	#for item: Shipment in self.shipments:
+		#shipments_temp_array.append(item.to_dict())
+	#var requests_for_quotation_temp_array: Array
+	#for item: RequestForQuotation in self.requests_for_quotation:
+		#requests_for_quotation_temp_array.append(item.to_dict())
+	#var quotations_temp_array: Array
+	#for item: Quotation in self.quotations:
+		#quotations_temp_array.append(item.to_dict())
+	#var humans_temp_array: Array
+	#for human: Human in self.humans:
+		#humans_temp_array.append(human.to_dict())
+	#
+	#return {
+		#"cargos": cargos_temp_array,
+		#"currencies": currencies_temp_array,
+		#"job_positions": job_positions_temp_array,
+		#"countries": countries_temp_array,
+		#"locations": locations_temp_array,
+		#"parties": parties_temp_array,
+		#"people": people_temp_array,
+		#"shipments": shipments_temp_array,
+		#"requests_for_quotation": requests_for_quotation_temp_array,
+		#"quotations": quotations_temp_array,
+		#"humans": humans_temp_array,
+		#"cargo_last_id": cargo_last_id,
+		#"currency_last_id": currency_last_id,
+		#"job_position_last_id": job_position_last_id,
+		#"party_last_id": party_last_id,
+		#"country_last_id": country_last_id,
+		#"location_last_id": location_last_id,
+		#"person_last_id": person_last_id,
+		#"vehicle_last_id": vehicle_last_id,
+		#"shipment_last_id": shipment_last_id,
+		#"quotation_last_id": quotation_last_id,
+		#"request_for_quotation_last_id": request_for_quotation_last_id,
+		#"human_last_id": human_last_id,
+	#}
+#
+#
+#func from_dict(data: Dictionary) -> void:
+	#for data_item: Dictionary in data["cargos"]:
+		#Cargo.from_dict(data_item)
+	#for data_item: Dictionary in data["currencies"]:
+		#Currency.from_dict(data_item)
+	#for data_item: Dictionary in data["job_positions"]:
+		#JobPosition.from_dict(data_item)
+	#for data_item: Dictionary in data["countries"]:
+		#Country.from_dict(data_item)
+	#for data_item: Dictionary in data["locations"]:
+		#Location.from_dict(data_item)
+	#for data_item: Dictionary in data["parties"]:
+		#Party.from_dict(data_item)
+	#for data_item: Dictionary in data["people"]:
+		#Person.from_dict(data_item)
+	#for data_item: Dictionary in data["shipments"]:
+		#Shipment.from_dict(data_item)
+	#for data_item: Dictionary in data["requests_for_quotation"]:
+		#RequestForQuotation.from_dict(data_item)
+	#for data_item: Dictionary in data["quotations"]:
+		#Quotation.from_dict(data_item)
+	#for data_item: Dictionary in data["humans"]:
+		#humans_dict[data_item["id"] as int].from_dict(data_item)
+	#
+	#for data_item: Dictionary in data["parties"]:
+		#parties_dict[data_item["id"] as int].assign_references_from_dict(data_item)
+	#for data_item: Dictionary in data["people"]:
+		#people_dict[data_item["id"] as int].assign_references_from_dict(data_item)
+	#for data_item: Dictionary in data["shipments"]:
+		#shipments_dict[data_item["id"] as int].assign_references_from_dict(data_item)
+	#for data_item: Dictionary in data["requests_for_quotation"]:
+		#requests_for_quotation_dict[data_item["id"] as int].assign_references_from_dict(data_item)
+	#for data_item: Dictionary in data["quotations"]:
+		#quotations_dict[data_item["id"] as int].assign_references_from_dict(data_item)
+	#
+	#cargo_last_id = data["cargo_last_id"]
+	#currency_last_id = data["currency_last_id"]
+	#job_position_last_id = data["job_position_last_id"]
+	#party_last_id = data["party_last_id"]
+	#country_last_id = data["country_last_id"]
+	#location_last_id = data["location_last_id"]
+	#person_last_id = data["person_last_id"]
+	#vehicle_last_id = data["vehicle_last_id"]
+	#shipment_last_id = data["shipment_last_id"]
+	#quotation_last_id = data["quotation_last_id"]
+	#request_for_quotation_last_id = data["request_for_quotation_last_id"]
+	#human_last_id = data["human_last_id"]
 
 
 func clear_all() -> void:

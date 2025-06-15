@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EventData" load_steps=2 format=3 uid="uid://cm3yy7j5tcoli"]
+
+[ext_resource type="Script" uid="uid://dyn65awiswbe4" path="res://master_data/events/event_data.gd" id="1_fldqa"]
+
+[resource]
+script = ExtResource("1_fldqa")
+code = "CSI"
+name = "Import Customs Cleared"
+description = "Customs at the destination country have cleared the shipment. It can now be released for delivery."
+metadata/_custom_type_script = "uid://dyn65awiswbe4"

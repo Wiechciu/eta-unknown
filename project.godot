@@ -41,11 +41,9 @@ enabled=PackedStringArray()
 [file_customization]
 
 folder_colors={
-"res://3d_scenes/": "blue",
 "res://addons/": "red",
-"res://documents/": "gray",
+"res://entities/": "blue",
 "res://master_data/": "purple",
-"res://shipments/": "orange",
 "res://sound/": "yellow",
 "res://systems/": "teal"
 }

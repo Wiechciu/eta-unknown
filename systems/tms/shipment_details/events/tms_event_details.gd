@@ -15,8 +15,8 @@ func _ready() -> void:
 @warning_ignore("shadowed_variable")
 func with_data(event: Event) -> TmsEventDetails:
 	self.event = event
-	code_label.text = event.code_string
-	name_label.text = event.name
+	code_label.text = event.event_data.code
+	name_label.text = event.event_data.name
 	time_label.text = GlobalTimer.get_nice_datetime_string_from_event(event)
 	
 	return self

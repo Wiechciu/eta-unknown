@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EventData" load_steps=2 format=3 uid="uid://bu2cl21d4q4yb"]
+
+[ext_resource type="Script" uid="uid://dyn65awiswbe4" path="res://master_data/events/event_data.gd" id="1_4drwh"]
+
+[resource]
+script = ExtResource("1_4drwh")
+code = "RCV"
+name = "Received at Origin"
+description = "Indicates the cargo has arrived at the origin terminal or consolidation hub. Prepares the shipment for export handling and customs."
+metadata/_custom_type_script = "uid://dyn65awiswbe4"

@@ -27,10 +27,13 @@ func with_data(id: int, code: String, name: String, country: Country) -> Locatio
 	return self
 
 
+@warning_ignore("shadowed_variable")
 static func get_location_by_code(code: String) -> Location:
 	for location: Location in GlobalRefs.locations:
 		if location.code == code:
 			return location
+	
+	printerr("Could't find location code: " + code)
 	return null
 
 

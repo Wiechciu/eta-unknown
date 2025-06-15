@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EventData" load_steps=2 format=3 uid="uid://b8bntaunyidbq"]
+
+[ext_resource type="Script" uid="uid://dyn65awiswbe4" path="res://master_data/events/event_data.gd" id="1_fxdjs"]
+
+[resource]
+script = ExtResource("1_fxdjs")
+code = "DEP"
+name = "Departed"
+description = "Marks the moment the shipment leaves the origin terminal via plane, ship, or other main transport. Transit is now fully underway."
+metadata/_custom_type_script = "uid://dyn65awiswbe4"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PersonalInfoData" load_steps=3 format=3 uid="uid://gwmxjvgbg2s0"]
+
+[ext_resource type="Texture2D" uid="uid://bg6eylk26tpnp" path="res://master_data/people/personal_info/icons/personal_info_job_position_icon.png" id="1_4oun5"]
+[ext_resource type="Script" uid="uid://cv2rc84hrtnua" path="res://master_data/people/personal_info/personal_info_data.gd" id="1_oq340"]
+
+[resource]
+script = ExtResource("1_oq340")
+name = "Job Title"
+description = "Job Title of an individual."
+icon = ExtResource("1_4oun5")
+metadata/_custom_type_script = "uid://cv2rc84hrtnua"

@@ -17,8 +17,8 @@ func _ready() -> void:
 @warning_ignore("shadowed_variable")
 func with_data(charge: Charge) -> TmsCharge:
 	self.charge = charge
-	code_label.text = charge.code_string
-	name_label.text = charge.name
+	code_label.text = charge.charge_data.code
+	name_label.text = charge.charge_data.name
 	amount_label.text = charge.amount_string
 	currency_label.text = charge.currency.code
 	party_label.text = charge.party.name

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DocumentData" load_steps=2 format=3 uid="uid://cnhuwes7emld8"]
+
+[ext_resource type="Script" uid="uid://36nkh5njfyvw" path="res://master_data/documents/document_data.gd" id="1_6x83t"]
+
+[resource]
+script = ExtResource("1_6x83t")
+name = "Master Air Waybill"
+code = "MWB"
+description = "Created by the airline, it covers the main shipment consisting of one or multiple House Air Waybills. It governs the carrier’s responsibility."
+metadata/_custom_type_script = "uid://36nkh5njfyvw"

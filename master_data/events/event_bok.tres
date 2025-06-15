@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EventData" load_steps=2 format=3 uid="uid://vpgs8msfsq3g"]
+
+[ext_resource type="Script" uid="uid://dyn65awiswbe4" path="res://master_data/events/event_data.gd" id="1_8hibm"]
+
+[resource]
+script = ExtResource("1_8hibm")
+code = "BOK"
+name = "Received Booking"
+description = "Indicates that the logistics provider has accepted and confirmed the transport order. This kicks off planning and coordination."
+metadata/_custom_type_script = "uid://dyn65awiswbe4"

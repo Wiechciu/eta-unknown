@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://db6moafiqgx84"]
-
-[ext_resource type="Script" uid="uid://ce8pw0c3l22n0" path="res://3d_scenes/entities/humans/inventory/inventory.gd" id="1_epwy5"]
-
-[node name="Inventory" type="Node"]
-script = ExtResource("1_epwy5")

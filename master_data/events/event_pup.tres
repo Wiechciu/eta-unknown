@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EventData" load_steps=2 format=3 uid="uid://dy0e823phpbrx"]
+
+[ext_resource type="Script" uid="uid://dyn65awiswbe4" path="res://master_data/events/event_data.gd" id="1_6tln2"]
+
+[resource]
+script = ExtResource("1_6tln2")
+code = "PUP"
+name = "Picked Up"
+description = "Confirms that the goods have been collected from the shipper’s location. The shipment is now officially in transit."
+metadata/_custom_type_script = "uid://dyn65awiswbe4"

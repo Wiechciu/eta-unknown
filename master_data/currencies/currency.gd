@@ -24,10 +24,13 @@ func get_exchange_rate_to(other_currency: Currency) -> float:
 	return exchange_rate_to_usd / other_currency.exchange_rate_to_usd
 
 
+@warning_ignore("shadowed_variable")
 static func get_currency_by_code(code: String) -> Currency:
 	for currency: Currency in GlobalRefs.currencies:
 		if currency.code == code:
 			return currency
+	
+	printerr("Could't find currency code: " + code)
 	return null
 
 

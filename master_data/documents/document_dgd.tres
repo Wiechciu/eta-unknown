@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DocumentData" load_steps=2 format=3 uid="uid://fvv3ughqnjlv"]
+
+[ext_resource type="Script" uid="uid://36nkh5njfyvw" path="res://master_data/documents/document_data.gd" id="1_8jeq5"]
+
+[resource]
+script = ExtResource("1_8jeq5")
+name = "Dangerous Goods Declaration"
+code = "DGD"
+description = "Mandatory for transporting hazardous materials. It certifies compliance with international transport safety regulations."
+metadata/_custom_type_script = "uid://36nkh5njfyvw"

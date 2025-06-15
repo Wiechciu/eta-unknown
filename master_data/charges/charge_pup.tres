@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ChargeData" load_steps=2 format=3 uid="uid://00nvkunx115b"]
+
+[ext_resource type="Script" uid="uid://ceqkcqoqgby3g" path="res://master_data/charges/charge_data.gd" id="1_dht8m"]
+
+[resource]
+script = ExtResource("1_dht8m")
+code = "PUP"
+name = "Pickup"
+description = "Refers to the cost of collecting cargo from the shipper’s location. It includes vehicle usage and labor, and may vary based on distance or urgency."
+metadata/_custom_type_script = "uid://ceqkcqoqgby3g"

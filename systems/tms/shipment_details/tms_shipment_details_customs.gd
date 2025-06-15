@@ -28,18 +28,18 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 	
 	_customs_agency_export.value.text = shipment.customs.customs_agency_export.name if shipment.customs.customs_agency_export else ""
 	_customs_agency_import.value.text = shipment.customs.customs_agency_import.name if shipment.customs.customs_agency_import else ""
-	_export_customs_cleared_date.value.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_code(Event.Code.CSE))
-	_import_customs_cleared_date.value.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_code(Event.Code.CSI))
+	_export_customs_cleared_date.value.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_code("CSE"))
+	_import_customs_cleared_date.value.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_code("CSI"))
 
 
 
 func _on_arrange_export_customs_button_pressed() -> void:
 	shipment.customs.customs_agency_export = GlobalRefs.customs_agencies.pick_random()
-	shipment.events.create_new_planned_event(Event.Code.CSE, GlobalTimer.get_future_date_from_event(shipment.events.get_first_event_of_code(Event.Code.RCV), 1, 8))
+	shipment.events.create_new_planned_event("CSE", GlobalTimer.get_future_date_from_event(shipment.events.get_first_event_of_code("RCV"), 1, 8))
 	refresh()
 
 
 func _on_arrange_import_customs_button_pressed() -> void:
 	shipment.customs.customs_agency_import = GlobalRefs.customs_agencies.pick_random()
-	shipment.events.create_new_planned_event(Event.Code.CSI, GlobalTimer.get_future_date_from_event(shipment.events.get_first_event_of_code(Event.Code.ARR), 0, 20))
+	shipment.events.create_new_planned_event("CSI", GlobalTimer.get_future_date_from_event(shipment.events.get_first_event_of_code("ARR"), 0, 20))
 	refresh()

@@ -134,7 +134,7 @@ func load_parties_from_json(_file_to_load: String) -> void:
 	#var loaded_array: Array = load_json_file(file_to_load)
 	
 	for i: int in 1000:
-		PartyGenerator.create_new()
+		Party.create_new()
 	#for item: Dictionary in loaded_array:
 		#var new_resource: Party = Party.new().with_data(
 			#GlobalRefs.get_party_id(),
@@ -175,7 +175,7 @@ func load_people_from_json(_file_to_load: String) -> void:
 	#var loaded_array: Array = load_json_file(file_to_load)
 	
 	for i: int in 1000:
-		PersonGenerator.create_new()
+		Person.create_new()
 	
 	#for item: Dictionary in loaded_array:
 		#var new_resource: Person = Person.new().with_data(

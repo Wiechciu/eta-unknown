@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EventData" load_steps=2 format=3 uid="uid://6ggy4opiaf02"]
+
+[ext_resource type="Script" uid="uid://dyn65awiswbe4" path="res://master_data/events/event_data.gd" id="1_wcj3m"]
+
+[resource]
+script = ExtResource("1_wcj3m")
+code = "LTS"
+name = "Latest Delivery"
+description = "The latest acceptable date and time for the shipment to be delivered. Used for scheduling and meeting service-level agreements."
+metadata/_custom_type_script = "uid://dyn65awiswbe4"

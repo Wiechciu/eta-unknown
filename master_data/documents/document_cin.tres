@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DocumentData" load_steps=2 format=3 uid="uid://buk17ym5kobq5"]
+
+[ext_resource type="Script" uid="uid://36nkh5njfyvw" path="res://master_data/documents/document_data.gd" id="1_hj7j4"]
+
+[resource]
+script = ExtResource("1_hj7j4")
+name = "Commercial Invoice"
+code = "CIN"
+description = "A legal document issued by the seller detailing the transaction and goods sold. It’s required for customs clearance and accounting."
+metadata/_custom_type_script = "uid://36nkh5njfyvw"

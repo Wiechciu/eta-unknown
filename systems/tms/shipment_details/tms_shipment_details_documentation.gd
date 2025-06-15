@@ -56,7 +56,7 @@ func refresh_document_details(documents: Array[Document]) -> void:
 
 func _on_print_all_button_pressed() -> void:
 	var documents_to_print: Array[Document] = shipment.documentation.documents
-	var labels_to_print: Array[Document] = shipment.documentation.documents.filter(func(document: Document) -> bool: return Document.DOCUMENTS_WITH_LABELS.has(document.code))
+	var labels_to_print: Array[Document] = shipment.documentation.documents.filter(func(document: Document) -> bool: return Document.DOCUMENTS_WITH_LABELS.has(document.document_data.code))
 	
 	print_documents(documents_to_print, labels_to_print)
 

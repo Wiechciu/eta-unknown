@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PersonalInfoData" load_steps=3 format=3 uid="uid://cev2vdula07ls"]
+
+[ext_resource type="Texture2D" uid="uid://dqqkcwe416ufb" path="res://master_data/people/personal_info/icons/personal_info_gender_icon.png" id="1_7tvub"]
+[ext_resource type="Script" uid="uid://cv2rc84hrtnua" path="res://master_data/people/personal_info/personal_info_data.gd" id="2_irnax"]
+
+[resource]
+script = ExtResource("2_irnax")
+name = "Gender"
+description = "Gender of an individual."
+icon = ExtResource("1_7tvub")
+metadata/_custom_type_script = "uid://cv2rc84hrtnua"

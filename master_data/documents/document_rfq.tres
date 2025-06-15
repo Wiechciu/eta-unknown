@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DocumentData" load_steps=2 format=3 uid="uid://pecem52ma5m2"]
+
+[ext_resource type="Script" uid="uid://36nkh5njfyvw" path="res://master_data/documents/document_data.gd" id="1_fu8e7"]
+
+[resource]
+script = ExtResource("1_fu8e7")
+name = "Request for quotation"
+code = "RFQ"
+description = "Used to ask service providers for pricing and terms related to a potential shipment. It kicks off the negotiation and service planning phase."
+metadata/_custom_type_script = "uid://36nkh5njfyvw"

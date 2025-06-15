@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EventData" load_steps=2 format=3 uid="uid://ch1nmoiyd66c0"]
+
+[ext_resource type="Script" uid="uid://dyn65awiswbe4" path="res://master_data/events/event_data.gd" id="1_rav0i"]
+
+[resource]
+script = ExtResource("1_rav0i")
+code = "ERL"
+name = "Earliest Pickup"
+description = "The earliest time cargo can be collected from the shipper. Helps synchronize operations with warehouse readiness and schedules."
+metadata/_custom_type_script = "uid://dyn65awiswbe4"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ChargeData" load_steps=2 format=3 uid="uid://dsp4w3uxu06l"]
+
+[ext_resource type="Script" uid="uid://ceqkcqoqgby3g" path="res://master_data/charges/charge_data.gd" id="1_2tkom"]
+
+[resource]
+script = ExtResource("1_2tkom")
+code = "SFR"
+name = "Seafreight"
+description = "Covers the cost of moving cargo by sea, typically calculated per container or per cubic meter. It’s a major component in ocean shipments."
+metadata/_custom_type_script = "uid://ceqkcqoqgby3g"

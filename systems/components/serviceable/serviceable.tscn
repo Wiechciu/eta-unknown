@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://dljaoqasoo50f"]
+
+[ext_resource type="Script" uid="uid://bb6kqfnc2fs63" path="res://systems/components/serviceable/serviceable.gd" id="1_7o3wb"]
+[ext_resource type="Texture2D" uid="uid://dqq1m0hufkflq" path="res://systems/components/serviceable/setting.png" id="2_cu6in"]
+
+[node name="Serviceable" type="Node" node_paths=PackedStringArray("texture_progress_bar", "audio_player")]
+script = ExtResource("1_7o3wb")
+texture_progress_bar = NodePath("TextureProgressBar")
+audio_player = NodePath("AudioStreamPlayer")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+modulate = Color(0.811765, 1, 1, 0.756863)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+max_value = 1.0
+step = 0.0
+value = 1.0
+fill_mode = 8
+texture_progress = ExtResource("2_cu6in")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -15.0
+bus = &"Environment"

@@ -1,0 +1,124 @@
+[gd_scene load_steps=17 format=3 uid="uid://dvpm8vxtia7au"]
+
+[ext_resource type="Script" uid="uid://bopojwj8du524" path="res://entities/furniture/computer/computer.gd" id="1_ace01"]
+[ext_resource type="PackedScene" uid="uid://dl753wrtmui4e" path="res://systems/operating_system/operating_system.tscn" id="2_ptgvf"]
+[ext_resource type="PackedScene" uid="uid://beffqttiv36q7" path="res://systems/components/interactable/interactable.tscn" id="3_30c2g"]
+[ext_resource type="AudioStream" uid="uid://bwmm728wd1wxy" path="res://entities/furniture/computer/state-change_confirm-down_1.wav" id="4_hlxpb"]
+[ext_resource type="AudioStream" uid="uid://leel6sqdxcoq" path="res://entities/furniture/computer/ui_loading_3.wav" id="4_n3oq5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_30c2g"]
+size = Vector3(1.99902, 1.31488, 0.0751954)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ace01"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ptgvf"]
+size = Vector3(1.92, 1.08, 0.07)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3l4wl"]
+albedo_color = Color(0, 0, 0, 1)
+metallic = 0.31
+roughness = 0.45
+
+[sub_resource type="BoxMesh" id="BoxMesh_82prh"]
+material = SubResource("StandardMaterial3D_3l4wl")
+size = Vector3(1.92, 1.08, 0.07)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ace01"]
+albedo_color = Color(0.340339, 0.340339, 0.340339, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ace01"]
+material = SubResource("StandardMaterial3D_ace01")
+size = Vector3(2, 1.15, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ptgvf"]
+material = SubResource("StandardMaterial3D_ace01")
+size = Vector3(1.105, 0.75, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8pfch"]
+material = SubResource("StandardMaterial3D_ace01")
+size = Vector3(0.105, 0.2, 0.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ptgvf"]
+albedo_color = Color(0.223103, 0.223103, 0.223103, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kooe7"]
+material = SubResource("StandardMaterial3D_ptgvf")
+size = Vector3(0.635, 0.05, 0.39)
+
+[node name="Computer" type="StaticBody3D" node_paths=PackedStringArray("subviewport", "input_area", "camera", "light", "screen_black", "audio_player")]
+script = ExtResource("1_ace01")
+subviewport = NodePath("SubViewport")
+os_scene = ExtResource("2_ptgvf")
+input_area = NodePath("InputArea")
+camera = NodePath("Camera3D")
+light = NodePath("SpotLight3D")
+screen_black = NodePath("3DModel/ScreenBlack")
+audio_player = NodePath("AudioStreamPlayer3D")
+start_audio_stream = ExtResource("4_n3oq5")
+close_audio_stream = ExtResource("4_hlxpb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.659882, -0.0351563)
+shape = SubResource("BoxShape3D_30c2g")
+
+[node name="Interactable" parent="." instance=ExtResource("3_30c2g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.74076, 0.812)
+cull_mask = 1048573
+
+[node name="ScreenSprite" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.74076, 0.035109)
+pixel_size = 0.001
+double_sided = false
+texture = SubResource("ViewportTexture_ace01")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(1920, 1080)
+
+[node name="InputArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InputArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.74076, 0)
+shape = SubResource("BoxShape3D_ptgvf")
+
+[node name="3DModel" type="Node3D" parent="."]
+
+[node name="ScreenBlack" type="MeshInstance3D" parent="3DModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.74076, 0)
+mesh = SubResource("BoxMesh_82prh")
+skeleton = NodePath("../..")
+
+[node name="Frame1" type="MeshInstance3D" parent="3DModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.74076, -0.0221731)
+mesh = SubResource("BoxMesh_ace01")
+skeleton = NodePath("../..")
+
+[node name="Frame2" type="MeshInstance3D" parent="3DModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.754237, -0.0571197)
+mesh = SubResource("BoxMesh_ptgvf")
+skeleton = NodePath("../..")
+
+[node name="Leg" type="MeshInstance3D" parent="3DModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13, -0.015)
+mesh = SubResource("BoxMesh_8pfch")
+skeleton = NodePath("../..")
+
+[node name="Stand" type="MeshInstance3D" parent="3DModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0302308, 0)
+mesh = SubResource("BoxMesh_kooe7")
+skeleton = NodePath("../..")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.710888, 0)
+light_energy = 2.0
+shadow_enabled = true
+spot_range = 10.0
+spot_attenuation = 2.0
+spot_angle = 80.0
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+bus = &"Environment"

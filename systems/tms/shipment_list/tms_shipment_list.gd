@@ -150,6 +150,6 @@ func _sort_ascending_by_shipment_number(a: Shipment, b: Shipment) -> bool:
 
 
 func _sort_ascending_by_earliest_pickup_date(a: Shipment, b: Shipment) -> bool:
-	if a.events.get_first_event_of_code(Event.Code.ERL).time < b.events.get_first_event_of_code(Event.Code.ERL).time:
+	if a.events.get_first_event_of_code("ERL").time < b.events.get_first_event_of_code("ERL").time:
 		return true
 	return false

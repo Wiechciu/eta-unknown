@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DocumentData" load_steps=2 format=3 uid="uid://bwqou18fbny0k"]
+
+[ext_resource type="Script" uid="uid://36nkh5njfyvw" path="res://master_data/documents/document_data.gd" id="1_hvibl"]
+
+[resource]
+script = ExtResource("1_hvibl")
+name = "Packing List"
+code = "PKL"
+description = "Provides detailed information on the contents of each package in a shipment. Helps with inventory checks and customs inspections."
+metadata/_custom_type_script = "uid://36nkh5njfyvw"

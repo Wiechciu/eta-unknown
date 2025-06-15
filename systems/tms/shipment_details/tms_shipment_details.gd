@@ -84,8 +84,8 @@ func load_shipment(shipment_to_load: Shipment) -> void:
 	_incoterms.value.text = shipment.incoterms.print_string
 	_service.value.text = shipment.service.name if shipment.service else ""
 	
-	_earliest_pickup.value.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_code(Event.Code.ERL))
-	_latest_delivery.value.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_code(Event.Code.LTS))
+	_earliest_pickup.value.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_code("ERL"))
+	_latest_delivery.value.text = GlobalTimer.get_nice_datetime_string_from_event(shipment.events.get_first_event_of_code("LTS"))
 	
 	_shipment_cargo_details.load_shipment(shipment)
 	_shipment_main_freight.load_shipment(shipment)

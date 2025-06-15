@@ -33,6 +33,7 @@ func populate_container() -> void:
 		await player.person_assigned
 	
 	for personal_info: PersonalInfo in player.person.personal_infos:
+		personal_info.update_value()
 		add_personal_info(personal_info)
 
 

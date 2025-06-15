@@ -35,13 +35,13 @@ texture = ExtResource("3_b72vd")
 expand_mode = 2
 
 [node name="Name" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 15
-text = "Personal data name"
+text = "Personal"
 
 [node name="Value" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 15
-text = "Personal data value"
+text = "Personal data value arstts"

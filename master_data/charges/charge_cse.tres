@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ChargeData" load_steps=2 format=3 uid="uid://bpm8jnqde7ejw"]
+
+[ext_resource type="Script" uid="uid://ceqkcqoqgby3g" path="res://master_data/charges/charge_data.gd" id="1_4axcj"]
+
+[resource]
+script = ExtResource("1_4axcj")
+code = "CSE"
+name = "Export Customs Clearance"
+description = "A service fee for preparing and submitting export documentation to customs. Ensures the shipment is legally cleared for departure."
+metadata/_custom_type_script = "uid://ceqkcqoqgby3g"

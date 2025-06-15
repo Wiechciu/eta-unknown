@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PersonalInfoData" load_steps=3 format=3 uid="uid://dw4ah0l4fs4dr"]
+
+[ext_resource type="Texture2D" uid="uid://cm4ijli7yuckg" path="res://master_data/people/personal_info/icons/personal_info_email_icon.png" id="1_2ah2a"]
+[ext_resource type="Script" uid="uid://cv2rc84hrtnua" path="res://master_data/people/personal_info/personal_info_data.gd" id="1_47i2j"]
+
+[resource]
+script = ExtResource("1_47i2j")
+name = "E-mail"
+description = "E-mail of an individual."
+icon = ExtResource("1_2ah2a")
+metadata/_custom_type_script = "uid://cv2rc84hrtnua"

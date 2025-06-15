@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ChargeData" load_steps=2 format=3 uid="uid://cxai04xlqk4qh"]
+
+[ext_resource type="Script" uid="uid://ceqkcqoqgby3g" path="res://master_data/charges/charge_data.gd" id="1_43mic"]
+
+[resource]
+script = ExtResource("1_43mic")
+code = "CSI"
+name = "Import Customs Clearance"
+description = "Charged for handling customs procedures upon arrival. It includes declaration, documentation checks, and liaising with authorities."
+metadata/_custom_type_script = "uid://ceqkcqoqgby3g"

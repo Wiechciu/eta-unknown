@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DocumentData" load_steps=2 format=3 uid="uid://br0jaod3kudei"]
+
+[ext_resource type="Script" uid="uid://36nkh5njfyvw" path="res://master_data/documents/document_data.gd" id="1_p4deb"]
+
+[resource]
+script = ExtResource("1_p4deb")
+name = "Import Customs Declaration"
+code = "CDI"
+description = "Used to declare incoming goods to customs authorities. It’s necessary for import clearance and duty assessment."
+metadata/_custom_type_script = "uid://36nkh5njfyvw"

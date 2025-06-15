@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="PersonalInfoData" load_steps=2 format=3 uid="uid://cnko4cld5w5k0"]
+[gd_resource type="Resource" script_class="PersonalInfoData" load_steps=3 format=3 uid="uid://cnko4cld5w5k0"]
 
+[ext_resource type="Texture2D" uid="uid://bbw7qg80qnkm7" path="res://master_data/people/personal_info/icons/personal_info_salary_icon.png" id="1_6n5qk"]
 [ext_resource type="Script" uid="uid://cv2rc84hrtnua" path="res://master_data/people/personal_info/personal_info_data.gd" id="1_m0mhq"]
 
 [resource]
 script = ExtResource("1_m0mhq")
 name = "Salary"
 description = "Salary of an individual."
+icon = ExtResource("1_6n5qk")
 metadata/_custom_type_script = "uid://cv2rc84hrtnua"

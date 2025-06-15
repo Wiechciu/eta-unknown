@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DocumentData" load_steps=2 format=3 uid="uid://2ol1i2kg5lft"]
+
+[ext_resource type="Script" uid="uid://36nkh5njfyvw" path="res://master_data/documents/document_data.gd" id="1_kbowa"]
+
+[resource]
+script = ExtResource("1_kbowa")
+name = "House Bill of Lading"
+code = "HBL"
+description = "Used by freight forwarders in ocean transport to represent their responsibility for individual shipments. It's issued to the shipper and acts as a receipt and contract."
+metadata/_custom_type_script = "uid://36nkh5njfyvw"

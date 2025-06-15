@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DocumentData" load_steps=2 format=3 uid="uid://cetw8k6omjgdq"]
+
+[ext_resource type="Script" uid="uid://36nkh5njfyvw" path="res://master_data/documents/document_data.gd" id="1_8kt0f"]
+
+[resource]
+script = ExtResource("1_8kt0f")
+name = "Shipping Order"
+code = "SPO"
+description = "Issued to initiate the actual transport of goods. It includes details like cargo specs, route, and transport mode."
+metadata/_custom_type_script = "uid://36nkh5njfyvw"

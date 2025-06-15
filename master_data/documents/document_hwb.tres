@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DocumentData" load_steps=2 format=3 uid="uid://bhl80ipudgtij"]
+
+[ext_resource type="Script" uid="uid://36nkh5njfyvw" path="res://master_data/documents/document_data.gd" id="1_n84w0"]
+
+[resource]
+script = ExtResource("1_n84w0")
+name = "House Air Waybill"
+code = "HWB"
+description = "Issued by a freight forwarder for a specific air shipment under their control. It documents the terms between the forwarder and the shipper."
+metadata/_custom_type_script = "uid://36nkh5njfyvw"

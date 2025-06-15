@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EventData" load_steps=2 format=3 uid="uid://cb507bvir8gw7"]
+
+[ext_resource type="Script" uid="uid://dyn65awiswbe4" path="res://master_data/events/event_data.gd" id="1_0dp3t"]
+
+[resource]
+script = ExtResource("1_0dp3t")
+code = "DEL"
+name = "Delivered"
+description = "Confirms that the shipment has been successfully delivered to the final destination. Often accompanied by a Proof of Delivery (POD)."
+metadata/_custom_type_script = "uid://dyn65awiswbe4"

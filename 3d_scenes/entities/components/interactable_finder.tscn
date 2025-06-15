@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://iycq57so0s4d"]
-
-[ext_resource type="Script" uid="uid://dfiok71jt8lna" path="res://3d_scenes/entities/components/interactable_finder.gd" id="1_ccvsw"]
-
-[node name="InteractableFinder" type="RayCast3D"]
-target_position = Vector3(0, 0, -2)
-script = ExtResource("1_ccvsw")

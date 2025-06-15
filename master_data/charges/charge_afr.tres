@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ChargeData" load_steps=2 format=3 uid="uid://dk203naeww276"]
+
+[ext_resource type="Script" uid="uid://ceqkcqoqgby3g" path="res://master_data/charges/charge_data.gd" id="1_dbkj6"]
+
+[resource]
+script = ExtResource("1_dbkj6")
+code = "AFR"
+name = "Airfreight"
+description = "This is the cost of transporting goods by air. It usually depends on the chargeable weight and route."
+metadata/_custom_type_script = "uid://ceqkcqoqgby3g"

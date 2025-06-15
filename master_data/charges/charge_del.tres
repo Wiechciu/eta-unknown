@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ChargeData" load_steps=2 format=3 uid="uid://b7itv1lounu38"]
+
+[ext_resource type="Script" uid="uid://ceqkcqoqgby3g" path="res://master_data/charges/charge_data.gd" id="1_6mks1"]
+
+[resource]
+script = ExtResource("1_6mks1")
+code = "DEL"
+name = "Delivery"
+description = "Charged for delivering goods to the consignee’s location. This is the final transport leg in the logistics chain."
+metadata/_custom_type_script = "uid://ceqkcqoqgby3g"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ChargeData" load_steps=2 format=3 uid="uid://d2y0ynm8manut"]
+
+[ext_resource type="Script" uid="uid://ceqkcqoqgby3g" path="res://master_data/charges/charge_data.gd" id="1_8mye8"]
+
+[resource]
+script = ExtResource("1_8mye8")
+code = "HDE"
+name = "Export Handling"
+description = "Covers cargo handling activities at origin such as labeling, palletizing, and terminal fees. Ensures goods are ready for export transport."
+metadata/_custom_type_script = "uid://ceqkcqoqgby3g"

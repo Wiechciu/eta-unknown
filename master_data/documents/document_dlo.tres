@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DocumentData" load_steps=2 format=3 uid="uid://dfcnwu1cmwka1"]
+
+[ext_resource type="Script" uid="uid://36nkh5njfyvw" path="res://master_data/documents/document_data.gd" id="1_ylgbw"]
+
+[resource]
+script = ExtResource("1_ylgbw")
+name = "Delivery Order"
+code = "DLO"
+description = "Authorizes release and final delivery of goods to the consignee. It’s typically used once customs clearance is complete."
+metadata/_custom_type_script = "uid://36nkh5njfyvw"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EventData" load_steps=2 format=3 uid="uid://dvltj3x0b2k23"]
+
+[ext_resource type="Script" uid="uid://dyn65awiswbe4" path="res://master_data/events/event_data.gd" id="1_21g7l"]
+
+[resource]
+script = ExtResource("1_21g7l")
+code = "ARR"
+name = "Arrived"
+description = "The cargo has arrived at the destination terminal or port. It’s now ready for import clearance and final-mile planning."
+metadata/_custom_type_script = "uid://dyn65awiswbe4"

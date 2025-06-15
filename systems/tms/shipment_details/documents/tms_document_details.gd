@@ -18,11 +18,11 @@ func _ready() -> void:
 @warning_ignore("shadowed_variable")
 func with_data(document: Document) -> TmsDocumentDetails:
 	self.document = document
-	code_label.text = document.code_string
-	name_label.text = document.name
+	code_label.text = document.document_data.code
+	name_label.text = document.document_data.name
 	number_label.text = str(document.number)
 	time_label.text = GlobalTimer.get_nice_datetime_string_from_unix_time(document.issued_time)
 	
-	label_check_box.disabled = not Document.DOCUMENTS_WITH_LABELS.has(document.code)
+	label_check_box.disabled = not Document.DOCUMENTS_WITH_LABELS.has(document.document_data.code)
 	
 	return self

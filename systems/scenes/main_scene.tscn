@@ -1,35 +1,37 @@
-[gd_scene load_steps=36 format=3 uid="uid://b18oy35p17ir7"]
+[gd_scene load_steps=38 format=3 uid="uid://b18oy35p17ir7"]
 
-[ext_resource type="PackedScene" uid="uid://dmwp5s37fvy1m" path="res://3d_scenes/entities/environment/environment.tscn" id="1_pyshm"]
-[ext_resource type="PackedScene" uid="uid://dvpm8vxtia7au" path="res://3d_scenes/entities/furniture/computer/computer.tscn" id="4_8pfch"]
-[ext_resource type="PackedScene" uid="uid://bgv6k5514y7ll" path="res://3d_scenes/entities/furniture/desk.tscn" id="4_a1rhb"]
-[ext_resource type="PackedScene" uid="uid://ry5gcuu7gkh" path="res://3d_scenes/entities/humans/player/player.tscn" id="5_kooe7"]
-[ext_resource type="PackedScene" uid="uid://pxvdpj18fd8u" path="res://3d_scenes/entities/furniture/computer_mouse.tscn" id="7_3xujk"]
-[ext_resource type="PackedScene" uid="uid://b1k30fd4iurrb" path="res://3d_scenes/entities/furniture/lamp/lamp.tscn" id="8_5nt3u"]
-[ext_resource type="PackedScene" uid="uid://bwiql8vmcwsjd" path="res://3d_scenes/entities/furniture/desk_chair.tscn" id="9_3xujk"]
-[ext_resource type="PackedScene" uid="uid://b8xwh8i0jq6ja" path="res://3d_scenes/entities/furniture/water_cooler/water_cooler.tscn" id="9_w7ts6"]
-[ext_resource type="PackedScene" uid="uid://d0af2emp6dqbi" path="res://3d_scenes/entities/furniture/clock/clock.tscn" id="10_dfqda"]
-[ext_resource type="PackedScene" uid="uid://cwiq1yqbrsgn2" path="res://3d_scenes/entities/furniture/computer_keyboard.tscn" id="11_3xujk"]
-[ext_resource type="PackedScene" uid="uid://tsnn4cymm6qn" path="res://3d_scenes/entities/furniture/wall_calendar/wall_calendar.tscn" id="11_4ilw0"]
-[ext_resource type="PackedScene" uid="uid://cwirb7xn3akwf" path="res://3d_scenes/entities/room/ceiling.tscn" id="12_dlj66"]
-[ext_resource type="PackedScene" uid="uid://dfmb5ul4bjq8" path="res://3d_scenes/entities/room/floor.tscn" id="13_3xujk"]
-[ext_resource type="PackedScene" uid="uid://duwv0a75sbh32" path="res://3d_scenes/entities/room/wall.tscn" id="14_yatgx"]
-[ext_resource type="PackedScene" uid="uid://bvhgujk86reqg" path="res://3d_scenes/entities/furniture/bookcase_open_low.tscn" id="16_yatgx"]
-[ext_resource type="PackedScene" uid="uid://bu1wt1vjkrqnr" path="res://3d_scenes/entities/furniture/radio/radio.tscn" id="17_nvgr2"]
-[ext_resource type="PackedScene" uid="uid://bt42d24wsevwl" path="res://3d_scenes/entities/room/wall_window.tscn" id="18_5cac6"]
-[ext_resource type="Script" uid="uid://u2qdcbcwrk7l" path="res://documents/document.gd" id="20_5h8s7"]
-[ext_resource type="PackedScene" uid="uid://dx6f662utr8ya" path="res://3d_scenes/entities/items/physical_document/physical_document.tscn" id="20_7ufp6"]
-[ext_resource type="PackedScene" uid="uid://camlixgb5adk5" path="res://3d_scenes/entities/furniture/printer/printer.tscn" id="21_nkfki"]
+[ext_resource type="PackedScene" uid="uid://dmwp5s37fvy1m" path="res://entities/environment/environment.tscn" id="1_pyshm"]
+[ext_resource type="PackedScene" uid="uid://dvpm8vxtia7au" path="res://entities/furniture/computer/computer.tscn" id="4_8pfch"]
+[ext_resource type="PackedScene" uid="uid://bgv6k5514y7ll" path="res://entities/furniture/desk.tscn" id="4_a1rhb"]
+[ext_resource type="PackedScene" uid="uid://ry5gcuu7gkh" path="res://entities/humans/player/player.tscn" id="5_kooe7"]
+[ext_resource type="PackedScene" uid="uid://pxvdpj18fd8u" path="res://entities/furniture/computer_mouse.tscn" id="7_3xujk"]
+[ext_resource type="PackedScene" uid="uid://b1k30fd4iurrb" path="res://entities/furniture/lamp/lamp.tscn" id="8_5nt3u"]
+[ext_resource type="PackedScene" uid="uid://bwiql8vmcwsjd" path="res://entities/furniture/desk_chair.tscn" id="9_3xujk"]
+[ext_resource type="PackedScene" uid="uid://b8xwh8i0jq6ja" path="res://entities/furniture/water_cooler/water_cooler.tscn" id="9_w7ts6"]
+[ext_resource type="PackedScene" uid="uid://d0af2emp6dqbi" path="res://entities/furniture/clock/clock.tscn" id="10_dfqda"]
+[ext_resource type="PackedScene" uid="uid://cwiq1yqbrsgn2" path="res://entities/furniture/computer_keyboard.tscn" id="11_3xujk"]
+[ext_resource type="PackedScene" uid="uid://tsnn4cymm6qn" path="res://entities/furniture/wall_calendar/wall_calendar.tscn" id="11_4ilw0"]
+[ext_resource type="PackedScene" uid="uid://cwirb7xn3akwf" path="res://entities/room/ceiling.tscn" id="12_dlj66"]
+[ext_resource type="PackedScene" uid="uid://dfmb5ul4bjq8" path="res://entities/room/floor.tscn" id="13_3xujk"]
+[ext_resource type="PackedScene" uid="uid://duwv0a75sbh32" path="res://entities/room/wall.tscn" id="14_yatgx"]
+[ext_resource type="PackedScene" uid="uid://bvhgujk86reqg" path="res://entities/furniture/bookcase_open_low.tscn" id="16_yatgx"]
+[ext_resource type="PackedScene" uid="uid://bu1wt1vjkrqnr" path="res://entities/furniture/radio/radio.tscn" id="17_nvgr2"]
+[ext_resource type="PackedScene" uid="uid://bt42d24wsevwl" path="res://entities/room/wall_window.tscn" id="18_5cac6"]
+[ext_resource type="Script" uid="uid://u2qdcbcwrk7l" path="res://master_data/documents/document.gd" id="20_5h8s7"]
+[ext_resource type="PackedScene" uid="uid://dx6f662utr8ya" path="res://entities/items/physical_document/physical_document.tscn" id="20_7ufp6"]
+[ext_resource type="Resource" uid="uid://pecem52ma5m2" path="res://master_data/documents/document_rfq.tres" id="20_i8r8i"]
+[ext_resource type="PackedScene" uid="uid://camlixgb5adk5" path="res://entities/furniture/printer/printer.tscn" id="21_nkfki"]
+[ext_resource type="Resource" uid="uid://coc88kmbh7dsm" path="res://master_data/documents/document_quo.tres" id="22_0way0"]
 [ext_resource type="VoxelGIData" uid="uid://bw6kakxwlaxcj" path="res://systems/scenes/main_scene.VoxelGI_data.res" id="22_7ueml"]
-[ext_resource type="PackedScene" uid="uid://dbh2di38sear8" path="res://3d_scenes/entities/trees/tree-large.glb" id="23_wl1sy"]
-[ext_resource type="PackedScene" uid="uid://j0s65b3tcmmh" path="res://3d_scenes/entities/trees/tree.glb" id="24_48y6e"]
-[ext_resource type="PackedScene" uid="uid://3ra1txvnlbm8" path="res://3d_scenes/entities/lake/lake.tscn" id="25_48y6e"]
-[ext_resource type="PackedScene" uid="uid://1a37344f8vm7" path="res://3d_scenes/entities/items/physical_cargo/physical_cargo.tscn" id="26_hjyx5"]
-[ext_resource type="PackedScene" uid="uid://da0yiss61kemr" path="res://3d_scenes/entities/humans/employee/employee.tscn" id="26_sd7sv"]
-[ext_resource type="PackedScene" uid="uid://cfgtlxo30incr" path="res://3d_scenes/entities/items/physical_label/physical_label.tscn" id="27_5h8s7"]
-[ext_resource type="PackedScene" uid="uid://co5med20utehv" path="res://3d_scenes/entities/warehouse/warehouse.tscn" id="27_hjyx5"]
-[ext_resource type="PackedScene" uid="uid://ciib54nns85wi" path="res://3d_scenes/entities/room/wall_door.tscn" id="27_s2j11"]
-[ext_resource type="PackedScene" uid="uid://b6b4ff3j1sb4" path="res://3d_scenes/entities/furniture/coffee_machine/coffee_machine.tscn" id="29_707bl"]
+[ext_resource type="PackedScene" uid="uid://dbh2di38sear8" path="res://entities/trees/tree-large.glb" id="23_wl1sy"]
+[ext_resource type="PackedScene" uid="uid://j0s65b3tcmmh" path="res://entities/trees/tree.glb" id="24_48y6e"]
+[ext_resource type="PackedScene" uid="uid://3ra1txvnlbm8" path="res://entities/lake/lake.tscn" id="25_48y6e"]
+[ext_resource type="PackedScene" uid="uid://1a37344f8vm7" path="res://entities/items/physical_cargo/physical_cargo.tscn" id="26_hjyx5"]
+[ext_resource type="PackedScene" uid="uid://da0yiss61kemr" path="res://entities/humans/employee/employee.tscn" id="26_sd7sv"]
+[ext_resource type="PackedScene" uid="uid://cfgtlxo30incr" path="res://entities/items/physical_label/physical_label.tscn" id="27_5h8s7"]
+[ext_resource type="PackedScene" uid="uid://co5med20utehv" path="res://entities/warehouse/warehouse.tscn" id="27_hjyx5"]
+[ext_resource type="PackedScene" uid="uid://ciib54nns85wi" path="res://entities/room/wall_door.tscn" id="27_s2j11"]
+[ext_resource type="PackedScene" uid="uid://b6b4ff3j1sb4" path="res://entities/furniture/coffee_machine/coffee_machine.tscn" id="29_707bl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5cac6"]
 albedo_color = Color(0, 0.329412, 0, 1)
@@ -43,14 +45,14 @@ size = Vector2(10, 10)
 
 [sub_resource type="Resource" id="Resource_707bl"]
 script = ExtResource("20_5h8s7")
-code = 1
+document_data = ExtResource("20_i8r8i")
 issued_time = 100
 number = 1
 metadata/_custom_type_script = ExtResource("20_5h8s7")
 
 [sub_resource type="Resource" id="Resource_5h8s7"]
 script = ExtResource("20_5h8s7")
-code = 0
+document_data = ExtResource("22_0way0")
 issued_time = 100
 number = 1
 metadata/_custom_type_script = ExtResource("20_5h8s7")

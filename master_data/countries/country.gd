@@ -21,10 +21,13 @@ func with_data(id: int, code: String, name: String, coordinates: Vector2) -> Cou
 	return self
 
 
+@warning_ignore("shadowed_variable")
 static func get_country_by_code(code: String) -> Country:
 	for country: Country in GlobalRefs.countries:
 		if country.code == code:
 			return country
+	
+	printerr("Could't find country code: " + code)
 	return null
 
 
