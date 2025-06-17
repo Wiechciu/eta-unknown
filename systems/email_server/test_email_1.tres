@@ -1,6 +1,23 @@
-[gd_resource type="Resource" script_class="Email" load_steps=2 format=3 uid="uid://cb1ongmcuw2fn"]
+[gd_resource type="Resource" script_class="Email" load_steps=7 format=3 uid="uid://cb1ongmcuw2fn"]
 
+[ext_resource type="Script" uid="uid://u2qdcbcwrk7l" path="res://master_data/documents/document.gd" id="1_drkou"]
 [ext_resource type="Script" uid="uid://c0n33sueqwg8d" path="res://master_data/emails/email.gd" id="1_onhtm"]
+[ext_resource type="Resource" uid="uid://coc88kmbh7dsm" path="res://master_data/documents/document_quo.tres" id="2_401jd"]
+[ext_resource type="Resource" uid="uid://buk17ym5kobq5" path="res://master_data/documents/document_cin.tres" id="3_8s47v"]
+
+[sub_resource type="Resource" id="Resource_wkniy"]
+script = ExtResource("1_drkou")
+document_data = ExtResource("2_401jd")
+issued_time = 100000000
+number = 1234
+metadata/_custom_type_script = "uid://u2qdcbcwrk7l"
+
+[sub_resource type="Resource" id="Resource_dy3fc"]
+script = ExtResource("1_drkou")
+document_data = ExtResource("3_8s47v")
+issued_time = 123456789123
+number = 333
+metadata/_custom_type_script = "uid://u2qdcbcwrk7l"
 
 [resource]
 script = ExtResource("1_onhtm")
@@ -31,6 +48,7 @@ Logistics Coordinator
 [Your Company]
 📞 +49 123 456 789 | ✉️ logistics@[company].com"
 date = 1000000000
+attachments = Array[ExtResource("1_drkou")]([SubResource("Resource_wkniy"), SubResource("Resource_dy3fc")])
 is_read = false
 communication_chain = Array[ExtResource("1_onhtm")]([])
 metadata/_custom_type_script = "uid://c0n33sueqwg8d"

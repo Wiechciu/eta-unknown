@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://054qat2cmosb"]
+
+[ext_resource type="Script" uid="uid://b72boj2kksi4u" path="res://systems/operating_system/apps/mailor/attachment_item.gd" id="1_ceq6c"]
+[ext_resource type="Texture2D" uid="uid://mejkxuykcx75" path="res://systems/operating_system/apps/mailor/attachment_icon.png" id="2_qj4ey"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qj4ey"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ckia2"]
+content_margin_right = 5.0
+bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="EmailAttachmentItem" type="PanelContainer" node_paths=PackedStringArray("button", "name_label")]
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_qj4ey")
+script = ExtResource("1_ceq6c")
+button = NodePath("Button")
+name_label = NodePath("PanelContainer/HBoxContainer/AttachmentName")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ckia2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="IconRect" type="TextureRect" parent="PanelContainer/HBoxContainer"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+texture = ExtResource("2_qj4ey")
+expand_mode = 3
+
+[node name="AttachmentName" type="Label" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "document.doc"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+flat = true

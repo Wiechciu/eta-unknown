@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://blor13w2b7vd1"]
+[gd_scene load_steps=7 format=3 uid="uid://blor13w2b7vd1"]
 
-[ext_resource type="Texture2D" uid="uid://bkv1havlcaufw" path="res://systems/operating_system/apps/mailor/mail_unread.png" id="1_131cr"]
+[ext_resource type="Texture2D" uid="uid://bkv1havlcaufw" path="res://systems/operating_system/apps/mailor/email_unread.png" id="1_131cr"]
 [ext_resource type="Script" uid="uid://c022ebkl2r4xn" path="res://systems/operating_system/apps/mailor/email_item.gd" id="1_noym8"]
-[ext_resource type="Texture2D" uid="uid://bc2y15q6annj6" path="res://systems/operating_system/apps/mailor/mail_read.png" id="3_uqefd"]
+[ext_resource type="Texture2D" uid="uid://bc2y15q6annj6" path="res://systems/operating_system/apps/mailor/email_read.png" id="3_uqefd"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uqefd"]
 
@@ -17,15 +17,29 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="EmailItem" type="PanelContainer" node_paths=PackedStringArray("button", "from_label", "subject_label", "date_label", "time_label", "icon_rect")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uqefd"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0.45882353, 0.5372549, 0.25882354)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="EmailItem" type="PanelContainer" node_paths=PackedStringArray("panel_container_to_apply_style_box", "button", "from_to_label", "subject_label", "date_label", "time_label", "icon_rect")]
 offset_right = 200.0
 offset_bottom = 58.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_uqefd")
 script = ExtResource("1_noym8")
+style_box_normal = SubResource("StyleBoxFlat_ibj8h")
+style_box_selected = SubResource("StyleBoxFlat_uqefd")
+panel_container_to_apply_style_box = NodePath("PanelContainer")
 icon_unread = ExtResource("1_131cr")
 icon_read = ExtResource("3_uqefd")
 button = NodePath("Button")
-from_label = NodePath("PanelContainer/HboxContainer/VBoxContainer/From")
+from_to_label = NodePath("PanelContainer/HboxContainer/VBoxContainer/FromTo")
 subject_label = NodePath("PanelContainer/HboxContainer/VBoxContainer/HBoxContainer/Subject")
 date_label = NodePath("PanelContainer/HboxContainer/VBoxContainer2/Date")
 time_label = NodePath("PanelContainer/HboxContainer/VBoxContainer2/Time")
@@ -60,7 +74,7 @@ text = "URGENT TEST arst tsrtrt arstarst"
 clip_text = true
 text_overrun_behavior = 3
 
-[node name="From" type="Label" parent="PanelContainer/HboxContainer/VBoxContainer"]
+[node name="FromTo" type="Label" parent="PanelContainer/HboxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0, 0, 0, 0.5882353)

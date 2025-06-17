@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bc2y15q6annj6"
-path="res://.godot/imported/mail_read.png-81ee515a506abb5d6495a10007232e0f.ctex"
+uid="uid://mejkxuykcx75"
+path="res://.godot/imported/attachment_icon.png-84a8fbd6a3d8886f88b4a3678e511ae8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://systems/operating_system/apps/mailor/mail_read.png"
-dest_files=["res://.godot/imported/mail_read.png-81ee515a506abb5d6495a10007232e0f.ctex"]
+source_file="res://systems/operating_system/apps/mailor/attachment_icon.png"
+dest_files=["res://.godot/imported/attachment_icon.png-84a8fbd6a3d8886f88b4a3678e511ae8.ctex"]
 
 [params]
 

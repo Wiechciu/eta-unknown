@@ -1,10 +1,13 @@
-[gd_scene load_steps=38 format=3 uid="uid://dh8b7wgt2j4qq"]
+[gd_scene load_steps=42 format=3 uid="uid://dh8b7wgt2j4qq"]
 
 [ext_resource type="Script" uid="uid://bu5de0dgiogpb" path="res://systems/operating_system/apps/mailor/mailor.gd" id="1_ny8fa"]
 [ext_resource type="PackedScene" uid="uid://dr7k5nsfgoobv" path="res://systems/operating_system/os_app_panel_header.tscn" id="2_11d6n"]
 [ext_resource type="PackedScene" uid="uid://bn326sk3yfdna" path="res://systems/operating_system/os_app_loading_screen.tscn" id="3_fvvr4"]
 [ext_resource type="PackedScene" uid="uid://blor13w2b7vd1" path="res://systems/operating_system/apps/mailor/email_item.tscn" id="3_ny8fa"]
+[ext_resource type="Script" uid="uid://u2qdcbcwrk7l" path="res://master_data/documents/document.gd" id="4_drr5v"]
 [ext_resource type="Script" uid="uid://c0n33sueqwg8d" path="res://master_data/emails/email.gd" id="4_jrf17"]
+[ext_resource type="PackedScene" uid="uid://054qat2cmosb" path="res://systems/operating_system/apps/mailor/attachment_item.tscn" id="6_1sawd"]
+[ext_resource type="Texture2D" uid="uid://dkbwp4f51cb8" path="res://systems/operating_system/apps/mailor/add_attachment_icon.png" id="7_1sawd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mgofm"]
 border_width_left = 4
@@ -34,42 +37,6 @@ content_margin_right = 5.0
 content_margin_bottom = 5.0
 draw_center = false
 
-[sub_resource type="Resource" id="Resource_jrf17"]
-resource_local_to_scene = true
-script = ExtResource("4_jrf17")
-from = "kary.duplo@lego.com"
-to = "wchc@wchc.pl"
-subject = "Test lego set"
-body = "Dear WCHC,
-I'm writing to you in regards to our new upcoming Lego sale and to arrange a transport for the following shipment:
-...
-
-Best regards,
-Kary Duplo
-Lego Inc"
-date = 1000
-is_read = false
-communication_chain = Array[ExtResource("4_jrf17")]([])
-metadata/_custom_type_script = "uid://c0n33sueqwg8d"
-
-[sub_resource type="Resource" id="Resource_drr5v"]
-resource_local_to_scene = true
-script = ExtResource("4_jrf17")
-from = "kary.duplo@lego.com"
-to = "wchc@wchc.pl"
-subject = "Test lego set"
-body = "Dear WCHC,
-I'm writing to you in regards to our new upcoming Lego sale and to arrange a transport for the following shipment:
-...
-
-Best regards,
-Kary Duplo
-Lego Inc"
-date = 1000
-is_read = false
-communication_chain = Array[ExtResource("4_jrf17")]([])
-metadata/_custom_type_script = "uid://c0n33sueqwg8d"
-
 [sub_resource type="Resource" id="Resource_1sawd"]
 resource_local_to_scene = true
 script = ExtResource("4_jrf17")
@@ -84,6 +51,7 @@ Best regards,
 Kary Duplo
 Lego Inc"
 date = 1000
+attachments = Array[ExtResource("4_drr5v")]([])
 is_read = false
 communication_chain = Array[ExtResource("4_jrf17")]([])
 metadata/_custom_type_script = "uid://c0n33sueqwg8d"
@@ -102,6 +70,7 @@ Best regards,
 Kary Duplo
 Lego Inc"
 date = 1000
+attachments = Array[ExtResource("4_drr5v")]([])
 is_read = false
 communication_chain = Array[ExtResource("4_jrf17")]([])
 metadata/_custom_type_script = "uid://c0n33sueqwg8d"
@@ -120,6 +89,7 @@ Best regards,
 Kary Duplo
 Lego Inc"
 date = 1000
+attachments = Array[ExtResource("4_drr5v")]([])
 is_read = false
 communication_chain = Array[ExtResource("4_jrf17")]([])
 metadata/_custom_type_script = "uid://c0n33sueqwg8d"
@@ -138,6 +108,7 @@ Best regards,
 Kary Duplo
 Lego Inc"
 date = 1000
+attachments = Array[ExtResource("4_drr5v")]([])
 is_read = false
 communication_chain = Array[ExtResource("4_jrf17")]([])
 metadata/_custom_type_script = "uid://c0n33sueqwg8d"
@@ -156,6 +127,7 @@ Best regards,
 Kary Duplo
 Lego Inc"
 date = 1000
+attachments = Array[ExtResource("4_drr5v")]([])
 is_read = false
 communication_chain = Array[ExtResource("4_jrf17")]([])
 metadata/_custom_type_script = "uid://c0n33sueqwg8d"
@@ -174,6 +146,26 @@ Best regards,
 Kary Duplo
 Lego Inc"
 date = 1000
+attachments = Array[ExtResource("4_drr5v")]([])
+is_read = false
+communication_chain = Array[ExtResource("4_jrf17")]([])
+metadata/_custom_type_script = "uid://c0n33sueqwg8d"
+
+[sub_resource type="Resource" id="Resource_orlh7"]
+resource_local_to_scene = true
+script = ExtResource("4_jrf17")
+from = "kary.duplo@lego.com"
+to = "wchc@wchc.pl"
+subject = "Test lego set"
+body = "Dear WCHC,
+I'm writing to you in regards to our new upcoming Lego sale and to arrange a transport for the following shipment:
+...
+
+Best regards,
+Kary Duplo
+Lego Inc"
+date = 1000
+attachments = Array[ExtResource("4_drr5v")]([])
 is_read = false
 communication_chain = Array[ExtResource("4_jrf17")]([])
 metadata/_custom_type_script = "uid://c0n33sueqwg8d"
@@ -188,7 +180,7 @@ content_margin_right = 5.0
 content_margin_bottom = 5.0
 bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4t8ss"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cg11y"]
 content_margin_left = 5.0
 content_margin_top = 2.0
 content_margin_right = 5.0
@@ -209,21 +201,6 @@ content_margin_top = 2.0
 content_margin_right = 5.0
 content_margin_bottom = 2.0
 bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cg11y"]
-content_margin_left = 5.0
-content_margin_top = 2.0
-content_margin_right = 5.0
-content_margin_bottom = 2.0
-bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -326,6 +303,21 @@ content_margin_bottom = 20.0
 bg_color = Color(0.8039216, 0.8980392, 0.96862745, 0.3372549)
 border_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4t8ss"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nr5ig"]
 content_margin_left = 5.0
 content_margin_right = 5.0
@@ -335,6 +327,17 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ancsa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_map3m"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_map3m"]
 
@@ -358,7 +361,7 @@ content_margin_bottom = 20.0
 draw_center = false
 border_color = Color(0, 0, 0, 1)
 
-[node name="Mailor" type="PanelContainer" node_paths=PackedStringArray("inbox_item_container", "sent_item_container", "email_reader", "from_label", "to_label", "date_label", "subject_label", "body_label", "email_composer", "to_edit", "subject_edit", "body_edit", "new_button", "send_button", "unread_button", "reply_button", "delete_button")]
+[node name="Mailor" type="PanelContainer" node_paths=PackedStringArray("inbox_items_container", "sent_items_container", "email_reader", "from_label", "to_label", "date_label", "subject_label", "body_label", "attachment_items_container_in_email_reader", "attachment_items_container_in_email_composer", "email_composer", "to_edit", "subject_edit", "body_edit", "buttons_container", "new_button", "send_button", "unread_button", "reply_button", "delete_button", "add_attachment_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -368,24 +371,29 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_mgofm")
 script = ExtResource("1_ny8fa")
-inbox_item_container = NodePath("VBoxContainer/HBoxContainer/Folders/VBoxContainer/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer")
-sent_item_container = NodePath("VBoxContainer/HBoxContainer/Folders/VBoxContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer")
+inbox_items_container = NodePath("VBoxContainer/HBoxContainer/Folders/VBoxContainer/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer")
+sent_items_container = NodePath("VBoxContainer/HBoxContainer/Folders/VBoxContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer")
 email_item_scene = ExtResource("3_ny8fa")
+attachment_item_scene = ExtResource("6_1sawd")
 email_reader = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader")
 from_label = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/From/FromValue")
 to_label = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/To/ToValue")
 date_label = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/Date/DateValue")
 subject_label = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/Subject/SubjectValue")
 body_label = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Body/BodyLabel")
+attachment_items_container_in_email_reader = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/Attachments/AttachmentsContainer")
+attachment_items_container_in_email_composer = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/Attachments/HBoxContainer/AttachmentsContainer")
 email_composer = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer")
-to_edit = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer/To/ToLineEdit")
-subject_edit = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer/Subject/SubjectLineEdit")
+to_edit = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/To/ToLineEdit")
+subject_edit = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/Subject/SubjectLineEdit")
 body_edit = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Body/BodyTextEdit")
+buttons_container = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/Buttons")
 new_button = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/Buttons/HBoxContainer/NewButton")
-send_button = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/Buttons/HBoxContainer/SendButton")
+send_button = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/SendButton")
 unread_button = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/Buttons/HBoxContainer/UnreadButton")
 reply_button = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/Buttons/HBoxContainer/ReplyButton")
 delete_button = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/Buttons/HBoxContainer/DeleteButton")
+add_attachment_button = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/Attachments/HBoxContainer/AddAttachmentButton/AddAttachmentButton")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -443,7 +451,7 @@ size_flags_vertical = 3
 
 [node name="EmailItem" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
-email = SubResource("Resource_jrf17")
+email = SubResource("Resource_1sawd")
 
 [node name="Sent" type="PanelContainer" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer"]
 layout_mode = 2
@@ -480,31 +488,27 @@ size_flags_vertical = 3
 
 [node name="EmailItem3" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
-email = SubResource("Resource_drr5v")
+email = SubResource("Resource_ancsa")
 
 [node name="EmailItem4" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
-email = SubResource("Resource_1sawd")
+email = SubResource("Resource_a8r3w")
 
 [node name="EmailItem5" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
-email = SubResource("Resource_ancsa")
+email = SubResource("Resource_nr5ig")
 
 [node name="EmailItem6" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
-email = SubResource("Resource_a8r3w")
+email = SubResource("Resource_cg11y")
 
 [node name="EmailItem7" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
-email = SubResource("Resource_nr5ig")
+email = SubResource("Resource_4t8ss")
 
 [node name="EmailItem8" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
-email = SubResource("Resource_cg11y")
-
-[node name="EmailItem9" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
-layout_mode = 2
-email = SubResource("Resource_4t8ss")
+email = SubResource("Resource_orlh7")
 
 [node name="EmailReaderComposer" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -525,16 +529,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ibj8h")
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/Buttons"]
 layout_mode = 2
 theme_override_constants/separation = 10
-
-[node name="SendButton" type="Button" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/Buttons/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 15
-theme_override_styles/focus = SubResource("StyleBoxFlat_4t8ss")
-theme_override_styles/hover = SubResource("StyleBoxFlat_a8r3w")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_a8r3w")
-theme_override_styles/normal = SubResource("StyleBoxFlat_a8r3w")
-text = "Send"
 
 [node name="NewButton" type="Button" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/Buttons/HBoxContainer"]
 layout_mode = 2
@@ -606,7 +600,7 @@ text = "Date:"
 [node name="DateValue" type="Label" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/Date"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 8.0
+size_flags_stretch_ratio = 7.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 15
 text = "2025-01-01, 15:00:00"
@@ -626,7 +620,7 @@ text = "From:"
 [node name="FromValue" type="Label" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/From"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 8.0
+size_flags_stretch_ratio = 7.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 15
 text = "test@test.com"
@@ -646,7 +640,7 @@ text = "To:"
 [node name="ToValue" type="Label" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/To"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 8.0
+size_flags_stretch_ratio = 7.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 15
 text = "test@test.com"
@@ -666,12 +660,34 @@ text = "Subject:"
 [node name="SubjectValue" type="Label" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/Subject"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 8.0
+size_flags_stretch_ratio = 7.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 15
 text = "URGENT TEST"
 clip_text = true
 text_overrun_behavior = 3
+
+[node name="Attachments" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer"]
+layout_mode = 2
+
+[node name="AttachmentsLabel" type="Label" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/Attachments"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "Attachments:"
+
+[node name="AttachmentsContainer" type="FlowContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/Attachments"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 7.0
+
+[node name="EmailAttachmentItem" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/Attachments/AttachmentsContainer" instance=ExtResource("6_1sawd")]
+layout_mode = 2
+
+[node name="EmailAttachmentItem2" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/Attachments/AttachmentsContainer" instance=ExtResource("6_1sawd")]
+layout_mode = 2
 
 [node name="Body" type="PanelContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer"]
 layout_mode = 2
@@ -705,67 +721,38 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_1sawd")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header"]
 layout_mode = 2
+theme_override_constants/separation = 7
 
-[node name="Date" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer"]
-visible = false
+[node name="SendButton" type="Button" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer"]
 layout_mode = 2
-
-[node name="DateLabel" type="Label" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer/Date"]
-layout_mode = 2
-size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 15
-text = "Date:"
+theme_override_styles/focus = SubResource("StyleBoxFlat_4t8ss")
+theme_override_styles/hover = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/normal = SubResource("StyleBoxFlat_a8r3w")
+text = "Send"
 
-[node name="DateLineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer/Date"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 8.0
-theme_override_colors/caret_color = Color(0, 0, 0, 1)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 15
-theme_override_styles/normal = SubResource("StyleBoxFlat_nr5ig")
-text = "2025-10-25"
-caret_blink = true
 
-[node name="From" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer"]
-visible = false
+[node name="To" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="FromLabel" type="Label" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer/From"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 15
-text = "From:"
-
-[node name="FromLineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer/From"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 8.0
-theme_override_colors/caret_color = Color(0, 0, 0, 1)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 15
-theme_override_styles/normal = SubResource("StyleBoxFlat_nr5ig")
-text = "test@test.com"
-caret_blink = true
-
-[node name="To" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer"]
-layout_mode = 2
-
-[node name="ToLabel" type="Label" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer/To"]
+[node name="ToLabel" type="Label" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/To"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 15
 text = "To:"
 
-[node name="ToLineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer/To"]
+[node name="ToLineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/To"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 8.0
+size_flags_stretch_ratio = 7.0
 theme_override_colors/caret_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 15
@@ -773,26 +760,87 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_nr5ig")
 text = "test@test.com"
 caret_blink = true
 
-[node name="Subject" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer"]
+[node name="Subject" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="SubjectLabel" type="Label" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer/Subject"]
+[node name="SubjectLabel" type="Label" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/Subject"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 15
 text = "Subject:"
 
-[node name="SubjectLineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer/Subject"]
+[node name="SubjectLineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/Subject"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 8.0
+size_flags_stretch_ratio = 7.0
 theme_override_colors/caret_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_nr5ig")
 text = "URGENT TEST"
 caret_blink = true
+
+[node name="Attachments" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AttachmentsLabel" type="Label" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/Attachments"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "Attachments:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/Attachments"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 7.0
+
+[node name="AddAttachmentButton" type="PanelContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/Attachments/HBoxContainer"]
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ancsa")
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/Attachments/HBoxContainer/AddAttachmentButton"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_map3m")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/Attachments/HBoxContainer/AddAttachmentButton/PanelContainer"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+texture = ExtResource("7_1sawd")
+expand_mode = 3
+
+[node name="AddAttachmentButton" type="Button" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/Attachments/HBoxContainer/AddAttachmentButton"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+flat = true
+
+[node name="AttachmentsContainer" type="FlowContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/Attachments/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 8.0
+
+[node name="EmailAttachmentItem" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/Attachments/HBoxContainer/AttachmentsContainer" instance=ExtResource("6_1sawd")]
+layout_mode = 2
+
+[node name="EmailAttachmentItem2" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/Attachments/HBoxContainer/AttachmentsContainer" instance=ExtResource("6_1sawd")]
+layout_mode = 2
+
+[node name="EmailAttachmentItem3" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/Attachments/HBoxContainer/AttachmentsContainer" instance=ExtResource("6_1sawd")]
+layout_mode = 2
+
+[node name="EmailAttachmentItem4" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/Attachments/HBoxContainer/AttachmentsContainer" instance=ExtResource("6_1sawd")]
+layout_mode = 2
+
+[node name="EmailAttachmentItem5" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/Attachments/HBoxContainer/AttachmentsContainer" instance=ExtResource("6_1sawd")]
+layout_mode = 2
+
+[node name="EmailAttachmentItem6" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/Attachments/HBoxContainer/AttachmentsContainer" instance=ExtResource("6_1sawd")]
+layout_mode = 2
 
 [node name="Body" type="PanelContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer"]
 layout_mode = 2

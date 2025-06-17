@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="OsAppData" load_steps=4 format=3 uid="uid://bdy7xorwui5vh"]
 
-[ext_resource type="Texture2D" uid="uid://bkv1havlcaufw" path="res://systems/operating_system/apps/mailor/mail_unread.png" id="1_6hub2"]
+[ext_resource type="Texture2D" uid="uid://bkv1havlcaufw" path="res://systems/operating_system/apps/mailor/email_unread.png" id="1_6hub2"]
 [ext_resource type="PackedScene" uid="uid://dh8b7wgt2j4qq" path="res://systems/operating_system/apps/mailor/mailor.tscn" id="2_bchnv"]
 [ext_resource type="Script" uid="uid://bpyvdtiywfe2p" path="res://systems/operating_system/os_app_data.gd" id="3_ateee"]
 
