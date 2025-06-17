@@ -14,7 +14,7 @@ config/name="ETA: Unknown"
 config/name_localized={
 "pl_PL": "ETA: Nieznana"
 }
-config/version="0.1.0"
+config/version="0.1.1"
 run/main_scene="res://systems/scenes/empty_scene.tscn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"

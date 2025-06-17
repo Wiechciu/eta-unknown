@@ -3,29 +3,39 @@ extends Control
 
 
 signal opened
+signal removed
 
 
-@export var document: Document
+var document: Document
 
-@export var button: Button
+@export var open_attachment_button: Button
+@export var remove_attachment_button: Button
+@export var remove_attachment_button_container: Control
 @export var name_label: Label
 
 
 func _ready() -> void:
-	button.pressed.connect(_on_button_pressed)
-	
-	if document != null:
-		initialize(document)
+	open_attachment_button.pressed.connect(_on_open_attachment_button_pressed)
+	remove_attachment_button.pressed.connect(_on_remove_attachment_button_pressed)
 
 
 @warning_ignore("shadowed_variable")
-func initialize(document: Document) -> void:
+func initialize(document: Document, is_read_only: bool) -> void:
 	self.document = document
 	self.name_label.text = generate_attachment_name_for_document(document)
+	
+	if is_read_only:
+		remove_attachment_button_container.hide()
+	else:
+		remove_attachment_button_container.show()
 
 
-func _on_button_pressed() -> void:
+func _on_open_attachment_button_pressed() -> void:
 	opened.emit()
+
+
+func _on_remove_attachment_button_pressed() -> void:
+	removed.emit()
 
 
 @warning_ignore("shadowed_variable")

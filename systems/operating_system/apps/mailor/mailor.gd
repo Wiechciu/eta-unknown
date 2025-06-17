@@ -2,6 +2,60 @@ class_name Mailor
 extends OsApp
 
 
+const EMAIL_SUBJECTS: Array[String] = [
+	"Shipment Delayed: New ETA Inside",
+	"Important: Customs Documentation Update",
+	"Weekly Logistics Performance Report",
+	"New Carrier Rates Effective This Month",
+	"Urgent: Freight Booking Confirmation Needed",
+	"Port Congestion: Impact on Delivery Schedules",
+	"New Warehouse Location Now Operational",
+	"Reminder: Submit Packing List by EOD",
+	"Q3 Supply Chain KPIs Released",
+	"Action Required: Missing HS Codes",
+	"Updated Incoterms Guidelines",
+	"Reminder: Schedule Your Pickup Today",
+	"Delivery Exception – Client Notification Sent",
+	"Freight Invoice Attached – Please Review",
+	"New Compliance Regulations in Effect",
+	"Tracking Information for Order #8472",
+	"Driver Assigned for Tomorrow’s Pickup",
+	"POD (Proof of Delivery) Now Available",
+	"Inventory Reconciliation Required",
+	"Export Control Audit: Prep Checklist",
+	"New 3PL Partnership Announcement",
+	"Upcoming Warehouse Maintenance Downtime",
+	"RFQ Submission Deadline Approaching",
+	"Final Mile Carrier Change Notification",
+	"Container Rolled Over – Next Vessel Info",
+	"Monthly Logistics Newsletter – June Edition",
+	"Dangerous Goods Certification Needed",
+	"Book Your Spot: Logistics Strategy Webinar",
+	"New Packaging Requirements from Supplier",
+	"System Downtime Scheduled This Weekend",
+	"Sailing Schedule Update – Asia-Europe Route",
+	"Spot Quote Available for LTL Shipment",
+	"Driver ETA Changed – Live Tracking Update",
+	"Import Clearance Delay at Port",
+	"Update: Shipment Transferred to Rail",
+	"New Integration: TMS and WMS Sync Live",
+	"Warehouse Inventory Levels Critical",
+	"Annual Carrier Review – Your Feedback Needed",
+	"Fuel Surcharge Increase Notification",
+	"Backorder Fulfillment Expected This Week",
+	"Client Return Shipment Request Received",
+	"Hazmat Documentation Checklist",
+	"Onboarding New Freight Forwarders",
+	"Last-Mile Metrics Dashboard Launched",
+	"Holiday Shipping Deadlines Reminder",
+	"Packaging Compliance Audit Findings",
+	"Supply Chain Risk Alert – Weather Advisory",
+	"Proof of Export for Your Records",
+	"New SLA Agreements Signed – Review Inside",
+	"Time-Sensitive: Verify Shipment Dimensions",
+	"Invitation: Global Logistics Summit 2025"
+]
+
 @export var inbox_items_container: Control
 @export var sent_items_container: Control
 @export var inbox_items: Array[EmailItem]
@@ -11,6 +65,7 @@ extends OsApp
 @export var attachment_item_scene: PackedScene
 
 @export var email_reader: Control
+@export var email_reader_header_container: Control
 @export var from_label: Label
 @export var to_label: Label
 @export var date_label: Label
@@ -29,43 +84,44 @@ var attachment_items_in_email_composer: Array[AttachmentItem]
 @export var buttons_container: Control
 @export var new_button: Button
 @export var send_button: Button
-@export var unread_button: Button
+@export var close_button: Button
+@export var mark_as_unread_button: Button
+@export var mark_as_read_button: Button
 @export var reply_button: Button
 @export var delete_button: Button
+@export var add_to_person_button: Button
+@export var add_subject_button: Button
 @export var add_attachment_button: Button
+@export var show_read_button: Button
 
 var displayed_email_item: EmailItem
-var line_break: String = "\n"
-var email_separator: String = "______________________________"
-var footer: String:
-	get:
-		return line_break \
-		+ line_break + "Best regards," \
-		+ line_break + GameManager.player.person.full_name \
-		+ line_break + GameManager.player.person.job_position.title \
-		+ line_break + GameManager.player.person.email \
-		+ line_break + GameManager.player.person.phone_number \
-		+ line_break + GameManager.player.person.employer.print_string
 
 
 func _ready() -> void:
 	UtilityTools.assert_all_exported_properties(self)
 	super._ready()
+	EmailServer.email_registered.connect(_on_email_registered_on_server)
 	clear_email_reader()
 	clear_email_composer()
 	clear_containers()
-	populate_containers()
+	retrieve_emails_from_server()
 	register_buttons()
+	filter_inbox()
 	switch_to_email_reader()
 
 
 func register_buttons() -> void:
 	new_button.pressed.connect(_on_new_button_pressed)
 	send_button.pressed.connect(_on_send_button_pressed)
-	unread_button.pressed.connect(_on_unread_button_pressed)
+	close_button.pressed.connect(_on_close_button_pressed)
+	mark_as_unread_button.pressed.connect(_on_mark_as_unread_button_pressed)
+	mark_as_read_button.pressed.connect(_on_mark_as_read_button_pressed)
 	reply_button.pressed.connect(_on_reply_button_pressed)
 	delete_button.pressed.connect(_on_delete_button_pressed)
+	add_to_person_button.pressed.connect(_on_add_to_person_button_pressed)
+	add_subject_button.pressed.connect(_on_add_subject_button_pressed)
 	add_attachment_button.pressed.connect(_on_add_attachment_button_pressed)
+	show_read_button.pressed.connect(_on_show_read_button_pressed)
 
 
 func clear_containers() -> void:
@@ -78,7 +134,7 @@ func clear_containers() -> void:
 	sent_items.clear()
 
 
-func populate_containers() -> void:
+func retrieve_emails_from_server() -> void:
 	for email: Email in EmailServer.emails:
 		add_email_item(email)
 
@@ -87,7 +143,7 @@ func add_email_item(email: Email) -> EmailItem:
 	var new_email_item: EmailItem
 	var items_array: Array[EmailItem]
 	var items_container: Control
-	if email.from == GameManager.player.person.email:
+	if email.from == GameManager.player.person:
 		new_email_item = create_email_item(email, false)
 		items_array = sent_items
 		items_container = sent_items_container
@@ -119,34 +175,40 @@ func remove_email_item(email_item: EmailItem) -> void:
 	email_item.queue_free()
 
 
-func add_all_attachment_items(email: Email, container: Control, array: Array[AttachmentItem]) -> void:
+func add_all_attachment_items(email: Email, is_read_only: bool) -> void:
 	for document: Document in email.attachments:
-		add_attachment_item(document, container, array)
+		add_attachment_item(document, is_read_only)
 
 
-func add_attachment_item(document: Document, container: Control, array: Array[AttachmentItem]) -> AttachmentItem:
-	var new_attachment_item: AttachmentItem = create_attachment_item(document)
+func add_attachment_item(document: Document, is_read_only: bool) -> AttachmentItem:
+	var array: Array[AttachmentItem] = attachment_items_in_email_reader if is_read_only else attachment_items_in_email_composer
+	var container: Control = attachment_items_container_in_email_reader if is_read_only else attachment_items_container_in_email_composer
+	var new_attachment_item: AttachmentItem = create_attachment_item(document, is_read_only)
 	array.append(new_attachment_item)
 	container.add_child(new_attachment_item)
 	return new_attachment_item
 
 
-func create_attachment_item(document: Document) -> AttachmentItem:
+func create_attachment_item(document: Document, is_read_only: bool) -> AttachmentItem:
 	var new_attachment_item: AttachmentItem = attachment_item_scene.instantiate() as AttachmentItem
-	new_attachment_item.initialize(document)
+	new_attachment_item.initialize(document, is_read_only)
 	new_attachment_item.opened.connect(func() -> void: print("attachment pressed: " + new_attachment_item.document.document_data.name))
+	new_attachment_item.removed.connect(_on_attachment_removed_button_pressed.bind(new_attachment_item))
 	return new_attachment_item
 
 
-func remove_attachment_item(attachment_item: AttachmentItem, array: Array[AttachmentItem]) -> void:
+func remove_attachment_item(attachment_item: AttachmentItem, is_read_only: bool) -> void:
 	if attachment_item == null:
 		return
 	
+	var array: Array[AttachmentItem] = attachment_items_in_email_reader if is_read_only else attachment_items_in_email_composer
 	array.erase(attachment_item)
 	attachment_item.queue_free()
 
 
-func remove_all_attachment_items(container: Control, array: Array[AttachmentItem]) -> void:
+func remove_all_attachment_items(is_read_only: bool) -> void:
+	var array: Array[AttachmentItem] = attachment_items_in_email_reader if is_read_only else attachment_items_in_email_composer
+	var container: Control = attachment_items_container_in_email_reader if is_read_only else attachment_items_container_in_email_composer
 	for child: Node in container.get_children():
 		child.queue_free()
 	array.clear()
@@ -156,15 +218,20 @@ func clear_email_reader() -> void:
 	if displayed_email_item != null:
 		displayed_email_item.deselect()
 		displayed_email_item = null
+		filter_inbox()
+	
+	email_reader_header_container.hide()
 	from_label.text = ""
 	to_label.text = ""
 	date_label.text = ""
 	subject_label.text = ""
 	body_label.text = ""
-	remove_all_attachment_items(attachment_items_container_in_email_reader, attachment_items_in_email_reader)
+	remove_all_attachment_items(true)
 	
 	reply_button.hide()
-	unread_button.hide()
+	close_button.hide()
+	mark_as_unread_button.hide()
+	mark_as_read_button.hide()
 	delete_button.hide()
 
 
@@ -172,33 +239,52 @@ func clear_email_composer() -> void:
 	to_edit.text = ""
 	subject_edit.text = ""
 	body_edit.text = ""
-	remove_all_attachment_items(attachment_items_container_in_email_composer, attachment_items_in_email_composer)
+	remove_all_attachment_items(false)
 
 
 func display_email_in_reader(email_item: EmailItem) -> void:
+	if displayed_email_item == email_item:
+		return
+	
 	clear_email_reader()
 	displayed_email_item = email_item
 	displayed_email_item.select()
+	displayed_email_item.set_to_read()
 	
-	from_label.text = email_item.email.from
-	to_label.text = email_item.email.to
+	email_reader_header_container.show()
+	from_label.text = email_item.email.from.email
+	to_label.text = email_item.email.to.email
 	date_label.text = GlobalTimer.get_nice_datetime_string_from_unix_time(email_item.email.date)
 	subject_label.text = email_item.email.subject
 	body_label.text = email_item.email.body
-	add_all_attachment_items(email_item.email, attachment_items_container_in_email_reader, attachment_items_in_email_reader)
+	add_all_attachment_items(email_item.email, true)
 	
+	close_button.show()
 	reply_button.show()
 	delete_button.show()
-	
-	if inbox_items.has(email_item):
-		unread_button.show()
+	update_mark_buttons()
+
+
+func update_mark_buttons() -> void:
+	if displayed_email_item.is_inbound and displayed_email_item.email.is_read:
+		mark_as_unread_button.show()
+		mark_as_read_button.hide()
+	elif displayed_email_item.is_inbound and displayed_email_item.email.is_unread:
+		mark_as_unread_button.hide()
+		mark_as_read_button.show()
 	else:
-		unread_button.hide()
+		mark_as_unread_button.hide()
+		mark_as_read_button.hide()
+
+
+func _on_email_registered_on_server(email: Email) -> void:
+	if email.from == GameManager.player.person or email.to == GameManager.player.person:
+		add_email_item(email)
 
 
 func _on_new_button_pressed() -> void:
 	clear_email_composer()
-	body_edit.text = footer
+	body_edit.text = EmailServer.get_footer(GameManager.player.person)
 	
 	switch_to_email_composer()
 	to_edit.grab_focus()
@@ -206,15 +292,12 @@ func _on_new_button_pressed() -> void:
 
 func _on_reply_button_pressed() -> void:
 	clear_email_composer()
-	if displayed_email_item.email.from == GameManager.player.person.email:
-		to_edit.text = displayed_email_item.email.to
+	if displayed_email_item.email.from == GameManager.player.person:
+		to_edit.text = displayed_email_item.email.to.email
 	else:
-		to_edit.text = displayed_email_item.email.from
-	subject_edit.text = "RE: " + displayed_email_item.email.subject
-	body_edit.text = footer \
-	+ line_break \
-	+ line_break + email_separator \
-	+ line_break + displayed_email_item.email.body
+		to_edit.text = displayed_email_item.email.from.email
+	subject_edit.text = EmailServer.REPLY_SUBJECT_PREFIX + displayed_email_item.email.subject
+	body_edit.text = EmailServer.add_footer_and_separator_to_beginning(displayed_email_item.email.body, GameManager.player.person)
 	
 	switch_to_email_composer()
 	body_edit.grab_focus()
@@ -222,7 +305,12 @@ func _on_reply_button_pressed() -> void:
 
 func _on_send_button_pressed() -> void:
 	if to_edit.text == "" or subject_edit.text == "":
-		ActionLogger.create_log("Need to fill in 'To' and 'Subject' fields", true)
+		ActionLogger.create_error("Need to fill in 'To' and 'Subject' fields")
+		return
+	
+	var to_person: Person = Person.get_person_by_email(to_edit.text)
+	if to_person == null:
+		ActionLogger.create_error("Can't find email '%s' in the directory!" % to_edit.text)
 		return
 	
 	var attached_documents: Array[Document]
@@ -230,8 +318,8 @@ func _on_send_button_pressed() -> void:
 		attached_documents.append(attachment_item.document)
 	
 	var new_email: Email = Email.create_new(
-		GameManager.player.person.email,
-		to_edit.text,
+		GameManager.player.person,
+		to_person,
 		subject_edit.text,
 		body_edit.text,
 		GlobalTimer.now,
@@ -239,25 +327,67 @@ func _on_send_button_pressed() -> void:
 	)
 	
 	EmailServer.register_email(new_email)
-	var new_email_item: EmailItem = add_email_item(new_email)
-	
-	switch_to_email_reader(new_email_item)
+	switch_to_email_reader(sent_items.back())
 
 
-func _on_unread_button_pressed() -> void:
+func _on_close_button_pressed() -> void:
+	clear_email_reader()
+
+
+func _on_mark_as_unread_button_pressed() -> void:
 	if displayed_email_item == null:
 		return
 	displayed_email_item.set_to_unread()
+	update_mark_buttons()
+
+
+func _on_mark_as_read_button_pressed() -> void:
+	if displayed_email_item == null:
+		return
+	displayed_email_item.set_to_read()
+	update_mark_buttons()
 
 
 func _on_delete_button_pressed() -> void:
 	remove_email_item(displayed_email_item)
 
 
+#TODO: Implement proper logic of selecting people.
+func _on_add_to_person_button_pressed() -> void:
+	to_edit.text = ""
+	var tween: Tween = create_tween()
+	tween.tween_property(to_edit, "text", GlobalRefs.people.pick_random().email, 0.5)
+	#to_edit.text = GlobalRefs.people.pick_random().email
+
+
+#TODO: Implement proper logic of selecting subject types.
+func _on_add_subject_button_pressed() -> void:
+	subject_edit.text = ""
+	var tween: Tween = create_tween()
+	tween.tween_property(subject_edit, "text", EMAIL_SUBJECTS.pick_random(), 0.5)
+	#subject_edit.text = EMAIL_SUBJECTS.pick_random()
+
+
 #TODO: Implement proper logic of selecting attachments from shipments.
 func _on_add_attachment_button_pressed() -> void:
 	var new_document: Document = Document.create_new((GlobalRefs.documents.pick_random() as DocumentData).code, GlobalTimer.now, randi_range(1000, 100000))
-	add_attachment_item(new_document, attachment_items_container_in_email_composer, attachment_items_in_email_composer)
+	add_attachment_item(new_document, false)
+
+
+func _on_attachment_removed_button_pressed(attachment_item: AttachmentItem) -> void:
+	remove_attachment_item(attachment_item, false)
+
+
+func _on_show_read_button_pressed() -> void:
+	filter_inbox()
+
+
+func filter_inbox() -> void:
+	for email_item: EmailItem in inbox_items:
+		if email_item.email.is_unread or email_item.email.is_read and show_read_button.button_pressed or email_item.is_selected:
+			email_item.show()
+		else:
+			email_item.hide()
 
 
 func switch_to_email_reader(email_item: EmailItem = null) -> void:
@@ -279,3 +409,5 @@ func switch_to_email_composer() -> void:
 	
 	email_reader.hide()
 	buttons_container.hide()
+	
+	clear_email_reader()

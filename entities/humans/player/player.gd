@@ -32,11 +32,11 @@ func _ready() -> void:
 	
 	super._ready()
 	initial_setup()
-	
-	GameManager.player = self
 	if person == null:
 		await person_assigned
 	person.job_position = GlobalRefs.job_positions[0] #Intern
+	
+	GameManager.set_player(self)
 
 
 func _physics_process(delta: float) -> void:

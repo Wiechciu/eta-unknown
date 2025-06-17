@@ -2,6 +2,7 @@ extends Node
 
 
 signal difficulty_changed
+signal player_assigned
 
 
 enum Difficulty {
@@ -43,3 +44,9 @@ func create_new_shipments() -> void:
 func change_difficulty(difficulty: Difficulty) -> void:
 	self.difficulty = difficulty
 	difficulty_changed.emit()
+
+
+@warning_ignore("shadowed_variable")
+func set_player(player: Player) -> void:
+	self.player = player
+	player_assigned.emit()

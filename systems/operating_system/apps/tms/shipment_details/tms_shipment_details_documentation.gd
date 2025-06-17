@@ -76,7 +76,7 @@ func _on_print_selected_button_pressed() -> void:
 
 func print_documents(documents_to_print: Array[Document], labels_to_print: Array[Document]) -> void:
 	if documents_to_print.size() == 0 and labels_to_print.size() == 0:
-		ActionLogger.create_log("NO_DOCUMENTS_TO_PRINT", true)
+		ActionLogger.create_error("NO_DOCUMENTS_TO_PRINT")
 		return
 	
 	for document_to_print: Document in documents_to_print:

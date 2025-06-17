@@ -88,7 +88,7 @@ func save_game(save_file_name: String) -> void:
 
 func load_game(save_file_name: String) -> void:
 	if not save_file_exists(save_file_name):
-		ActionLogger.create_log(tr("SAVE_FILE_DOESNT_EXIST").format({"file_name":save_file_name}), true)
+		ActionLogger.create_error(tr("SAVE_FILE_DOESNT_EXIST").format({"file_name":save_file_name}))
 		return
 	is_loading_game = true
 	is_game_loaded = false
@@ -132,7 +132,7 @@ func load_game_from_json(save_file_name: String) -> void:
 	file.close()
 	
 	if data == null:
-		ActionLogger.create_log(tr("COULDNT_LOAD_SAVE_FILE").format({"file_name":save_file_name}), true)
+		ActionLogger.create_error(tr("COULDNT_LOAD_SAVE_FILE").format({"file_name":save_file_name}))
 		return
 	
 	GlobalTimer.from_dict(data)
@@ -187,7 +187,7 @@ func get_or_create_save_folder() -> DirAccess:
 
 func delete_save_file(save_file_name: String) -> void:
 	if not save_file_exists(save_file_name):
-		ActionLogger.create_log(tr("SAVE_FILE_DOESNT_EXIST").format({"file_name":save_file_name}), true)
+		ActionLogger.create_error(tr("SAVE_FILE_DOESNT_EXIST").format({"file_name":save_file_name}))
 		return
 	
 	DirAccess.remove_absolute(save_folder + save_file_name + save_file_extension)

@@ -15,6 +15,7 @@ func initialize(icon_texture: Texture2D, header_text: String, body_text: String)
 	if header_text == "":
 		header_container.hide()
 	else:
+		header_container.show()
 		header_label.text = header_text
 		if icon_texture != null:
 			icon_rect.texture = icon_texture

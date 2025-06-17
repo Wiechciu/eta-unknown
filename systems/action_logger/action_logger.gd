@@ -41,6 +41,10 @@ func create_log(message: String, is_error: bool = false) -> void:
 		message_container.get_child(0).queue_free()
 
 
+func create_error(message: String) -> void:
+	create_log(message, true)
+
+
 func change_modulate() -> void:
 	await get_tree().process_frame
 	if message_container.get_child_count() == 0:

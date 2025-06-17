@@ -151,6 +151,16 @@ static func create_new() -> Person:
 	return new_person
 
 
+@warning_ignore("shadowed_variable")
+static func get_person_by_email(email: String) -> Person:
+	for person: Person in GlobalRefs.people:
+		if person.email == email:
+			return person
+	
+	printerr("Could't find person email: " + email)
+	return null
+
+
 #@warning_ignore("shadowed_variable")
 #func with_data(id: int, first_name: String, last_name: String, gender: Gender, email: String, phone_number: String, birthdate: String, experience: Experience, employer: Party, job_position: JobPosition) -> Person:
 	#self.id = id

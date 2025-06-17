@@ -181,6 +181,7 @@ skeleton = NodePath("")
 [node name="GPUParticles3D" type="GPUParticles3D" parent="CoffeeMachine"]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -1.2195975, 2.1482513, 0.98844343)
 amount = 2
+amount_ratio = 0.0
 lifetime = 0.15000000000000002
 process_material = SubResource("ParticleProcessMaterial_uwnbp")
 draw_pass_1 = SubResource("SphereMesh_ythw8")

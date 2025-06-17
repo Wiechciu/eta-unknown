@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://chd34lwigyb5e"]
 
 [ext_resource type="Script" uid="uid://bp130y35xqygy" path="res://systems/tooltip/tooltip.gd" id="1_7rjlb"]
-[ext_resource type="Texture2D" uid="uid://ciwqcrdw7ve0p" path="res://systems/menu/inventory/bin.png" id="2_p7mdq"]
+[ext_resource type="Texture2D" uid="uid://cx8f37dagx66e" path="res://systems/operating_system/apps/tms/contrast.png" id="2_p7mdq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7rjlb"]
 content_margin_left = 3.0
@@ -25,8 +25,8 @@ grow_begin = 0.0
 grow_end = 0.0
 
 [node name="Tooltip" type="PanelContainer" node_paths=PackedStringArray("header_container", "icon_rect", "header_label", "body_label")]
-offset_right = 230.0
-offset_bottom = 44.0
+offset_right = 206.0
+offset_bottom = 20.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7rjlb")
 script = ExtResource("1_7rjlb")
@@ -40,6 +40,7 @@ layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="HeaderContainer" type="VBoxContainer" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 0
 
@@ -60,7 +61,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 12
-text = "Tooltip header stdr "
+text = "Tooltip header"
 autowrap_mode = 3
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/HeaderContainer"]
