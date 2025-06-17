@@ -40,7 +40,7 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("cancel") and is_focused:
+	if (event.is_action_pressed("cancel") or event.is_action_pressed("inventory")) and is_focused:
 		unfocus_view()
 		get_viewport().set_input_as_handled()
 
@@ -116,12 +116,16 @@ func focus_view() -> void:
 	tween.tween_property(camera, "global_rotation", camera.global_rotation, focusing_time).from(old_camera.global_rotation)
 	await tween.finished
 	
+	os.reparent(self)
+	
 	is_transitioning = false
 
 
 func unfocus_view() -> void:
 	is_transitioning = true
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	os.reparent(subviewport)
 	
 	var tween: Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_parallel(true)
 	tween.tween_property(camera, "global_rotation", old_camera.global_rotation, focusing_time)

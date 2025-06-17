@@ -28,6 +28,7 @@ DebugTools="*res://systems/tools/debug_tools.tscn"
 ActionLogger="*res://systems/action_logger/action_logger.tscn"
 SaveManager="*res://systems/save_manager/save_manager.tscn"
 GlobalMarket="*res://systems/global_market/global_market.tscn"
+EmailServer="*res://systems/email_server/email_server.tscn"
 
 [debug]
 

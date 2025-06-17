@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Email" load_steps=2 format=3 uid="uid://bblh2eia84ch8"]
+
+[ext_resource type="Script" uid="uid://c0n33sueqwg8d" path="res://master_data/emails/email.gd" id="1_muhvr"]
+
+[resource]
+script = ExtResource("1_muhvr")
+from = "dawson@dawson.com"
+to = "wchc@wchc.pl"
+subject = "URGENT: Delay on Shipment – [BL#789456] – Revised ETA"
+body = "We regret to inform you that your shipment under BL#789456 has encountered an unexpected delay due to port congestion in Antwerp. The updated estimated arrival date is now June 25, 2025, instead of the previously scheduled June 20, 2025.
+
+We understand the impact this may have on your operations and are actively working with the carrier to expedite the process where possible. Alternative routing options are being evaluated as a contingency.
+
+We’ll provide a further update within the next 24 hours. Thank you for your patience and understanding.
+
+Kind regards,
+[Your Name]
+Operations Team
+[Your Company]"
+date = 1000000000
+is_read = false
+communication_chain = Array[ExtResource("1_muhvr")]([])
+metadata/_custom_type_script = "uid://c0n33sueqwg8d"

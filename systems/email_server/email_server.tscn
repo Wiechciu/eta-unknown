@@ -1,0 +1,11 @@
+[gd_scene load_steps=6 format=3 uid="uid://ygeupj2nncdj"]
+
+[ext_resource type="Script" uid="uid://pwyu2assdolc" path="res://systems/email_server/email_server.gd" id="1_k8gh5"]
+[ext_resource type="Script" uid="uid://c0n33sueqwg8d" path="res://master_data/emails/email.gd" id="2_027fa"]
+[ext_resource type="Resource" uid="uid://cb1ongmcuw2fn" path="res://systems/email_server/test_email_1.tres" id="3_rmy0h"]
+[ext_resource type="Resource" uid="uid://bblh2eia84ch8" path="res://systems/email_server/test_email_2.tres" id="4_disbt"]
+[ext_resource type="Resource" uid="uid://jwak606lyfib" path="res://systems/email_server/test_email_3.tres" id="5_rt4q7"]
+
+[node name="EmailServer" type="Node"]
+script = ExtResource("1_k8gh5")
+emails = Array[ExtResource("2_027fa")]([ExtResource("3_rmy0h"), ExtResource("4_disbt"), ExtResource("5_rt4q7")])

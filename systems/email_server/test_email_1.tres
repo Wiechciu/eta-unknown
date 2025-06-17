@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="Email" load_steps=2 format=3 uid="uid://cb1ongmcuw2fn"]
+
+[ext_resource type="Script" uid="uid://c0n33sueqwg8d" path="res://master_data/emails/email.gd" id="1_onhtm"]
+
+[resource]
+script = ExtResource("1_onhtm")
+from = "rein.wilson@dundermifflin.com"
+to = "wchc@wchc.pl"
+subject = "Shipping Confirmation – [PO#123456] – ETA June 21, 2025"
+body = "Dear [Client Name],
+
+We’re pleased to inform you that your shipment under PO#123456 has been dispatched from our Hamburg facility on June 17, 2025. The cargo is en route via sea freight and is expected to arrive at the Port of Rotterdam on June 21, 2025.
+
+Details:
+
+    Carrier: Maersk Line
+
+    Container No.: MSKU1234567
+
+    Incoterms: FOB Hamburg
+
+    ETA (Port): June 21, 2025
+
+    ETA (Final Delivery): June 24, 2025
+
+We will continue to monitor the shipment and update you should there be any changes. Please don’t hesitate to contact us for tracking or documentation.
+
+Best regards,
+[Your Name]
+Logistics Coordinator
+[Your Company]
+📞 +49 123 456 789 | ✉️ logistics@[company].com"
+date = 1000000000
+is_read = false
+communication_chain = Array[ExtResource("1_onhtm")]([])
+metadata/_custom_type_script = "uid://c0n33sueqwg8d"

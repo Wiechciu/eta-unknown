@@ -13,6 +13,7 @@ corner_radius_top_left = 20
 
 [node name="ActionLogger" type="Control" node_paths=PackedStringArray("message_container", "audio_player")]
 process_mode = 3
+z_index = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

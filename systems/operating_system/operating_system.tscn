@@ -42,8 +42,11 @@ bg_color = Color(0.125911, 0.125911, 0.125911, 1)
 
 [node name="OperatingSystem" type="PanelContainer" node_paths=PackedStringArray("_desktop", "_taskbar")]
 clip_contents = true
-offset_right = 1920.0
-offset_bottom = 1080.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_nlmep")
 script = ExtResource("1_raqbm")
 _desktop = NodePath("VBoxContainer/Desktop")

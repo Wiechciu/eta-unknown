@@ -12,6 +12,7 @@ var boot_duration: float = 0.3
 
 func _ready() -> void:
 	UtilityTools.assert_all_exported_properties(self)
+	start()
 
 
 func start() -> void:
@@ -19,7 +20,7 @@ func start() -> void:
 
 
 func close() -> void:
-	await hide_with_slide()
+	await hide_with_fade()
 	queue_free()
 
 

@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dh8b7wgt2j4qq"]
+[gd_scene load_steps=38 format=3 uid="uid://dh8b7wgt2j4qq"]
 
 [ext_resource type="Script" uid="uid://bu5de0dgiogpb" path="res://systems/operating_system/apps/mailor/mailor.gd" id="1_ny8fa"]
 [ext_resource type="PackedScene" uid="uid://dr7k5nsfgoobv" path="res://systems/operating_system/os_app_panel_header.tscn" id="2_11d6n"]
 [ext_resource type="PackedScene" uid="uid://bn326sk3yfdna" path="res://systems/operating_system/os_app_loading_screen.tscn" id="3_fvvr4"]
+[ext_resource type="PackedScene" uid="uid://blor13w2b7vd1" path="res://systems/operating_system/apps/mailor/email_item.tscn" id="3_ny8fa"]
+[ext_resource type="Script" uid="uid://c0n33sueqwg8d" path="res://master_data/emails/email.gd" id="4_jrf17"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mgofm"]
 border_width_left = 4
@@ -13,8 +15,350 @@ border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fvvr4"]
 bg_color = Color(1, 1, 1, 1)
+border_width_right = 2
+border_color = Color(0, 0, 0, 1)
 
-[node name="Mailor" type="PanelContainer" node_paths=PackedStringArray("loading_screen")]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fvvr4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ny8fa"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jrf17"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+draw_center = false
+
+[sub_resource type="Resource" id="Resource_jrf17"]
+resource_local_to_scene = true
+script = ExtResource("4_jrf17")
+from = "kary.duplo@lego.com"
+to = "wchc@wchc.pl"
+subject = "Test lego set"
+body = "Dear WCHC,
+I'm writing to you in regards to our new upcoming Lego sale and to arrange a transport for the following shipment:
+...
+
+Best regards,
+Kary Duplo
+Lego Inc"
+date = 1000
+is_read = false
+communication_chain = Array[ExtResource("4_jrf17")]([])
+metadata/_custom_type_script = "uid://c0n33sueqwg8d"
+
+[sub_resource type="Resource" id="Resource_drr5v"]
+resource_local_to_scene = true
+script = ExtResource("4_jrf17")
+from = "kary.duplo@lego.com"
+to = "wchc@wchc.pl"
+subject = "Test lego set"
+body = "Dear WCHC,
+I'm writing to you in regards to our new upcoming Lego sale and to arrange a transport for the following shipment:
+...
+
+Best regards,
+Kary Duplo
+Lego Inc"
+date = 1000
+is_read = false
+communication_chain = Array[ExtResource("4_jrf17")]([])
+metadata/_custom_type_script = "uid://c0n33sueqwg8d"
+
+[sub_resource type="Resource" id="Resource_1sawd"]
+resource_local_to_scene = true
+script = ExtResource("4_jrf17")
+from = "kary.duplo@lego.com"
+to = "wchc@wchc.pl"
+subject = "Test lego set"
+body = "Dear WCHC,
+I'm writing to you in regards to our new upcoming Lego sale and to arrange a transport for the following shipment:
+...
+
+Best regards,
+Kary Duplo
+Lego Inc"
+date = 1000
+is_read = false
+communication_chain = Array[ExtResource("4_jrf17")]([])
+metadata/_custom_type_script = "uid://c0n33sueqwg8d"
+
+[sub_resource type="Resource" id="Resource_ancsa"]
+resource_local_to_scene = true
+script = ExtResource("4_jrf17")
+from = "kary.duplo@lego.com"
+to = "wchc@wchc.pl"
+subject = "Test lego set"
+body = "Dear WCHC,
+I'm writing to you in regards to our new upcoming Lego sale and to arrange a transport for the following shipment:
+...
+
+Best regards,
+Kary Duplo
+Lego Inc"
+date = 1000
+is_read = false
+communication_chain = Array[ExtResource("4_jrf17")]([])
+metadata/_custom_type_script = "uid://c0n33sueqwg8d"
+
+[sub_resource type="Resource" id="Resource_a8r3w"]
+resource_local_to_scene = true
+script = ExtResource("4_jrf17")
+from = "kary.duplo@lego.com"
+to = "wchc@wchc.pl"
+subject = "Test lego set"
+body = "Dear WCHC,
+I'm writing to you in regards to our new upcoming Lego sale and to arrange a transport for the following shipment:
+...
+
+Best regards,
+Kary Duplo
+Lego Inc"
+date = 1000
+is_read = false
+communication_chain = Array[ExtResource("4_jrf17")]([])
+metadata/_custom_type_script = "uid://c0n33sueqwg8d"
+
+[sub_resource type="Resource" id="Resource_nr5ig"]
+resource_local_to_scene = true
+script = ExtResource("4_jrf17")
+from = "kary.duplo@lego.com"
+to = "wchc@wchc.pl"
+subject = "Test lego set"
+body = "Dear WCHC,
+I'm writing to you in regards to our new upcoming Lego sale and to arrange a transport for the following shipment:
+...
+
+Best regards,
+Kary Duplo
+Lego Inc"
+date = 1000
+is_read = false
+communication_chain = Array[ExtResource("4_jrf17")]([])
+metadata/_custom_type_script = "uid://c0n33sueqwg8d"
+
+[sub_resource type="Resource" id="Resource_cg11y"]
+resource_local_to_scene = true
+script = ExtResource("4_jrf17")
+from = "kary.duplo@lego.com"
+to = "wchc@wchc.pl"
+subject = "Test lego set"
+body = "Dear WCHC,
+I'm writing to you in regards to our new upcoming Lego sale and to arrange a transport for the following shipment:
+...
+
+Best regards,
+Kary Duplo
+Lego Inc"
+date = 1000
+is_read = false
+communication_chain = Array[ExtResource("4_jrf17")]([])
+metadata/_custom_type_script = "uid://c0n33sueqwg8d"
+
+[sub_resource type="Resource" id="Resource_4t8ss"]
+resource_local_to_scene = true
+script = ExtResource("4_jrf17")
+from = "kary.duplo@lego.com"
+to = "wchc@wchc.pl"
+subject = "Test lego set"
+body = "Dear WCHC,
+I'm writing to you in regards to our new upcoming Lego sale and to arrange a transport for the following shipment:
+...
+
+Best regards,
+Kary Duplo
+Lego Inc"
+date = 1000
+is_read = false
+communication_chain = Array[ExtResource("4_jrf17")]([])
+metadata/_custom_type_script = "uid://c0n33sueqwg8d"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_drr5v"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ibj8h"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4t8ss"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8r3w"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cg11y"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_50wre"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_782if"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_orlh7"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 0, 0.1137255, 0.19607843)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_31wgn"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 0, 0.1137255, 0.19607843)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fkpoh"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 0, 0.1137255, 0.19607843)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71xv2"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 0, 0.1137255, 0.19607843)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jrf17"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1sawd"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ibj8h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ancsa"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.8039216, 0.8980392, 0.96862745, 0.3372549)
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nr5ig"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_map3m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5fap2"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xeha4"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+draw_center = false
+border_color = Color(0, 0, 0, 1)
+
+[node name="Mailor" type="PanelContainer" node_paths=PackedStringArray("inbox_item_container", "sent_item_container", "email_reader", "from_label", "to_label", "date_label", "subject_label", "body_label", "email_composer", "to_edit", "subject_edit", "body_edit", "new_button", "send_button", "unread_button", "reply_button", "delete_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -24,7 +368,24 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_mgofm")
 script = ExtResource("1_ny8fa")
-loading_screen = NodePath("OsAppLoadingScreen")
+inbox_item_container = NodePath("VBoxContainer/HBoxContainer/Folders/VBoxContainer/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer")
+sent_item_container = NodePath("VBoxContainer/HBoxContainer/Folders/VBoxContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer")
+email_item_scene = ExtResource("3_ny8fa")
+email_reader = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader")
+from_label = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/From/FromValue")
+to_label = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/To/ToValue")
+date_label = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/Date/DateValue")
+subject_label = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/Subject/SubjectValue")
+body_label = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Body/BodyLabel")
+email_composer = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer")
+to_edit = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer/To/ToLineEdit")
+subject_edit = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer/Subject/SubjectLineEdit")
+body_edit = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Body/BodyTextEdit")
+new_button = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/Buttons/HBoxContainer/NewButton")
+send_button = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/Buttons/HBoxContainer/SendButton")
+unread_button = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/Buttons/HBoxContainer/UnreadButton")
+reply_button = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/Buttons/HBoxContainer/ReplyButton")
+delete_button = NodePath("VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/Buttons/HBoxContainer/DeleteButton")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -33,10 +394,421 @@ theme_override_constants/separation = 0
 [node name="OsAppPanelHeader" parent="VBoxContainer" instance=ExtResource("2_11d6n")]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="Folders" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_fvvr4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Folders"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Inbox" type="PanelContainer" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_fvvr4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Inbox"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Header" type="PanelContainer" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Inbox/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny8fa")
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Inbox/VBoxContainer/Header"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "Inbox"
+horizontal_alignment = 1
+
+[node name="List" type="PanelContainer" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Inbox/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_jrf17")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Inbox/VBoxContainer/List"]
+layout_mode = 2
+
+[node name="ItemContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Inbox/VBoxContainer/List/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="EmailItem" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
+layout_mode = 2
+email = SubResource("Resource_jrf17")
+
+[node name="Sent" type="PanelContainer" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_fvvr4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Sent"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Header" type="PanelContainer" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Sent/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ny8fa")
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Sent/VBoxContainer/Header"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "Sent"
+horizontal_alignment = 1
+
+[node name="List" type="PanelContainer" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Sent/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_jrf17")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Sent/VBoxContainer/List"]
+layout_mode = 2
+
+[node name="ItemContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Sent/VBoxContainer/List/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="EmailItem3" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
+layout_mode = 2
+email = SubResource("Resource_drr5v")
+
+[node name="EmailItem4" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
+layout_mode = 2
+email = SubResource("Resource_1sawd")
+
+[node name="EmailItem5" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
+layout_mode = 2
+email = SubResource("Resource_ancsa")
+
+[node name="EmailItem6" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
+layout_mode = 2
+email = SubResource("Resource_a8r3w")
+
+[node name="EmailItem7" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
+layout_mode = 2
+email = SubResource("Resource_nr5ig")
+
+[node name="EmailItem8" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
+layout_mode = 2
+email = SubResource("Resource_cg11y")
+
+[node name="EmailItem9" parent="VBoxContainer/HBoxContainer/Folders/VBoxContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
+layout_mode = 2
+email = SubResource("Resource_4t8ss")
+
+[node name="EmailReaderComposer" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_drr5v")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+theme_override_constants/separation = 0
+
+[node name="Buttons" type="PanelContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ibj8h")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/Buttons"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SendButton" type="Button" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/Buttons/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/focus = SubResource("StyleBoxFlat_4t8ss")
+theme_override_styles/hover = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/normal = SubResource("StyleBoxFlat_a8r3w")
+text = "Send"
+
+[node name="NewButton" type="Button" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/Buttons/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/focus = SubResource("StyleBoxFlat_cg11y")
+theme_override_styles/hover = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/normal = SubResource("StyleBoxFlat_a8r3w")
+text = "New"
+
+[node name="ReplyButton" type="Button" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/Buttons/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/focus = SubResource("StyleBoxFlat_50wre")
+theme_override_styles/hover = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/normal = SubResource("StyleBoxFlat_a8r3w")
+text = "Reply"
+
+[node name="UnreadButton" type="Button" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/Buttons/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/focus = SubResource("StyleBoxFlat_782if")
+theme_override_styles/hover = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/normal = SubResource("StyleBoxFlat_a8r3w")
+text = "Mark as unread"
+
+[node name="DeleteButton" type="Button" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/Buttons/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/focus = SubResource("StyleBoxFlat_orlh7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_31wgn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fkpoh")
+theme_override_styles/normal = SubResource("StyleBoxFlat_71xv2")
+text = "Delete"
+
+[node name="EmailReader" type="PanelContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jrf17")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Header" type="PanelContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_1sawd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header"]
+layout_mode = 2
+
+[node name="Date" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer"]
+layout_mode = 2
+
+[node name="DateLabel" type="Label" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/Date"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "Date:"
+
+[node name="DateValue" type="Label" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/Date"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 8.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "2025-01-01, 15:00:00"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="From" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer"]
+layout_mode = 2
+
+[node name="FromLabel" type="Label" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/From"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "From:"
+
+[node name="FromValue" type="Label" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/From"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 8.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "test@test.com"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="To" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer"]
+layout_mode = 2
+
+[node name="ToLabel" type="Label" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/To"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "To:"
+
+[node name="ToValue" type="Label" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/To"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 8.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "test@test.com"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Subject" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer"]
+layout_mode = 2
+
+[node name="SubjectLabel" type="Label" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/Subject"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "Subject:"
+
+[node name="SubjectValue" type="Label" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/Subject"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 8.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "URGENT TEST"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Body" type="PanelContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ibj8h")
+
+[node name="BodyLabel" type="RichTextLabel" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailReader/VBoxContainer/Body"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/bold_italics_font_size = 15
+theme_override_font_sizes/italics_font_size = 15
+theme_override_font_sizes/mono_font_size = 15
+theme_override_font_sizes/normal_font_size = 15
+theme_override_font_sizes/bold_font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_ancsa")
+bbcode_enabled = true
+text = "test test test test"
+
+[node name="EmailComposer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jrf17")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Header" type="PanelContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_1sawd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header"]
+layout_mode = 2
+
+[node name="Date" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="DateLabel" type="Label" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer/Date"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "Date:"
+
+[node name="DateLineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer/Date"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 8.0
+theme_override_colors/caret_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_nr5ig")
+text = "2025-10-25"
+caret_blink = true
+
+[node name="From" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="FromLabel" type="Label" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer/From"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "From:"
+
+[node name="FromLineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer/From"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 8.0
+theme_override_colors/caret_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_nr5ig")
+text = "test@test.com"
+caret_blink = true
+
+[node name="To" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer"]
+layout_mode = 2
+
+[node name="ToLabel" type="Label" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer/To"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "To:"
+
+[node name="ToLineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer/To"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 8.0
+theme_override_colors/caret_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_nr5ig")
+text = "test@test.com"
+caret_blink = true
+
+[node name="Subject" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer"]
+layout_mode = 2
+
+[node name="SubjectLabel" type="Label" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer/Subject"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "Subject:"
+
+[node name="SubjectLineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/VBoxContainer/Subject"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 8.0
+theme_override_colors/caret_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_nr5ig")
+text = "URGENT TEST"
+caret_blink = true
+
+[node name="Body" type="PanelContainer" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_map3m")
+
+[node name="BodyTextEdit" type="TextEdit" parent="VBoxContainer/HBoxContainer/EmailReaderComposer/VBoxContainer/EmailComposer/VBoxContainer/Body"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/caret_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_5fap2")
+theme_override_styles/focus = SubResource("StyleBoxFlat_xeha4")
+text = "test test test"
+wrap_mode = 1
+caret_blink = true
 
 [node name="OsAppLoadingScreen" parent="." instance=ExtResource("3_fvvr4")]
 visible = false

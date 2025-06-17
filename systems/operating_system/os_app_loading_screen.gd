@@ -13,10 +13,17 @@ var loading_time: float = 1
 var title_loading_delay: float = 0.2
 var title_loading_time: float = 0.5
 
+
 func _ready() -> void:
 	os_app = UtilityTools.get_parent_of_type(self, OsApp) as OsApp
 	icon_rect.texture = os_app.os_app_icon
 	title_label.text = os_app.os_app_name
+	
+	await os_app.ready
+	hide_all_siblings()
+	start_loading()
+	await finished_loading
+	show_all_siblings()
 
 
 func start_loading() -> void:
@@ -31,3 +38,17 @@ func start_loading() -> void:
 	tween.tween_property(self, "modulate", Color.TRANSPARENT, 0.2)
 	tween.tween_callback(hide)
 	await tween.finished
+
+
+func hide_all_siblings() -> void:
+	for sibling: Node in get_parent().get_children():
+		if sibling == self:
+			continue
+		(sibling as Control).hide()
+
+
+func show_all_siblings() -> void:
+	for sibling: Node in get_parent().get_children():
+		if sibling == self:
+			continue
+		(sibling as Control).show()

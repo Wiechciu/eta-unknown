@@ -24,8 +24,13 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("inventory"):
 		if is_player_menu_open:
 			close_player_menu()
-		else:
+			get_viewport().set_input_as_handled()
+		elif GameManager.player.camera.current:
 			open_player_menu()
+			get_viewport().set_input_as_handled()
+	
+	if event.is_action_pressed("interact") and is_player_menu_open:
+		get_viewport().set_input_as_handled()
 
 
 func fold_all_except_first() -> void:

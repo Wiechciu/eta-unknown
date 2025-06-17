@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="Email" load_steps=2 format=3 uid="uid://jwak606lyfib"]
+
+[ext_resource type="Script" uid="uid://c0n33sueqwg8d" path="res://master_data/emails/email.gd" id="1_swhit"]
+
+[resource]
+script = ExtResource("1_swhit")
+from = "contact@military.com"
+to = "wchc@wchc.pl"
+subject = "Freight Quotation – Hamburg to Shanghai – Ref#Q-5682"
+body = "Dear [Customer Name],
+
+Thank you for your inquiry regarding the freight service from Hamburg to Shanghai. Please find below our offer based on the provided shipment details (FCL, 20ft container, general cargo):
+
+Freight Quote:
+
+    Ocean Freight: €1,250.00
+
+    Bunker Adjustment Factor (BAF): Included
+
+    Port Charges (Origin): €120.00
+
+    Port Charges (Destination): Not included
+
+    Transit Time: Approx. 28 days
+
+    Validity: 7 days (until June 24, 2025)
+
+Let us know if you'd like us to proceed with booking or if you need a revised quote for different terms.
+
+Looking forward to working with you.
+
+Best regards,
+[Your Name]
+Sales Executive – Freight Solutions
+[Your Company]
+📞 +49 987 654 321 | ✉️ sales@[company].com"
+date = 1000000000
+is_read = false
+communication_chain = Array[ExtResource("1_swhit")]([])
+metadata/_custom_type_script = "uid://c0n33sueqwg8d"

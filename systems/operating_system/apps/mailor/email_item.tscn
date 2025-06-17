@@ -1,0 +1,89 @@
+[gd_scene load_steps=6 format=3 uid="uid://blor13w2b7vd1"]
+
+[ext_resource type="Texture2D" uid="uid://bkv1havlcaufw" path="res://systems/operating_system/apps/mailor/mail_unread.png" id="1_131cr"]
+[ext_resource type="Script" uid="uid://c022ebkl2r4xn" path="res://systems/operating_system/apps/mailor/email_item.gd" id="1_noym8"]
+[ext_resource type="Texture2D" uid="uid://bc2y15q6annj6" path="res://systems/operating_system/apps/mailor/mail_read.png" id="3_uqefd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uqefd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ibj8h"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(3.1284987e-06, 0.45884943, 0.5379117, 0.11764706)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="EmailItem" type="PanelContainer" node_paths=PackedStringArray("button", "from_label", "subject_label", "date_label", "time_label", "icon_rect")]
+offset_right = 200.0
+offset_bottom = 58.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_uqefd")
+script = ExtResource("1_noym8")
+icon_unread = ExtResource("1_131cr")
+icon_read = ExtResource("3_uqefd")
+button = NodePath("Button")
+from_label = NodePath("PanelContainer/HboxContainer/VBoxContainer/From")
+subject_label = NodePath("PanelContainer/HboxContainer/VBoxContainer/HBoxContainer/Subject")
+date_label = NodePath("PanelContainer/HboxContainer/VBoxContainer2/Date")
+time_label = NodePath("PanelContainer/HboxContainer/VBoxContainer2/Time")
+icon_rect = NodePath("PanelContainer/HboxContainer/VBoxContainer/HBoxContainer/IconRect")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ibj8h")
+
+[node name="HboxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/HboxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/HboxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="IconRect" type="TextureRect" parent="PanelContainer/HboxContainer/VBoxContainer/HBoxContainer"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+texture = ExtResource("1_131cr")
+expand_mode = 2
+
+[node name="Subject" type="Label" parent="PanelContainer/HboxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "URGENT TEST arst tsrtrt arstarst"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="From" type="Label" parent="PanelContainer/HboxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 0.5882353)
+theme_override_font_sizes/font_size = 15
+text = "test@test.com"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/HboxContainer"]
+layout_mode = 2
+
+[node name="Date" type="Label" parent="PanelContainer/HboxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "01-01"
+
+[node name="Time" type="Label" parent="PanelContainer/HboxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+text = "15:00"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+flat = true

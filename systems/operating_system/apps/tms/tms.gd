@@ -2,9 +2,6 @@ class_name Tms
 extends OsApp
 
 
-@export var all_container: BoxContainer
-
-@export var loading_screen: OsAppLoadingScreen
 @export var navigation: TmsNavigation
 
 @export var shipment_list: TmsShipmentList
@@ -19,11 +16,6 @@ func _ready() -> void:
 	shipment_details._shipment_documentation.document_print_ordered.connect(_on_document_print_ordered)
 	
 	close_all_except_navigation()
-	hide_all()
-	super.start()
-	loading_screen.start_loading()
-	await loading_screen.finished_loading
-	show_all()
 
 
 func close_all() -> void:
@@ -38,14 +30,6 @@ func close_all_except_navigation() -> void:
 	#quotation_details.close()
 	data.close()
 	#data_details.close()
-
-
-func hide_all() -> void:
-	all_container.hide()
-
-
-func show_all() -> void:
-	all_container.show()
 
 
 func open_shipment_list() -> void:

@@ -203,6 +203,18 @@ func get_nice_date_string_from_unix_time(unix_time: int) -> String:
 	return Time.get_datetime_string_from_unix_time(unix_time).left(-9)
 
 
+func get_nice_short_date_string_from_unix_time(unix_time: int) -> String:
+	if unix_time == 0:
+		return ""
+	return Time.get_datetime_string_from_unix_time(unix_time).left(-9).right(5)
+
+
+func get_nice_time_string_from_unix_time(unix_time: int) -> String:
+	if unix_time == 0:
+		return ""
+	return Time.get_datetime_string_from_unix_time(unix_time).right(8).left(5)
+
+
 func get_nice_date_string_from_event(event: Event) -> String:
 	if event == null:
 		return ""
