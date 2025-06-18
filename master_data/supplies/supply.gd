@@ -1,4 +1,3 @@
-#TODO Change SupplyData with Supply, the same with StateData and SkillData
 class_name Supply
 extends Resource
 

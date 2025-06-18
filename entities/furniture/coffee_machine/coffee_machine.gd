@@ -9,6 +9,7 @@ enum Status {
 }
 
 
+@export var machine_name: String = "COFFEE_MACHINE"
 @export var audio_player: AudioStreamPlayer3D
 
 var serviceable: Serviceable
@@ -74,7 +75,10 @@ func refill_supply(supply: Supply, node: Node) -> void:
 
 func make_coffee(node: Node) -> void:
 	status = Status.WORKING
-	particles.amount_ratio = 1.0
+	
+	var tween_in: Tween = create_tween()
+	tween_in.tween_property(particles, "amount_ratio", 1.0, 1.0)
+	
 	play_making_coffee_sound()
 	
 	await get_tree().create_timer(making_coffee_time).timeout
@@ -88,7 +92,10 @@ func make_coffee(node: Node) -> void:
 		ActionLogger.create_log("Ahhh...")
 	
 	check_supplies()
-	particles.amount_ratio = 0.0
+	
+	var tween_out: Tween = create_tween()
+	tween_out.tween_property(particles, "amount_ratio", 0.0, 1.0)
+	
 	status = Status.IDLE
 
 
@@ -112,8 +119,7 @@ func play_sound(with_pitch_variable: bool = true) -> void:
 
 func check_supplies() -> void:
 	for supply: Supply in supplies:
-		
 		supply.amount_stored -= (supply.supply_data.amount_per_use * GameManager.difficulty)
 		if supply.is_out_of_supply:
 			play_out_of_supply_sound(supply)
-			ActionLogger.create_log(tr("OUT_OF_SUPPLY").format({"supply_name": tr(supply.supply_data.supply_name)}))
+			ActionLogger.create_log(tr("OUT_OF_SUPPLY").format({"supply_name": tr(supply.supply_data.supply_name), "machine_name": tr(machine_name)}))

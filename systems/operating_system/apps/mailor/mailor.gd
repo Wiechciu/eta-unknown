@@ -64,6 +64,7 @@ const EMAIL_SUBJECTS: Array[String] = [
 @export var email_item_scene: PackedScene
 @export var attachment_item_scene: PackedScene
 
+@export var account_info_Label: Label
 @export var email_reader: Control
 @export var email_reader_header_container: Control
 @export var from_label: Label
@@ -95,12 +96,14 @@ var attachment_items_in_email_composer: Array[AttachmentItem]
 @export var show_read_button: Button
 
 var displayed_email_item: EmailItem
+var original_email: Email
 
 
 func _ready() -> void:
 	UtilityTools.assert_all_exported_properties(self)
 	super._ready()
 	EmailServer.email_registered.connect(_on_email_registered_on_server)
+	account_info_Label.text = "Signed in as: %s" % logged_in_user.email
 	clear_email_reader()
 	clear_email_composer()
 	clear_containers()
@@ -143,7 +146,7 @@ func add_email_item(email: Email) -> EmailItem:
 	var new_email_item: EmailItem
 	var items_array: Array[EmailItem]
 	var items_container: Control
-	if email.from == GameManager.player.person:
+	if email.from == logged_in_user:
 		new_email_item = create_email_item(email, false)
 		items_array = sent_items
 		items_container = sent_items_container
@@ -157,9 +160,9 @@ func add_email_item(email: Email) -> EmailItem:
 	return new_email_item
 
 
-func create_email_item(email: Email, inbound: bool) -> EmailItem:
+func create_email_item(email: Email, is_inbound: bool) -> EmailItem:
 	var new_email_item: EmailItem = email_item_scene.instantiate() as EmailItem
-	new_email_item.initialize(email, inbound)
+	new_email_item.initialize(email, is_inbound)
 	new_email_item.opened.connect(switch_to_email_reader.bind(new_email_item))
 	return new_email_item
 
@@ -278,13 +281,14 @@ func update_mark_buttons() -> void:
 
 
 func _on_email_registered_on_server(email: Email) -> void:
-	if email.from == GameManager.player.person or email.to == GameManager.player.person:
+	if email.from == logged_in_user or email.to == logged_in_user:
 		add_email_item(email)
 
 
 func _on_new_button_pressed() -> void:
 	clear_email_composer()
-	body_edit.text = EmailServer.get_footer(GameManager.player.person)
+	body_edit.text = EmailServer.get_footer(logged_in_user)
+	original_email = null
 	
 	switch_to_email_composer()
 	to_edit.grab_focus()
@@ -292,12 +296,13 @@ func _on_new_button_pressed() -> void:
 
 func _on_reply_button_pressed() -> void:
 	clear_email_composer()
-	if displayed_email_item.email.from == GameManager.player.person:
+	if displayed_email_item.is_outbound:
 		to_edit.text = displayed_email_item.email.to.email
 	else:
 		to_edit.text = displayed_email_item.email.from.email
 	subject_edit.text = EmailServer.REPLY_SUBJECT_PREFIX + displayed_email_item.email.subject
-	body_edit.text = EmailServer.add_footer_and_separator_to_beginning(displayed_email_item.email.body, GameManager.player.person)
+	body_edit.text = EmailServer.add_footer_and_separator_to_beginning(displayed_email_item.email.body, logged_in_user)
+	original_email = displayed_email_item.email
 	
 	switch_to_email_composer()
 	body_edit.grab_focus()
@@ -318,12 +323,13 @@ func _on_send_button_pressed() -> void:
 		attached_documents.append(attachment_item.document)
 	
 	var new_email: Email = Email.create_new(
-		GameManager.player.person,
+		logged_in_user,
 		to_person,
 		subject_edit.text,
 		body_edit.text,
 		GlobalTimer.now,
-		attached_documents
+		attached_documents,
+		original_email
 	)
 	
 	EmailServer.register_email(new_email)
@@ -357,7 +363,6 @@ func _on_add_to_person_button_pressed() -> void:
 	to_edit.text = ""
 	var tween: Tween = create_tween()
 	tween.tween_property(to_edit, "text", GlobalRefs.people.pick_random().email, 0.5)
-	#to_edit.text = GlobalRefs.people.pick_random().email
 
 
 #TODO: Implement proper logic of selecting subject types.
@@ -365,7 +370,6 @@ func _on_add_subject_button_pressed() -> void:
 	subject_edit.text = ""
 	var tween: Tween = create_tween()
 	tween.tween_property(subject_edit, "text", EMAIL_SUBJECTS.pick_random(), 0.5)
-	#subject_edit.text = EMAIL_SUBJECTS.pick_random()
 
 
 #TODO: Implement proper logic of selecting attachments from shipments.

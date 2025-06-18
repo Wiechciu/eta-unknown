@@ -3,7 +3,7 @@ GAME_NAME;ETA: Unknown;ETA: Nieznana
 PRESS_TO_INTERACT;Press {action} to interact;Naciśnij {action}, aby wejść w interakcję
 INTERACT_NOTHING;Nothing to do here;Nie ma tu nic do zrobienia
 INTERACT_BUSY;Machine in use;Maszyna w użyciu
-OUT_OF_SUPPLY;Out of {supply_name};Skończył się {supply_name}
+OUT_OF_SUPPLY;{machine_name} is out of {supply_name};{machine_name} – brak {supply_name}
 HOLD_TO_THROW;Hold {action} to throw;Przytrzymaj {action}, aby rzucić
 TODAY_IS;Today is;Dzisiaj jest
 DAY_0;Sunday;Niedziela
@@ -212,7 +212,7 @@ DIFFICULTY;Workflow chaos level;Poziom chaosu procesów
 DIFFICULTY_NAME_EASY;Smooth sailing;Gładka żegluga
 DIFFICULTY_NAME_MEDIUM;Keep it together;Trzymaj się kupy
 DIFFICULTY_NAME_HARD;Freightmare;Koszmar transportowy
-DIFFICULTY_DESCRIPTION_EASY;"Everything runs like clockwork; even the printer cooperates.";Wszystko działa jak w zegarku, nawet drukarka współpracuje.
+DIFFICULTY_DESCRIPTION_EASY;Everything runs like clockwork, even the printer cooperates.;Wszystko działa jak w zegarku, nawet drukarka współpracuje.
 DIFFICULTY_DESCRIPTION_MEDIUM;Regular hiccups keep you on your toes, but nothing unmanageable. ;Regularne problemy utrzymują cię w gotowości, ale da się je opanować.
 DIFFICULTY_DESCRIPTION_HARD;Nonstop chaos that tests your skills and patience at every turn.;Nieustanny chaos, który testuje twoje umiejętności i cierpliwość.
 AUTOSAVE;Autosave;Zapis automatyczny
@@ -249,7 +249,9 @@ STATES;Health State;Stan Zdrowia
 PERSONAL_DATA;Personal Data;Dane Personalne
 SKILLS;Professional Development;Rozwój Zawodowy
 INVENTORY;Inventory;Inwentarz
-COFFEE_BEANS;coffee beans;ziarna kawy
-WATER;water;woda
-PAPER;paper;papier
-INK;ink;tusz
+PRINTER;Printer;Drukarka
+COFFEE_MACHINE;Coffee machine;Ekspres do kawy
+COFFEE_BEANS;Coffee beans;Ziarna kawy
+WATER;Water;Woda
+PAPER;Paper;Papier
+INK;Ink;Tusz

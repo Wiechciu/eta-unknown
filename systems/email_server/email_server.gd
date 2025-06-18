@@ -32,14 +32,17 @@ func schedule_response(original_email: Email) -> void:
 	var response_delay_max: float = 10.0
 	await get_tree().create_timer(randf_range(response_delay_min, response_delay_max)).timeout
 	
+	var message: String = "Hello," \
+		+ LINE_BREAK + "Well noted, thank you!"
+	
 	var new_email: Email = Email.create_new(
 		original_email.to,
 		original_email.from,
 		REPLY_SUBJECT_PREFIX + original_email.subject,
-		add_message_and_footer_to_beginning("Hello," \
-		+ LINE_BREAK + "Well noted, thank you!",
-		original_email.body, original_email.to),
-		GlobalTimer.now
+		add_message_and_footer_to_beginning(message, original_email.body, original_email.to),
+		GlobalTimer.now,
+		[],
+		original_email
 	)
 	register_email(new_email)
 

@@ -12,16 +12,22 @@ var interfaces: Array[ComputerInterface]
 
 var boot_duration: float = 1
 var is_closing: bool
+var logged_in_user: Person
 
 
 func _ready() -> void:
 	UtilityTools.assert_all_exported_properties(self)
-	
-	load_apps()
+
+
+@warning_ignore("shadowed_variable")
+func initialize(logged_in_user: Person, interfaces: Array[ComputerInterface]) -> void:
+	self.logged_in_user = logged_in_user
+	self.interfaces = interfaces
+	load_app_icons()
 	start()
 
 
-func load_apps() -> void:
+func load_app_icons() -> void:
 	for os_app_data: OsAppData in os_app_datas:
 		_desktop.load_icon(os_app_data)
 
@@ -55,8 +61,7 @@ func _on_icon_desktop_clicked(os_app_data: OsAppData) -> void:
 
 func start_app(os_app_data: OsAppData) -> void:
 	var os_app: OsApp = os_app_data.scene.instantiate() as OsApp
-	os_app.os_app_name = os_app_data.name
-	os_app.os_app_icon = os_app_data.icon
+	os_app.initialize(logged_in_user, os_app_data.name, os_app_data.icon)
 	_desktop.load_app(os_app)
 	os_app.tree_exited.connect(_on_app_closed.bind(os_app))
 	os_app.document_print_ordered.connect(_on_document_print_ordered)

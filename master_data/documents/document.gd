@@ -7,24 +7,6 @@ enum PrintType {
 	LABEL,
 }
 
-#enum Code {
-	#RFQ,
-	#QUO,
-	#SPO,
-	#HWB,
-	#MWB,
-	#HBL,
-	#MBL,
-	#CDE,
-	#CDI,
-	#PUO,
-	#DLO,
-	#POD,
-	#CIN,
-	#PKL,
-	#MSD,
-	#DGD,
-#}
 
 const DOCUMENTS_WITH_LABELS: Array[String] = [
 	"HWB",
@@ -33,17 +15,7 @@ const DOCUMENTS_WITH_LABELS: Array[String] = [
 	"MBL",
 ]
 
-#@export var code: Code
-#var code_string: String:
-	#get:
-		#return Code.keys()[code]
-#var name: String:
-	#get:
-		#return tr("DOCUMENT_" + code_string)
-#var description: String:
-	#get:
-		##TODO do actual descriptions
-		#return name + " description"
+
 @export var document_data: DocumentData
 
 @export var issued_time: int

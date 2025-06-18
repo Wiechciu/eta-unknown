@@ -12,6 +12,8 @@ enum Status {
 	SERVICING,
 }
 
+@export var machine_name: String = "PRINTER"
+
 @export var printer_tray: Node3D
 @export var document_spawn_position: Node3D
 @export var document_target_position: Node3D
@@ -209,11 +211,10 @@ func play_sound(with_pitch_variable: bool = true) -> void:
 
 func check_supplies() -> void:
 	for supply: Supply in supplies:
-		
 		supply.amount_stored -= (supply.supply_data.amount_per_use * GameManager.difficulty)
 		if supply.is_out_of_supply:
 			play_out_of_supply_sound(supply)
-			ActionLogger.create_log(tr("OUT_OF_SUPPLY").format({"supply_name": tr(supply.supply_data.supply_name)}))
+			ActionLogger.create_log(tr("OUT_OF_SUPPLY").format({"supply_name": tr(supply.supply_data.supply_name), "machine_name": tr(machine_name)}))
 
 
 func check_jamming() -> bool:

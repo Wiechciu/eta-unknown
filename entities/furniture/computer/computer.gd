@@ -48,27 +48,28 @@ func _unhandled_input(event: InputEvent) -> void:
 func register_interactable() -> void:
 	var interactable: Interactable = UtilityTools.get_child_of_type(self, Interactable) as Interactable
 	if interactable != null:
-		interactable.interacted.connect(interact.unbind(1))
+		interactable.interacted.connect(interact)
 
 
-func interact() -> void:
+func interact(node: Node) -> void:
 	if is_transitioning:
 		return
 	
+	var user: Person = (node as Human).person
 	if is_focused:
 		unfocus_view()
 	else:
-		focus_view()
+		focus_view(user)
 
 
-func start_os() -> void:
+func start_os(user: Person) -> void:
 	if os != null and not os.is_closing:
 		return
 	
 	os = os_scene.instantiate() as OperatingSystem
-	os.interfaces = interfaces
 	subviewport.add_child(os)
 	os.on_closing.connect(_on_os_closing)
+	os.initialize(user, interfaces)
 	fade_in_lights()
 	play_start_sound()
 
@@ -100,7 +101,7 @@ func play_close_sound() -> void:
 	audio_player.play()
 
 
-func focus_view() -> void:
+func focus_view(user: Person) -> void:
 	is_transitioning = true
 	is_focused = true
 	old_camera = get_viewport().get_camera_3d()
@@ -109,7 +110,7 @@ func focus_view() -> void:
 	
 	GameManager.player.menu.hide_player_hud()
 	
-	start_os()
+	start_os(user)
 	
 	var tween: Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE).set_parallel(true)
 	tween.tween_property(camera, "global_position", camera.global_position, focusing_time).from(old_camera.global_position)

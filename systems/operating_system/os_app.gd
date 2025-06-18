@@ -8,10 +8,18 @@ signal document_print_ordered(document: Document, print_type: Document.PrintType
 var os_app_name: String
 var os_app_icon: Texture2D
 var boot_duration: float = 0.3
+var logged_in_user: Person
 
 
 func _ready() -> void:
 	UtilityTools.assert_all_exported_properties(self)
+
+
+@warning_ignore("shadowed_variable")
+func initialize(user: Person, os_app_name: String, os_app_icon: Texture2D) -> void:
+	self.logged_in_user = user
+	self.os_app_name = os_app_name
+	self.os_app_icon = os_app_icon
 	start()
 
 
