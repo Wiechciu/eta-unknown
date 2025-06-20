@@ -108,6 +108,9 @@ func load_game(save_file_name: String) -> void:
 
 
 func save_game_to_json(save_file_name: String) -> void:
+	print("SAVING BROKEN, to be fixed") #FIXME
+	return
+	
 	is_saving_game = true
 	
 	get_or_create_save_folder()
@@ -144,8 +147,7 @@ func load_game_from_json(save_file_name: String) -> void:
 
 func reload_main_scene() -> void:
 	get_tree().change_scene_to_packed(GameManager.main_scene)
-	while get_tree().current_scene == null:
-		await get_tree().process_frame
+	await get_tree().scene_changed
 
 
 func fade_out() -> void:

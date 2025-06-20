@@ -10,6 +10,7 @@ extends Resource
 @export var attachments: Array[Document]
 @export var is_read: bool = false
 @export var communication_chain: Array[Email]
+@export var responses: Array[Email]
 
 var is_unread: bool:
 	get:
@@ -19,7 +20,7 @@ var is_unread: bool:
 
 
 @warning_ignore("shadowed_variable")
-static func create_new(from: Person, to: Person, subject: String, body: String, date: int, attachments: Array[Document], original_email: Email, is_read: bool = false) -> Email:
+static func create_new(from: Person, to: Person, subject: String, body: String, date: int, attachments: Array[Document], original_email: Email = null, is_read: bool = false) -> Email:
 	var new_email: Email = Email.new()
 	new_email.from = from
 	new_email.to = to
@@ -31,7 +32,7 @@ static func create_new(from: Person, to: Person, subject: String, body: String, 
 	if original_email != null:
 		new_email.communication_chain = original_email.communication_chain.duplicate()
 		new_email.communication_chain.append(original_email)
-	
+		original_email.responses.append(new_email)
 	return new_email
 
 

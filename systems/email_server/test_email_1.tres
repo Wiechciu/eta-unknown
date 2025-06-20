@@ -21,8 +21,6 @@ metadata/_custom_type_script = "uid://u2qdcbcwrk7l"
 
 [resource]
 script = ExtResource("1_onhtm")
-from = "rein.wilson@dundermifflin.com"
-to = "wchc@wchc.pl"
 subject = "Shipping Confirmation – [PO#123456] – ETA June 21, 2025"
 body = "Dear [Client Name],
 
@@ -49,6 +47,4 @@ Logistics Coordinator
 📞 +49 123 456 789 | ✉️ logistics@[company].com"
 date = 1000000000
 attachments = Array[ExtResource("1_drkou")]([SubResource("Resource_wkniy"), SubResource("Resource_dy3fc")])
-is_read = false
-communication_chain = Array[ExtResource("1_onhtm")]([])
 metadata/_custom_type_script = "uid://c0n33sueqwg8d"

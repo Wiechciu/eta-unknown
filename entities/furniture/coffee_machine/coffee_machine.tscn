@@ -15,13 +15,11 @@
 [sub_resource type="Resource" id="Resource_r1mi8"]
 script = ExtResource("6_uwnbp")
 supply_data = ExtResource("8_ythw8")
-amount_stored = 0.0
 metadata/_custom_type_script = "uid://b16ctjt7ha2af"
 
 [sub_resource type="Resource" id="Resource_j3gqe"]
 script = ExtResource("6_uwnbp")
 supply_data = ExtResource("7_7w8c8")
-amount_stored = 0.0
 metadata/_custom_type_script = "uid://b16ctjt7ha2af"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bf2o8"]

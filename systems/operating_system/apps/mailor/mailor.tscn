@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://dh8b7wgt2j4qq"]
+[gd_scene load_steps=59 format=3 uid="uid://dh8b7wgt2j4qq"]
 
 [ext_resource type="Script" uid="uid://bu5de0dgiogpb" path="res://systems/operating_system/apps/mailor/mailor.gd" id="1_ny8fa"]
 [ext_resource type="PackedScene" uid="uid://dr7k5nsfgoobv" path="res://systems/operating_system/os_app_panel_header.tscn" id="2_11d6n"]
@@ -25,7 +25,7 @@ interpolation_mode = 1
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ancsa"]
 gradient = SubResource("Gradient_1sawd")
-width = 2
+width = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3lel5"]
 bg_color = Color(0, 0, 0, 1)
@@ -50,6 +50,11 @@ content_margin_right = 5.0
 content_margin_bottom = 5.0
 bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jq42h"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+draw_center = false
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jrf17"]
 content_margin_left = 5.0
 content_margin_top = 5.0
@@ -69,9 +74,6 @@ Best regards,
 Kary Duplo
 Lego Inc"
 date = 1000
-attachments = Array[ExtResource("4_drr5v")]([])
-is_read = false
-communication_chain = Array[ExtResource("4_jrf17")]([])
 metadata/_custom_type_script = "uid://c0n33sueqwg8d"
 
 [sub_resource type="Resource" id="Resource_4t8ss"]
@@ -86,9 +88,6 @@ Best regards,
 Kary Duplo
 Lego Inc"
 date = 1000
-attachments = Array[ExtResource("4_drr5v")]([])
-is_read = false
-communication_chain = Array[ExtResource("4_jrf17")]([])
 metadata/_custom_type_script = "uid://c0n33sueqwg8d"
 
 [sub_resource type="Resource" id="Resource_orlh7"]
@@ -103,9 +102,6 @@ Best regards,
 Kary Duplo
 Lego Inc"
 date = 1000
-attachments = Array[ExtResource("4_drr5v")]([])
-is_read = false
-communication_chain = Array[ExtResource("4_jrf17")]([])
 metadata/_custom_type_script = "uid://c0n33sueqwg8d"
 
 [sub_resource type="Resource" id="Resource_31wgn"]
@@ -120,9 +116,6 @@ Best regards,
 Kary Duplo
 Lego Inc"
 date = 1000
-attachments = Array[ExtResource("4_drr5v")]([])
-is_read = false
-communication_chain = Array[ExtResource("4_jrf17")]([])
 metadata/_custom_type_script = "uid://c0n33sueqwg8d"
 
 [sub_resource type="Resource" id="Resource_fkpoh"]
@@ -137,9 +130,6 @@ Best regards,
 Kary Duplo
 Lego Inc"
 date = 1000
-attachments = Array[ExtResource("4_drr5v")]([])
-is_read = false
-communication_chain = Array[ExtResource("4_jrf17")]([])
 metadata/_custom_type_script = "uid://c0n33sueqwg8d"
 
 [sub_resource type="Resource" id="Resource_71xv2"]
@@ -154,9 +144,6 @@ Best regards,
 Kary Duplo
 Lego Inc"
 date = 1000
-attachments = Array[ExtResource("4_drr5v")]([])
-is_read = false
-communication_chain = Array[ExtResource("4_jrf17")]([])
 metadata/_custom_type_script = "uid://c0n33sueqwg8d"
 
 [sub_resource type="Resource" id="Resource_782if"]
@@ -171,9 +158,6 @@ Best regards,
 Kary Duplo
 Lego Inc"
 date = 1000
-attachments = Array[ExtResource("4_drr5v")]([])
-is_read = false
-communication_chain = Array[ExtResource("4_jrf17")]([])
 metadata/_custom_type_script = "uid://c0n33sueqwg8d"
 
 [sub_resource type="Resource" id="Resource_50wre"]
@@ -188,9 +172,6 @@ Best regards,
 Kary Duplo
 Lego Inc"
 date = 1000
-attachments = Array[ExtResource("4_drr5v")]([])
-is_read = false
-communication_chain = Array[ExtResource("4_jrf17")]([])
 metadata/_custom_type_script = "uid://c0n33sueqwg8d"
 
 [sub_resource type="Resource" id="Resource_map3m"]
@@ -205,9 +186,6 @@ Best regards,
 Kary Duplo
 Lego Inc"
 date = 1000
-attachments = Array[ExtResource("4_drr5v")]([])
-is_read = false
-communication_chain = Array[ExtResource("4_jrf17")]([])
 metadata/_custom_type_script = "uid://c0n33sueqwg8d"
 
 [sub_resource type="Resource" id="Resource_5fap2"]
@@ -222,9 +200,6 @@ Best regards,
 Kary Duplo
 Lego Inc"
 date = 1000
-attachments = Array[ExtResource("4_drr5v")]([])
-is_read = false
-communication_chain = Array[ExtResource("4_jrf17")]([])
 metadata/_custom_type_script = "uid://c0n33sueqwg8d"
 
 [sub_resource type="Resource" id="Resource_xeha4"]
@@ -239,9 +214,6 @@ Best regards,
 Kary Duplo
 Lego Inc"
 date = 1000
-attachments = Array[ExtResource("4_drr5v")]([])
-is_read = false
-communication_chain = Array[ExtResource("4_jrf17")]([])
 metadata/_custom_type_script = "uid://c0n33sueqwg8d"
 
 [sub_resource type="Resource" id="Resource_3lel5"]
@@ -256,9 +228,6 @@ Best regards,
 Kary Duplo
 Lego Inc"
 date = 1000
-attachments = Array[ExtResource("4_drr5v")]([])
-is_read = false
-communication_chain = Array[ExtResource("4_jrf17")]([])
 metadata/_custom_type_script = "uid://c0n33sueqwg8d"
 
 [sub_resource type="Resource" id="Resource_oo5l3"]
@@ -273,9 +242,6 @@ Best regards,
 Kary Duplo
 Lego Inc"
 date = 1000
-attachments = Array[ExtResource("4_drr5v")]([])
-is_read = false
-communication_chain = Array[ExtResource("4_jrf17")]([])
 metadata/_custom_type_script = "uid://c0n33sueqwg8d"
 
 [sub_resource type="Resource" id="Resource_jq42h"]
@@ -290,9 +256,6 @@ Best regards,
 Kary Duplo
 Lego Inc"
 date = 1000
-attachments = Array[ExtResource("4_drr5v")]([])
-is_read = false
-communication_chain = Array[ExtResource("4_jrf17")]([])
 metadata/_custom_type_script = "uid://c0n33sueqwg8d"
 
 [sub_resource type="Resource" id="Resource_uhsja"]
@@ -307,9 +270,6 @@ Best regards,
 Kary Duplo
 Lego Inc"
 date = 1000
-attachments = Array[ExtResource("4_drr5v")]([])
-is_read = false
-communication_chain = Array[ExtResource("4_jrf17")]([])
 metadata/_custom_type_script = "uid://c0n33sueqwg8d"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_drr5v"]
@@ -322,42 +282,12 @@ content_margin_right = 5.0
 content_margin_bottom = 5.0
 bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cg11y"]
-content_margin_left = 5.0
-content_margin_top = 2.0
-content_margin_right = 5.0
-content_margin_bottom = 2.0
-bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8r3w"]
 content_margin_left = 5.0
 content_margin_top = 2.0
 content_margin_right = 5.0
 content_margin_bottom = 2.0
 bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_50wre"]
-content_margin_left = 5.0
-content_margin_top = 2.0
-content_margin_right = 5.0
-content_margin_bottom = 2.0
-bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -378,12 +308,12 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_orlh7"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cg11y"]
 content_margin_left = 5.0
 content_margin_top = 2.0
 content_margin_right = 5.0
 content_margin_bottom = 2.0
-bg_color = Color(1, 0, 0.1137255, 0.19607843)
+bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -393,7 +323,22 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_31wgn"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_50wre"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71xv2"]
 content_margin_left = 5.0
 content_margin_top = 2.0
 content_margin_right = 5.0
@@ -415,12 +360,27 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71xv2"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_31wgn"]
 content_margin_left = 5.0
 content_margin_top = 2.0
 content_margin_right = 5.0
 content_margin_bottom = 2.0
 bg_color = Color(1, 0, 0.1137255, 0.19607843)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_orlh7"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 0, 0.1137255, 0.19607843)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -475,11 +435,7 @@ corner_radius_bottom_left = 5
 content_margin_left = 5.0
 content_margin_right = 5.0
 bg_color = Color(1, 1, 1, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0, 0, 0, 1)
+border_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_map3m"]
 
@@ -489,10 +445,6 @@ content_margin_top = 20.0
 content_margin_right = 20.0
 content_margin_bottom = 20.0
 draw_center = false
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xeha4"]
@@ -503,7 +455,7 @@ content_margin_bottom = 20.0
 draw_center = false
 border_color = Color(0, 0, 0, 1)
 
-[node name="Mailor" type="PanelContainer" node_paths=PackedStringArray("inbox_items_container", "sent_items_container", "account_info_Label", "email_reader", "email_reader_header_container", "from_label", "to_label", "date_label", "subject_label", "body_label", "attachment_items_container_in_email_reader", "attachment_items_container_in_email_composer", "email_composer", "to_edit", "subject_edit", "body_edit", "buttons_container", "new_button", "send_button", "close_button", "mark_as_unread_button", "mark_as_read_button", "reply_button", "delete_button", "add_to_person_button", "add_subject_button", "add_attachment_button", "show_read_button")]
+[node name="Mailor" type="PanelContainer" node_paths=PackedStringArray("inbox_items_container", "sent_items_container", "account_info_Label", "search_edit", "email_reader", "email_reader_header_container", "from_label", "to_label", "date_label", "subject_label", "body_label", "attachment_items_container_in_email_reader", "attachment_items_container_in_email_composer", "email_composer", "to_edit", "subject_edit", "body_edit", "buttons_container", "new_button", "send_button", "close_button", "mark_as_unread_button", "mark_as_read_button", "reply_button", "delete_button", "add_to_person_button", "add_subject_button", "add_attachment_button", "show_read_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -513,11 +465,12 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_mgofm")
 script = ExtResource("1_ny8fa")
-inbox_items_container = NodePath("VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer")
-sent_items_container = NodePath("VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Sent/VBoxContainer/List/ScrollContainer/ItemContainer")
+inbox_items_container = NodePath("VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer")
+sent_items_container = NodePath("VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer")
 email_item_scene = ExtResource("3_ny8fa")
 attachment_item_scene = ExtResource("6_1sawd")
 account_info_Label = NodePath("VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/AccountInfo/AccountInfoLabel")
+search_edit = NodePath("VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/Search")
 email_reader = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailReader")
 email_reader_header_container = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailReader/VBoxContainer/Header")
 from_label = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/From/FromValue")
@@ -542,7 +495,7 @@ delete_button = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/V
 add_to_person_button = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/To/HBoxContainer/AddToPersonButton/AddToPersonButton")
 add_subject_button = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/Subject/HBoxContainer/AddSubjectButton/AddSubjectButton")
 add_attachment_button = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/Attachments/HBoxContainer/AddAttachmentButton/AddAttachmentButton")
-show_read_button = NodePath("VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Inbox/VBoxContainer/Header/ShowReadButton")
+show_read_button = NodePath("VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/Header/ShowReadButton")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -554,7 +507,7 @@ layout_mode = 2
 [node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 1
+theme_override_constants/separation = 2
 theme_override_icons/grabber = SubResource("GradientTexture1D_ancsa")
 theme_override_styles/split_bar_background = SubResource("StyleBoxFlat_3lel5")
 
@@ -580,142 +533,160 @@ text = "Signed in as: user@email.com"
 clip_text = true
 text_overrun_behavior = 3
 
-[node name="Folders" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer"]
+[node name="VSplitContainer" type="VSplitContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 2
+theme_override_icons/grabber = SubResource("GradientTexture1D_ancsa")
+theme_override_styles/split_bar_background = SubResource("StyleBoxFlat_3lel5")
 
-[node name="Inbox" type="PanelContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders"]
+[node name="Inbox" type="PanelContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_fvvr4")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Inbox"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Header" type="PanelContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Inbox/VBoxContainer"]
+[node name="Header" type="PanelContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ny8fa")
 
-[node name="FolderName" type="Label" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Inbox/VBoxContainer/Header"]
+[node name="FolderName" type="Label" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/Header"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 15
 text = "Inbox"
 horizontal_alignment = 1
 
-[node name="ShowReadButton" type="CheckButton" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Inbox/VBoxContainer/Header"]
+[node name="ShowReadButton" type="CheckButton" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/Header"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_icons/checked = ExtResource("6_nr5ig")
 theme_override_icons/unchecked = ExtResource("7_cg11y")
 script = ExtResource("7_4t8ss")
 
-[node name="TooltipComponent" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Inbox/VBoxContainer/Header/ShowReadButton" instance=ExtResource("8_orlh7")]
+[node name="TooltipComponent" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/Header/ShowReadButton" instance=ExtResource("8_orlh7")]
 
-[node name="List" type="PanelContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Inbox/VBoxContainer"]
+[node name="Search" type="LineEdit" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 7.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(0, 0, 0, 0.24300002)
+theme_override_colors/caret_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_jq42h")
+placeholder_text = "type to search..."
+keep_editing_on_text_submit = true
+clear_button_enabled = true
+caret_blink = true
+
+[node name="List" type="PanelContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_jrf17")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Inbox/VBoxContainer/List"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List"]
 layout_mode = 2
 
-[node name="ItemContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Inbox/VBoxContainer/List/ScrollContainer"]
+[node name="ItemContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="EmailItem" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
+[node name="EmailItem" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
 email = SubResource("Resource_cg11y")
 
-[node name="EmailItem2" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
+[node name="EmailItem2" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
 email = SubResource("Resource_4t8ss")
 
-[node name="EmailItem3" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
+[node name="EmailItem3" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
 email = SubResource("Resource_orlh7")
 
-[node name="EmailItem4" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
+[node name="EmailItem4" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
 email = SubResource("Resource_31wgn")
 
-[node name="EmailItem5" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
+[node name="EmailItem5" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
 email = SubResource("Resource_fkpoh")
 
-[node name="EmailItem6" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
+[node name="EmailItem6" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
 email = SubResource("Resource_71xv2")
 
-[node name="EmailItem7" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
+[node name="EmailItem7" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
 email = SubResource("Resource_782if")
 
-[node name="EmailItem8" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
+[node name="EmailItem8" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
 email = SubResource("Resource_50wre")
 
-[node name="EmailItem9" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
+[node name="EmailItem9" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
 email = SubResource("Resource_map3m")
 
-[node name="Sent" type="PanelContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders"]
+[node name="Sent" type="PanelContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_fvvr4")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Sent"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Sent"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Header" type="PanelContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Sent/VBoxContainer"]
+[node name="Header" type="PanelContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Sent/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ny8fa")
 
-[node name="FolderName" type="Label" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Sent/VBoxContainer/Header"]
+[node name="FolderName" type="Label" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Sent/VBoxContainer/Header"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 15
 text = "Sent"
 horizontal_alignment = 1
 
-[node name="List" type="PanelContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Sent/VBoxContainer"]
+[node name="List" type="PanelContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Sent/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_jrf17")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Sent/VBoxContainer/List"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Sent/VBoxContainer/List"]
 layout_mode = 2
 
-[node name="ItemContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Sent/VBoxContainer/List/ScrollContainer"]
+[node name="ItemContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Sent/VBoxContainer/List/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="EmailItem3" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
+[node name="EmailItem3" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
 email = SubResource("Resource_5fap2")
 
-[node name="EmailItem4" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
+[node name="EmailItem4" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
 email = SubResource("Resource_xeha4")
 
-[node name="EmailItem5" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
+[node name="EmailItem5" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
 email = SubResource("Resource_3lel5")
 
-[node name="EmailItem6" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
+[node name="EmailItem6" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
 email = SubResource("Resource_oo5l3")
 
-[node name="EmailItem7" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
+[node name="EmailItem7" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
 email = SubResource("Resource_jq42h")
 
-[node name="EmailItem8" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/Folders/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
+[node name="EmailItem8" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
 email = SubResource("Resource_uhsja")
 
@@ -739,64 +710,64 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ibj8h")
 layout_mode = 2
 theme_override_constants/separation = 10
 
+[node name="CloseButton" type="Button" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/Buttons/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/hover = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/focus = SubResource("StyleBoxFlat_782if")
+text = "Close"
+
 [node name="NewButton" type="Button" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/Buttons/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 15
-theme_override_styles/focus = SubResource("StyleBoxFlat_cg11y")
-theme_override_styles/hover = SubResource("StyleBoxFlat_a8r3w")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_a8r3w")
 theme_override_styles/normal = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/hover = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/focus = SubResource("StyleBoxFlat_cg11y")
 text = "New"
 
 [node name="ReplyButton" type="Button" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/Buttons/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/hover = SubResource("StyleBoxFlat_a8r3w")
 theme_override_styles/focus = SubResource("StyleBoxFlat_50wre")
-theme_override_styles/hover = SubResource("StyleBoxFlat_a8r3w")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_a8r3w")
-theme_override_styles/normal = SubResource("StyleBoxFlat_a8r3w")
 text = "Reply"
-
-[node name="CloseButton" type="Button" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/Buttons/HBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 15
-theme_override_styles/focus = SubResource("StyleBoxFlat_782if")
-theme_override_styles/hover = SubResource("StyleBoxFlat_a8r3w")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_a8r3w")
-theme_override_styles/normal = SubResource("StyleBoxFlat_a8r3w")
-text = "Close"
 
 [node name="MarkAsUnreadButton" type="Button" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/Buttons/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 15
-theme_override_styles/focus = SubResource("StyleBoxFlat_782if")
-theme_override_styles/hover = SubResource("StyleBoxFlat_a8r3w")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_a8r3w")
 theme_override_styles/normal = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/hover = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/focus = SubResource("StyleBoxFlat_782if")
 text = "Mark as unread"
 
 [node name="MarkAsReadButton" type="Button" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/Buttons/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 15
-theme_override_styles/focus = SubResource("StyleBoxFlat_782if")
-theme_override_styles/hover = SubResource("StyleBoxFlat_a8r3w")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_a8r3w")
 theme_override_styles/normal = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/hover = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/focus = SubResource("StyleBoxFlat_782if")
 text = "Mark as read"
 
 [node name="DeleteButton" type="Button" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/Buttons/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 15
-theme_override_styles/focus = SubResource("StyleBoxFlat_orlh7")
-theme_override_styles/hover = SubResource("StyleBoxFlat_31wgn")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_fkpoh")
 theme_override_styles/normal = SubResource("StyleBoxFlat_71xv2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fkpoh")
+theme_override_styles/hover = SubResource("StyleBoxFlat_31wgn")
+theme_override_styles/focus = SubResource("StyleBoxFlat_orlh7")
 text = "Delete"
 
 [node name="EmailReader" type="PanelContainer" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer"]
@@ -927,11 +898,11 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_ibj8h")
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 15
+theme_override_font_sizes/bold_font_size = 15
 theme_override_font_sizes/bold_italics_font_size = 15
 theme_override_font_sizes/italics_font_size = 15
 theme_override_font_sizes/mono_font_size = 15
-theme_override_font_sizes/normal_font_size = 15
-theme_override_font_sizes/bold_font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_ancsa")
 bbcode_enabled = true
 text = "test test test test"
@@ -958,10 +929,10 @@ theme_override_constants/separation = 7
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 15
-theme_override_styles/focus = SubResource("StyleBoxFlat_4t8ss")
-theme_override_styles/hover = SubResource("StyleBoxFlat_a8r3w")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_a8r3w")
 theme_override_styles/normal = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/hover = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/focus = SubResource("StyleBoxFlat_4t8ss")
 text = "Send"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer"]
@@ -1009,8 +980,8 @@ flat = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 7.0
-theme_override_colors/caret_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/caret_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_nr5ig")
 text = "test@test.com"
@@ -1057,8 +1028,8 @@ flat = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 7.0
-theme_override_colors/caret_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/caret_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_nr5ig")
 text = "URGENT TEST"
@@ -1132,8 +1103,8 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_map3m")
 
 [node name="BodyTextEdit" type="TextEdit" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer/VBoxContainer/Body"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/caret_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_5fap2")
 theme_override_styles/focus = SubResource("StyleBoxFlat_xeha4")

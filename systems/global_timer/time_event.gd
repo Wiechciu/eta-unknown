@@ -4,15 +4,15 @@ extends Resource
 
 var time: int
 var observer: Object
-var event: Event
+var args: Array
 
 
 @warning_ignore("shadowed_variable")
-static func create_new(time: int, observer: Object, event: Event = null) -> TimeEvent:
+static func create_new(time: int, observer: Object, ...args: Array) -> TimeEvent:
 	var new_time_event: TimeEvent = TimeEvent.new()
 	new_time_event.time = time
 	new_time_event.observer = observer
-	new_time_event.event = event
+	new_time_event.args = args
 	assert(observer != null and observer.has_method("notify"), str(observer.get_script().resource_path) + " is creating TimeEvent, but has no \"notify\" method to receive TimeEvent!")
 	
 	return new_time_event

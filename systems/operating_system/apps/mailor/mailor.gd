@@ -2,60 +2,6 @@ class_name Mailor
 extends OsApp
 
 
-const EMAIL_SUBJECTS: Array[String] = [
-	"Shipment Delayed: New ETA Inside",
-	"Important: Customs Documentation Update",
-	"Weekly Logistics Performance Report",
-	"New Carrier Rates Effective This Month",
-	"Urgent: Freight Booking Confirmation Needed",
-	"Port Congestion: Impact on Delivery Schedules",
-	"New Warehouse Location Now Operational",
-	"Reminder: Submit Packing List by EOD",
-	"Q3 Supply Chain KPIs Released",
-	"Action Required: Missing HS Codes",
-	"Updated Incoterms Guidelines",
-	"Reminder: Schedule Your Pickup Today",
-	"Delivery Exception – Client Notification Sent",
-	"Freight Invoice Attached – Please Review",
-	"New Compliance Regulations in Effect",
-	"Tracking Information for Order #8472",
-	"Driver Assigned for Tomorrow’s Pickup",
-	"POD (Proof of Delivery) Now Available",
-	"Inventory Reconciliation Required",
-	"Export Control Audit: Prep Checklist",
-	"New 3PL Partnership Announcement",
-	"Upcoming Warehouse Maintenance Downtime",
-	"RFQ Submission Deadline Approaching",
-	"Final Mile Carrier Change Notification",
-	"Container Rolled Over – Next Vessel Info",
-	"Monthly Logistics Newsletter – June Edition",
-	"Dangerous Goods Certification Needed",
-	"Book Your Spot: Logistics Strategy Webinar",
-	"New Packaging Requirements from Supplier",
-	"System Downtime Scheduled This Weekend",
-	"Sailing Schedule Update – Asia-Europe Route",
-	"Spot Quote Available for LTL Shipment",
-	"Driver ETA Changed – Live Tracking Update",
-	"Import Clearance Delay at Port",
-	"Update: Shipment Transferred to Rail",
-	"New Integration: TMS and WMS Sync Live",
-	"Warehouse Inventory Levels Critical",
-	"Annual Carrier Review – Your Feedback Needed",
-	"Fuel Surcharge Increase Notification",
-	"Backorder Fulfillment Expected This Week",
-	"Client Return Shipment Request Received",
-	"Hazmat Documentation Checklist",
-	"Onboarding New Freight Forwarders",
-	"Last-Mile Metrics Dashboard Launched",
-	"Holiday Shipping Deadlines Reminder",
-	"Packaging Compliance Audit Findings",
-	"Supply Chain Risk Alert – Weather Advisory",
-	"Proof of Export for Your Records",
-	"New SLA Agreements Signed – Review Inside",
-	"Time-Sensitive: Verify Shipment Dimensions",
-	"Invitation: Global Logistics Summit 2025"
-]
-
 @export var inbox_items_container: Control
 @export var sent_items_container: Control
 @export var inbox_items: Array[EmailItem]
@@ -65,6 +11,8 @@ const EMAIL_SUBJECTS: Array[String] = [
 @export var attachment_item_scene: PackedScene
 
 @export var account_info_Label: Label
+@export var search_edit: LineEdit
+
 @export var email_reader: Control
 @export var email_reader_header_container: Control
 @export var from_label: Label
@@ -108,12 +56,14 @@ func _ready() -> void:
 	clear_email_composer()
 	clear_containers()
 	retrieve_emails_from_server()
-	register_buttons()
+	register_signals()
 	filter_inbox()
 	switch_to_email_reader()
 
 
-func register_buttons() -> void:
+func register_signals() -> void:
+	search_edit.text_submitted.connect(_on_search_text_submitted.unbind(1))
+	
 	new_button.pressed.connect(_on_new_button_pressed)
 	send_button.pressed.connect(_on_send_button_pressed)
 	close_button.pressed.connect(_on_close_button_pressed)
@@ -157,6 +107,7 @@ func add_email_item(email: Email) -> EmailItem:
 	items_array.append(new_email_item)
 	items_container.add_child(new_email_item)
 	items_container.move_child(new_email_item, 0)
+	show_or_hide_email_item(new_email_item)
 	return new_email_item
 
 
@@ -223,12 +174,14 @@ func clear_email_reader() -> void:
 		displayed_email_item = null
 		filter_inbox()
 	
+	
 	email_reader_header_container.hide()
 	from_label.text = ""
 	to_label.text = ""
 	date_label.text = ""
 	subject_label.text = ""
 	body_label.text = ""
+	body_label.scroll_to_line(0)
 	remove_all_attachment_items(true)
 	
 	reply_button.hide()
@@ -283,6 +236,10 @@ func update_mark_buttons() -> void:
 func _on_email_registered_on_server(email: Email) -> void:
 	if email.from == logged_in_user or email.to == logged_in_user:
 		add_email_item(email)
+
+
+func _on_search_text_submitted() -> void:
+	filter_inbox()
 
 
 func _on_new_button_pressed() -> void:
@@ -369,7 +326,7 @@ func _on_add_to_person_button_pressed() -> void:
 func _on_add_subject_button_pressed() -> void:
 	subject_edit.text = ""
 	var tween: Tween = create_tween()
-	tween.tween_property(subject_edit, "text", EMAIL_SUBJECTS.pick_random(), 0.5)
+	tween.tween_property(subject_edit, "text", EmailServer.EMAIL_SUBJECTS.pick_random(), 0.5)
 
 
 #TODO: Implement proper logic of selecting attachments from shipments.
@@ -388,10 +345,26 @@ func _on_show_read_button_pressed() -> void:
 
 func filter_inbox() -> void:
 	for email_item: EmailItem in inbox_items:
-		if email_item.email.is_unread or email_item.email.is_read and show_read_button.button_pressed or email_item.is_selected:
-			email_item.show()
-		else:
-			email_item.hide()
+		show_or_hide_email_item(email_item)
+
+
+func show_or_hide_email_item(email_item: EmailItem) -> void:
+	if(check_email_item_to_show_or_hide(email_item)):
+		email_item.show()
+	else:
+		email_item.hide()
+
+
+func check_email_item_to_show_or_hide(email_item: EmailItem) -> bool:
+	return \
+		#Read/unread check
+		(email_item.email.is_unread \
+		or email_item.email.is_read and show_read_button.button_pressed \
+		or email_item.is_selected) \
+		#Search text check #TODO: parse the search box text to look for keywords, e.g. from:xyz, subject:xyz
+		and ((email_item.email.subject.containsn(search_edit.text) if search_edit.text != "" else true) \
+		or (email_item.email.body.containsn(search_edit.text) if search_edit.text != "" else true) \
+		or (email_item.email.from.email.containsn(search_edit.text) if search_edit.text != "" else true))
 
 
 func switch_to_email_reader(email_item: EmailItem = null) -> void:

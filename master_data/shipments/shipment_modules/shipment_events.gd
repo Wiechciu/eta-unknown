@@ -128,16 +128,23 @@ static func _on_actual_event_registered(actual_event: Event, shipment: Shipment)
 
 
 static func _on_time_event_notification(time_event: TimeEvent, shipment: Shipment) -> void:
-	print("Shipment ID: %s, number: %s, event: %s at %s" % [shipment.id, shipment.number, time_event.event.event_data.code, GlobalTimer.get_nice_datetime_string_from_unix_time(time_event.time)])
+	var event: Event
+	for arg: Variant in time_event.args:
+		if arg is Event:
+			event = arg
+			break
+		return
 	
-	if time_event.event.event_data.code == "LTS" and not shipment.is_owned:
+	print("Shipment ID: %s, number: %s, event: %s at %s" % [shipment.id, shipment.number, event.event_data.code, GlobalTimer.get_nice_datetime_string_from_unix_time(time_event.time)])
+	
+	if event.event_data.code == "LTS" and not shipment.is_owned:
 		shipment.remove()
 	
 	#TODO: this is to be removed once proper events are created
-	if time_event.event.event_data.code != "ERL" and time_event.event.event_data.code != "LTS":
-		shipment.events.register_new_actual_event_from_planned_event(time_event.event)
+	if event.event_data.code != "ERL" and event.event_data.code != "LTS":
+		shipment.events.register_new_actual_event_from_planned_event(event)
 	
-	match time_event.event.event_data.code:
+	match event.event_data.code:
 		"BOK":
 			shipment.documentation.create_new_document_now("SPO", 1)
 		"PUP":

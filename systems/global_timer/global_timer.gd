@@ -220,9 +220,13 @@ func get_nice_date_string_from_event(event: Event) -> String:
 		return ""
 	return get_nice_date_string_from_unix_time(event.time)
 
-## The observer needs to have a "Notify" function to be able to receive the event
-func create_time_event_from_unix_time(time: int, observer: Object, event: Event = null) -> TimeEvent:
-	var new_time_event: TimeEvent = TimeEvent.create_new(time, observer, event)
+## The observer needs to have a the following function to be able to receive the event
+## [codeblock]
+## func notify(time_event: TimeEvent) -> void:
+## 	pass
+## [/codeblock]
+func create_time_event_from_unix_time(time: int, observer: Object, ...args: Array) -> TimeEvent:
+	var new_time_event: TimeEvent = TimeEvent.create_new.callv([time, observer] + args)
 	
 	if not time_events.is_empty() and new_time_event.time < time_events[0].time:
 		time_events.push_front(new_time_event)
@@ -231,12 +235,15 @@ func create_time_event_from_unix_time(time: int, observer: Object, event: Event 
 	
 	return new_time_event
 
-
+## The observer needs to have a the following function to be able to receive the event
+## [codeblock]
+## func notify(time_event: TimeEvent) -> void:
+## 	pass
+## [/codeblock]
 func create_time_event_from_event(event: Event, observer: Object) -> TimeEvent:
 	if event == null:
 		return null
 	return create_time_event_from_unix_time(event.time, observer, event)
-
 
 
 func _sort_time_events_ascending(a: TimeEvent, b: TimeEvent) -> bool:
