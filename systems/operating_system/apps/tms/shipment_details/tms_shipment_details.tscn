@@ -77,11 +77,10 @@ layout_mode = 2
 [node name="Tabs" type="TabContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 8
+current_tab = 0
 clip_tabs = false
 
 [node name="GENERAL" type="PanelContainer" parent="VBoxContainer/Tabs"]
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 metadata/_tab_index = 0
@@ -602,6 +601,7 @@ layout_mode = 2
 text = "PRINT_SELECTED"
 
 [node name="ACCOUNTING" type="PanelContainer" parent="VBoxContainer/Tabs" node_paths=PackedStringArray("_quotation", "_revenue_total", "_cost_total", "_gross_profit", "_margin", "_revenue_container", "_cost_container")]
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_eiifu")
 script = ExtResource("15_06odw")

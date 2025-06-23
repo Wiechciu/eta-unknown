@@ -2,6 +2,7 @@ class_name ShipmentCargoDetails
 extends Resource
 
 
+var shipment: Shipment
 var cargo: Cargo
 var dimension_sets: Array[DimensionSet]
 var total_quantity: int:

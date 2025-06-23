@@ -2,9 +2,15 @@ class_name Mailor
 extends OsApp
 
 
+signal items_count_changed
+
+
 @export var inbox_items_container: Control
 @export var sent_items_container: Control
 @export var inbox_items: Array[EmailItem]
+var unread_inbox_items: Array[EmailItem]:
+	get:
+		return inbox_items.filter(func(email_item: EmailItem) -> bool: return email_item.email.is_unread)
 @export var sent_items: Array[EmailItem]
 
 @export var email_item_scene: PackedScene
@@ -12,6 +18,8 @@ extends OsApp
 
 @export var account_info_Label: Label
 @export var search_edit: LineEdit
+@export var search_delay_timer: Timer
+var search_call_id: int
 
 @export var email_reader: Control
 @export var email_reader_header_container: Control
@@ -20,10 +28,14 @@ extends OsApp
 @export var date_label: Label
 @export var subject_label: Label
 @export var body_label: RichTextLabel
+@export var body_label_container: Control
+@export var attachment_container_in_email_reader: Control
 @export var attachment_items_container_in_email_reader: Control
 @export var attachment_items_container_in_email_composer: Control
 var attachment_items_in_email_reader: Array[AttachmentItem]
 var attachment_items_in_email_composer: Array[AttachmentItem]
+
+@export var attachment_reader: Control
 
 @export var email_composer: Control
 @export var to_edit: LineEdit
@@ -53,6 +65,7 @@ func _ready() -> void:
 	EmailServer.email_registered.connect(_on_email_registered_on_server)
 	account_info_Label.text = "Signed in as: %s" % logged_in_user.email
 	clear_email_reader()
+	clear_attachment_reader()
 	clear_email_composer()
 	clear_containers()
 	retrieve_emails_from_server()
@@ -62,6 +75,7 @@ func _ready() -> void:
 
 
 func register_signals() -> void:
+	search_edit.text_changed.connect(_on_search_text_changed.unbind(1))
 	search_edit.text_submitted.connect(_on_search_text_submitted.unbind(1))
 	
 	new_button.pressed.connect(_on_new_button_pressed)
@@ -108,6 +122,7 @@ func add_email_item(email: Email) -> EmailItem:
 	items_container.add_child(new_email_item)
 	items_container.move_child(new_email_item, 0)
 	show_or_hide_email_item(new_email_item)
+	items_count_changed.emit()
 	return new_email_item
 
 
@@ -126,7 +141,10 @@ func remove_email_item(email_item: EmailItem) -> void:
 	sent_items.erase(email_item)
 	
 	clear_email_reader()
+	clear_attachment_reader()
+	
 	email_item.queue_free()
+	items_count_changed.emit()
 
 
 func add_all_attachment_items(email: Email, is_read_only: bool) -> void:
@@ -146,7 +164,7 @@ func add_attachment_item(document: Document, is_read_only: bool) -> AttachmentIt
 func create_attachment_item(document: Document, is_read_only: bool) -> AttachmentItem:
 	var new_attachment_item: AttachmentItem = attachment_item_scene.instantiate() as AttachmentItem
 	new_attachment_item.initialize(document, is_read_only)
-	new_attachment_item.opened.connect(func() -> void: print("attachment pressed: " + new_attachment_item.document.document_data.name))
+	new_attachment_item.opened.connect(_on_attachment_opened_button_pressed.bind(new_attachment_item))
 	new_attachment_item.removed.connect(_on_attachment_removed_button_pressed.bind(new_attachment_item))
 	return new_attachment_item
 
@@ -174,7 +192,6 @@ func clear_email_reader() -> void:
 		displayed_email_item = null
 		filter_inbox()
 	
-	
 	email_reader_header_container.hide()
 	from_label.text = ""
 	to_label.text = ""
@@ -189,6 +206,11 @@ func clear_email_reader() -> void:
 	mark_as_unread_button.hide()
 	mark_as_read_button.hide()
 	delete_button.hide()
+
+
+func clear_attachment_reader() -> void:
+	for child: Node in attachment_reader.get_children():
+		child.queue_free()
 
 
 func clear_email_composer() -> void:
@@ -206,6 +228,7 @@ func display_email_in_reader(email_item: EmailItem) -> void:
 	displayed_email_item = email_item
 	displayed_email_item.select()
 	displayed_email_item.set_to_read()
+	items_count_changed.emit()
 	
 	email_reader_header_container.show()
 	from_label.text = email_item.email.from.email
@@ -213,12 +236,31 @@ func display_email_in_reader(email_item: EmailItem) -> void:
 	date_label.text = GlobalTimer.get_nice_datetime_string_from_unix_time(email_item.email.date)
 	subject_label.text = email_item.email.subject
 	body_label.text = email_item.email.body
-	add_all_attachment_items(email_item.email, true)
+	if email_item.email.attachments.is_empty():
+		attachment_container_in_email_reader.hide()
+	else:
+		attachment_container_in_email_reader.show()
+		add_all_attachment_items(email_item.email, true)
 	
 	close_button.show()
 	reply_button.show()
 	delete_button.show()
 	update_mark_buttons()
+
+
+func display_attachment_in_reader(attachment_item: AttachmentItem) -> void:
+	clear_attachment_reader()
+	if attachment_item.document.document_data.document_layout == null:
+		printerr("No document layout assigned")
+		ActionLogger.create_error("Cannot open attachment!")
+		return
+	var document_layout: DocumentLayout = attachment_item.document.document_data.document_layout.instantiate() as DocumentLayout
+	document_layout.initialize(attachment_item.document, attachment_item.name_label.text)
+	attachment_reader.add_child(document_layout)
+	document_layout.closed.connect(switch_to_email_reader.bind(displayed_email_item))
+	
+	attachment_reader.show()
+	body_label_container.hide()
 
 
 func update_mark_buttons() -> void:
@@ -238,7 +280,19 @@ func _on_email_registered_on_server(email: Email) -> void:
 		add_email_item(email)
 
 
+func _on_search_text_changed() -> void:
+	search_call_id += 1
+	var current_search_call_id: int = search_call_id
+	
+	search_delay_timer.start()
+	await search_delay_timer.timeout
+	
+	if current_search_call_id == search_call_id:
+		filter_inbox()
+
+
 func _on_search_text_submitted() -> void:
+	search_call_id += 1
 	filter_inbox()
 
 
@@ -295,12 +349,14 @@ func _on_send_button_pressed() -> void:
 
 func _on_close_button_pressed() -> void:
 	clear_email_reader()
+	clear_attachment_reader()
 
 
 func _on_mark_as_unread_button_pressed() -> void:
 	if displayed_email_item == null:
 		return
 	displayed_email_item.set_to_unread()
+	items_count_changed.emit()
 	update_mark_buttons()
 
 
@@ -308,6 +364,7 @@ func _on_mark_as_read_button_pressed() -> void:
 	if displayed_email_item == null:
 		return
 	displayed_email_item.set_to_read()
+	items_count_changed.emit()
 	update_mark_buttons()
 
 
@@ -331,8 +388,12 @@ func _on_add_subject_button_pressed() -> void:
 
 #TODO: Implement proper logic of selecting attachments from shipments.
 func _on_add_attachment_button_pressed() -> void:
-	var new_document: Document = Document.create_new((GlobalRefs.documents.pick_random() as DocumentData).code, GlobalTimer.now, randi_range(1000, 100000))
+	var new_document: Document = Document.create_new((GlobalRefs.documents.pick_random() as DocumentData).code, GlobalTimer.now, randi_range(1000, 100000), Shipment.create_new_with_random_data())
 	add_attachment_item(new_document, false)
+
+
+func _on_attachment_opened_button_pressed(attachment_item: AttachmentItem) -> void:
+	display_attachment_in_reader(attachment_item)
 
 
 func _on_attachment_removed_button_pressed(attachment_item: AttachmentItem) -> void:
@@ -346,6 +407,7 @@ func _on_show_read_button_pressed() -> void:
 func filter_inbox() -> void:
 	for email_item: EmailItem in inbox_items:
 		show_or_hide_email_item(email_item)
+	items_count_changed.emit()
 
 
 func show_or_hide_email_item(email_item: EmailItem) -> void:
@@ -369,7 +431,9 @@ func check_email_item_to_show_or_hide(email_item: EmailItem) -> bool:
 
 func switch_to_email_reader(email_item: EmailItem = null) -> void:
 	email_reader.show()
+	attachment_reader.hide()
 	buttons_container.show()
+	body_label_container.show()
 	
 	email_composer.hide()
 	send_button.hide()
@@ -385,6 +449,7 @@ func switch_to_email_composer() -> void:
 	add_attachment_button.show()
 	
 	email_reader.hide()
+	attachment_reader.hide()
 	buttons_container.hide()
 	
 	clear_email_reader()

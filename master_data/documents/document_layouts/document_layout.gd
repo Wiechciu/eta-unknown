@@ -2,9 +2,18 @@ class_name DocumentLayout
 extends Control
 
 
-var shipment: Shipment
-var document: Document
+signal initialized
+
+@warning_ignore("unused_signal") # Called from the DocumentPanelHeader
+signal closed
 
 
-func load_shipment(shipment_to_load: Shipment) -> void:
-	shipment = shipment_to_load
+@export var document: Document
+var custom_title: String
+
+
+@warning_ignore("shadowed_variable")
+func initialize(document: Document, custom_title: String = "") -> void:
+	self.document = document
+	self.custom_title = custom_title
+	initialized.emit()

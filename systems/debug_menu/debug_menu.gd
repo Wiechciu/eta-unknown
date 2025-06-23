@@ -29,10 +29,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_new_shipping_order_button_pressed() -> void:
 	var new_shipping_order: ShippingOrder = shipping_order_scene.instantiate()
-	var new_shipment: Shipment = Shipment.create_new_with_random_data()
-	if new_shipment == null:
-		return
-	new_shipping_order.load_shipment(Shipment.create_new_with_random_data())
+	var new_document: Document = Document.create_new("SPO", GlobalTimer.now, randi_range(1000000, 9999999), Shipment.create_new_with_random_data())
+	new_shipping_order.initialize(new_document)
 	
 	get_tree().root.add_child(new_shipping_order)
 	new_shipping_order.position.x = 300

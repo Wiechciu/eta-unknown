@@ -44,11 +44,15 @@ func hide_all_siblings() -> void:
 	for sibling: Node in get_parent().get_children():
 		if sibling == self:
 			continue
+		if sibling is not Control:
+			continue
 		(sibling as Control).hide()
 
 
 func show_all_siblings() -> void:
 	for sibling: Node in get_parent().get_children():
 		if sibling == self:
+			continue
+		if sibling is not Control:
 			continue
 		(sibling as Control).show()

@@ -5,6 +5,7 @@ extends Resource
 signal charges_updated
 
 
+var shipment: Shipment
 var quotation: Quotation
 var charges: Array[Charge]
 var revenue_charges: Array[Charge]

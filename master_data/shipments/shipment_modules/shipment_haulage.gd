@@ -2,6 +2,7 @@ class_name ShipmentHaulage
 extends Resource
 
 
+var shipment: Shipment
 var trucker_pickup: Party
 var trucker_delivery: Party
 

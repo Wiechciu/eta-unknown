@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwnqdq3njd2b6"]
+
+[ext_resource type="Script" uid="uid://b78ouo8mmqv5f" path="res://master_data/documents/document_layouts/document_panel_header.gd" id="1_v10r7"]
+[ext_resource type="Texture2D" uid="uid://10rfme0j0g0t" path="res://entities/items/physical_document/physical_document_icon.png" id="2_p6jrr"]
+[ext_resource type="Texture2D" uid="uid://byp6aoo37qjph" path="res://systems/operating_system/cross.png" id="4_n6flx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p6jrr"]
+content_margin_left = 16.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 3.0
+bg_color = Color(0, 0.2, 0.3647059, 1)
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[node name="DocumentPanelHeader" type="PanelContainer" node_paths=PackedStringArray("icon_rect", "title_label")]
+offset_right = 210.0
+offset_bottom = 36.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_p6jrr")
+script = ExtResource("1_v10r7")
+icon_rect = NodePath("HBoxContainer/Icon")
+title_label = NodePath("HBoxContainer/Title")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_p6jrr")
+expand_mode = 2
+
+[node name="Title" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+text = "Document name"
+
+[node name="CloseButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(31, 31)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+icon = ExtResource("4_n6flx")
+flat = true
+expand_icon = true
+
+[connection signal="pressed" from="HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]

@@ -230,27 +230,39 @@ func create_time_event_for_email() -> void:
 func notify(time_event: TimeEvent) -> void:
 	if time_event.args.is_empty():
 		create_email(time_event.time)
-	elif time_event.args.front() is Email:
-		var original_email: Email = time_event.args.front() as Email
-		if original_email.communication_chain.is_empty():
-			create_reminder(time_event.time, original_email)
+		return
+	
+	var original_email: Email = time_event.args.front() as Email
+	if original_email != null:
+		create_reminder(time_event.time, original_email)
+		return
 
 
 func create_email(time: int) -> void:
+	var shipment: Shipment = Shipment.create_new_with_random_data(employer, GlobalRefs.customers_with_employees.pick_random())
+	if shipment == null:
+		return
+	
+	var attachments: Array[Document] = []
 	var subject: String
 	var chance_for_rfq: float = 0.5
 	if randf() < chance_for_rfq:
 		subject = EmailServer.EMAIL_SUBJECTS_RFQ.pick_random()
+		var document: Document = Document.create_new("RFQ", GlobalTimer.now, randi_range(1000000,9999999), shipment)
+		attachments.append(document)
 	else:
 		subject = EmailServer.EMAIL_SUBJECTS_SPO.pick_random()
-
+		var document: Document = Document.create_new("SPO", GlobalTimer.now, randi_range(1000000,9999999), shipment)
+		attachments.append(document)
+	
+	
 	var new_email: Email = Email.create_new(
 		self,
 		GameManager.player.person,
 		subject,
 		"As attached" + EmailServer.get_footer(self),
 		time,
-		[],
+		attachments,
 		null
 	)
 	
@@ -259,23 +271,26 @@ func create_email(time: int) -> void:
 
 
 func create_reminder(time: int, original_email: Email) -> void:
+	if original_email.communication_chain.is_empty():
+		return
+	
 	for response: Email in original_email.responses:
-		if response.from == original_email.to:
+		var response_exists: bool = response.from == original_email.to
+		if response_exists:
 			return
 	
+	var attachments: Array[Document] = []
 	var new_email: Email = Email.create_new(
 		self,
 		original_email.to,
 		EmailServer.REPLY_SUBJECT_PREFIX + original_email.subject + " | reminder",
 		EmailServer.add_message_and_footer_to_beginning("Hello,\nKind reminder on the matter below.", original_email.body, self),
 		time,
-		[],
+		attachments,
 		original_email
 	)
 	
 	EmailServer.register_email(new_email)
-	GlobalTimer.create_time_event_from_unix_time(time + randi_range(GlobalTimer.ONE_HOUR * 2, GlobalTimer.ONE_HOUR * 4), self, new_email)
-
 
 
 #func to_dict() -> Dictionary:

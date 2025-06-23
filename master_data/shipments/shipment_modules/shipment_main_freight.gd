@@ -2,6 +2,7 @@ class_name ShipmentMainFreight
 extends Resource
 
 
+var shipment: Shipment
 var mode_of_transport: ModeOfTransport
 var carrier: Party
 

@@ -144,5 +144,6 @@ text = "15:00"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_override_styles/focus = SubResource("StyleBoxFlat_4joxy")
 flat = true

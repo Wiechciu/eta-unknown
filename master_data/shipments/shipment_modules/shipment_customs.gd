@@ -2,6 +2,7 @@ class_name ShipmentCustoms
 extends Resource
 
 
+var shipment: Shipment
 var customs_agency_export: Party #TODO
 var customs_agency_import: Party #TODO
 

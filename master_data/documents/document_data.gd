@@ -5,6 +5,7 @@ extends Resource
 @export var code: String
 @export var name: String
 @export var description: String
+@export var document_layout: PackedScene
 
 
 @warning_ignore("shadowed_variable")

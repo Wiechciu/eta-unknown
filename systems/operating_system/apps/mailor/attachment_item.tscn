@@ -59,6 +59,7 @@ text = "document.doc"
 
 [node name="OpenAttachmentButton" type="Button" parent="PanelContainer/HBoxContainer/PanelContainer2"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 flat = true
 
 [node name="PanelContainer" type="PanelContainer" parent="PanelContainer/HBoxContainer"]
@@ -73,4 +74,5 @@ expand_mode = 3
 
 [node name="RemoveAttachmentButton" type="Button" parent="PanelContainer/HBoxContainer/PanelContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 flat = true

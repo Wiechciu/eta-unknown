@@ -17,17 +17,18 @@ const DOCUMENTS_WITH_LABELS: Array[String] = [
 
 
 @export var document_data: DocumentData
-
 @export var issued_time: int
 @export var number: int
+@export var shipment: Shipment
 
 
 @warning_ignore("shadowed_variable")
-static func create_new(code: String, issued_time: int, number: int) -> Document:
+static func create_new(code: String, issued_time: int, number: int, shipment: Shipment) -> Document:
 	var new_document: Document = Document.new()
 	new_document.document_data = DocumentData.get_document_by_code(code)
 	new_document.issued_time = issued_time
 	new_document.number = number
+	new_document.shipment = shipment
 	return new_document
 
 

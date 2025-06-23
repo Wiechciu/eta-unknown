@@ -2,6 +2,7 @@ class_name ShipmentHandling
 extends Resource
 
 
+var shipment: Shipment
 var handling_agent_export: Party #TODO
 var handling_agent_import: Party #TODO
 

@@ -9,7 +9,6 @@ var tooltip: Tooltip
 
 func _ready() -> void:
 	parent = get_parent()
-	
 	if		not parent is Control or \
 			not parent.has_method("get_tooltip_body") or \
 			parent.get_tooltip_body() == "":

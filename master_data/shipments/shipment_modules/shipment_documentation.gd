@@ -5,6 +5,7 @@ extends Resource
 signal documentation_updated
 
 
+var shipment: Shipment
 var documents: Array[Document]
 #var commercial_documents: Array[Document] #TODO
 #var transport_documents: Array[Document] #TODO
@@ -38,7 +39,7 @@ func remove_document(document: Document) -> void:
 
 
 func create_new_document(code: String, issued_time: int, number: int) -> Document:
-	var new_document: Document = Document.create_new(code, issued_time, number)
+	var new_document: Document = Document.create_new(code, issued_time, number, shipment)
 	register_document(new_document)
 	return new_document
 
