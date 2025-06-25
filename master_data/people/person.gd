@@ -2,97 +2,17 @@ class_name Person
 extends Resource
 
 
-const MALE_NAMES: Array[String] = [
-	"Liam", "Noah", "Oliver", "Elijah", "James", "William", "Benjamin", "Lucas", "Henry", "Alexander",
-	"Mason", "Michael", "Ethan", "Daniel", "Jacob", "Logan", "Jackson", "Levi", "Sebastian", "Mateo",
-	"Jack", "Owen", "Theodore", "Aiden", "Samuel", "Joseph", "John", "David", "Wyatt", "Matthew",
-	"Luke", "Asher", "Carter", "Julian", "Grayson", "Leo", "Jayden", "Gabriel", "Isaac", "Lincoln",
-	"Anthony", "Hudson", "Dylan", "Ezra", "Thomas", "Charles", "Christopher", "Jaxon", "Maverick", "Josiah",
-	"Isaiah", "Andrew", "Elias", "Joshua", "Nathan", "Caleb", "Ryan", "Adrian", "Miles", "Eli",
-	"Nolan", "Christian", "Aaron", "Cameron", "Ezekiel", "Colton", "Luca", "Landon", "Hunter", "Jonathan",
-	"Santiago", "Axel", "Easton", "Cooper", "Jeremiah", "Angel", "Roman", "Connor", "Jameson", "Robert",
-	"Greyson", "Jordan", "Ian", "Carson", "Jaxson", "Leonardo", "Nicholas", "Dominic", "Austin", "Everett",
-	"Brooks", "Xavier", "Kai", "Jose", "Parker", "Adam", "Jace", "Wesley", "Kayden", "Silas"
-]
-const FEMALE_NAMES: Array[String] = [
-	"Olivia", "Emma", "Charlotte", "Amelia", "Sophia", "Isabella", "Ava", "Mia", "Evelyn", "Luna",
-	"Harper", "Camila", "Gianna", "Elizabeth", "Eleanor", "Ella", "Abigail", "Sofia", "Avery", "Scarlett",
-	"Emily", "Aria", "Penelope", "Chloe", "Layla", "Mila", "Nora", "Hazel", "Madison", "Ellie",
-	"Lily", "Nova", "Isla", "Grace", "Violet", "Aurora", "Riley", "Zoey", "Willow", "Emilia",
-	"Stella", "Zoe", "Victoria", "Hannah", "Addison", "Leah", "Lucy", "Eliana", "Ivy", "Everly",
-	"Lillian", "Paisley", "Elena", "Naomi", "Maya", "Natalie", "Kinsley", "Delilah", "Claire", "Audrey",
-	"Aaliyah", "Brooklyn", "Bella", "Aurora", "Savannah", "Skylar", "Genesis", "Hailey", "Autumn", "Kennedy",
-	"Valentina", "Josephine", "Ariana", "Allison", "Gabriella", "Alice", "Madelyn", "Cora", "Ruby", "Eva",
-	"Serenity", "Autumn", "Adeline", "Hailey", "Piper", "Rylee", "Athena", "Clara", "Samantha", "Liliana",
-	"Sarah", "Eva", "Quinn", "Sadie", "Caroline", "Allie", "Eliza", "Juliana", "Arya", "Iris"
-]
-const SURNAMES: Array[String] = [
-	"Smith","Johnson","Williams","Jones","Brown","Davis","Miller","Wilson","Moore","Taylor",
-	"Anderson","Thomas","Jackson","White","Harris","Martin","Thompson","Garcia","Martinez","Robinson",
-	"Clark","Rodriguez","Lewis","Lee","Walker","Hall","Allen","Young","Hernandez","King",
-	"Wright","Lopez","Hill","Scott","Green","Adams","Baker","Gonzalez","Nelson","Carter",
-	"Mitchell","Perez","Roberts","Turner","Phillips","Campbell","Parker","Evans","Edwards","Collins",
-	"Stewart","Sanchez","Morris","Rogers","Reed","Cook","Morgan","Bell","Murphy","Bailey",
-	"Rivera","Cooper","Richardson","Cox","Howard","Ward","Torres","Peterson","Gray","Ramirez",
-	"James","Watson","Brooks","Kelly","Sanders","Price","Bennett","Wood","Barnes","Ross",
-	"Henderson","Coleman","Jenkins","Perry","Powell","Long","Patterson","Hughes","Flores","Washington",
-	"Butler","Simmons","Foster","Gonzales","Bryant","Alexander","Russell","Griffin","Diaz","Hayes",
-	"Myers","Ford","Hamilton","Graham","Sullivan","Wallace","Woods","Cole","West","Jordan",
-	"Owens","Reynolds","Fisher","Ellis","Harrison","Gibson","McDonald","Cruz","Marshall","Ortiz",
-	"Gomez","Murray","Freeman","Wells","Webb","Simpson","Stevens","Tucker","Porter","Hunter",
-	"Hicks","Crawford","Henry","Boyd","Mason","Morales","Kennedy","Warren","Dixon","Ramos",
-	"Reyes","Burns","Gordon","Shaw","Holmes","Rice","Robertson","Hunt","Black","Daniels",
-	"Palmer","Mills","Nichols","Grant","Knight","Ferguson","Rose","Stone","Hawkins","Dunn",
-	"Perkins","Hudson","Spencer","Gardner","Stephens","Payne","Pierce","Berry","Matthews","Arnold",
-	"Wagner","Willis","Ray","Watkins","Olson","Carroll","Duncan","Sutton","Barnett","Shields",
-	"Benson","Underwood","Fisher","Fowler","Ellington","Hanson","Santos","Miles","Craig","Rodgers",
-	"Jefferson","Fields","Stevenson","Jensen","Marquez","Burnett","Romero","Robles","Stein","Nicholson",
-	"Sharpe","Walters","Fox","Moss","Moran","Contreras","Farmer","Bryan","Lane","Riley",
-	"Armstrong","Walton","Hart","Mendoza","Richards","Rodriguez","Saunders","Cunningham","Powers","Schmidt",
-	"Schultz","Barker","Guzman","Fletcher","Weaver","Schneider","Shannon","Matthews","Hansen","Thompson",
-	"Hopkins","Lucas","Harper","Andrews","Larson","Fitzgerald","Iverson","Baldwin","Rojas","Dean",
-	"Guerra","Watts","McBride","Cain","Austin","Brock","Fernandez","Wheeler","Carlson","May",
-	"McKinney","Pena","Stephenson","Christopher","Rahman","Harrell","Abbott","Shepherd","Boyle","Rangel",
-	"Pugh","Sierra","Ventura","Hampton","Britt","Larsen","Curtis","Bradley","Fuentes","Johnston",
-	"Gaines","Chandler","Hardy","Macias","Day","Brewer","Cannon","Yates","Hodge","Rivas",
-	"Chan","Phelps","Madden","Roman","Brady","Osborne","Casey","Snow","Montoya","Francis",
-	"Sandoval","Booth","Atkins","Reese","Bullock","Dawson","Roth","Merritt","Webster","Chapman",
-	"Vasquez","Sparks","Justice","Harmon","Bates","Clements","Herrera","Robinson","Meyer","Stone",
-	"Rosales","Stevens","Morrison","Kirby","Waller","Johns","Briggs","O’Connor","Keith","Hahn",
-	"Trujillo","Ball","Davenport","Snyder","Clayton","Walsh","Farrell","Lowell","Sosa","Neal",
-	"Bradford","Ashley","Brock","Lloyd","York","Sweet","Huffman","Bauer","Prince","Lucas",
-	"Conner","McKenzie","Bedford","Conrad","Moses","Stanton","Bowers","Lucas","Fitzgerald","Wong",
-	"Vaughn","Hopkins","Sanders","Elliott","Case","McDonald","Fletcher","Garrett","Abbott","Ross",
-	"Keller","Willis","Thornton","Crosby","Mann","Banks","Rice","Lynn","Chapman","Mason",
-	"Todd","Blair","Perry","Gross","Marsh","Gillespie","Roman","Peters","Heath","Crawford",
-	"Larson","Dickerson","Rutledge","Duke","Moreno","Powell","Gates","Farmer","Whitehead","Flowers",
-	"Cobb","Wheeler","Doyle","Watkins","Park","Hanson","Frank","Patrick","Flynn","Church",
-	"Welch","Buchanan","Simon","Brock","Munoz","Faulkner","Holman","Underwood","Cortez","Madden",
-	"Klein","Pitts","Savage","Gill","Lamb","Benton","McMillan","Hendrix","Morrow","Justice",
-	"Steele","Dickson","Hahn","Roach","Riley","Walters","Frost","Lindsey","Cain","Reeves",
-	"Dixon","Oneil","Lucero","Morrison","Fleming","Sheppard","Hodge","Holt","Glenn","Sharp",
-	"Yang","Carr","Maynard","Nicholson","Hurley","Robinson","Stokes","Church","Farley","Sweeney",
-	"Dickson","Travis","Barrera","Miles","Santana","Irwin","Eaton","Houston","Hahn","Boone",
-	"Cervantes","Clarke","Cain","White","Bright","Beck","Hopkins","Albert","Maldonado","Scott",
-	"Shaffer","Lang","Gilmore","Knox","Franklin","Hurley","Buchanan","Sharp","Poole","Fletcher",
-	"Barron","Cohen","Randall","Rodriguez","Tyson","Pruitt","Cain","Slater","Branch","Palacios",
-	"Clayton","Fry","Haynes","Roach","Lyons","Nichols","Mercer","Nolan","Chan","Byrd",
-	"Marquez","Craig","Donaldson","Potter","Kent","Hodge","Daniel","Graham","Sheppard","Cross",
-	"Woodward","Bolton","McKay","York","Cobb","Herman","Mack","Reese","Horton","Mullen",
-	"Roach","Bentley","Cortez","Park","Yates","Giles","Maynard","Miles","Donnell","Salinas",
-	"York","Goff","Lyons","Davidson","Potts","Flores","Chase","Hardin","Whitaker","Kaufman",
-	"Gonzalez","Huffman","Fox","Schultz","Dorsey","Reilly","Duncan","Simon","Collins","Ledbetter",
-	"Pace","Redding","Bruce","Fuller","Nixon","Hodge","Fischer","Walton","Hammond","Maynard",
-	"Dennis","Wiley","Olsen","Steele","Bishop","Willis","Holder","Beach","Clayton","Shaffer",
-	"Clements","Lang","Blackburn","Hartman","Boyle","McDonald","McMillan","Huber","Ware","Giles",
-	"Horne","Cabrera","Joyce","Soto","York","Mccormick","Glass","Dillard","Waller","Flynn"
-]
+const MALE_NAMES: Array[String] = preload("res://master_data/people/person_male_names.json").data
+const FEMALE_NAMES: Array[String] = preload("res://master_data/people/person_female_names.json").data
+const SURNAMES: Array[String] = preload("res://master_data/people/person_surnames.json").data
+
 
 enum Experience {
 	NOVICE,
 	SPECIALIST,
 	EXPERT,
 }
+
 
 var id: int
 var first_name: String
@@ -218,10 +138,16 @@ func set_up_email_scheduling() -> void:
 	if GameManager.player.person == self:
 		return
 	
-	GlobalTimer.shift_started.connect(create_time_event_for_email)
+	GlobalTimer.shift_started.connect(_on_shift_started)
+	EmailServer.email_registered.connect(_on_email_registered)
 
 
-func create_time_event_for_email() -> void:
+func _on_email_registered(registered_email: Email) -> void:
+	if registered_email.to == self:
+		GlobalTimer.create_time_event_from_unix_time(GlobalTimer.now + GlobalTimer.ONE_MINUTE * randi_range(2, 10), self, registered_email)
+
+
+func _on_shift_started() -> void:
 	var chance_for_email: float = 0.3
 	if randf() < chance_for_email:
 		GlobalTimer.create_time_event_from_unix_time(GlobalTimer.now + GlobalTimer.ONE_MINUTE * randi_range(10, 8 * 60), self)
@@ -234,7 +160,10 @@ func notify(time_event: TimeEvent) -> void:
 	
 	var original_email: Email = time_event.args.front() as Email
 	if original_email != null:
-		create_reminder(time_event.time, original_email)
+		if original_email.from == self:
+			create_reminder(time_event.time, original_email)
+		elif original_email.to == self:
+			create_response(time_event.time, original_email)
 		return
 
 
@@ -255,7 +184,6 @@ func create_email(time: int) -> void:
 		var document: Document = Document.create_new("SPO", GlobalTimer.now, randi_range(1000000,9999999), shipment)
 		attachments.append(document)
 	
-	
 	var new_email: Email = Email.create_new(
 		self,
 		GameManager.player.person,
@@ -271,20 +199,41 @@ func create_email(time: int) -> void:
 
 
 func create_reminder(time: int, original_email: Email) -> void:
-	if original_email.communication_chain.is_empty():
-		return
-	
 	for response: Email in original_email.responses:
 		var response_exists: bool = response.from == original_email.to
 		if response_exists:
 			return
 	
-	var attachments: Array[Document] = []
+	var message: String = "Hello," + \
+		EmailServer.LINE_BREAK + "Kind reminder on the matter below." + \
+		EmailServer.get_footer(self)
+	
+	var attachments: Array[Document] = original_email.attachments
 	var new_email: Email = Email.create_new(
 		self,
 		original_email.to,
 		EmailServer.REPLY_SUBJECT_PREFIX + original_email.subject + " | reminder",
-		EmailServer.add_message_and_footer_to_beginning("Hello,\nKind reminder on the matter below.", original_email.body, self),
+		message,
+		time,
+		attachments,
+		original_email
+	)
+	
+	EmailServer.register_email(new_email)
+
+
+func create_response(time: int, original_email: Email) -> void:
+	var subject: String = EmailServer.REPLY_SUBJECT_PREFIX + original_email.subject
+	var message: String = "Hello," \
+		+ EmailServer.LINE_BREAK + "Well noted, thank you!" \
+		+ EmailServer.get_footer(self)
+	
+	var attachments: Array[Document] = []
+	var new_email: Email = Email.create_new(
+		self,
+		original_email.from,
+		subject,
+		message,
 		time,
 		attachments,
 		original_email

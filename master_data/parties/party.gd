@@ -24,105 +24,13 @@ const SUPPLIER_TYPES: Array[Type] = [
 	Type.TRUCKER,
 ]
 
-const NAME_PREFIXES: Array[String] = [
-	"Global", "Prime", "Next", "Ultra", "Dynamic", "Rapid", "Pioneer", "Vertex", "Summit", "Nexus",
-	"Quantum", "Apex", "Echo", "Iron", "Nova", "Atlas", "Vortex", "Pulse", "Fusion", "Crystal",
-	"True", "Bright", "Deep", "Blue", "Green", "Solid", "Clear", "Open", "Swift", "Urban",
-	"Golden", "Silver", "Royal", "Future", "Bold", "Stellar", "Gravity", "Arc", "Meta", "Core",
-	"Omni", "Solar", "Lunar", "Zenith", "Neo", "Magna", "Alpha", "Beta", "Sigma", "Horizon",
-	"Hyper", "Turbo", "Smart", "Echo", "Trans", "Opti", "Cyber", "Neon", "Iron", "Fire",
-	"Digital", "Mono", "Hexa", "Tri", "One", "Infini", "Nova", "Epic", "Axial", "Proto",
-	"Astro", "Nano", "Max", "Elevate", "Nimbus", "Velvet", "Spectra", "Drift", "North", "West",
-	"Cobalt", "Amber", "Orchid", "Ivory", "Crimson", "Azure", "Chrome", "Zebra", "Oasis", "Frost",
-	"Nimbus", "Zen", "Ironwood", "Truepoint", "Skyward", "Topline", "Vertexa", "Equinox", "Tranquil", "Silent",
-	"Delta", "Strato", "Centra", "Arch", "Polaris", "Eon", "Beacon", "Lumen", "Corewave", "Frontline"
-]
-const NAME_BUZZWORDS: Array[String] = [
-	"Solutions", "Systems", "Networks", "Technologies", "Concepts", "Industries", "Dynamics", "Ventures", "Enterprises", "Holdings",
-	"Analytics", "Capital", "Strategies", "Group", "Logics", "Matrix", "Node", "Design", "Fabric", "Layer",
-	"Circle", "Bridge", "Edge", "Chain", "Sphere", "Flow", "Source", "Point", "Works", "Path",
-	"Labs", "Forge", "Spark", "Thread", "Nest", "Guild", "Union", "Platform", "Grid", "Stack",
-	"Studio", "Verse", "Cloud", "Engine", "Factor", "Orbit", "Panel", "Frame", "Beacon", "Anchor",
-	"Delta", "Core", "Crate", "Link", "Depot", "Realm", "Port", "Fleet", "Logic", "Task",
-	"Dock", "Hub", "Hive", "Loop", "Layer", "Module", "Tier", "Unit", "Axis", "Point",
-	"Chronicle", "Vault", "Mirror", "Portion", "Access", "Nucleus", "Vision", "Thread", "Merge", "Pulse",
-	"Horizon", "Drift", "Wave", "Pilot", "Cell", "Drop", "Rise", "Stretch", "Play", "Cellar",
-	"Engine", "Field", "Array", "Note", "Lab", "Solutioneers", "Roots", "Meadow", "Dockyard", "Cluster",
-	"Storm", "Vector", "Branch", "Stack", "Frame", "Boost", "Drill", "Machine", "Line", "Beam",
-	"Motion", "Linker", "Craft", "Sparkle", "Sprout", "Growth", "Vault", "Runner", "Map", "Pipeline"
-]
-const NAME_SUFFIXES: Array[String] = [
-	"Inc", "LLC", "Corp", "Ltd", "Group", "Co", "PLC", "GmbH", "S.A.", "Partners",
-	"Consulting", "Studios", "Collective", "Associates", "Consortium", "Works", "Agency", "Initiative", "Syndicate", "Authority",
-	"Solutions", "Ventures", "Holdings", "Industries", "Enterprises", "Networks", "Systems", "Technologies", "Logistics", "Dynamics",
-	"International", "Worldwide", "Global", "Union", "Federation", "Labs", "Node", "Core", "Outfit", "Engineers",
-	"Machines", "Architects", "Creators", "Makers", "Builders", "Pioneers", "Minds", "Catalysts", "Executors", "Operators",
-	"Council", "Commission", "Exchange", "Studio", "Haven", "Nest", "Vault", "Realm", "Deck", "Fellows",
-	"Thinktank", "Conglomerate", "Sons", "Brothers", "Guild", "Club", "League", "Society", "Crüe", "Syndicate",
-	"Associates", "Advisors", "Thinkers", "Shapers", "Navigators", "Mechanics", "Crafters", "Boosters", "Explorers", "Nexus",
-	"People", "Collective", "Front", "Foundation", "Empire", "Network", "Stack", "Matrix", "Cloud", "Forge",
-	"One", "360", "Plus", "Zero", "X", "Pro", "Max", "Edge", "Link", "Shift"
-]
-const STREET_PREFIXES: Array[String] = [
-	"Oak", "Pine", "Maple", "Cedar", "Elm", "Ash", "Birch", "Willow", "Holly",
-	"Chestnut", "Spruce", "Sycamore", "Walnut", "Redwood", "Dogwood", "Beech",
-	"Cottonwood", "Alder", "Juniper", "Sequoia", "Magnolia", "Hickory", "Laurel",
-	"Mulberry", "Poplar", "Rowan", "Aspen", "Yew", "Fir", "Linden", "Grove",
-	"Highland", "Ridge", "Hill", "Valley", "Lake", "River", "Creek", "Spring",
-	"Brook", "Forest", "Canyon", "Meadow", "Field", "Park", "Bay", "Shore",
-	"Island", "Bluff", "Cliff", "Trail", "Path", "Vista", "Summit", "Glade",
-	"Stone", "Iron", "Silver", "Gold", "Crystal", "Shadow", "Sunset", "Twilight"
-]
-const STREET_SUFFIXES: Array[String] = [
-	"Street", "Avenue", "Road", "Boulevard", "Drive", "Lane", "Way", "Court",
-	"Circle", "Terrace", "Place", "Loop", "Parkway", "Alley", "Run", "Commons",
-	"Pass", "Square", "Heights", "Crossing", "Row", "Point", "Hollow", "View",
-	"Garden", "Walk", "Crescent", "Glen", "Landing", "Plaza", "Reach", "Turn"
-]
-const CITY_PREFIXES: Array[String]  = [
-	"Green", "North", "South", "East", "West",
-	"Lake", "River", "Hill", "Spring", "Clear",
-	"New", "Fort", "Port", "Mount", "Grand",
-	"High", "Low", "Sunny", "Silver", "Golden",
-	"Red", "Blue", "White", "Black", "Stone",
-	"Oak", "Pine", "Maple", "Cedar", "Willow",
-	"Iron", "Ash", "Bright", "Shadow", "Cloud",
-	"Storm", "Frost", "Dust", "Glade", "Crystal",
-	"Fog", "Drift", "Sun", "Moon", "Star",
-	"Falcon", "Wolf", "Bear", "Fox", "Eagle",
-	"Copper", "Bronze", "Steel", "Obsidian", "Quartz",
-	"Wind", "Snow", "Rain", "Thunder", "Blaze",
-	"Cinder", "Ember", "Flint", "Clay", "Slate",
-	"Marble", "Granite", "Moss", "Boulder", "Pebble",
-	"Branch", "Thorn", "Vine", "Briar", "Bloom",
-	"Thistle", "Ivy", "Lily", "Fern", "Dawn",
-	"Dusk", "Aurora", "Echo", "Zephyr", "Nimbus",
-	"Comet", "Nova", "Hawk", "Falco", "Griffin",
-	"Dragon", "Raven", "Crow", "Lynx", "Otter",
-	"Badger", "Elk", "Moose", "Coyote", "Cougar"
-]
-const CITY_SUFFIXES: Array[String]  = [
-	"ton", "ville", "burg", "borough", "bury",
-	"stead", "land", "field", "ford", "view",
-	"mouth", "port", "gate", "dale", "wood",
-	"ridge", "haven", "heights", "cove", "springs",
-	"hollow", "falls", "meadows", "valley", "cross",
-	"grove", "creek", "bluff", "point", "bay",
-	"cliff", "reach", "bend", "mead", "nook",
-	"well", "mill", "rock", "run", "shore",
-	"peak", "summit", "divide", "line", "cut",
-	"chasm", "basin", "pines", "trees", "forest",
-	"woods", "branches", "stones", "rocks", "hills",
-	"pasture", "trail", "pass", "bridge", "arch",
-	"archway", "terrace", "circle", "loop", "row",
-	"walk", "lane", "path", "way", "outlook",
-	"watch", "station", "camp", "depot", "yard",
-	"junction", "hub", "delta", "flats", "banks",
-	"shoreline", "firth", "strand", "harbor", "havenport",
-	"cairn", "ledge", "crag", "den", "hatch",
-	"rise", "ridgeway", "valewood", "fen", "marsh",
-	"bog", "isle", "key", "reef", "wharf"
-]
+const NAME_PREFIXES: Array[String] = preload("res://master_data/parties/party_name_prefixes.json").data
+const NAME_BUZZWORDS: Array[String] = preload("res://master_data/parties/party_name_buzzwords.json").data
+const NAME_SUFFIXES: Array[String] = preload("res://master_data/parties/party_name_suffixes.json").data
+const STREET_PREFIXES: Array[String] = preload("res://master_data/parties/address_street_prefixes.json").data
+const STREET_SUFFIXES: Array[String] = preload("res://master_data/parties/address_street_suffixes.json").data
+const CITY_PREFIXES: Array[String]  = preload("res://master_data/parties/address_city_prefixes.json").data
+const CITY_SUFFIXES: Array[String]  = preload("res://master_data/parties/address_city_suffixes.json").data
 const MAX_ATTEMPTS: int = 1000
 
 

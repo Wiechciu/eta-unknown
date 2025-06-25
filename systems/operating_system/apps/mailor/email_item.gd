@@ -35,7 +35,6 @@ var is_selected: bool
 @export_tool_button("change_to_selected") var change_to_selected: Callable = func() -> void: panel_container_to_apply_style_box.add_theme_stylebox_override("panel", style_box_selected)
 
 
-
 func _ready() -> void:
 	button.pressed.connect(_on_button_pressed)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://dh8b7wgt2j4qq"]
+[gd_scene load_steps=64 format=3 uid="uid://dh8b7wgt2j4qq"]
 
 [ext_resource type="Script" uid="uid://bu5de0dgiogpb" path="res://systems/operating_system/apps/mailor/mailor.gd" id="1_ny8fa"]
 [ext_resource type="PackedScene" uid="uid://dr7k5nsfgoobv" path="res://systems/operating_system/os_app_panel_header.tscn" id="2_11d6n"]
@@ -14,6 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://csikevd7cm74m" path="res://systems/tooltip/tooltip_component.tscn" id="8_orlh7"]
 [ext_resource type="Script" uid="uid://u2qdcbcwrk7l" path="res://master_data/documents/document.gd" id="10_orlh7"]
 [ext_resource type="PackedScene" uid="uid://byup0xasld7sf" path="res://master_data/documents/document_layouts/document_layout_spo.tscn" id="11_4t8ss"]
+[ext_resource type="PackedScene" uid="uid://b3dw5xcdwe7xm" path="res://systems/operating_system/apps/mailor/email_body_item.tscn" id="12_31wgn"]
+[ext_resource type="PackedScene" uid="uid://dbvmpkqwprb1" path="res://systems/operating_system/apps/mailor/email_syntax_particles_effect.tscn" id="15_71xv2"]
+[ext_resource type="Script" uid="uid://u52t2qf2poah" path="res://systems/operating_system/apps/mailor/email_syntax_highlighter.gd" id="15_fkpoh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mgofm"]
 border_width_left = 4
@@ -63,34 +66,6 @@ content_margin_top = 5.0
 content_margin_right = 5.0
 content_margin_bottom = 5.0
 draw_center = false
-
-[sub_resource type="Resource" id="Resource_31wgn"]
-resource_local_to_scene = true
-script = ExtResource("4_jrf17")
-subject = "Test lego set"
-body = "Dear WCHC,
-I'm writing to you in regards to our new upcoming Lego sale and to arrange a transport for the following shipment:
-...
-
-Best regards,
-Kary Duplo
-Lego Inc"
-date = 1000
-metadata/_custom_type_script = "uid://c0n33sueqwg8d"
-
-[sub_resource type="Resource" id="Resource_fkpoh"]
-resource_local_to_scene = true
-script = ExtResource("4_jrf17")
-subject = "Test lego set"
-body = "Dear WCHC,
-I'm writing to you in regards to our new upcoming Lego sale and to arrange a transport for the following shipment:
-...
-
-Best regards,
-Kary Duplo
-Lego Inc"
-date = 1000
-metadata/_custom_type_script = "uid://c0n33sueqwg8d"
 
 [sub_resource type="Resource" id="Resource_71xv2"]
 resource_local_to_scene = true
@@ -274,6 +249,34 @@ Lego Inc"
 date = 1000
 metadata/_custom_type_script = "uid://c0n33sueqwg8d"
 
+[sub_resource type="Resource" id="Resource_nc55p"]
+resource_local_to_scene = true
+script = ExtResource("4_jrf17")
+subject = "Test lego set"
+body = "Dear WCHC,
+I'm writing to you in regards to our new upcoming Lego sale and to arrange a transport for the following shipment:
+...
+
+Best regards,
+Kary Duplo
+Lego Inc"
+date = 1000
+metadata/_custom_type_script = "uid://c0n33sueqwg8d"
+
+[sub_resource type="Resource" id="Resource_s1mr4"]
+resource_local_to_scene = true
+script = ExtResource("4_jrf17")
+subject = "Test lego set"
+body = "Dear WCHC,
+I'm writing to you in regards to our new upcoming Lego sale and to arrange a transport for the following shipment:
+...
+
+Best regards,
+Kary Duplo
+Lego Inc"
+date = 1000
+metadata/_custom_type_script = "uid://c0n33sueqwg8d"
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_drr5v"]
 bg_color = Color(1, 1, 1, 1)
 
@@ -397,15 +400,9 @@ content_margin_right = 5.0
 content_margin_bottom = 5.0
 bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ibj8h"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nc55p"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ancsa"]
-content_margin_left = 20.0
-content_margin_top = 20.0
-content_margin_right = 20.0
-content_margin_bottom = 20.0
-bg_color = Color(0.8039216, 0.8980392, 0.96862745, 0.3372549)
-border_color = Color(0, 0, 0, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ibj8h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4t8ss"]
 content_margin_left = 5.0
@@ -439,25 +436,33 @@ content_margin_right = 5.0
 bg_color = Color(1, 1, 1, 1)
 border_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_map3m"]
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5fap2"]
 content_margin_left = 20.0
 content_margin_top = 20.0
 content_margin_right = 20.0
-content_margin_bottom = 20.0
 draw_center = false
-border_color = Color(0, 0, 0, 1)
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0.39215687)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xeha4"]
-content_margin_left = 20.0
-content_margin_top = 20.0
-content_margin_right = 20.0
-content_margin_bottom = 20.0
-draw_center = false
-border_color = Color(0, 0, 0, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nc55p"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.3)
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 0.3)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
 
-[node name="Mailor" type="PanelContainer" node_paths=PackedStringArray("inbox_items_container", "sent_items_container", "account_info_Label", "search_edit", "search_delay_timer", "email_reader", "email_reader_header_container", "from_label", "to_label", "date_label", "subject_label", "body_label", "body_label_container", "attachment_container_in_email_reader", "attachment_items_container_in_email_reader", "attachment_items_container_in_email_composer", "attachment_reader", "email_composer", "to_edit", "subject_edit", "body_edit", "buttons_container", "new_button", "send_button", "close_button", "mark_as_unread_button", "mark_as_read_button", "reply_button", "delete_button", "add_to_person_button", "add_subject_button", "add_attachment_button", "show_read_button")]
+[sub_resource type="SyntaxHighlighter" id="SyntaxHighlighter_782if"]
+script = ExtResource("15_fkpoh")
+metadata/_custom_type_script = "uid://u52t2qf2poah"
+
+[node name="Mailor" type="PanelContainer" node_paths=PackedStringArray("inbox_items_container", "sent_items_container", "account_info_Label", "search_edit", "search_delay_timer", "email_reader", "email_reader_header_container", "from_label", "to_label", "date_label", "subject_label", "body_container_in_email_reader", "email_body_items_container_in_email_reader", "email_body_items_container_in_email_composer", "attachment_reader", "attachment_container_in_email_reader", "attachment_items_container_in_email_reader", "attachment_items_container_in_email_composer", "email_composer", "to_edit", "subject_edit", "body_edit", "buttons_container", "new_button", "send_button", "close_button", "mark_as_unread_button", "mark_as_read_button", "reply_button", "delete_button", "add_to_person_button", "add_subject_button", "add_attachment_button", "show_read_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -470,6 +475,7 @@ script = ExtResource("1_ny8fa")
 inbox_items_container = NodePath("VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer")
 sent_items_container = NodePath("VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer")
 email_item_scene = ExtResource("3_ny8fa")
+email_body_item_scene = ExtResource("12_31wgn")
 attachment_item_scene = ExtResource("6_1sawd")
 account_info_Label = NodePath("VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/AccountInfo/AccountInfoLabel")
 search_edit = NodePath("VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/Search")
@@ -480,16 +486,17 @@ from_label = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBox
 to_label = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/To/ToValue")
 date_label = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/Date/DateValue")
 subject_label = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/Subject/SubjectValue")
-body_label = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailReader/VBoxContainer/Body/BodyLabel")
-body_label_container = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailReader/VBoxContainer/Body")
+body_container_in_email_reader = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailReader/VBoxContainer/BodyContainer")
+email_body_items_container_in_email_reader = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailReader/VBoxContainer/BodyContainer/EmailBodyItemsContainer")
+email_body_items_container_in_email_composer = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer/VBoxContainer/BodyContainer/EmailBodyItemsContainer")
+attachment_reader = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailReader/VBoxContainer/AttachmentReader")
 attachment_container_in_email_reader = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/AttachmentContainer")
 attachment_items_container_in_email_reader = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/AttachmentContainer/AttachmentsItemContainer")
 attachment_items_container_in_email_composer = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/AttachmentContainer/HBoxContainer/AttachmentsItemContainer")
-attachment_reader = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailReader/VBoxContainer/AttachmentReader")
 email_composer = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer")
 to_edit = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/To/HBoxContainer/ToLineEdit")
 subject_edit = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/Subject/HBoxContainer/SubjectLineEdit")
-body_edit = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer/VBoxContainer/Body/BodyTextEdit")
+body_edit = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer/VBoxContainer/BodyContainer/EmailBodyItemsContainer/BodyTextEdit")
 buttons_container = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/Buttons")
 new_button = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/Buttons/HBoxContainer/NewButton")
 send_button = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/SendButton")
@@ -502,6 +509,7 @@ add_to_person_button = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndCom
 add_subject_button = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/Subject/HBoxContainer/AddSubjectButton/AddSubjectButton")
 add_attachment_button = NodePath("VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/AttachmentContainer/HBoxContainer/AddAttachmentButton/AddAttachmentButton")
 show_read_button = NodePath("VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/Header/ShowReadButton")
+particle_scene = ExtResource("15_71xv2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -612,6 +620,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_jrf17")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List"]
 layout_mode = 2
+follow_focus = true
 
 [node name="ItemContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List/ScrollContainer"]
 layout_mode = 2
@@ -620,39 +629,39 @@ size_flags_vertical = 3
 
 [node name="EmailItem" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
-email = SubResource("Resource_31wgn")
+email = SubResource("Resource_71xv2")
 
 [node name="EmailItem2" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
-email = SubResource("Resource_fkpoh")
+email = SubResource("Resource_782if")
 
 [node name="EmailItem3" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
-email = SubResource("Resource_71xv2")
+email = SubResource("Resource_50wre")
 
 [node name="EmailItem4" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
-email = SubResource("Resource_782if")
+email = SubResource("Resource_map3m")
 
 [node name="EmailItem5" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
-email = SubResource("Resource_50wre")
+email = SubResource("Resource_5fap2")
 
 [node name="EmailItem6" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
-email = SubResource("Resource_map3m")
+email = SubResource("Resource_xeha4")
 
 [node name="EmailItem7" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
-email = SubResource("Resource_5fap2")
+email = SubResource("Resource_3lel5")
 
 [node name="EmailItem8" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
-email = SubResource("Resource_xeha4")
+email = SubResource("Resource_oo5l3")
 
 [node name="EmailItem9" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
-email = SubResource("Resource_3lel5")
+email = SubResource("Resource_jq42h")
 
 [node name="Sent" type="PanelContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer"]
 layout_mode = 2
@@ -697,6 +706,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_jrf17")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Sent/VBoxContainer/List"]
 layout_mode = 2
+follow_focus = true
 
 [node name="ItemContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Sent/VBoxContainer/List/ScrollContainer"]
 layout_mode = 2
@@ -705,27 +715,27 @@ size_flags_vertical = 3
 
 [node name="EmailItem3" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
-email = SubResource("Resource_oo5l3")
+email = SubResource("Resource_uhsja")
 
 [node name="EmailItem4" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
-email = SubResource("Resource_jq42h")
+email = SubResource("Resource_axbmp")
 
 [node name="EmailItem5" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
-email = SubResource("Resource_uhsja")
+email = SubResource("Resource_nd7a6")
 
 [node name="EmailItem6" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
-email = SubResource("Resource_axbmp")
+email = SubResource("Resource_etcog")
 
 [node name="EmailItem7" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
-email = SubResource("Resource_nd7a6")
+email = SubResource("Resource_nc55p")
 
 [node name="EmailItem8" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Sent/VBoxContainer/List/ScrollContainer/ItemContainer" instance=ExtResource("3_ny8fa")]
 layout_mode = 2
-email = SubResource("Resource_etcog")
+email = SubResource("Resource_s1mr4")
 
 [node name="EmailReaderAndComposer" type="PanelContainer" parent="VBoxContainer/HSplitContainer"]
 layout_mode = 2
@@ -808,6 +818,7 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_orlh7")
 text = "Delete"
 
 [node name="EmailReader" type="PanelContainer" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_jrf17")
@@ -926,23 +937,32 @@ layout_mode = 2
 [node name="EmailAttachmentItem2" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailReader/VBoxContainer/Header/VBoxContainer/AttachmentContainer/AttachmentsItemContainer" instance=ExtResource("6_1sawd")]
 layout_mode = 2
 
-[node name="Body" type="PanelContainer" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailReader/VBoxContainer"]
+[node name="BodyContainer" type="ScrollContainer" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailReader/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ibj8h")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_nc55p")
+follow_focus = true
 
-[node name="BodyLabel" type="RichTextLabel" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailReader/VBoxContainer/Body"]
+[node name="EmailBodyItemsContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailReader/VBoxContainer/BodyContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 15
-theme_override_font_sizes/bold_font_size = 15
-theme_override_font_sizes/bold_italics_font_size = 15
-theme_override_font_sizes/italics_font_size = 15
-theme_override_font_sizes/mono_font_size = 15
-theme_override_styles/normal = SubResource("StyleBoxFlat_ancsa")
-bbcode_enabled = true
-text = "test test test test"
+theme_override_constants/separation = 0
+
+[node name="EmailBodyItem" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailReader/VBoxContainer/BodyContainer/EmailBodyItemsContainer" instance=ExtResource("12_31wgn")]
+layout_mode = 2
+
+[node name="EmailBodyItem2" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailReader/VBoxContainer/BodyContainer/EmailBodyItemsContainer" instance=ExtResource("12_31wgn")]
+layout_mode = 2
+
+[node name="EmailBodyItem3" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailReader/VBoxContainer/BodyContainer/EmailBodyItemsContainer" instance=ExtResource("12_31wgn")]
+layout_mode = 2
+
+[node name="EmailBodyItem4" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailReader/VBoxContainer/BodyContainer/EmailBodyItemsContainer" instance=ExtResource("12_31wgn")]
+layout_mode = 2
+
+[node name="EmailBodyItem5" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailReader/VBoxContainer/BodyContainer/EmailBodyItemsContainer" instance=ExtResource("12_31wgn")]
+layout_mode = 2
 
 [node name="AttachmentReader" type="PanelContainer" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailReader/VBoxContainer"]
 layout_mode = 2
@@ -1141,21 +1161,50 @@ layout_mode = 2
 [node name="EmailAttachmentItem6" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer/VBoxContainer/Header/HBoxContainer/VBoxContainer/AttachmentContainer/HBoxContainer/AttachmentsItemContainer" instance=ExtResource("6_1sawd")]
 layout_mode = 2
 
-[node name="Body" type="PanelContainer" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer/VBoxContainer"]
+[node name="BodyContainer" type="ScrollContainer" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_map3m")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_nc55p")
+follow_focus = true
 
-[node name="BodyTextEdit" type="TextEdit" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer/VBoxContainer/Body"]
+[node name="EmailBodyItemsContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer/VBoxContainer/BodyContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="BodyTextEdit" type="TextEdit" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer/VBoxContainer/BodyContainer/EmailBodyItemsContainer"]
 layout_mode = 2
 theme_override_colors/caret_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 0
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxFlat_5fap2")
-theme_override_styles/focus = SubResource("StyleBoxFlat_xeha4")
-text = "test test test"
+theme_override_styles/focus = SubResource("StyleBoxFlat_5fap2")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_nc55p")
+text = "test arst test 12 arst Please accept and say thank you later. 
+test accept accept 
+test arst test at !testtarst test @ tsatr t"
 wrap_mode = 1
+scroll_fit_content_height = true
 caret_blink = true
+caret_multiple = false
+syntax_highlighter = SubResource("SyntaxHighlighter_782if")
+
+[node name="EmailBodyItem" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer/VBoxContainer/BodyContainer/EmailBodyItemsContainer" instance=ExtResource("12_31wgn")]
+layout_mode = 2
+
+[node name="EmailBodyItem2" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer/VBoxContainer/BodyContainer/EmailBodyItemsContainer" instance=ExtResource("12_31wgn")]
+layout_mode = 2
+
+[node name="EmailBodyItem3" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer/VBoxContainer/BodyContainer/EmailBodyItemsContainer" instance=ExtResource("12_31wgn")]
+layout_mode = 2
+
+[node name="EmailBodyItem4" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer/VBoxContainer/BodyContainer/EmailBodyItemsContainer" instance=ExtResource("12_31wgn")]
+layout_mode = 2
+
+[node name="EmailBodyItem5" parent="VBoxContainer/HSplitContainer/EmailReaderAndComposer/VBoxContainer/EmailComposer/VBoxContainer/BodyContainer/EmailBodyItemsContainer" instance=ExtResource("12_31wgn")]
+layout_mode = 2
 
 [node name="OsAppLoadingScreen" parent="." instance=ExtResource("3_fvvr4")]
 visible = false

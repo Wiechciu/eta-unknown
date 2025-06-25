@@ -10,8 +10,10 @@ enum FolderType {
 @export var folder_type: FolderType
 var mailor: Mailor
 var inbox_items_count: int
-var unread_inbox_items_count: int
+var visible_inbox_items_count: int
 var sent_items_count: int
+var visible_sent_items_count: int
+
 
 func _ready() -> void:
 	mailor = UtilityTools.get_parent_of_type(self, Mailor)
@@ -24,11 +26,12 @@ func _ready() -> void:
 func _on_items_count_changed() -> void:
 	if folder_type == FolderType.INBOX:
 		inbox_items_count = mailor.inbox_items.size()
-		unread_inbox_items_count = mailor.unread_inbox_items.size()
-		text = "(%s | %s)" % [inbox_items_count, unread_inbox_items_count]
+		visible_inbox_items_count = mailor.visible_inbox_items.size()
+		text = "(%s / %s)" % [visible_inbox_items_count, inbox_items_count]
 	else:
 		sent_items_count = mailor.sent_items.size()
-		text = "(%s)" % [sent_items_count]
+		visible_sent_items_count = mailor.visible_sent_items.size()
+		text = "(%s / %s)" % [visible_sent_items_count, sent_items_count]
 
 
 func get_tooltip_icon() -> Texture2D:
@@ -40,7 +43,8 @@ func get_tooltip_header() -> String:
 
 
 func get_tooltip_body() -> String:
+	var tooltip_body: String = "%s folder contains %s emails in total.\nCurrently showing %s emails."
 	if folder_type == FolderType.INBOX:
-		return "Inbox folder contains %s emails,\nof which %s are unread." % [inbox_items_count, unread_inbox_items_count]
+		return tooltip_body % ["Inbox", inbox_items_count, visible_inbox_items_count]
 	else:
-		return "Sent folder contains %s emails." % [sent_items_count]
+		return tooltip_body % ["Sent", sent_items_count, visible_sent_items_count]

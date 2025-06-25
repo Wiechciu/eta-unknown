@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbvmpkqwprb1"]
+
+[ext_resource type="Texture2D" uid="uid://dvqelf5syshsy" path="res://systems/operating_system/apps/mailor/fuzzy_ball.png" id="1_2n7e1"]
+
+[sub_resource type="Curve" id="Curve_2n7e1"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.10875332, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_wt1rq"]
+resource_local_to_scene = true
+curve = SubResource("Curve_2n7e1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wt1rq"]
+resource_local_to_scene = true
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -10, 0)
+emission_shape = 3
+emission_box_extents = Vector3(1, 10, 1)
+spread = 30.0
+initial_velocity_min = 50.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.01
+scale_max = 0.049999997
+color = Color(1, 0, 1, 1)
+alpha_curve = SubResource("CurveTexture_wt1rq")
+
+[node name="EmailSyntaxParticlesEffect" type="GPUParticles2D"]
+amount = 200
+texture = ExtResource("1_2n7e1")
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_wt1rq")

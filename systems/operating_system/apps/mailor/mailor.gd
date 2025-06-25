@@ -5,43 +5,69 @@ extends OsApp
 signal items_count_changed
 
 
+const EMAIL_KEYWORDS_ACCEPT: Array[String] = preload("res://systems/operating_system/apps/mailor/email_keywords.json").data.ACCEPT
+const EMAIL_KEYWORDS_DECLINE: Array[String] = preload("res://systems/operating_system/apps/mailor/email_keywords.json").data.DECLINE
+const EMAIL_KEYWORDS_REQUEST_INFO: Array[String] = preload("res://systems/operating_system/apps/mailor/email_keywords.json").data.REQUEST_INFO
+const EMAIL_KEYWORDS_CANCEL: Array[String] = preload("res://systems/operating_system/apps/mailor/email_keywords.json").data.CANCEL
+const EMAIL_KEYWORDS_GREETING: Array[String] = preload("res://systems/operating_system/apps/mailor/email_keywords.json").data.GREETING
+const EMAIL_KEYWORDS_THANKFUL: Array[String] = preload("res://systems/operating_system/apps/mailor/email_keywords.json").data.THANKFUL
+
+
+@export_category("Email Items")
 @export var inbox_items_container: Control
 @export var sent_items_container: Control
 @export var inbox_items: Array[EmailItem]
 var unread_inbox_items: Array[EmailItem]:
 	get:
 		return inbox_items.filter(func(email_item: EmailItem) -> bool: return email_item.email.is_unread)
+var visible_inbox_items: Array[EmailItem]:
+	get:
+		return inbox_items.filter(func(email_item: EmailItem) -> bool: return email_item.visible)
 @export var sent_items: Array[EmailItem]
+var visible_sent_items: Array[EmailItem]:
+	get:
+		return sent_items.filter(func(email_item: EmailItem) -> bool: return email_item.visible)
 
 @export var email_item_scene: PackedScene
+@export var email_body_item_scene: PackedScene
 @export var attachment_item_scene: PackedScene
 
+@export_category("Account Info")
 @export var account_info_Label: Label
+
+@export_category("Search")
 @export var search_edit: LineEdit
 @export var search_delay_timer: Timer
 var search_call_id: int
 
+@export_category("Email Reader")
 @export var email_reader: Control
 @export var email_reader_header_container: Control
 @export var from_label: Label
 @export var to_label: Label
 @export var date_label: Label
 @export var subject_label: Label
-@export var body_label: RichTextLabel
-@export var body_label_container: Control
+@export var body_container_in_email_reader: Control
+@export var email_body_items_container_in_email_reader: Control
+@export var email_body_items_container_in_email_composer: Control
+var email_body_items_in_email_reader: Array[EmailBodyItem]
+var email_body_items_in_email_composer: Array[EmailBodyItem]
+
+@export_category("Attachment Reader")
+@export var attachment_reader: Control
 @export var attachment_container_in_email_reader: Control
 @export var attachment_items_container_in_email_reader: Control
 @export var attachment_items_container_in_email_composer: Control
 var attachment_items_in_email_reader: Array[AttachmentItem]
 var attachment_items_in_email_composer: Array[AttachmentItem]
 
-@export var attachment_reader: Control
-
+@export_category("Email Composer")
 @export var email_composer: Control
 @export var to_edit: LineEdit
 @export var subject_edit: LineEdit
 @export var body_edit: TextEdit
 
+@export_category("Buttons")
 @export var buttons_container: Control
 @export var new_button: Button
 @export var send_button: Button
@@ -54,6 +80,9 @@ var attachment_items_in_email_composer: Array[AttachmentItem]
 @export var add_subject_button: Button
 @export var add_attachment_button: Button
 @export var show_read_button: Button
+
+@export_category("Syntax Highlighter")
+@export var particle_scene: PackedScene
 
 var displayed_email_item: EmailItem
 var original_email: Email
@@ -70,7 +99,8 @@ func _ready() -> void:
 	clear_containers()
 	retrieve_emails_from_server()
 	register_signals()
-	filter_inbox()
+	add_syntax_highlighter_colors()
+	filter_folders()
 	switch_to_email_reader()
 
 
@@ -89,6 +119,42 @@ func register_signals() -> void:
 	add_subject_button.pressed.connect(_on_add_subject_button_pressed)
 	add_attachment_button.pressed.connect(_on_add_attachment_button_pressed)
 	show_read_button.pressed.connect(_on_show_read_button_pressed)
+
+
+func add_syntax_highlighter_colors() -> void:
+	if body_edit.syntax_highlighter == null:
+		body_edit.syntax_highlighter = EmailSyntaxHighlighter.new()
+	var syntax_highlighter: EmailSyntaxHighlighter = body_edit.syntax_highlighter as EmailSyntaxHighlighter
+	syntax_highlighter.word_highlighted.connect(_on_word_highlighted)
+	
+	syntax_highlighter.clear_keyword_groups()
+	syntax_highlighter.add_keyword_group(Color(0.165, 0.655, 0.263, 1.0), EMAIL_KEYWORDS_ACCEPT)
+	syntax_highlighter.add_keyword_group(Color(0.863, 0.0, 0.0, 1.0), EMAIL_KEYWORDS_DECLINE)
+	syntax_highlighter.add_keyword_group(Color(0.005, 0.534, 0.613, 1.0), EMAIL_KEYWORDS_REQUEST_INFO)
+	syntax_highlighter.add_keyword_group(Color(0.826, 0.356, 0.0, 1.0), EMAIL_KEYWORDS_CANCEL)
+	syntax_highlighter.add_keyword_group(Color(0.392, 0.514, 0.929, 1.0), EMAIL_KEYWORDS_GREETING)
+	syntax_highlighter.add_keyword_group(Color(0.501, 0, 0.501, 1), EMAIL_KEYWORDS_THANKFUL)
+
+
+func _on_word_highlighted(text_edit: TextEdit, _word: String, color: Color, _line: int) -> void:
+	if particle_scene == null:
+		return
+	
+	await get_tree().process_frame
+	
+	var particles: GPUParticles2D = particle_scene.instantiate()
+	(particles.process_material as ParticleProcessMaterial).color = color
+	text_edit.add_theme_color_override("caret_color", color)
+	particles.global_position = text_edit.global_position + text_edit.get_caret_draw_pos() 
+	particles.top_level = true
+	
+	get_tree().root.add_child(particles)
+	particles.one_shot = true
+	particles.restart()
+	
+	await particles.finished
+	text_edit.add_theme_color_override("caret_color", Color.BLACK)
+	particles.queue_free()
 
 
 func clear_containers() -> void:
@@ -147,6 +213,38 @@ func remove_email_item(email_item: EmailItem) -> void:
 	items_count_changed.emit()
 
 
+func add_all_email_body_items(email: Email, is_read_only: bool) -> void:
+	for email_from_history: Email in email.communication_chain:
+		add_email_body_item(email_from_history, is_read_only)
+	add_email_body_item(email, is_read_only)
+
+
+func add_email_body_item(email: Email, is_read_only: bool) -> EmailBodyItem:
+	var array: Array[EmailBodyItem] = email_body_items_in_email_reader if is_read_only else email_body_items_in_email_composer
+	var container: Control = email_body_items_container_in_email_reader if is_read_only else email_body_items_container_in_email_composer
+	var new_email_body_item: EmailBodyItem = create_email_body_item(email, is_read_only)
+	array.append(new_email_body_item)
+	container.add_child(new_email_body_item)
+	container.move_child(new_email_body_item, 0 if is_read_only else 1)
+
+	return new_email_body_item
+
+
+func create_email_body_item(email: Email, is_read_only: bool) -> EmailBodyItem:
+	var new_email_body_item: EmailBodyItem = email_body_item_scene.instantiate() as EmailBodyItem
+	new_email_body_item.initialize(email, is_read_only)
+	return new_email_body_item
+
+
+func remove_all_email_body_items(is_read_only: bool) -> void:
+	var array: Array[EmailBodyItem] = email_body_items_in_email_reader if is_read_only else email_body_items_in_email_composer
+	var container: Control = email_body_items_container_in_email_reader if is_read_only else email_body_items_container_in_email_composer
+	for child: Node in container.get_children():
+		if child is EmailBodyItem:
+			child.queue_free()
+	array.clear()
+
+
 func add_all_attachment_items(email: Email, is_read_only: bool) -> void:
 	for document: Document in email.attachments:
 		add_attachment_item(document, is_read_only)
@@ -190,15 +288,14 @@ func clear_email_reader() -> void:
 	if displayed_email_item != null:
 		displayed_email_item.deselect()
 		displayed_email_item = null
-		filter_inbox()
+		filter_folders()
 	
 	email_reader_header_container.hide()
 	from_label.text = ""
 	to_label.text = ""
 	date_label.text = ""
 	subject_label.text = ""
-	body_label.text = ""
-	body_label.scroll_to_line(0)
+	remove_all_email_body_items(true) #TODO: scroll to bottom of the scroll container
 	remove_all_attachment_items(true)
 	
 	reply_button.hide()
@@ -217,6 +314,7 @@ func clear_email_composer() -> void:
 	to_edit.text = ""
 	subject_edit.text = ""
 	body_edit.text = ""
+	remove_all_email_body_items(false) #TODO: scroll to bottom of the scroll container
 	remove_all_attachment_items(false)
 
 
@@ -235,7 +333,7 @@ func display_email_in_reader(email_item: EmailItem) -> void:
 	to_label.text = email_item.email.to.email
 	date_label.text = GlobalTimer.get_nice_datetime_string_from_unix_time(email_item.email.date)
 	subject_label.text = email_item.email.subject
-	body_label.text = email_item.email.body
+	add_all_email_body_items(email_item.email, true)
 	if email_item.email.attachments.is_empty():
 		attachment_container_in_email_reader.hide()
 	else:
@@ -260,7 +358,7 @@ func display_attachment_in_reader(attachment_item: AttachmentItem) -> void:
 	document_layout.closed.connect(switch_to_email_reader.bind(displayed_email_item))
 	
 	attachment_reader.show()
-	body_label_container.hide()
+	body_container_in_email_reader.hide()
 
 
 func update_mark_buttons() -> void:
@@ -288,12 +386,12 @@ func _on_search_text_changed() -> void:
 	await search_delay_timer.timeout
 	
 	if current_search_call_id == search_call_id:
-		filter_inbox()
+		filter_folders()
 
 
 func _on_search_text_submitted() -> void:
 	search_call_id += 1
-	filter_inbox()
+	filter_folders()
 
 
 func _on_new_button_pressed() -> void:
@@ -312,7 +410,9 @@ func _on_reply_button_pressed() -> void:
 	else:
 		to_edit.text = displayed_email_item.email.from.email
 	subject_edit.text = EmailServer.REPLY_SUBJECT_PREFIX + displayed_email_item.email.subject
-	body_edit.text = EmailServer.add_footer_and_separator_to_beginning(displayed_email_item.email.body, logged_in_user)
+	body_edit.text = ""
+	add_all_email_body_items(displayed_email_item.email, false)
+	body_edit.text = EmailServer.get_footer(logged_in_user)
 	original_email = displayed_email_item.email
 	
 	switch_to_email_composer()
@@ -401,11 +501,13 @@ func _on_attachment_removed_button_pressed(attachment_item: AttachmentItem) -> v
 
 
 func _on_show_read_button_pressed() -> void:
-	filter_inbox()
+	filter_folders()
 
 
-func filter_inbox() -> void:
+func filter_folders() -> void:
 	for email_item: EmailItem in inbox_items:
+		show_or_hide_email_item(email_item)
+	for email_item: EmailItem in sent_items:
 		show_or_hide_email_item(email_item)
 	items_count_changed.emit()
 
@@ -433,7 +535,7 @@ func switch_to_email_reader(email_item: EmailItem = null) -> void:
 	email_reader.show()
 	attachment_reader.hide()
 	buttons_container.show()
-	body_label_container.show()
+	body_container_in_email_reader.show()
 	
 	email_composer.hide()
 	send_button.hide()

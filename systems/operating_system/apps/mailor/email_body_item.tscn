@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3dw5xcdwe7xm"]
+
+[ext_resource type="Script" uid="uid://b1g5u2hfhyk1n" path="res://systems/operating_system/apps/mailor/email_body_item.gd" id="1_ycbqh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ancsa"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+bg_color = Color(0.8039216, 0.8980392, 0.96862745, 0.3372549)
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 0.39215687)
+
+[node name="EmailBodyItem" type="RichTextLabel"]
+offset_right = 449.0
+offset_bottom = 22.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 15
+theme_override_font_sizes/bold_font_size = 15
+theme_override_font_sizes/bold_italics_font_size = 15
+theme_override_font_sizes/italics_font_size = 15
+theme_override_font_sizes/mono_font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_ancsa")
+bbcode_enabled = true
+text = "test
+test
+test
+test
+"
+fit_content = true
+scroll_active = false
+script = ExtResource("1_ycbqh")

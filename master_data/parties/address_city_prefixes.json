@@ -1,0 +1,22 @@
+[
+	"Green", "North", "South", "East", "West",
+	"Lake", "River", "Hill", "Spring", "Clear",
+	"New", "Fort", "Port", "Mount", "Grand",
+	"High", "Low", "Sunny", "Silver", "Golden",
+	"Red", "Blue", "White", "Black", "Stone",
+	"Oak", "Pine", "Maple", "Cedar", "Willow",
+	"Iron", "Ash", "Bright", "Shadow", "Cloud",
+	"Storm", "Frost", "Dust", "Glade", "Crystal",
+	"Fog", "Drift", "Sun", "Moon", "Star",
+	"Falcon", "Wolf", "Bear", "Fox", "Eagle",
+	"Copper", "Bronze", "Steel", "Obsidian", "Quartz",
+	"Wind", "Snow", "Rain", "Thunder", "Blaze",
+	"Cinder", "Ember", "Flint", "Clay", "Slate",
+	"Marble", "Granite", "Moss", "Boulder", "Pebble",
+	"Branch", "Thorn", "Vine", "Briar", "Bloom",
+	"Thistle", "Ivy", "Lily", "Fern", "Dawn",
+	"Dusk", "Aurora", "Echo", "Zephyr", "Nimbus",
+	"Comet", "Nova", "Hawk", "Falco", "Griffin",
+	"Dragon", "Raven", "Crow", "Lynx", "Otter",
+	"Badger", "Elk", "Moose", "Coyote", "Cougar"
+]

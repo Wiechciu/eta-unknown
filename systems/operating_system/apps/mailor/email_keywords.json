@@ -1,0 +1,8 @@
+{
+	"ACCEPT": ["accept", "confirm", "approved", "ok", "i'm on it", "let's do it"],
+	"DECLINE": ["reject", "decline", "pass", "not this time", "we can't"],
+	"REQUEST_INFO": ["clarify", "details", "specify", "explain", "information"],
+	"CANCEL": ["cancel", "scrap it", "no go"],
+	"GREETING": ["hello", "hi", "dear"],
+	"THANKFUL": ["thank you", "thanks", "appreciate", "cheers", "grateful"],
+}
