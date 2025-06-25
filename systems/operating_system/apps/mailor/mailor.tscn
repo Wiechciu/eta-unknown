@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://csikevd7cm74m" path="res://systems/tooltip/tooltip_component.tscn" id="8_orlh7"]
 [ext_resource type="PackedScene" uid="uid://byup0xasld7sf" path="res://master_data/documents/document_layouts/document_layout_spo.tscn" id="11_4t8ss"]
 [ext_resource type="PackedScene" uid="uid://b3dw5xcdwe7xm" path="res://systems/operating_system/apps/mailor/email_body_item.tscn" id="12_31wgn"]
-[ext_resource type="Script" uid="uid://u2qdcbcwrk7l" path="res://master_data/documents/document.gd" id="12_71xv2"]
+[ext_resource type="Script" uid="uid://u2qdcbcwrk7l" path="res://master_data/documents/document.gd" id="12_782if"]
 [ext_resource type="PackedScene" uid="uid://cd2veihae5l0j" path="res://systems/operating_system/apps/mailor/reply_with_template_button.tscn" id="14_782if"]
 [ext_resource type="PackedScene" uid="uid://dbvmpkqwprb1" path="res://systems/operating_system/apps/mailor/email_syntax_particles_effect.tscn" id="15_71xv2"]
 [ext_resource type="Script" uid="uid://u52t2qf2poah" path="res://systems/operating_system/apps/mailor/email_syntax_highlighter.gd" id="15_fkpoh"]

@@ -1,25 +1,44 @@
-[gd_scene load_steps=8 format=3 uid="uid://cd2veihae5l0j"]
+[gd_scene load_steps=15 format=3 uid="uid://cd2veihae5l0j"]
 
 [ext_resource type="Script" uid="uid://caohxxa02aolt" path="res://systems/operating_system/apps/mailor/reply_with_template_button.gd" id="1_8j1lw"]
 [ext_resource type="Texture2D" uid="uid://cfy4xqgpovxrj" path="res://arrow_down.tres" id="1_el5xh"]
+[ext_resource type="PackedScene" uid="uid://b0x1secl8njg2" path="res://systems/operating_system/apps/mailor/email_templates/email_template_item.tscn" id="3_a12hh"]
+[ext_resource type="Script" uid="uid://dkum24n3wusea" path="res://systems/operating_system/apps/mailor/email_templates/email_template.gd" id="3_hnjtp"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cm1iw"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8j1lw"]
+
+[sub_resource type="Resource" id="Resource_7g6j6"]
+script = ExtResource("3_hnjtp")
+name = "Test email template"
+message = "Email message thank you and ok confirm"
+metadata/_custom_type_script = "uid://dkum24n3wusea"
+
+[sub_resource type="Resource" id="Resource_1rid7"]
+script = ExtResource("3_hnjtp")
+name = "Second template"
+message = "test test thank you test"
+metadata/_custom_type_script = "uid://dkum24n3wusea"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a12hh"]
 bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cwlbl"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a12hh"]
 content_margin_left = 5.0
-content_margin_top = 2.0
-content_margin_bottom = 2.0
+content_margin_right = 5.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k64gd"]
-content_margin_left = 5.0
+content_margin_left = 0.0
 content_margin_top = 5.0
-content_margin_right = 5.0
+content_margin_right = 0.0
 content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cwlbl"]
+content_margin_top = 2.0
+content_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8r3w"]
 content_margin_left = 5.0
@@ -47,31 +66,58 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="ReplyWithTemplateButton" type="PanelContainer"]
-theme_override_styles/panel = SubResource("StyleBoxFlat_cm1iw")
-script = ExtResource("1_8j1lw")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hnjtp"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.8039216, 0.8980392, 0.96862745, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="ReplyWithTemplateButton" type="PanelContainer" node_paths=PackedStringArray("button", "visual_container", "email_template_items_container")]
+theme_override_styles/panel = SubResource("StyleBoxEmpty_8j1lw")
+script = ExtResource("1_8j1lw")
+button = NodePath("VBoxContainer/PanelContainer/Button")
+visual_container = NodePath("VBoxContainer/Control")
+email_template_items_container = NodePath("VBoxContainer/Control/PanelContainer/VBoxContainer")
+email_template_item_scene = ExtResource("3_a12hh")
+email_templates = Array[ExtResource("3_hnjtp")]([SubResource("Resource_7g6j6"), SubResource("Resource_1rid7")])
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a12hh")
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_a12hh")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_k64gd")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/PanelContainer/PanelContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("1_el5xh")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 15
 theme_override_styles/normal = SubResource("StyleBoxEmpty_cwlbl")
 text = "Reply with template"
 
-[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_k64gd")
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/PanelContainer"]
-layout_mode = 2
-texture = ExtResource("1_el5xh")
-expand_mode = 3
-
-[node name="ReplyWithTemplateButton" type="Button" parent="."]
+[node name="Button" type="Button" parent="VBoxContainer/PanelContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 15
@@ -81,4 +127,23 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_a8r3w")
 theme_override_styles/focus = SubResource("StyleBoxFlat_50wre")
 flat = true
 
-[connection signal="pressed" from="ReplyWithTemplateButton" to="." method="_on_reply_with_template_button_pressed"]
+[node name="Control" type="Control" parent="VBoxContainer"]
+z_index = 1
+layout_mode = 2
+mouse_filter = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/Control"]
+layout_mode = 0
+offset_right = 171.0
+offset_bottom = 58.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hnjtp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Control/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="EmailTemplateItem" parent="VBoxContainer/Control/PanelContainer/VBoxContainer" instance=ExtResource("3_a12hh")]
+layout_mode = 2
+
+[node name="EmailTemplateItem2" parent="VBoxContainer/Control/PanelContainer/VBoxContainer" instance=ExtResource("3_a12hh")]
+layout_mode = 2

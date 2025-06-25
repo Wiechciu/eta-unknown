@@ -418,14 +418,8 @@ func _on_reply_button_pressed() -> void:
 	switch_to_email_composer_with_reply()
 
 
-func _on_reply_with_template_button_pressed() -> void:
-	switch_to_email_composer_with_reply(
-		"Hello,"
-		+ EmailServer.LINE_BREAK + "Thank you for your message."
-		+ EmailServer.LINE_BREAK + "Please note that we accept the order and will proceed with processing of this shipment immediately."
-		+ EmailServer.LINE_BREAK
-		+ EmailServer.LINE_BREAK + "Hope you have a nice day!"
-	)
+func _on_reply_with_template_button_pressed(email_template_item: EmailTemplateItem) -> void:
+	switch_to_email_composer_with_reply(email_template_item.email_template.message)
 
 
 func switch_to_email_composer_with_reply(message: String = "") -> void:
