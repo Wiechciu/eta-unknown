@@ -16,14 +16,14 @@ const EMAIL_KEYWORDS_THANKFUL: Array[String] = preload("res://systems/operating_
 @export_category("Email Items")
 @export var inbox_items_container: Control
 @export var sent_items_container: Control
-@export var inbox_items: Array[EmailItem]
+var inbox_items: Array[EmailItem]
 var unread_inbox_items: Array[EmailItem]:
 	get:
 		return inbox_items.filter(func(email_item: EmailItem) -> bool: return email_item.email.is_unread)
 var visible_inbox_items: Array[EmailItem]:
 	get:
 		return inbox_items.filter(func(email_item: EmailItem) -> bool: return email_item.visible)
-@export var sent_items: Array[EmailItem]
+var sent_items: Array[EmailItem]
 var visible_sent_items: Array[EmailItem]:
 	get:
 		return sent_items.filter(func(email_item: EmailItem) -> bool: return email_item.visible)
@@ -47,11 +47,10 @@ var search_call_id: int
 @export var to_label: Label
 @export var date_label: Label
 @export var subject_label: Label
+@export var body_scroll_container_in_email_reader: ScrollContainer
 @export var body_container_in_email_reader: Control
 @export var email_body_items_container_in_email_reader: Control
-@export var email_body_items_container_in_email_composer: Control
 var email_body_items_in_email_reader: Array[EmailBodyItem]
-var email_body_items_in_email_composer: Array[EmailBodyItem]
 
 @export_category("Attachment Reader")
 @export var attachment_reader: Control
@@ -66,15 +65,21 @@ var attachment_items_in_email_composer: Array[AttachmentItem]
 @export var to_edit: LineEdit
 @export var subject_edit: LineEdit
 @export var body_edit: TextEdit
+@export var body_scroll_container_in_email_composer: ScrollContainer
+@export var email_body_items_container_in_email_composer: Control
+var email_body_items_in_email_composer: Array[EmailBodyItem]
 
 @export_category("Buttons")
-@export var buttons_container: Control
+@export var buttons_email_reader_container: Control
+@export var buttons_email_composer_container: Control
 @export var new_button: Button
 @export var send_button: Button
-@export var close_button: Button
+@export var close_email_reader_button: Button
+@export var close_email_composer_button: Button
 @export var mark_as_unread_button: Button
 @export var mark_as_read_button: Button
 @export var reply_button: Button
+@export var reply_with_template_button: ReplyWithTemplateButton
 @export var delete_button: Button
 @export var add_to_person_button: Button
 @export var add_subject_button: Button
@@ -110,10 +115,12 @@ func register_signals() -> void:
 	
 	new_button.pressed.connect(_on_new_button_pressed)
 	send_button.pressed.connect(_on_send_button_pressed)
-	close_button.pressed.connect(_on_close_button_pressed)
+	close_email_reader_button.pressed.connect(_on_close_email_reader_button_pressed)
+	close_email_composer_button.pressed.connect(_on_close_email_composer_button_pressed)
 	mark_as_unread_button.pressed.connect(_on_mark_as_unread_button_pressed)
 	mark_as_read_button.pressed.connect(_on_mark_as_read_button_pressed)
 	reply_button.pressed.connect(_on_reply_button_pressed)
+	reply_with_template_button.pressed.connect(_on_reply_with_template_button_pressed)
 	delete_button.pressed.connect(_on_delete_button_pressed)
 	add_to_person_button.pressed.connect(_on_add_to_person_button_pressed)
 	add_subject_button.pressed.connect(_on_add_subject_button_pressed)
@@ -217,6 +224,8 @@ func add_all_email_body_items(email: Email, is_read_only: bool) -> void:
 	for email_from_history: Email in email.communication_chain:
 		add_email_body_item(email_from_history, is_read_only)
 	add_email_body_item(email, is_read_only)
+	var scroll_container: ScrollContainer = body_scroll_container_in_email_reader if is_read_only else body_scroll_container_in_email_composer
+	scroll_container.scroll_vertical = 0
 
 
 func add_email_body_item(email: Email, is_read_only: bool) -> EmailBodyItem:
@@ -295,11 +304,12 @@ func clear_email_reader() -> void:
 	to_label.text = ""
 	date_label.text = ""
 	subject_label.text = ""
-	remove_all_email_body_items(true) #TODO: scroll to bottom of the scroll container
+	remove_all_email_body_items(true)
 	remove_all_attachment_items(true)
 	
 	reply_button.hide()
-	close_button.hide()
+	reply_with_template_button.hide()
+	close_email_reader_button.hide()
 	mark_as_unread_button.hide()
 	mark_as_read_button.hide()
 	delete_button.hide()
@@ -314,7 +324,7 @@ func clear_email_composer() -> void:
 	to_edit.text = ""
 	subject_edit.text = ""
 	body_edit.text = ""
-	remove_all_email_body_items(false) #TODO: scroll to bottom of the scroll container
+	remove_all_email_body_items(false)
 	remove_all_attachment_items(false)
 
 
@@ -340,8 +350,9 @@ func display_email_in_reader(email_item: EmailItem) -> void:
 		attachment_container_in_email_reader.show()
 		add_all_attachment_items(email_item.email, true)
 	
-	close_button.show()
+	close_email_reader_button.show()
 	reply_button.show()
+	reply_with_template_button.show()
 	delete_button.show()
 	update_mark_buttons()
 
@@ -404,6 +415,20 @@ func _on_new_button_pressed() -> void:
 
 
 func _on_reply_button_pressed() -> void:
+	switch_to_email_composer_with_reply()
+
+
+func _on_reply_with_template_button_pressed() -> void:
+	switch_to_email_composer_with_reply(
+		"Hello,"
+		+ EmailServer.LINE_BREAK + "Thank you for your message."
+		+ EmailServer.LINE_BREAK + "Please note that we accept the order and will proceed with processing of this shipment immediately."
+		+ EmailServer.LINE_BREAK
+		+ EmailServer.LINE_BREAK + "Hope you have a nice day!"
+	)
+
+
+func switch_to_email_composer_with_reply(message: String = "") -> void:
 	clear_email_composer()
 	if displayed_email_item.is_outbound:
 		to_edit.text = displayed_email_item.email.to.email
@@ -411,12 +436,27 @@ func _on_reply_button_pressed() -> void:
 		to_edit.text = displayed_email_item.email.from.email
 	subject_edit.text = EmailServer.REPLY_SUBJECT_PREFIX + displayed_email_item.email.subject
 	body_edit.text = ""
+	
 	add_all_email_body_items(displayed_email_item.email, false)
-	body_edit.text = EmailServer.get_footer(logged_in_user)
 	original_email = displayed_email_item.email
 	
 	switch_to_email_composer()
 	body_edit.grab_focus()
+	
+	var caret_line: int
+	var caret_column: int
+	if message != "":
+		var tween_duration: float = message.length() / 30.0
+		var tween: Tween = create_tween()
+		tween.set_parallel(true)
+		tween.tween_property(body_edit, "text", message, tween_duration)
+		tween.tween_method(func(_x: float) -> void: body_edit.set_caret_line(999999); body_edit.set_caret_column(9999999), 0.0, 1.0, tween_duration)
+		await tween.finished
+		caret_line = body_edit.get_caret_line()
+		caret_column = body_edit.get_caret_column()
+	body_edit.text = body_edit.text + EmailServer.get_footer(logged_in_user)
+	body_edit.set_caret_line(caret_line)
+	body_edit.set_caret_column(caret_column)
 
 
 func _on_send_button_pressed() -> void:
@@ -447,9 +487,14 @@ func _on_send_button_pressed() -> void:
 	switch_to_email_reader(sent_items.back())
 
 
-func _on_close_button_pressed() -> void:
+func _on_close_email_reader_button_pressed() -> void:
 	clear_email_reader()
 	clear_attachment_reader()
+
+
+func _on_close_email_composer_button_pressed() -> void:
+	clear_email_composer()
+	switch_to_email_reader()
 
 
 func _on_mark_as_unread_button_pressed() -> void:
@@ -534,11 +579,11 @@ func check_email_item_to_show_or_hide(email_item: EmailItem) -> bool:
 func switch_to_email_reader(email_item: EmailItem = null) -> void:
 	email_reader.show()
 	attachment_reader.hide()
-	buttons_container.show()
+	buttons_email_reader_container.show()
 	body_container_in_email_reader.show()
 	
 	email_composer.hide()
-	send_button.hide()
+	buttons_email_composer_container.hide()
 	add_attachment_button.hide()
 	
 	if email_item != null:
@@ -547,11 +592,11 @@ func switch_to_email_reader(email_item: EmailItem = null) -> void:
 
 func switch_to_email_composer() -> void:
 	email_composer.show()
-	send_button.show()
+	buttons_email_composer_container.show()
 	add_attachment_button.show()
 	
 	email_reader.hide()
 	attachment_reader.hide()
-	buttons_container.hide()
+	buttons_email_reader_container.hide()
 	
 	clear_email_reader()

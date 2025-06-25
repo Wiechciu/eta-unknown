@@ -28,9 +28,9 @@ func register_email(email: Email) -> void:
 
 func get_footer(person: Person) -> String:
 	return LINE_BREAK \
-	+ LINE_BREAK + "[i]" + "Best regards," \
+	+ LINE_BREAK + "Best regards," \
 	+ LINE_BREAK + person.full_name \
 	+ LINE_BREAK + person.job_position.title \
 	+ LINE_BREAK + person.email \
 	+ LINE_BREAK + person.phone_number \
-	+ LINE_BREAK + person.employer.print_string + "[/i]" 
+	+ LINE_BREAK + person.employer.print_string 

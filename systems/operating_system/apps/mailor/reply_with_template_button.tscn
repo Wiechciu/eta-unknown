@@ -1,0 +1,84 @@
+[gd_scene load_steps=8 format=3 uid="uid://cd2veihae5l0j"]
+
+[ext_resource type="Script" uid="uid://caohxxa02aolt" path="res://systems/operating_system/apps/mailor/reply_with_template_button.gd" id="1_8j1lw"]
+[ext_resource type="Texture2D" uid="uid://cfy4xqgpovxrj" path="res://arrow_down.tres" id="1_el5xh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cm1iw"]
+bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cwlbl"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k64gd"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8r3w"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_50wre"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0.48235294, 0.83137256, 0.19607843)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="ReplyWithTemplateButton" type="PanelContainer"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_cm1iw")
+script = ExtResource("1_8j1lw")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cwlbl")
+text = "Reply with template"
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_k64gd")
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("1_el5xh")
+expand_mode = 3
+
+[node name="ReplyWithTemplateButton" type="Button" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/hover = SubResource("StyleBoxFlat_a8r3w")
+theme_override_styles/focus = SubResource("StyleBoxFlat_50wre")
+flat = true
+
+[connection signal="pressed" from="ReplyWithTemplateButton" to="." method="_on_reply_with_template_button_pressed"]
