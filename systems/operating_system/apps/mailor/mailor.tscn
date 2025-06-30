@@ -626,7 +626,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_jrf17")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List"]
 layout_mode = 2
-follow_focus = true
 
 [node name="ItemContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Inbox/VBoxContainer/List/ScrollContainer"]
 layout_mode = 2
@@ -712,7 +711,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_jrf17")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Sent/VBoxContainer/List"]
 layout_mode = 2
-follow_focus = true
 
 [node name="ItemContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/AccountInfoAndFolders/VBoxContainer/VSplitContainer/Sent/VBoxContainer/List/ScrollContainer"]
 layout_mode = 2

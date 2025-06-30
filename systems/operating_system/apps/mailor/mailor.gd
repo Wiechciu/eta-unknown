@@ -5,14 +5,6 @@ extends OsApp
 signal items_count_changed
 
 
-const EMAIL_KEYWORDS_ACCEPT: Array[String] = preload("res://systems/operating_system/apps/mailor/email_keywords.json").data.ACCEPT
-const EMAIL_KEYWORDS_DECLINE: Array[String] = preload("res://systems/operating_system/apps/mailor/email_keywords.json").data.DECLINE
-const EMAIL_KEYWORDS_REQUEST_INFO: Array[String] = preload("res://systems/operating_system/apps/mailor/email_keywords.json").data.REQUEST_INFO
-const EMAIL_KEYWORDS_CANCEL: Array[String] = preload("res://systems/operating_system/apps/mailor/email_keywords.json").data.CANCEL
-const EMAIL_KEYWORDS_GREETING: Array[String] = preload("res://systems/operating_system/apps/mailor/email_keywords.json").data.GREETING
-const EMAIL_KEYWORDS_THANKFUL: Array[String] = preload("res://systems/operating_system/apps/mailor/email_keywords.json").data.THANKFUL
-
-
 @export_category("Email Items")
 @export var inbox_items_container: Control
 @export var sent_items_container: Control
@@ -91,6 +83,7 @@ var email_body_items_in_email_composer: Array[EmailBodyItem]
 
 var displayed_email_item: EmailItem
 var original_email: Email
+var writing_tween: Tween
 
 
 func _ready() -> void:
@@ -135,12 +128,12 @@ func add_syntax_highlighter_colors() -> void:
 	syntax_highlighter.word_highlighted.connect(_on_word_highlighted)
 	
 	syntax_highlighter.clear_keyword_groups()
-	syntax_highlighter.add_keyword_group(Color(0.165, 0.655, 0.263, 1.0), EMAIL_KEYWORDS_ACCEPT)
-	syntax_highlighter.add_keyword_group(Color(0.863, 0.0, 0.0, 1.0), EMAIL_KEYWORDS_DECLINE)
-	syntax_highlighter.add_keyword_group(Color(0.005, 0.534, 0.613, 1.0), EMAIL_KEYWORDS_REQUEST_INFO)
-	syntax_highlighter.add_keyword_group(Color(0.826, 0.356, 0.0, 1.0), EMAIL_KEYWORDS_CANCEL)
-	syntax_highlighter.add_keyword_group(Color(0.392, 0.514, 0.929, 1.0), EMAIL_KEYWORDS_GREETING)
-	syntax_highlighter.add_keyword_group(Color(0.501, 0, 0.501, 1), EMAIL_KEYWORDS_THANKFUL)
+	syntax_highlighter.add_keyword_group(Color(0.165, 0.655, 0.263, 1.0), EmailServer.EMAIL_KEYWORDS_ACCEPT)
+	syntax_highlighter.add_keyword_group(Color(0.863, 0.0, 0.0, 1.0), EmailServer.EMAIL_KEYWORDS_DECLINE)
+	syntax_highlighter.add_keyword_group(Color(0.005, 0.534, 0.613, 1.0), EmailServer.EMAIL_KEYWORDS_REQUEST_INFO)
+	syntax_highlighter.add_keyword_group(Color(0.826, 0.356, 0.0, 1.0), EmailServer.EMAIL_KEYWORDS_CANCEL)
+	syntax_highlighter.add_keyword_group(Color(0.392, 0.514, 0.929, 1.0), EmailServer.EMAIL_KEYWORDS_GREETING)
+	syntax_highlighter.add_keyword_group(Color(0.501, 0, 0.501, 1), EmailServer.EMAIL_KEYWORDS_THANKFUL)
 
 
 func _on_word_highlighted(text_edit: TextEdit, _word: String, color: Color, _line: int) -> void:
@@ -436,21 +429,26 @@ func switch_to_email_composer_with_reply(message: String = "") -> void:
 	
 	switch_to_email_composer()
 	body_edit.grab_focus()
+	body_scroll_container_in_email_composer.scroll_vertical = 0 #has to be here, because grab focus scrolls it down somehow
 	
 	var caret_line: int
 	var caret_column: int
 	if message != "":
-		var tween_duration: float = message.length() / 30.0
-		var tween: Tween = create_tween()
-		tween.set_parallel(true)
-		tween.tween_property(body_edit, "text", message, tween_duration)
-		tween.tween_method(func(_x: float) -> void: body_edit.set_caret_line(999999); body_edit.set_caret_column(9999999), 0.0, 1.0, tween_duration)
-		await tween.finished
+		if writing_tween != null and writing_tween.is_running():
+			writing_tween.kill()
+		writing_tween = create_tween()
+		var writing_speed_cps: float = 30.0 # TODO: hook this up to a skill
+		var tween_duration: float = message.length() / writing_speed_cps
+		writing_tween.set_parallel(true)
+		writing_tween.tween_property(body_edit, "text", message, tween_duration)
+		writing_tween.tween_method(func(_x: float) -> void: body_edit.set_caret_line(999999); body_edit.set_caret_column(9999999), 0.0, 1.0, tween_duration)
+		await writing_tween.finished
 		caret_line = body_edit.get_caret_line()
 		caret_column = body_edit.get_caret_column()
 	body_edit.text = body_edit.text + EmailServer.get_footer(logged_in_user)
 	body_edit.set_caret_line(caret_line)
 	body_edit.set_caret_column(caret_column)
+	print(body_scroll_container_in_email_composer.scroll_vertical)
 
 
 func _on_send_button_pressed() -> void:

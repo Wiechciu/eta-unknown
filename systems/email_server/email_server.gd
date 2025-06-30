@@ -3,12 +3,20 @@ extends Node
 
 signal email_registered(email: Email)
 
-@export var emails: Array[Email]
 const REPLY_SUBJECT_PREFIX: String = "RE: "
 const LINE_BREAK: String = "\n"
 const EMAIL_SUBJECTS: Array[String] = preload("res://systems/email_server/email_subjects_general.json").data
 const EMAIL_SUBJECTS_RFQ: Array[String] = preload("res://systems/email_server/email_subjects_rfq.json").data
 const EMAIL_SUBJECTS_SPO: Array[String] = preload("res://systems/email_server/email_subjects_spo.json").data
+const EMAIL_KEYWORDS_ACCEPT: Array[String] = preload("res://systems/operating_system/apps/mailor/email_keywords.json").data.ACCEPT
+const EMAIL_KEYWORDS_DECLINE: Array[String] = preload("res://systems/operating_system/apps/mailor/email_keywords.json").data.DECLINE
+const EMAIL_KEYWORDS_REQUEST_INFO: Array[String] = preload("res://systems/operating_system/apps/mailor/email_keywords.json").data.REQUEST_INFO
+const EMAIL_KEYWORDS_CANCEL: Array[String] = preload("res://systems/operating_system/apps/mailor/email_keywords.json").data.CANCEL
+const EMAIL_KEYWORDS_GREETING: Array[String] = preload("res://systems/operating_system/apps/mailor/email_keywords.json").data.GREETING
+const EMAIL_KEYWORDS_THANKFUL: Array[String] = preload("res://systems/operating_system/apps/mailor/email_keywords.json").data.THANKFUL
+
+
+@export var emails: Array[Email]
 
 
 func _ready() -> void:

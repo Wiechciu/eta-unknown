@@ -163,7 +163,7 @@ func notify(time_event: TimeEvent) -> void:
 		if original_email.from == self:
 			create_reminder(time_event.time, original_email)
 		elif original_email.to == self:
-			create_response(time_event.time, original_email)
+			analyze_email(time_event.time, original_email)
 		return
 
 
@@ -222,11 +222,45 @@ func create_reminder(time: int, original_email: Email) -> void:
 	EmailServer.register_email(new_email)
 
 
-func create_response(time: int, original_email: Email) -> void:
+func analyze_email(time: int, original_email: Email) -> void:
+	var message: String
+	var previous_email: Email = original_email.communication_chain.back()
+	var contains_keyword_accept: bool = email_contains_keywords(original_email, EmailServer.EMAIL_KEYWORDS_ACCEPT)
+	var contains_keyword_decline: bool = email_contains_keywords(original_email, EmailServer.EMAIL_KEYWORDS_DECLINE)
+	var contains_document_spo: bool = email_contains_document_code_in_attachments(previous_email, "SPO")
+	var contains_document_rfq: bool = email_contains_document_code_in_attachments(previous_email, "RFQ")
+	if contains_document_spo and contains_keyword_accept and not contains_keyword_decline:
+		message = "SPO - ACCEPTION ACKNOWLEDGED"
+	elif contains_document_spo and contains_keyword_accept and contains_keyword_decline:
+		message = "SPO - AMBIGUOUS ANSWER"
+	elif contains_document_rfq and contains_keyword_accept and not contains_keyword_decline:
+		message = "RFQ - ACCEPTION ACKNOWLEDGED"
+	elif contains_document_rfq and contains_keyword_accept and contains_keyword_decline:
+		message = "RFQ - AMBIGUOUS ANSWER"
+	else:
+		message = "Hello," \
+			+ EmailServer.LINE_BREAK + "Well noted, thank you!" \
+			+ EmailServer.get_footer(self)
+	
+	create_response(time, original_email, message)
+
+
+func email_contains_document_code_in_attachments(original_email: Email, code: String) -> bool:
+	for attachment: Document in original_email.attachments:
+		if attachment.document_data.code == code:
+			return true
+	return false
+
+
+func email_contains_keywords(original_email: Email, keywords: Array) -> bool:
+	for keyword: String in keywords:
+		if original_email.body.containsn(keyword):
+			return true
+	return false
+
+
+func create_response(time: int, original_email: Email, message: String) -> void:
 	var subject: String = EmailServer.REPLY_SUBJECT_PREFIX + original_email.subject
-	var message: String = "Hello," \
-		+ EmailServer.LINE_BREAK + "Well noted, thank you!" \
-		+ EmailServer.get_footer(self)
 	
 	var attachments: Array[Document] = []
 	var new_email: Email = Email.create_new(
