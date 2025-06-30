@@ -3,7 +3,7 @@ extends Resource
 
 
 @export var name: String
-@export var message: String
+@export_multiline var message: String
 
 
 @warning_ignore("shadowed_variable")

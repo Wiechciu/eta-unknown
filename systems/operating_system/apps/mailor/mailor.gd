@@ -120,7 +120,7 @@ func register_signals() -> void:
 	mark_as_unread_button.pressed.connect(_on_mark_as_unread_button_pressed)
 	mark_as_read_button.pressed.connect(_on_mark_as_read_button_pressed)
 	reply_button.pressed.connect(_on_reply_button_pressed)
-	reply_with_template_button.pressed.connect(_on_reply_with_template_button_pressed)
+	reply_with_template_button.template_selected.connect(_on_reply_with_template_button_pressed)
 	delete_button.pressed.connect(_on_delete_button_pressed)
 	add_to_person_button.pressed.connect(_on_add_to_person_button_pressed)
 	add_subject_button.pressed.connect(_on_add_subject_button_pressed)
@@ -418,8 +418,8 @@ func _on_reply_button_pressed() -> void:
 	switch_to_email_composer_with_reply()
 
 
-func _on_reply_with_template_button_pressed(email_template_item: EmailTemplateItem) -> void:
-	switch_to_email_composer_with_reply(email_template_item.email_template.message)
+func _on_reply_with_template_button_pressed(email_template: EmailTemplate) -> void:
+	switch_to_email_composer_with_reply(email_template.message)
 
 
 func switch_to_email_composer_with_reply(message: String = "") -> void:
