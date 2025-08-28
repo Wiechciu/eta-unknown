@@ -1,4 +1,4 @@
-[gd_resource type="SVGTexture" format=3 uid="uid://cbkx4x4y5gikm"]
+[gd_resource type="DPITexture" format=3 uid="uid://cbkx4x4y5gikm"]
 
 [resource]
 _source = "<svg xmlns='http://www.w3.org/2000/svg' width='32' height='16'><rect width='30' height='14' x='1' y='1' fill='#00335d' fill-opacity='0.8' rx='7'/><circle cx='24' cy='8' r='5' fill='#FFFFFF' fill-opacity='1.0'/></svg>"
