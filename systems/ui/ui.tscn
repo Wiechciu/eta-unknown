@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://db7riwidjsxbu"]
+[gd_scene format=3 uid="uid://db7riwidjsxbu"]
 
 [ext_resource type="Script" uid="uid://cxh3u0n0nptw2" path="res://systems/ui/ui.gd" id="1_xemwu"]
 [ext_resource type="Script" uid="uid://cbk66ldef8nie" path="res://systems/ui/version.gd" id="2_1i10y"]
@@ -21,15 +21,6 @@
 [ext_resource type="Script" uid="uid://coqvlcdcl126x" path="res://systems/ui/graphics_quality.gd" id="15_ony14"]
 [ext_resource type="Script" uid="uid://g8hj25s33m5s" path="res://systems/ui/controls_settings.gd" id="20_phplh"]
 [ext_resource type="PackedScene" uid="uid://xoadia8ml518" path="res://systems/ui/controls_list_item.tscn" id="21_ewkj2"]
-
-[sub_resource type="Gradient" id="Gradient_ony14"]
-offsets = PackedFloat32Array(0.401198, 1)
-colors = PackedColorArray(0.0605798, 0.63632, 1, 0.248, 0, 0, 0, 0.392157)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_5u55t"]
-gradient = SubResource("Gradient_ony14")
-fill = 1
-fill_from = Vector2(0.5, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xemwu"]
 content_margin_left = 16.0
@@ -91,7 +82,7 @@ thickness = 2
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ewkj2"]
 
-[node name="Ui" type="Control" node_paths=PackedStringArray("toggleable_panels_container", "main_menu")]
+[node name="Ui" type="Control" unique_id=1180312839 node_paths=PackedStringArray("toggleable_panels_container", "main_menu")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -103,8 +94,7 @@ script = ExtResource("1_xemwu")
 toggleable_panels_container = NodePath("ToggleablePanelsContainer")
 main_menu = NodePath("ToggleablePanelsContainer/MainMenu")
 
-[node name="Background" type="ColorRect" parent="."]
-visible = false
+[node name="Background" type="ColorRect" parent="." unique_id=889964595]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -113,16 +103,15 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.27451)
 
-[node name="Logo" type="TextureRect" parent="."]
+[node name="Logo" type="TextureRect" parent="." unique_id=609432139]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("GradientTexture2D_5u55t")
 
-[node name="Label" type="Label" parent="Logo"]
+[node name="Label" type="Label" parent="Logo" unique_id=135475225]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -138,8 +127,9 @@ theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
 theme_override_font_sizes/font_size = 50
 text = "GAME_NAME"
+horizontal_alignment = 1
 
-[node name="Version" type="Label" parent="."]
+[node name="Version" type="Label" parent="." unique_id=449395634]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -156,7 +146,7 @@ text = "version"
 vertical_alignment = 2
 script = ExtResource("2_1i10y")
 
-[node name="ToggleablePanelsContainer" type="Control" parent="."]
+[node name="ToggleablePanelsContainer" type="Control" parent="." unique_id=2109831036]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -164,7 +154,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MainMenu" type="PanelContainer" parent="ToggleablePanelsContainer"]
+[node name="MainMenu" type="PanelContainer" parent="ToggleablePanelsContainer" unique_id=331749263]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -179,44 +169,44 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_xemwu")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/MainMenu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/MainMenu" unique_id=828652731]
 layout_mode = 2
 
-[node name="Header" type="Label" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer"]
+[node name="Header" type="Label" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer" unique_id=1095621040]
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "MENU"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer" unique_id=68412274]
 layout_mode = 2
 theme_override_constants/separation = 20
 theme_override_styles/separator = SubResource("StyleBoxLine_ony14")
 
-[node name="Buttons" type="VBoxContainer" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer"]
+[node name="Buttons" type="VBoxContainer" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer" unique_id=547014830]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 10
 
-[node name="PlayButton" type="Button" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons"]
+[node name="PlayButton" type="Button" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons" unique_id=981024764]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "PLAY"
 script = ExtResource("5_yuv0y")
 
-[node name="HSeparator2" type="HSeparator" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons"]
+[node name="HSeparator2" type="HSeparator" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons" unique_id=756390574]
 layout_mode = 2
 theme_override_constants/separation = 20
 theme_override_styles/separator = SubResource("StyleBoxEmpty_ytiqy")
 
-[node name="NewGameButton" type="Button" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons"]
+[node name="NewGameButton" type="Button" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons" unique_id=2144076082]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "NEW_GAME"
 script = ExtResource("5_m8kx8")
 
-[node name="SaveOrLoadButton" type="Button" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons" node_paths=PackedStringArray("control_to_hide", "control_to_show")]
+[node name="SaveOrLoadButton" type="Button" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons" unique_id=867605245 node_paths=PackedStringArray("control_to_hide", "control_to_show")]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SAVE_OR_LOAD"
@@ -224,12 +214,12 @@ script = ExtResource("7_bl64p")
 control_to_hide = NodePath("../../..")
 control_to_show = NodePath("../../../../SaveOrLoadMenu")
 
-[node name="HSeparator3" type="HSeparator" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons"]
+[node name="HSeparator3" type="HSeparator" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons" unique_id=644424461]
 layout_mode = 2
 theme_override_constants/separation = 20
 theme_override_styles/separator = SubResource("StyleBoxEmpty_ytiqy")
 
-[node name="SettingsButton" type="Button" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons" node_paths=PackedStringArray("control_to_hide", "control_to_show")]
+[node name="SettingsButton" type="Button" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons" unique_id=1587851025 node_paths=PackedStringArray("control_to_hide", "control_to_show")]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SETTINGS"
@@ -237,7 +227,7 @@ script = ExtResource("7_bl64p")
 control_to_hide = NodePath("../../..")
 control_to_show = NodePath("../../../../SettingsMenu")
 
-[node name="CreditsButton" type="Button" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons" node_paths=PackedStringArray("control_to_hide", "control_to_show")]
+[node name="CreditsButton" type="Button" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons" unique_id=286756592 node_paths=PackedStringArray("control_to_hide", "control_to_show")]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "CREDITS"
@@ -245,18 +235,18 @@ script = ExtResource("7_bl64p")
 control_to_hide = NodePath("../../..")
 control_to_show = NodePath("../../../../CreditsMenu")
 
-[node name="HSeparator4" type="HSeparator" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons"]
+[node name="HSeparator4" type="HSeparator" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons" unique_id=83641238]
 layout_mode = 2
 theme_override_constants/separation = 20
 theme_override_styles/separator = SubResource("StyleBoxEmpty_ytiqy")
 
-[node name="QuitButton" type="Button" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons"]
+[node name="QuitButton" type="Button" parent="ToggleablePanelsContainer/MainMenu/VBoxContainer/Buttons" unique_id=35505992]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "QUIT"
 script = ExtResource("5_hssc3")
 
-[node name="SaveOrLoadMenu" type="PanelContainer" parent="ToggleablePanelsContainer" node_paths=PackedStringArray("container", "save_name_line_edit")]
+[node name="SaveOrLoadMenu" type="PanelContainer" parent="ToggleablePanelsContainer" unique_id=1189208095 node_paths=PackedStringArray("container", "save_name_line_edit")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -276,59 +266,59 @@ container = NodePath("VBoxContainer/PanelContainer/ScrollContainer/Container")
 list_item_scene = ExtResource("10_y1ln0")
 save_name_line_edit = NodePath("VBoxContainer/SaveNameLineEdit")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/SaveOrLoadMenu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/SaveOrLoadMenu" unique_id=1276420001]
 layout_mode = 2
 
-[node name="Header" type="Label" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer"]
+[node name="Header" type="Label" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer" unique_id=1754339955]
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "SAVE_OR_LOAD"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer" unique_id=1976456672]
 layout_mode = 2
 theme_override_constants/separation = 20
 theme_override_styles/separator = SubResource("StyleBoxLine_5u55t")
 
-[node name="PanelContainer" type="PanelContainer" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer" unique_id=478068293]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_y1ln0")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/PanelContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/PanelContainer" unique_id=1083278588]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Container" type="VBoxContainer" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/PanelContainer/ScrollContainer"]
+[node name="Container" type="VBoxContainer" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/PanelContainer/ScrollContainer" unique_id=1573397561]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SaveListItem" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("10_y1ln0")]
+[node name="SaveListItem" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/PanelContainer/ScrollContainer/Container" unique_id=425442531 instance=ExtResource("10_y1ln0")]
 layout_mode = 2
 
-[node name="SaveListItem2" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("10_y1ln0")]
+[node name="SaveListItem2" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/PanelContainer/ScrollContainer/Container" unique_id=1741012505 instance=ExtResource("10_y1ln0")]
 layout_mode = 2
 
-[node name="SaveListItem3" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("10_y1ln0")]
+[node name="SaveListItem3" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/PanelContainer/ScrollContainer/Container" unique_id=496930180 instance=ExtResource("10_y1ln0")]
 layout_mode = 2
 
-[node name="SaveListItem4" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("10_y1ln0")]
+[node name="SaveListItem4" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/PanelContainer/ScrollContainer/Container" unique_id=402748852 instance=ExtResource("10_y1ln0")]
 layout_mode = 2
 
-[node name="SaveListItem5" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("10_y1ln0")]
+[node name="SaveListItem5" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/PanelContainer/ScrollContainer/Container" unique_id=748783068 instance=ExtResource("10_y1ln0")]
 layout_mode = 2
 
-[node name="SaveListItem6" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/PanelContainer/ScrollContainer/Container" instance=ExtResource("10_y1ln0")]
+[node name="SaveListItem6" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/PanelContainer/ScrollContainer/Container" unique_id=332636953 instance=ExtResource("10_y1ln0")]
 layout_mode = 2
 
-[node name="HSeparator2" type="HSeparator" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer" unique_id=202176618]
 layout_mode = 2
 theme_override_constants/separation = 20
 theme_override_styles/separator = SubResource("StyleBoxEmpty_ytiqy")
 
-[node name="SaveNameLineEdit" type="LineEdit" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer"]
+[node name="SaveNameLineEdit" type="LineEdit" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer" unique_id=906191176]
 layout_mode = 2
 text = "Save-Name-Date"
 clear_button_enabled = true
@@ -336,16 +326,16 @@ select_all_on_focus = true
 caret_blink = true
 script = ExtResource("11_oqlsv")
 
-[node name="HSeparator3" type="HSeparator" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer" unique_id=733569765]
 layout_mode = 2
 theme_override_constants/separation = 20
 theme_override_styles/separator = SubResource("StyleBoxEmpty_ytiqy")
 
-[node name="Buttons" type="HBoxContainer" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer"]
+[node name="Buttons" type="HBoxContainer" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer" unique_id=237794055]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="BackButton" type="Button" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons" node_paths=PackedStringArray("control_to_hide", "control_to_show")]
+[node name="BackButton" type="Button" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons" unique_id=747955141 node_paths=PackedStringArray("control_to_hide", "control_to_show")]
 modulate = Color(0.482362, 0.778436, 0.915901, 1)
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
@@ -357,31 +347,31 @@ script = ExtResource("7_bl64p")
 control_to_hide = NodePath("../../..")
 control_to_show = NodePath("../../../../MainMenu")
 
-[node name="HSeparator2" type="VSeparator" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons"]
+[node name="HSeparator2" type="VSeparator" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons" unique_id=995504072]
 layout_mode = 2
 theme_override_constants/separation = 30
 theme_override_styles/separator = SubResource("StyleBoxEmpty_bl64p")
 
-[node name="LoadButton" type="Button" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons" node_paths=PackedStringArray("save_name_line_edit")]
+[node name="LoadButton" type="Button" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons" unique_id=1760731930 node_paths=PackedStringArray("save_name_line_edit")]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "LOAD"
 script = ExtResource("6_m8kx8")
 save_name_line_edit = NodePath("../../SaveNameLineEdit")
 
-[node name="SaveButton" type="Button" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons" node_paths=PackedStringArray("save_name_line_edit")]
+[node name="SaveButton" type="Button" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons" unique_id=362509132 node_paths=PackedStringArray("save_name_line_edit")]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SAVE"
 script = ExtResource("5_06iss")
 save_name_line_edit = NodePath("../../SaveNameLineEdit")
 
-[node name="HSeparator" type="VSeparator" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons"]
+[node name="HSeparator" type="VSeparator" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons" unique_id=917193531]
 layout_mode = 2
 theme_override_constants/separation = 30
 theme_override_styles/separator = SubResource("StyleBoxEmpty_bl64p")
 
-[node name="DeleteButton" type="Button" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons" node_paths=PackedStringArray("save_name_line_edit")]
+[node name="DeleteButton" type="Button" parent="ToggleablePanelsContainer/SaveOrLoadMenu/VBoxContainer/Buttons" unique_id=854317150 node_paths=PackedStringArray("save_name_line_edit")]
 modulate = Color(0.585388, 0, 0.0219403, 1)
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
@@ -392,7 +382,7 @@ text = "DELETE"
 script = ExtResource("15_fm32y")
 save_name_line_edit = NodePath("../../SaveNameLineEdit")
 
-[node name="SettingsMenu" type="PanelContainer" parent="ToggleablePanelsContainer" node_paths=PackedStringArray("tab_container", "reset_settings_button", "language", "difficulty", "autosave", "master_volume", "music_volume", "ui_volume", "voice_volume", "environment_volume", "graphics_quality", "fullscreen", "controls_settings")]
+[node name="SettingsMenu" type="PanelContainer" parent="ToggleablePanelsContainer" unique_id=1829617341 node_paths=PackedStringArray("tab_container", "reset_settings_button", "language", "difficulty", "autosave", "master_volume", "music_volume", "ui_volume", "voice_volume", "environment_volume", "graphics_quality", "fullscreen", "controls_settings")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -422,62 +412,62 @@ graphics_quality = NodePath("VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxConta
 fullscreen = NodePath("VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer/Fullscreen/Fullscreen")
 controls_settings = NodePath("VBoxContainer/TabContainer/SETTINGS_CONTROLS")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu" unique_id=176383226]
 layout_mode = 2
 
-[node name="Header" type="Label" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer"]
+[node name="Header" type="Label" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer" unique_id=558946591]
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "SETTINGS"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer" unique_id=1310141492]
 layout_mode = 2
 theme_override_constants/separation = 20
 theme_override_styles/separator = SubResource("StyleBoxLine_1i10y")
 
-[node name="TabContainer" type="TabContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer"]
+[node name="TabContainer" type="TabContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer" unique_id=910194615]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_fm32y")
 tab_alignment = 1
 current_tab = 0
 
-[node name="SETTINGS_GAME" type="PanelContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer"]
+[node name="SETTINGS_GAME" type="PanelContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer" unique_id=758896844]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5u55t")
 metadata/_tab_index = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME" unique_id=1210021851]
 layout_mode = 2
 
-[node name="Language" type="HBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer"]
+[node name="Language" type="HBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer" unique_id=755307368]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Language"]
+[node name="Label" type="Label" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Language" unique_id=579183658]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "LANGUAGE"
 
-[node name="Language" type="OptionButton" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Language"]
+[node name="Language" type="OptionButton" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Language" unique_id=58597084]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("2_5x0jx")
 
-[node name="Difficulty" type="HBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer"]
+[node name="Difficulty" type="HBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer" unique_id=318361595]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Difficulty"]
+[node name="Label" type="Label" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Difficulty" unique_id=1834468930]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "DIFFICULTY"
 
-[node name="Difficulty" type="OptionButton" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Difficulty"]
+[node name="Difficulty" type="OptionButton" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Difficulty" unique_id=1250172972]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("13_bl64p")
 
-[node name="Autosave" type="HBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer" node_paths=PackedStringArray("check_box", "spin_box", "label")]
+[node name="Autosave" type="HBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer" unique_id=1231004844 node_paths=PackedStringArray("check_box", "spin_box", "label")]
 layout_mode = 2
 theme_override_constants/separation = 0
 script = ExtResource("15_5u55t")
@@ -485,21 +475,21 @@ check_box = NodePath("HBoxContainer/CheckBox")
 spin_box = NodePath("HBoxContainer/SpinBox")
 label = NodePath("HBoxContainer/Label")
 
-[node name="Label" type="Label" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Autosave"]
+[node name="Label" type="Label" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Autosave" unique_id=573224226]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "AUTOSAVE"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Autosave"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Autosave" unique_id=230097258]
 custom_minimum_size = Vector2(0, 43)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
 
-[node name="CheckBox" type="CheckBox" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Autosave/HBoxContainer"]
+[node name="CheckBox" type="CheckBox" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Autosave/HBoxContainer" unique_id=252331259]
 layout_mode = 2
 
-[node name="SpinBox" type="SpinBox" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Autosave/HBoxContainer"]
+[node name="SpinBox" type="SpinBox" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Autosave/HBoxContainer" unique_id=1572505199]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
@@ -509,77 +499,77 @@ rounded = true
 allow_greater = true
 alignment = 2
 
-[node name="Label" type="Label" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Autosave/HBoxContainer"]
+[node name="Label" type="Label" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_GAME/VBoxContainer/Autosave/HBoxContainer" unique_id=956916589]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "EVERY_X_DAYS"
 
-[node name="SETTINGS_AUDIO" type="PanelContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer"]
+[node name="SETTINGS_AUDIO" type="PanelContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer" unique_id=1777862609]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_1i10y")
 metadata/_tab_index = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_AUDIO"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_AUDIO" unique_id=1857035837]
 layout_mode = 2
 
-[node name="Master" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_AUDIO/VBoxContainer" instance=ExtResource("3_hr65t")]
+[node name="Master" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_AUDIO/VBoxContainer" unique_id=1774923424 instance=ExtResource("3_hr65t")]
 layout_mode = 2
 
-[node name="Music" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_AUDIO/VBoxContainer" instance=ExtResource("3_hr65t")]
+[node name="Music" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_AUDIO/VBoxContainer" unique_id=864577708 instance=ExtResource("3_hr65t")]
 layout_mode = 2
 bus_name = &"Music"
 
-[node name="Ui" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_AUDIO/VBoxContainer" instance=ExtResource("3_hr65t")]
+[node name="Ui" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_AUDIO/VBoxContainer" unique_id=705898158 instance=ExtResource("3_hr65t")]
 layout_mode = 2
 bus_name = &"Ui"
 
-[node name="Voice" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_AUDIO/VBoxContainer" instance=ExtResource("3_hr65t")]
+[node name="Voice" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_AUDIO/VBoxContainer" unique_id=1383106923 instance=ExtResource("3_hr65t")]
 layout_mode = 2
 bus_name = &"Voice"
 
-[node name="Environment" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_AUDIO/VBoxContainer" instance=ExtResource("3_hr65t")]
+[node name="Environment" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_AUDIO/VBoxContainer" unique_id=450962306 instance=ExtResource("3_hr65t")]
 layout_mode = 2
 bus_name = &"Environment"
 
-[node name="SETTINGS_VIDEO" type="PanelContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer"]
+[node name="SETTINGS_VIDEO" type="PanelContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer" unique_id=1172959818]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5u55t")
 metadata/_tab_index = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_VIDEO"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_VIDEO" unique_id=1241898897]
 layout_mode = 2
 
-[node name="GraphicsQuality" type="HBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer"]
+[node name="GraphicsQuality" type="HBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer" unique_id=483425907]
 visible = false
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer/GraphicsQuality"]
+[node name="Label" type="Label" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer/GraphicsQuality" unique_id=934627158]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "GRAPHICS_QUALITY"
 
-[node name="GraphicsQuality" type="OptionButton" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer/GraphicsQuality"]
+[node name="GraphicsQuality" type="OptionButton" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer/GraphicsQuality" unique_id=2003019590]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("15_ony14")
 
-[node name="Fullscreen" type="HBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer"]
+[node name="Fullscreen" type="HBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer" unique_id=1580045565]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer/Fullscreen"]
+[node name="Label" type="Label" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer/Fullscreen" unique_id=1175775616]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 text = "FULLSCREEN"
 
-[node name="Fullscreen" type="CheckButton" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer/Fullscreen"]
+[node name="Fullscreen" type="CheckButton" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_VIDEO/VBoxContainer/Fullscreen" unique_id=331595350]
 layout_mode = 2
 size_flags_horizontal = 2
 script = ExtResource("3_oihav")
 
-[node name="SETTINGS_CONTROLS" type="PanelContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer" node_paths=PackedStringArray("container")]
+[node name="SETTINGS_CONTROLS" type="PanelContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer" unique_id=1920195467 node_paths=PackedStringArray("container")]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5u55t")
@@ -588,28 +578,28 @@ container = NodePath("ScrollContainer/Container")
 list_item_scene = ExtResource("21_ewkj2")
 metadata/_tab_index = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_CONTROLS"]
+[node name="ScrollContainer" type="ScrollContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_CONTROLS" unique_id=111005873]
 layout_mode = 2
 
-[node name="Container" type="VBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_CONTROLS/ScrollContainer"]
+[node name="Container" type="VBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_CONTROLS/ScrollContainer" unique_id=1116811267]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ControlsListItem" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_CONTROLS/ScrollContainer/Container" instance=ExtResource("21_ewkj2")]
+[node name="ControlsListItem" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/TabContainer/SETTINGS_CONTROLS/ScrollContainer/Container" unique_id=1247544735 instance=ExtResource("21_ewkj2")]
 layout_mode = 2
 
-[node name="HSeparator2" type="HSeparator" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer" unique_id=1704489744]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/separation = 20
 theme_override_styles/separator = SubResource("StyleBoxEmpty_ytiqy")
 
-[node name="Buttons" type="HBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer"]
+[node name="Buttons" type="HBoxContainer" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer" unique_id=1893434711]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="BackButton" type="Button" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/Buttons" node_paths=PackedStringArray("control_to_hide", "control_to_show")]
+[node name="BackButton" type="Button" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/Buttons" unique_id=693801894 node_paths=PackedStringArray("control_to_hide", "control_to_show")]
 modulate = Color(0.482362, 0.778436, 0.915901, 1)
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
@@ -621,7 +611,7 @@ script = ExtResource("7_bl64p")
 control_to_hide = NodePath("../../..")
 control_to_show = NodePath("../../../../MainMenu")
 
-[node name="ResetSettingsButton" type="Button" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/Buttons"]
+[node name="ResetSettingsButton" type="Button" parent="ToggleablePanelsContainer/SettingsMenu/VBoxContainer/Buttons" unique_id=504075215]
 modulate = Color(0.585388, 0, 0.0219403, 1)
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
@@ -630,7 +620,7 @@ size_flags_vertical = 8
 theme_override_font_sizes/font_size = 20
 text = "RESET_SETTINGS"
 
-[node name="CreditsMenu" type="PanelContainer" parent="ToggleablePanelsContainer"]
+[node name="CreditsMenu" type="PanelContainer" parent="ToggleablePanelsContainer" unique_id=933513661]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -646,131 +636,131 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_xemwu")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/CreditsMenu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/CreditsMenu" unique_id=87914692]
 layout_mode = 2
 
-[node name="Header" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer"]
+[node name="Header" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer" unique_id=511377485]
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "CREDITS"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer" unique_id=234810021]
 layout_mode = 2
 theme_override_constants/separation = 20
 theme_override_styles/separator = SubResource("StyleBoxLine_phplh")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer" unique_id=224155178]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer" unique_id=835563319]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 16
 
-[node name="PanelContainer" type="PanelContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1419051280]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ewkj2")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer" unique_id=2138054891]
 layout_mode = 2
 
-[node name="Header" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="Header" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=1174030216]
 layout_mode = 2
 text = "Game Development"
 horizontal_alignment = 1
 
-[node name="Person" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+[node name="Person" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer/VBoxContainer" unique_id=646634020]
 layout_mode = 2
 theme_override_font_sizes/font_size = 15
 text = "Jakub Wiecheć - WCHC"
 horizontal_alignment = 1
 
-[node name="PanelContainer2" type="PanelContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1271641055]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ewkj2")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2" unique_id=1501541672]
 layout_mode = 2
 
-[node name="Header" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+[node name="Header" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=424288329]
 layout_mode = 2
 text = "Translation"
 horizontal_alignment = 1
 
-[node name="Person" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+[node name="Person" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=1298781813]
 layout_mode = 2
 theme_override_font_sizes/font_size = 15
 text = "English - Jakub Wiecheć"
 horizontal_alignment = 1
 
-[node name="Person2" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+[node name="Person2" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=1090739812]
 layout_mode = 2
 theme_override_font_sizes/font_size = 15
 text = "Polish - Jakub Wiecheć"
 horizontal_alignment = 1
 
-[node name="PanelContainer3" type="PanelContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="PanelContainer3" type="PanelContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1703426692]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ewkj2")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer3"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer3" unique_id=2050459673]
 layout_mode = 2
 
-[node name="Header" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer3/VBoxContainer"]
+[node name="Header" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer3/VBoxContainer" unique_id=474216027]
 layout_mode = 2
 text = "Game Development"
 horizontal_alignment = 1
 
-[node name="Person" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer3/VBoxContainer"]
+[node name="Person" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer3/VBoxContainer" unique_id=224106448]
 layout_mode = 2
 theme_override_font_sizes/font_size = 15
 text = "Jakub Wiecheć - WCHC"
 horizontal_alignment = 1
 
-[node name="PanelContainer4" type="PanelContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="PanelContainer4" type="PanelContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=1129383150]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ewkj2")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer4"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer4" unique_id=311534310]
 layout_mode = 2
 
-[node name="Header" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer4/VBoxContainer"]
+[node name="Header" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer4/VBoxContainer" unique_id=1887059298]
 layout_mode = 2
 text = "Game Development"
 horizontal_alignment = 1
 
-[node name="Person" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer4/VBoxContainer"]
+[node name="Person" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer4/VBoxContainer" unique_id=1752050465]
 layout_mode = 2
 theme_override_font_sizes/font_size = 15
 text = "Jakub Wiecheć - WCHC"
 horizontal_alignment = 1
 
-[node name="PanelContainer5" type="PanelContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="PanelContainer5" type="PanelContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=640134867]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ewkj2")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer5"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer5" unique_id=1991963771]
 layout_mode = 2
 
-[node name="Header" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer5/VBoxContainer"]
+[node name="Header" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer5/VBoxContainer" unique_id=1500855908]
 layout_mode = 2
 text = "Game Development"
 horizontal_alignment = 1
 
-[node name="Person" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer5/VBoxContainer"]
+[node name="Person" type="Label" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/ScrollContainer/VBoxContainer/PanelContainer5/VBoxContainer" unique_id=1813408786]
 layout_mode = 2
 theme_override_font_sizes/font_size = 15
 text = "Jakub Wiecheć - WCHC"
 horizontal_alignment = 1
 
-[node name="Buttons" type="HBoxContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer"]
+[node name="Buttons" type="HBoxContainer" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer" unique_id=2036486160]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="BackButton" type="Button" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/Buttons" node_paths=PackedStringArray("control_to_hide", "control_to_show")]
+[node name="BackButton" type="Button" parent="ToggleablePanelsContainer/CreditsMenu/VBoxContainer/Buttons" unique_id=534603170 node_paths=PackedStringArray("control_to_hide", "control_to_show")]
 modulate = Color(0.482362, 0.778436, 0.915901, 1)
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
