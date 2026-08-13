@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dksi1q8iitdxl"]
+[gd_scene format=3 uid="uid://dksi1q8iitdxl"]
 
 [ext_resource type="Script" uid="uid://ddlkf8qet6m5u" path="res://systems/operating_system/os_app_icon_taskbar.gd" id="1_t0vij"]
 [ext_resource type="Texture2D" uid="uid://dipd68uiomkhw" path="res://icon.svg" id="2_5kvjj"]
@@ -11,7 +11,7 @@ content_margin_right = 4.0
 content_margin_bottom = 1.0
 bg_color = Color(0, 0.282353, 0.419608, 0.572549)
 
-[node name="AppIconTaskbar" type="PanelContainer" node_paths=PackedStringArray("label", "icon")]
+[node name="AppIconTaskbar" type="PanelContainer" unique_id=1653844427 node_paths=PackedStringArray("label", "icon")]
 custom_minimum_size = Vector2(200, 20)
 offset_right = 37.0
 offset_bottom = 23.0
@@ -20,26 +20,26 @@ script = ExtResource("1_t0vij")
 label = NodePath("VBoxContainer/Label")
 icon = NodePath("VBoxContainer/Icon")
 
-[node name="VBoxContainer" type="HBoxContainer" parent="."]
+[node name="VBoxContainer" type="HBoxContainer" parent="." unique_id=659643145]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Icon" type="TextureRect" parent="VBoxContainer"]
+[node name="Icon" type="TextureRect" parent="VBoxContainer" unique_id=660759149]
 layout_mode = 2
 texture = ExtResource("2_5kvjj")
 expand_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1463831997]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "TMS"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="." unique_id=333694235]
 layout_mode = 2
 flat = true
 
-[node name="UiAnimationComponent" parent="." node_paths=PackedStringArray("control_to_watch") instance=ExtResource("3_5kvjj")]
+[node name="UiAnimationComponent" parent="." unique_id=1371622052 node_paths=PackedStringArray("control_to_watch") instance=ExtResource("3_5kvjj")]
 control_to_watch = NodePath("../Button")
 animate_scale = true
 scale_animation_pivot_type = 4

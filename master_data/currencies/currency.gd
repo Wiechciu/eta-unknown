@@ -27,7 +27,7 @@ static func get_by_code(code: String) -> Currency:
 		if currency.code.to_lower() == code.to_lower():
 			return currency
 	
-	printerr("Could't find currency code: " + code)
+	printerr("Couldn't find currency code: " + code)
 	return null
 
 

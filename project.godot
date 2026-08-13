@@ -130,7 +130,3 @@ locale/translations=PackedStringArray("res://systems/translation/translation.en.
 
 3d_render/layer_2="Player"
 3d_physics/layer_3="Interactable"
-
-[rendering]
-
-environment/defaults/default_clear_color=Color(1, 1, 1, 1)

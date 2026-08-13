@@ -90,6 +90,7 @@ static func create_new(id: int, status: Status, customer_reference: String, expo
 	return new_shipment
 
 
+@warning_ignore_start("shadowed_variable")
 static func create_new_with_random_data(shipper_to_assign: Party = null, consignee_to_assign: Party = null) -> Shipment:
 	var id: int = GlobalRefs.get_shipment_id()
 	
@@ -177,6 +178,7 @@ static func create_new_with_random_data(shipper_to_assign: Party = null, consign
 		null,
 		[]
 	)
+@warning_ignore_restore("shadowed_variable")
 
 
 func remove() -> void:

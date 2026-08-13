@@ -54,7 +54,7 @@ static func create_new(id: int, shipment: Shipment, request_for_quotation: Reque
 	return new_quotation
 
 
-@warning_ignore("shadowed_variable")
+@warning_ignore_start("shadowed_variable")
 static func create_new_with_random_data(request_for_quotation: RequestForQuotation, quoting_forwarder: Party) -> Quotation:
 	var id: int = GlobalRefs.get_quotation_id()
 	
@@ -92,6 +92,7 @@ static func create_new_with_random_data(request_for_quotation: RequestForQuotati
 		transit_time,
 		status
 	)
+@warning_ignore_restore("shadowed_variable")
 
 
 func change_status(new_status: Status) -> void:

@@ -110,6 +110,7 @@ func _sort_ascending(a: Event, b: Event) -> bool:
 
 
 # The below is for debugging only for random generated shipments
+@warning_ignore("shadowed_variable")
 static func _on_planned_event_registered(planned_event: Event, shipment: Shipment) -> void:
 	if planned_event.event_data.code == "PUP":
 		shipment.change_status(Shipment.Status.PLANNED)
@@ -120,6 +121,7 @@ static func _on_planned_event_registered(planned_event: Event, shipment: Shipmen
 		shipment.accounting.create_new_revenue_charge("DEL", randi_range(120, 170), Currency.get_by_code("EUR"), shipment.consignee)
 
 
+@warning_ignore("shadowed_variable")
 static func _on_actual_event_registered(actual_event: Event, shipment: Shipment) -> void:
 	if actual_event.event_data.code == "PUP":
 		shipment.change_status(Shipment.Status.IN_TRANSIT)
@@ -127,6 +129,7 @@ static func _on_actual_event_registered(actual_event: Event, shipment: Shipment)
 		shipment.change_status(Shipment.Status.DELIVERED)
 
 
+@warning_ignore("shadowed_variable")
 static func _on_time_event_notification(time_event: TimeEvent, shipment: Shipment) -> void:
 	var event: Event
 	for arg: Variant in time_event.args:

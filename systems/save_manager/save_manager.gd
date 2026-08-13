@@ -111,6 +111,7 @@ func save_game_to_json(save_file_name: String) -> void:
 	print("SAVING BROKEN, to be fixed") #FIXME
 	return
 	
+	@warning_ignore("unreachable_code")
 	is_saving_game = true
 	
 	get_or_create_save_folder()

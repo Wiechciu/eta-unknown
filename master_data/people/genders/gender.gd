@@ -11,5 +11,5 @@ static func get_by_name(name: String) -> Gender:
 		if gender.gender_name.to_lower() == name.to_lower():
 			return gender
 	
-	printerr("Could't find gender: " + name)
+	printerr("Couldn't find gender: " + name)
 	return null

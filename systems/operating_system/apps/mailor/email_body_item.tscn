@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3dw5xcdwe7xm"]
+[gd_scene format=3 uid="uid://b3dw5xcdwe7xm"]
 
 [ext_resource type="Script" uid="uid://b1g5u2hfhyk1n" path="res://systems/operating_system/apps/mailor/email_body_item.gd" id="1_ycbqh"]
 
@@ -11,7 +11,7 @@ bg_color = Color(0.8039216, 0.8980392, 0.96862745, 0.3372549)
 border_width_bottom = 1
 border_color = Color(0, 0, 0, 0.39215687)
 
-[node name="EmailBodyItem" type="RichTextLabel"]
+[node name="EmailBodyItem" type="RichTextLabel" unique_id=1375910433]
 offset_right = 449.0
 offset_bottom = 22.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
