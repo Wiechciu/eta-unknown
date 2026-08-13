@@ -22,9 +22,9 @@ static func create_new(id: int, code: String, name: String, exchange_rate_to_usd
 
 
 @warning_ignore("shadowed_variable")
-static func get_currency_by_code(code: String) -> Currency:
+static func get_by_code(code: String) -> Currency:
 	for currency: Currency in GlobalRefs.currencies:
-		if currency.code == code:
+		if currency.code.to_lower() == code.to_lower():
 			return currency
 	
 	printerr("Could't find currency code: " + code)

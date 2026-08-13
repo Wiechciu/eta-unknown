@@ -1,4 +1,4 @@
-[gd_scene load_steps=470 format=3 uid="uid://bjndjg4xh0keh"]
+[gd_scene format=3 uid="uid://bjndjg4xh0keh"]
 
 [ext_resource type="Script" uid="uid://bp8cyi2njiujs" path="res://systems/global_refs/global_refs.gd" id="1_6qxei"]
 [ext_resource type="Script" uid="uid://q2os2fkrr7m1" path="res://master_data/people/skills/skill_category.gd" id="2_265ga"]
@@ -470,11 +470,11 @@
 [ext_resource type="Resource" uid="uid://diwj73f3wx3qh" path="res://master_data/incoterms/incoterms_fca.tres" id="463_pjp03"]
 [ext_resource type="Resource" uid="uid://c7t616km0osx7" path="res://master_data/incoterms/incoterms_fob.tres" id="464_887ru"]
 
-[node name="GlobalRefs" type="Node"]
+[node name="GlobalRefs" type="Node" unique_id=491385294]
 process_mode = 3
 script = ExtResource("1_6qxei")
 genders = Array[ExtResource("2_f6vnp")]([ExtResource("3_5hlid"), ExtResource("4_isf54")])
-personal_info_data = Array[ExtResource("5_ydhbr")]([ExtResource("6_3xmdx"), ExtResource("7_xud4e"), ExtResource("7_3h68w"), ExtResource("9_0owmd"), ExtResource("10_qg61q"), ExtResource("7_do2kt"), ExtResource("9_ac6f3"), ExtResource("8_3h68w"), ExtResource("14_hvhu1"), ExtResource("9_a7u6r")])
+personal_info_data = Array[ExtResource("5_ydhbr")]([ExtResource("6_3xmdx"), ExtResource("7_xud4e"), ExtResource("10_qg61q"), ExtResource("7_3h68w"), ExtResource("9_0owmd"), ExtResource("7_do2kt"), ExtResource("9_ac6f3"), ExtResource("8_3h68w"), ExtResource("14_hvhu1"), ExtResource("9_a7u6r")])
 states = Array[ExtResource("2_kpf7x")]([ExtResource("3_v3def"), ExtResource("4_uder3"), ExtResource("5_0ef4m")])
 skill_categories = Array[ExtResource("2_265ga")]([ExtResource("3_pybxh"), ExtResource("4_fgltc"), ExtResource("5_dpdqx"), ExtResource("6_mo8vh"), ExtResource("7_kpf7x")])
 skills = Array[ExtResource("8_v3def")]([ExtResource("9_uder3"), ExtResource("10_pybxh"), ExtResource("10_0ef4m"), ExtResource("11_f6vnp"), ExtResource("12_5hlid"), ExtResource("13_isf54"), ExtResource("14_hc7fn"), ExtResource("15_rr1fn"), ExtResource("16_v2acn"), ExtResource("17_hbsro"), ExtResource("18_ifh3k"), ExtResource("19_m1ghu"), ExtResource("20_x80su"), ExtResource("21_n57id"), ExtResource("22_ibact"), ExtResource("23_choop"), ExtResource("24_du8gs"), ExtResource("25_ccccb"), ExtResource("26_jr8p0"), ExtResource("27_gp4hg"), ExtResource("28_xfl0a"), ExtResource("29_ymvsh"), ExtResource("30_mp8x4"), ExtResource("31_nrqu1"), ExtResource("32_r1r5t"), ExtResource("33_lwyxx"), ExtResource("34_tbr6a"), ExtResource("35_3eel4"), ExtResource("36_e1ldj"), ExtResource("37_wkmeq"), ExtResource("38_4pis4"), ExtResource("39_rmnf8"), ExtResource("40_yuqut"), ExtResource("41_776m3"), ExtResource("42_oqrtl"), ExtResource("43_mftuc"), ExtResource("44_084nv"), ExtResource("45_cp54n")])

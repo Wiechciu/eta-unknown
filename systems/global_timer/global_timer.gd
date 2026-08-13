@@ -278,3 +278,16 @@ func from_dict(data: Dictionary) -> void:
 	now_float = data["time"]
 	previous_hour = current_hour
 	previous_date_string = current_date_string
+
+
+## Returns true if provided date string in format DD-MM-YYYY is valid.
+func is_valid_date_string(date_string: String) -> bool:
+	var splits: PackedStringArray = date_string.split("-")
+	if splits.size() != 3:
+		return false
+	
+	var has_valid_year: bool = splits[0].is_valid_int() and int(splits[0]) > 0
+	var has_valid_month: bool = splits[1].is_valid_int() and int(splits[1]) >= 1 and int(splits[1]) <= 12
+	var has_valid_day: bool = splits[2].is_valid_int() and int(splits[2]) >= 1 and int(splits[2]) <= 31
+	
+	return has_valid_year and has_valid_month and has_valid_day

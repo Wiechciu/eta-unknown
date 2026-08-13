@@ -32,18 +32,22 @@ func update_value() -> void:
 		"Salary": value = str(person.job_position.salary) if person.job_position else "---"
 
 
-func update_person() -> void:
+@warning_ignore("shadowed_variable")
+func update_person(value: String) -> void:
 	match personal_info_data.name:
 		"Name":
 			person.first_name = value.substr(0, value.find(" "))
 			if value.find(" ") >= 0:
 				person.last_name = value.substr(value.find(" ") + 1, value.length())
-		#"Gender": person.gender = GlobalRefs.genders. = person.gender.gender_name.capitalize()
-		#"E-mail": value = person.email
-		#"Phone": value = person.phone_number
-		"Birthdate": person.birthdate = value
-		#"Employer": value = person.employer.name if person.employer else "---"
-		#"Job Title": value = person.job_position.title if person.job_position else "---"
-		#"Supervisor": value = person.supervisor.full_name if person.supervisor else "---"
-		#"Subordinates": value = str(person.subordinates.size())
-		#"Salary": value = str(person.job_position.salary) if person.job_position else "---"
+		"Gender":
+			var gender: Gender = Gender.get_by_name(value)
+			if not gender:
+				ActionLogger.create_error("Wrong gender: %s" % value)
+				return
+			person.gender = gender
+		"Birthdate":
+			if not GlobalTimer.is_valid_date_string(value):
+				ActionLogger.create_error("Wrong birthday: %s" % value)
+				return
+			person.birthdate = value
+	update_value()

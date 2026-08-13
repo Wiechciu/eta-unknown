@@ -58,7 +58,7 @@ static func create_new(id: int, shipment: Shipment, request_for_quotation: Reque
 static func create_new_with_random_data(request_for_quotation: RequestForQuotation, quoting_forwarder: Party) -> Quotation:
 	var id: int = GlobalRefs.get_quotation_id()
 	
-	var currency: Currency = Currency.get_currency_by_code("EUR")
+	var currency: Currency = Currency.get_by_code("EUR")
 	var cost_charges: Array[Charge]
 	var revenue_charges: Array[Charge]
 	var afr_cost: Charge = Charge.create_new("AFR", Charge.Type.COST, randi_range(3, 5) * request_for_quotation.shipment.cargo_details.total_weight, currency, GlobalRefs.carriers_with_employees.pick_random())

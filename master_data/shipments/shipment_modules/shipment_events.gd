@@ -113,11 +113,11 @@ func _sort_ascending(a: Event, b: Event) -> bool:
 static func _on_planned_event_registered(planned_event: Event, shipment: Shipment) -> void:
 	if planned_event.event_data.code == "PUP":
 		shipment.change_status(Shipment.Status.PLANNED)
-		shipment.accounting.create_new_cost_charge("PUP", randi_range(100, 150), Currency.get_currency_by_code("EUR"), shipment.haulage.trucker_pickup)
-		shipment.accounting.create_new_revenue_charge("PUP", randi_range(120, 170), Currency.get_currency_by_code("EUR"), shipment.shipper)
+		shipment.accounting.create_new_cost_charge("PUP", randi_range(100, 150), Currency.get_by_code("EUR"), shipment.haulage.trucker_pickup)
+		shipment.accounting.create_new_revenue_charge("PUP", randi_range(120, 170), Currency.get_by_code("EUR"), shipment.shipper)
 	if planned_event.event_data.code == "DEL":
-		shipment.accounting.create_new_cost_charge("DEL", randi_range(100, 150), Currency.get_currency_by_code("EUR"), shipment.haulage.trucker_delivery)
-		shipment.accounting.create_new_revenue_charge("DEL", randi_range(120, 170), Currency.get_currency_by_code("EUR"), shipment.consignee)
+		shipment.accounting.create_new_cost_charge("DEL", randi_range(100, 150), Currency.get_by_code("EUR"), shipment.haulage.trucker_delivery)
+		shipment.accounting.create_new_revenue_charge("DEL", randi_range(120, 170), Currency.get_by_code("EUR"), shipment.consignee)
 
 
 static func _on_actual_event_registered(actual_event: Event, shipment: Shipment) -> void:

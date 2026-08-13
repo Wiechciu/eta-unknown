@@ -33,6 +33,7 @@ func initialize(personal_info: PersonalInfo) -> PersonalInfoItem:
 	
 	if personal_info.personal_info_data.editable:
 		edit.editing_toggled.connect(func(toggled_on: bool) -> void: if not toggled_on: end_editing())
+		edit.focus_exited.connect(end_editing)
 	
 	return self
 
@@ -68,6 +69,6 @@ func start_editing() -> void:
 func end_editing() -> void:
 	value_label.show()
 	edit.hide()
-	personal_info.value = edit.text
-	value_label.text = edit.text
-	personal_info.update_person()
+	personal_info.update_person(edit.text)
+	edit.text = personal_info.value
+	value_label.text = personal_info.value
