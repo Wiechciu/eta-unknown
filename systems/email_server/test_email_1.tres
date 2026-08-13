@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Email" load_steps=7 format=3 uid="uid://cb1ongmcuw2fn"]
+[gd_resource type="Resource" script_class="Email" format=3 uid="uid://cb1ongmcuw2fn"]
 
 [ext_resource type="Script" uid="uid://u2qdcbcwrk7l" path="res://master_data/documents/document.gd" id="1_drkou"]
 [ext_resource type="Script" uid="uid://c0n33sueqwg8d" path="res://master_data/emails/email.gd" id="1_onhtm"]

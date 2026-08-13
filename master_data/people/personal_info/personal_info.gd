@@ -30,3 +30,20 @@ func update_value() -> void:
 		"Supervisor": value = person.supervisor.full_name if person.supervisor else "---"
 		"Subordinates": value = str(person.subordinates.size())
 		"Salary": value = str(person.job_position.salary) if person.job_position else "---"
+
+
+func update_person() -> void:
+	match personal_info_data.name:
+		"Name":
+			person.first_name = value.substr(0, value.find(" "))
+			if value.find(" ") >= 0:
+				person.last_name = value.substr(value.find(" ") + 1, value.length())
+		#"Gender": person.gender = GlobalRefs.genders. = person.gender.gender_name.capitalize()
+		#"E-mail": value = person.email
+		#"Phone": value = person.phone_number
+		"Birthdate": person.birthdate = value
+		#"Employer": value = person.employer.name if person.employer else "---"
+		#"Job Title": value = person.job_position.title if person.job_position else "---"
+		#"Supervisor": value = person.supervisor.full_name if person.supervisor else "---"
+		#"Subordinates": value = str(person.subordinates.size())
+		#"Salary": value = str(person.job_position.salary) if person.job_position else "---"

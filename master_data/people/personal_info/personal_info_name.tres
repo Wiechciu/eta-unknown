@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PersonalInfoData" load_steps=3 format=3 uid="uid://bgcnmpg8rbexe"]
+[gd_resource type="Resource" script_class="PersonalInfoData" format=3 uid="uid://bgcnmpg8rbexe"]
 
 [ext_resource type="Texture2D" uid="uid://d0hxdkwb05ugx" path="res://master_data/people/personal_info/icons/personal_info_name_icon.png" id="1_cduma"]
 [ext_resource type="Script" uid="uid://cv2rc84hrtnua" path="res://master_data/people/personal_info/personal_info_data.gd" id="1_fb28x"]
@@ -8,4 +8,5 @@ script = ExtResource("1_fb28x")
 name = "Name"
 description = "Full name of an individual."
 icon = ExtResource("1_cduma")
+editable = true
 metadata/_custom_type_script = "uid://cv2rc84hrtnua"
